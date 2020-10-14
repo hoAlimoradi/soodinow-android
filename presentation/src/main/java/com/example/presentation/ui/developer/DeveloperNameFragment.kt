@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.example.domain.models.repo.DeveloperNameRepoModel
 import com.example.presentation.R
 import com.example.presentation.base.BaseFragment
@@ -15,6 +16,8 @@ import kotlinx.android.synthetic.main.fragment_developer_name.*
 @AndroidEntryPoint
 class DeveloperNameFragment : BaseFragment<DeveloperNameViewModel>() {
 	
+	private val viewModel: DeveloperNameViewModel by viewModels()
+	
 	override fun onCreateView(
 		inflater: LayoutInflater,
 		container: ViewGroup?,
@@ -25,16 +28,11 @@ class DeveloperNameFragment : BaseFragment<DeveloperNameViewModel>() {
 		false
 	)
 	
-	private val viewModel by viewModelProvider {
-		DeveloperNameViewModel()
-	}
-	
 	override fun onViewCreated(
 		view: View,
 		savedInstanceState: Bundle?
 	) {
 		super.onViewCreated(view,savedInstanceState)
-		createViewModel()
 		
 		viewModel.getDeveloperName()
 		
