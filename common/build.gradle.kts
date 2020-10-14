@@ -32,6 +32,6 @@ android {
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Dependencies.KOTLIN_VERSION}")
-    implementation("androidx.core:core-ktx:${Dependencies.KTX_VER}")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Dependencies.Versions.KOTLIN_VERSION}")
+    implementation("androidx.core:core-ktx:${Dependencies.Versions.KTX_VER}")
 }

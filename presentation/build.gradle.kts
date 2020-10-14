@@ -43,15 +43,15 @@ android {
 
 dependencies {
 	implementation(fileTree(mapOf("dir" to "libs","include" to listOf("*.jar"))))
-	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Dependencies.KOTLIN_VERSION}")
-	implementation("androidx.appcompat:appcompat:${Dependencies.APPCOMPAT_VER}")
-	implementation("androidx.core:core-ktx:${Dependencies.KTX_VER}")
-	implementation("androidx.constraintlayout:constraintlayout:${Dependencies.CONSTRAINT_LAYOUT_VER}")
+	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Dependencies.Versions.KOTLIN_VERSION}")
+	implementation("androidx.appcompat:appcompat:${Dependencies.Versions.APPCOMPAT_VER}")
+	implementation("androidx.core:core-ktx:${Dependencies.Versions.KTX_VER}")
+	implementation("androidx.constraintlayout:constraintlayout:${Dependencies.Versions.CONSTRAINT_LAYOUT_VER}")
 	
 	
-	testImplementation("junit:junit:${Dependencies.JUNIT_VER}")
-	androidTestImplementation("androidx.test.ext:junit:${Dependencies.TEST_JUNIT_VER}")
-	androidTestImplementation("androidx.test.espresso:espresso-core:${Dependencies.ESPRESSO_VER}")
+	testImplementation("junit:junit:${Dependencies.Versions.JUNIT_VER}")
+	androidTestImplementation("androidx.test.ext:junit:${Dependencies.Versions.TEST_JUNIT_VER}")
+	androidTestImplementation("androidx.test.espresso:espresso-core:${Dependencies.Versions.ESPRESSO_VER}")
 	
 	implementation("androidx.navigation:navigation-fragment-ktx:${Dependencies.Versions.NAVIGATION_COMPONENT_VER}")
 	implementation("androidx.navigation:navigation-ui-ktx:${Dependencies.Versions.NAVIGATION_COMPONENT_VER}")

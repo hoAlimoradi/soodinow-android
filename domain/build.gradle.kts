@@ -35,19 +35,19 @@ android {
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Dependencies.KOTLIN_VERSION}")
-    implementation("androidx.core:core-ktx:${Dependencies.KTX_VER}")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Dependencies.Versions.KOTLIN_VERSION}")
+    implementation("androidx.core:core-ktx:${Dependencies.Versions.KTX_VER}")
     
-    implementation ("io.objectbox:objectbox-kotlin:${Dependencies.OBJECT_BOX_VER}")
+    implementation ("io.objectbox:objectbox-kotlin:${Dependencies.Versions.OBJECT_BOX_VER}")
 
-    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Dependencies.COROUTINES_VER}")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Dependencies.Versions.COROUTINES_VER}")
 
-    implementation("com.squareup.moshi:moshi:${Dependencies.MOSHI_VER}")
-    implementation ("se.ansman.kotshi:api:${Dependencies.KOTSHI_VER}")
-    kapt("se.ansman.kotshi:compiler:${Dependencies.KOTSHI_VER}")
+    implementation("com.squareup.moshi:moshi:${Dependencies.Versions.MOSHI_VER}")
+    implementation ("se.ansman.kotshi:api:${Dependencies.Versions.KOTSHI_VER}")
+    kapt("se.ansman.kotshi:compiler:${Dependencies.Versions.KOTSHI_VER}")
 
-    implementation ("com.google.dagger:hilt-android:${Dependencies.HILT_VER}")
-    kapt ("com.google.dagger:hilt-android-compiler:${Dependencies.HILT_VER}")
+    implementation ("com.google.dagger:hilt-android:${Dependencies.Versions.HILT_VER}")
+    kapt ("com.google.dagger:hilt-android-compiler:${Dependencies.Versions.HILT_VER}")
 
-    testImplementation("junit:junit:${Dependencies.JUNIT_VER}")
+    testImplementation("junit:junit:${Dependencies.Versions.JUNIT_VER}")
 }

@@ -40,23 +40,23 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Dependencies.Versions.KOTLIN_VERSION}")
 
-    implementation("androidx.appcompat:appcompat:${Dependencies.APPCOMPAT_VER}")
-    implementation("androidx.core:core-ktx:${Dependencies.KTX_VER}")
-    implementation("androidx.constraintlayout:constraintlayout:${Dependencies.CONSTRAINT_LAYOUT_VER}")
+    implementation("androidx.appcompat:appcompat:${Dependencies.Versions.APPCOMPAT_VER}")
+    implementation("androidx.core:core-ktx:${Dependencies.Versions.KTX_VER}")
+    implementation("androidx.constraintlayout:constraintlayout:${Dependencies.Versions.CONSTRAINT_LAYOUT_VER}")
     
     implementation ("com.google.dagger:hilt-android:${Dependencies.Versions.HILT_VER}")
     kapt ("com.google.dagger:hilt-android-compiler:${Dependencies.Versions.HILT_VER}")
     implementation ("androidx.hilt:hilt-lifecycle-viewmodel:${Dependencies.Versions.ANDROIDX_HILT_VER}")
     kapt ("androidx.hilt:hilt-compiler:${Dependencies.Versions.ANDROIDX_HILT_VER}")
-
-//    implementation ("io.objectbox:objectbox-kotlin:${Dependencies.OBJECT_BOX_VER}")
+    
+    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.11.0")
     
     implementation(project(Dependencies.Modules.DOMAIN))
     implementation(project(Dependencies.Modules.PRESENTATION))
     implementation(project(Dependencies.Modules.DATA))
     implementation(project(Dependencies.Modules.COMMON))
     
-    testImplementation("junit:junit:${Dependencies.JUNIT_VER}")
-    androidTestImplementation("androidx.test.ext:junit:${Dependencies.TEST_JUNIT_VER}")
-    androidTestImplementation("androidx.test.espresso:espresso-core:${Dependencies.ESPRESSO_VER}")
+    testImplementation("junit:junit:${Dependencies.Versions.JUNIT_VER}")
+    androidTestImplementation("androidx.test.ext:junit:${Dependencies.Versions.TEST_JUNIT_VER}")
+    androidTestImplementation("androidx.test.espresso:espresso-core:${Dependencies.Versions.ESPRESSO_VER}")
 }
