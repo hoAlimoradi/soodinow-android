@@ -6,7 +6,7 @@ import com.example.data.network.interceptor.HttpLogIntercept
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -22,7 +22,7 @@ class ApiServiceFactory @Inject constructor(
 	
 	private fun retrofit(): Retrofit = Retrofit.Builder()
 		.baseUrl(BaseUrl)
-		.addConverterFactory(MoshiConverterFactory.create())
+		.addConverterFactory(GsonConverterFactory.create())
 		.addCallAdapterFactory(CoroutineCallAdapterFactory())
 		.client(okHttpClientBuilder().build())
 		.build()

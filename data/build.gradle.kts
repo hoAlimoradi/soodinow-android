@@ -40,13 +40,14 @@ dependencies {
 
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Dependencies.COROUTINES_VER}")
 
-    implementation("com.squareup.moshi:moshi:${Dependencies.MOSHI_VER}")
+//    implementation("com.squareup.moshi:moshi:${Dependencies.MOSHI_VER}")
     implementation ("se.ansman.kotshi:api:${Dependencies.KOTSHI_VER}")
     kapt("se.ansman.kotshi:compiler:${Dependencies.KOTSHI_VER}")
     
     implementation("com.squareup.retrofit2:retrofit:${Dependencies.Versions.RETROFIT_VER}")
     implementation ("com.squareup.okhttp3:logging-interceptor:${Dependencies.Versions.OK_HTTP_INTERCEPTOR_VER}")
-    implementation ("com.squareup.retrofit2:converter-moshi:${Dependencies.Versions.MOSHI_CONVERTER_VER}")
+    implementation ("com.squareup.retrofit2:converter-gson:${Dependencies.Versions.GSON_CONVERTER_VER}")
+//    implementation ("com.squareup.retrofit2:converter-moshi:${Dependencies.Versions.MOSHI_CONVERTER_VER}")
     
     implementation ("com.squareup.okhttp3:okhttp:${Dependencies.Versions.OK_HTTP_VER}")
     
