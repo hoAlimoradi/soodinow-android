@@ -3,4 +3,4 @@ include(":data")
 include(":domain")
 include(":presentation")
 include(":app")
-rootProject.name = "MVVM_Arch"
+rootProject.name = "Soodinow"
