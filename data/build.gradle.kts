@@ -1,22 +1,22 @@
-import com.example.buildSrc.Dependencies
+import com.paya.buildSrc.Dependencies
 
 plugins {
     id("com.android.library")
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
-    "dagger.hilt.android.plugin"
+    id("dagger.hilt.android.plugin")
     id("io.objectbox")
 }
 
 android {
     compileSdkVersion(30)
-    buildToolsVersion = "30.0.0"
+    buildToolsVersion = "30.0.1"
 
     defaultConfig {
         minSdkVersion(21)
         targetSdkVersion(30)
-
+    
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -39,15 +39,13 @@ dependencies {
     implementation("androidx.core:core-ktx:${Dependencies.KTX_VER}")
 
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Dependencies.COROUTINES_VER}")
-
-//    implementation("com.squareup.moshi:moshi:${Dependencies.MOSHI_VER}")
+    
     implementation ("se.ansman.kotshi:api:${Dependencies.KOTSHI_VER}")
     kapt("se.ansman.kotshi:compiler:${Dependencies.KOTSHI_VER}")
     
     implementation("com.squareup.retrofit2:retrofit:${Dependencies.Versions.RETROFIT_VER}")
     implementation ("com.squareup.okhttp3:logging-interceptor:${Dependencies.Versions.OK_HTTP_INTERCEPTOR_VER}")
     implementation ("com.squareup.retrofit2:converter-gson:${Dependencies.Versions.GSON_CONVERTER_VER}")
-//    implementation ("com.squareup.retrofit2:converter-moshi:${Dependencies.Versions.MOSHI_CONVERTER_VER}")
     
     implementation ("com.squareup.okhttp3:okhttp:${Dependencies.Versions.OK_HTTP_VER}")
     
@@ -56,8 +54,6 @@ dependencies {
     implementation ("com.google.dagger:hilt-android:${Dependencies.HILT_VER}")
     kapt("com.google.dagger:hilt-android-compiler:${Dependencies.HILT_VER}")
     
-//    implementation ("io.objectbox:objectbox-kotlin:${Dependencies.OBJECT_BOX_VER}")
-    
     implementation(project(Dependencies.Modules.DOMAIN))
     implementation(project(Dependencies.Modules.COMMON))
     
@@ -65,4 +61,5 @@ dependencies {
     releaseImplementation("com.github.ChuckerTeam.Chucker:library-no-op:${Dependencies.Versions.CHUCK_VER}")
 
     testImplementation("junit:junit:${Dependencies.JUNIT_VER}")
+    androidTestImplementation("androidx.test.ext:junit:${Dependencies.TEST_JUNIT_VER}")
 }

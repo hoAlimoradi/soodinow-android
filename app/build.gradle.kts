@@ -1,4 +1,4 @@
-import com.example.buildSrc.Dependencies
+import com.paya.buildSrc.Dependencies
 
 plugins {
     id("com.android.application")
@@ -11,10 +11,10 @@ plugins {
 
 android {
     compileSdkVersion(30)
-    buildToolsVersion = "30.0.0"
+    buildToolsVersion = "30.0.1"
 
     defaultConfig {
-        applicationId = "com.example.mvvm_arch"
+        applicationId = "com.paya.soodinow"
         minSdkVersion(21)
         targetSdkVersion(30)
         versionCode = 1

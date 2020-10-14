@@ -1,4 +1,4 @@
-import com.example.buildSrc.Dependencies
+import com.paya.buildSrc.Dependencies
 
 plugins {
 	id("com.android.library")
@@ -12,7 +12,7 @@ plugins {
 
 android {
 	compileSdkVersion(30)
-	buildToolsVersion = "30.0.0"
+	buildToolsVersion = "30.0.1"
 	
 	defaultConfig {
 		minSdkVersion(21)

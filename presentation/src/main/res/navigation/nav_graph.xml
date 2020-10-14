@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/firstFragment"
-        android:name="com.example.presentation.ui.developer.DeveloperNameFragment"
+        android:name="com.paya.presentation.ui.developer.DeveloperNameFragment"
         android:label="Blank"
         tools:layout="@layout/fragment_developer_name"
         />
