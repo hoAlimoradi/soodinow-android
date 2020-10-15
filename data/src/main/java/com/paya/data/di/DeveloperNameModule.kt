@@ -3,8 +3,6 @@ package com.paya.data.di
 import com.paya.common.Mapper
 import com.paya.data.database.developer_name.DeveloperNameDbApi
 import com.paya.data.database.developer_name.DeveloperNameDbApiImpl
-import com.paya.data.datasource.developer.DeveloperDataSource
-import com.paya.data.datasource.developer.DeveloperDataSourceImpl
 import com.paya.data.mapper.DeveloperNameEntityRepoMapper
 import com.paya.data.mapper.DeveloperNameRepoEntityMapper
 import com.paya.data.mapper.DeveloperNameServerRepoMapper
@@ -19,35 +17,31 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
-import javax.inject.Singleton
 
 @Module
 @InstallIn(ActivityComponent::class)
-abstract class DeveloperNameModule{
+abstract class DeveloperNameModule {
 	
 	@Binds
-	abstract fun bindMapper(dev : DeveloperNameServerRepoMapper): Mapper<
+	abstract fun bindMapper(dev: DeveloperNameServerRepoMapper): Mapper<
 			DeveloperNameServerModel,
 			DeveloperNameRepoModel
 			>
 	
 	@Binds
-	abstract fun bindMapperRepoEntity(devRepoEntityMapper : DeveloperNameRepoEntityMapper): Mapper<
+	abstract fun bindMapperRepoEntity(devRepoEntityMapper: DeveloperNameRepoEntityMapper): Mapper<
 			DeveloperNameRepoModel?,
 			DeveloperNameDbModel
 			>
 	
 	@Binds
-	abstract fun bindMapperEntityRepo(devEntityRepoMapper : DeveloperNameEntityRepoMapper): Mapper<
+	abstract fun bindMapperEntityRepo(devEntityRepoMapper: DeveloperNameEntityRepoMapper): Mapper<
 			DeveloperNameDbModel?,
 			DeveloperNameRepoModel
 			>
 	
 	@Binds
 	abstract fun developerNameRepo(dev : DeveloperRepositoryImpl): DeveloperRepository
-	
-	@Binds
-	abstract fun developerName(dev: DeveloperDataSourceImpl): DeveloperDataSource
 	
 	@Binds
 	abstract fun developerNameDb(db: DeveloperNameDbApiImpl): DeveloperNameDbApi

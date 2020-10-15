@@ -41,7 +41,8 @@ dependencies {
     implementation ("io.objectbox:objectbox-kotlin:${Dependencies.Versions.OBJECT_BOX_VER}")
 
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Dependencies.Versions.COROUTINES_VER}")
-
+    
+    implementation("com.squareup.retrofit2:retrofit:${Dependencies.Versions.RETROFIT_VER}")
     implementation("com.squareup.moshi:moshi:${Dependencies.Versions.MOSHI_VER}")
     implementation ("se.ansman.kotshi:api:${Dependencies.Versions.KOTSHI_VER}")
     kapt("se.ansman.kotshi:compiler:${Dependencies.Versions.KOTSHI_VER}")

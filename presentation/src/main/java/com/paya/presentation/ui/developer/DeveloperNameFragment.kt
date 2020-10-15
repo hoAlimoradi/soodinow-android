@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.paya.domain.models.repo.DeveloperNameRepoModel
+import com.paya.domain.tools.Resource
+import com.paya.domain.tools.Status
 import com.paya.presentation.R
 import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.utils.observe
@@ -39,8 +41,11 @@ class DeveloperNameFragment : BaseFragment<DeveloperNameViewModel>() {
 		observe(viewModel.developerName, ::showDeveloperName)
 	}
 	
-	private fun showDeveloperName(devName : DeveloperNameRepoModel){
-		tvFirstName.text = devName.first
-		tvLastName.text = devName.last
+	private fun showDeveloperName(devNameResource : Resource<DeveloperNameRepoModel>){
+		if(devNameResource.status == Status.SUCCESS){
+			val devName = devNameResource.data ?: return
+			tvFirstName.text = devName.first
+			tvLastName.text = devName.last
+		}
 	}
 }

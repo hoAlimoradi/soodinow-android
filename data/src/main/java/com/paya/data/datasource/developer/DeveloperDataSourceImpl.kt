@@ -2,6 +2,7 @@ package com.paya.data.datasource.developer
 
 import com.paya.common.Mapper
 import com.paya.data.database.developer_name.DeveloperNameDbApi
+import com.paya.data.network.apiresponse.ApiResponse
 import com.paya.data.network.remote_api.DeveloperNameService
 import com.paya.domain.models.local.DeveloperNameDbModel
 import com.paya.domain.models.remote.DeveloperNameServerModel
@@ -28,6 +29,6 @@ class DeveloperDataSourceImpl @Inject constructor(
 		developerApiDb.delete()
 	}
 	
-	override suspend fun getNameDeveloperNet(): DeveloperNameRepoModel =
-		mapperNet.map(developerNet.getName())
+	override suspend fun getNameDeveloperNet(): ApiResponse<DeveloperNameServerModel> =
+		developerNet.getName()
 }

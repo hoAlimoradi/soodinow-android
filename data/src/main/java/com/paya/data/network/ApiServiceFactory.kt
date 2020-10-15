@@ -3,7 +3,7 @@ package com.paya.data.network
 import com.chuckerteam.chucker.BuildConfig
 import com.paya.data.network.interceptor.ChuckIntercept
 import com.paya.data.network.interceptor.HttpLogIntercept
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.paya.data.network.apiresponse.ApiResponseCallAdapterFactory
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -23,7 +23,7 @@ class ApiServiceFactory @Inject constructor(
 	private fun retrofit(): Retrofit = Retrofit.Builder()
 		.baseUrl(BaseUrl)
 		.addConverterFactory(GsonConverterFactory.create())
-		.addCallAdapterFactory(CoroutineCallAdapterFactory())
+		.addCallAdapterFactory(ApiResponseCallAdapterFactory())
 		.client(okHttpClientBuilder().build())
 		.build()
 	
