@@ -7,6 +7,7 @@ import dagger.hilt.android.components.ActivityRetainedComponent
 @Module(
 includes = [
 	DeveloperNameModule::class,
+	AuthModule::class,
 	ApiServiceFactoryModule::class,
 	ObjectBoxDeveloperNameFactoryModule::class
 ]

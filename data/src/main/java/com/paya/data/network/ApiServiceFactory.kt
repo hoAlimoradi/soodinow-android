@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 const val TIME_OUT: Long = 60
-const val BaseUrl: String = "http://demo9484242.mockable.io/"
+const val BaseUrl: String = "http://main.soodinow.com/api/v1/"
 
 class ApiServiceFactory @Inject constructor(
 	private val chuckIntercept : ChuckIntercept,

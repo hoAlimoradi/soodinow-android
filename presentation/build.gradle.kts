@@ -5,9 +5,11 @@ plugins {
 	kotlin("android")
 	kotlin("android.extensions")
 	kotlin("kapt")
+	id("kotlin-kapt")
 	id("dagger.hilt.android.plugin")
 	id("io.objectbox")
 	id("androidx.navigation.safeargs.kotlin")
+	id("kotlin-android")
 }
 
 android {
@@ -39,6 +41,11 @@ android {
             )
 		}
 	}
+	
+	buildFeatures {
+		dataBinding = true
+	}
+	
 }
 
 dependencies {
@@ -47,6 +54,7 @@ dependencies {
 	implementation("androidx.appcompat:appcompat:${Dependencies.Versions.APPCOMPAT_VER}")
 	implementation("androidx.core:core-ktx:${Dependencies.Versions.KTX_VER}")
 	implementation("androidx.constraintlayout:constraintlayout:${Dependencies.Versions.CONSTRAINT_LAYOUT_VER}")
+	implementation("androidx.legacy:legacy-support-v4:1.0.0")
 	
 	
 	testImplementation("junit:junit:${Dependencies.Versions.JUNIT_VER}")
@@ -66,6 +74,8 @@ dependencies {
 	kapt("androidx.lifecycle:lifecycle-compiler:${Dependencies.Versions.LIFECYCLE_VER}")
 	implementation("androidx.lifecycle:lifecycle-runtime-ktx:${Dependencies.Versions.LIFECYCLE_VER}")
 	implementation("android.arch.lifecycle:extensions:2.1.0")
+	
+	kapt ("com.android.databinding:compiler:${Dependencies.Versions.DATA_BINDING_VER}")
 	
 	
 	implementation(project(Dependencies.Modules.DOMAIN))

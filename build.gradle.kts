@@ -19,6 +19,7 @@ buildscript {
         classpath ("androidx.navigation:navigation-safe-args-gradle-plugin:${com.paya.buildSrc.Dependencies.Versions.NAVIGATION_COMPONENT_VER}")
     
         classpath ("com.github.ben-manes:gradle-versions-plugin:0.33.0")
+        classpath ("org.jetbrains.kotlin:kotlin-android-extensions:1.4.10")
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle.kts.kts.kts files
     }

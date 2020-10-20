@@ -43,6 +43,7 @@ dependencies {
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Dependencies.Versions.COROUTINES_VER}")
     
     implementation("com.squareup.retrofit2:retrofit:${Dependencies.Versions.RETROFIT_VER}")
+    implementation ("com.squareup.retrofit2:converter-gson:${Dependencies.Versions.GSON_CONVERTER_VER}")
     implementation("com.squareup.moshi:moshi:${Dependencies.Versions.MOSHI_VER}")
     implementation ("se.ansman.kotshi:api:${Dependencies.Versions.KOTSHI_VER}")
     kapt("se.ansman.kotshi:compiler:${Dependencies.Versions.KOTSHI_VER}")

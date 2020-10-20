@@ -24,6 +24,7 @@ object Dependencies{
 		const val OK_HTTP_INTERCEPTOR_VER = "4.10.0-RC1"
 		const val NAVIGATION_COMPONENT_VER = "2.3.1"
 		const val LIFECYCLE_VER = "2.3.0-beta01"
+		const val DATA_BINDING_VER = "3.1.4"
 	}
 	
 	object Modules{

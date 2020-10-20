@@ -5,6 +5,7 @@ plugins {
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
+    id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
     id("io.objectbox")
 }
@@ -34,6 +35,11 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
+    
+    buildFeatures {
+        dataBinding = true
+    }
+    
 }
 
 dependencies {
@@ -50,6 +56,7 @@ dependencies {
     kapt ("androidx.hilt:hilt-compiler:${Dependencies.Versions.ANDROIDX_HILT_VER}")
     
     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.11.0")
+    kapt ("com.android.databinding:compiler:${Dependencies.Versions.DATA_BINDING_VER}")
     
     implementation(project(Dependencies.Modules.DOMAIN))
     implementation(project(Dependencies.Modules.PRESENTATION))

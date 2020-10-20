@@ -2,14 +2,24 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/firstFragment"
+    app:startDestination="@id/registerFragment"
     >
 
     <fragment
-        android:id="@+id/firstFragment"
-        android:name="com.paya.presentation.ui.developer.DeveloperNameFragment"
-        android:label="Blank"
-        tools:layout="@layout/fragment_developer_name"
-        />
+        android:id="@+id/registerFragment"
+        android:name="com.paya.presentation.ui.register.RegisterFragment"
+        android:label="RegisterFragment" >
+        <action
+            android:id="@+id/navigateToActivateFragment"
+            app:destination="@id/activateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/activateFragment"
+        android:name="com.paya.presentation.ui.activate.ActivateFragment"
+        android:label="ActivateFragment" >
+        <argument
+            android:name="phoneNumber"
+            app:argType="string" />
+    </fragment>
 
 </navigation>
