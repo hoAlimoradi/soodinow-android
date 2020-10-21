@@ -4,6 +4,7 @@
     <string name="register">ثبت نام</string>
     <string name="register_description">برای ورود لطفا شماره موبایل خود را وارد کنید</string>
     <string name="activation_description">لطفا عدد پیامک شده را در کادر زیر وارد کنید</string>
+    <string name="fingerprint_description">از دفعات بعدی می توانید با اثر انگشت وارد شوید </string>
     <string name="submit_and_continue">ثبت و ادامه</string>
     <string name="change_phone_number">تغییر شماره</string>
     <string name="resend_code">ارسال مجدد</string>
