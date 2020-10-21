@@ -10,5 +10,6 @@ package com.paya.domain.tools
 enum class Status {
     SUCCESS,
     ERROR,
-    LOADING
+    LOADING,
+    IDLE
 }

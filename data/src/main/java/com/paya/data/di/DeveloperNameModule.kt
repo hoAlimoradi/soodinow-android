@@ -47,5 +47,6 @@ abstract class DeveloperNameModule {
 	abstract fun developerNameDb(db: DeveloperNameDbApiImpl): DeveloperNameDbApi
 	
 	@Binds
-	abstract fun bindGetDeveloperNameCase(db: GetDeveloperNameCase): UseCase<Unit,DeveloperNameRepoModel>
+	abstract fun bindGetDeveloperNameCase(db: GetDeveloperNameCase):
+			UseCase<Unit,DeveloperNameRepoModel>
 }

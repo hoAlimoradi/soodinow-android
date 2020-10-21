@@ -3,6 +3,7 @@ package com.paya.presentation.viewmodel
 import androidx.databinding.ObservableField
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
+import com.paya.domain.models.repo.AccessTokenRepoModel
 import com.paya.domain.models.repo.ActivateRepoModel
 import com.paya.domain.models.repo.RegisterRepoModel
 import com.paya.domain.tools.Resource
@@ -14,12 +15,12 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class ActivateViewModel @ViewModelInject constructor(
-	private val activateUseCase: UseCase<ActivateRepoModel,ActivateRepoModel>,
+	private val activateUseCase: UseCase<ActivateRepoModel,AccessTokenRepoModel>,
 	private val registerUseCase: UseCase<String,RegisterRepoModel>
 ) : ViewModel() {
 	
-	private val activateResource = MutableLiveData<Resource<ActivateRepoModel>>()
-	private val registerStatus = VolatileLiveData<Resource<RegisterRepoModel>>()
+	//	private val activateResource = MutableLiveData<Resource<AccessTokenRepoModel>>()
+//	private val registerStatus = VolatileLiveData<Resource<RegisterRepoModel>>()
 	val remainingTimeText = MutableLiveData<String>()
 	val remainingTime = MutableLiveData(59)
 	
@@ -27,25 +28,31 @@ class ActivateViewModel @ViewModelInject constructor(
 		viewModelScope.launch { setRemainingTime() }
 	}
 	
+	var accessToken: String = ""
 	lateinit var phoneNumber: String
 	val activationCode = ObservableField<String>()
 	
-	val status: LiveData<Resource<Nothing>> = getStatus()
+	val status = VolatileLiveData<Resource<Any>>()
 	
 	fun activate() {
 		val activationCode = activationCode.get()
-		if (activationCode == null || activationCode.isBlank()|| activationCode.length != 5) {
-			activateResource.value = Resource.error("code is not valid",null)
+		if (activationCode == null || activationCode.isBlank() || activationCode.length != 5) {
+			status.setValue(Resource.error("code is not valid",null))
 			return
 		}
 		viewModelScope.launch(Dispatchers.IO) {
-			activateResource.postValue(Resource.loading(null))
+			status.postValue(Resource.loading(null))
 			val activateModel = ActivateRepoModel(
 				phoneNumber,
 				activationCode
 			)
 			val response = activateUseCase.action(activateModel)
-			activateResource.postValue(response)
+			if (response.status == Status.SUCCESS) {
+				response.data?.accessToken?.let {
+					accessToken = it
+				}
+			}
+			status.postValue(response)
 		}
 	}
 	
@@ -53,36 +60,16 @@ class ActivateViewModel @ViewModelInject constructor(
 		if (remainingTime.value != 0)
 			return
 		viewModelScope.launch(Dispatchers.IO) {
-			registerStatus.postValue(Resource.loading(null))
+			status.postValue(Resource.loading(null))
 			val response = registerUseCase.action("+989$phoneNumber")
-			registerStatus.postValue(response)
+			
+			if (response.status == Status.SUCCESS)
+				status.postValue(Resource.idle(null))
+			else
+				status.postValue(response)
 		}
 	}
 	
-	private fun getStatus(): MediatorLiveData<Resource<Nothing>> {
-		val result = MediatorLiveData<Resource<Nothing>>()
-		result.addSource(activateResource) {
-			val resource = activateResource.value ?: return@addSource
-			result.value = when (resource.status) {
-				Status.SUCCESS -> {
-					remainingTime.value = 59
-					viewModelScope.launch { setRemainingTime() }
-					Resource.success(null)
-				}
-				Status.ERROR -> Resource.error(it.message ?: "Error",null)
-				Status.LOADING -> Resource.loading(null)
-			}
-		}
-		result.addSource(registerStatus) {
-			val resource = registerStatus.value ?: return@addSource
-			result.value = when (resource.status) {
-				Status.ERROR -> Resource.error(it.message ?: "Error",null)
-				Status.LOADING -> Resource.loading(null)
-				else -> return@addSource
-			}
-		}
-		return result
-	}
 	
 	private suspend fun setRemainingTime() {
 		val formattedRemainingTime =
@@ -90,7 +77,7 @@ class ActivateViewModel @ViewModelInject constructor(
 			else "0${remainingTime.value}"
 		remainingTimeText.value = "00:$formattedRemainingTime"
 		
-		if(remainingTime.value == 0)
+		if (remainingTime.value == 0)
 			return
 		
 		delay(1000)

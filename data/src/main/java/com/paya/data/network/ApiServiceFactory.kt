@@ -4,6 +4,7 @@ import com.chuckerteam.chucker.BuildConfig
 import com.paya.data.network.interceptor.ChuckIntercept
 import com.paya.data.network.interceptor.HttpLogIntercept
 import com.paya.data.network.apiresponse.ApiResponseCallAdapterFactory
+import com.paya.data.network.interceptor.AuthenticatorInterceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -15,7 +16,8 @@ const val BaseUrl: String = "http://main.soodinow.com/api/v1/"
 
 class ApiServiceFactory @Inject constructor(
 	private val chuckIntercept : ChuckIntercept,
-	private val httpLogIntercept : HttpLogIntercept
+	private val httpLogIntercept : HttpLogIntercept,
+	private val authenticatorInterceptor: AuthenticatorInterceptor
 ) {
 	
 	fun <T> create(serviceClass: Class<T>): T = retrofit().create(serviceClass)
@@ -34,6 +36,7 @@ class ApiServiceFactory @Inject constructor(
 			.readTimeout(TIME_OUT, TimeUnit.SECONDS)
 			.retryOnConnectionFailure(true)
 			.addInterceptor(httpLogIntercept.getIntercept())
+			.addInterceptor(authenticatorInterceptor)
 		if (BuildConfig.DEBUG) {
 			builder.addInterceptor(chuckIntercept.getIntercept())
 		}

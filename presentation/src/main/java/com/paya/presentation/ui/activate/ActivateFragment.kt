@@ -54,9 +54,9 @@ class ActivateFragment : Fragment() {
 		}
 	}
 	
-	private fun checkActivateStatus(activateResource: Resource<Nothing>){
+	private fun checkActivateStatus(activateResource: Resource<Any>){
 		if (activateResource.status == Status.SUCCESS){
-			findNavController().navigate(R.id.activateFragment)
+			findNavController().navigate(R.id.setPasswordFragment)
 		}else if (activateResource.status == Status.ERROR){
 			Toast.makeText(
 				requireContext(), activateResource.message, Toast.LENGTH_SHORT

@@ -4,7 +4,7 @@ import io.objectbox.annotation.Entity
 import io.objectbox.annotation.Id
 
 @Entity
-data class RegisterDbModel(
+data class AccessTokenDbModel(
 	@Id var id: Long = 0,
-	val username: String? = ""
+	val accessToken: String? = ""
 )
