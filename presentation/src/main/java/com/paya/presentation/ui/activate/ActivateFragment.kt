@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.paya.domain.models.repo.ActivateRepoModel
 import com.paya.domain.tools.Resource
@@ -40,18 +41,22 @@ class ActivateFragment : Fragment() {
 		
 		mViewModel.phoneNumber = args.phoneNumber
 		mBinding.viewModel = mViewModel
+		mBinding.lifecycleOwner = this
 		
 		return mBinding.root
 	}
 	
 	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
 		super.onViewCreated(view,savedInstanceState)
-		observe(mViewModel.activateResource, ::checkActivateStatus)
+		observe(mViewModel.status, ::checkActivateStatus)
+		mBinding.changeNumber.setOnClickListener {
+			findNavController().popBackStack(R.id.registerFragment, false)
+		}
 	}
 	
-	private fun checkActivateStatus(activateResource: Resource<ActivateRepoModel>){
+	private fun checkActivateStatus(activateResource: Resource<Nothing>){
 		if (activateResource.status == Status.SUCCESS){
-		
+			findNavController().navigate(R.id.activateFragment)
 		}else if (activateResource.status == Status.ERROR){
 			Toast.makeText(
 				requireContext(), activateResource.message, Toast.LENGTH_SHORT

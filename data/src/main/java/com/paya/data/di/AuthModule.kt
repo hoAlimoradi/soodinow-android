@@ -3,8 +3,10 @@ package com.paya.data.di
 import com.paya.common.Mapper
 import com.paya.data.mapper.*
 import com.paya.data.repository.AuthRepositoryImpl
+import com.paya.domain.models.remote.AccessTokenRemoteModel
 import com.paya.domain.models.remote.ActivateRemoteModel
 import com.paya.domain.models.remote.RegisterRemoteModel
+import com.paya.domain.models.repo.AccessTokenRepoModel
 import com.paya.domain.models.repo.ActivateRepoModel
 import com.paya.domain.models.repo.RegisterRepoModel
 import com.paya.domain.repository.AuthRepository
@@ -31,6 +33,12 @@ abstract class AuthModule {
 			ActivateRemoteModel,
 			ActivateRepoModel
 			>
+	
+//	@Binds
+//	abstract fun bindAccessTokenRemoteRepoMapper(mapper: AccessTokenRemoteRepoMapper): Mapper<
+//			AccessTokenRemoteModel,
+//			AccessTokenRepoModel
+//			>
 	
 	@Binds
 	abstract fun registerRepo(dev: AuthRepositoryImpl): AuthRepository

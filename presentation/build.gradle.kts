@@ -77,6 +77,7 @@ dependencies {
 	
 	kapt ("com.android.databinding:compiler:${Dependencies.Versions.DATA_BINDING_VER}")
 	
+	implementation ("com.alimuzaffar.lib:pinentryedittext:2.0.6")
 	
 	implementation(project(Dependencies.Modules.DOMAIN))
 }

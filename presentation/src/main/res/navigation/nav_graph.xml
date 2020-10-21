@@ -10,6 +10,7 @@
         android:name="com.paya.presentation.ui.register.RegisterFragment"
         android:label="RegisterFragment" >
         <action
+            app:popUpTo="@id/registerFragment"
             android:id="@+id/navigateToActivateFragment"
             app:destination="@id/activateFragment" />
     </fragment>
@@ -19,6 +20,17 @@
         android:label="ActivateFragment" >
         <argument
             android:name="phoneNumber"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_activateFragment_to_setPasswordFragment"
+            app:destination="@id/setPasswordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/setPasswordFragment"
+        android:name="com.paya.presentation.ui.setPassword.SetPasswordFragment"
+        android:label="SetPasswordFragment" >
+        <argument
+            android:name="accessToken"
             app:argType="string" />
     </fragment>
 

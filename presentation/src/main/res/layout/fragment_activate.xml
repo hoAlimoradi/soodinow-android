@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.paya.presentation.viewmodel.ActivateViewModel"/>
+
+        <import type="android.view.View" />
+
+        <import type="com.paya.presentation.viewmodel.ActivateViewModel" />
 
         <variable
             name="viewModel"
@@ -14,40 +17,186 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.register.RegisterFragment">
+        tools:context=".ui.activate.ActivateFragment">
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_start_code"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.2"
+            android:id="@+id/guideline_start_phone_number"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.2" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_end_code"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.8"
+            android:id="@+id/guideline_end_phone_number"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.8" />
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/phone_number_edit_text"
-            android:text="@={viewModel.activationCode}"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="@id/guideline_start_code"
-            app:layout_constraintEnd_toEndOf="@id/guideline_end_code"
-            android:inputType="phone"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_bottom_background"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
 
-        <Button
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_top_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.36" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/login_background"
+            app:layout_constraintBottom_toBottomOf="@id/guideline_bottom_background"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container"
+            style="@style/TopRoundedCornerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:text="Register"
-            android:onClick="@{() -> viewModel.activate()}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            app:layout_constraintTop_toTopOf="@id/guideline_top_content">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_top_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.15" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_top_subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.35" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_top_phone_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.43" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_top_resend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.63" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_top_register_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.83" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TitleTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/register"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/guideline_top_title" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/description"
+                style="@style/SubtitleTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/register_description"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/guideline_top_subtitle" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/change_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_medium"
+                android:text="@string/change_phone_number"
+                android:textColor="@color/dark_blue"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/guideline_top_subtitle" />
+
+            <com.alimuzaffar.lib.pin.PinEntryEditText
+                android:id="@+id/txt_pin_entry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_medium"
+                android:cursorVisible="false"
+                android:digits="1234567890"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="5"
+                android:text="@={viewModel.activationCode}"
+                android:textIsSelectable="false"
+                android:textSize="@dimen/margin_medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/guideline_top_phone_number"
+                app:pinAnimationType="popIn"
+                app:pinBackgroundDrawable="@drawable/round_corner_layout"
+                app:pinBackgroundIsSquare="true"
+                app:pinLineColors="@android:color/transparent"
+                app:pinLineStroke="2dp"
+                app:pinLineStrokeSelected="4dp"
+                app:pinTextBottomPadding="@dimen/margin_small" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/resend_code"
+                enableDisable="@{viewModel.remainingTime}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_medium"
+                android:onClick="@{() -> viewModel.register()}"
+                android:text="@string/resend_code"
+                android:textColor="@color/green"
+                android:textSize="@dimen/text_size_small"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/guideline_top_resend" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/resend_code_after"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_small"
+                android:text="@string/resend_code_after"
+                android:textColor="@color/green"
+                android:textSize="@dimen/text_size_small"
+                app:layout_constraintStart_toEndOf="@id/resend_code_time"
+                app:layout_constraintTop_toBottomOf="@id/guideline_top_resend" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/resend_code_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_medium"
+                android:text="@{viewModel.remainingTimeText}"
+                android:textColor="@color/green"
+                android:textSize="@dimen/text_size_small"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/guideline_top_resend" />
+
+            <Button
+                style="@style/SubmitButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_medium"
+                android:onClick="@{() -> viewModel.activate()}"
+                android:text="@string/submit_and_continue"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

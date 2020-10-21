@@ -1,11 +1,14 @@
 package com.paya.presentation.ui.register
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -18,6 +21,7 @@ import com.paya.presentation.databinding.FragmentRegisterBinding
 import com.paya.presentation.utils.observe
 import com.paya.presentation.viewmodel.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class RegisterFragment : Fragment() {
@@ -44,19 +48,27 @@ class RegisterFragment : Fragment() {
 	
 	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
 		super.onViewCreated(view,savedInstanceState)
-		observe(mViewModel.registerStatus, ::checkRegisterStatus)
+		mBinding.phoneNumberLayout.setOnClickListener {
+			mBinding.phoneNumberEditText.requestFocus()
+			val imm: InputMethodManager? =
+				requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+			imm?.showSoftInput(mBinding.phoneNumberEditText,InputMethodManager.SHOW_IMPLICIT)
+		}
+		observe(mViewModel.registerStatus,::checkRegisterStatus)
 	}
 	
 	private fun checkRegisterStatus(registerResource: Resource<RegisterRepoModel>){
-		Log.d("checkRegisterStatus", registerResource.status.toString())
+		Log.d("checkRegisterStatus",registerResource.status.toString())
 		if (registerResource.status == Status.SUCCESS){
+			val args = Bundle()
+			args.putString("phoneNumber", registerResource.data?.username!!)
 			findNavController().navigate(
-				RegisterFragmentDirections.navigateToActivateFragment(mViewModel.phoneNumber.get()!!)
+				R.id.activateFragment,
+				args
 			)
-			onDestroy()
 		}else if (registerResource.status == Status.ERROR){
 			Toast.makeText(
-				requireContext(), registerResource.message, Toast.LENGTH_SHORT
+				requireContext(),registerResource.message,Toast.LENGTH_SHORT
 			).show()
 		}
 	}

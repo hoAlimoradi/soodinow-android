@@ -26,9 +26,13 @@ class RegisterViewModel @ViewModelInject constructor(
 			registerStatus.setValue(Resource.error("Phone number cannot be empty", null))
 			return
 		}
+		if(phoneNumber.length != 9){
+			registerStatus.setValue(Resource.error("Phone number is not valid", null))
+			return
+		}
 		viewModelScope.launch (Dispatchers.IO) {
 			registerStatus.postValue(Resource.loading(null))
-			val response = registerUseCase.action(phoneNumber)
+			val response = registerUseCase.action("+989$phoneNumber")
 			registerStatus.postValue(response)
 		}
 	}
