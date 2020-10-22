@@ -48,7 +48,9 @@ class LoginFragment : Fragment() {
 	
 	private fun checkLoginStatus(resource: Resource<Any>){
 		if (resource.status == Status.SUCCESS){
-			findNavController().navigate(R.id.homeFragment)
+			findNavController().navigate(
+				R.id.navigateToHomeFragment
+			)
 		}else if (resource.status == Status.ERROR){
 			Toast.makeText(
 				requireContext(), resource.message, Toast.LENGTH_SHORT

@@ -49,7 +49,9 @@ class SetPasswordFragment : Fragment() {
 	
 	private fun checkSetPasswordStatus(resource: Resource<SetPasswordRepoModel>){
 		if (resource.status == Status.SUCCESS){
-			findNavController().navigate(R.id.loginFragment)
+			findNavController().navigate(
+				R.id.navigateFromSetPasswordToLoginFragment
+			)
 		}else if (resource.status == Status.ERROR){
 			Toast.makeText(
 				requireContext(), resource.message, Toast.LENGTH_SHORT

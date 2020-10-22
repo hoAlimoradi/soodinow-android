@@ -50,13 +50,15 @@ class ActivateFragment : Fragment() {
 		super.onViewCreated(view,savedInstanceState)
 		observe(mViewModel.status, ::checkActivateStatus)
 		mBinding.changeNumber.setOnClickListener {
-			findNavController().popBackStack(R.id.registerFragment, false)
+			findNavController().popBackStack()
 		}
 	}
 	
 	private fun checkActivateStatus(activateResource: Resource<Any>){
 		if (activateResource.status == Status.SUCCESS){
-			findNavController().navigate(R.id.setPasswordFragment)
+			findNavController().navigate(
+				R.id.navigateToSetPasswordFragment
+			)
 		}else if (activateResource.status == Status.ERROR){
 			Toast.makeText(
 				requireContext(), activateResource.message, Toast.LENGTH_SHORT

@@ -14,6 +14,11 @@
         <item name="android:textColor">@color/blue_gray</item>
     </style>
 
+    <style name="PurpleTitleTextView" parent="TitleTextView">
+        <item name="android:textColor">@color/purple</item>
+        <item name="android:textSize">@dimen/text_size_title_small</item>
+    </style>
+
     <style name="SubtitleTextView">
         <item name="android:textSize">@dimen/text_size_small</item>
         <item name="android:layout_marginStart">@dimen/margin_medium</item>
