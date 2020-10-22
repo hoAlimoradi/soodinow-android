@@ -48,12 +48,6 @@ class RegisterFragment : Fragment() {
 	
 	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
 		super.onViewCreated(view,savedInstanceState)
-		mBinding.phoneNumberLayout.setOnClickListener {
-			mBinding.phoneNumberEditText.requestFocus()
-			val imm: InputMethodManager? =
-				requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
-			imm?.showSoftInput(mBinding.phoneNumberEditText,InputMethodManager.SHOW_IMPLICIT)
-		}
 		observe(mViewModel.registerStatus,::checkRegisterStatus)
 	}
 	

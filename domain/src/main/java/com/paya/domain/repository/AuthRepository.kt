@@ -1,7 +1,6 @@
 package com.paya.domain.repository
 
-import com.paya.domain.models.repo.AccessTokenRepoModel
-import com.paya.domain.models.repo.ActivateRepoModel
+import com.paya.domain.models.repo.UserInfoRepoModel
 import com.paya.domain.models.repo.RegisterRepoModel
 import com.paya.domain.models.repo.SetPasswordRepoModel
 import com.paya.domain.tools.Resource
@@ -11,8 +10,14 @@ interface AuthRepository {
 	suspend fun activate(
 		phoneNumber: String,
 		code: String
-	): Resource<AccessTokenRepoModel>
-	suspend fun updateAccessToken(accessTokenModel: AccessTokenRepoModel)
-	suspend fun getAccessToken(): Resource<AccessTokenRepoModel>
+	): Resource<UserInfoRepoModel>
+	suspend fun login(
+		username: String,
+		password: String
+	): Resource<UserInfoRepoModel>
+	suspend fun updateAccessToken(accessToken: String)
+	suspend fun updateIsPasswordSet(isPasswordSet: Boolean)
+	suspend fun updateIsHintShowed(isHintShowed: Boolean)
+	suspend fun getUserInfo(): Resource<UserInfoRepoModel>
 	suspend fun setPassword(password: String): Resource<SetPasswordRepoModel>
 }

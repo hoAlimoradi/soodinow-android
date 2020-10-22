@@ -1,35 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
-        <import type="com.paya.presentation.viewmodel.RegisterViewModel" />
+        <import type="android.view.View" />
+
+        <import type="com.paya.presentation.viewmodel.LoginViewModel" />
 
         <variable
             name="viewModel"
-            type="RegisterViewModel" />
+            type="LoginViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.register.RegisterFragment">
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_start_phone_number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.2" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_end_phone_number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.8" />
+        tools:context=".ui.login.LoginFragment">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_bottom_background"
@@ -43,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.36" />
+            app:layout_constraintGuide_percent="0.25" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="match_parent"
@@ -54,6 +41,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:background="@color/white"
             android:id="@+id/container"
             style="@style/TopRoundedCornerLayout"
             android:layout_width="match_parent"
@@ -66,63 +54,75 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.15" />
+                app:layout_constraintGuide_percent="0.08" />
 
             <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline_top_subtitle"
+                android:id="@+id/guideline_top_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.35" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline_top_phone_number"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.43" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline_top_register_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.83" />
+                app:layout_constraintGuide_percent="0.21" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/TitleTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/register"
+                android:text="@string/login"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/guideline_top_title" />
 
-
             <LinearLayout
-                android:id="@+id/phone_number_layout"
+                android:id="@+id/password_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/guideline_top_subtitle">
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/guideline_top_password">
 
                 <include
                     layout="@layout/input_phone_number"
-                    app:label="@{@string/register_description}"
-                    app:content="@={viewModel.phoneNumber}"/>
+                    app:content="@{viewModel.username}"
+                    app:label="@{@string/username_or_phone}" />
+
+                <include
+                    layout="@layout/input_text"
+                    app:content="@{viewModel.password}"
+                    app:label="@{@string/repeat_password}" />
 
             </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/fingerprint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/password_layout"
+                app:srcCompat="@drawable/ic_fingerprint" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/description"
+                style="@style/SubtitleTextView"
+                android:layout_width="0dp"
+                android:layout_marginTop="@dimen/margin_small"
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:text="@string/fingerprint_description"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fingerprint" />
 
             <Button
                 style="@style/SubmitButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_medium"
-                android:onClick="@{() -> viewModel.register()}"
-                android:text="@string/submit_and_continue"
+                android:onClick="@{() -> viewModel.login()}"
+                android:text="@string/login"
                 app:layout_constraintBottom_toBottomOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,7 +1,7 @@
 package com.paya.data.di
 
 import com.paya.data.database.ObjectBox
-import com.paya.domain.models.local.AccessTokenDbModel
+import com.paya.domain.models.local.UserInfoDbModel
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
@@ -14,6 +14,6 @@ import io.objectbox.Box
 class AccessTokenDbModule{
 	@Provides
 	@Reusable
-	fun accessTokenDb(): Box<AccessTokenDbModel> =
-		ObjectBox.boxStore.boxFor(AccessTokenDbModel::class.java)
+	fun accessTokenDb(): Box<UserInfoDbModel> =
+		ObjectBox.boxStore.boxFor(UserInfoDbModel::class.java)
 }

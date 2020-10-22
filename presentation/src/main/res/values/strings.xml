@@ -2,6 +2,7 @@
     <string name="app_name">presentation</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="register">ثبت نام</string>
+    <string name="login">ورود</string>
     <string name="register_description">برای ورود لطفا شماره موبایل خود را وارد کنید</string>
     <string name="activation_description">لطفا عدد پیامک شده را در کادر زیر وارد کنید</string>
     <string name="fingerprint_description">از دفعات بعدی می توانید با اثر انگشت وارد شوید </string>
@@ -11,4 +12,5 @@
     <string name="resend_code_after">ارسال دوباره کد بعد از</string>
     <string name="password">رمزعبور</string>
     <string name="repeat_password">تکرار رمز عبور</string>
+    <string name="username_or_phone">نام کاربری (شماره تماس)</string>
 </resources>

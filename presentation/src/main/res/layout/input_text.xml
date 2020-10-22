@@ -30,9 +30,10 @@
             />
 
         <androidx.appcompat.widget.AppCompatEditText
+            android:layout_marginTop="@dimen/margin_very_small"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/margin_very_small"
+            android:padding="@dimen/margin_small"
             android:text="@={content}"
             android:textColor="#000000"
             android:background="@drawable/round_corner_layout"

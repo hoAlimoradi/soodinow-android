@@ -1,25 +1,21 @@
 package com.paya.data.network.interceptor
 
-import com.paya.data.database.accessToken.AccessTokenDbApi
+import com.paya.data.database.userInfo.UserInfoDbApi
 import kotlinx.coroutines.*
 import okhttp3.Interceptor
 import okhttp3.Response
 import javax.inject.Inject
 
 class AuthenticatorInterceptor @Inject constructor(
-    accessTokenDbApi: AccessTokenDbApi
+    private val userInfoDbApi: UserInfoDbApi
 ): Interceptor {
     
-    private val scope = CoroutineScope(Dispatchers.IO)
     private var credentials: String? = null
     
-    init {
-    	scope.launch {
-            credentials = accessTokenDbApi.getSingle()?.accessToken
-        }
-    }
-
     override fun intercept(chain: Interceptor.Chain): Response {
+        runBlocking {
+            credentials = userInfoDbApi.getSingle()?.accessToken
+        }
         var request = chain.request()
         credentials?.let {
             request = request.newBuilder().header(
@@ -27,9 +23,6 @@ class AuthenticatorInterceptor @Inject constructor(
                 "Bearer $credentials"
             ).build()
         }
-        
-        if (scope.isActive)
-            scope.cancel()
         
         return chain.proceed(request)
     }

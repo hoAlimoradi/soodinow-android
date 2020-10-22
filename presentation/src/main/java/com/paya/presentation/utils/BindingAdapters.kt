@@ -1,5 +1,9 @@
 package com.paya.presentation.utils
 
+import android.content.Context
+import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
@@ -16,6 +20,18 @@ object BindingAdapters {
 		else
 			textView.setTextColor(ContextCompat.getColor(textView.context,R.color.green))
 	}
-
+	
+	@JvmStatic
+	@BindingAdapter("focusTarget")
+	fun setFocusTarget(view: View,viewId: Int?) {
+		viewId ?: return
+		view.setOnClickListener {
+			val target = view.findViewById<EditText>(viewId)
+			target.requestFocus()
+			val imm: InputMethodManager? =
+				target.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+			imm?.showSoftInput(target,InputMethodManager.SHOW_IMPLICIT)
+		}
+	}
 	
 }

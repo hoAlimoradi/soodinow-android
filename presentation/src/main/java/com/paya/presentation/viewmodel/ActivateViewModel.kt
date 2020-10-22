@@ -2,8 +2,9 @@ package com.paya.presentation.viewmodel
 
 import androidx.databinding.ObservableField
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.*
-import com.paya.domain.models.repo.AccessTokenRepoModel
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.paya.domain.models.repo.ActivateRepoModel
 import com.paya.domain.models.repo.RegisterRepoModel
 import com.paya.domain.tools.Resource
@@ -15,12 +16,10 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class ActivateViewModel @ViewModelInject constructor(
-	private val activateUseCase: UseCase<ActivateRepoModel,AccessTokenRepoModel>,
+	private val activateUseCase: UseCase<ActivateRepoModel,Any>,
 	private val registerUseCase: UseCase<String,RegisterRepoModel>
 ) : ViewModel() {
 	
-	//	private val activateResource = MutableLiveData<Resource<AccessTokenRepoModel>>()
-//	private val registerStatus = VolatileLiveData<Resource<RegisterRepoModel>>()
 	val remainingTimeText = MutableLiveData<String>()
 	val remainingTime = MutableLiveData(59)
 	
@@ -28,7 +27,6 @@ class ActivateViewModel @ViewModelInject constructor(
 		viewModelScope.launch { setRemainingTime() }
 	}
 	
-	var accessToken: String = ""
 	lateinit var phoneNumber: String
 	val activationCode = ObservableField<String>()
 	
@@ -47,11 +45,6 @@ class ActivateViewModel @ViewModelInject constructor(
 				activationCode
 			)
 			val response = activateUseCase.action(activateModel)
-			if (response.status == Status.SUCCESS) {
-				response.data?.accessToken?.let {
-					accessToken = it
-				}
-			}
 			status.postValue(response)
 		}
 	}

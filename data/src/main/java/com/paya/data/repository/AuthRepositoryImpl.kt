@@ -1,16 +1,16 @@
 package com.paya.data.repository
 
 import com.paya.common.Mapper
-import com.paya.data.database.accessToken.AccessTokenDbApi
+import com.paya.data.database.userInfo.UserInfoDbApi
 import com.paya.data.network.apiresponse.ApiEmptyResponse
 import com.paya.data.network.apiresponse.ApiErrorResponse
 import com.paya.data.network.apiresponse.ApiSuccessResponse
 import com.paya.data.network.remote_api.AuthService
-import com.paya.domain.models.local.AccessTokenDbModel
+import com.paya.domain.models.local.UserInfoDbModel
 import com.paya.domain.models.remote.AccessTokenRemoteModel
 import com.paya.domain.models.remote.RegisterRemoteModel
 import com.paya.domain.models.remote.SetPasswordRemoteModel
-import com.paya.domain.models.repo.AccessTokenRepoModel
+import com.paya.domain.models.repo.UserInfoRepoModel
 import com.paya.domain.models.repo.RegisterRepoModel
 import com.paya.domain.models.repo.SetPasswordRepoModel
 import com.paya.domain.repository.AuthRepository
@@ -21,11 +21,11 @@ import javax.inject.Inject
 class AuthRepositoryImpl @Inject constructor(
 	private val authNet: AuthService,
 	private val registerMapperRemoteRepo: Mapper<RegisterRemoteModel,RegisterRepoModel>,
-	private val accessTokenMapperRemoteRepo: Mapper<AccessTokenRemoteModel,AccessTokenRepoModel>,
-	private val accessTokenMapperRepoEntity: Mapper<AccessTokenRepoModel?,AccessTokenDbModel>,
-	private val accessTokenMapperEntityRepo: Mapper<AccessTokenDbModel?,AccessTokenRepoModel>,
+	private val userInfoMapperRemoteRepo: Mapper<AccessTokenRemoteModel,UserInfoRepoModel>,
+	private val userInfoMapperRepoEntity: Mapper<UserInfoRepoModel?,UserInfoDbModel>,
+	private val userInfoMapperEntityRepo: Mapper<UserInfoDbModel?,UserInfoRepoModel>,
 	private val setPasswordRemoteRepoMapper: Mapper<SetPasswordRemoteModel,SetPasswordRepoModel>,
-	private val accessTokenDbApi: AccessTokenDbApi
+	private val userInfoDbApi: UserInfoDbApi
 ) : AuthRepository {
 	
 	override suspend fun register(phoneNumber: String): Resource<RegisterRepoModel> {
@@ -36,24 +36,38 @@ class AuthRepositoryImpl @Inject constructor(
 		}
 	}
 	
-	override suspend fun activate(phoneNumber: String, code: String): Resource<AccessTokenRepoModel> {
+	override suspend fun activate(phoneNumber: String, code: String): Resource<UserInfoRepoModel> {
 		return when(val activateModel = authNet.activate(phoneNumber, code)){
 			is ApiEmptyResponse -> Resource.success(null)
-			is ApiSuccessResponse -> Resource.success(accessTokenMapperRemoteRepo.map(activateModel.body.data))
+			is ApiSuccessResponse -> Resource.success(userInfoMapperRemoteRepo.map(activateModel.body.data))
 			is ApiErrorResponse -> Resource.error(activateModel.errorMessage, null)
 		}
 	}
 	
-	override suspend fun updateAccessToken(accessTokenModel: AccessTokenRepoModel) {
-		accessTokenDbApi.update(
-			accessTokenMapperRepoEntity.map(accessTokenModel)
-		)
+	override suspend fun login(username: String,password: String): Resource<UserInfoRepoModel> {
+		return when(val loginModel = authNet.login(username, password)){
+			is ApiEmptyResponse -> Resource.success(null)
+			is ApiSuccessResponse -> Resource.success(userInfoMapperRemoteRepo.map(loginModel.body.data))
+			is ApiErrorResponse -> Resource.error(loginModel.errorMessage, null)
+		}
 	}
 	
-	override suspend fun getAccessToken(): Resource<AccessTokenRepoModel> {
+	override suspend fun updateAccessToken(accessToken: String) {
+		userInfoDbApi.updateAccessToken(accessToken)
+	}
+	
+	override suspend fun updateIsPasswordSet(isPasswordSet: Boolean) {
+		userInfoDbApi.updateIsPasswordSet(isPasswordSet)
+	}
+	
+	override suspend fun updateIsHintShowed(isHintShowed: Boolean) {
+		userInfoDbApi.updateIsHintShowed(isHintShowed)
+	}
+	
+	override suspend fun getUserInfo(): Resource<UserInfoRepoModel> {
 		return try {
-			val accessToken = accessTokenDbApi.getSingle()
-			Resource.success(accessTokenMapperEntityRepo.map(accessToken))
+			val userInfo = userInfoDbApi.getSingle()
+			Resource.success(userInfoMapperEntityRepo.map(userInfo))
 		} catch (e: Exception) {
 			Resource.error(
 				e.message ?: "unknown error",

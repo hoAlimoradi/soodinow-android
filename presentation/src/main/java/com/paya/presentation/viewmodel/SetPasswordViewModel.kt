@@ -5,7 +5,7 @@ import androidx.databinding.ObservableField
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.paya.domain.models.repo.AccessTokenRepoModel
+import com.paya.domain.models.repo.UserInfoRepoModel
 import com.paya.domain.models.repo.SetPasswordRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.UseCase
@@ -14,7 +14,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class SetPasswordViewModel @ViewModelInject constructor(
-	private val getAccessTokenUseCase: UseCase<Unit,AccessTokenRepoModel>,
+	private val getUserInfoUseCase: UseCase<Unit,UserInfoRepoModel>,
 	private val setPasswordUseCase: UseCase<String,SetPasswordRepoModel>
 ) : ViewModel() {
 	
@@ -28,7 +28,7 @@ class SetPasswordViewModel @ViewModelInject constructor(
 	
 	private fun getAccessToken() {
 		viewModelScope.launch(Dispatchers.IO) {
-			val accessTokenResource = getAccessTokenUseCase.action(Unit)
+			val accessTokenResource = getUserInfoUseCase.action(Unit)
 			accessToken = accessTokenResource.data?.accessToken
 			Log.d("SetPasswordViewModel", accessToken ?: "null")
 		}

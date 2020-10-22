@@ -4,7 +4,9 @@ import io.objectbox.annotation.Entity
 import io.objectbox.annotation.Id
 
 @Entity
-data class AccessTokenDbModel(
+data class UserInfoDbModel(
 	@Id var id: Long = 0,
-	val accessToken: String? = ""
+	var accessToken: String? = "",
+	var isPasswordSet: Boolean = false,
+	var isHintShowed: Boolean = false
 )

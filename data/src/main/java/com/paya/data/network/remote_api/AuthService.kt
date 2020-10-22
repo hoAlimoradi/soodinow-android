@@ -6,7 +6,6 @@ import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.PATCH
 import retrofit2.http.POST
-
 interface AuthService {
 	
 	@FormUrlEncoded
@@ -28,4 +27,12 @@ interface AuthService {
 		@Field("password") password: String
 	): ApiResponse<BaseModel<SetPasswordRemoteModel>>
 	
+	@FormUrlEncoded
+	@POST("auth/login/")
+	suspend fun login(
+		@Field("username") username: String,
+		@Field("password") password: String
+	): ApiResponse<BaseModel<AccessTokenRemoteModel>>
+	
 }
+

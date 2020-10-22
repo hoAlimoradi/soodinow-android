@@ -1,19 +1,20 @@
 package com.paya.data.mapper
 
 import com.paya.common.Mapper
-import com.paya.domain.models.local.AccessTokenDbModel
-import com.paya.domain.models.remote.AccessTokenRemoteModel
-import com.paya.domain.models.repo.AccessTokenRepoModel
+import com.paya.domain.models.local.UserInfoDbModel
+import com.paya.domain.models.repo.UserInfoRepoModel
 import javax.inject.Inject
 
 class AccessTokenEntityRepoMapper @Inject constructor() : Mapper<
-		AccessTokenDbModel?,
-		AccessTokenRepoModel
+		UserInfoDbModel?,
+		UserInfoRepoModel
 		> {
 	
-	override fun map(param: AccessTokenDbModel?): AccessTokenRepoModel {
-		return AccessTokenRepoModel(
-			accessToken = param?.accessToken ?: ""
+	override fun map(param: UserInfoDbModel?): UserInfoRepoModel {
+		return UserInfoRepoModel(
+			accessToken = param?.accessToken ?: "",
+			isPasswordSet = param?.isPasswordSet ?: false,
+			isHintShowed = param?.isHintShowed ?: false
 		)
 	}
 	

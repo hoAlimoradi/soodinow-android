@@ -1,24 +1,18 @@
 package com.paya.data.di
 
 import com.paya.common.Mapper
-import com.paya.data.database.accessToken.AccessTokenDbApi
-import com.paya.data.database.accessToken.AccessTokenDbApiImpl
+import com.paya.data.database.userInfo.UserInfoDbApi
+import com.paya.data.database.userInfo.UserInfoDbApiImpl
 import com.paya.data.mapper.*
 import com.paya.data.repository.AuthRepositoryImpl
-import com.paya.domain.models.local.AccessTokenDbModel
+import com.paya.domain.models.local.UserInfoDbModel
 import com.paya.domain.models.remote.AccessTokenRemoteModel
 import com.paya.domain.models.remote.RegisterRemoteModel
 import com.paya.domain.models.remote.SetPasswordRemoteModel
-import com.paya.domain.models.repo.AccessTokenRepoModel
-import com.paya.domain.models.repo.ActivateRepoModel
-import com.paya.domain.models.repo.RegisterRepoModel
-import com.paya.domain.models.repo.SetPasswordRepoModel
+import com.paya.domain.models.repo.*
 import com.paya.domain.repository.AuthRepository
 import com.paya.domain.tools.UseCase
-import com.paya.domain.usecase.auth.ActivateUseCase
-import com.paya.domain.usecase.auth.GetAccessTokenUseCase
-import com.paya.domain.usecase.auth.RegisterUseCase
-import com.paya.domain.usecase.auth.SetPasswordUseCase
+import com.paya.domain.usecase.auth.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -37,19 +31,19 @@ abstract class AuthModule {
 	@Binds
 	abstract fun bindAccessTokenRemoteRepoMapper(mapper: AccessTokenRemoteRepoMapper): Mapper<
 			AccessTokenRemoteModel,
-			AccessTokenRepoModel
+			UserInfoRepoModel
 			>
 	
 	@Binds
 	abstract fun bindAccessTokenRepoEntityMapper(mapper: AccessTokenRepoEntityMapper): Mapper<
-			AccessTokenRepoModel?,
-			AccessTokenDbModel
+			UserInfoRepoModel?,
+			UserInfoDbModel
 			>
 	
 	@Binds
 	abstract fun bindAccessTokenEntityRepoMapper(mapper: AccessTokenEntityRepoMapper): Mapper<
-			AccessTokenDbModel?,
-			AccessTokenRepoModel
+			UserInfoDbModel?,
+			UserInfoRepoModel
 			>
 	
 	@Binds
@@ -62,18 +56,22 @@ abstract class AuthModule {
 	abstract fun registerRepo(dev: AuthRepositoryImpl): AuthRepository
 	
 	@Binds
-	abstract fun accessTokenDbApi(api: AccessTokenDbApiImpl): AccessTokenDbApi
+	abstract fun accessTokenDbApi(api: UserInfoDbApiImpl): UserInfoDbApi
 	
 	@Binds
 	abstract fun bindRegisterUseCase(useCase: RegisterUseCase): UseCase<String,RegisterRepoModel>
 	
 	@Binds
 	abstract fun bindActivateUseCase(useCase: ActivateUseCase):
-			UseCase<ActivateRepoModel,AccessTokenRepoModel>
+			UseCase<ActivateRepoModel,Any>
 	
 	@Binds
-	abstract fun bindGetAccessTokenUseCase(useCase: GetAccessTokenUseCase):
-			UseCase<Unit,AccessTokenRepoModel>
+	abstract fun bindLoginUseCase(useCase: LoginUseCase):
+			UseCase<LoginRepoModel,Any>
+	
+	@Binds
+	abstract fun bindGetAccessTokenUseCase(useCase: GetUserInfoUseCase):
+			UseCase<Unit,UserInfoRepoModel>
 	
 	@Binds
 	abstract fun bindSetPasswordUseCase(useCase: SetPasswordUseCase):

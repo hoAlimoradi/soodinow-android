@@ -1,19 +1,20 @@
 package com.paya.domain.usecase.auth
 
-import com.paya.domain.models.repo.ActivateRepoModel
+import com.paya.domain.models.repo.UserInfoRepoModel
+import com.paya.domain.models.repo.LoginRepoModel
 import com.paya.domain.repository.AuthRepository
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.domain.tools.UseCase
 import javax.inject.Inject
 
-class ActivateUseCase @Inject constructor(
+class LoginUseCase @Inject constructor(
 	private val authRepository: AuthRepository
-): UseCase<ActivateRepoModel, Any> {
-	override suspend fun action(param: ActivateRepoModel): Resource<Any> {
+): UseCase<LoginRepoModel, Any> {
+	override suspend fun action(param: LoginRepoModel): Resource<Any> {
 		val resource =  authRepository.activate(
 			param.username,
-			param.code
+			param.password
 		)
 		if (resource.status == Status.SUCCESS){
 			resource.data?.accessToken?.let { authRepository.updateAccessToken(it) }

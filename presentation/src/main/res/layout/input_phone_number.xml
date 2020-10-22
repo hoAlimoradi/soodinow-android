@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="androidx.databinding.ObservableField"/>
+
+        <variable
+            name="label"
+            type="java.lang.String" />
+
+        <variable
+            name="content"
+            type="ObservableField&lt;java.lang.String>" />
+    </data>
+
+    <LinearLayout
+        android:paddingHorizontal="@dimen/margin_medium"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{label}"
+            tools:text="نام کاربری"
+            android:layout_marginTop="@dimen/margin_very_small"
+            />
+
+        <LinearLayout
+            focusTarget="@{@id/phone_number_edit_text}"
+            android:layout_marginTop="@dimen/margin_very_small"
+            android:id="@+id/phone_number_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_corner_layout"
+            android:padding="@dimen/margin_small">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="09"
+                android:textSize="@dimen/text_size_medium"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/phone_number_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_very_small"
+                android:background="@android:color/transparent"
+                android:inputType="phone"
+                android:text="@={content}"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>
