@@ -42,6 +42,7 @@ class RegisterFragment : Fragment() {
 		)
 		
 		mBinding.viewModel = mViewModel
+		mBinding.lifecycleOwner = this
 		
 		return mBinding.root
 	}

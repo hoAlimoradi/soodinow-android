@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="com.paya.domain.tools.Resource" />
         <import type="com.paya.presentation.viewmodel.RegisterViewModel" />
 
         <variable
@@ -123,6 +123,12 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <include
+            layout="@layout/loading_state"
+            app:resource="@{(Resource) viewModel.registerStatus}"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

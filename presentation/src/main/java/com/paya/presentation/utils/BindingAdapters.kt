@@ -22,6 +22,12 @@ object BindingAdapters {
 	}
 	
 	@JvmStatic
+	@BindingAdapter("visibleGone")
+	fun showHide(view: View, show: Boolean) {
+		view.visibility = if (show) View.VISIBLE else View.GONE
+	}
+	
+	@JvmStatic
 	@BindingAdapter("focusTarget")
 	fun setFocusTarget(view: View,viewId: Int?) {
 		viewId ?: return

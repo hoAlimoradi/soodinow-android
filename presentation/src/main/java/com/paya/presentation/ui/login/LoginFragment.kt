@@ -36,6 +36,7 @@ class LoginFragment : Fragment() {
 		)
 		
 		mBinding.viewModel = mViewModel
+		mBinding.lifecycleOwner = this
 		
 		return mBinding.root
 	}
