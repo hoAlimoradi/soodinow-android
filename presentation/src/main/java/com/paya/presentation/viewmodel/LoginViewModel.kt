@@ -38,7 +38,7 @@ class LoginViewModel @ViewModelInject constructor(
 		viewModelScope.launch(Dispatchers.IO) {
 			loginResource.postValue(Resource.loading(null))
 			val loginModel = LoginRepoModel(
-				username = username,
+				username = "+989$username",
 				password = password
 			)
 			val response = loginUseCase.action(loginModel)

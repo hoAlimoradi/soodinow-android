@@ -12,7 +12,7 @@ class LoginUseCase @Inject constructor(
 	private val authRepository: AuthRepository
 ): UseCase<LoginRepoModel, Any> {
 	override suspend fun action(param: LoginRepoModel): Resource<Any> {
-		val resource =  authRepository.activate(
+		val resource =  authRepository.login(
 			param.username,
 			param.password
 		)
