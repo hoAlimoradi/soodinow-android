@@ -29,7 +29,8 @@
             android:layout_marginTop="@dimen/margin_very_small"
             />
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:orientation="horizontal"
             focusTarget="@{@id/phone_number_edit_text}"
             android:layout_marginTop="@dimen/margin_very_small"
             android:id="@+id/phone_number_layout"
@@ -39,6 +40,10 @@
             android:padding="@dimen/margin_small">
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_prefix"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="09"
@@ -46,16 +51,30 @@
                 android:textStyle="bold" />
 
             <androidx.appcompat.widget.AppCompatEditText
+                verificationImage="@{@id/verification_img}"
                 android:id="@+id/phone_number_edit_text"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/margin_very_small"
                 android:background="@android:color/transparent"
                 android:inputType="phone"
                 android:text="@={content}"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/txt_prefix"
+                app:layout_constraintEnd_toStartOf="@id/verification_img"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
-        </LinearLayout>
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/verification_img"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/ic_verification"
+                android:layout_gravity="end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 
