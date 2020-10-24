@@ -4,12 +4,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/splash_screen"
     tools:context=".ui.splash.SplashActivity">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_top_icon"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_start_icon"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_end_icon"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
     <androidx.appcompat.widget.AppCompatImageView
-        android:src="@drawable/splash_screen"
-        android:scaleType="fitXY"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        app:srcCompat="@drawable/ic_logo_white"
+        app:layout_constraintTop_toTopOf="@id/guideline_top_icon"
+        app:layout_constraintStart_toStartOf="@id/guideline_start_icon"
+        app:layout_constraintEnd_toEndOf="@id/guideline_end_icon"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_marginBottom="@dimen/margin_medium"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:textColor="@color/light_gray"
+            android:text="@string/last_version_update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_marginStart="@dimen/margin_very_small"
+            android:id="@+id/versionTxt"
+            android:textColor="@color/light_gray"
+            tools:text="1.0.0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
