@@ -1,6 +1,7 @@
 package com.paya.presentation.utils
 
 import android.content.Context
+import android.graphics.PorterDuff
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -50,15 +51,24 @@ object BindingAdapters {
 		
 		val parent = editText.parent as View
 		val imageView = parent.findViewById<ImageView>(viewId)
+		setTintColor(imageView, editText.context, R.color.gray)
 		
 		editText.doAfterTextChanged {
 			val text = it.toString()
-			if (text.length != 9) {
-				imageView.setImageResource(R.drawable.ic_verification)
-			} else {
-				imageView.setImageResource(R.drawable.ic_verification_green)
-			}
+			val colorId = if (text.length != 9) R.color.gray else R.color.green
+			setTintColor(imageView,editText.context,colorId)
 		}
+	}
+	
+	private fun setTintColor(
+		imageView: ImageView,
+		context: Context,
+		colorId: Int
+	) {
+		imageView.setColorFilter(
+			ContextCompat.getColor(context,colorId),
+			PorterDuff.Mode.SRC_IN
+		)
 	}
 	
 }
