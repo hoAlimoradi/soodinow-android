@@ -17,4 +17,5 @@
     <string name="fake_content">
         لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه است
     </string>
+    <string name="last_version_update">Last version update</string>
 </resources>
