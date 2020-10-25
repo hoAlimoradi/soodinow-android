@@ -16,9 +16,15 @@ class RegisterViewModel @ViewModelInject constructor(
 	private val registerUseCase: UseCase<String, RegisterRepoModel>
 ): ViewModel(){
 	
+	val title = MutableLiveData<String>()
+	
 	val phoneNumber = ObservableField<String>()
 	
 	val registerStatus = VolatileLiveData<Resource<RegisterRepoModel>>()
+	
+	fun setTitle(title: String) {
+		this.title.value = title
+	}
 	
 	fun register(){
 		val phoneNumber = phoneNumber.get()

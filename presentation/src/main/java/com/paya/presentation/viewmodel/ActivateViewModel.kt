@@ -20,6 +20,7 @@ class ActivateViewModel @ViewModelInject constructor(
 	private val registerUseCase: UseCase<String,RegisterRepoModel>
 ) : ViewModel() {
 	
+	val title = MutableLiveData<String>()
 	val remainingTimeText = MutableLiveData<String>()
 	val remainingTime = MutableLiveData(59)
 	
@@ -32,9 +33,13 @@ class ActivateViewModel @ViewModelInject constructor(
 	
 	val status = VolatileLiveData<Resource<Any>>()
 	
+	fun setTitle(title: String) {
+		this.title.value = title
+	}
+	
 	fun activate() {
 		val activationCode = activationCode.get()
-		if (activationCode == null || activationCode.isBlank() || activationCode.length != 5) {
+		if (activationCode.isNullOrBlank() || activationCode.length != 5) {
 			status.setValue(Resource.error("code is not valid",null))
 			return
 		}
