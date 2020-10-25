@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/margin_medium"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.hint.fragments.OpenAccount">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_start_slider"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_end_slider"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/image"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guideline_start_slider"
+        app:layout_constraintEnd_toEndOf="@id/guideline_end_slider"
+        app:srcCompat="@drawable/ic_objects"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/slider_title"
+        style="@style/PurpleTitleTextView"
+        android:text="@string/private_account"
+        android:layout_marginTop="@dimen/margin_medium"
+        app:layout_constraintTop_toBottomOf="@id/image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:gravity="center_horizontal"
+        app:layout_constraintStart_toStartOf="@id/guideline_start_slider"
+        app:layout_constraintEnd_toEndOf="@id/guideline_end_slider"
+        app:layout_constraintTop_toBottomOf="@id/slider_title"
+        android:layout_marginTop="@dimen/margin_small"
+        android:text="@string/fake_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
