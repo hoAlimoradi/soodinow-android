@@ -3,6 +3,7 @@ package com.paya.presentation.viewmodel
 import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.paya.domain.models.repo.UserInfoRepoModel
@@ -18,11 +19,15 @@ class SetPasswordViewModel @ViewModelInject constructor(
 	private val setPasswordUseCase: UseCase<String,SetPasswordRepoModel>
 ) : ViewModel() {
 	
+	val title = MutableLiveData<String>()
 	private var accessToken: String? = null
 	
 	init {
 		getAccessToken()
 	}
+	
+	val password = ObservableField<String>()
+	val repeatPassword = ObservableField<String>()
 	
 	val setPasswordResource = VolatileLiveData<Resource<SetPasswordRepoModel>>()
 	
@@ -34,8 +39,9 @@ class SetPasswordViewModel @ViewModelInject constructor(
 		}
 	}
 	
-	val password = ObservableField<String>()
-	val repeatPassword = ObservableField<String>()
+	fun setTitle(title: String) {
+		this.title.value = title
+	}
 	
 	fun submit(){
 		val password = password.get()

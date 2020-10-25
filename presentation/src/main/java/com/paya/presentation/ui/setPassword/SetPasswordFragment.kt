@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.paya.domain.models.repo.SetPasswordRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
@@ -23,6 +24,7 @@ class SetPasswordFragment : Fragment() {
 	
 	private lateinit var mBinding: FragmentSetPasswordBinding
 	private val mViewModel: SetPasswordViewModel by viewModels()
+	val args by navArgs<SetPasswordFragmentArgs>()
 	
 	override fun onCreateView(
 		inflater: LayoutInflater,container: ViewGroup?,
@@ -36,6 +38,7 @@ class SetPasswordFragment : Fragment() {
 			false
 		)
 		
+		args.title?.let{mViewModel.setTitle(it)}
 		mBinding.viewModel = mViewModel
 		mBinding.lifecycleOwner = this
 		
