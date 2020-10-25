@@ -54,6 +54,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:background="@drawable/top_round_corner"
             android:id="@+id/container"
             style="@style/TopRoundedCornerLayout"
             android:layout_width="match_parent"
@@ -123,6 +124,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <include
+            tools:visibility="gone"
             layout="@layout/loading_state"
             app:resource="@{(Resource) viewModel.registerStatus}"
             android:layout_width="match_parent"
