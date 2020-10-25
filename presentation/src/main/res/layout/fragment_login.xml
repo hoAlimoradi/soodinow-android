@@ -39,7 +39,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:background="@color/white"
+            android:background="@drawable/top_round_corner"
             android:id="@+id/container"
             style="@style/TopRoundedCornerLayout"
             android:layout_width="match_parent"
@@ -52,14 +52,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.08" />
+                app:layout_constraintGuide_percent="0.07" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline_top_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.21" />
+                app:layout_constraintGuide_percent="0.19" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/TitleTextView"
@@ -100,28 +100,28 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/password_layout" />
 
+            <FrameLayout
+                android:id="@+id/description_layout"
+                app:layout_constraintTop_toBottomOf="@id/forget_password"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <include
+                    app:layout_constraintTop_toBottomOf="@id/forget_password"
+                    layout="@layout/text_with_seperator"/>
+
+            </FrameLayout>
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/fingerprint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_medium"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/forget_password"
-                app:srcCompat="@drawable/ic_fingerprint" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/description"
-                style="@style/SubtitleTextView"
-                android:layout_width="0dp"
                 android:layout_marginTop="@dimen/margin_small"
-                android:gravity="center_horizontal"
-                android:layout_height="wrap_content"
-                android:text="@string/fingerprint_description"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/fingerprint" />
+                app:layout_constraintTop_toBottomOf="@id/description_layout"
+                app:srcCompat="@drawable/ic_fingerprint_2" />
 
             <Button
                 style="@style/SubmitButton"
