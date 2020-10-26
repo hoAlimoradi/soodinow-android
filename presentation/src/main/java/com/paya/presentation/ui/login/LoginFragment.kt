@@ -44,6 +44,13 @@ class LoginFragment : Fragment() {
 	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
 		super.onViewCreated(view,savedInstanceState)
 		observe(mViewModel.loginResource, ::checkLoginStatus)
+		mBinding.forgetPassword.setOnClickListener {
+			findNavController().navigate(
+				LoginFragmentDirections.actionLoginFragmentToRegisterFragment(
+					getString(R.string.recover_password)
+				)
+			)
+		}
 	}
 	
 	private fun checkLoginStatus(resource: Resource<Any>){

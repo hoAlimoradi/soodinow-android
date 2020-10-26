@@ -54,6 +54,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:background="@drawable/top_round_corner"
             android:id="@+id/container"
             style="@style/TopRoundedCornerLayout"
             android:layout_width="match_parent"
@@ -93,11 +94,10 @@
                 style="@style/TitleTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/register"
+                android:text="@{viewModel.title == null ? @string/register : viewModel.title}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/guideline_top_title" />
-
 
             <LinearLayout
                 android:id="@+id/phone_number_layout"
@@ -124,6 +124,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <include
+            tools:visibility="gone"
             layout="@layout/loading_state"
             app:resource="@{(Resource) viewModel.registerStatus}"
             android:layout_width="match_parent"

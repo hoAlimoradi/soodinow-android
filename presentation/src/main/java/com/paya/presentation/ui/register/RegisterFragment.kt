@@ -1,18 +1,16 @@
 package com.paya.presentation.ui.register
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.paya.domain.models.repo.RegisterRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
@@ -28,6 +26,7 @@ class RegisterFragment : Fragment() {
 	
 	private val mViewModel: RegisterViewModel by viewModels()
 	private lateinit var mBinding: FragmentRegisterBinding
+	private val args by navArgs<RegisterFragmentArgs>()
 	
 	override fun onCreateView(
 		inflater: LayoutInflater,container: ViewGroup?,
@@ -41,6 +40,7 @@ class RegisterFragment : Fragment() {
 			false
 		)
 		
+		args.title?.let { mViewModel.setTitle(it) }
 		mBinding.viewModel = mViewModel
 		mBinding.lifecycleOwner = this
 		
@@ -55,11 +55,12 @@ class RegisterFragment : Fragment() {
 	private fun checkRegisterStatus(registerResource: Resource<RegisterRepoModel>){
 		Log.d("checkRegisterStatus",registerResource.status.toString())
 		if (registerResource.status == Status.SUCCESS){
-			val args = Bundle()
-			args.putString("phoneNumber", registerResource.data?.username!!)
+			val bundle = Bundle()
+			bundle.putString("phoneNumber", registerResource.data?.username!!)
+			bundle.putString("title", args.title)
 			findNavController().navigate(
 				R.id.activateFragment,
-				args
+				bundle
 			)
 		}else if (registerResource.status == Status.ERROR){
 			Toast.makeText(

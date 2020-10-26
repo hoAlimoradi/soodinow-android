@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -9,111 +10,94 @@
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_top_icon"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.08"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.08" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_start_icon"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.36"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.36" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_end_icon"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.64"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.64" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_top_slider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.32"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_start_slider"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.15"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_end_slider"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.85"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            app:layout_constraintGuide_percent="0.32" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_vertical_half"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            app:layout_constraintTop_toTopOf="@id/guideline_top_icon"
-            app:layout_constraintStart_toStartOf="@id/guideline_start_icon"
-            app:layout_constraintEnd_toEndOf="@id/guideline_end_icon"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:src="@drawable/ic_logo_sodinow"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            app:layout_constraintEnd_toEndOf="@id/guideline_end_icon"
+            app:layout_constraintStart_toStartOf="@id/guideline_start_icon"
+            app:layout_constraintTop_toTopOf="@id/guideline_top_icon" />
+
+        <androidx.viewpager2.widget.ViewPager2 xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_medium"
+            app:layout_constraintTop_toTopOf="@id/guideline_top_slider" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/image"
-            app:layout_constraintTop_toTopOf="@id/guideline_top_slider"
-            app:layout_constraintStart_toStartOf="@id/guideline_start_slider"
-            app:layout_constraintEnd_toEndOf="@id/guideline_end_slider"
-            app:srcCompat="@drawable/ic_objects"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            android:id="@+id/img_left_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_medium"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pager"
+            app:srcCompat="@drawable/ic_left_arrow" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/slider_title"
-            style="@style/PurpleTitleTextView"
-            android:text="@string/private_account"
-            android:layout_marginTop="@dimen/margin_small"
-            app:layout_constraintTop_toBottomOf="@id/image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:gravity="center_horizontal"
-            app:layout_constraintStart_toStartOf="@id/guideline_start_slider"
-            app:layout_constraintEnd_toEndOf="@id/guideline_end_slider"
-            app:layout_constraintTop_toBottomOf="@id/slider_title"
-            android:layout_marginTop="@dimen/margin_very_small"
-            android:text="@string/fake_content"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_right_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pager"
+            app:srcCompat="@drawable/ic_right_arrow" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/register"
-            android:padding="@dimen/margin_very_small"
-            android:gravity="center_horizontal"
-            app:layout_constraintEnd_toStartOf="@id/guideline_vertical_half"
-            android:layout_margin="@dimen/margin_small"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="@dimen/margin_very_small"
-            android:text="@string/register"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_small"
+            android:layout_marginBottom="@dimen/margin_very_small"
+            android:gravity="center_horizontal"
+            android:padding="@dimen/margin_very_small"
+            android:text="@string/register"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/guideline_vertical_half" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/login"
-            android:gravity="center_horizontal"
-            android:layout_margin="@dimen/margin_small"
-            android:padding="@dimen/margin_very_small"
-            app:layout_constraintStart_toEndOf="@id/guideline_vertical_half"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:text="@string/login"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_small"
+            android:gravity="center_horizontal"
+            android:padding="@dimen/margin_very_small"
+            android:text="@string/login"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/guideline_vertical_half" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

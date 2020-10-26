@@ -40,6 +40,7 @@ class ActivateFragment : Fragment() {
 		)
 		
 		mViewModel.phoneNumber = args.phoneNumber
+		args.title?.let{mViewModel.setTitle(it)}
 		mBinding.viewModel = mViewModel
 		mBinding.lifecycleOwner = this
 		
@@ -56,8 +57,11 @@ class ActivateFragment : Fragment() {
 	
 	private fun checkActivateStatus(activateResource: Resource<Any>){
 		if (activateResource.status == Status.SUCCESS){
+			val bundle = Bundle()
+			bundle.putString("title", args.title)
 			findNavController().navigate(
-				R.id.navigateToSetPasswordFragment
+				R.id.navigateToSetPasswordFragment,
+				bundle
 			)
 		}else if (activateResource.status == Status.ERROR){
 			Toast.makeText(

@@ -79,5 +79,8 @@ dependencies {
 	
 	implementation ("com.alimuzaffar.lib:pinentryedittext:2.0.6")
 	
+	implementation ("androidx.viewpager2:viewpager2:1.0.0")
+	
+	
 	implementation(project(Dependencies.Modules.DOMAIN))
 }
