@@ -1,8 +1,7 @@
 package com.paya.presentation.ui.splash
 
 import android.content.Intent
-import android.content.pm.PackageInfo
-import android.content.pm.PackageManager
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope

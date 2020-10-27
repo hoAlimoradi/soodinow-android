@@ -20,6 +20,23 @@
     <string name="fake_content">
         لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه است
     </string>
+    <string name="settings">تنظیمات</string>
+    <string name="support">پشتیبانی</string>
+    <string name="home">خانه</string>
+    <string name="profile">پروفایل</string>
+    <string name="market">بازار</string>
+    <string name="create_account_investment">افتتاح حساب سرمایه گذاری</string>
+    <string name="create_personal_account">افتتاح حساب شخصی</string>
+    <string name="why_soodinow">چرا سودینو؟</string>
+    <string name="why_soodinow_description">شما می توانید چندین حساب سرمایه گذاری با مبالغ دلخواه خود داشته باشید.</string>
+    <string name="more_description">توضیحات بیشتر</string>
+    <string name="market_view">مشاهده بازار</string>
+    <string name="all_currency">همه ارزها</string>
+    <string name="market_description_card_home">شما می توانید چندین حساب سرمایه گذاری با مبالغ دلخواه خود داشته باشید</string>
+    <string name="toman">تومان</string>
+    <string name="create_date">تاریخ افتتاح</string>
+    <string name="wealth_toman">دارایی (تومان)</string>
+    <string name="wealth_increase">رشد دارایی</string>
     <string name="last_version_update">Last version update</string>
     <string name="settings">تنظیمات</string>
     <string name="support">پشتیبانی</string>
