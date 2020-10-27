@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_account_card">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/top_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.07" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/top_card_number_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bottom_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.93" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/start_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.04" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/end_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.96" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/center_horizontal_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/user_name_bottom_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.7" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/logoImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_logo_white"
+        app:layout_constraintEnd_toStartOf="@id/end_guideline"
+        app:layout_constraintTop_toBottomOf="@id/top_guideline" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/accountCardNumber"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="5585   2588  2555   2154"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_card_number"
+        app:layout_constraintEnd_toStartOf="@id/logoImage"
+        app:layout_constraintStart_toEndOf="@id/start_guideline"
+        app:layout_constraintTop_toBottomOf="@id/top_card_number_guideline" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/accountSubCardNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_very_small"
+        android:text="حساب سرمایه گذاری جسور پایا"
+        android:textColor="@color/green_gray"
+        android:textSize="@dimen/text_size_10sp"
+        app:layout_constraintStart_toEndOf="@id/start_guideline"
+        app:layout_constraintTop_toBottomOf="@id/accountCardNumber" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/cardSalesLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_card_sales_line"
+        app:layout_constraintStart_toEndOf="@+id/start_guideline"
+        app:layout_constraintTop_toBottomOf="@id/center_horizontal_guideline" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/hoverPointSales"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_hover_point"
+        app:layout_constraintBottom_toBottomOf="@id/cardSalesLine"
+        app:layout_constraintStart_toStartOf="@+id/cardSalesLine"
+        android:layout_marginBottom="60dp"
+        android:layout_marginStart="52dp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/salesValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_card_sales"
+        android:elevation="2dp"
+        android:gravity="center"
+        android:text="44 %"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_10sp"
+        app:layout_constraintBottom_toTopOf="@+id/hoverPointSales"
+        app:layout_constraintStart_toStartOf="@+id/cardSalesLine"
+        android:layout_marginStart="35dp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_very_small"
+        android:elevation="2dp"
+        android:gravity="center"
+        android:text="@string/wealth_increase"
+        android:textColor="@color/white"
+        android:textSize="8sp"
+        app:layout_constraintBottom_toBottomOf="@+id/cardSalesLine"
+        app:layout_constraintEnd_toEndOf="@+id/cardSalesLine" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/accountUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:gravity="top"
+        android:text="رضا کریمی"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_small"
+        app:layout_constraintBottom_toTopOf="@+id/user_name_bottom_guideline"
+        app:layout_constraintEnd_toStartOf="@id/end_guideline"
+        app:layout_constraintTop_toBottomOf="@id/center_horizontal_guideline" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/dateValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:text="99 / 02 / 18"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_11sp"
+        app:layout_constraintEnd_toStartOf="@id/end_guideline"
+        app:layout_constraintTop_toBottomOf="@id/user_name_bottom_guideline" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/dateTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/create_date"
+        android:textColor="@color/green_gray"
+        android:textSize="@dimen/text_size_10sp"
+        app:layout_constraintEnd_toStartOf="@id/end_guideline"
+        app:layout_constraintStart_toEndOf="@id/dateBarrier"
+        app:layout_constraintTop_toBottomOf="@id/dateValue" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/dateBarrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="start"
+        app:constraint_referenced_ids="dateTitle,dateValue" />
+
+    <Space
+        android:id="@+id/space"
+        android:layout_width="@dimen/margin_medium"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/bottom_guideline"
+        app:layout_constraintEnd_toStartOf="@id/dateBarrier" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/wealthValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:text="10.856.000"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_11sp"
+        app:layout_constraintEnd_toStartOf="@id/space"
+        app:layout_constraintTop_toBottomOf="@id/user_name_bottom_guideline" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/wealthTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/wealth_toman"
+        android:textColor="@color/green_gray"
+        android:textSize="@dimen/text_size_10sp"
+        app:layout_constraintEnd_toStartOf="@id/space"
+        app:layout_constraintStart_toEndOf="@+id/wealthBarrier"
+        app:layout_constraintTop_toBottomOf="@id/wealthValue" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/wealthBarrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_very_small"
+        app:barrierDirection="start"
+        app:constraint_referenced_ids="wealthTitle,wealthValue" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

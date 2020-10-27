@@ -60,7 +60,7 @@
             app:layout_constraintTop_toTopOf="@id/guideline_top_icon"
             app:layout_constraintStart_toStartOf="@id/guideline_start_icon"
             app:layout_constraintEnd_toEndOf="@id/guideline_end_icon"
-            android:src="@drawable/ic_logo_sodinow"
+            android:src="@drawable/ic_logo_soodinow"
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>
 
