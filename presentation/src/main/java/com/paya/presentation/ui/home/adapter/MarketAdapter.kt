@@ -1,4 +1,4 @@
-package com.paya.presentation.ui.home
+package com.paya.presentation.ui.home.adapter
 
 import android.view.LayoutInflater
 import android.view.View
