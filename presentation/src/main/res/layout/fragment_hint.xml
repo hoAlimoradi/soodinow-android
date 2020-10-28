@@ -51,7 +51,7 @@
             app:layout_constraintStart_toStartOf="@id/guideline_start_icon"
             app:layout_constraintTop_toTopOf="@id/guideline_top_icon" />
 
-        <androidx.viewpager2.widget.ViewPager2 xmlns:android="http://schemas.android.com/apk/res/android"
+        <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/pager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
