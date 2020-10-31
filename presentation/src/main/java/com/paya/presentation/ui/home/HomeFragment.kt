@@ -1,21 +1,19 @@
 package com.paya.presentation.ui.home
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.HORIZONTAL
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.paya.domain.models.repo.AccountCardRepoModel
 import com.paya.domain.models.repo.MarketRepoModel
-import com.paya.domain.models.repo.RegisterRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.presentation.R
 import com.paya.presentation.databinding.FragmentHomeBinding
@@ -23,9 +21,10 @@ import com.paya.presentation.ui.hint.fragments.CardAccount
 import com.paya.presentation.ui.home.adapter.MarketAdapter
 import com.paya.presentation.utils.ViewPagerUtil
 import com.paya.presentation.utils.observe
-import com.paya.presentation.viewmodel.HintViewModel
 import com.paya.presentation.viewmodel.HomeViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 	
 	private lateinit var adapter: SlidePagerAdapter
