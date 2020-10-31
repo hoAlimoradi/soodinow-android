@@ -38,5 +38,9 @@
     <string name="wealth_toman">دارایی (تومان)</string>
     <string name="wealth_increase">رشد دارایی</string>
     <string name="last_version_update">Last version update</string>
+    <string name="write_here">اینجا بنویسید</string>
+    <string name="count">تعداد</string>
+    <string name="volume">حجم</string>
+    <string name="price">قیمت</string>
 
 </resources>

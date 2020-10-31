@@ -53,4 +53,7 @@
     <style name="GeneralCardView">
         <item name="cardCornerRadius">@dimen/radius_card</item>
     </style>
+    <style name="RoundCardView">
+        <item name="cardCornerRadius">@dimen/radius</item>
+    </style>
 </resources>
