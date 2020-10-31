@@ -10,7 +10,9 @@ import dagger.hilt.android.components.ActivityRetainedComponent
 		AuthModule::class,
 		ApiServiceFactoryModule::class,
 		ObjectBoxDeveloperNameFactoryModule::class,
-		AccessTokenDbModule::class
+		AccessTokenDbModule::class,
+		AccountModule::class,
+		MarketModule::class
 	]
 )
 @InstallIn(ActivityRetainedComponent::class)

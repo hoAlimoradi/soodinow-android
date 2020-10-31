@@ -80,6 +80,8 @@ dependencies {
 	implementation ("com.alimuzaffar.lib:pinentryedittext:2.0.6")
 	
 	implementation ("androidx.viewpager2:viewpager2:1.0.0")
+	implementation ("com.google.android.material:material:${Dependencies.Versions.MATERIAL_VER}")
+	implementation ("com.tbuonomo.andrui:viewpagerdotsindicator:${Dependencies.Versions.VIEW_PAGER_DOTS_INDICATOR_VER}")
 	
 	
 	implementation(project(Dependencies.Modules.DOMAIN))

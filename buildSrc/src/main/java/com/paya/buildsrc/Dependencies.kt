@@ -25,6 +25,8 @@ object Dependencies{
 		const val NAVIGATION_COMPONENT_VER = "2.3.1"
 		const val LIFECYCLE_VER = "2.3.0-beta01"
 		const val DATA_BINDING_VER = "3.1.4"
+		const val MATERIAL_VER = "1.2.1"
+		const val VIEW_PAGER_DOTS_INDICATOR_VER = "4.1.2"
 	}
 	
 	object Modules{
