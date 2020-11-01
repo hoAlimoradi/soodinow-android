@@ -29,7 +29,16 @@ class MarketFragment : Fragment() {
 			container,
 			false
 		)
+		
+		mBinding.viewModel = mViewModel
+		mBinding.lifecycleOwner = this
+		
 		return mBinding.root
+	}
+	
+	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
+		super.onViewCreated(view,savedInstanceState)
+		mViewModel.getPoints()
 	}
 	
 }

@@ -8,6 +8,7 @@
     <dimen name="margin_large">64dp</dimen>
     <dimen name="margin_small">16dp</dimen>
     <dimen name="margin_very_small">8dp</dimen>
+    <dimen name="margin_4_dp">4dp</dimen>
 
 
     <dimen name="text_size_title">32sp</dimen>
