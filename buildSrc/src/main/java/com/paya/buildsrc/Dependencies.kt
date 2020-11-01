@@ -27,6 +27,9 @@ object Dependencies{
 		const val DATA_BINDING_VER = "3.1.4"
 		const val MATERIAL_VER = "1.2.1"
 		const val VIEW_PAGER_DOTS_INDICATOR_VER = "4.1.2"
+		const val VIEW_PAGER_VERSION = "1.0.0"
+		const val PIN_ENTRY_EDIT_TEXT = "2.0.6"
+		const val MP_ANDROID_CHART = "3.1.0"
 	}
 	
 	object Modules{
