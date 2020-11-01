@@ -6,12 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import com.paya.presentation.R
 import com.paya.presentation.databinding.FragmentMarketBinding
+import com.paya.presentation.viewmodel.MarketViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MarketFragment : Fragment() {
 	
 	private lateinit var mBinding: FragmentMarketBinding
+	private val mViewModel: MarketViewModel by viewModels()
 	
 	override fun onCreateView(
 		inflater: LayoutInflater,container: ViewGroup?,
