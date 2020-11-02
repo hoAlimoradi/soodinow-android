@@ -1,14 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.market.MarketFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
 
-    <TextView
+        <import type="com.paya.presentation.viewmodel.MarketViewModel" />
+
+        <import type="com.paya.presentation.utils.shared.Point" />
+
+        <import type="java.util.List" />
+
+        <variable
+            name="viewModel"
+            type="MarketViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Market Fragment" />
+        android:layout_height="wrap_content">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/bg"
+            tools:context=".ui.market.MarketFragment">
+
+            <androidx.cardview.widget.CardView
+                android:layout_marginStart="@dimen/margin_small"
+                android:layout_marginEnd="@dimen/margin_small"
+                android:id="@+id/currencyCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="@dimen/radius_card"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/margin_small"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/profitImg"
+                        android:layout_width="@dimen/margin_medium"
+                        android:layout_height="@dimen/margin_medium"
+                        android:layout_marginTop="@dimen/margin_4_dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_profits" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:textColor="@color/purple"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/text_size_large"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/margin_very_small"
+                        android:text="@string/observe_market"
+                        app:layout_constraintEnd_toStartOf="@id/profitImg"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:layout_marginEnd="@dimen/margin_very_small"
+                        android:text="@string/fake_content"
+                        android:textSize="@dimen/text_size_small"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/profitImg" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/currencyRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/txt_description"
+                        tools:itemCount="4"
+                        tools:listitem="@layout/item_currency_detail" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_very_small"
+                        android:layout_marginEnd="@dimen/margin_very_small"
+                        android:text="@string/more"
+                        android:textColor="@color/purple"
+                        android:textSize="@dimen/text_size_small"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/currencyRecyclerView" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_marginTop="@dimen/margin_medium"
+                android:layout_marginEnd="@dimen/margin_small"
+                android:adjustViewBounds="true"
+                android:id="@+id/settings"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="@dimen/margin_medium"
+                android:layout_height="@dimen/margin_medium"
+                android:layout_marginStart="@dimen/margin_small"
+                app:layout_constraintTop_toBottomOf="@id/currencyCard"
+                app:srcCompat="@drawable/ic_settings" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginVertical="@dimen/margin_small"
+                android:id="@+id/tagsRecyclerView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toStartOf="@id/settings"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/currencyCard"
+                tools:listitem="@layout/item_day"
+                tools:itemCount="1"/>
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:layout_marginTop="@dimen/margin_small"
+                style="@style/SwitchCompatStyle"
+                android:id="@+id/filter_switch"
+                android:layout_marginStart="@dimen/margin_small"
+                app:layout_constraintTop_toBottomOf="@id/tagsRecyclerView"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_marginTop="@dimen/margin_small"
+                android:adjustViewBounds="true"
+                android:id="@+id/filter"
+                android:layout_width="@dimen/margin_medium"
+                android:layout_height="@dimen/margin_medium"
+                android:layout_marginStart="@dimen/margin_small"
+                app:layout_constraintStart_toEndOf="@id/filter_switch"
+                app:layout_constraintTop_toBottomOf="@id/tagsRecyclerView"
+                app:srcCompat="@drawable/ic_group" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/stockRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_very_small"
+                app:layout_constraintTop_toBottomOf="@id/filter_switch"
+                tools:listitem="@layout/item_market_stock" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

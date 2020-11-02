@@ -48,5 +48,10 @@
     <string name="information">اطلاعات</string>
     <string name="summary">خلاصه</string>
     <string name="kadal">کدال</string>
+    <string name="last_deal">آخرین معامله</string>
+    <string name="sell">فروش</string>
+    <string name="buy">خرید</string>
+    <string name="observe_market">مشاهده بازار</string>
+    <string name="more">بیشتر</string>
 
 </resources>

@@ -56,4 +56,10 @@
     <style name="RoundCardView">
         <item name="cardCornerRadius">@dimen/radius</item>
     </style>
+
+    <style name="SwitchCompatStyle" >
+        <item name="thumbTint">@color/switch_color</item>
+        <item name="trackTint">@color/dark_gray</item>
+    </style>
+
 </resources>
