@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/home">
+    app:startDestination="@id/dividend">
 
     <fragment
         android:id="@+id/settings"
@@ -55,4 +55,10 @@
         android:name="com.paya.presentation.ui.market.MarketFragment"
         android:label="fragment_market"
         tools:layout="@layout/fragment_market" />
+
+    <fragment
+        android:id="@+id/dividend"
+        android:name="com.paya.presentation.ui.dividend.DividendDetailFragment"
+        android:label="fragment_dividend_detail"
+        tools:layout="@layout/fragment_dividend_detail" />
 </navigation>

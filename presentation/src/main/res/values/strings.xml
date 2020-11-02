@@ -42,5 +42,11 @@
     <string name="count">تعداد</string>
     <string name="volume">حجم</string>
     <string name="price">قیمت</string>
+    <string name="date_colon">تاریخ :</string>
+    <string name="time_colon">ساعت:</string>
+    <string name="company_dividend">سهام شرکت</string>
+    <string name="information">اطلاعات</string>
+    <string name="summary">خلاصه</string>
+    <string name="kadal">کدال</string>
 
 </resources>
