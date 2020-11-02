@@ -38,5 +38,10 @@
     <string name="wealth_toman">دارایی (تومان)</string>
     <string name="wealth_increase">رشد دارایی</string>
     <string name="last_version_update">Last version update</string>
+    <string name="last_deal">آخرین معامله</string>
+    <string name="sell">فروش</string>
+    <string name="buy">خرید</string>
+    <string name="observe_market">مشاهده بازار</string>
+    <string name="more">بیشتر</string>
 
 </resources>

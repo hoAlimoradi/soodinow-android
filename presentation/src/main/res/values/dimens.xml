@@ -27,4 +27,6 @@
     <dimen name="viewpager_next_item_visible">20dp</dimen>
     <dimen name="viewpager_item_padding">10dp</dimen>
     <dimen name="viewpager_current_item_horizontal_margin">30dp</dimen>
+
+    <dimen name="line_chart_height">120dp</dimen>
 </resources>
