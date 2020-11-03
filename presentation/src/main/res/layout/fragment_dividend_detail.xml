@@ -68,37 +68,40 @@
             app:layout_constraintEnd_toStartOf="@id/end_guideline"
             app:layout_constraintTop_toBottomOf="@+id/top_guideline" />
 
+        <include
+            android:id="@+id/inputSearch"
+            layout="@layout/input_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_very_small"
+
+            app:layout_constraintEnd_toStartOf="@id/end_guideline"
+            app:layout_constraintStart_toEndOf="@id/start_guideline"
+            app:layout_constraintTop_toBottomOf="@id/inner_top_guideline" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height"
+            android:layout_marginTop="@dimen/margin_small"
+            app:layout_constraintEnd_toStartOf="@id/end_guideline"
+            app:layout_constraintStart_toEndOf="@id/start_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/inputSearch"
+            app:tabBackground="@drawable/tab_round_selector"
+            app:tabIndicatorHeight="0dp"
+            app:tabSelectedTextColor="@color/white" />
+
         <ScrollView
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toTopOf="@id/bottom_guideline"
             app:layout_constraintEnd_toStartOf="@id/end_guideline"
             app:layout_constraintStart_toEndOf="@id/start_guideline"
-            app:layout_constraintTop_toBottomOf="@id/inner_top_guideline">
+            app:layout_constraintTop_toBottomOf="@id/tabLayout">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
-
-                <include
-                    android:id="@+id/inputSearch"
-                    layout="@layout/input_search"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_very_small"
-                    app:layout_constraintTop_toTopOf="parent"
-                    />
-
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/tabLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/height"
-                    android:layout_marginTop="@dimen/margin_small"
-                    app:layout_constraintTop_toBottomOf="@+id/inputSearch"
-                    app:tabBackground="@drawable/tab_round_selector"
-                    app:tabIndicatorHeight="0dp"
-                    app:tabSelectedTextColor="@color/white" />
 
                 <include
                     android:id="@+id/dividendDetailStock"
@@ -106,7 +109,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_small"
-                    app:layout_constraintTop_toBottomOf="@id/tabLayout" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"

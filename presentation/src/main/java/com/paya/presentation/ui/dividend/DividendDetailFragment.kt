@@ -58,11 +58,11 @@ class DividendDetailFragment : Fragment() {
 	
 	private fun setupPager() {
 		mBinding.pager.adapter = DividendPagerAdapter(childFragmentManager)
-		mBinding.pager.setCurrentItem(2,false)
 		mBinding.tabLayout.setupWithViewPager(mBinding.pager)
 		mBinding.tabLayout.getTabAt(0)?.text = getString(R.string.kadal)
 		mBinding.tabLayout.getTabAt(1)?.text = getString(R.string.summary)
 		mBinding.tabLayout.getTabAt(2)?.text = getString(R.string.information)
+		mBinding.pager.setCurrentItem(2,false)
 	}
 	
 	private fun setupDaysRecyclerView() {
@@ -73,12 +73,10 @@ class DividendDetailFragment : Fragment() {
 	}
 	
 	private inner class DividendPagerAdapter(f: FragmentManager) : FragmentPagerAdapter(
-		f,
-		BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
+		f,BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
 	) {
 		
 		private val fragments: ArrayList<Fragment> = ArrayList()
-		private var mCurrentPosition = -1
 		
 		init {
 			fragments.add(DividendKadalFragment())
@@ -86,17 +84,6 @@ class DividendDetailFragment : Fragment() {
 			fragments.add(DividendInformationFragment())
 		}
 		
-		override fun setPrimaryItem(container: ViewGroup,position: Int,`object`: Any) {
-			super.setPrimaryItem(container,position,`object`)
-			if (position != mCurrentPosition) {
-				val fragment = `object` as Fragment
-				val pager: WrapContentViewPager = container as WrapContentViewPager
-				if (fragment.view != null) {
-					mCurrentPosition = position
-					pager.measureCurrentView(fragment.requireView())
-				}
-			}
-		}
 		
 		
 		override fun getCount(): Int = fragments.size

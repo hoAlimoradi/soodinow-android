@@ -2,41 +2,33 @@ package com.paya.presentation.utils
 
 import android.content.Context
 import android.util.AttributeSet
-import android.view.View
 import androidx.viewpager.widget.ViewPager
 
 class WrapContentViewPager @JvmOverloads constructor(
 	context: Context,
 	attrs: AttributeSet? = null,
 ) : ViewPager(context,attrs) {
-	
-	private var mCurrentView: View? = null
 	override fun onMeasure(widthMeasureSpec: Int,heightMeasureSpec: Int) {
-		if (mCurrentView == null) {
+		var heightMeasureSpec = heightMeasureSpec
+		val mode = MeasureSpec.getMode(heightMeasureSpec)
+		// Unspecified means that the ViewPager is in a ScrollView WRAP_CONTENT.
+		// At Most means that the ViewPager is not in a ScrollView WRAP_CONTENT.
+		if (mode == MeasureSpec.UNSPECIFIED || mode == MeasureSpec.AT_MOST) {
+			// super has to be called in the beginning so the child views can be initialized.
 			super.onMeasure(widthMeasureSpec,heightMeasureSpec)
-			return
+			var height = 0
+			for (i in 0 until childCount) {
+				val child = getChildAt(i)
+				child.measure(
+					widthMeasureSpec,
+					MeasureSpec.makeMeasureSpec(0,MeasureSpec.UNSPECIFIED)
+				)
+				val h = child.measuredHeight
+				if (h > height) height = h
+			}
+			heightMeasureSpec = MeasureSpec.makeMeasureSpec(height,MeasureSpec.EXACTLY)
 		}
-		var height = 0
-		mCurrentView!!.measure(
-			widthMeasureSpec,
-			MeasureSpec.makeMeasureSpec(0,MeasureSpec.UNSPECIFIED)
-		)
-		var h = mCurrentView!!.measuredHeight;
-		if (h > height) height = h;
-		
-		super.onMeasure(widthMeasureSpec,MeasureSpec.makeMeasureSpec(height,MeasureSpec.EXACTLY));
-	}
-	
-	fun measureCurrentView(currentView: View) {
-		mCurrentView = currentView;
-		requestLayout();
-	}
-	
-	fun measureFragment(view: View): Int {
-		if (view == null)
-			return 0;
-		
-		view.measure(0,0);
-		return view.measuredHeight;
+		// super has to be called again so the new specs are treated as exact measurements
+		super.onMeasure(widthMeasureSpec,heightMeasureSpec)
 	}
 }

@@ -1,12 +1,13 @@
 package com.paya.presentation.ui.market
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.paya.presentation.R
@@ -14,6 +15,7 @@ import com.paya.presentation.databinding.FragmentMarketBinding
 import com.paya.presentation.ui.market.adapter.CurrencyAdapter
 import com.paya.presentation.ui.market.adapter.DayAdapter
 import com.paya.presentation.ui.market.adapter.StockAdapter
+import com.paya.presentation.utils.BaseAdapter
 import com.paya.presentation.viewmodel.MarketViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -52,6 +54,14 @@ class MarketFragment : Fragment() {
 	private fun setupStockRecyclerView() {
 		val layoutManager = LinearLayoutManager(context)
 		val adapter = StockAdapter()
+		adapter.addFakeItem("")
+		adapter.addOnClickListenerItem(object : BaseAdapter.OnClickListenerItem<String> {
+			override fun onClickListenerItem(adapter: BaseAdapter<*,*>,item: String,position: Int) {
+				findNavController().navigate(
+					MarketFragmentDirections.navigateToDividendFragment()
+				)
+			}
+		})
 		mBinding.stockRecyclerView.layoutManager = layoutManager
 		mBinding.stockRecyclerView.adapter = adapter
 	}
