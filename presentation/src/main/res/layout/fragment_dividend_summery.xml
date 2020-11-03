@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.dividend.fragments.DividendSummeryFragment">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/top_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.01" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/bottom_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.99" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/start_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.01" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/end_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.99" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/chartImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_chart_horizontal"
+            app:layout_constraintEnd_toStartOf="@id/end_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/top_guideline" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/titleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="2dp"
+            android:gravity="center"
+            android:text="@string/summary"
+            android:textColor="@color/purple"
+            android:textSize="@dimen/text_size_small"
+            app:layout_constraintEnd_toStartOf="@id/chartImage"
+            app:layout_constraintTop_toBottomOf="@id/top_guideline" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/subTitleText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_very_small"
+            android:layout_marginEnd="@dimen/margin_4_dp"
+            android:elevation="2dp"
+            android:gravity="top"
+            android:text="لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم  ازصنعت چاپ و با استفاده از طراحان گرافیک است"
+            android:textColor="@color/purple_gray"
+            android:textSize="@dimen/text_size_10sp"
+            app:layout_constraintEnd_toStartOf="@id/end_guideline"
+            app:layout_constraintStart_toEndOf="@id/start_guideline"
+            app:layout_constraintTop_toBottomOf="@id/chartImage" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tradingHistoryText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_very_small"
+            android:elevation="2dp"
+            android:gravity="center"
+            android:text="@string/trading_history"
+            android:textColor="@color/purple_gray"
+            android:textSize="@dimen/text_size_small"
+            app:layout_constraintStart_toEndOf="@id/start_guideline"
+            app:layout_constraintTop_toBottomOf="@id/subTitleText" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/detailsPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_very_small"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:elevation="2dp"
+            android:gravity="center"
+            android:text="@string/details_price"
+            android:textColor="@color/green"
+            android:textSize="@dimen/text_size_small"
+            app:layout_constraintEnd_toStartOf="@id/end_guideline"
+            app:layout_constraintTop_toBottomOf="@id/tradingHistoryText" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/priceRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_very_small"
+            android:background="@drawable/bg_dividend_price"
+            android:paddingTop="@dimen/margin_small"
+            android:paddingBottom="@dimen/margin_small"
+            app:layout_constraintEnd_toStartOf="@id/end_guideline"
+            app:layout_constraintStart_toEndOf="@id/start_guideline"
+            app:layout_constraintTop_toBottomOf="@id/detailsPrice"
+            tools:itemCount="5"
+            tools:listitem="@layout/row_dividend_detail_price" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/symbolMarketText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_very_small"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:elevation="2dp"
+            android:gravity="center"
+            android:text="@string/symbol_market"
+            android:textColor="@color/green"
+            android:textSize="@dimen/text_size_small"
+            app:layout_constraintEnd_toStartOf="@id/end_guideline"
+            app:layout_constraintTop_toBottomOf="@id/priceRecyclerView" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/exchangeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_very_small"
+            android:elevation="2dp"
+            android:gravity="center"
+            android:text="@string/exchange"
+            android:textColor="@color/green"
+            android:textSize="@dimen/text_size_small"
+            app:layout_constraintStart_toEndOf="@id/start_guideline"
+            app:layout_constraintTop_toBottomOf="@id/priceRecyclerView" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/exchangeRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_very_small"
+            android:background="@drawable/bg_dividend_price"
+            android:paddingTop="@dimen/margin_small"
+            android:paddingBottom="@dimen/margin_small"
+            app:layout_constraintEnd_toStartOf="@id/end_guideline"
+            app:layout_constraintStart_toEndOf="@id/start_guideline"
+            app:layout_constraintTop_toBottomOf="@id/exchangeText"
+            tools:itemCount="5"
+            tools:listitem="@layout/row_dividend_detail_exchange" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -12,8 +12,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.databinding.BindingAdapter
 import com.github.mikephil.charting.charts.LineChart
-import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
@@ -26,7 +24,7 @@ object BindingAdapters {
 	
 	@JvmStatic
 	@BindingAdapter("percentText")
-	fun setPercentText(textView: TextView, value: String?){
+	fun setPercentText(textView: TextView,value: String?) {
 		value ?: return
 		val percentText = "% $value"
 		textView.text = percentText
@@ -141,8 +139,8 @@ object BindingAdapters {
 			set1.circleRadius = 1f
 			set1.setCircleColor(Color.BLACK)
 			set1.highLightColor = Color.RED
-			set1.color = ContextCompat.getColor(chart.context, R.color.green)
-			set1.fillColor = ContextCompat.getColor(chart.context, R.color.green)
+			set1.color = ContextCompat.getColor(chart.context,R.color.green)
+			set1.fillColor = ContextCompat.getColor(chart.context,R.color.green)
 			set1.fillAlpha = 30
 			set1.setDrawHorizontalHighlightIndicator(true)
 			set1.fillFormatter =
@@ -156,6 +154,40 @@ object BindingAdapters {
 			// set data
 			chart.data = data
 		}
+	}
+	
+	@JvmStatic
+	@BindingAdapter("chartWithoutData")
+	fun setLineChartWithoutData(chart: LineChart,axisMaximum: Float) {
+		
+		chart.description.isEnabled = false
+		chart.setTouchEnabled(false)
+		chart.isDragEnabled = false
+		chart.setScaleEnabled(true)
+		chart.setDrawGridBackground(false)
+		chart.setPinchZoom(false)
+		chart.setBackgroundColor(Color.WHITE)
+		val data = LineData()
+		data.setValueTextColor(Color.GREEN)
+		chart.data = data
+		
+		val xl = chart.xAxis
+		xl.textColor = ContextCompat.getColor(chart.context,R.color.purple_gray)
+		xl.setDrawGridLines(false)
+		xl.setAvoidFirstLastClipping(true)
+		xl.isEnabled = true
+		
+		val leftAxis = chart.axisLeft
+		leftAxis.textColor = ContextCompat.getColor(chart.context,R.color.purple_gray)
+		leftAxis.axisLineColor = ContextCompat.getColor(chart.context,R.color.purple_gray)
+		leftAxis.gridColor = ContextCompat.getColor(chart.context,R.color.purple_gray)
+		leftAxis.axisMaximum = axisMaximum
+		leftAxis.axisMinimum = 0f
+		leftAxis.setDrawZeroLine(true)
+		leftAxis.setDrawGridLines(true)
+		
+		val rightAxis = chart.axisRight
+		rightAxis.isEnabled = false
 	}
 	
 	private fun setTintColor(

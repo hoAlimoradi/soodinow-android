@@ -53,5 +53,14 @@
     <string name="buy">خرید</string>
     <string name="observe_market">مشاهده بازار</string>
     <string name="more">بیشتر</string>
+    <string name="final_price">قیمت پایانی</string>
+    <string name="view_day">نمایش روزانه</string>
+    <string name="trading_history">سابقه معاملات</string>
+    <string name="symbol_market">بازار نماد</string>
+    <string name="exchange">بورس</string>
+    <string name="details_price">جزییات قیمتی</string>
+    <string name="days_trading_panel">تابلوی معاملات روزانه</string>
+    <string name="legal">حقوقی</string>
+    <string name="substantive">حقیقی</string>
 
 </resources>

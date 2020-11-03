@@ -22,6 +22,7 @@
     <color name="purple_gray">#5D4E63</color>
     <color name="bg">#F9F9F9</color>
     <color name="bg_dividend">#F8F8F8</color>
+    <color name="bg_dividend_price">#F6F6F6</color>
     <color name="white_72">#B8FFFFFF</color>
     <color name="line_color">#DEDEDE</color>
     <color name="light_purple">#5D4E63</color>

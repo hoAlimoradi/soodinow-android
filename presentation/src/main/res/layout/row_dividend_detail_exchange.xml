@@ -6,33 +6,17 @@
     android:paddingStart="@dimen/margin_small"
     android:paddingEnd="@dimen/margin_small">
 
-
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/currencyText"
+        android:id="@+id/valueText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:elevation="2dp"
         android:gravity="center"
-        android:text="@string/toman"
-        android:textColor="@color/blue_light"
-        android:textSize="@dimen/text_size_10sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/priceText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_very_small"
-        android:elevation="2dp"
-        android:gravity="center"
-        android:text="232,3232,23"
+        android:text="232.53"
         android:textColor="@color/purple_gray"
         android:textSize="@dimen/text_size_small"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/currencyText"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
@@ -54,7 +38,7 @@
         android:layout_height="wrap_content"
         android:elevation="2dp"
         android:gravity="center"
-        android:text="قیمت پایانی"
+        android:text="تعداد معاملات"
         android:textColor="@color/purple_gray"
         android:textSize="@dimen/text_size_small"
         app:layout_constraintBottom_toBottomOf="parent"

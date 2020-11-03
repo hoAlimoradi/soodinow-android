@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_medium"
+        android:layout_marginVertical="@dimen/margin_very_small"
+        app:cardCornerRadius="@dimen/radius_card">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/margin_very_small"
+            android:paddingStart="@dimen/margin_small">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/left_round_purple_background"
+                android:paddingHorizontal="@dimen/margin_medium"
+                android:paddingVertical="@dimen/margin_4_dp"
+                android:text="ایران خودرو"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/appCompatImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/margin_medium"
+                android:layout_marginEnd="@dimen/margin_small"
+                android:adjustViewBounds="true"
+                app:layout_constraintEnd_toStartOf="@id/txt_name"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_bookmark" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/ic_path"
+                android:drawablePadding="4dp"
+                android:text="99 / 08 / 22"
+                android:textSize="@dimen/text_size_small"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_percent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_arrow_red"
+                android:text="4%"
+                android:textSize="@dimen/text_size_small"
+                app:layout_constraintBaseline_toBaselineOf="@+id/title_price"
+                app:layout_constraintEnd_toStartOf="@id/txt_last_deal_price" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/title_price"
+                style="@style/PurpleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_very_small"
+                android:layout_marginTop="@dimen/margin_very_small"
+                android:text="@string/final_price"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txt_sub_name" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_toman"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/toman"
+                android:textSize="@dimen/text_size_small"
+                app:layout_constraintBaseline_toBaselineOf="@+id/txt_last_deal_price"
+                app:layout_constraintEnd_toStartOf="@id/title_price" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_chart_vertical"
+                app:layout_constraintBottom_toBottomOf="@+id/txt_last_deal_price"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_last_deal_price"
+                style="@style/PurpleTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_very_small"
+                android:layout_marginTop="@dimen/margin_very_small"
+                android:text="12500"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title_price" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_sub_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_very_small"
+                android:layout_marginTop="@dimen/margin_small"
+                android:layout_marginEnd="@dimen/margin_very_small"
+                android:text="اپراتور تلفن همراه"
+                android:textSize="@dimen/text_size_10sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txt_name" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_very_small"
+                android:drawableEnd="@drawable/ic_path_allowed"
+                android:drawablePadding="4dp"
+                android:text="مجاز"
+                android:textSize="@dimen/text_size_10sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/txt_sub_name"
+                app:layout_constraintEnd_toStartOf="@id/txt_sub_name" />
+
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/chart"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_chart_height"
+                android:layout_marginTop="@dimen/margin_small"
+                android:layout_marginEnd="@dimen/margin_small"
+                app:layout_constraintTop_toBottomOf="@id/txt_last_deal_price" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/dayRecycler"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toStartOf="@+id/btn_date"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/chart"
+                tools:itemCount="1"
+                tools:listitem="@layout/item_day" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/btn_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_very_small"
+                android:background="@drawable/round_corner_layout"
+                android:drawableStart="@drawable/ic_arrow_bottom"
+                android:drawablePadding="@dimen/margin_very_small"
+                android:paddingHorizontal="@dimen/margin_small"
+                android:paddingVertical="@dimen/margin_4_dp"
+                android:text="@string/view_day"
+                android:textSize="@dimen/text_size_small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/chart" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

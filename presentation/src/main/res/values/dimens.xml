@@ -2,11 +2,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <dimen name="small_radius">12dp</dimen>
     <dimen name="radius">48dp</dimen>
+    <dimen name="radius_chart">48dp</dimen>
     <dimen name="radius_card">15dp</dimen>
     <dimen name="height">48dp</dimen>
     <dimen name="margin_medium">24dp</dimen>
     <dimen name="margin_large">64dp</dimen>
     <dimen name="margin_small">16dp</dimen>
+    <dimen name="margin_line_chart">15dp</dimen>
     <dimen name="margin_very_small">8dp</dimen>
     <dimen name="margin_4_dp">4dp</dimen>
 
