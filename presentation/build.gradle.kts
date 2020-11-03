@@ -77,11 +77,14 @@ dependencies {
 	
 	kapt ("com.android.databinding:compiler:${Dependencies.Versions.DATA_BINDING_VER}")
 	
-	implementation ("com.alimuzaffar.lib:pinentryedittext:2.0.6")
+	implementation ("com.alimuzaffar.lib:pinentryedittext:${Dependencies.Versions.PIN_ENTRY_EDIT_TEXT}")
 	
-	implementation ("androidx.viewpager2:viewpager2:1.0.0")
+	implementation ("androidx.viewpager2:viewpager2:${Dependencies.Versions.VIEW_PAGER_VERSION}")
 	implementation ("com.google.android.material:material:${Dependencies.Versions.MATERIAL_VER}")
 	implementation ("com.tbuonomo.andrui:viewpagerdotsindicator:${Dependencies.Versions.VIEW_PAGER_DOTS_INDICATOR_VER}")
+	
+	implementation ("com.github.PhilJay:MPAndroidChart:${Dependencies.Versions.MP_ANDROID_CHART}")
+	
 	
 	
 	implementation(project(Dependencies.Modules.DOMAIN))
