@@ -32,7 +32,7 @@ class StockAdapter : RecyclerView.Adapter<StockAdapter.StockViewHolder>(){
 	}
 	
 	override fun getItemCount(): Int {
-		return 3
+		return 5
 	}
 	
 	class StockViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
