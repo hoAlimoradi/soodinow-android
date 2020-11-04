@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
@@ -6,6 +6,18 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    </style>
+
+    <style name="TextAppearance.FontPathFarsiRegular" parent="android:TextAppearance">
+        <item name="fontPath">@string/font_farsi_regular</item>
+    </style>
+
+    <style name="TextAppearance.FontPathRegular" parent="android:TextAppearance">
+        <item name="fontPath">@string/font_regular</item>
+    </style>
+
+    <style name="TextAppearance.FontPathBoldRegular" parent="android:TextAppearance">
+        <item name="fontPath">@string/font_bold</item>
     </style>
 
     <style name="TitleTextView">
@@ -64,7 +76,7 @@
         <item name="cardCornerRadius">@dimen/radius_card</item>
     </style>
     <style name="RoundCardView">
-        <item name="cardCornerRadius">@dimen/radius</item>
+        <item name="cardCornerRadius">@dimen/radius_medium</item>
     </style>
 
     <style name="SwitchCompatStyle" >

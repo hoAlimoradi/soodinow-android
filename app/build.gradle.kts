@@ -58,6 +58,8 @@ dependencies {
     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.11.0")
     kapt ("com.android.databinding:compiler:${Dependencies.Versions.DATA_BINDING_VER}")
     
+    implementation("uk.co.chrisjenx:calligraphy:${Dependencies.Versions.CALLIGRAPHY}")
+    
     implementation(project(Dependencies.Modules.DOMAIN))
     implementation(project(Dependencies.Modules.PRESENTATION))
     implementation(project(Dependencies.Modules.DATA))

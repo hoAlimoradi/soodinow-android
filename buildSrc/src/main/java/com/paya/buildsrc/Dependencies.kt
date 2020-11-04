@@ -30,6 +30,7 @@ object Dependencies{
 		const val VIEW_PAGER_VERSION = "1.0.0"
 		const val PIN_ENTRY_EDIT_TEXT = "2.0.6"
 		const val MP_ANDROID_CHART = "3.1.0"
+		const val CALLIGRAPHY = "2.3.0"
 	}
 	
 	object Modules{

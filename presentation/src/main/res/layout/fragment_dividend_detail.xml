@@ -71,18 +71,17 @@
         <include
             android:id="@+id/inputSearch"
             layout="@layout/input_search"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_very_small"
-
             app:layout_constraintEnd_toStartOf="@id/end_guideline"
             app:layout_constraintStart_toEndOf="@id/start_guideline"
             app:layout_constraintTop_toBottomOf="@id/inner_top_guideline" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/height"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
             android:layout_marginTop="@dimen/margin_small"
             app:layout_constraintEnd_toStartOf="@id/end_guideline"
             app:layout_constraintStart_toEndOf="@id/start_guideline"

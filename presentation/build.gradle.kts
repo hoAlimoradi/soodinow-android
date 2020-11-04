@@ -85,6 +85,7 @@ dependencies {
 	
 	implementation ("com.github.PhilJay:MPAndroidChart:${Dependencies.Versions.MP_ANDROID_CHART}")
 	
+	implementation("uk.co.chrisjenx:calligraphy:${Dependencies.Versions.CALLIGRAPHY}")
 	
 	
 	implementation(project(Dependencies.Modules.DOMAIN))

@@ -5,7 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import com.paya.presentation.R
+import com.paya.presentation.databinding.AccountCardBinding
+import com.paya.presentation.utils.BindingAdapters
+import com.paya.presentation.utils.shared.Point
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,12 +34,28 @@ class CardAccount : Fragment() {
 		}
 	}
 	
+	
+	private lateinit var mBinding : AccountCardBinding
+	
 	override fun onCreateView(
 		inflater: LayoutInflater,container: ViewGroup?,
 		savedInstanceState: Bundle?
 	): View? {
+		
 		// Inflate the layout for this fragment
-		return inflater.inflate(R.layout.account_card,container,false)
+		mBinding =  DataBindingUtil.inflate(inflater,R.layout.account_card,container,false)
+		
+		return mBinding.root
+	}
+	
+	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
+		super.onViewCreated(view,savedInstanceState)
+		val points = mutableListOf<Point>()
+		for (i in 0 until 10) {
+			val value = (Math.random() * 100).toFloat()
+			points.add(Point(i.toFloat(),value))
+		}
+		//BindingAdapters.setLineAccountChartData(mBinding.chart,points)
 	}
 	
 	companion object {
