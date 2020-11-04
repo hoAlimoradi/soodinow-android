@@ -1,5 +1,12 @@
 <resources>
     <string name="app_name">presentation</string>
+
+
+    <string name="font_farsi_regular">fonts/iran_yekan_farsi_number_regular.ttf</string>
+    <string name="font_regular">fonts/iran_yekan_web_regular.ttf</string>
+    <string name="font_bold">fonts/iran_yekan_web_bold.ttf</string>
+
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="register">ثبت نام</string>
     <string name="recover_password">بازیابی رمز عبور</string>

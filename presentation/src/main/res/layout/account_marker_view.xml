@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.AppCompatTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/salesValue"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_card_sales"
+    android:elevation="2dp"
+    android:gravity="center"
+    android:text="44 %"
+    android:textColor="@color/black"
+    android:textSize="@dimen/text_size_10sp"
+    app:layout_constraintBottom_toTopOf="@+id/hoverPointSales"
+    app:layout_constraintStart_toStartOf="@+id/cardSalesLine" />

@@ -65,7 +65,8 @@
                 android:text="4%"
                 android:textSize="@dimen/text_size_small"
                 app:layout_constraintBaseline_toBaselineOf="@+id/title_price"
-                app:layout_constraintEnd_toStartOf="@id/txt_last_deal_price" />
+                app:layout_constraintEnd_toStartOf="@id/title_price"
+                android:layout_marginEnd="@dimen/margin_4_dp"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/title_price"
@@ -86,7 +87,8 @@
                 android:text="@string/toman"
                 android:textSize="@dimen/text_size_small"
                 app:layout_constraintBaseline_toBaselineOf="@+id/txt_last_deal_price"
-                app:layout_constraintEnd_toStartOf="@id/title_price" />
+                app:layout_constraintEnd_toStartOf="@id/txt_last_deal_price"
+                android:layout_marginEnd="@dimen/margin_4_dp"/>
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="wrap_content"

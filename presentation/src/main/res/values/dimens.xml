@@ -6,6 +6,7 @@
     <dimen name="radius_medium">36dp</dimen>
     <dimen name="radius_card">15dp</dimen>
     <dimen name="height">48dp</dimen>
+    <dimen name="height_medium">36dp</dimen>
     <dimen name="margin_medium">24dp</dimen>
     <dimen name="margin_large">64dp</dimen>
     <dimen name="margin_small">16dp</dimen>
@@ -21,12 +22,13 @@
     <dimen name="text_size_large">22sp</dimen>
     <dimen name="text_size_11sp">11sp</dimen>
     <dimen name="text_size_10sp">10sp</dimen>
+    <dimen name="text_size_8sp">8sp</dimen>
     <dimen name="text_size_menu">10sp</dimen>
 
     <dimen name="design_bottom_navigation_text_size" tools:override="true">10sp</dimen>
     <dimen name="design_bottom_navigation_active_text_size" tools:override="true">10sp</dimen>
     <dimen name="create_account_button_height">27dp</dimen>
-    <dimen name="text_size_card_number">19sp</dimen>
+    <dimen name="text_size_card_number">18sp</dimen>
     <dimen name="viewpager_next_item_visible">20dp</dimen>
     <dimen name="viewpager_item_padding">10dp</dimen>
     <dimen name="viewpager_current_item_horizontal_margin">30dp</dimen>

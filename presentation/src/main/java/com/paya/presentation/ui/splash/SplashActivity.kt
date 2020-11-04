@@ -6,13 +6,14 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.paya.presentation.BaseActivity
 import com.paya.presentation.MainActivity
 import com.paya.presentation.R
 import kotlinx.android.synthetic.main.activity_splash.*
 import kotlinx.coroutines.delay
 
 
-class SplashActivity : AppCompatActivity() {
+class SplashActivity : BaseActivity() {
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_splash)
