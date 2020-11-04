@@ -96,7 +96,7 @@ class HintFragment : Fragment() {
 				findNavController().navigate(R.id.navigateToRegisterFragment)
 			}
 			HintViewModel.UserState.IS_PASSWORD_SET -> {
-//				findNavController().navigate(R.id.navigateFromHintToLoginFragment)
+				findNavController().navigate(R.id.navigateFromHintToLoginFragment)
 			}
 			HintViewModel.UserState.NONE -> return
 		}
