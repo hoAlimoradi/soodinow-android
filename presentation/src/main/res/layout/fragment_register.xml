@@ -18,20 +18,6 @@
         tools:context=".ui.register.RegisterFragment">
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_start_phone_number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.2" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_end_phone_number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.8" />
-
-        <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_bottom_background"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

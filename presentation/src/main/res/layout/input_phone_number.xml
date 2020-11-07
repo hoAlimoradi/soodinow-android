@@ -27,18 +27,18 @@
             android:layout_height="wrap_content"
             android:text="@{label}"
             tools:text="نام کاربری"
-            android:layout_marginTop="@dimen/margin_very_small"
+            android:layout_marginTop="@dimen/margin_4_dp"
             />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:orientation="horizontal"
             focusTarget="@{@id/phone_number_edit_text}"
-            android:layout_marginTop="@dimen/margin_very_small"
+            android:layout_marginTop="@dimen/margin_4_dp"
             android:id="@+id/phone_number_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/round_corner_layout"
-            android:padding="@dimen/margin_small">
+            android:padding="@dimen/margin_very_small">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txt_prefix"
