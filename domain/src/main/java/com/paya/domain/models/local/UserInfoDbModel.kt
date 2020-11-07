@@ -6,7 +6,6 @@ import io.objectbox.annotation.Id
 @Entity
 data class UserInfoDbModel(
 	@Id var id: Long = 0,
-	var accessToken: String? = "",
 	var isPasswordSet: Boolean = false,
 	var isHintShowed: Boolean = false
 )

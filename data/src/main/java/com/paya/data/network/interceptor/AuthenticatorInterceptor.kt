@@ -1,28 +1,22 @@
 package com.paya.data.network.interceptor
 
-import com.paya.data.database.userInfo.UserInfoDbApi
-import kotlinx.coroutines.*
+import com.paya.data.sharedpreferences.PreferenceHelper
 import okhttp3.Interceptor
 import okhttp3.Response
 import javax.inject.Inject
 
 class AuthenticatorInterceptor @Inject constructor(
-    private val userInfoDbApi: UserInfoDbApi
+    private val preferenceHelper: PreferenceHelper
 ): Interceptor {
     
-    private var credentials: String? = null
     
     override fun intercept(chain: Interceptor.Chain): Response {
-        runBlocking {
-            credentials = userInfoDbApi.getSingle()?.accessToken
-        }
+        val credentials = preferenceHelper.getAccessToken()
         var request = chain.request()
-        credentials?.let {
-            request = request.newBuilder().header(
-                "Authorization",
-                "Bearer $credentials"
-            ).build()
-        }
+        request = request.newBuilder().header(
+            "Authorization",
+            "Bearer $credentials"
+        ).build()
         
         return chain.proceed(request)
     }

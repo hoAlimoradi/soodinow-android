@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <import type="com.paya.domain.tools.Resource" />
+
         <import type="com.paya.presentation.viewmodel.LoginViewModel" />
 
         <variable
@@ -10,8 +14,7 @@
             type="LoginViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.login.LoginFragment">
@@ -21,14 +24,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.5" />
+            app:layout_constraintGuide_percent="0.65" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_top_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.25" />
+            app:layout_constraintGuide_percent="0.15" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="match_parent"
@@ -38,109 +41,107 @@
             app:layout_constraintBottom_toBottomOf="@id/guideline_bottom_background"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:background="@drawable/top_round_corner"
-            android:id="@+id/container"
-            style="@style/TopRoundedCornerLayout"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="@id/guideline_top_content">
+            app:layout_constraintTop_toTopOf="@id/guideline_top_content"
+            app:layout_constraintBottom_toBottomOf="parent">
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline_top_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.07" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline_top_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.19" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                style="@style/TitleTextView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/login"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/guideline_top_title" />
-
-            <LinearLayout
-                android:id="@+id/password_layout"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/container"
+                style="@style/TopRoundedCornerLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintTop_toBottomOf="@id/guideline_top_password">
+                android:background="@drawable/top_round_corner"
+                android:layout_gravity="bottom">
 
-                <include
-                    layout="@layout/input_phone_number"
-                    app:content="@{viewModel.username}"
-                    app:label="@{@string/username_or_phone}" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/title_txt"
+                    style="@style/TitleTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:text="@string/login"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                <include
-                    layout="@layout/input_text"
-                    app:content="@{viewModel.password}"
-                    app:label="@{@string/repeat_password}" />
+                <LinearLayout
+                    android:id="@+id/password_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@id/title_txt">
 
-            </LinearLayout>
+                    <include
+                        layout="@layout/input_phone_number"
+                        app:content="@{viewModel.username}"
+                        app:label="@{@string/username_or_phone}" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_marginTop="@dimen/margin_small"
-                android:id="@+id/forget_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_medium"
-                android:text="@string/forget_password"
-                android:textColor="@color/dark_blue"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/password_layout" />
+                    <include
+                        layout="@layout/input_text"
+                        app:content="@{viewModel.password}"
+                        app:label="@{@string/repeat_password}" />
 
-            <FrameLayout
-                android:id="@+id/description_layout"
-                app:layout_constraintTop_toBottomOf="@id/forget_password"
-                android:layout_marginTop="@dimen/margin_medium"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                </LinearLayout>
 
-                <include
-                    app:layout_constraintTop_toBottomOf="@id/forget_password"
-                    layout="@layout/text_with_seperator"/>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/forget_password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_medium"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:text="@string/forget_password"
+                    android:textColor="@color/dark_blue"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/password_layout" />
 
-            </FrameLayout>
+                <FrameLayout
+                    android:id="@+id/description_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    app:layout_constraintTop_toBottomOf="@id/forget_password">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/fingerprint"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_small"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/description_layout"
-                app:srcCompat="@drawable/ic_fingerprint_2" />
+                    <include
+                        layout="@layout/text_with_seperator"
+                        app:layout_constraintTop_toBottomOf="@id/forget_password" />
 
-            <Button
-                style="@style/SubmitButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_medium"
-                android:onClick="@{() -> viewModel.login()}"
-                android:text="@string/login"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                </FrameLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/fingerprint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/description_layout"
+                    app:srcCompat="@drawable/ic_fingerprint_2" />
+
+                <Button
+                    style="@style/SubmitButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginBottom="@dimen/margin_medium"
+                    android:onClick="@{() -> viewModel.login()}"
+                    android:text="@string/login"
+                    app:layout_constraintTop_toBottomOf="@id/fingerprint"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </FrameLayout>
 
         <include
-            tools:visibility="gone"
             layout="@layout/loading_state"
-            app:resource="@{(Resource) viewModel.loginResource}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            app:resource="@{(Resource) viewModel.loginResource}"
+            tools:visibility="gone" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

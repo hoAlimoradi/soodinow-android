@@ -12,12 +12,6 @@ class UserInfoDbApiImpl @Inject constructor(
 		return userInfoList.lastOrNull()
 	}
 	
-	override suspend fun updateAccessToken(accessToken: String) {
-		val userInfo = getSingle() ?: UserInfoDbModel()
-		userInfo.accessToken = accessToken
-		userInfoBox.put(userInfo)
-	}
-	
 	override suspend fun updateIsPasswordSet(isPasswordSet: Boolean) {
 		val userInfo = getSingle() ?: UserInfoDbModel()
 		userInfo.isPasswordSet = isPasswordSet

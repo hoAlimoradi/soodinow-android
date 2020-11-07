@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginHorizontal="@dimen/margin_medium"
-        android:layout_marginTop="@dimen/margin_very_small"
+        android:layout_marginTop="@dimen/margin_4_dp"
         >
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -27,14 +27,14 @@
             android:layout_height="wrap_content"
             android:text="@{label}"
             tools:text="نام کاربری"
-            android:layout_marginTop="@dimen/margin_very_small"
+            android:layout_marginTop="@dimen/margin_4_dp"
             />
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:layout_marginTop="@dimen/margin_very_small"
+            android:layout_marginTop="@dimen/margin_4_dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/margin_small"
+            android:padding="@dimen/margin_very_small"
             android:text="@={content}"
             android:textColor="#000000"
             android:background="@drawable/round_corner_layout"

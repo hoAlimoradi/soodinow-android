@@ -8,6 +8,7 @@
     <dimen name="height">48dp</dimen>
     <dimen name="height_medium">36dp</dimen>
     <dimen name="margin_medium">24dp</dimen>
+    <dimen name="margin_32">32dp</dimen>
     <dimen name="margin_large">64dp</dimen>
     <dimen name="margin_small">16dp</dimen>
     <dimen name="margin_line_chart">15dp</dimen>
@@ -15,7 +16,7 @@
     <dimen name="margin_4_dp">4dp</dimen>
 
 
-    <dimen name="text_size_title">32sp</dimen>
+    <dimen name="text_size_title">30sp</dimen>
     <dimen name="text_size_title_small">26sp</dimen>
     <dimen name="text_size_small">14sp</dimen>
     <dimen name="text_size_medium">18sp</dimen>

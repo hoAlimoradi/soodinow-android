@@ -14,6 +14,7 @@ import com.paya.presentation.utils.VolatileLiveData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ActivateViewModel @ViewModelInject constructor(
 	private val activateUseCase: UseCase<ActivateRepoModel,Any>,
@@ -25,7 +26,7 @@ class ActivateViewModel @ViewModelInject constructor(
 	val remainingTime = MutableLiveData(59)
 	
 	init {
-		viewModelScope.launch { setRemainingTime() }
+		setRemainingTime()
 	}
 	
 	lateinit var phoneNumber: String
@@ -59,30 +60,33 @@ class ActivateViewModel @ViewModelInject constructor(
 			return
 		viewModelScope.launch(Dispatchers.IO) {
 			status.postValue(Resource.loading(null))
-			val response = registerUseCase.action("+989$phoneNumber")
+			val response = registerUseCase.action(phoneNumber)
 			
-			if (response.status == Status.SUCCESS)
+			if (response.status == Status.SUCCESS) {
 				status.postValue(Resource.idle(null))
-			else
+				remainingTime.postValue(59)
+				setRemainingTime()
+			} else
 				status.postValue(response)
 		}
 	}
 	
 	
-	private suspend fun setRemainingTime() {
-		val formattedRemainingTime =
-			if (remainingTime.value!! >= 10) remainingTime.value.toString()
-			else "0${remainingTime.value}"
-		remainingTimeText.value = "00:$formattedRemainingTime"
-		
-		if (remainingTime.value == 0)
-			return
-		
-		delay(1000)
-		remainingTime.value = remainingTime.value!! - 1
-		
-		setRemainingTime()
-		
+	private fun setRemainingTime() {
+		viewModelScope.launch {
+			val formattedRemainingTime =
+				if (remainingTime.value!! >= 10) remainingTime.value.toString()
+				else "0${remainingTime.value}"
+			remainingTimeText.value = "00:$formattedRemainingTime"
+			
+			if (remainingTime.value == 0)
+				return@launch
+			
+			delay(1000)
+			remainingTime.value = remainingTime.value!! - 1
+			
+			setRemainingTime()
+		}
 	}
 	
 }
