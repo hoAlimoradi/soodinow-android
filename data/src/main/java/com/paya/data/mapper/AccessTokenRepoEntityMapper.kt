@@ -12,7 +12,6 @@ class AccessTokenRepoEntityMapper @Inject constructor() : Mapper<
 	
 	override fun map(param: UserInfoRepoModel?): UserInfoDbModel {
 		return UserInfoDbModel(
-			accessToken = param?.accessToken ?: "",
 			isPasswordSet = param?.isPasswordSet ?: false,
 			isHintShowed = param?.isHintShowed ?: false
 		)

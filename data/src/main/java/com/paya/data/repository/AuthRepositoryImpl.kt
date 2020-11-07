@@ -6,6 +6,7 @@ import com.paya.data.network.apiresponse.ApiEmptyResponse
 import com.paya.data.network.apiresponse.ApiErrorResponse
 import com.paya.data.network.apiresponse.ApiSuccessResponse
 import com.paya.data.network.remote_api.AuthService
+import com.paya.data.sharedpreferences.PreferenceHelper
 import com.paya.domain.models.local.UserInfoDbModel
 import com.paya.domain.models.remote.AccessTokenRemoteModel
 import com.paya.domain.models.remote.RegisterRemoteModel
@@ -25,7 +26,8 @@ class AuthRepositoryImpl @Inject constructor(
 	private val userInfoMapperRepoEntity: Mapper<UserInfoRepoModel?,UserInfoDbModel>,
 	private val userInfoMapperEntityRepo: Mapper<UserInfoDbModel?,UserInfoRepoModel>,
 	private val setPasswordRemoteRepoMapper: Mapper<SetPasswordRemoteModel,SetPasswordRepoModel>,
-	private val userInfoDbApi: UserInfoDbApi
+	private val userInfoDbApi: UserInfoDbApi,
+	private val preferenceHelper: PreferenceHelper
 ) : AuthRepository {
 	
 	override suspend fun register(phoneNumber: String): Resource<RegisterRepoModel> {
@@ -53,7 +55,7 @@ class AuthRepositoryImpl @Inject constructor(
 	}
 	
 	override suspend fun updateAccessToken(accessToken: String) {
-		userInfoDbApi.updateAccessToken(accessToken)
+		preferenceHelper.setAccessToken(accessToken)
 	}
 	
 	override suspend fun updateIsPasswordSet(isPasswordSet: Boolean) {
