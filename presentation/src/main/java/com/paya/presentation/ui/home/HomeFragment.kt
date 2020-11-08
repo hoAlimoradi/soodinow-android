@@ -8,6 +8,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.HORIZONTAL
@@ -46,10 +47,15 @@ class HomeFragment : Fragment() {
 	
 	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
 		super.onViewCreated(view,savedInstanceState)
-		observe(mViewModel.getAccountCard, ::checkGetAccountStatus)
-		observe(mViewModel.getMarketSmallList, ::checkGetMarketSmallListStatus)
+		observe(mViewModel.getAccountCard,::checkGetAccountStatus)
+		observe(mViewModel.getMarketSmallList,::checkGetMarketSmallListStatus)
 		val manager = LinearLayoutManager(context,HORIZONTAL,true)
 		val adapter = MarketAdapter()
+		mBinding.btnCreateAccount.setOnClickListener {
+			findNavController().navigate(
+				HomeFragmentDirections.navigateToCreateAccountFragment()
+			)
+		}
 		mBinding.marketRecycleView.layoutManager = manager
 		mBinding.marketRecycleView.adapter = adapter
 		val dividerItemDecoration = DividerItemDecoration(context,DividerItemDecoration.HORIZONTAL)

@@ -69,5 +69,10 @@
     <string name="days_trading_panel">تابلوی معاملات روزانه</string>
     <string name="legal">حقوقی</string>
     <string name="substantive">حقیقی</string>
+    <string name="create_personal_account_title">افتتاح حساب سرمایه گذاری شخصی</string>
+    <string name="chart_title_create_personal_account">نمودار نرخ رشد حساب سرمایه گذاری شخصی</string>
+    <string name="daily">روزانه</string>
+    <string name="weekly">هفتگی</string>
+    <string name="long_time">بلند مدت</string>
 
 </resources>

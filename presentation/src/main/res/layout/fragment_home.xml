@@ -241,7 +241,7 @@
             android:id="@+id/createAccountGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
+            android:visibility="visible"
             app:constraint_referenced_ids="createAccountCardView,btnCreateAccount" />
 
         <androidx.cardview.widget.CardView
@@ -273,6 +273,7 @@
             android:elevation="2dp"
             android:gravity="center"
             android:orientation="vertical"
+            android:clickable="true"
             app:layout_constraintBottom_toBottomOf="@+id/createAccountCardView"
             app:layout_constraintEnd_toStartOf="@id/account_end_guideline"
             app:layout_constraintStart_toEndOf="@id/account_start_guideline">
@@ -301,7 +302,8 @@
             android:id="@+id/viewPagerGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:constraint_referenced_ids="pager,tabAccountCard" />
+            app:constraint_referenced_ids="pager,tabAccountCard"
+            android:visibility="gone"/>
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/pager"

@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg"
+        tools:context=".ui.createPersonalAccount.CreateAccountPersonalFragment">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="@string/create_personal_account_title" />
+
+
+        <androidx.cardview.widget.CardView
+            style="@style/GeneralCardView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/margin_small"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/top_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.02" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/inner_top_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.09" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/bottom_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.98" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/bottom_top_layout_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.18" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/top_chart_title_layout_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.28" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/top_chart_layout_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.34" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/start_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.02" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/end_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.98" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/center_vertical_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5" />
+
+                <ak.sh.ay.oblique.ObliqueView
+                    android:id="@+id/obliqueView"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:src="@drawable/img_create_load"
+                    app:ending_slant_angle="60"
+                    app:layout_constraintBottom_toTopOf="@+id/bottom_top_layout_guideline"
+                    app:layout_constraintEnd_toStartOf="@id/center_vertical_guideline"
+                    app:layout_constraintStart_toEndOf="@+id/start_guideline"
+                    app:layout_constraintTop_toBottomOf="@id/top_guideline"
+                    app:radius="40"
+                    app:shadow_height="0"
+                    app:type="image" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iconCreateAccount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_4_dp"
+                    android:layout_marginTop="3dp"
+                    android:src="@drawable/ic_create_account"
+                    android:tint="@color/green"
+                    app:layout_constraintEnd_toStartOf="@id/end_guideline"
+                    app:layout_constraintStart_toEndOf="@id/txt_title_create"
+                    app:layout_constraintTop_toBottomOf="@id/top_guideline" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txt_title_create"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/create_personal_account_title"
+                    android:textColor="@color/purple"
+                    android:textSize="@dimen/text_size_10sp"
+                    app:layout_constraintEnd_toStartOf="@id/iconCreateAccount"
+                    app:layout_constraintStart_toEndOf="@+id/center_vertical_guideline"
+                    app:layout_constraintTop_toBottomOf="@id/top_guideline" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txt_description_create"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="@dimen/margin_4_dp"
+                    android:gravity="top"
+                    android:text="لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم  ازصنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه است. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه استلورم ا"
+                    android:textColor="@color/purple_gray"
+                    android:textSize="@dimen/text_size_10sp"
+                    app:layout_constraintBottom_toTopOf="@+id/bottom_top_layout_guideline"
+                    app:layout_constraintEnd_toStartOf="@id/end_guideline"
+                    app:layout_constraintStart_toEndOf="@+id/center_vertical_guideline"
+                    app:layout_constraintTop_toBottomOf="@id/txt_title_create" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/createAccountBtn"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/height_medium"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:background="@drawable/bg_button_green"
+                    android:text="@string/create_personal_account"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_small"
+                    app:layout_constraintEnd_toStartOf="@+id/end_guideline"
+                    app:layout_constraintStart_toEndOf="@+id/start_guideline"
+                    app:layout_constraintTop_toBottomOf="@id/bottom_top_layout_guideline" />
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iconChartCreateAccount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_4_dp"
+                    android:layout_marginTop="3dp"
+                    android:src="@drawable/ic_create_account"
+                    android:tint="@color/green"
+                    app:layout_constraintEnd_toStartOf="@id/end_guideline"
+                    app:layout_constraintStart_toEndOf="@id/txt_title_create"
+                    app:layout_constraintTop_toBottomOf="@id/top_chart_title_layout_guideline" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txt_title_chart_create"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/chart_title_create_personal_account"
+                    android:textColor="@color/purple"
+                    android:textSize="@dimen/text_size_11sp"
+                    app:layout_constraintEnd_toStartOf="@id/iconCreateAccount"
+                    app:layout_constraintStart_toEndOf="@+id/start_guideline"
+                    app:layout_constraintTop_toBottomOf="@id/top_chart_title_layout_guideline" />
+
+                <LinearLayout
+                    android:id="@+id/chartBaseDataLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/top_chart_layout_guideline">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardChartPrice"
+                        android:layout_width="120dp"
+                        android:layout_height="@dimen/height"
+                        android:layout_margin="@dimen/margin_4_dp"
+                        android:elevation="5dp"
+                        app:cardCornerRadius="5dp"
+                        app:layout_constraintStart_toEndOf="@id/cardChartPercent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/top_chart_layout_guideline">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="start"
+                                android:layout_marginStart="@dimen/margin_small"
+                                android:layout_marginTop="@dimen/margin_4_dp"
+                                android:text="@string/toman"
+                                android:textColor="@color/gray"
+                                android:textSize="@dimen/text_size_11sp" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin_4_dp"
+                                android:text="4444,333,44"
+                                android:textColor="@color/purple_gray"
+                                android:textSize="@dimen/text_size_11sp" />
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardChartPercent"
+                        android:layout_width="@dimen/height"
+                        android:layout_height="@dimen/height"
+                        android:layout_margin="@dimen/margin_4_dp"
+                        android:elevation="5dp"
+                        app:cardCornerRadius="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_market_downturn"
+                                android:tint="@color/green"
+                                app:tint="@color/red" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin_4_dp"
+                                android:text="% 4"
+                                android:textColor="@color/purple_gray"
+                                android:textSize="@dimen/text_size_11sp" />
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/chart"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="@dimen/margin_small"
+                    app:layout_constraintEnd_toStartOf="@id/end_guideline"
+                    app:layout_constraintStart_toEndOf="@id/start_guideline"
+                    app:layout_constraintTop_toBottomOf="@id/chartBaseDataLayout"
+                    app:layout_constraintBottom_toTopOf="@id/dayRecycler"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/dayRecycler"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/margin_medium"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toTopOf="@id/checkLayout"
+                    app:layout_constraintEnd_toStartOf="@id/end_guideline"
+                    app:layout_constraintStart_toEndOf="@+id/start_guideline"
+                    tools:itemCount="1"
+                    tools:listitem="@layout/item_day" />
+
+                <LinearLayout
+                    android:id="@+id/checkLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    app:layout_constraintBottom_toTopOf="@+id/bottom_guideline"
+                    android:paddingTop="@dimen/margin_medium">
+
+                    <androidx.appcompat.widget.AppCompatCheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/long_time"
+                        android:layoutDirection="rtl"
+                        android:textSize="@dimen/text_size_11sp"
+                        android:button="@drawable/selector_check_box"
+                        android:layout_marginStart="@dimen/margin_medium"
+                        />
+                    <androidx.appcompat.widget.AppCompatCheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/weekly"
+                        android:layoutDirection="rtl"
+                        android:textSize="@dimen/text_size_11sp"
+                        android:button="@drawable/selector_check_box"
+                        android:layout_marginStart="@dimen/margin_medium"
+                        />
+                    <androidx.appcompat.widget.AppCompatCheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/daily"
+                        android:layoutDirection="rtl"
+                        android:textSize="@dimen/text_size_11sp"
+                        android:checked="true"
+                        android:button="@drawable/selector_check_box"
+                        />
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
