@@ -2,21 +2,18 @@ package com.paya.data.repository
 
 import com.paya.common.Mapper
 import com.paya.data.database.userInfo.UserInfoDbApi
-import com.paya.data.network.apiresponse.ApiEmptyResponse
-import com.paya.data.network.apiresponse.ApiErrorResponse
-import com.paya.data.network.apiresponse.ApiSuccessResponse
 import com.paya.data.network.remote_api.AuthService
 import com.paya.data.sharedpreferences.PreferenceHelper
+import com.paya.data.utils.getResourceFromApiResponse
 import com.paya.domain.models.local.UserInfoDbModel
 import com.paya.domain.models.remote.AccessTokenRemoteModel
 import com.paya.domain.models.remote.RegisterRemoteModel
 import com.paya.domain.models.remote.SetPasswordRemoteModel
-import com.paya.domain.models.repo.UserInfoRepoModel
 import com.paya.domain.models.repo.RegisterRepoModel
 import com.paya.domain.models.repo.SetPasswordRepoModel
+import com.paya.domain.models.repo.UserInfoRepoModel
 import com.paya.domain.repository.AuthRepository
 import com.paya.domain.tools.Resource
-import java.lang.Exception
 import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(
@@ -31,26 +28,23 @@ class AuthRepositoryImpl @Inject constructor(
 ) : AuthRepository {
 	
 	override suspend fun register(phoneNumber: String): Resource<RegisterRepoModel> {
-		return when(val registerModel = authNet.register(phoneNumber)){
-			is ApiEmptyResponse -> Resource.success(null)
-			is ApiSuccessResponse -> Resource.success(registerMapperRemoteRepo.map(registerModel.body.data))
-			is ApiErrorResponse -> Resource.error(registerModel.errorMessage, null)
+		val registerApiResponse = authNet.register(phoneNumber)
+		return getResourceFromApiResponse(registerApiResponse){
+			registerMapperRemoteRepo.map(it.data)
 		}
 	}
 	
 	override suspend fun activate(phoneNumber: String, code: String): Resource<UserInfoRepoModel> {
-		return when(val activateModel = authNet.activate(phoneNumber, code)){
-			is ApiEmptyResponse -> Resource.success(null)
-			is ApiSuccessResponse -> Resource.success(userInfoMapperRemoteRepo.map(activateModel.body.data))
-			is ApiErrorResponse -> Resource.error(activateModel.errorMessage, null)
+		val activateApiResponse = authNet.activate(phoneNumber, code)
+		return getResourceFromApiResponse(activateApiResponse){
+			userInfoMapperRemoteRepo.map(it.data)
 		}
 	}
 	
 	override suspend fun login(username: String,password: String): Resource<UserInfoRepoModel> {
-		return when(val loginModel = authNet.login(username, password)){
-			is ApiEmptyResponse -> Resource.success(null)
-			is ApiSuccessResponse -> Resource.success(userInfoMapperRemoteRepo.map(loginModel.body.data))
-			is ApiErrorResponse -> Resource.error(loginModel.errorMessage, null)
+		val loginApiResponse = authNet.login(username, password)
+		return getResourceFromApiResponse(loginApiResponse){
+			userInfoMapperRemoteRepo.map(it.data)
 		}
 	}
 	
@@ -79,10 +73,9 @@ class AuthRepositoryImpl @Inject constructor(
 	}
 	
 	override suspend fun setPassword(password: String): Resource<SetPasswordRepoModel> {
-		return when(val setPasswordModel = authNet.setPassword(password)){
-			is ApiEmptyResponse -> Resource.success(null)
-			is ApiSuccessResponse -> Resource.success(setPasswordRemoteRepoMapper.map(setPasswordModel.body.data))
-			is ApiErrorResponse -> Resource.error(setPasswordModel.errorMessage, null)
+		val setPasswordApiResponse = authNet.setPassword(password)
+		return getResourceFromApiResponse(setPasswordApiResponse){
+			setPasswordRemoteRepoMapper.map(it.data)
 		}
 	}
 	
