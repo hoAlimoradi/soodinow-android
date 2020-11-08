@@ -74,5 +74,21 @@
     <string name="daily">روزانه</string>
     <string name="weekly">هفتگی</string>
     <string name="long_time">بلند مدت</string>
+    <string name="first_information">مشخصات اولیه</string>
+    <string name="insert_next">ثبت و ادامه</string>
+
+    <string name="name_family">نام و نام خانوادگی</string>
+    <string name="sub_title_name_family">نام و نام خانوادگی خود را بصورت کامل بنویسید</string>
+    <string name="hint_name_family">بطور مثال    علی ابراهیمی خراسانی</string>
+    <string name="national_code">کد ملی</string>
+    <string name="sub_title_national_code">کد ملی خود را بدون خط تیره بنویسید</string>
+    <string name="hint_national_code">بطور مثال  1187514297</string>
+    <string name="shaba_number">شماره شبا</string>
+    <string name="sub_title_shaba_number">شماره شبا بانک خود را  خود را بدون  IR  بنویسید</string>
+    <string name="hint_shaba_number">بطور مثال  18754114522255555255555</string>
+    <string name="date_of_birth">تاریخ تولد</string>
+    <string name="sub_title_date_of_birth">تاریخ تولد خود را دقیق انتخاب کنید</string>
+    <string name="sub_title_password">رمز عبور خود را از بین اعداد و حروف  انگلیسی و فلان انتخاب کنید</string>
+    <string name="hint_password">بطور مثال !@$%^JHYTED88658</string>
 
 </resources>

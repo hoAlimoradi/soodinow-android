@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.paya.presentation.R
@@ -39,6 +40,11 @@ class CreateAccountPersonalFragment : Fragment() {
 	
 	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
 		super.onViewCreated(view,savedInstanceState)
+		mBinding.createAccountBtn.setOnClickListener {
+			findNavController().navigate(
+				CreateAccountPersonalFragmentDirections.navigateToFirstInformation()
+			)
+		}
 		setupTagsRecyclerView()
 		val points = mutableListOf<Point>()
 		for (i in 0 until 10) {

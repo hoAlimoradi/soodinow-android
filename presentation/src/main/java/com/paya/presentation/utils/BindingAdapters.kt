@@ -77,6 +77,13 @@ object BindingAdapters {
 	}
 	
 	@JvmStatic
+	@BindingAdapter("hintLabel")
+	fun setHintLabel(editText: EditText,value: String?) {
+		value ?: return
+		editText.hint = value
+	}
+	
+	@JvmStatic
 	@BindingAdapter("chartData")
 	fun setLineChartData(chart: LineChart,data: List<Point>?) {
 		data ?: return
