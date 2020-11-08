@@ -14,10 +14,12 @@ class QuestionsRepositoryImpl @Inject constructor(
 	private val questionsRemoteRepoMapper: Mapper<QuestionsRemoteModel, QuestionsRepoModel>
 ): QuestionsRepository{
 	
-	override suspend fun getAllQuestions(): Resource<QuestionsRepoModel> {
+	override suspend fun getAllQuestions(): Resource<ArrayList<QuestionsRepoModel>> {
 		val questionsResponse = questionService.getAllQuestions()
 		return getResourceFromApiResponse(questionsResponse){
-			questionsRemoteRepoMapper.map(it.data)
+			it.data.map { questionsRemoteModel ->
+				questionsRemoteRepoMapper.map(questionsRemoteModel)
+			} as ArrayList
 		}
 	}
 	

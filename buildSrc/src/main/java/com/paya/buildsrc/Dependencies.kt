@@ -31,6 +31,7 @@ object Dependencies{
 		const val PIN_ENTRY_EDIT_TEXT = "2.0.6"
 		const val MP_ANDROID_CHART = "3.1.0"
 		const val CALLIGRAPHY = "2.3.0"
+		const val STEPVIEW_VER = "1.5.1"
 	}
 	
 	object Modules{

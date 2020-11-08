@@ -7,6 +7,7 @@ buildscript {
         maven(url = "https://maven.google.com")
         gradlePluginPortal()
         maven(url = "https://maven.fabric.io/public")
+        maven(url = "https://jitpack.io")
     }
 
 

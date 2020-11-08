@@ -94,6 +94,10 @@
         android:name="com.paya.presentation.ui.main.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" />
+    <fragment
+        android:id="@+id/questionFragment"
+        android:name="com.paya.presentation.ui.question.QuestionFragment"
+        android:label="QuestionFragment" />
 
 
 </navigation>

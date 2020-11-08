@@ -7,7 +7,7 @@ import retrofit2.http.GET
 
 interface QuestionService {
 	
-	@GET("/q/questions/")
-	suspend fun getAllQuestions(): ApiResponse<BaseModel<QuestionsRemoteModel>>
+	@GET("q/questions/")
+	suspend fun getAllQuestions(): ApiResponse<BaseModel<List<QuestionsRemoteModel>>>
 	
 }

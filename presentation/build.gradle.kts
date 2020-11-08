@@ -36,9 +36,9 @@ android {
 		getByName("release") {
 			isMinifyEnabled = false
 			proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+				getDefaultProguardFile("proguard-android-optimize.txt"),
+				"proguard-rules.pro"
+			)
 		}
 	}
 	
@@ -75,17 +75,19 @@ dependencies {
 	implementation("androidx.lifecycle:lifecycle-runtime-ktx:${Dependencies.Versions.LIFECYCLE_VER}")
 	implementation("android.arch.lifecycle:extensions:2.1.0")
 	
-	kapt ("com.android.databinding:compiler:${Dependencies.Versions.DATA_BINDING_VER}")
+	kapt("com.android.databinding:compiler:${Dependencies.Versions.DATA_BINDING_VER}")
 	
-	implementation ("com.alimuzaffar.lib:pinentryedittext:${Dependencies.Versions.PIN_ENTRY_EDIT_TEXT}")
+	implementation("com.alimuzaffar.lib:pinentryedittext:${Dependencies.Versions.PIN_ENTRY_EDIT_TEXT}")
 	
-	implementation ("androidx.viewpager2:viewpager2:${Dependencies.Versions.VIEW_PAGER_VERSION}")
-	implementation ("com.google.android.material:material:${Dependencies.Versions.MATERIAL_VER}")
-	implementation ("com.tbuonomo.andrui:viewpagerdotsindicator:${Dependencies.Versions.VIEW_PAGER_DOTS_INDICATOR_VER}")
+	implementation("androidx.viewpager2:viewpager2:${Dependencies.Versions.VIEW_PAGER_VERSION}")
+	implementation("com.google.android.material:material:${Dependencies.Versions.MATERIAL_VER}")
+	implementation("com.tbuonomo.andrui:viewpagerdotsindicator:${Dependencies.Versions.VIEW_PAGER_DOTS_INDICATOR_VER}")
 	
-	implementation ("com.github.PhilJay:MPAndroidChart:${Dependencies.Versions.MP_ANDROID_CHART}")
+	implementation("com.github.PhilJay:MPAndroidChart:${Dependencies.Versions.MP_ANDROID_CHART}")
 	
 	implementation("uk.co.chrisjenx:calligraphy:${Dependencies.Versions.CALLIGRAPHY}")
+	
+	implementation("com.shuhart.stepview:stepview:${Dependencies.Versions.STEPVIEW_VER}")
 	
 	
 	implementation(project(Dependencies.Modules.DOMAIN))

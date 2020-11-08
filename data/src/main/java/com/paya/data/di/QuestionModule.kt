@@ -6,6 +6,8 @@ import com.paya.data.repository.QuestionsRepositoryImpl
 import com.paya.domain.models.remote.QuestionsRemoteModel
 import com.paya.domain.models.repo.QuestionsRepoModel
 import com.paya.domain.repository.QuestionsRepository
+import com.paya.domain.tools.UseCase
+import com.paya.domain.usecase.question.GetAllQuestionsUseCase
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -23,5 +25,8 @@ abstract class QuestionModule {
 	
 	@Binds
 	abstract fun bindQuestionRepository(repository: QuestionsRepositoryImpl): QuestionsRepository
+	
+	@Binds
+	abstract fun binGetQuestionUseCase(useCase: GetAllQuestionsUseCase): UseCase<Unit,ArrayList<QuestionsRepoModel>>
 	
 }

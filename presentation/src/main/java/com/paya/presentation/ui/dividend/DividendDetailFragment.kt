@@ -20,11 +20,6 @@ import com.paya.presentation.utils.BindingAdapters
 import com.paya.presentation.utils.WrapContentViewPager
 import com.paya.presentation.utils.shared.Point
 
-
-
-
-
-
 class DividendDetailFragment : Fragment() {
 	
 	private lateinit var mBinding: FragmentDividendDetailBinding
