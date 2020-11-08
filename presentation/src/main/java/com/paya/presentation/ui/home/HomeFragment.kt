@@ -56,6 +56,11 @@ class HomeFragment : Fragment() {
 				HomeFragmentDirections.navigateToCreateAccountFragment()
 			)
 		}
+		mBinding.buttonCreateAccount.setOnClickListener {
+			findNavController().navigate(
+				HomeFragmentDirections.navigateToCreateAccountFragment()
+			)
+		}
 		mBinding.marketRecycleView.layoutManager = manager
 		mBinding.marketRecycleView.adapter = adapter
 		val dividerItemDecoration = DividerItemDecoration(context,DividerItemDecoration.HORIZONTAL)

@@ -90,5 +90,13 @@
     <string name="sub_title_date_of_birth">تاریخ تولد خود را دقیق انتخاب کنید</string>
     <string name="sub_title_password">رمز عبور خود را از بین اعداد و حروف  انگلیسی و فلان انتخاب کنید</string>
     <string name="hint_password">بطور مثال !@$%^JHYTED88658</string>
+    <string name="connect_brokerage">اتصال به کارگزاری</string>
+    <string name="how_to_account_brokerage">آیا در کارگزاری حسابی دارید؟</string>
+    <string name="no_have">خیر ندارم</string>
+    <string name="yes_have">بله دارم</string>
+    <string name="select_brokerage">کارگزاری خود را انتخاب کنید</string>
+    <string name="select_size_invest">میزان سرمایه گذاری خود را انتخاب کنید</string>
+    <string name="increase_credit_price">این مبلغ از اعتبار کارگزاری کسر شود</string>
+    <string name="this_charge_price">این مبلغ را اکنون شارژ می کنم</string>
 
 </resources>

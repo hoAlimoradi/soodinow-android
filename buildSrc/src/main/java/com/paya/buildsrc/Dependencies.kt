@@ -32,6 +32,7 @@ object Dependencies{
 		const val MP_ANDROID_CHART = "3.1.0"
 		const val CALLIGRAPHY = "2.3.0"
 		const val OBLIQUE = "2.2"
+		const val INDICATOR_SEEK_BAR = "2.1.2"
 	}
 	
 	object Modules{

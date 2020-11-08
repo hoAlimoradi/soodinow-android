@@ -37,6 +37,9 @@
         <action
             android:id="@+id/navigateToCreateAccountFragment"
             app:destination="@id/createPersonalAccount" />
+        <action
+            android:id="@+id/navigateToConnectBrokerage"
+            app:destination="@id/connectBrokerage" />
 
     </fragment>
 
@@ -85,4 +88,9 @@
         android:name="com.paya.presentation.ui.createPersonalAccount.FirstInformationFragment"
         android:label="fragment_first_information"
         tools:layout="@layout/fragment_first_information" />
+    <fragment
+        android:id="@+id/connectBrokerage"
+        android:name="com.paya.presentation.ui.createPersonalAccount.ConnectBrokerageFragment"
+        android:label="fragment_connect_brokerage"
+        tools:layout="@layout/fragment_connect_brokerage" />
 </navigation>

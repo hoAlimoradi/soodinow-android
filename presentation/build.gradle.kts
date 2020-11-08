@@ -85,6 +85,7 @@ dependencies {
 	
 	implementation ("com.github.PhilJay:MPAndroidChart:${Dependencies.Versions.MP_ANDROID_CHART}")
 	implementation("com.fxn769:oblique:${Dependencies.Versions.OBLIQUE}")
+	implementation ("com.github.warkiz.widget:indicatorseekbar:${Dependencies.Versions.INDICATOR_SEEK_BAR}")
 	implementation("uk.co.chrisjenx:calligraphy:${Dependencies.Versions.CALLIGRAPHY}")
 	
 	
