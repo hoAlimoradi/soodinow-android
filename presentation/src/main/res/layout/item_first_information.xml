@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="androidx.databinding.ObservableField" />
+
+        <variable
+            name="label"
+            type="java.lang.String" />
+
+        <variable
+            name="subLabel"
+            type="java.lang.String" />
+
+        <variable
+            name="hintLabel"
+            type="java.lang.String" />
+
+        <variable
+            name="content"
+            type="ObservableField&lt;java.lang.String>" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:drawableEnd="@drawable/ic_path"
+            android:drawablePadding="@dimen/margin_4_dp"
+            android:text="@={label}"
+            android:textColor="@color/purple"
+            android:textSize="@dimen/text_size_11sp"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/subTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_very_small"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:text="@={subLabel}"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/text_size_10sp"
+            app:layout_constraintTop_toBottomOf="@id/title" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/inputContentEditText"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_very_small"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:background="@drawable/round_corner_layout"
+            android:inputType="text"
+            android:lines="1"
+            android:maxLines="1"
+            android:paddingStart="@dimen/margin_very_small"
+            android:paddingEnd="@dimen/margin_very_small"
+            android:singleLine="true"
+            android:text="@={content}"
+            android:textColor="#000000"
+            hintLabel="@{hintLabel}"
+            android:textSize="@dimen/text_size_11sp"
+            app:layout_constraintTop_toBottomOf="@id/subTitle" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

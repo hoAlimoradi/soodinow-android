@@ -34,7 +34,7 @@
         app:layout_constraintStart_toStartOf="@id/guideline_start_icon"
         app:layout_constraintEnd_toEndOf="@id/guideline_end_icon"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"/>
+        android:layout_height="120dp"/>
 
     <LinearLayout
         android:layout_marginBottom="@dimen/margin_medium"

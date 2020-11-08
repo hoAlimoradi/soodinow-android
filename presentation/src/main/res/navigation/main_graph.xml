@@ -34,6 +34,12 @@
         <action
             android:id="@+id/navigateToProfileFragment"
             app:destination="@id/profile" />
+        <action
+            android:id="@+id/navigateToCreateAccountFragment"
+            app:destination="@id/createPersonalAccount" />
+        <action
+            android:id="@+id/navigateToConnectBrokerage"
+            app:destination="@id/connectBrokerage" />
 
     </fragment>
 
@@ -65,4 +71,26 @@
         android:name="com.paya.presentation.ui.dividend.DividendDetailFragment"
         android:label="fragment_dividend_detail"
         tools:layout="@layout/fragment_dividend_detail" />
+
+
+    <fragment
+        android:id="@+id/createPersonalAccount"
+        android:name="com.paya.presentation.ui.createPersonalAccount.CreateAccountPersonalFragment"
+        android:label="fragment_create_account_personal"
+        tools:layout="@layout/fragment_create_account_personal" >
+        <action
+            android:id="@+id/navigateToFirstInformation"
+            app:destination="@id/firstInformation" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/firstInformation"
+        android:name="com.paya.presentation.ui.createPersonalAccount.FirstInformationFragment"
+        android:label="fragment_first_information"
+        tools:layout="@layout/fragment_first_information" />
+    <fragment
+        android:id="@+id/connectBrokerage"
+        android:name="com.paya.presentation.ui.createPersonalAccount.ConnectBrokerageFragment"
+        android:label="fragment_connect_brokerage"
+        tools:layout="@layout/fragment_connect_brokerage" />
 </navigation>

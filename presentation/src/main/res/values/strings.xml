@@ -69,6 +69,35 @@
     <string name="days_trading_panel">تابلوی معاملات روزانه</string>
     <string name="legal">حقوقی</string>
     <string name="substantive">حقیقی</string>
+    <string name="create_personal_account_title">افتتاح حساب سرمایه گذاری شخصی</string>
+    <string name="chart_title_create_personal_account">نمودار نرخ رشد حساب سرمایه گذاری شخصی</string>
+    <string name="daily">روزانه</string>
+    <string name="weekly">هفتگی</string>
+    <string name="long_time">بلند مدت</string>
+    <string name="first_information">مشخصات اولیه</string>
+    <string name="insert_next">ثبت و ادامه</string>
+
+    <string name="name_family">نام و نام خانوادگی</string>
+    <string name="sub_title_name_family">نام و نام خانوادگی خود را بصورت کامل بنویسید</string>
+    <string name="hint_name_family">بطور مثال    علی ابراهیمی خراسانی</string>
+    <string name="national_code">کد ملی</string>
+    <string name="sub_title_national_code">کد ملی خود را بدون خط تیره بنویسید</string>
+    <string name="hint_national_code">بطور مثال  1187514297</string>
+    <string name="shaba_number">شماره شبا</string>
+    <string name="sub_title_shaba_number">شماره شبا بانک خود را  خود را بدون  IR  بنویسید</string>
+    <string name="hint_shaba_number">بطور مثال  18754114522255555255555</string>
+    <string name="date_of_birth">تاریخ تولد</string>
+    <string name="sub_title_date_of_birth">تاریخ تولد خود را دقیق انتخاب کنید</string>
+    <string name="sub_title_password">رمز عبور خود را از بین اعداد و حروف  انگلیسی و فلان انتخاب کنید</string>
+    <string name="hint_password">بطور مثال !@$%^JHYTED88658</string>
+    <string name="connect_brokerage">اتصال به کارگزاری</string>
+    <string name="how_to_account_brokerage">آیا در کارگزاری حسابی دارید؟</string>
+    <string name="no_have">خیر ندارم</string>
+    <string name="yes_have">بله دارم</string>
+    <string name="select_brokerage">کارگزاری خود را انتخاب کنید</string>
+    <string name="select_size_invest">میزان سرمایه گذاری خود را انتخاب کنید</string>
+    <string name="increase_credit_price">این مبلغ از اعتبار کارگزاری کسر شود</string>
+    <string name="this_charge_price">این مبلغ را اکنون شارژ می کنم</string>
     <string name="questionnaire">پرسشنامه</string>
 
 </resources>
