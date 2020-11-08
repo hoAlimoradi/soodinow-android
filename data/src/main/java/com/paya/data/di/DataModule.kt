@@ -13,7 +13,8 @@ import dagger.hilt.android.components.ActivityRetainedComponent
 		AccessTokenDbModule::class,
 		AccountModule::class,
 		MarketModule::class,
-		SharedPreferenceModule::class
+		SharedPreferenceModule::class,
+		QuestionModule::class
 	]
 )
 @InstallIn(ActivityRetainedComponent::class)

@@ -1,10 +1,7 @@
 package com.paya.data.di
 
 import com.paya.data.network.ApiServiceFactory
-import com.paya.data.network.remote_api.AccountService
-import com.paya.data.network.remote_api.DeveloperNameService
-import com.paya.data.network.remote_api.AuthService
-import com.paya.data.network.remote_api.MarketService
+import com.paya.data.network.remote_api.*
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
@@ -33,4 +30,9 @@ class ApiServiceFactoryModule{
 	@Reusable
 	fun marketService(apiService: ApiServiceFactory) =
 		apiService.create(MarketService::class.java)
+	
+	@Provides
+	@Reusable
+	fun questionsService(apiService: ApiServiceFactory) =
+		apiService.create(QuestionService::class.java)
 }
