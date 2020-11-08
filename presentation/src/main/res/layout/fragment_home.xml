@@ -276,7 +276,8 @@
             android:clickable="true"
             app:layout_constraintBottom_toBottomOf="@+id/createAccountCardView"
             app:layout_constraintEnd_toStartOf="@id/account_end_guideline"
-            app:layout_constraintStart_toEndOf="@id/account_start_guideline">
+            app:layout_constraintStart_toEndOf="@id/account_start_guideline"
+            android:focusable="true">
 
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="wrap_content"

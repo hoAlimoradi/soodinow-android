@@ -14,7 +14,7 @@
             layout="@layout/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:title="@string/create_personal_account_title" />
+            app:label="@{@string/create_personal_account_title}" />
 
 
         <androidx.cardview.widget.CardView

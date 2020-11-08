@@ -50,7 +50,7 @@
             layout="@layout/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:title="@string/company_dividend" />
+            app:label="@{@string/company_dividend}" />
 
         <include
             android:id="@+id/inputSearch"
