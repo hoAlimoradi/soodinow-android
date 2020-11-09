@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/hintFragment">
+    app:startDestination="@id/investmentScoreFragment">
 
     <fragment
         android:id="@+id/hintFragment"
@@ -98,6 +98,16 @@
         android:id="@+id/questionFragment"
         android:name="com.paya.presentation.ui.question.QuestionFragment"
         android:label="QuestionFragment" />
+    <fragment
+        android:id="@+id/appropriateInvestmentFragment"
+        android:name="com.paya.presentation.ui.investment.AppropriateInvestmentFragment"
+        android:label="fragment_appropriate_investment"
+        tools:layout="@layout/fragment_appropriate_investment" />
+    <fragment
+        android:id="@+id/investmentScoreFragment"
+        android:name="com.paya.presentation.ui.investment.InvestmentScoreFragment"
+        android:label="fragment_investment_score"
+        tools:layout="@layout/fragment_investment_score" />
 
 
 </navigation>
