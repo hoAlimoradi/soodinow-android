@@ -102,7 +102,7 @@ class AppropriateInvestmentFragment : Fragment() {
 			entries.add(
 				PieEntry(
 					(Math.random() * range + range / 5).toFloat(),
-					""
+					parties[i % parties.size]
 				)
 			)
 		}
