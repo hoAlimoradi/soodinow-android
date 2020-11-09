@@ -90,6 +90,8 @@ dependencies {
 	
 	implementation("com.shuhart.stepview:stepview:${Dependencies.Versions.STEPVIEW_VER}")
 	
+	implementation ("com.github.jakob-grabner:Circle-Progress-View:1.4")
+	
 	
 	implementation(project(Dependencies.Modules.DOMAIN))
 }
