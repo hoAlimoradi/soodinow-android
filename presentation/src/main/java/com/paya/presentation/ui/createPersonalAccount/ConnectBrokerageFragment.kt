@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.paya.presentation.R
 import com.paya.presentation.databinding.FragmentConnectBrokerageBinding
@@ -39,6 +40,11 @@ class ConnectBrokerageFragment : Fragment() {
 		setupInvestList()
 		setupSeekBar()
 		changeView()
+		mBinding.addInvestBtn.setOnClickListener {
+			findNavController().navigate(
+				ConnectBrokerageFragmentDirections.navigateToHomeFragment()
+			)
+		}
 		
 	}
 	

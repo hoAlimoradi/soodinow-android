@@ -37,9 +37,7 @@
         <action
             android:id="@+id/navigateToCreateAccountFragment"
             app:destination="@id/createPersonalAccount" />
-        <action
-            android:id="@+id/navigateToConnectBrokerage"
-            app:destination="@id/connectBrokerage" />
+
 
     </fragment>
 
@@ -60,7 +58,7 @@
         android:id="@+id/market"
         android:name="com.paya.presentation.ui.market.MarketFragment"
         android:label="fragment_market"
-        tools:layout="@layout/fragment_market" >
+        tools:layout="@layout/fragment_market">
         <action
             android:id="@+id/navigateToDividendFragment"
             app:destination="@id/dividend" />
@@ -77,7 +75,7 @@
         android:id="@+id/createPersonalAccount"
         android:name="com.paya.presentation.ui.createPersonalAccount.CreateAccountPersonalFragment"
         android:label="fragment_create_account_personal"
-        tools:layout="@layout/fragment_create_account_personal" >
+        tools:layout="@layout/fragment_create_account_personal">
         <action
             android:id="@+id/navigateToFirstInformation"
             app:destination="@id/firstInformation" />
@@ -87,10 +85,52 @@
         android:id="@+id/firstInformation"
         android:name="com.paya.presentation.ui.createPersonalAccount.FirstInformationFragment"
         android:label="fragment_first_information"
-        tools:layout="@layout/fragment_first_information" />
+        tools:layout="@layout/fragment_first_information">
+        <action
+            android:id="@+id/navigateToQuestion"
+            app:destination="@id/questionFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/questionFragment"
+        android:name="com.paya.presentation.ui.question.QuestionFragment"
+        android:label="fragment_question"
+        tools:layout="@layout/fragment_question">
+        <action
+            android:id="@+id/navigateToInvestment"
+            app:destination="@id/investment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/investment"
+        android:name="com.paya.presentation.ui.investment.InvestmentFragment"
+        android:label="fragment_investment"
+        tools:layout="@layout/fragment_investment">
+        <action
+            android:id="@+id/navigateToInvestmentScore"
+            app:destination="@id/investmentScore" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/investmentScore"
+        android:name="com.paya.presentation.ui.investment.InvestmentScoreFragment"
+        android:label="fragment_investment_score"
+        tools:layout="@layout/fragment_investment_score">
+        <action
+            android:id="@+id/navigateToConnectBrokerage"
+            app:destination="@id/connectBrokerage" />
+    </fragment>
+
     <fragment
         android:id="@+id/connectBrokerage"
         android:name="com.paya.presentation.ui.createPersonalAccount.ConnectBrokerageFragment"
         android:label="fragment_connect_brokerage"
-        tools:layout="@layout/fragment_connect_brokerage" />
+        tools:layout="@layout/fragment_connect_brokerage">
+        <action
+            android:id="@+id/navigateToHomeFragment"
+            app:destination="@id/home" />
+    </fragment>
+
 </navigation>
