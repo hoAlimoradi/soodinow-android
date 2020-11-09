@@ -25,9 +25,7 @@ class InvestmentScoreFragment : Fragment() {
 	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
 		super.onViewCreated(view,savedInstanceState)
 		mBinding.submitBtn.setOnClickListener {
-			findNavController().navigate(
-				InvestmentScoreFragmentDirections.navigateToConnectBrokerage()
-			)
+		
 		}
 	}
 }

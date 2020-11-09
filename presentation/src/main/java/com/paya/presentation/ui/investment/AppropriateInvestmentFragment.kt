@@ -14,6 +14,7 @@ import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.utils.MPPointF
 import com.paya.presentation.R
+import com.paya.presentation.databinding.FragmentAppropriateInvestmentBinding
 import kotlinx.android.synthetic.main.fragment_appropriate_investment.*
 import java.util.*
 
@@ -23,6 +24,7 @@ class AppropriateInvestmentFragment : Fragment() {
 		"بذز","کاریز","افق ملت ","آگاه"
 	)
 	
+	private lateinit var mBinding: FragmentAppropriateInvestmentBinding
 	override fun onCreateView(
 		inflater: LayoutInflater,container: ViewGroup?,
 		savedInstanceState: Bundle?
@@ -34,6 +36,12 @@ class AppropriateInvestmentFragment : Fragment() {
 	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
 		super.onViewCreated(view,savedInstanceState)
 		setupPieChart()
+		simulation_btn.setOnClickListener {
+			val pop = InvestmentScoreDialog()
+			val fm = requireActivity().supportFragmentManager
+			pop.show(fm, "name")
+		}
+		
 	}
 	
 	private fun setupPieChart() {

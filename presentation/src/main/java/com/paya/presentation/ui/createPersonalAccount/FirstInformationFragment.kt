@@ -28,7 +28,7 @@ class FirstInformationFragment : Fragment() {
 		super.onViewCreated(view,savedInstanceState)
 		mBinding.insertBtn.setOnClickListener {
 			findNavController().navigate(
-				FirstInformationFragmentDirections.navigateToQuestion()
+				FirstInformationFragmentDirections.navigateToConnectBrokerage()
 			)
 		}
 	}

@@ -36,4 +36,6 @@
     <dimen name="elevation">10dp</dimen>
 
     <dimen name="line_chart_height">120dp</dimen>
+    <dimen name="dialog_w">300dp</dimen>
+    <dimen name="dialog_h">500dp</dimen>
 </resources>

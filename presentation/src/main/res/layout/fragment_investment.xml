@@ -128,6 +128,7 @@
                             app:layout_constraintTop_toBottomOf="@id/description">
 
                             <TextView
+                                android:id="@+id/txtGold"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
@@ -137,6 +138,7 @@
                                 android:textStyle="bold" />
 
                             <at.grabner.circleprogress.CircleProgressView
+                                android:id="@+id/progressGold"
                                 android:layout_width="64dp"
                                 android:layout_height="64dp"
                                 app:cpv_autoTextSize="true"
@@ -169,6 +171,7 @@
                             app:layout_constraintTop_toBottomOf="@id/gold">
 
                             <TextView
+                                android:id="@+id/txtDividend"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
@@ -178,6 +181,7 @@
                                 android:textStyle="bold" />
 
                             <at.grabner.circleprogress.CircleProgressView
+                                android:id="@+id/progressDividend"
                                 android:layout_width="64dp"
                                 android:layout_height="64dp"
                                 app:cpv_autoTextSize="true"
@@ -210,6 +214,7 @@
                             app:layout_constraintTop_toBottomOf="@id/stock">
 
                             <TextView
+                                android:id="@+id/txtIncome"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
@@ -219,6 +224,7 @@
                                 android:textStyle="bold" />
 
                             <at.grabner.circleprogress.CircleProgressView
+                                android:id="@+id/progressBarIncomeّ"
                                 android:layout_width="64dp"
                                 android:layout_height="64dp"
                                 app:cpv_autoTextSize="true"
@@ -267,6 +273,7 @@
                             app:layout_constraintTop_toBottomOf="@id/risk_title" />
 
                         <com.warkiz.widget.IndicatorSeekBar
+                            android:id="@+id/seekBar"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             app:isb_indicator_color="@color/purple"

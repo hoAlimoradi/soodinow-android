@@ -1,28 +1,32 @@
-package com.paya.presentation.ui.createPersonalAccount
+package com.paya.presentation.ui.investment
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.paya.presentation.R
-import com.paya.presentation.databinding.FragmentCreateAccountPersonalBinding
+import com.paya.presentation.databinding.FragmentDialogInvesmentScoreBinding
 import com.paya.presentation.ui.createPersonalAccount.adapter.DayAdapter
 import com.paya.presentation.utils.BindingAdapters
 import com.paya.presentation.utils.shared.Point
 
 
-class CreateAccountPersonalFragment : Fragment() {
-	private lateinit var mBinding: FragmentCreateAccountPersonalBinding
+class InvestmentScoreDialog : DialogFragment() {
+	
+	private lateinit var mBinding: FragmentDialogInvesmentScoreBinding
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		
 	}
 	
+	override fun onResume() {
+		super.onResume()
+		val window: Window? = dialog!!.window
+		window!!.setLayout(resources.getDimension(R.dimen.dialog_w).toInt(),resources.getDimension(R.dimen.dialog_h).toInt())
+		window!!.setGravity(Gravity.CENTER)
+	}
 	override fun onCreateView(
 		inflater: LayoutInflater,container: ViewGroup?,
 		savedInstanceState: Bundle?
@@ -30,7 +34,7 @@ class CreateAccountPersonalFragment : Fragment() {
 		// Inflate the layout for this fragment
 		mBinding = DataBindingUtil.inflate(
 			inflater,
-			R.layout.fragment_create_account_personal,
+			R.layout.fragment_dialog_invesment_score,
 			container,
 			false
 		)
@@ -40,11 +44,6 @@ class CreateAccountPersonalFragment : Fragment() {
 	
 	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
 		super.onViewCreated(view,savedInstanceState)
-		mBinding.createAccountBtn.setOnClickListener {
-			findNavController().navigate(
-				CreateAccountPersonalFragmentDirections.navigateToQuestion()
-			)
-		}
 		setupTagsRecyclerView()
 		val points = mutableListOf<Point>()
 		for (i in 0 until 10) {
