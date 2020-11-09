@@ -43,7 +43,16 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.5" />
 
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/bottom_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.9" />
+
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/logo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_logo_soodinow"
@@ -54,9 +63,12 @@
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/pager"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginBottom="@dimen/margin_medium"
-            app:layout_constraintTop_toTopOf="@id/guideline_top_slider" />
+            app:layout_constraintTop_toBottomOf="@id/logo"
+            android:layout_marginTop="@dimen/margin_medium"
+            app:layout_constraintBottom_toTopOf="@id/bottom_guideline"
+            />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_left_arrow"
@@ -86,7 +98,8 @@
             android:padding="@dimen/margin_very_small"
             android:text="@string/register"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/guideline_vertical_half" />
+            app:layout_constraintEnd_toStartOf="@id/guideline_vertical_half"
+            app:layout_constraintTop_toBottomOf="@id/bottom_guideline"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/login"
@@ -97,7 +110,8 @@
             android:padding="@dimen/margin_very_small"
             android:text="@string/login"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/guideline_vertical_half" />
+            app:layout_constraintStart_toEndOf="@id/guideline_vertical_half"
+            app:layout_constraintTop_toBottomOf="@id/bottom_guideline"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
