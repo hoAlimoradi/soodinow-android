@@ -5,7 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.PieData
@@ -15,13 +20,19 @@ import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.utils.MPPointF
 import com.paya.presentation.R
 import com.paya.presentation.databinding.FragmentAppropriateInvestmentBinding
+import com.paya.presentation.ui.home.adapter.MarketAdapter
+import com.paya.presentation.ui.investment.adapter.ChartLabelAdapter
+import com.paya.presentation.ui.investment.adapter.ChartLabelModel
 import kotlinx.android.synthetic.main.fragment_appropriate_investment.*
 import java.util.*
 
 class AppropriateInvestmentFragment : Fragment() {
 	
-	private val parties = arrayOf(
-		"بذز","کاریز","افق ملت ","آگاه"
+	private val chartLabels = listOf(
+		ChartLabelModel("بذر", "#008C23"),
+		ChartLabelModel("کاریز", "#A9CFA6"),
+		ChartLabelModel("افق ملت ", "#035058"),
+		ChartLabelModel("آگاه", "#62B366")
 	)
 	
 	private lateinit var mBinding: FragmentAppropriateInvestmentBinding
@@ -30,44 +41,59 @@ class AppropriateInvestmentFragment : Fragment() {
 		savedInstanceState: Bundle?
 	): View? {
 		// Inflate the layout for this fragment
-		return inflater.inflate(R.layout.fragment_appropriate_investment,container,false)
+		mBinding = DataBindingUtil.inflate(
+			inflater,
+			R.layout.fragment_appropriate_investment,
+			container,
+			false
+		)
+		return mBinding.root
 	}
 	
 	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
 		super.onViewCreated(view,savedInstanceState)
 		setupPieChart()
+		setupChartLabelRecyclerView()
 		simulation_btn.setOnClickListener {
 			val pop = InvestmentScoreDialog()
 			val fm = requireActivity().supportFragmentManager
-			pop.show(fm, "name")
+			pop.show(fm,"name")
 		}
 		
 	}
 	
+	private fun setupChartLabelRecyclerView() {
+		val layoutManager = GridLayoutManager(requireContext(), 2)
+		layoutManager.reverseLayout = true
+		val adapter = ChartLabelAdapter(chartLabels)
+		mBinding.chartLabelRecycler.layoutManager = layoutManager
+		mBinding.chartLabelRecycler.adapter = adapter
+	}
+	
 	private fun setupPieChart() {
 		chart.setUsePercentValues(true)
-		chart.getDescription().setEnabled(false)
-		chart.setExtraOffsets(5f,10f,5f,5f)
+		chart.description.isEnabled = false
+		chart.setExtraOffsets(5f,5f,5f,5f)
 		
-		chart.setDragDecelerationFrictionCoef(0.95f)
+		chart.dragDecelerationFrictionCoef = 0.95f
 		
 		
-		chart.setDrawHoleEnabled(true)
+		chart.isDrawHoleEnabled = true
 		chart.setHoleColor(Color.WHITE)
 		
 		chart.setTransparentCircleColor(Color.WHITE)
 		chart.setTransparentCircleAlpha(110)
 		
-		chart.setHoleRadius(58f)
-		chart.setTransparentCircleRadius(61f)
+		chart.holeRadius = 58f
+		chart.transparentCircleRadius = 61f
 		
 		chart.setDrawCenterText(true)
 		
-		chart.setRotationAngle(0f)
+		chart.rotationAngle = 0f
 		// enable rotation of the chart by touch
 		// enable rotation of the chart by touch
-		chart.setRotationEnabled(true)
-		chart.setHighlightPerTapEnabled(true)
+		chart.isRotationEnabled = true
+		chart.isHighlightPerTapEnabled = true
 		
 		// chart.setUnit(" €");
 		// chart.setDrawUnitsInChart(true);
@@ -84,17 +110,7 @@ class AppropriateInvestmentFragment : Fragment() {
 		chart.animateY(1400,Easing.EaseInOutQuad)
 		// chart.spin(2000, 0, 360);
 		
-		// chart.spin(2000, 0, 360);
-		val l: Legend = chart.getLegend()
-		l.verticalAlignment = Legend.LegendVerticalAlignment.TOP
-		l.horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
-		l.orientation = Legend.LegendOrientation.HORIZONTAL
-		l.setDrawInside(false)
-		l.xEntrySpace = 7f
-		l.yEntrySpace = 0f
-		l.yOffset = 0f
-		
-		// entry label styling
+		chart.legend.isEnabled = false
 		
 		// entry label styling
 		chart.setEntryLabelColor(Color.WHITE)
@@ -106,11 +122,12 @@ class AppropriateInvestmentFragment : Fragment() {
 		
 		// NOTE: The order of the entries when being added to the entries array determines their position around the center of
 		// the chart.
+		val parties = chartLabels.map { it.labelName }.toTypedArray()
 		for (i in parties.indices) {
 			entries.add(
 				PieEntry(
 					(Math.random() * range + range / 5).toFloat(),
-					parties[i % parties.size]
+					""
 				)
 			)
 		}
@@ -122,10 +139,11 @@ class AppropriateInvestmentFragment : Fragment() {
 		
 		// add a lot of colors
 		val colors = ArrayList<Int>()
-		colors.add(Color.parseColor("#008C23"))
-		colors.add(Color.parseColor("#A9CFA6"))
-		colors.add(Color.parseColor("#035058"))
-		colors.add(Color.parseColor("#62B366"))
+		
+		val labelColors = chartLabels.map { it.labelColor }.toTypedArray()
+		for (colorString in labelColors){
+			colors.add(Color.parseColor(colorString))
+		}
 		dataSet.colors = colors
 		//dataSet.setSelectionShift(0f);
 		val data = PieData(dataSet)

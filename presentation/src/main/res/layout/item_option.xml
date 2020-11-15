@@ -18,7 +18,7 @@
         android:layout_marginTop="@dimen/margin_4_dp"
         android:id="@+id/option_title_txt"
         tools:text="اصلا درآمدم به پس انداز نمیرسه"
-        android:textSize="@dimen/text_size_small"
+        android:textSize="@dimen/text_size_very_small"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/option_select"

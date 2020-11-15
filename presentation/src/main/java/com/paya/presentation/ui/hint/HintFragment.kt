@@ -77,6 +77,9 @@ class HintFragment : Fragment() {
 		mBinding.imgRightArrow.setOnClickListener {
 			pager.setCurrentItem(++selectedIndex, true)
 		}
+		
+		mBinding.hintIndicator.setViewPager2(mBinding.pager)
+		
 	}
 	
 	private fun checkSelectedIndex() {
@@ -84,9 +87,9 @@ class HintFragment : Fragment() {
 		mBinding.imgLeftArrow.visibility = View.VISIBLE
 		
 		if (selectedIndex == 0){
-			mBinding.imgLeftArrow.visibility = View.GONE
+			mBinding.imgLeftArrow.visibility = View.INVISIBLE
 		}else if (selectedIndex == adapter.itemCount - 1){
-			mBinding.imgRightArrow.visibility = View.GONE
+			mBinding.imgRightArrow.visibility = View.INVISIBLE
 		}
 	}
 	
