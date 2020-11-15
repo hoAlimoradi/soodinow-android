@@ -38,6 +38,10 @@
             android:id="@+id/navigateToCreateAccountFragment"
             app:destination="@id/createPersonalAccount" />
 
+        <action
+            android:id="@+id/navigateToCreateWithoutRiskAccountFragment"
+            app:destination="@id/createWithoutRiskAccount" />
+
 
     </fragment>
 
@@ -124,6 +128,29 @@
         <action
             android:id="@+id/navigateToHomeFragment"
             app:destination="@id/home" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/createWithoutRiskAccount"
+        android:name="com.paya.presentation.ui.createPersonalAccount.CreateAccountWithoutRiskFragment"
+        android:label="without_account_risk"
+        tools:layout="@layout/fragment_create_account_without_risk">
+        <action android:id="@+id/navigationToCalculateProfitCapital"
+            app:destination="@+id/calculateProfileCapital"/>
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/calculateProfileCapital"
+        android:name="com.paya.presentation.ui.investment.CalculateProfitCapitalFragment"
+        android:label="fragment_calculate_profit_capital"
+        tools:layout="@layout/fragment_calculate_profit_capital">
+
+        <action
+            android:id="@+id/navigateToFirstInformation"
+            app:destination="@id/firstInformation" />
+
     </fragment>
 
 </navigation>

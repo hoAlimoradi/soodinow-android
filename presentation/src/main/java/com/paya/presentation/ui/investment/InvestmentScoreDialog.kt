@@ -1,15 +1,15 @@
 package com.paya.presentation.ui.investment
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.paya.presentation.R
 import com.paya.presentation.databinding.FragmentDialogInvesmentScoreBinding
-import com.paya.presentation.ui.createPersonalAccount.adapter.DayAdapter
 import com.paya.presentation.utils.BindingAdapters
+import com.paya.presentation.utils.Utils
 import com.paya.presentation.utils.shared.Point
 
 
@@ -23,9 +23,8 @@ class InvestmentScoreDialog : DialogFragment() {
 	
 	override fun onResume() {
 		super.onResume()
-		val window: Window? = dialog!!.window
-		window!!.setLayout(resources.getDimension(R.dimen.dialog_w).toInt(),resources.getDimension(R.dimen.dialog_h).toInt())
-		window!!.setGravity(Gravity.CENTER)
+		dialog?.window?.let { Utils.setSizeDialog(requireActivity(),it) }
+		
 	}
 	override fun onCreateView(
 		inflater: LayoutInflater,container: ViewGroup?,
@@ -44,7 +43,9 @@ class InvestmentScoreDialog : DialogFragment() {
 	
 	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
 		super.onViewCreated(view,savedInstanceState)
-		setupTagsRecyclerView()
+		mBinding.toolbar.closeBtn.setOnClickListener {
+			dismissAllowingStateLoss()
+		}
 		val points = mutableListOf<Point>()
 		for (i in 0 until 10) {
 			val value = (Math.random() * 100).toFloat()
@@ -53,10 +54,4 @@ class InvestmentScoreDialog : DialogFragment() {
 		BindingAdapters.setLineChartData(mBinding.chart,points)
 	}
 	
-	private fun setupTagsRecyclerView() {
-		val layoutManager = LinearLayoutManager(context,RecyclerView.HORIZONTAL,true)
-		val adapter = DayAdapter()
-		mBinding.dayRecycler.layoutManager = layoutManager
-		mBinding.dayRecycler.adapter = adapter
-	}
 }

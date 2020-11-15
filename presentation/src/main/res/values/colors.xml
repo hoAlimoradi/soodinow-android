@@ -5,6 +5,7 @@
     <color name="colorAccent">#03DAC5</color>
     
     <color name="blue_gray">#72898F</color>
+    <color name="blue_gray_1">#486273</color>
     <color name="blue_light">#989A9B</color>
     <color name="light_gray">#f5f5f5</color>
     <color name="light">#EEEEEE</color>
@@ -29,5 +30,7 @@
     <color name="line_color">#DEDEDE</color>
     <color name="light_purple">#5D4E63</color>
     <color name="dark_purple">#7D4181</color>
+    <color name="pink">#FC5581</color>
+    <color name="cyan">#23D7DC</color>
     <color name="yellow">#FFE76D</color>
 </resources>

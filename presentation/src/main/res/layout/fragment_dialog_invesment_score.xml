@@ -10,6 +10,7 @@
         android:layout_height="match_parent"
         android:layout_margin="@dimen/margin_small">
 
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -78,17 +79,25 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.5" />
 
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/toolbar_dialog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:titleDialog="@{@string/invest_simulation}" />
+
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iconChartCreateAccount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_4_dp"
-                android:layout_marginTop="3dp"
-                android:src="@drawable/ic_create_account"
-                android:tint="@color/green"
+                android:layout_marginTop="@dimen/margin_very_small"
+                android:src="@drawable/ic_path"
                 app:layout_constraintEnd_toStartOf="@id/end_guideline"
-                app:layout_constraintTop_toBottomOf="@id/top_guideline" />
+                app:layout_constraintTop_toBottomOf="@id/toolbar"
+                android:baselineAlignBottom="true" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txt_title_chart_create"
@@ -99,7 +108,9 @@
                 android:textSize="@dimen/text_size_11sp"
                 app:layout_constraintEnd_toStartOf="@id/iconChartCreateAccount"
                 app:layout_constraintStart_toEndOf="@+id/start_guideline"
-                app:layout_constraintTop_toBottomOf="@id/top_guideline" />
+                android:layout_marginEnd="@dimen/margin_very_small"
+                app:layout_constraintTop_toBottomOf="@id/toolbar"
+                app:layout_constraintBaseline_toBaselineOf="@id/iconChartCreateAccount"/>
 
             <LinearLayout
                 android:id="@+id/chartBaseDataLayout"
@@ -108,7 +119,8 @@
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/inner_top_guideline">
+                android:layout_marginTop="@dimen/margin_small"
+                app:layout_constraintTop_toBottomOf="@+id/txt_title_chart_create">
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardChartPrice"
@@ -186,22 +198,13 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginTop="@dimen/margin_small"
-                app:layout_constraintBottom_toTopOf="@id/dayRecycler"
-                app:layout_constraintEnd_toStartOf="@id/end_guideline"
-                app:layout_constraintStart_toEndOf="@id/start_guideline"
-                app:layout_constraintTop_toBottomOf="@id/chartBaseDataLayout" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/dayRecycler"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="@dimen/margin_medium"
                 app:layout_constraintBottom_toTopOf="@id/checkLayout"
                 app:layout_constraintEnd_toStartOf="@id/end_guideline"
-                app:layout_constraintStart_toEndOf="@+id/start_guideline"
-                tools:itemCount="1"
-                tools:listitem="@layout/item_day" />
+                app:layout_constraintStart_toEndOf="@id/start_guideline"
+                android:layout_marginStart="@dimen/margin_small"
+                android:layout_marginEnd="@dimen/margin_small"
+                app:layout_constraintTop_toBottomOf="@id/chartBaseDataLayout" />
+
 
             <LinearLayout
                 android:id="@+id/checkLayout"
@@ -210,33 +213,42 @@
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:paddingTop="@dimen/margin_medium"
-                app:layout_constraintBottom_toTopOf="@+id/bottom_guideline">
+                app:layout_constraintBottom_toTopOf="@+id/bottom_guideline"
+                android:layout_marginBottom="@dimen/margin_medium">
 
                 <androidx.appcompat.widget.AppCompatCheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_medium"
-                    android:button="@drawable/selector_check_box"
+
+                    android:button="@null"
+                    android:drawableStart="@drawable/selector_check_box"
+                    android:drawablePadding="@dimen/margin_very_small"
                     android:layoutDirection="rtl"
-                    android:text="@string/long_time"
+                    android:text="@string/one_years"
                     android:textSize="@dimen/text_size_11sp" />
 
                 <androidx.appcompat.widget.AppCompatCheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_medium"
-                    android:button="@drawable/selector_check_box"
+
+                    android:button="@null"
+                    android:drawableStart="@drawable/selector_check_box"
+                    android:drawablePadding="@dimen/margin_very_small"
                     android:layoutDirection="rtl"
-                    android:text="@string/weekly"
+                    android:text="@string/six_months"
                     android:textSize="@dimen/text_size_11sp" />
 
                 <androidx.appcompat.widget.AppCompatCheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:button="@drawable/selector_check_box"
                     android:checked="true"
                     android:layoutDirection="rtl"
-                    android:text="@string/daily"
+                    android:button="@null"
+                    android:drawableStart="@drawable/selector_check_box"
+                    android:drawablePadding="@dimen/margin_very_small"
+                    android:text="@string/three_months"
                     android:textSize="@dimen/text_size_11sp" />
 
             </LinearLayout>

@@ -22,8 +22,10 @@ import com.paya.presentation.ui.hint.fragments.CardAccount
 import com.paya.presentation.ui.home.adapter.MarketAdapter
 import com.paya.presentation.utils.ViewPagerUtil
 import com.paya.presentation.utils.observe
+import com.paya.presentation.utils.setAllOnClickListener
 import com.paya.presentation.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_home.*
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -61,6 +63,12 @@ class HomeFragment : Fragment() {
 				HomeFragmentDirections.navigateToCreateAccountFragment()
 			)
 		}
+		
+		personalGroup.setAllOnClickListener {
+			findNavController().navigate(
+				HomeFragmentDirections.navigateToCreateWithoutRiskAccountFragment()
+			)
+		}
 		mBinding.marketRecycleView.layoutManager = manager
 		mBinding.marketRecycleView.adapter = adapter
 		val dividerItemDecoration = DividerItemDecoration(context,DividerItemDecoration.HORIZONTAL)
@@ -72,6 +80,23 @@ class HomeFragment : Fragment() {
 		mBinding.marketRecycleView.addItemDecoration(dividerItemDecoration)
 		
 		setupViewPager()
+		
+		// TODO: 11/11/2020 AD delete
+		mBinding.createAccountImage.setOnClickListener {
+			mBinding.createAccountGroup.visibility = View.GONE
+			mBinding.viewPagerGroup.visibility = View.GONE
+			accountCard.visibility = View.VISIBLE
+		}
+		accountCard.setOnClickListener {
+			mBinding.createAccountGroup.visibility = View.GONE
+			mBinding.viewPagerGroup.visibility = View.VISIBLE
+			accountCard.visibility = View.GONE
+		}
+		pager.setOnClickListener {
+			mBinding.createAccountGroup.visibility = View.VISIBLE
+			mBinding.viewPagerGroup.visibility = View.GONE
+			accountCard.visibility = View.GONE
+		}
 	}
 	
 	private fun checkGetAccountStatus(accountResource: Resource<AccountCardRepoModel>){

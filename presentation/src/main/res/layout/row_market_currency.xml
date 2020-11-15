@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="110dp"
     android:layout_height="match_parent"
-    android:background="@drawable/row_market_round_corner_card_layout">
+    android:background="@drawable/row_market_round_corner_card_layout"
+    android:minHeight="100dp"
+    android:maxHeight="150dp">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/top_guideline"
@@ -64,6 +66,7 @@
         app:layout_constraintBottom_toTopOf="@id/center_horizontal_guideline"/>
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/centerLine"
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:layerType="software"
@@ -75,11 +78,13 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/marketPercentageIcon"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_very_small"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/margin_4_dp"
         android:src="@drawable/ic_market_downturn"
         app:layout_constraintBottom_toTopOf="@id/marketPercentageValue"
-        app:layout_constraintEnd_toStartOf="@id/end_guideline" />
+        app:layout_constraintEnd_toStartOf="@id/end_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/centerLine"
+        android:scaleType="fitEnd"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/marketPercentageValue"
@@ -109,16 +114,18 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/marketWealthCurrencyValue"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginEnd="@dimen/margin_very_small"
-        android:layout_marginBottom="@dimen/margin_very_small"
+        android:layout_marginBottom="@dimen/margin_4_dp"
         android:elevation="2dp"
-        android:gravity="center_vertical"
+        android:gravity="bottom"
         android:text="@string/toman"
         android:textColor="@color/gray"
         android:textSize="@dimen/text_size_11sp"
         app:layout_constraintBottom_toTopOf="@id/marketWealthValue"
-        app:layout_constraintStart_toEndOf="@+id/start_guideline" />
+        app:layout_constraintStart_toEndOf="@+id/start_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/centerLine"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
