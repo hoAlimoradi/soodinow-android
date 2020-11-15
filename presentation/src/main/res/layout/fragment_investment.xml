@@ -59,21 +59,78 @@
             app:layout_constraintEnd_toStartOf="@id/end_guideline"
             app:layout_constraintTop_toBottomOf="@+id/top_guideline" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/image"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/title_img"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
-            android:adjustViewBounds="true"
-            android:src="@drawable/image_invesment_score"
-            app:layout_constraintTop_toBottomOf="@id/titleToolbar" />
+            app:layout_constraintTop_toBottomOf="@id/titleToolbar">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:adjustViewBounds="true"
+                android:src="@drawable/image_investment_score"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_start_progress"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_top_progress"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.25"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_bottom_progress"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.75"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <at.grabner.circleprogress.CircleProgressView
+                app:layout_constraintTop_toTopOf="@id/guideline_top_progress"
+                app:layout_constraintStart_toStartOf="@id/guideline_start_progress"
+                app:layout_constraintBottom_toBottomOf="@id/guideline_bottom_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                app:cpv_barColor="@color/yellow"
+                app:cpv_barWidth="@dimen/dp_12"
+                app:cpv_innerContourSize="1dp"
+                app:cpv_maxValue="100"
+                app:cpv_autoTextSize="true"
+                app:cpv_outerContourSize="0dp"
+                app:cpv_innerContourColor="@color/white"
+                app:cpv_rimColor="@color/dark_gray_2"
+                app:cpv_blockCount="50"
+                app:cpv_blockScale="0.5"
+                app:cpv_autoTextColor="false"
+                app:cpv_rimWidth="@dimen/dp_12"
+                app:cpv_seekMode="false"
+                app:cpv_showUnit="true"
+                app:cpv_textColor="@color/white"
+                app:cpv_textScale="1"
+                app:cpv_unit="%"
+                app:cpv_unitColor="@color/white"
+                app:cpv_unitPosition="right_top"
+                app:cpv_unitScale="1"
+                app:cpv_value="65" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:clipToPadding="true"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/image">
+            app:layout_constraintTop_toBottomOf="@id/title_img">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -150,7 +207,7 @@
                                 app:cpv_outerContourSize="0dp"
                                 app:cpv_rimColor="@color/light_gray"
                                 app:cpv_rimWidth="5dp"
-                                app:cpv_seekMode="true"
+                                app:cpv_seekMode="false"
                                 app:cpv_showUnit="true"
                                 app:cpv_textColor="@color/black"
                                 app:cpv_textScale="1"
@@ -195,7 +252,7 @@
                                 app:cpv_outerContourSize="0dp"
                                 app:cpv_rimColor="@color/light_gray"
                                 app:cpv_rimWidth="5dp"
-                                app:cpv_seekMode="true"
+                                app:cpv_seekMode="false"
                                 app:cpv_showUnit="true"
                                 app:cpv_textColor="@color/black"
                                 app:cpv_textScale="1"
@@ -240,7 +297,7 @@
                                 app:cpv_outerContourSize="0dp"
                                 app:cpv_rimColor="@color/light_gray"
                                 app:cpv_rimWidth="5dp"
-                                app:cpv_seekMode="true"
+                                app:cpv_seekMode="false"
                                 app:cpv_showUnit="true"
                                 app:cpv_textColor="@color/black"
                                 app:cpv_textScale="1"
@@ -253,10 +310,10 @@
                         </LinearLayout>
 
                         <androidx.cardview.widget.CardView
-                            app:cardCornerRadius="@dimen/very_small_radius"
                             android:id="@+id/chart_view"
                             android:layout_width="@dimen/margin_medium"
                             android:layout_height="0dp"
+                            app:cardCornerRadius="@dimen/very_small_radius"
                             app:layout_constraintBottom_toBottomOf="@id/income"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="@id/gold">
@@ -266,23 +323,23 @@
                                 android:layout_height="match_parent">
 
                                 <View
-                                    android:background="@color/dark_gray_3"
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent"/>
+                                    android:layout_height="match_parent"
+                                    android:background="@color/dark_gray_3" />
 
                                 <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
                                     android:background="@color/dark_gray"
                                     app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintHeight_percent="0.6"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"/>
+                                    app:layout_constraintHeight_percent="0.6" />
 
                                 <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
                                     android:background="@color/dark_gray_2"
                                     app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintHeight_percent="0.15"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"/>
+                                    app:layout_constraintHeight_percent="0.15" />
 
                             </androidx.constraintlayout.widget.ConstraintLayout>
 

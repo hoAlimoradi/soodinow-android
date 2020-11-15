@@ -10,6 +10,7 @@
     <dimen name="height_medium">36dp</dimen>
     <dimen name="margin_medium">24dp</dimen>
     <dimen name="margin_32">32dp</dimen>
+    <dimen name="dp_12">12dp</dimen>
     <dimen name="margin_large">64dp</dimen>
     <dimen name="margin_small">16dp</dimen>
     <dimen name="margin_line_chart">15dp</dimen>
