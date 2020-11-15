@@ -49,7 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.9" />
+            app:layout_constraintGuide_percent="0.85" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/logo"
@@ -70,6 +70,22 @@
             app:layout_constraintBottom_toTopOf="@id/bottom_guideline"
             />
 
+        <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+            android:id="@+id/hintIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:dotsColor="@color/purple_gray"
+            app:dotsCornerRadius="8dp"
+            app:dotsSize="8dp"
+            app:dotsSpacing="2dp"
+            app:dotsWidthFactor="2.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/img_left_arrow"
+            app:layout_constraintBottom_toBottomOf="@id/img_left_arrow"
+            app:progressMode="false"
+            app:selectedDotColor="@color/green" />
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_left_arrow"
             android:layout_width="wrap_content"
@@ -88,27 +104,32 @@
             app:layout_constraintTop_toBottomOf="@id/pager"
             app:srcCompat="@drawable/ic_right_arrow" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_small"
-            android:layout_marginBottom="@dimen/margin_very_small"
+            android:layout_margin="@dimen/margin_very_small"
             android:gravity="center_horizontal"
-            android:padding="@dimen/margin_very_small"
             android:text="@string/register"
+            app:layout_constraintVertical_bias="1"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:backgroundTint="@color/green"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/guideline_vertical_half"
             app:layout_constraintTop_toBottomOf="@id/bottom_guideline"/>
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_small"
+            android:layout_margin="@dimen/margin_very_small"
+            app:layout_constraintVertical_bias="1"
             android:gravity="center_horizontal"
-            android:padding="@dimen/margin_very_small"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/green"
             android:text="@string/login"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/guideline_vertical_half"
             app:layout_constraintTop_toBottomOf="@id/bottom_guideline"/>
