@@ -27,18 +27,20 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="سرمایه گذاری مناسب شما"
             android:textColor="@color/purple"
             android:textSize="@dimen/text_size_small"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guideline_half"
+            app:layout_constraintHorizontal_bias="1"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/subtitle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_small"
             android:text="میزان دارایی در سبد سرمایه گذاری"
@@ -46,6 +48,8 @@
             android:textSize="@dimen/text_size_small"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guideline_half"
+            app:layout_constraintHorizontal_bias="1"
             app:layout_constraintTop_toBottomOf="@id/title" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -59,6 +63,15 @@
             app:layout_constraintStart_toStartOf="@id/guideline_half"
             app:layout_constraintTop_toBottomOf="@id/subtitle" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:foregroundGravity="right"
+            android:id="@+id/chart_label_recycler"
+            app:layout_constraintTop_toBottomOf="@id/description"
+            app:layout_constraintStart_toStartOf="@id/guideline_half"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/chart"
             android:layout_width="0dp"
@@ -66,7 +79,7 @@
             android:layout_marginTop="@dimen/margin_very_small"
             app:layout_constraintEnd_toEndOf="@id/guideline_half"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/subtitle" />
+            app:layout_constraintTop_toBottomOf="@id/title" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/simulation_btn"
@@ -80,7 +93,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/chart" />
+            app:layout_constraintTop_toBottomOf="@id/chart_label_recycler" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
