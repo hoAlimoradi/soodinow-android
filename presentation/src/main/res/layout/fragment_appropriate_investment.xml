@@ -73,12 +73,16 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:foregroundGravity="right"
+            tools:listitem="@layout/item_chart_label"
+            tools:itemCount="4"
             android:id="@+id/chart_label_recycler"
             app:layout_constraintTop_toBottomOf="@id/description"
             app:layout_constraintStart_toStartOf="@id/guideline_half"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            app:layout_constraintVertical_bias="0.1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_height="0dp"/>
 
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/chart"
@@ -88,20 +92,6 @@
             app:layout_constraintEnd_toEndOf="@id/guideline_half"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/title" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/simulation_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_medium"
-            android:backgroundTint="@color/purple"
-            android:paddingHorizontal="@dimen/margin_medium"
-            android:text="شبیه سازی این سرمایه گذازی"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/chart_label_recycler" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
