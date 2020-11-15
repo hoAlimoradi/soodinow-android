@@ -234,7 +234,7 @@
 
                     <RadioButton
                         android:id="@+id/radioButtonWithdrawal"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_small"
                         android:button="@null"
@@ -246,26 +246,28 @@
                         android:textSize="@dimen/text_size_11sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/txt_select"
-                        tools:ignore="RtlSymmetry"/>
+                        tools:ignore="RtlSymmetry" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txt_withdrawal"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_very_small"
+                        android:layout_marginEnd="@dimen/margin_small"
                         android:text="لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه است. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده"
                         android:textColor="@color/gray"
                         android:textSize="@dimen/text_size_10sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginEnd="@dimen/margin_small"
                         app:layout_constraintTop_toBottomOf="@id/radioButtonWithdrawal" />
+
                     <RadioButton
                         android:id="@+id/radioButtonDepositAmount"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_small"
                         android:button="@null"
+                        android:checked="true"
                         android:drawableStart="@drawable/selector_check_radio"
                         android:drawablePadding="@dimen/margin_very_small"
                         android:layoutDirection="rtl"
@@ -273,21 +275,20 @@
                         android:textColor="@color/purple_gray"
                         android:textSize="@dimen/text_size_11sp"
                         app:layout_constraintEnd_toEndOf="parent"
-                        android:checked="true"
                         app:layout_constraintTop_toBottomOf="@id/txt_withdrawal"
-                        tools:ignore="RtlSymmetry"/>
+                        tools:ignore="RtlSymmetry" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txt_deposit_amount"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_very_small"
+                        android:layout_marginEnd="@dimen/margin_small"
                         android:text="لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه است. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده"
                         android:textColor="@color/gray"
                         android:textSize="@dimen/text_size_10sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginEnd="@dimen/margin_small"
                         app:layout_constraintTop_toBottomOf="@id/radioButtonDepositAmount" />
 
 
@@ -308,10 +309,10 @@
                         android:text="26,000,000"
                         android:textColor="#000000"
                         android:textSize="@dimen/text_size_small"
+                        app:layout_constraintEnd_toStartOf="@+id/txt_title_amount"
                         app:layout_constraintHorizontal_weight="7"
-                        app:layout_constraintTop_toBottomOf="@id/txt_deposit_amount"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/txt_title_amount"/>
+                        app:layout_constraintTop_toBottomOf="@id/txt_deposit_amount" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tomanInputAmount"
@@ -330,15 +331,15 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_very_small"
+                        android:layout_marginEnd="@dimen/margin_small"
                         android:text="مبلغ واریزی هر ماهه"
                         android:textColor="@color/gray"
                         android:textSize="@dimen/text_size_10sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginEnd="@dimen/margin_small"
                         app:layout_constraintBottom_toBottomOf="@id/inputAmount"
-                        app:layout_constraintTop_toTopOf="@id/inputAmount"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_weight="3"
                         app:layout_constraintStart_toEndOf="@+id/inputAmount"
-                        app:layout_constraintHorizontal_weight="3"/>
+                        app:layout_constraintTop_toTopOf="@id/inputAmount" />
 
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -349,31 +350,31 @@
                         android:layout_marginEnd="@dimen/margin_small"
                         android:background="@drawable/round_corner_layout"
                         android:drawableStart="@drawable/ic_arrow_bottom"
-                        android:paddingStart="@dimen/margin_small"
                         android:gravity="center"
+                        android:paddingStart="@dimen/margin_small"
                         android:text="13"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_11sp"
-                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/inputAmount"
                         app:layout_constraintEnd_toStartOf="@+id/txt_title_month"
-                        app:layout_constraintHorizontal_weight="4"/>
+                        app:layout_constraintHorizontal_weight="4"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/inputAmount" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txt_title_month"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_very_small"
+                        android:layout_marginEnd="@dimen/margin_small"
                         android:text="چه روزی از هر ماهه"
                         android:textColor="@color/gray"
                         android:textSize="@dimen/text_size_10sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginEnd="@dimen/margin_small"
                         app:layout_constraintBottom_toBottomOf="@id/txtSelectMonth"
-                        app:layout_constraintTop_toTopOf="@id/txtSelectMonth"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_weight="6"
                         app:layout_constraintStart_toEndOf="@+id/txtSelectMonth"
-                        app:layout_constraintHorizontal_weight="6"/>
+                        app:layout_constraintTop_toTopOf="@id/txtSelectMonth" />
 
                     <androidx.fragment.app.FragmentContainerView
                         android:id="@+id/profit_method_price"
