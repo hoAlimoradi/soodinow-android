@@ -29,7 +29,7 @@ import java.util.*
 class AppropriateInvestmentFragment : Fragment() {
 	
 	private val chartLabels = listOf(
-		ChartLabelModel("بذز", "#008C23"),
+		ChartLabelModel("بذر", "#008C23"),
 		ChartLabelModel("کاریز", "#A9CFA6"),
 		ChartLabelModel("افق ملت ", "#035058"),
 		ChartLabelModel("آگاه", "#62B366")
@@ -127,7 +127,7 @@ class AppropriateInvestmentFragment : Fragment() {
 			entries.add(
 				PieEntry(
 					(Math.random() * range + range / 5).toFloat(),
-					parties[i % parties.size]
+					""
 				)
 			)
 		}
