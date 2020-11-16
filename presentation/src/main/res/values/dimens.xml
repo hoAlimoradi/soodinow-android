@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <dimen name="very_small_radius">8dp</dimen>
+    <dimen name="very_small_radius">3dp</dimen>
     <dimen name="small_radius">12dp</dimen>
     <dimen name="radius">48dp</dimen>
     <dimen name="radius_chart">48dp</dimen>

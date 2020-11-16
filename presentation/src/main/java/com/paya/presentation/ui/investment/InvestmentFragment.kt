@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -47,20 +48,35 @@ class InvestmentFragment : Fragment() {
 			}
 			
 			override fun onStopTrackingTouch(seekBar: IndicatorSeekBar?) {
-				val min = 0
-				val max = 100
-				var gold = (Random().nextInt(max - min + 1) + min).toFloat()
-				progressGold.setValue(gold)
-				txtGold.text = "" + gold.toInt() +" درصد صندوق طلا"
-				var divdend = (Random().nextInt(max - min + 1) + min).toFloat()
-				progressDividend.setValue(divdend)
-				txtDividend.text = "" + divdend.toInt() +" درصد صندوق سهام"
-				var income = (Random().nextInt(max - min + 1) + min).toFloat()
+				val max = 70
+				val income = (Random().nextInt(max)).toFloat()
 				`progressBarIncomeّ`.setValue(income)
 				txtIncome.text = "" + income.toInt() +" درصد صندوق درامد ثابت"
+				
+				val divdend = Random().nextInt((100 - income).toInt()).toFloat()
+				progressDividend.setValue(divdend)
+				txtDividend.text = "" + divdend.toInt() +" درصد صندوق سهام"
+				val gold = 100 - divdend - income
+				progressGold.setValue(gold)
+				txtGold.text = "" + gold.toInt() +" درصد صندوق طلا"
+				
+				val stockLp = stock_chart_view.layoutParams as ConstraintLayout.LayoutParams
+				stockLp.matchConstraintPercentHeight = ((divdend + income)  / 100)
+				stock_chart_view.layoutParams = stockLp
+				
+				val incomeLp = income_chart_view.layoutParams as ConstraintLayout.LayoutParams
+				incomeLp.matchConstraintPercentHeight = income / 100
+				income_chart_view.layoutParams = incomeLp
 			}
 			
 		}
+		
+		simulation_btn.setOnClickListener {
+			val pop = InvestmentScoreDialog()
+			val fm = requireActivity().supportFragmentManager
+			pop.show(fm,"name")
+		}
+		
 	}
 	
 }
