@@ -227,7 +227,7 @@
                         android:background="@drawable/round_corner_layout"
                         android:enabled="false"
                         android:gravity="center"
-                        android:inputType="text"
+                        android:inputType="number"
                         android:lines="1"
                         android:maxLines="1"
                         android:paddingStart="@dimen/margin_very_small"

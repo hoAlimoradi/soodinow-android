@@ -1,6 +1,8 @@
 package com.paya.presentation.ui.createPersonalAccount
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,8 +15,9 @@ import com.paya.presentation.R
 import com.paya.presentation.databinding.FragmentConnectBrokerageBinding
 import com.paya.presentation.ui.createPersonalAccount.adapter.InvestAdapter
 import com.paya.presentation.utils.BindingAdapters
+import com.paya.presentation.utils.PriceTextWatcher
+import com.paya.presentation.utils.Utils
 import com.paya.presentation.viewmodel.ConnectBrokerageViewModel
-import com.paya.presentation.viewmodel.LoginViewModel
 import com.warkiz.widget.IndicatorSeekBar
 import com.warkiz.widget.OnSeekChangeListener
 import com.warkiz.widget.SeekParams
@@ -45,20 +48,15 @@ class ConnectBrokerageFragment : Fragment() {
 				ConnectBrokerageFragmentDirections.navigateToHomeFragment()
 			)
 		}
+		initInputPrice()
 		
 	}
 	
-	private fun setupInvestList() {
-		val manager = LinearLayoutManager(requireContext())
-		mBinding.investRecyclerView.layoutManager = manager
-		mBinding.investRecyclerView.adapter = InvestAdapter()
-	}
-	
 	private fun setupSeekBar() {
-		mBinding.seekBarPrice.onSeekChangeListener = object: OnSeekChangeListener {
+		mBinding.seekBarPrice.onSeekChangeListener = object : OnSeekChangeListener {
 			override fun onSeeking(seekParams: SeekParams?) {
 				if (seekParams != null) {
-					mBinding.inputPrice.setText(BindingAdapters.separatorAmount(seekParams.progress))
+					mBinding.inputPrice.setText(seekParams.progress.toString())
 				}
 			}
 			
@@ -70,8 +68,33 @@ class ConnectBrokerageFragment : Fragment() {
 			
 			}
 			
-		};
+		}
 	}
+	
+	private fun initInputPrice() {
+		mBinding.inputPrice.addTextChangedListener(
+			PriceTextWatcher(mBinding.inputPrice,
+				object : PriceTextWatcher.OnChange {
+					override fun change(s: CharSequence?) {
+					
+					}
+					
+					override fun afterChange(s: Editable?) {
+						if (TextUtils.isEmpty(s))
+							return
+						mBinding.seekBarPrice.setProgress(Utils.convertToFloatAmount(s.toString()))
+					}
+					
+				})
+		)
+	}
+	
+	private fun setupInvestList() {
+		val manager = LinearLayoutManager(requireContext())
+		mBinding.investRecyclerView.layoutManager = manager
+		mBinding.investRecyclerView.adapter = InvestAdapter()
+	}
+	
 	
 	private fun changeView() {
 		BindingAdapters.changeBgRoundPurple(mBinding.yesHaveAccountBtn,true)
