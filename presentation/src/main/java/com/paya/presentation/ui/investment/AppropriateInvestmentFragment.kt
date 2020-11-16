@@ -54,12 +54,6 @@ class AppropriateInvestmentFragment : Fragment() {
 		super.onViewCreated(view,savedInstanceState)
 		setupPieChart()
 		setupChartLabelRecyclerView()
-		simulation_btn.setOnClickListener {
-			val pop = InvestmentScoreDialog()
-			val fm = requireActivity().supportFragmentManager
-			pop.show(fm,"name")
-		}
-		
 	}
 	
 	private fun setupChartLabelRecyclerView() {

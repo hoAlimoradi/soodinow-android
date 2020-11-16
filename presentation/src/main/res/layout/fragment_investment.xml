@@ -328,6 +328,7 @@
                                     android:background="@color/dark_gray_3" />
 
                                 <View
+                                    android:id="@+id/stock_chart_view"
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
                                     android:background="@color/dark_gray"
@@ -335,6 +336,7 @@
                                     app:layout_constraintHeight_percent="0.6" />
 
                                 <View
+                                    android:id="@+id/income_chart_view"
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
                                     android:background="@color/dark_gray_2"
@@ -422,6 +424,18 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_medium"
                             app:layout_constraintTop_toBottomOf="@id/submit_btn" />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/simulation_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_medium"
+                            android:backgroundTint="@color/purple"
+                            android:paddingHorizontal="@dimen/margin_medium"
+                            android:text="شبیه سازی این سرمایه گذازی"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:layout_gravity="center_horizontal"/>
 
                         <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/submit_btn"

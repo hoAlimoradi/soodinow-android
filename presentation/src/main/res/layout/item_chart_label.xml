@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="@dimen/margin_4_dp"
@@ -13,8 +13,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:background="@drawable/round_small_radius_corner_layout"
         tools:backgroundTint="@color/red"
-        android:layout_width="@dimen/margin_medium"
-        android:layout_height="@dimen/margin_medium"/>
+        android:layout_width="@dimen/dp_12"
+        android:layout_height="@dimen/dp_12"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/label_txt"
@@ -22,7 +22,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/label_color"
         android:textStyle="bold"
-        android:textSize="@dimen/text_size_normal"
+        android:textSize="@dimen/text_size_8sp"
         android:layout_marginEnd="@dimen/margin_very_small"
         tools:text="افق ملت"
         android:layout_width="wrap_content"
