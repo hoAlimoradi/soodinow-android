@@ -417,7 +417,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <fragment
+                        <androidx.fragment.app.FragmentContainerView
                             android:id="@+id/appropriate_investment_fragment"
                             android:name="com.paya.presentation.ui.investment.AppropriateInvestmentFragment"
                             android:layout_width="match_parent"
