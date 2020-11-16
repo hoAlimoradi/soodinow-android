@@ -99,5 +99,6 @@
     <string name="increase_credit_price">این مبلغ از اعتبار کارگزاری کسر شود</string>
     <string name="this_charge_price">این مبلغ را اکنون شارژ می کنم</string>
     <string name="questionnaire">پرسشنامه</string>
+    <string name="create_low_risk_account">افتتاح حساب سرمایه گذاری بدون ریسک </string>
 
 </resources>
