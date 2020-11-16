@@ -55,26 +55,6 @@ object BindingAdapters {
 		}
 	}
 	
-	@JvmStatic
-	fun separatorAmount(amount: Int): String? {
-		return try {
-			val value = amount.toString().replace(",","")
-			val reverseValue = StringBuilder(value).reverse()
-				.toString()
-			val finalValue = StringBuilder()
-			for (i in 1..reverseValue.length) {
-				val `val` = reverseValue[i - 1]
-				finalValue.append(`val`)
-				if (i % 3 == 0 && i != reverseValue.length && i > 0) {
-					finalValue.append(",")
-				}
-			}
-			StringBuilder(finalValue).reverse().toString()
-		} catch (e: Exception) {
-			""
-		}
-	}
-	
 	
 	@JvmStatic
 	@BindingAdapter("visibleGone")

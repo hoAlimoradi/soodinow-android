@@ -19,7 +19,7 @@ abstract class BaseAdapter<VH : RecyclerView.ViewHolder?,Item> : RecyclerView.Ad
 	}
 	
 	override fun onBindViewHolder(holder: VH,position: Int) {
-		var item: Item = data[position]
+		val item: Item = data[position]
 		holder!!.itemView.setOnClickListener {
 			if (onClickListenerItem != null) {
 				onClickListenerItem!!.onClickListenerItem(this@BaseAdapter,item,position)
@@ -55,6 +55,6 @@ abstract class BaseAdapter<VH : RecyclerView.ViewHolder?,Item> : RecyclerView.Ad
 	}
 	
 	interface OnClickListenerItem<Item> {
-		fun onClickListenerItem(adapter: BaseAdapter<*,*>,item: Item,position: Int)
+		fun onClickListenerItem(adapter: BaseAdapter<*,Item>,item: Item,position: Int)
 	}
 }

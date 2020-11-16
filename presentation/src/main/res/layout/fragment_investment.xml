@@ -76,42 +76,39 @@
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline_start_progress"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.15"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.15" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline_top_progress"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.25"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.25" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline_bottom_progress"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.75"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.75" />
 
             <at.grabner.circleprogress.CircleProgressView
-                app:layout_constraintTop_toTopOf="@id/guideline_top_progress"
-                app:layout_constraintStart_toStartOf="@id/guideline_start_progress"
-                app:layout_constraintBottom_toBottomOf="@id/guideline_bottom_progress"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
+                app:cpv_autoTextColor="false"
+                app:cpv_autoTextSize="true"
                 app:cpv_barColor="@color/yellow"
                 app:cpv_barWidth="@dimen/dp_12"
-                app:cpv_innerContourSize="1dp"
-                app:cpv_maxValue="100"
-                app:cpv_autoTextSize="true"
-                app:cpv_outerContourSize="0dp"
-                app:cpv_innerContourColor="@color/white"
-                app:cpv_rimColor="@color/dark_gray_2"
                 app:cpv_blockCount="50"
                 app:cpv_blockScale="0.5"
-                app:cpv_autoTextColor="false"
+                app:cpv_innerContourColor="@color/white"
+                app:cpv_innerContourSize="1dp"
+                app:cpv_maxValue="100"
+                app:cpv_outerContourSize="0dp"
+                app:cpv_rimColor="@color/dark_gray_2"
                 app:cpv_rimWidth="@dimen/dp_12"
                 app:cpv_seekMode="false"
                 app:cpv_showUnit="true"
@@ -121,7 +118,10 @@
                 app:cpv_unitColor="@color/white"
                 app:cpv_unitPosition="right_top"
                 app:cpv_unitScale="1"
-                app:cpv_value="65" />
+                app:cpv_value="65"
+                app:layout_constraintBottom_toBottomOf="@id/guideline_bottom_progress"
+                app:layout_constraintStart_toStartOf="@id/guideline_start_progress"
+                app:layout_constraintTop_toTopOf="@id/guideline_top_progress" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -417,7 +417,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <fragment
+                        <androidx.fragment.app.FragmentContainerView
                             android:id="@+id/appropriate_investment_fragment"
                             android:name="com.paya.presentation.ui.investment.AppropriateInvestmentFragment"
                             android:layout_width="match_parent"
