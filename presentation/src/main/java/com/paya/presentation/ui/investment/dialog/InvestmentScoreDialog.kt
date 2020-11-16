@@ -1,4 +1,4 @@
-package com.paya.presentation.ui.investment
+package com.paya.presentation.ui.investment.dialog
 
 import android.os.Bundle
 import android.view.LayoutInflater

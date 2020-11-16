@@ -14,6 +14,7 @@
             layout="@layout/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
             app:label="@{@string/calculate_profit_capital_toolbar_title}" />
 
         <androidx.cardview.widget.CardView
@@ -97,7 +98,7 @@
                         android:background="@drawable/round_corner_layout"
                         android:enabled="false"
                         android:gravity="center"
-                        android:inputType="text"
+                        android:inputType="number"
                         android:lines="1"
                         android:maxLines="1"
                         android:paddingStart="@dimen/margin_very_small"
@@ -312,7 +313,8 @@
                         app:layout_constraintEnd_toStartOf="@+id/txt_title_amount"
                         app:layout_constraintHorizontal_weight="7"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txt_deposit_amount" />
+                        app:layout_constraintTop_toBottomOf="@id/txt_deposit_amount"
+                        android:layout_marginEnd="@dimen/margin_very_small"/>
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tomanInputAmount"
@@ -330,7 +332,6 @@
                         android:id="@+id/txt_title_amount"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_very_small"
                         android:layout_marginEnd="@dimen/margin_small"
                         android:text="مبلغ واریزی هر ماهه"
                         android:textColor="@color/gray"
@@ -343,7 +344,7 @@
 
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/txtSelectMonth"
+                        android:id="@+id/txtSelectDay"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/height_medium"
                         android:layout_marginTop="@dimen/margin_small"
@@ -354,8 +355,7 @@
                         android:paddingStart="@dimen/margin_small"
                         android:text="13"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_11sp"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        android:textSize="@dimen/text_size_small"
                         app:layout_constraintEnd_toStartOf="@+id/txt_title_month"
                         app:layout_constraintHorizontal_weight="4"
                         app:layout_constraintStart_toStartOf="parent"
@@ -365,16 +365,15 @@
                         android:id="@+id/txt_title_month"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_very_small"
                         android:layout_marginEnd="@dimen/margin_small"
                         android:text="چه روزی از هر ماهه"
                         android:textColor="@color/gray"
                         android:textSize="@dimen/text_size_10sp"
-                        app:layout_constraintBottom_toBottomOf="@id/txtSelectMonth"
+                        app:layout_constraintBottom_toBottomOf="@id/txtSelectDay"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_weight="6"
-                        app:layout_constraintStart_toEndOf="@+id/txtSelectMonth"
-                        app:layout_constraintTop_toTopOf="@id/txtSelectMonth" />
+                        app:layout_constraintStart_toEndOf="@+id/txtSelectDay"
+                        app:layout_constraintTop_toTopOf="@id/txtSelectDay" />
 
                     <androidx.fragment.app.FragmentContainerView
                         android:id="@+id/profit_method_price"
@@ -382,7 +381,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_small"
-                        app:layout_constraintTop_toBottomOf="@id/txtSelectMonth" />
+                        app:layout_constraintTop_toBottomOf="@id/txtSelectDay" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

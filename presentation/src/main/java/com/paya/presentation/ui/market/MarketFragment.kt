@@ -56,7 +56,7 @@ class MarketFragment : Fragment() {
 		val adapter = StockAdapter()
 		adapter.addFakeItem("")
 		adapter.addOnClickListenerItem(object : BaseAdapter.OnClickListenerItem<String> {
-			override fun onClickListenerItem(adapter: BaseAdapter<*,*>,item: String,position: Int) {
+			override fun onClickListenerItem(adapter: BaseAdapter<*,String>,item: String,position: Int) {
 				findNavController().navigate(
 					MarketFragmentDirections.navigateToDividendFragment()
 				)
