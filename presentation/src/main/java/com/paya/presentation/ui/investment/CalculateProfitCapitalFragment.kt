@@ -6,9 +6,11 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.paya.presentation.R
-import com.paya.presentation.ui.investment.adapter.SelectedDayInMonth
+import com.paya.presentation.databinding.FragmentCalculateProfitCapitalBinding
 import com.paya.presentation.ui.investment.dialog.SelectedDayInMonthDialogFragment
 import com.paya.presentation.utils.PriceTextWatcher
 import com.paya.presentation.utils.Utils
@@ -18,17 +20,20 @@ import com.warkiz.widget.SeekParams
 import kotlinx.android.synthetic.main.fragment_calculate_profit_capital.*
 
 class CalculateProfitCapitalFragment : Fragment() {
-
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-	}
-	
+	private lateinit var mBinding: FragmentCalculateProfitCapitalBinding
 	override fun onCreateView(
 		inflater: LayoutInflater,container: ViewGroup?,
 		savedInstanceState: Bundle?
 	): View? {
 		// Inflate the layout for this fragment
-		return inflater.inflate(R.layout.fragment_calculate_profit_capital,container,false)
+		mBinding = DataBindingUtil.inflate(
+			inflater,
+			R.layout.fragment_calculate_profit_capital,
+			container,
+			false
+		)
+		
+		return mBinding.root
 	}
 	
 	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
@@ -38,11 +43,17 @@ class CalculateProfitCapitalFragment : Fragment() {
 		setupInputAmount()
 		setupSelectedDay()
 		setupRadioButton()
+		mBinding.submitBtn.setOnClickListener {
+			findNavController().navigate(
+				CalculateProfitCapitalFragmentDirections.navigateToFirstInformation()
+			)
+		}
 	}
 	
 	private fun setupSelectedDay() {
 		txtSelectDay.setOnClickListener {
-			val pop = SelectedDayInMonthDialogFragment(object : SelectedDayInMonthDialogFragment.OnSelectedDay{
+			val pop = SelectedDayInMonthDialogFragment(object :
+				SelectedDayInMonthDialogFragment.OnSelectedDay {
 				override fun day(day: String) {
 					txtSelectDay.text = day
 				}
@@ -54,10 +65,10 @@ class CalculateProfitCapitalFragment : Fragment() {
 	}
 	
 	private fun setupRadioButton() {
-		radioButtonDepositAmount.setOnCheckedChangeListener { compoundButton, b ->
+		radioButtonDepositAmount.setOnCheckedChangeListener { compoundButton,b ->
 			radioButtonWithdrawal.isChecked = !b
 		}
-		radioButtonWithdrawal.setOnCheckedChangeListener { compoundButton, b ->
+		radioButtonWithdrawal.setOnCheckedChangeListener { compoundButton,b ->
 			radioButtonDepositAmount.isChecked = !b
 		}
 	}
@@ -81,7 +92,6 @@ class CalculateProfitCapitalFragment : Fragment() {
 			
 		}
 	}
-	
 	
 	
 	private fun initInputPrice() {
