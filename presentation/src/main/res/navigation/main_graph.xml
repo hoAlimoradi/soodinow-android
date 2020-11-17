@@ -133,12 +133,21 @@
 
     <fragment
         android:id="@+id/createWithoutRiskAccount"
-        android:name="com.paya.presentation.ui.createPersonalAccount.CreateAccountWithoutRiskFragment"
+        android:name="com.paya.presentation.ui.createLowRiskAccount.CreateAccountWithoutRiskFragment"
         android:label="without_account_risk"
         tools:layout="@layout/fragment_create_account_without_risk">
+        <action android:id="@+id/navigationToCreateLowRiskAccount"
+            app:destination="@+id/createLowRiskAccount"/>
+    </fragment>
+
+    <fragment android:id="@+id/createLowRiskAccount"
+        android:name="com.paya.presentation.ui.createLowRiskAccount.CreateLowRiskAccountFragment"
+        tools:layout="@layout/fragment_create_low_risk_account"
+        android:label="fragment_create_low_risk_account">
         <action android:id="@+id/navigationToCalculateProfitCapital"
             app:destination="@+id/calculateProfileCapital"/>
     </fragment>
+
 
 
     <fragment

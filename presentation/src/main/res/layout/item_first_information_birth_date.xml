@@ -60,7 +60,14 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.7" />
 
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/dateGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="years,months,day" />
+
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/years"
             android:layout_width="0dp"
             android:layout_height="@dimen/height_medium"
             android:layout_marginStart="@dimen/margin_small"
@@ -79,6 +86,7 @@
 
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/months"
             android:layout_width="0dp"
             android:layout_height="@dimen/height_medium"
             android:layout_marginTop="@dimen/margin_very_small"
@@ -94,6 +102,7 @@
             app:layout_constraintEnd_toStartOf="@id/birth_second"/>
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/day"
             android:layout_width="0dp"
             android:layout_height="@dimen/height_medium"
             android:layout_marginStart="@dimen/margin_small"

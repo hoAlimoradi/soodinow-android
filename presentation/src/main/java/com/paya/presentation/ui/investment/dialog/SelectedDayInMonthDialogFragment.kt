@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.paya.presentation.R
+import com.paya.presentation.databinding.FragmentMonthDialogBinding
 import com.paya.presentation.ui.investment.adapter.SelectedDayInMonth
 import com.paya.presentation.utils.BaseAdapter
 import com.paya.presentation.utils.Utils
@@ -21,11 +23,20 @@ class SelectedDayInMonthDialogFragment(
 	var onSelectedDay: OnSelectedDay
 ) : DialogFragment() {
 	
+	private lateinit var mBinding : FragmentMonthDialogBinding
 	override fun onCreateView(
 		inflater: LayoutInflater,container: ViewGroup?,
 		savedInstanceState: Bundle?
 	): View? {
 		// Inflate the layout for this fragment
+		mBinding = DataBindingUtil.inflate(
+			inflater,
+			R.layout.fragment_month_dialog,
+			container,
+			false
+		)
+		
+		return mBinding.root
 		return inflater.inflate(R.layout.fragment_month_dialog,container,false)
 	}
 	override fun onResume() {

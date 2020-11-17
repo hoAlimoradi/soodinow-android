@@ -383,6 +383,16 @@
                         android:layout_marginTop="@dimen/margin_small"
                         app:layout_constraintTop_toBottomOf="@id/txtSelectDay" />
 
+                    <Button
+                        android:id="@+id/submit_btn"
+                        style="@style/SubmitButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/height_medium"
+                        android:layout_marginTop="@dimen/margin_medium"
+                        android:layout_marginBottom="@dimen/margin_medium"
+                        android:text="@string/submit_and_continue"
+                        app:layout_constraintTop_toBottomOf="@id/profit_method_price" />
+
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </ScrollView>

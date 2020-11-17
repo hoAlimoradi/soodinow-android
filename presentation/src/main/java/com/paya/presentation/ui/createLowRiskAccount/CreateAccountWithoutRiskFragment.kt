@@ -1,4 +1,4 @@
-package com.paya.presentation.ui.createPersonalAccount
+package com.paya.presentation.ui.createLowRiskAccount
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.paya.presentation.R
-import com.paya.presentation.databinding.FragmentCreateAccountPersonalBinding
 import com.paya.presentation.databinding.FragmentCreateAccountWithoutRiskBinding
 import com.paya.presentation.ui.createPersonalAccount.adapter.DayAdapter
 import com.paya.presentation.utils.BindingAdapters
@@ -43,7 +42,7 @@ class CreateAccountWithoutRiskFragment : Fragment() {
 		super.onViewCreated(view,savedInstanceState)
 		mBinding.createAccountBtn.setOnClickListener {
 			findNavController().navigate(
-				CreateAccountWithoutRiskFragmentDirections.navigationToCalculateProfitCapital()
+				CreateAccountWithoutRiskFragmentDirections.navigationToCreateLowRiskAccount()
 			)
 		}
 		setupTagsRecyclerView()

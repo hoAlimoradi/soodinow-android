@@ -63,8 +63,7 @@
             android:id="@+id/title_img"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
-            android:layout_marginBottom="@dimen/margin_small"
+            android:layout_margin="@dimen/margin_small"
             app:layout_constraintTop_toBottomOf="@id/titleToolbar">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -102,7 +101,7 @@
                     android:layout_marginBottom="@dimen/margin_medium"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/margin_medium"
+                    android:layout_marginHorizontal="@dimen/margin_small"
                     app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="@dimen/radius_card">
 
@@ -235,28 +234,40 @@
 
                         <RadioGroup
                             android:id="@+id/myRadioGroup"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_very_small"
                             android:checkedButton="@+id/low_risk"
                             app:layout_constraintEnd_toEndOf="parent"
+                            android:gravity="end"
                             app:layout_constraintTop_toBottomOf="@id/risk_description">
 
                             <RadioButton
                                 android:id="@+id/low_risk"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="سرمایه کذاری کم ریسک" />
+                                android:text="سرمایه کذاری کم ریسک"
+                                android:button="@null"
+                                android:drawableStart="@drawable/selector_check_radio"
+                                android:drawablePadding="@dimen/margin_very_small"
+                                android:layoutDirection="rtl"
+                                />
 
                             <RadioButton
                                 android:id="@+id/high_risk"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="سرمایه گذاری پرریسک" />
+                                android:text="سرمایه گذاری پرریسک"
+                                android:button="@null"
+                                android:drawableStart="@drawable/selector_check_radio"
+                                android:drawablePadding="@dimen/margin_very_small"
+                                android:layoutDirection="rtl"
+                                android:layout_marginTop="@dimen/margin_very_small"/>
 
                         </RadioGroup>
 
                         <Button
+                            android:id="@+id/submit_btn"
                             style="@style/SubmitButton"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
