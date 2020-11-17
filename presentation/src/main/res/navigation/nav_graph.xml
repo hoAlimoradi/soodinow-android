@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/mainFragment">
+    app:startDestination="@id/createLowRiskAccountFragment">
 
     <fragment
         android:id="@+id/hintFragment"
@@ -113,6 +113,10 @@
         android:name="com.paya.presentation.ui.investment.InvestmentFragment"
         android:label="fragment_investment"
         tools:layout="@layout/fragment_investment" />
+    <fragment
+        android:id="@+id/createLowRiskAccountFragment"
+        android:name="com.paya.presentation.ui.createLowRiskAccount.CreateLowRiskAccountFragment"
+        android:label="CreateLowRiskAccountFragment" />
 
 
 </navigation>

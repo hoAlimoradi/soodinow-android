@@ -118,4 +118,6 @@
     <string name="select_item">می توانید یکی از حالات زیر را انتخاب نمایید</string>
     <string name="create_low_risk_account">افتتاح حساب سرمایه گذاری بدون ریسک </string>
 
+    <string name="based_on_last_year">طبق سال گذشته</string>
+    <string name="highest_profit">طبق سال گذشته</string>
 </resources>

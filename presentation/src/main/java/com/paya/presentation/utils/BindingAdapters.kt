@@ -12,6 +12,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.databinding.BindingAdapter
+import at.grabner.circleprogress.CircleProgressView
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
@@ -30,6 +31,13 @@ object BindingAdapters {
 		value ?: return
 		val percentText = "% $value"
 		textView.text = percentText
+	}
+	
+	@JvmStatic
+	@BindingAdapter("progressValue")
+	fun setProgressValue(circleProgressView: CircleProgressView, value: Float?){
+		value ?: return
+		circleProgressView.setValue(value)
 	}
 	
 	@JvmStatic
