@@ -3,6 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <import type="com.paya.presentation.viewmodel.CreateLowRiskAccountViewModel"/>
+        <import type="com.paya.domain.tools.Resource" />
+
+        <variable
+            name="viewModel"
+            type="CreateLowRiskAccountViewModel" />
+        <variable
+            name="low_profit"
+            type="Float" />
+        <variable
+            name="high_profit"
+            type="Float" />
+        <variable
+            name="last_year_profit"
+            type="Float" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -59,29 +77,6 @@
             app:layout_constraintEnd_toStartOf="@id/end_guideline"
             app:layout_constraintTop_toBottomOf="@+id/top_guideline" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/title_img"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_small"
-            app:layout_constraintTop_toBottomOf="@id/titleToolbar">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/image"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/image_accout_without_risk"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
-
 
         <ScrollView
             android:layout_width="match_parent"
@@ -89,7 +84,7 @@
             android:layout_marginTop="@dimen/margin_medium"
             android:clipToPadding="true"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title_img">
+            app:layout_constraintTop_toBottomOf="@id/titleToolbar">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -134,103 +129,35 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/title" />
 
-
-                        <androidx.constraintlayout.widget.Guideline
-                            android:id="@+id/guideline_1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            app:layout_constraintGuide_percent="0.3333" />
-
-                        <androidx.constraintlayout.widget.Guideline
-                            android:id="@+id/guideline_2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            app:layout_constraintGuide_percent="0.6666" />
-
-                        <FrameLayout
-                            android:id="@+id/profit_layout_1"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/margin_medium"
-                            app:layout_constraintEnd_toStartOf="@id/guideline_1"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/description">
-
-                            <include
-                                layout="@layout/item_profit_estimate"
-                                app:color="@{@color/green_3}"
-                                app:progressValue="@{20f}"
-                                app:subtitle="@{@string/low_profit}"/>
-
-                        </FrameLayout>
-
-                        <FrameLayout
-                            android:id="@+id/profit_layout_2"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/margin_medium"
-                            app:layout_constraintEnd_toStartOf="@id/guideline_2"
-                            app:layout_constraintStart_toStartOf="@id/guideline_1"
-                            app:layout_constraintTop_toBottomOf="@id/description">
-
-                            <include
-                                layout="@layout/item_profit_estimate"
-                                app:color="@{@color/green_2}"
-                                app:progressValue="@{55f}"
-                                app:subtitle="@{@string/based_on_last_year}"/>
-
-                        </FrameLayout>
-
-                        <FrameLayout
-                            android:id="@+id/profit_layout_3"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/margin_medium"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="@id/guideline_2"
-                            app:layout_constraintTop_toBottomOf="@id/description">
-
-                            <include layout="@layout/item_profit_estimate"
-                                app:color="@{@color/green}"
-                                app:progressValue="@{85f}"
-                                app:subtitle="@{@string/highest_profit}"/>
-
-                        </FrameLayout>
-
-                        <fragment
-                            android:id="@+id/appropriate_investment_fragment"
-                            android:name="com.paya.presentation.ui.investment.AppropriateInvestmentFragment"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/margin_medium"
-                            app:layout_constraintTop_toBottomOf="@id/profit_layout_3" />
-
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/risk_title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/margin_medium"
-                            android:text="تغییر دستی درصد ریسک"
-                            android:textColor="@color/purple"
-                            android:textSize="@dimen/text_size_small"
-                            android:textStyle="bold"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="1.0"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/appropriate_investment_fragment" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/risk_description"
+                            android:id="@+id/txt_how_much_invest"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_small"
-                            android:text="@string/fake_content"
+                            android:text="@string/how_much_invest"
+                            android:textColor="@color/purple"
                             android:textSize="@dimen/text_size_11sp"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/risk_title" />
+                            app:layout_constraintTop_toBottomOf="@+id/description" />
+
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/inputPrice"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/height_medium"
+                            android:layout_marginTop="@dimen/margin_medium"
+                            android:background="@drawable/round_corner_layout"
+                            android:gravity="center"
+                            android:inputType="number"
+                            android:lines="1"
+                            android:maxLines="1"
+                            android:paddingStart="@dimen/margin_very_small"
+                            android:paddingEnd="@dimen/margin_very_small"
+                            android:singleLine="true"
+                            android:text="26,000,000"
+                            android:textColor="#000000"
+                            android:textSize="@dimen/text_size_small"
+                            app:layout_constraintTop_toBottomOf="@id/txt_how_much_invest" />
 
                         <RadioGroup
                             android:id="@+id/myRadioGroup"
@@ -240,7 +167,7 @@
                             android:checkedButton="@+id/low_risk"
                             app:layout_constraintEnd_toEndOf="parent"
                             android:gravity="end"
-                            app:layout_constraintTop_toBottomOf="@id/risk_description">
+                            app:layout_constraintTop_toBottomOf="@id/inputPrice">
 
                             <RadioButton
                                 android:id="@+id/low_risk"
@@ -266,6 +193,78 @@
 
                         </RadioGroup>
 
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent="0.3333" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent="0.6666" />
+
+                        <FrameLayout
+                            android:id="@+id/profit_layout_1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_medium"
+                            app:layout_constraintEnd_toStartOf="@id/guideline_1"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/myRadioGroup">
+
+                            <include
+                                layout="@layout/item_profit_estimate"
+                                app:color="@{@color/green_3}"
+                                app:progressValue="@{low_profit}"
+                                app:subtitle="@{@string/low_profit}"/>
+
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:id="@+id/profit_layout_2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_medium"
+                            app:layout_constraintEnd_toStartOf="@id/guideline_2"
+                            app:layout_constraintStart_toStartOf="@id/guideline_1"
+                            app:layout_constraintTop_toBottomOf="@id/myRadioGroup">
+
+                            <include
+                                layout="@layout/item_profit_estimate"
+                                app:color="@{@color/green_2}"
+                                app:progressValue="@{last_year_profit}"
+                                app:subtitle="@{@string/based_on_last_year}"/>
+
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:id="@+id/profit_layout_3"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_medium"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@id/guideline_2"
+                            app:layout_constraintTop_toBottomOf="@id/myRadioGroup">
+
+                            <include layout="@layout/item_profit_estimate"
+                                app:color="@{@color/green}"
+                                app:progressValue="@{high_profit}"
+                                app:subtitle="@{@string/highest_profit}"/>
+
+                        </FrameLayout>
+
+                        <fragment
+                            android:id="@+id/appropriate_investment_fragment"
+                            android:name="com.paya.presentation.ui.investment.AppropriateInvestmentFragment"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_medium"
+                            app:layout_constraintTop_toBottomOf="@id/profit_layout_3" />
+
                         <Button
                             android:id="@+id/submit_btn"
                             style="@style/SubmitButton"
@@ -273,7 +272,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/margin_medium"
                             android:text="@string/submit_and_continue"
-                            app:layout_constraintTop_toBottomOf="@id/myRadioGroup"
+                            app:layout_constraintTop_toBottomOf="@id/appropriate_investment_fragment"
                             android:layout_marginTop="@dimen/margin_medium" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -284,6 +283,14 @@
             </LinearLayout>
 
         </ScrollView>
+
+        <include
+            layout="@layout/loading_state"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            app:resource="@{(Resource) viewModel.lowRiskResource}"
+            tools:visibility="gone" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

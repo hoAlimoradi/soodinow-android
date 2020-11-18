@@ -156,6 +156,14 @@
         android:label="fragment_calculate_profit_capital"
         tools:layout="@layout/fragment_calculate_profit_capital">
 
+        <argument
+            android:name="Percents"
+            app:argType="com.paya.domain.models.repo.PercentRepoModel"
+            app:nullable="true" />
+        <argument
+            android:name="SelectedPrice"
+            app:argType="long" />
+
         <action
             android:id="@+id/navigateToFirstInformation"
             app:destination="@id/firstInformation" />
