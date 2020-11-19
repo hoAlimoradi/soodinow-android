@@ -4,6 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     >
 
+    <data>
+
+        <import type="com.paya.domain.tools.Resource" />
+
+        <import type="com.paya.presentation.viewmodel.FirstInformationViewModel" />
+
+        <variable
+            name="viewModel"
+            type="FirstInformationViewModel" />
+    </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -42,7 +52,8 @@
                         app:hintLabel="@{@string/hint_name_family}"
                         app:label="@{@string/name_family}"
                         app:subLabel="@{@string/sub_title_name_family}"
-                        app:layout_constraintTop_toTopOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:content="@{viewModel.name}"/>
 
                     <View
                         android:id="@+id/nameLine"
@@ -57,11 +68,12 @@
                         android:id="@+id/national"
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent"
-                        layout="@layout/item_first_information"
+                        layout="@layout/item_first_information_number"
                         app:hintLabel="@{@string/hint_national_code}"
                         app:label="@{@string/national_code}"
                         app:subLabel="@{@string/sub_title_national_code}"
-                        app:layout_constraintTop_toBottomOf="@id/nameLine"/>
+                        app:layout_constraintTop_toBottomOf="@id/nameLine"
+                        app:content="@{viewModel.nationalCode}"/>
 
                     <View
                         android:id="@+id/nationalLine"
@@ -75,11 +87,12 @@
                         android:id="@+id/shaba"
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent"
-                        layout="@layout/item_first_information"
+                        layout="@layout/item_first_information_number"
                         app:hintLabel="@{@string/hint_shaba_number}"
                         app:label="@{@string/shaba_number}"
                         app:subLabel="@{@string/sub_title_shaba_number}"
-                        app:layout_constraintTop_toBottomOf="@id/nationalLine"/>
+                        app:layout_constraintTop_toBottomOf="@id/nationalLine"
+                        app:content="@{viewModel.bban}"/>
 
                     <View
                         android:id="@+id/shabaLine"
@@ -99,25 +112,6 @@
                         app:subLabel="@{@string/sub_title_date_of_birth}"
                         app:layout_constraintTop_toBottomOf="@id/shabaLine"/>
 
-                    <View
-                        android:id="@+id/birthDateLine"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_margin="@dimen/margin_small"
-                        android:background="@drawable/ic_line_green"
-                        app:layout_constraintTop_toBottomOf="@id/birthDate"/>
-
-
-
-                    <include
-                        android:id="@+id/password"
-                        android:layout_height="wrap_content"
-                        android:layout_width="match_parent"
-                        layout="@layout/item_first_information"
-                        app:hintLabel="@{@string/hint_password}"
-                        app:label="@{@string/password}"
-                        app:subLabel="@{@string/sub_title_password}"
-                        app:layout_constraintTop_toBottomOf="@id/birthDateLine"/>
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -136,7 +130,16 @@
             android:textSize="@dimen/text_size_small"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            android:onClick="@{() -> viewModel.updateProfile()}"/>
+
+        <include
+            layout="@layout/loading_state"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            app:resource="@{(Resource) viewModel.status}"
+            tools:visibility="gone" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

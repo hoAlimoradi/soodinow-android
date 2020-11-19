@@ -1,8 +1,6 @@
 package com.paya.domain.repository
 
-import com.paya.domain.models.repo.UserInfoRepoModel
-import com.paya.domain.models.repo.RegisterRepoModel
-import com.paya.domain.models.repo.SetPasswordRepoModel
+import com.paya.domain.models.repo.*
 import com.paya.domain.tools.Resource
 
 interface AuthRepository {
@@ -20,4 +18,6 @@ interface AuthRepository {
 	suspend fun updateIsHintShowed(isHintShowed: Boolean)
 	suspend fun getUserInfo(): Resource<UserInfoRepoModel>
 	suspend fun setPassword(password: String): Resource<SetPasswordRepoModel>
+	suspend fun updateProfile(body: ProfileBodyRepoModel): Resource<ProfileRepoModel>
+	suspend fun getProfile(): Resource<ProfileRepoModel>
 }

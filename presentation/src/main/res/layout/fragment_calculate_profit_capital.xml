@@ -3,6 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.investment.CalculateProfitCapitalFragment">
+<data>
+
+    <import type="com.paya.domain.tools.Resource" />
+
+    <import type="com.paya.presentation.viewmodel.CalculateProfitCapitalViewModel" />
+
+    <variable
+        name="viewModel"
+        type="CalculateProfitCapitalViewModel" />
+</data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -121,11 +131,19 @@
                         app:layout_constraintBottom_toBottomOf="@id/inputPrice"
                         app:layout_constraintStart_toStartOf="@id/inputPrice" />
 
+                    <androidx.constraintlayout.widget.Group
+                        android:id="@+id/seekBarGroup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        app:constraint_referenced_ids="seekBarPrice,startViewSeekBar,endViewSeekBar,minSeekBar,tomanStartSeekBar,maxSeekBar,tomanEndSeekBar" />
+
                     <com.warkiz.widget.IndicatorSeekBar
                         android:id="@+id/seekBarPrice"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_medium"
+
+                        android:visibility="gone"
                         android:elevation="2dp"
                         android:layoutDirection="rtl"
                         app:isb_indicator_text_size="18sp"
@@ -381,6 +399,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_small"
+                        android:visibility="gone"
                         app:layout_constraintTop_toBottomOf="@id/txtSelectDay" />
 
                     <Button
@@ -390,6 +409,7 @@
                         android:layout_height="@dimen/height_medium"
                         android:layout_marginTop="@dimen/margin_medium"
                         android:layout_marginBottom="@dimen/margin_medium"
+                        android:onClick="@{() -> viewModel.getProfile()}"
                         android:text="@string/submit_and_continue"
                         app:layout_constraintTop_toBottomOf="@id/profit_method_price" />
 
@@ -398,5 +418,12 @@
             </ScrollView>
         </androidx.cardview.widget.CardView>
 
+        <include
+            layout="@layout/loading_state"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            app:resource="@{(Resource) viewModel.statusProfile}"
+            tools:visibility="gone" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

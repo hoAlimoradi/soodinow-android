@@ -2,10 +2,8 @@ package com.paya.data.network.remote_api
 
 import com.paya.data.network.apiresponse.ApiResponse
 import com.paya.domain.models.remote.*
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.PATCH
-import retrofit2.http.POST
+import retrofit2.http.*
+
 interface AuthService {
 	
 	@FormUrlEncoded
@@ -33,6 +31,16 @@ interface AuthService {
 		@Field("username") username: String,
 		@Field("password") password: String
 	): ApiResponse<BaseModel<AccessTokenRemoteModel>>
+	
+	
+	@PATCH("auth/profile/update/")
+	suspend fun updateProfile(
+		@Body body: ProfileBodyRemoteModel
+	): ApiResponse<BaseModel<ProfileRemoteModel>>
+	
+	
+	@GET("auth/profile/")
+	suspend fun getProfile(): ApiResponse<BaseModel<ProfileRemoteModel>>
 	
 }
 

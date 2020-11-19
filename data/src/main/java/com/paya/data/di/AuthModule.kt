@@ -6,9 +6,7 @@ import com.paya.data.database.userInfo.UserInfoDbApiImpl
 import com.paya.data.mapper.*
 import com.paya.data.repository.AuthRepositoryImpl
 import com.paya.domain.models.local.UserInfoDbModel
-import com.paya.domain.models.remote.AccessTokenRemoteModel
-import com.paya.domain.models.remote.RegisterRemoteModel
-import com.paya.domain.models.remote.SetPasswordRemoteModel
+import com.paya.domain.models.remote.*
 import com.paya.domain.models.repo.*
 import com.paya.domain.repository.AuthRepository
 import com.paya.domain.tools.UseCase
@@ -53,6 +51,18 @@ abstract class AuthModule {
 			>
 	
 	@Binds
+	abstract fun bindProfileRemoteRepoMapper(mapper: ProfileRemoteRepoMapper): Mapper<
+			ProfileRemoteModel,
+			ProfileRepoModel
+			>
+	
+	@Binds
+	abstract fun bindUpdateProfileRepoRemoteMapper(mapper: ProfileRepoRemoteMapper): Mapper<
+			ProfileBodyRepoModel,
+			ProfileBodyRemoteModel
+			>
+	
+	@Binds
 	abstract fun registerRepo(dev: AuthRepositoryImpl): AuthRepository
 	
 	@Binds
@@ -76,4 +86,12 @@ abstract class AuthModule {
 	@Binds
 	abstract fun bindSetPasswordUseCase(useCase: SetPasswordUseCase):
 			UseCase<String,SetPasswordRepoModel>
+	
+	@Binds
+	abstract fun bindUpdateProfileUseCase(useCase: UpdateProfileUseCase):
+			UseCase<ProfileBodyRepoModel,ProfileRepoModel>
+	
+	@Binds
+	abstract fun bindGetProfileUseCase(useCase: GetProfileUseCase):
+			UseCase<Unit,ProfileRepoModel>
 }

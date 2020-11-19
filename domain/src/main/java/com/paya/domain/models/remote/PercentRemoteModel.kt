@@ -10,5 +10,5 @@ data class PercentRemoteModel(
 
 data class PercentEntity(
 	val percent: Float,
-	val price: Float
+	val price: Long
 )

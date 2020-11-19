@@ -6,21 +6,34 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import com.paya.domain.models.repo.ProfileRepoModel
+import com.paya.domain.tools.Resource
+import com.paya.domain.tools.Status
 import com.paya.presentation.R
 import com.paya.presentation.databinding.FragmentCalculateProfitCapitalBinding
 import com.paya.presentation.ui.investment.dialog.SelectedDayInMonthDialogFragment
 import com.paya.presentation.utils.PriceTextWatcher
 import com.paya.presentation.utils.Utils
+import com.paya.presentation.utils.observe
+import com.paya.presentation.viewmodel.CalculateProfitCapitalViewModel
 import com.warkiz.widget.IndicatorSeekBar
 import com.warkiz.widget.OnSeekChangeListener
 import com.warkiz.widget.SeekParams
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_calculate_profit_capital.*
 
+@AndroidEntryPoint
 class CalculateProfitCapitalFragment : Fragment() {
+	private val mViewModel: CalculateProfitCapitalViewModel by viewModels()
 	private lateinit var mBinding: FragmentCalculateProfitCapitalBinding
+	private lateinit var profitMethodFragment: ProfitMethodFragment
+	val args: CalculateProfitCapitalFragmentArgs by navArgs()
 	override fun onCreateView(
 		inflater: LayoutInflater,container: ViewGroup?,
 		savedInstanceState: Bundle?
@@ -32,7 +45,8 @@ class CalculateProfitCapitalFragment : Fragment() {
 			container,
 			false
 		)
-		
+		mBinding.viewModel = mViewModel
+		mBinding.lifecycleOwner = this
 		return mBinding.root
 	}
 	
@@ -43,10 +57,24 @@ class CalculateProfitCapitalFragment : Fragment() {
 		setupInputAmount()
 		setupSelectedDay()
 		setupRadioButton()
-		mBinding.submitBtn.setOnClickListener {
-			findNavController().navigate(
-				CalculateProfitCapitalFragmentDirections.navigateToFirstInformation()
-			)
+		observe(mViewModel.statusProfile,::checkProfile)
+		profitMethodFragment = childFragmentManager.findFragmentById(R.id.profit_method_invest) as ProfitMethodFragment
+		profitMethodFragment.percent = args.Percents
+		mBinding.inputPrice.setText(Utils.separatorAmount(args.SelectedPrice.toString()))
+		
+	}
+	
+	private fun checkProfile(resource: Resource<ProfileRepoModel>) {
+		if (resource.status == Status.SUCCESS) {
+			if (!resource.data!!.complete) {
+				findNavController().navigate(
+					CalculateProfitCapitalFragmentDirections.navigateToFirstInformation()
+				)
+			}
+		} else if (resource.status == Status.ERROR) {
+			Toast.makeText(
+				requireContext(),resource.message,Toast.LENGTH_SHORT
+			).show()
 		}
 	}
 	
