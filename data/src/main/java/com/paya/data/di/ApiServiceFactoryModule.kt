@@ -35,4 +35,9 @@ class ApiServiceFactoryModule{
 	@Reusable
 	fun questionsService(apiService: ApiServiceFactory) =
 		apiService.create(QuestionService::class.java)
+	
+	@Provides
+	@Reusable
+	fun lowRiskService(apiService: ApiServiceFactory) =
+		apiService.create(LowRiskInvestmentService::class.java)
 }
