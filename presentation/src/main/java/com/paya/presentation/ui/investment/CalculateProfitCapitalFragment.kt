@@ -70,6 +70,10 @@ class CalculateProfitCapitalFragment : Fragment() {
 				findNavController().navigate(
 					CalculateProfitCapitalFragmentDirections.navigateToFirstInformation()
 				)
+			} else {
+				findNavController().navigate(
+					CalculateProfitCapitalFragmentDirections.navigateToHomeFragment()
+				)
 			}
 		} else if (resource.status == Status.ERROR) {
 			Toast.makeText(
