@@ -33,6 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="144dp"
             android:layout_margin="@dimen/margin_small"
+            android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@id/toolbar">
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -251,7 +252,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/profit_method_invest" />
 
-                    <RadioButton
+                    <androidx.appcompat.widget.AppCompatCheckBox
                         android:id="@+id/radioButtonWithdrawal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -280,7 +281,89 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/radioButtonWithdrawal" />
 
-                    <RadioButton
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/inputWithdrawalAmount"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/height_medium"
+                        android:layout_marginTop="@dimen/margin_medium"
+                        android:background="@drawable/round_corner_layout"
+                        android:enabled="false"
+                        android:gravity="center"
+                        android:inputType="text"
+                        android:lines="1"
+                        android:maxLines="1"
+                        android:paddingStart="@dimen/margin_very_small"
+                        android:paddingEnd="@dimen/margin_very_small"
+                        android:singleLine="true"
+                        android:text="26,000,000"
+                        android:textColor="#000000"
+                        android:textSize="@dimen/text_size_small"
+                        app:layout_constraintEnd_toStartOf="@+id/txt_withdrawal_title_amount"
+                        app:layout_constraintHorizontal_weight="7"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txt_withdrawal"
+                        android:layout_marginEnd="@dimen/margin_very_small"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tomanWithdrawalInputAmount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/height_medium"
+                        android:layout_marginStart="@dimen/margin_small"
+                        android:gravity="center"
+                        android:text="@string/toman"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/text_size_10sp"
+                        app:layout_constraintBottom_toBottomOf="@id/inputWithdrawalAmount"
+                        app:layout_constraintStart_toStartOf="@id/inputWithdrawalAmount" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_withdrawal_title_amount"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/margin_small"
+                        android:text="مبلغ برداشتی هر ماهه"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/text_size_10sp"
+                        app:layout_constraintBottom_toBottomOf="@id/inputWithdrawalAmount"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_weight="3"
+                        app:layout_constraintStart_toEndOf="@+id/inputWithdrawalAmount"
+                        app:layout_constraintTop_toTopOf="@id/inputWithdrawalAmount" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txtWithdrawalSelectDay"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/height_medium"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:layout_marginEnd="@dimen/margin_small"
+                        android:background="@drawable/round_corner_layout"
+                        android:drawableStart="@drawable/ic_arrow_bottom"
+                        android:gravity="center"
+                        android:paddingStart="@dimen/margin_small"
+                        android:text="13"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_small"
+                        app:layout_constraintEnd_toStartOf="@+id/txt_withdrawal_title_month"
+                        app:layout_constraintHorizontal_weight="4"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/inputWithdrawalAmount" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_withdrawal_title_month"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/margin_small"
+                        android:text="چه روزی از هر ماهه"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/text_size_10sp"
+                        app:layout_constraintBottom_toBottomOf="@id/txtWithdrawalSelectDay"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_weight="6"
+                        app:layout_constraintStart_toEndOf="@+id/txtWithdrawalSelectDay"
+                        app:layout_constraintTop_toTopOf="@id/txtWithdrawalSelectDay" />
+
+                    <androidx.appcompat.widget.AppCompatCheckBox
                         android:id="@+id/radioButtonDepositAmount"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -294,7 +377,7 @@
                         android:textColor="@color/purple_gray"
                         android:textSize="@dimen/text_size_11sp"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txt_withdrawal"
+                        app:layout_constraintTop_toBottomOf="@id/txtWithdrawalSelectDay"
                         tools:ignore="RtlSymmetry" />
 
                     <androidx.appcompat.widget.AppCompatTextView

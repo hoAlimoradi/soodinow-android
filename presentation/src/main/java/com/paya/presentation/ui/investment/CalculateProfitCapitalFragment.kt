@@ -56,11 +56,12 @@ class CalculateProfitCapitalFragment : Fragment() {
 		initInputPrice()
 		setupInputAmount()
 		setupSelectedDay()
-		setupRadioButton()
 		observe(mViewModel.statusProfile,::checkProfile)
 		profitMethodFragment = childFragmentManager.findFragmentById(R.id.profit_method_invest) as ProfitMethodFragment
 		profitMethodFragment.percent = args.Percents
 		mBinding.inputPrice.setText(Utils.separatorAmount(args.SelectedPrice.toString()))
+		mBinding.inputWithdrawalAmount.setText(Utils.separatorAmount(args.SelectedPrice.toString()))
+		mBinding.inputAmount.setText(Utils.separatorAmount(args.SelectedPrice.toString()))
 		
 	}
 	
@@ -94,23 +95,26 @@ class CalculateProfitCapitalFragment : Fragment() {
 			val fm = requireActivity().supportFragmentManager
 			pop.show(fm,"name")
 		}
+		
+		txtWithdrawalSelectDay.setOnClickListener {
+			val pop = SelectedDayInMonthDialogFragment(object :
+				SelectedDayInMonthDialogFragment.OnSelectedDay {
+				override fun day(day: String) {
+					txtWithdrawalSelectDay.text = day
+				}
+				
+			})
+			val fm = requireActivity().supportFragmentManager
+			pop.show(fm,"name")
+		}
 	}
 	
-	private fun setupRadioButton() {
-		radioButtonDepositAmount.setOnCheckedChangeListener { compoundButton,b ->
-			radioButtonWithdrawal.isChecked = !b
-		}
-		radioButtonWithdrawal.setOnCheckedChangeListener { compoundButton,b ->
-			radioButtonDepositAmount.isChecked = !b
-		}
-	}
 	
 	private fun setupSeekBar() {
 		seekBarPrice.onSeekChangeListener = object : OnSeekChangeListener {
 			override fun onSeeking(seekParams: SeekParams?) {
 				if (seekParams != null) {
 					inputPrice.setText(seekParams.progress.toString())
-					inputAmount.setText(seekParams.progress.toString())
 				}
 			}
 			
@@ -135,9 +139,9 @@ class CalculateProfitCapitalFragment : Fragment() {
 					}
 					
 					override fun afterChange(s: Editable?) {
-						if (TextUtils.isEmpty(s))
-							return
-						seekBarPrice.setProgress(Utils.convertToFloatAmount(s.toString()))
+//						if (TextUtils.isEmpty(s))
+//							return
+//						seekBarPrice.setProgress(Utils.convertToFloatAmount(s.toString()))
 					}
 					
 				})
@@ -154,9 +158,7 @@ class CalculateProfitCapitalFragment : Fragment() {
 					}
 					
 					override fun afterChange(s: Editable?) {
-						if (TextUtils.isEmpty(s))
-							return
-						seekBarPrice.setProgress(Utils.convertToFloatAmount(s.toString()))
+					
 					}
 					
 				})
