@@ -1,11 +1,16 @@
 package com.paya.presentation.utils
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.util.DisplayMetrics
 import android.view.Gravity
 import android.view.Window
+import ir.hamsaa.persiandatepicker.util.PersianCalendar
+import saman.zamani.persiandate.PersianDate
+import saman.zamani.persiandate.PersianDateFormat
+import java.text.SimpleDateFormat
 
 object Utils {
 	@JvmStatic
@@ -26,6 +31,10 @@ object Utils {
 	
 	@JvmStatic
 	fun separatorAmount(amount: CharSequence?): String? {
+		return separatorAmount(amount.toString().replace(",","").toInt())
+	}
+	@JvmStatic
+	fun separatorAmount(amount: String?): String? {
 		return separatorAmount(amount.toString().replace(",","").toInt())
 	}
 	@JvmStatic
@@ -51,5 +60,18 @@ object Utils {
 	@JvmStatic
 	fun convertToFloatAmount(s: String): Float {
 		return s.replace(",","").toFloat()
+	}
+	
+	@SuppressLint("SimpleDateFormat")
+	@JvmStatic
+	fun convertToDate(pDate: PersianCalendar) : String{
+		val persianDate =  PersianDate()
+		val format =  PersianDateFormat("YYYY-mm-dd")
+		format.format(persianDate)
+		persianDate.shYear = pDate.persianYear
+		persianDate.shMonth = pDate.persianMonth
+		persianDate.shDay = pDate.persianDay
+		val sdf =  SimpleDateFormat("yyyy-MM-dd")
+		return sdf.format(persianDate.toDate())
 	}
 }

@@ -6,12 +6,8 @@ import com.paya.data.network.remote_api.AuthService
 import com.paya.data.sharedpreferences.PreferenceHelper
 import com.paya.data.utils.getResourceFromApiResponse
 import com.paya.domain.models.local.UserInfoDbModel
-import com.paya.domain.models.remote.AccessTokenRemoteModel
-import com.paya.domain.models.remote.RegisterRemoteModel
-import com.paya.domain.models.remote.SetPasswordRemoteModel
-import com.paya.domain.models.repo.RegisterRepoModel
-import com.paya.domain.models.repo.SetPasswordRepoModel
-import com.paya.domain.models.repo.UserInfoRepoModel
+import com.paya.domain.models.remote.*
+import com.paya.domain.models.repo.*
 import com.paya.domain.repository.AuthRepository
 import com.paya.domain.tools.Resource
 import javax.inject.Inject
@@ -24,7 +20,9 @@ class AuthRepositoryImpl @Inject constructor(
 	private val userInfoMapperEntityRepo: Mapper<UserInfoDbModel?,UserInfoRepoModel>,
 	private val setPasswordRemoteRepoMapper: Mapper<SetPasswordRemoteModel,SetPasswordRepoModel>,
 	private val userInfoDbApi: UserInfoDbApi,
-	private val preferenceHelper: PreferenceHelper
+	private val preferenceHelper: PreferenceHelper,
+	private val profileRemoteRepoMapper: Mapper<ProfileRemoteModel,ProfileRepoModel>,
+	private val profileRepoRemoteMapper: Mapper<ProfileBodyRepoModel,ProfileBodyRemoteModel>
 ) : AuthRepository {
 	
 	override suspend fun register(phoneNumber: String): Resource<RegisterRepoModel> {
@@ -74,8 +72,22 @@ class AuthRepositoryImpl @Inject constructor(
 	
 	override suspend fun setPassword(password: String): Resource<SetPasswordRepoModel> {
 		val setPasswordApiResponse = authNet.setPassword(password)
-		return getResourceFromApiResponse(setPasswordApiResponse){
+		return getResourceFromApiResponse(setPasswordApiResponse) {
 			setPasswordRemoteRepoMapper.map(it.data)
+		}
+	}
+	
+	override suspend fun updateProfile(body: ProfileBodyRepoModel): Resource<ProfileRepoModel> {
+		val updateProfileApi = authNet.updateProfile(profileRepoRemoteMapper.map(body))
+		return getResourceFromApiResponse(updateProfileApi) {
+			profileRemoteRepoMapper.map(it.data)
+		}
+	}
+	
+	override suspend fun getProfile(): Resource<ProfileRepoModel> {
+		val getProfileApi = authNet.getProfile()
+		return getResourceFromApiResponse(getProfileApi) {
+			profileRemoteRepoMapper.map(it.data)
 		}
 	}
 	

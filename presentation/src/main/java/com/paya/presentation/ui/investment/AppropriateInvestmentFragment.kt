@@ -64,7 +64,7 @@ class AppropriateInvestmentFragment : Fragment() {
 	}
 	
 	private fun setupChartLabelRecyclerView() {
-		val layoutManager = GridLayoutManager(requireContext(),2)
+		val layoutManager = GridLayoutManager(requireContext(),2,RecyclerView.VERTICAL,true)
 		layoutManager.reverseLayout = true
 		
 		val cl = mutableListOf<ChartLabelModel>()

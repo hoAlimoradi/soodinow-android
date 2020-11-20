@@ -167,6 +167,9 @@
         <action
             android:id="@+id/navigateToFirstInformation"
             app:destination="@id/firstInformation" />
+        <action
+            android:id="@+id/navigateToHomeFragment"
+            app:destination="@id/home" />
 
     </fragment>
 

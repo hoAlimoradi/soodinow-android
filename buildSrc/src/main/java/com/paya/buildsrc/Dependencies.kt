@@ -34,7 +34,8 @@ object Dependencies{
 		const val OBLIQUE = "2.2"
 		const val INDICATOR_SEEK_BAR = "2.1.2"
 		const val STEPVIEW_VER = "1.5.1"
-		const val PERSIAN_DATE = "V1.2"
+		const val PERSIAN_DATE = "0.8"
+		const val PERSIAN_DATE_DIALOG = "V1.2"
 	}
 	
 	object Modules{
