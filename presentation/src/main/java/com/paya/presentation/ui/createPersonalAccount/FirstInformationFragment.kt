@@ -68,8 +68,13 @@ class FirstInformationFragment : Fragment() {
 	private fun onReadyUpdateProfile(resource: Resource<ProfileRepoModel>) {
 		when (resource.status) {
 			Status.SUCCESS -> findNavController().popBackStack()
-			Status.ERROR -> Toast.makeText(requireContext(),resource.message,Toast.LENGTH_SHORT)
-				.show()
+			Status.ERROR -> {
+				context.let {
+					Toast.makeText(it,resource.message,Toast.LENGTH_SHORT)
+						.show()
+				}
+				
+			}
 			else -> return
 		}
 		
