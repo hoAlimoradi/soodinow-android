@@ -89,8 +89,9 @@ dependencies {
 	implementation("uk.co.chrisjenx:calligraphy:${Dependencies.Versions.CALLIGRAPHY}")
 	
 	implementation("com.shuhart.stepview:stepview:${Dependencies.Versions.STEPVIEW_VER}")
+	implementation("com.github.samanzamani.persiandate:PersianDate:${Dependencies.Versions.PERSIAN_DATE}")
 	
-	implementation ("com.github.hamsaadev:Persian-Date-Picker-Dialog:${Dependencies.Versions.PERSIAN_DATE}")
+	implementation ("com.github.hamsaadev:Persian-Date-Picker-Dialog:${Dependencies.Versions.PERSIAN_DATE_DIALOG}")
 	
 	implementation ("com.github.jakob-grabner:Circle-Progress-View:1.4")
 	
