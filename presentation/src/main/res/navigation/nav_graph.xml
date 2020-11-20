@@ -116,7 +116,7 @@
     <fragment
         android:id="@+id/createLowRiskAccountFragment"
         android:name="com.paya.presentation.ui.createLowRiskAccount.CreateLowRiskAccountFragment"
-        android:label="CreateLowRiskAccountFragment" />
-
+        android:label="CreateLowRiskAccountFragment" >
+    </fragment>
 
 </navigation>

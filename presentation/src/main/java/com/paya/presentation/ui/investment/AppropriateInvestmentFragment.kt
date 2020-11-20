@@ -18,6 +18,7 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.utils.MPPointF
+import com.paya.domain.models.repo.BasketRepoModel
 import com.paya.presentation.R
 import com.paya.presentation.databinding.FragmentAppropriateInvestmentBinding
 import com.paya.presentation.ui.home.adapter.MarketAdapter
@@ -28,12 +29,14 @@ import java.util.*
 
 class AppropriateInvestmentFragment : Fragment() {
 	
-	private val chartLabels = listOf(
-		ChartLabelModel("بذر", "#008C23"),
-		ChartLabelModel("کاریز", "#A9CFA6"),
-		ChartLabelModel("افق ملت ", "#035058"),
-		ChartLabelModel("آگاه", "#62B366")
+	val chartLabels = listOf(
+		ChartLabelModel("بذر","#008C23"),
+		ChartLabelModel("کاریز","#A9CFA6"),
+		ChartLabelModel("افق ملت ","#035058"),
+		ChartLabelModel("آگاه","#62B366")
 	)
+	
+	val basket = mutableListOf<BasketRepoModel>()
 	
 	private lateinit var mBinding: FragmentAppropriateInvestmentBinding
 	override fun onCreateView(
@@ -52,14 +55,28 @@ class AppropriateInvestmentFragment : Fragment() {
 	
 	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
 		super.onViewCreated(view,savedInstanceState)
+		setup()
+	}
+	
+	fun setup() {
 		setupPieChart()
 		setupChartLabelRecyclerView()
 	}
 	
 	private fun setupChartLabelRecyclerView() {
-		val layoutManager = GridLayoutManager(requireContext(), 2)
+		val layoutManager = GridLayoutManager(requireContext(),2)
 		layoutManager.reverseLayout = true
-		val adapter = ChartLabelAdapter(chartLabels)
+		
+		val cl = mutableListOf<ChartLabelModel>()
+		basket.forEachIndexed { index,basketRepoModel ->
+			cl.add(
+				ChartLabelModel(
+					basketRepoModel.namad,
+					chartLabels[index % chartLabels.size].labelColor
+				)
+			)
+		}
+		val adapter = ChartLabelAdapter(cl)
 		mBinding.chartLabelRecycler.layoutManager = layoutManager
 		mBinding.chartLabelRecycler.adapter = adapter
 	}
@@ -116,11 +133,10 @@ class AppropriateInvestmentFragment : Fragment() {
 		
 		// NOTE: The order of the entries when being added to the entries array determines their position around the center of
 		// the chart.
-		val parties = chartLabels.map { it.labelName }.toTypedArray()
-		for (i in parties.indices) {
+		for (i in basket.indices) {
 			entries.add(
 				PieEntry(
-					(Math.random() * range + range / 5).toFloat(),
+					basket[i].percent,
 					""
 				)
 			)
@@ -135,7 +151,7 @@ class AppropriateInvestmentFragment : Fragment() {
 		val colors = ArrayList<Int>()
 		
 		val labelColors = chartLabels.map { it.labelColor }.toTypedArray()
-		for (colorString in labelColors){
+		for (colorString in labelColors) {
 			colors.add(Color.parseColor(colorString))
 		}
 		dataSet.colors = colors
