@@ -46,9 +46,9 @@ class ProfitMethodFragment : Fragment() {
 			mBinding.progressLowProfit.setValue(it.minimum.percent * 100)
 			mBinding.progressYearsOld.setValue(it.year.percent * 100)
 			
-			mBinding.txtIdealPrice.text = Utils.separatorAmount(it.perfect.price.toString())
-			mBinding.txtLowProfitPrice.text = Utils.separatorAmount(it.minimum.price.toString())
-			mBinding.txtYearsOldPrice.text = Utils.separatorAmount(it.year.price.toString())
+			mBinding.txtIdealPrice.text = Utils.separatorAmount(it.perfect.price.toBigDecimal().toPlainString())
+			mBinding.txtLowProfitPrice.text = Utils.separatorAmount(it.minimum.price.toBigDecimal().toPlainString())
+			mBinding.txtYearsOldPrice.text = Utils.separatorAmount(it.year.price.toBigDecimal().toPlainString())
 		}
 		
 	}

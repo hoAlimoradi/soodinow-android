@@ -20,9 +20,14 @@ import com.paya.domain.tools.Status
 import com.paya.presentation.R
 import com.paya.presentation.databinding.FragmentCreateLowRiskAccountBinding
 import com.paya.presentation.ui.investment.AppropriateInvestmentFragment
+import com.paya.presentation.utils.Utils
 import com.paya.presentation.utils.observe
 import com.paya.presentation.viewmodel.CreateLowRiskAccountViewModel
+import com.warkiz.widget.IndicatorSeekBar
+import com.warkiz.widget.OnSeekChangeListener
+import com.warkiz.widget.SeekParams
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_calculate_profit_capital.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -58,7 +63,7 @@ class CreateLowRiskAccountFragment : Fragment() {
 		getLowRiskStocks()
 		appropriateInvestmentFragment = childFragmentManager.findFragmentById(R.id.appropriate_investment_fragment) as AppropriateInvestmentFragment
 		observe(mViewModel.lowRiskResource, ::onReady)
-		
+		setupSeekBar()
 		setupInputPrice()
 		
 		mBinding.myRadioGroup.setOnCheckedChangeListener { group, checkedId ->
@@ -74,6 +79,25 @@ class CreateLowRiskAccountFragment : Fragment() {
 			)
 		}
 		
+	}
+	
+	private fun setupSeekBar() {
+		seekBarPrice.onSeekChangeListener = object : OnSeekChangeListener {
+			override fun onSeeking(seekParams: SeekParams?) {
+				if (seekParams != null) {
+					inputPrice.setText(Utils.separatorAmount(seekParams.progress.toString()))
+				}
+			}
+			
+			override fun onStartTrackingTouch(seekBar: IndicatorSeekBar?) {
+			
+			}
+			
+			override fun onStopTrackingTouch(seekBar: IndicatorSeekBar?) {
+			
+			}
+			
+		}
 	}
 	
 	private fun setupInputPrice() {
@@ -124,6 +148,7 @@ class CreateLowRiskAccountFragment : Fragment() {
 				mBinding.highProfit = response.perfect.percent * 100
 				
 				val basket = resource.data?.basket ?: return
+				appropriateInvestmentFragment.basket.clear()
 				appropriateInvestmentFragment.basket.addAll(basket)
 				appropriateInvestmentFragment.setup()
 			}

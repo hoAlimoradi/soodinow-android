@@ -11,5 +11,5 @@ data class PercentRepoModel(
 
 data class Percent(
 	val percent: Float,
-	val price: Long
+	val price: Float
 ): Serializable

@@ -1,11 +1,11 @@
 package com.paya.presentation.ui.profile
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.paya.presentation.R
@@ -51,18 +51,20 @@ class ProfileFragment : Fragment() {
 		adapter = SlidePagerAdapter(this)
 		mBinding.pager.offscreenPageLimit = 1
 		mBinding.pager.adapter = adapter
-		mBinding.pager.setPadding(
-			resources.getDimension(R.dimen.viewpager_item_padding).toInt(),
-			0,
-			resources.getDimension(R.dimen.viewpager_item_padding).toInt(),0
-		)
-		mBinding.pager.setPageTransformer(ViewPagerUtil.getTransformer(requireContext().resources))
-		mBinding.pager.addItemDecoration(ViewPagerUtil.getItemDecoration(requireContext()))
+		if (adapter.itemCount > 1) {
+			mBinding.pager.setPadding(
+				resources.getDimension(R.dimen.viewpager_item_padding).toInt(),
+				0,
+				resources.getDimension(R.dimen.viewpager_item_padding).toInt(),0
+			)
+			mBinding.pager.setPageTransformer(ViewPagerUtil.getTransformer(requireContext().resources))
+			mBinding.pager.addItemDecoration(ViewPagerUtil.getItemDecoration(requireContext()))
+		}
 		mBinding.tabAccountCard.setViewPager2(mBinding.pager)
 	}
 	
 	private inner class SlidePagerAdapter(f: Fragment) : FragmentStateAdapter(f) {
-		override fun getItemCount(): Int = 3
+		override fun getItemCount(): Int = 1
 		
 		override fun createFragment(position: Int): Fragment = CardAccount()
 	}
