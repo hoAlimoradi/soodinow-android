@@ -68,13 +68,25 @@ class AppropriateInvestmentFragment : Fragment() {
 		layoutManager.reverseLayout = true
 		
 		val cl = mutableListOf<ChartLabelModel>()
-		basket.forEachIndexed { index,basketRepoModel ->
-			cl.add(
-				ChartLabelModel(
-					basketRepoModel.namad,
-					chartLabels[index % chartLabels.size].labelColor
+		if (basket.isNotEmpty()){
+			basket.forEachIndexed { index,basketRepoModel ->
+				cl.add(
+					ChartLabelModel(
+						basketRepoModel.namad,
+						chartLabels[index % chartLabels.size].labelColor
+					)
 				)
-			)
+			}
+		}
+		else{
+			chartLabels.forEachIndexed { index, chartLabelModel ->
+				cl.add(
+					ChartLabelModel(
+						chartLabelModel.labelName,
+						chartLabels[index % chartLabels.size].labelColor
+					)
+				)
+			}
 		}
 		val adapter = ChartLabelAdapter(cl)
 		mBinding.chartLabelRecycler.layoutManager = layoutManager
@@ -133,14 +145,28 @@ class AppropriateInvestmentFragment : Fragment() {
 		
 		// NOTE: The order of the entries when being added to the entries array determines their position around the center of
 		// the chart.
-		for (i in basket.indices) {
-			entries.add(
-				PieEntry(
-					basket[i].percent,
-					""
+		if (basket.isNotEmpty()){
+			for (i in basket.indices) {
+				entries.add(
+					PieEntry(
+						basket[i].percent,
+						""
+					)
 				)
-			)
+			}
 		}
+		else{
+			val parties = chartLabels.map { it.labelName }.toTypedArray()
+			for (i in parties.indices) {
+				entries.add(
+					PieEntry(
+						(Math.random() * range + range / 5).toFloat(),
+						""
+					)
+				)
+			}
+		}
+		
 		val dataSet = PieDataSet(entries,"")
 		dataSet.setDrawIcons(false)
 		dataSet.sliceSpace = 3f
