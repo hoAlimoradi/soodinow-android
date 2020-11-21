@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.paya.presentation.R
 import com.paya.presentation.databinding.FragmentMonthDialogBinding
+import com.paya.presentation.databinding.FragmentWithdrawalDialogBinding
 import com.paya.presentation.ui.investment.adapter.SelectedWithdrawalAdapter
 import com.paya.presentation.utils.BaseAdapter
 import com.paya.presentation.utils.Utils
@@ -23,7 +24,7 @@ class SelectedWithdrawalDialogFragment(
 	var onSelectedDay: OnSelectedMonth
 ) : DialogFragment() {
 	
-	private lateinit var mBinding : FragmentMonthDialogBinding
+	private lateinit var mBinding : FragmentWithdrawalDialogBinding
 	override fun onCreateView(
 		inflater: LayoutInflater,container: ViewGroup?,
 		savedInstanceState: Bundle?
