@@ -18,6 +18,7 @@ import com.paya.domain.tools.Status
 import com.paya.presentation.R
 import com.paya.presentation.databinding.FragmentCalculateProfitCapitalBinding
 import com.paya.presentation.ui.investment.dialog.SelectedDayInMonthDialogFragment
+import com.paya.presentation.ui.investment.dialog.SelectedWithdrawalDialogFragment
 import com.paya.presentation.utils.PriceTextWatcher
 import com.paya.presentation.utils.Utils
 import com.paya.presentation.utils.observe
@@ -97,10 +98,10 @@ class CalculateProfitCapitalFragment : Fragment() {
 		}
 		
 		txtWithdrawalSelectDay.setOnClickListener {
-			val pop = SelectedDayInMonthDialogFragment(object :
-				SelectedDayInMonthDialogFragment.OnSelectedDay {
-				override fun day(day: String) {
-					txtWithdrawalSelectDay.text = day
+			val pop = SelectedWithdrawalDialogFragment(object :
+				SelectedWithdrawalDialogFragment.OnSelectedMonth {
+				override fun month(month: String) {
+					txtWithdrawalSelectDay.text = month
 				}
 				
 			})

@@ -12,15 +12,15 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.paya.presentation.R
 import com.paya.presentation.databinding.FragmentMonthDialogBinding
-import com.paya.presentation.ui.investment.adapter.SelectedDayInMonth
+import com.paya.presentation.ui.investment.adapter.SelectedWithdrawalAdapter
 import com.paya.presentation.utils.BaseAdapter
 import com.paya.presentation.utils.Utils
 import kotlinx.android.synthetic.main.fragment_month_dialog.*
 import kotlinx.android.synthetic.main.toolbar_dialog.*
 
 
-class SelectedDayInMonthDialogFragment(
-	var onSelectedDay: OnSelectedDay
+class SelectedWithdrawalDialogFragment(
+	var onSelectedDay: OnSelectedMonth
 ) : DialogFragment() {
 	
 	private lateinit var mBinding : FragmentMonthDialogBinding
@@ -31,12 +31,13 @@ class SelectedDayInMonthDialogFragment(
 		// Inflate the layout for this fragment
 		mBinding = DataBindingUtil.inflate(
 			inflater,
-			R.layout.fragment_month_dialog,
+			R.layout.fragment_withdrawal_dialog,
 			container,
 			false
 		)
 		
 		return mBinding.root
+		
 	}
 	override fun onResume() {
 		super.onResume()
@@ -53,7 +54,7 @@ class SelectedDayInMonthDialogFragment(
 	
 	private fun setupRecyclerView() {
 		dayRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-		val adapter = SelectedDayInMonth()
+		val adapter = SelectedWithdrawalAdapter()
 		val dividerItemDecoration = DividerItemDecoration(context, LinearLayout.VERTICAL)
 		context?.let { it ->
 			ContextCompat.getDrawable(it,R.drawable.divider_line)?.let {
@@ -69,7 +70,7 @@ class SelectedDayInMonthDialogFragment(
 				item: String,
 				position: Int
 			) {
-				onSelectedDay.day(item)
+				onSelectedDay.month(item)
 				dismissAllowingStateLoss()
 			}
 			
@@ -77,7 +78,7 @@ class SelectedDayInMonthDialogFragment(
 		dayRecyclerView.adapter = adapter
 	}
 	
-	interface OnSelectedDay {
-		fun day(day: String)
+	interface OnSelectedMonth {
+		fun month(month: String)
 	}
 }

@@ -103,6 +103,7 @@
     <string name="questionnaire">پرسشنامه</string>
     <string name="invest_simulation">شبیه سازی این سرمایه گذاری</string>
     <string name="select_day">انتخاب روز</string>
+    <string name="select_month">انتخاب ماه</string>
     <string name="three_months">سه ماهه</string>
     <string name="six_months">شش ماهه</string>
     <string name="one_years">یکساله</string>
