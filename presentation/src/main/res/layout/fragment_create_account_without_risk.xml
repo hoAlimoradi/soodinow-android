@@ -295,7 +295,7 @@
                     tools:itemCount="1"
                     tools:listitem="@layout/item_day" />
 
-                <LinearLayout
+                <RadioGroup
                     android:id="@+id/checkLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -304,7 +304,8 @@
                     app:layout_constraintBottom_toTopOf="@+id/bottom_guideline"
                     android:paddingTop="@dimen/margin_medium">
 
-                    <androidx.appcompat.widget.AppCompatCheckBox
+                    <androidx.appcompat.widget.AppCompatRadioButton
+                        android:id="@+id/longTimeRadio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/long_time"
@@ -315,7 +316,8 @@
                         android:drawableStart="@drawable/selector_check_box"
                         android:layout_marginStart="@dimen/margin_medium"
                         />
-                    <androidx.appcompat.widget.AppCompatCheckBox
+                    <androidx.appcompat.widget.AppCompatRadioButton
+                        android:id="@+id/weekRadio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/weekly"
@@ -326,7 +328,8 @@
                         android:drawableStart="@drawable/selector_check_box"
                         android:layout_marginStart="@dimen/margin_medium"
                         />
-                    <androidx.appcompat.widget.AppCompatCheckBox
+                    <androidx.appcompat.widget.AppCompatRadioButton
+                        android:id="@+id/dayRadio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/daily"
@@ -338,7 +341,7 @@
                         android:drawableStart="@drawable/selector_check_box"
                         />
 
-                </LinearLayout>
+                </RadioGroup>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
