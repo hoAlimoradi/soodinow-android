@@ -52,6 +52,15 @@
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.355" />
 
+            <androidx.appcompat.widget.AppCompatImageView
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/title"
+                android:layout_marginTop="@dimen/margin_small"
+                android:layout_marginStart="@dimen/margin_very_small"
+                app:srcCompat="@drawable/ic_add_account"
+                android:layout_width="@dimen/margin_small"
+                android:layout_height="@dimen/margin_small"/>
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
@@ -59,6 +68,7 @@
                 android:layout_margin="@dimen/margin_small"
                 android:text="افتتاح حساب جدید"
                 android:textColor="@color/purple"
+                android:textSize="@dimen/text_size_12sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -70,7 +80,7 @@
                 android:layout_marginTop="@dimen/margin_very_small"
                 app:layout_constraintEnd_toStartOf="@+id/end_guideline"
                 app:layout_constraintStart_toEndOf="@+id/start_guideline"
-                app:layout_constraintTop_toBottomOf="@id/title" />
+                app:layout_constraintTop_toBottomOf="@id/txtInventoryManagement" />
 
             <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
                 android:id="@+id/tabAccountCard"
@@ -97,8 +107,9 @@
                 android:text="@string/inventory_management"
                 android:textColor="@color/purple"
                 android:textSize="@dimen/text_size_12sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tabAccountCard" />
+                app:layout_constraintTop_toBottomOf="@id/title" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="@dimen/margin_small"
@@ -106,7 +117,7 @@
                 android:layout_marginStart="@dimen/margin_very_small"
                 android:layout_marginTop="@dimen/margin_very_small"
                 app:layout_constraintStart_toEndOf="@id/txtInventoryManagement"
-                app:layout_constraintTop_toBottomOf="@id/tabAccountCard"
+                app:layout_constraintTop_toBottomOf="@id/title"
                 app:srcCompat="@drawable/ic_money_bag" />
 
             <androidx.cardview.widget.CardView
@@ -117,7 +128,7 @@
                 android:layout_marginTop="@dimen/margin_small"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="@dimen/radius_card"
-                app:layout_constraintTop_toBottomOf="@id/txtInventoryManagement">
+                app:layout_constraintTop_toBottomOf="@id/pager">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -186,6 +197,7 @@
                         app:srcCompat="@drawable/ic_path_up" />
 
                     <RadioGroup
+                        android:layout_marginEnd="@dimen/margin_very_small"
                         android:id="@+id/myRadioGroup"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -193,8 +205,8 @@
                         android:layout_marginTop="@dimen/margin_very_small"
                         android:checkedButton="@+id/low_risk"
                         android:gravity="end"
-                        app:layout_constraintHorizontal_bias="1"
-                        app:layout_constraintStart_toStartOf="@id/guideline_end_chart"
+                        app:layout_constraintHorizontal_bias="0"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/txt_percent">
 
                         <RadioButton

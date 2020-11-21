@@ -8,12 +8,17 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.paya.domain.models.repo.ProfileRepoModel
+import com.paya.domain.tools.Resource
 import com.paya.presentation.R
 import com.paya.presentation.databinding.FragmentProfileBinding
 import com.paya.presentation.ui.hint.fragments.CardAccount
 import com.paya.presentation.utils.ViewPagerUtil
+import com.paya.presentation.utils.observe
 import com.paya.presentation.viewmodel.ProfileViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ProfileFragment : Fragment() {
 	
 	private lateinit var mBinding: FragmentProfileBinding
@@ -45,6 +50,11 @@ class ProfileFragment : Fragment() {
 		mBinding.myRadioGroup.setOnCheckedChangeListener { _,_ ->
 			viewModel.getPoints()
 		}
+		observe(viewModel.profile, ::onProfileReady)
+	}
+	
+	private fun onProfileReady(resource: Resource<ProfileRepoModel>){
+	
 	}
 	
 	private fun setupViewPager() {

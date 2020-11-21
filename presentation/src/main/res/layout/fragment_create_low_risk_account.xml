@@ -4,18 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.paya.presentation.viewmodel.CreateLowRiskAccountViewModel"/>
+
+        <import type="com.paya.presentation.viewmodel.CreateLowRiskAccountViewModel" />
+
         <import type="com.paya.domain.tools.Resource" />
 
         <variable
             name="viewModel"
             type="CreateLowRiskAccountViewModel" />
+
         <variable
             name="low_profit"
             type="Float" />
+
         <variable
             name="high_profit"
             type="Float" />
+
         <variable
             name="last_year_profit"
             type="Float" />
@@ -93,10 +98,35 @@
                 android:orientation="vertical">
 
                 <androidx.cardview.widget.CardView
-                    android:layout_marginBottom="@dimen/margin_medium"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/margin_small"
+                    android:layout_gravity="center_horizontal"
+                    app:cardCornerRadius="@dimen/radius_card">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:adjustViewBounds="true"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/image_accout_without_risk" />
+
+                    </FrameLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/margin_small"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:layout_marginBottom="@dimen/margin_medium"
                     app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="@dimen/radius_card">
 
@@ -106,47 +136,22 @@
                         android:padding="@dimen/margin_small">
 
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/create_low_risk_account"
-                            android:textColor="@color/purple"
-                            android:textSize="@dimen/text_size_small"
-                            android:textStyle="bold"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="1.0"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/description"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/margin_very_small"
-                            android:text="@string/fake_content"
-                            android:textSize="@dimen/text_size_11sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/title" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/txt_how_much_invest"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/margin_small"
                             android:text="@string/how_much_invest"
                             android:textColor="@color/purple"
                             android:textSize="@dimen/text_size_11sp"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/description" />
-
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <androidx.appcompat.widget.AppCompatEditText
                             android:id="@+id/inputPrice"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/height_medium"
-                            android:layout_marginTop="@dimen/margin_medium"
+                            android:layout_marginTop="@dimen/margin_very_small"
                             android:background="@drawable/round_corner_layout"
+                            android:enabled="true"
                             android:gravity="center"
                             android:inputType="number"
                             android:lines="1"
@@ -154,7 +159,6 @@
                             android:paddingStart="@dimen/margin_very_small"
                             android:paddingEnd="@dimen/margin_very_small"
                             android:singleLine="true"
-                            android:enabled="false"
                             android:text="26,000,000"
                             android:textColor="#000000"
                             android:textSize="@dimen/text_size_small"
@@ -172,107 +176,6 @@
                             app:layout_constraintBottom_toBottomOf="@id/inputPrice"
                             app:layout_constraintStart_toStartOf="@id/inputPrice" />
 
-                        <androidx.constraintlayout.widget.Group
-                            android:id="@+id/seekBarGroup"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:visibility="visible"
-                            app:constraint_referenced_ids="seekBarPrice,startViewSeekBar,endViewSeekBar,minSeekBar,tomanStartSeekBar,maxSeekBar,tomanEndSeekBar" />
-
-                        <com.warkiz.widget.IndicatorSeekBar
-                            android:id="@+id/seekBarPrice"
-                            android:layout_marginTop="@dimen/margin_small"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-
-                            android:visibility="gone"
-                            android:elevation="2dp"
-                            android:layoutDirection="rtl"
-                            app:isb_indicator_text_size="18sp"
-                            app:isb_max="50000000"
-                            app:isb_min="1000000"
-                            app:isb_progress="26000000"
-                            app:isb_show_indicator="none"
-                            app:isb_thumb_color="@color/green"
-                            app:isb_thumb_size="20dp"
-                            app:isb_track_background_color="@color/gray"
-                            app:isb_track_background_size="4dp"
-                            app:isb_track_progress_color="@color/gray"
-                            app:isb_track_progress_size="4dp"
-                            app:layout_constraintTop_toBottomOf="@id/inputPrice" />
-
-                        <View
-                            android:id="@+id/startViewSeekBar"
-                            android:layout_width="4dp"
-                            android:layout_height="25dp"
-                            android:layout_marginStart="12dp"
-                            android:background="@color/gray"
-                            app:layout_constraintStart_toStartOf="@id/seekBarPrice"
-                            app:layout_constraintTop_toTopOf="@id/seekBarPrice" />
-
-                        <View
-                            android:id="@+id/endViewSeekBar"
-                            android:layout_width="4dp"
-                            android:layout_height="25dp"
-                            android:layout_marginEnd="12dp"
-                            android:background="@color/gray"
-                            app:layout_constraintEnd_toEndOf="@id/seekBarPrice"
-                            app:layout_constraintTop_toTopOf="@id/seekBarPrice" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/minSeekBar"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/margin_small"
-                            android:gravity="center"
-                            android:text="1,000,000"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/text_size_11sp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/startViewSeekBar" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tomanStartSeekBar"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/margin_small"
-                            android:gravity="center"
-                            android:text="@string/toman"
-                            android:textColor="@color/gray"
-                            android:textSize="@dimen/text_size_10sp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/minSeekBar" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/maxSeekBar"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/margin_small"
-                            android:gravity="center"
-                            android:text="50,000,000"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/text_size_11sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/endViewSeekBar" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tomanEndSeekBar"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/margin_small"
-                            android:gravity="center"
-                            android:text="@string/toman"
-                            android:textColor="@color/gray"
-                            android:textSize="@dimen/text_size_10sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/maxSeekBar" />
-
-                        <androidx.constraintlayout.widget.Barrier
-                            android:id="@+id/seekBarBarrier"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:barrierDirection="bottom"
-                            app:constraint_referenced_ids="tomanEndSeekBar,tomanStartSeekBar" />
 
                         <RadioGroup
                             android:id="@+id/myRadioGroup"
@@ -280,31 +183,30 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_very_small"
                             android:checkedButton="@+id/low_risk"
-                            app:layout_constraintEnd_toEndOf="parent"
                             android:gravity="end"
-                            app:layout_constraintTop_toBottomOf="@id/seekBarBarrier">
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tomanInputPrice">
 
                             <RadioButton
                                 android:id="@+id/low_risk"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="سرمایه کذاری کم ریسک"
                                 android:button="@null"
                                 android:drawableStart="@drawable/selector_check_radio"
                                 android:drawablePadding="@dimen/margin_very_small"
                                 android:layoutDirection="rtl"
-                                />
+                                android:text="سرمایه کذاری کم ریسک" />
 
                             <RadioButton
                                 android:id="@+id/high_risk"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="سرمایه گذاری پرریسک"
+                                android:layout_marginTop="@dimen/margin_very_small"
                                 android:button="@null"
                                 android:drawableStart="@drawable/selector_check_radio"
                                 android:drawablePadding="@dimen/margin_very_small"
                                 android:layoutDirection="rtl"
-                                android:layout_marginTop="@dimen/margin_very_small"/>
+                                android:text="سرمایه گذاری پرریسک" />
 
                         </RadioGroup>
 
@@ -335,7 +237,7 @@
                                 layout="@layout/item_profit_estimate"
                                 app:color="@{@color/green_3}"
                                 app:progressValue="@{low_profit}"
-                                app:subtitle="@{@string/low_profit}"/>
+                                app:subtitle="@{@string/low_profit}" />
 
                         </FrameLayout>
 
@@ -352,7 +254,7 @@
                                 layout="@layout/item_profit_estimate"
                                 app:color="@{@color/green_2}"
                                 app:progressValue="@{last_year_profit}"
-                                app:subtitle="@{@string/based_on_last_year}"/>
+                                app:subtitle="@{@string/based_on_last_year}" />
 
                         </FrameLayout>
 
@@ -365,10 +267,11 @@
                             app:layout_constraintStart_toStartOf="@id/guideline_2"
                             app:layout_constraintTop_toBottomOf="@id/myRadioGroup">
 
-                            <include layout="@layout/item_profit_estimate"
+                            <include
+                                layout="@layout/item_profit_estimate"
                                 app:color="@{@color/green}"
                                 app:progressValue="@{high_profit}"
-                                app:subtitle="@{@string/highest_profit}"/>
+                                app:subtitle="@{@string/highest_profit}" />
 
                         </FrameLayout>
 
@@ -385,10 +288,10 @@
                             style="@style/SubmitButton"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_medium"
                             android:layout_marginBottom="@dimen/margin_medium"
                             android:text="@string/submit_and_continue"
-                            app:layout_constraintTop_toBottomOf="@id/appropriate_investment_fragment"
-                            android:layout_marginTop="@dimen/margin_medium" />
+                            app:layout_constraintTop_toBottomOf="@id/appropriate_investment_fragment" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -20,6 +20,7 @@ import com.paya.domain.tools.Status
 import com.paya.presentation.R
 import com.paya.presentation.databinding.FragmentCreateLowRiskAccountBinding
 import com.paya.presentation.ui.investment.AppropriateInvestmentFragment
+import com.paya.presentation.utils.NumberTextWatcher
 import com.paya.presentation.utils.Utils
 import com.paya.presentation.utils.observe
 import com.paya.presentation.viewmodel.CreateLowRiskAccountViewModel
@@ -63,7 +64,6 @@ class CreateLowRiskAccountFragment : Fragment() {
 		getLowRiskStocks()
 		appropriateInvestmentFragment = childFragmentManager.findFragmentById(R.id.appropriate_investment_fragment) as AppropriateInvestmentFragment
 		observe(mViewModel.lowRiskResource, ::onReady)
-		setupSeekBar()
 		setupInputPrice()
 		
 		mBinding.myRadioGroup.setOnCheckedChangeListener { group, checkedId ->
@@ -88,41 +88,46 @@ class CreateLowRiskAccountFragment : Fragment() {
 					inputPrice.setText(Utils.separatorAmount(seekParams.progress.toString()))
 				}
 			}
-			
+
 			override fun onStartTrackingTouch(seekBar: IndicatorSeekBar?) {
-			
+
 			}
-			
+
 			override fun onStopTrackingTouch(seekBar: IndicatorSeekBar?) {
-			
+
 			}
-			
+
 		}
 	}
 	
 	private fun setupInputPrice() {
-		val watcher = object : TextWatcher {
-			private var searchFor = ""
+		val watcher = NumberTextWatcher(
+			mBinding.inputPrice,
+			",###",
+			lifecycleScope
+		) { getLowRiskStocks() }
+//		val watcher = object : TextWatcher {
+//			private var searchFor = ""
+//
+//			override fun onTextChanged(s: CharSequence?,start: Int,before: Int,count: Int) {
+//				val searchText = s.toString().trim()
+//				if (searchText == searchFor)
+//					return
+//
+//				searchFor = searchText
+//
+//				lifecycleScope.launch {
+//					delay(500)  //debounce timeOut
+//					if (searchText != searchFor)
+//						return@launch
+//
+//					getLowRiskStocks()
+//				}
+//			}
 			
-			override fun onTextChanged(s: CharSequence?,start: Int,before: Int,count: Int) {
-				val searchText = s.toString().trim()
-				if (searchText == searchFor)
-					return
-				
-				searchFor = searchText
-				
-				lifecycleScope.launch {
-					delay(500)  //debounce timeOut
-					if (searchText != searchFor)
-						return@launch
-					
-					getLowRiskStocks()
-				}
-			}
-			
-			override fun afterTextChanged(s: Editable?) = Unit
-			override fun beforeTextChanged(s: CharSequence?,start: Int,count: Int,after: Int) = Unit
-		}
+//			override fun afterTextChanged(s: Editable?) = Unit
+//			override fun beforeTextChanged(s: CharSequence?,start: Int,count: Int,after: Int) = Unit
+//		}
 		
 		mBinding.inputPrice.addTextChangedListener(watcher)
 	}

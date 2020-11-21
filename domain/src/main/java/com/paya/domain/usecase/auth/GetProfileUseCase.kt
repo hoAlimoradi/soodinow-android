@@ -1,6 +1,5 @@
 package com.paya.domain.usecase.auth
 
-import com.paya.domain.models.repo.ProfileBodyRepoModel
 import com.paya.domain.models.repo.ProfileRepoModel
 import com.paya.domain.repository.AuthRepository
 import com.paya.domain.tools.Resource

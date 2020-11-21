@@ -107,8 +107,8 @@ class AppropriateInvestmentFragment : Fragment() {
 		chart.setTransparentCircleColor(Color.WHITE)
 		chart.setTransparentCircleAlpha(110)
 		
-		chart.holeRadius = 58f
-		chart.transparentCircleRadius = 61f
+		chart.holeRadius = 45f
+		chart.transparentCircleRadius = 48f
 		
 		chart.setDrawCenterText(true)
 		
