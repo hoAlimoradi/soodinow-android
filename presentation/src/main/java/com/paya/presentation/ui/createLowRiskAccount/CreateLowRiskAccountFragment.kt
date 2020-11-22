@@ -74,7 +74,8 @@ class CreateLowRiskAccountFragment : Fragment() {
 			findNavController().navigate(
 				CreateLowRiskAccountFragmentDirections.navigationToCalculateProfitCapital(
 					percents,
-					mBinding.inputPrice.text.toString().filter { it.isDigit() }.toLong()
+					mBinding.inputPrice.text.toString().filter { it.isDigit() }.toLong(),
+					(if (mBinding.highRisk.isChecked) "risk" else "no_risk")
 				)
 			)
 		}

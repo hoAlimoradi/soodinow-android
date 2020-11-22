@@ -1,7 +1,6 @@
 package com.paya.domain.repository
 
-import com.paya.domain.models.repo.IsInRiskListRepoModel
-import com.paya.domain.models.repo.LowRiskStockRequest
+import com.paya.domain.models.repo.*
 import com.paya.domain.tools.Resource
 
 interface LowRiskInvestmentRepository {
@@ -9,5 +8,10 @@ interface LowRiskInvestmentRepository {
 		lowRiskStockRequest: LowRiskStockRequest
 	): Resource<IsInRiskListRepoModel>
 	
+	suspend fun exitAccount() : Resource<ExitAccountRepoModel>
+	
+	suspend fun addRiskOrder(
+		addRiskOrderRepoBodyModel: AddRiskOrderRepoBodyModel
+	) : Resource<AddRiskOrderRepoModel>
 
 }
