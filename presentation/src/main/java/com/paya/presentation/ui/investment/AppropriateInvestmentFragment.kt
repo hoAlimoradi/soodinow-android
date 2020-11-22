@@ -8,11 +8,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.github.mikephil.charting.animation.Easing
-import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
@@ -21,7 +18,6 @@ import com.github.mikephil.charting.utils.MPPointF
 import com.paya.domain.models.repo.BasketRepoModel
 import com.paya.presentation.R
 import com.paya.presentation.databinding.FragmentAppropriateInvestmentBinding
-import com.paya.presentation.ui.home.adapter.MarketAdapter
 import com.paya.presentation.ui.investment.adapter.ChartLabelAdapter
 import com.paya.presentation.ui.investment.adapter.ChartLabelModel
 import kotlinx.android.synthetic.main.fragment_appropriate_investment.*
@@ -68,7 +64,7 @@ class AppropriateInvestmentFragment : Fragment() {
 		layoutManager.reverseLayout = true
 		
 		val cl = mutableListOf<ChartLabelModel>()
-		if (basket.isNotEmpty()){
+		if (basket.isNotEmpty()) {
 			basket.forEachIndexed { index,basketRepoModel ->
 				cl.add(
 					ChartLabelModel(
@@ -77,9 +73,8 @@ class AppropriateInvestmentFragment : Fragment() {
 					)
 				)
 			}
-		}
-		else{
-			chartLabels.forEachIndexed { index, chartLabelModel ->
+		} else {
+			chartLabels.forEachIndexed { index,chartLabelModel ->
 				cl.add(
 					ChartLabelModel(
 						chartLabelModel.labelName,
@@ -88,7 +83,11 @@ class AppropriateInvestmentFragment : Fragment() {
 				)
 			}
 		}
-		val adapter = ChartLabelAdapter(cl)
+		val adapter = ChartLabelAdapter(cl) {
+			val x = chart.data.dataSets[0].getEntryForIndex(it).x
+			val y = chart.data.dataSets[0].getEntryForIndex(it).y
+			chart.highlightValue(x,y,it)
+		}
 		mBinding.chartLabelRecycler.layoutManager = layoutManager
 		mBinding.chartLabelRecycler.adapter = adapter
 	}
@@ -145,7 +144,7 @@ class AppropriateInvestmentFragment : Fragment() {
 		
 		// NOTE: The order of the entries when being added to the entries array determines their position around the center of
 		// the chart.
-		if (basket.isNotEmpty()){
+		if (basket.isNotEmpty()) {
 			for (i in basket.indices) {
 				entries.add(
 					PieEntry(
@@ -154,8 +153,7 @@ class AppropriateInvestmentFragment : Fragment() {
 					)
 				)
 			}
-		}
-		else{
+		} else {
 			val parties = chartLabels.map { it.labelName }.toTypedArray()
 			for (i in parties.indices) {
 				entries.add(

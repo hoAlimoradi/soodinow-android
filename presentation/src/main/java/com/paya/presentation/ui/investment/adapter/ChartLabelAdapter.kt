@@ -12,7 +12,8 @@ import com.paya.presentation.R
 import com.paya.presentation.ui.home.adapter.MarketAdapter
 
 class ChartLabelAdapter(
-	private val chartLabelModels: List<ChartLabelModel>
+	private val chartLabelModels: List<ChartLabelModel>,
+	private val onItemClicked: (index: Int) -> Unit
 ): RecyclerView.Adapter<ChartLabelAdapter.ChartLabelViewHolder>(){
 	
 	class ChartLabelViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
@@ -38,6 +39,7 @@ class ChartLabelAdapter(
 			)!!
 		)
 		DrawableCompat.setTint(drawable, Color.parseColor(chartLabel.labelColor))
+		holder.itemView.setOnClickListener { onItemClicked(position) }
 		holder.labelColor.background = drawable
 	}
 	
