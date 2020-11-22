@@ -8,4 +8,6 @@ interface LowRiskInvestmentRepository {
 	suspend fun getLowRiskStocks(
 		lowRiskStockRequest: LowRiskStockRequest
 	): Resource<IsInRiskListRepoModel>
+	
+
 }
