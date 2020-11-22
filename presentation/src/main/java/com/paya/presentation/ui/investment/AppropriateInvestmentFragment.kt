@@ -86,7 +86,7 @@ class AppropriateInvestmentFragment : Fragment() {
 		val adapter = ChartLabelAdapter(cl) {
 			val x = chart.data.dataSets[0].getEntryForIndex(it).x
 			val y = chart.data.dataSets[0].getEntryForIndex(it).y
-			chart.highlightValue(x,y,it)
+			chart.highlightValue(it.toFloat(),y,0)
 		}
 		mBinding.chartLabelRecycler.layoutManager = layoutManager
 		mBinding.chartLabelRecycler.adapter = adapter
