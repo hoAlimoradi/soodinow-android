@@ -8,11 +8,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
 import com.paya.domain.models.repo.ProfileRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.presentation.R
 import com.paya.presentation.databinding.FragmentProfileBinding
 import com.paya.presentation.ui.hint.fragments.CardAccount
+import com.paya.presentation.ui.investment.AppropriateInvestmentFragment
 import com.paya.presentation.utils.ViewPagerUtil
 import com.paya.presentation.utils.observe
 import com.paya.presentation.viewmodel.ProfileViewModel
@@ -50,10 +52,10 @@ class ProfileFragment : Fragment() {
 		mBinding.myRadioGroup.setOnCheckedChangeListener { _,_ ->
 			viewModel.getPoints()
 		}
-		observe(viewModel.profile, ::onProfileReady)
+		observe(viewModel.profile,::onProfileReady)
 	}
 	
-	private fun onProfileReady(resource: Resource<ProfileRepoModel>){
+	private fun onProfileReady(resource: Resource<ProfileRepoModel>) {
 	
 	}
 	
@@ -70,11 +72,23 @@ class ProfileFragment : Fragment() {
 			mBinding.pager.setPageTransformer(ViewPagerUtil.getTransformer(requireContext().resources))
 			mBinding.pager.addItemDecoration(ViewPagerUtil.getItemDecoration(requireContext()))
 		}
+		mBinding.pager.registerOnPageChangeCallback(
+			object : ViewPager2.OnPageChangeCallback() {
+				override fun onPageSelected(position: Int) {
+					super.onPageSelected(position)
+					viewModel.getPoints()
+					val fragment: AppropriateInvestmentFragment =
+						childFragmentManager.findFragmentById(R.id.appropriate_investment_fragment)
+								as AppropriateInvestmentFragment
+					fragment.setup()
+				}
+			}
+		)
 		mBinding.tabAccountCard.setViewPager2(mBinding.pager)
 	}
 	
 	private inner class SlidePagerAdapter(f: Fragment) : FragmentStateAdapter(f) {
-		override fun getItemCount(): Int = 1
+		override fun getItemCount(): Int = 3
 		
 		override fun createFragment(position: Int): Fragment = CardAccount()
 	}
