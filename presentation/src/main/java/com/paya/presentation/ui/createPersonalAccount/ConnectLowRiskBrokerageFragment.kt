@@ -84,7 +84,7 @@ class ConnectLowRiskBrokerageFragment : Fragment() {
 		mBinding.seekBarPrice.onSeekChangeListener = object : OnSeekChangeListener {
 			override fun onSeeking(seekParams: SeekParams?) {
 				if (seekParams != null) {
-					mBinding.inputPrice.setText(seekParams.progress.toString())
+					//mBinding.inputPrice.setText(seekParams.progress.toString())
 				}
 			}
 			
