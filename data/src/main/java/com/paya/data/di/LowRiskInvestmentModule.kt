@@ -6,14 +6,8 @@ import com.paya.data.mapper.AddRiskOrderRepoRemoteMapper
 import com.paya.data.mapper.ExitAccountRemoteRepoMapper
 import com.paya.data.mapper.IsInRiskListRemoteRepoMapper
 import com.paya.data.repository.LowRiskInvestmentRepositoryImpl
-import com.paya.domain.models.remote.AddRiskOrderRemoteBodyModel
-import com.paya.domain.models.remote.AddRiskOrderRemoteModel
-import com.paya.domain.models.remote.ExitAccountRemoteModel
-import com.paya.domain.models.remote.IsInRiskListRemoteModel
-import com.paya.domain.models.repo.AddRiskOrderRepoBodyModel
-import com.paya.domain.models.repo.AddRiskOrderRepoModel
-import com.paya.domain.models.repo.ExitAccountRepoModel
-import com.paya.domain.models.repo.IsInRiskListRepoModel
+import com.paya.domain.models.remote.*
+import com.paya.domain.models.repo.*
 import com.paya.domain.repository.LowRiskInvestmentRepository
 import com.paya.domain.tools.UseCase
 import com.paya.domain.usecase.order.AddRiskOrderUseCase
@@ -39,8 +33,8 @@ abstract class LowRiskInvestmentModule {
 	
 	@Binds
 	abstract fun bindAddRiskOrderRemoteRepoMapper(mapper: AddRiskOrderRemoteRepoMapper): Mapper<
-			AddRiskOrderRemoteModel,
-			AddRiskOrderRepoModel>
+			AddRiskOrderItem,
+			AddRiskOrderRepoItem>
 	
 	@Binds
 	abstract fun bindAddRiskOrderRepoRemoteMapper(mapper: AddRiskOrderRepoRemoteMapper): Mapper<
@@ -54,6 +48,6 @@ abstract class LowRiskInvestmentModule {
 	abstract fun bindExitAccountUseCase(useCase: ExitAccountUseCase): UseCase<Unit,ExitAccountRepoModel>
 	
 	@Binds
-	abstract fun bindAddRiskOrderUseCase(useCase: AddRiskOrderUseCase) : UseCase<AddRiskOrderRepoBodyModel,AddRiskOrderRepoModel>
+	abstract fun bindAddRiskOrderUseCase(useCase: AddRiskOrderUseCase) : UseCase<AddRiskOrderRepoBodyModel, List<AddRiskOrderRepoItem>>
 	
 }

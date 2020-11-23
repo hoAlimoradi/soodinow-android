@@ -16,6 +16,7 @@ import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.presentation.R
 import com.paya.presentation.databinding.FragmentCalculateProfitCapitalBinding
+import com.paya.presentation.ui.createPersonalAccount.ConnectLowRiskBrokerageFragmentArgs
 import com.paya.presentation.ui.investment.dialog.SelectedDayInMonthDialogFragment
 import com.paya.presentation.ui.investment.dialog.SelectedWithdrawalDialogFragment
 import com.paya.presentation.utils.PriceTextWatcher
@@ -57,7 +58,8 @@ class CalculateProfitCapitalFragment : Fragment() {
 		setupInputAmount()
 		setupSelectedDay()
 		observe(mViewModel.statusProfile,::checkProfile)
-		profitMethodFragment = childFragmentManager.findFragmentById(R.id.profit_method_invest) as ProfitMethodFragment
+		profitMethodFragment =
+			childFragmentManager.findFragmentById(R.id.profit_method_invest) as ProfitMethodFragment
 		profitMethodFragment.percent = args.Percents
 		mBinding.inputPrice.setText(Utils.separatorAmount(args.SelectedPrice.toString()))
 		mBinding.inputWithdrawalAmount.setText(Utils.separatorAmount(args.SelectedPrice.toString()))
@@ -72,11 +74,12 @@ class CalculateProfitCapitalFragment : Fragment() {
 					CalculateProfitCapitalFragmentDirections.navigateToFirstInformation()
 				)
 			} else {
+				val bundle = Bundle()
+				bundle.putLong("SelectedPrice", args.SelectedPrice)
+				bundle.putString("riskState", args.riskState)
 				findNavController().navigate(
-					CalculateProfitCapitalFragmentDirections.navigateToConnectLowRiskBrokerageFragment(
-						args.SelectedPrice,
-						args.riskState
-					)
+					R.id.connectLowRiskBrokerage,
+					bundle
 				)
 			}
 		} else if (resource.status == Status.ERROR) {

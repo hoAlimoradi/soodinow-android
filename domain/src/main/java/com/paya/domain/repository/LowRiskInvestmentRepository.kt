@@ -12,6 +12,6 @@ interface LowRiskInvestmentRepository {
 	
 	suspend fun addRiskOrder(
 		addRiskOrderRepoBodyModel: AddRiskOrderRepoBodyModel
-	) : Resource<AddRiskOrderRepoModel>
+	) : Resource<List<AddRiskOrderRepoItem>>
 
 }
