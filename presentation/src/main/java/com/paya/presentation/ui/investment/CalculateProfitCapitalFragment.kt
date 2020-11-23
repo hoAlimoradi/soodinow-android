@@ -2,7 +2,6 @@ package com.paya.presentation.ui.investment
 
 import android.os.Bundle
 import android.text.Editable
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -74,7 +73,10 @@ class CalculateProfitCapitalFragment : Fragment() {
 				)
 			} else {
 				findNavController().navigate(
-					CalculateProfitCapitalFragmentDirections.navigateToHomeFragment()
+					CalculateProfitCapitalFragmentDirections.navigateToConnectLowRiskBrokerageFragment(
+						args.SelectedPrice,
+						args.riskState
+					)
 				)
 			}
 		} else if (resource.status == Status.ERROR) {

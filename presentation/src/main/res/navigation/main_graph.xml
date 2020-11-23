@@ -164,9 +164,35 @@
             android:name="SelectedPrice"
             app:argType="long" />
 
+        <argument
+            android:name="riskState"
+            app:argType="string" />
+
         <action
             android:id="@+id/navigateToFirstInformation"
             app:destination="@id/firstInformation" />
+        <action
+            android:id="@+id/navigateToConnectLowRiskBrokerageFragment"
+            app:destination="@id/connectLowRiskBrokerage" />
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/connectLowRiskBrokerage"
+        android:name="com.paya.presentation.ui.createPersonalAccount.ConnectLowRiskBrokerageFragment"
+        android:label="fragment_connect_low_risk_brokerage"
+        tools:layout="@layout/fragment_connect_low_risk_brokerage">
+
+        <argument
+            android:name="SelectedPrice"
+            app:argType="long" />
+
+        <argument
+            android:name="riskState"
+            app:argType="string" />
+
+
         <action
             android:id="@+id/navigateToHomeFragment"
             app:destination="@id/home" />

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -14,8 +15,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.HORIZONTAL
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.paya.domain.models.repo.AccountCardRepoModel
+import com.paya.domain.models.repo.ExitAccountRepoModel
 import com.paya.domain.models.repo.MarketRepoModel
 import com.paya.domain.tools.Resource
+import com.paya.domain.tools.Status
 import com.paya.presentation.R
 import com.paya.presentation.databinding.FragmentHomeBinding
 import com.paya.presentation.ui.hint.fragments.CardAccount
@@ -44,6 +47,8 @@ class HomeFragment : Fragment() {
 			container,
 			false
 		)
+		mBinding.viewModel = mViewModel
+		mBinding.lifecycleOwner = this
 		return mBinding.root
 	}
 	
@@ -51,6 +56,7 @@ class HomeFragment : Fragment() {
 		super.onViewCreated(view,savedInstanceState)
 		observe(mViewModel.getAccountCard,::checkGetAccountStatus)
 		observe(mViewModel.getMarketSmallList,::checkGetMarketSmallListStatus)
+		observe(mViewModel.exitAccountStatus,::readyExitAccount)
 		val manager = LinearLayoutManager(context,HORIZONTAL,true)
 		val adapter = MarketAdapter()
 		mBinding.btnCreateAccount.setOnClickListener {
@@ -65,9 +71,8 @@ class HomeFragment : Fragment() {
 		}
 		
 		personalGroup.setAllOnClickListener {
-			findNavController().navigate(
-				HomeFragmentDirections.navigateToCreateWithoutRiskAccountFragment()
-			)
+			mViewModel.exitAccount()
+			
 		}
 		mBinding.marketRecycleView.layoutManager = manager
 		mBinding.marketRecycleView.adapter = adapter
@@ -99,11 +104,32 @@ class HomeFragment : Fragment() {
 		}
 	}
 	
-	private fun checkGetAccountStatus(accountResource: Resource<AccountCardRepoModel>){
+	private fun readyExitAccount(resource: Resource<ExitAccountRepoModel>) {
+		when (resource.status) {
+			Status.SUCCESS ->
+				resource.data.let {
+					if (it!!.existing) {
+						findNavController().navigate(
+							HomeFragmentDirections.navigateToCreateWithoutRiskAccountFragment()
+						)
+					} else {
+						context.let {
+							Toast.makeText(it,resource.message,Toast.LENGTH_SHORT).show()
+						}
+					}
+				}
+			Status.ERROR -> context.let {
+				Toast.makeText(it,resource.message,Toast.LENGTH_SHORT).show()
+			}
+			else -> return
+		}
+	}
+	
+	private fun checkGetAccountStatus(accountResource: Resource<AccountCardRepoModel>) {
 	
 	}
 	
-	private fun checkGetMarketSmallListStatus(marketResource: Resource<MarketRepoModel>){
+	private fun checkGetMarketSmallListStatus(marketResource: Resource<MarketRepoModel>) {
 	
 	}
 	
