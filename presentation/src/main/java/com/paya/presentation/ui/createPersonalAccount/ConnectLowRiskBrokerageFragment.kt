@@ -15,6 +15,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.paya.domain.models.repo.AddRiskOrderRepoItem
 import com.paya.domain.models.repo.AddRiskOrderRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
@@ -69,10 +70,13 @@ class ConnectLowRiskBrokerageFragment : Fragment() {
 		
 	}
 	
-	private fun readyAddRiskOrder(resource: Resource<ArrayList<AddRiskOrderRepoModel>>) {
+	private fun readyAddRiskOrder(resource: Resource<List<AddRiskOrderRepoItem>>) {
 		when (resource.status) {
 			Status.SUCCESS -> {
-				Toast.makeText(requireContext(),"با موفقیت انجام شد",Toast.LENGTH_SHORT).show()
+				Toast.makeText(
+					requireContext(),
+					resource.data?.get(0)?.ruleAction ?: "با موفقیت انجام شد",
+					Toast.LENGTH_SHORT).show()
 				findNavController().navigate(
 					ConnectLowRiskBrokerageFragmentDirections.navigateToHomeFragment()
 				)
