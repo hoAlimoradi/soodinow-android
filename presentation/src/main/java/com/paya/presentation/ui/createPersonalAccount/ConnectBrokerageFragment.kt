@@ -92,7 +92,9 @@ class ConnectBrokerageFragment : Fragment() {
 	private fun setupInvestList() {
 		val manager = LinearLayoutManager(requireContext())
 		mBinding.investRecyclerView.layoutManager = manager
-		mBinding.investRecyclerView.adapter = InvestAdapter()
+		mBinding.investRecyclerView.adapter = InvestAdapter() {
+		
+		}
 	}
 	
 	

@@ -1,5 +1,7 @@
 package com.paya.presentation.ui.createPersonalAccount
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
@@ -120,7 +122,10 @@ class ConnectLowRiskBrokerageFragment : Fragment() {
 	private fun setupInvestList() {
 		val manager = LinearLayoutManager(requireContext())
 		mBinding.investRecyclerView.layoutManager = manager
-		mBinding.investRecyclerView.adapter = InvestAdapter()
+		mBinding.investRecyclerView.adapter = InvestAdapter() {
+			val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://reg.irfarabi.com/reg/?j=1&is=1"));
+			startActivity(browserIntent);
+		}
 	}
 	
 	private fun setupSpinner() {

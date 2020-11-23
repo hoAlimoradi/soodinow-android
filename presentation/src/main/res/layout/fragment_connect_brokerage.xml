@@ -136,7 +136,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/layoutHaveAccount" />
 
-                    <androidx.appcompat.widget.AppCompatEditText
+                    <androidx.appcompat.widget.AppCompatSpinner
                         android:id="@+id/inputSelectBrokerage"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/height_medium"
@@ -154,7 +154,10 @@
                         android:singleLine="true"
                         android:textColor="#000000"
                         android:textSize="@dimen/text_size_11sp"
-                        app:layout_constraintTop_toBottomOf="@id/txt_select_brokerage" />
+                        app:layout_constraintTop_toBottomOf="@id/txt_select_brokerage"
+                        android:entries="@array/brokerage_list"
+                        android:spinnerMode="dropdown"
+                        android:overlapAnchor="false"/>
 
 
                     <androidx.appcompat.widget.AppCompatTextView

@@ -155,8 +155,9 @@
                         android:textColor="#000000"
                         android:textSize="@dimen/text_size_11sp"
                         app:layout_constraintTop_toBottomOf="@id/txt_select_brokerage"
-                        android:enabled="false"
                         android:entries="@array/brokerage_list"
+                        android:spinnerMode="dropdown"
+                        android:overlapAnchor="false"
                         />
 
 

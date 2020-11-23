@@ -108,7 +108,7 @@ class HomeFragment : Fragment() {
 		when (resource.status) {
 			Status.SUCCESS ->
 				resource.data.let {
-					if (it!!.existing) {
+					if (!it!!.existing) {
 						findNavController().navigate(
 							HomeFragmentDirections.navigateToCreateWithoutRiskAccountFragment()
 						)
