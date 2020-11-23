@@ -43,6 +43,7 @@
     <string name="all_currency">همه ارزها</string>
     <string name="market_description_card_home">شما می توانید چندین حساب سرمایه گذاری با مبالغ دلخواه خود داشته باشید</string>
     <string name="toman">تومان</string>
+    <string name="rial">ریال</string>
     <string name="create_date">تاریخ افتتاح</string>
     <string name="wealth_toman">دارایی (تومان)</string>
     <string name="wealth_increase">رشد دارایی</string>
