@@ -123,6 +123,10 @@ class ConnectLowRiskBrokerageFragment : Fragment() {
 		mBinding.investRecyclerView.adapter = InvestAdapter()
 	}
 	
+	private fun setupSpinner() {
+	
+	}
+	
 	
 	private fun changeView() {
 		BindingAdapters.changeBgRoundPurple(mBinding.yesHaveAccountBtn,true)
