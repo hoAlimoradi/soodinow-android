@@ -47,6 +47,8 @@ class ConnectLowRiskBrokerageFragment : Fragment() {
 				container,
 				false
 			)
+		mBinding.viewModel = mViewModel
+		mBinding.lifecycleOwner = this
 		return mBinding.root
 	}
 	

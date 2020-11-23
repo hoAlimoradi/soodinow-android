@@ -24,7 +24,7 @@
         android:gravity="center"
         android:padding="16dp"
         android:layout_height="match_parent"
-        android:elevation="10dp">
+        android:elevation="30dp">
 
         <ProgressBar
             app:visibleGone="@{resource.status == Status.LOADING}"
