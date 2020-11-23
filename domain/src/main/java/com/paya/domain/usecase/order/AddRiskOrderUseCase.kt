@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 class AddRiskOrderUseCase @Inject constructor(
 	private val orderRepository: LowRiskInvestmentRepository
-): UseCase<AddRiskOrderRepoBodyModel, List<AddRiskOrderRepoItem>> {
+): UseCase<AddRiskOrderRepoBodyModel, @JvmSuppressWildcards List<AddRiskOrderRepoItem>> {
 	override suspend fun action(param: AddRiskOrderRepoBodyModel): Resource<List<AddRiskOrderRepoItem>> {
 		return orderRepository.addRiskOrder(param)
 	}
