@@ -22,6 +22,6 @@ interface LowRiskInvestmentService {
 	@POST("order/add-risk-order/")
 	suspend fun addRiskOrder(
 		@Body body: AddRiskOrderRemoteBodyModel
-	): ApiResponse<BaseModel<AddRiskOrderRemoteModel>>
+	): ApiResponse<BaseModel<List<AddRiskOrderItem>>>
 	
 }

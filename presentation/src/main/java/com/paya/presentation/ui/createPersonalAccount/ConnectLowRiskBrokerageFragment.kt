@@ -69,11 +69,14 @@ class ConnectLowRiskBrokerageFragment : Fragment() {
 		
 	}
 	
-	private fun readyAddRiskOrder(resource: Resource<AddRiskOrderRepoModel>) {
+	private fun readyAddRiskOrder(resource: Resource<ArrayList<AddRiskOrderRepoModel>>) {
 		when (resource.status) {
-			Status.SUCCESS -> findNavController().navigate(
-				ConnectLowRiskBrokerageFragmentDirections.navigateToHomeFragment()
-			)
+			Status.SUCCESS -> {
+				Toast.makeText(requireContext(),"با موفقیت انجام شد",Toast.LENGTH_SHORT).show()
+				findNavController().navigate(
+					ConnectLowRiskBrokerageFragmentDirections.navigateToHomeFragment()
+				)
+			}
 			Status.ERROR -> context.let {
 				Toast.makeText(it,resource.message,Toast.LENGTH_SHORT).show()
 			}
