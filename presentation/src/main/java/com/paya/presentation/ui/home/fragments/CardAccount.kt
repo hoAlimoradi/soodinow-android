@@ -44,7 +44,7 @@ class CardAccount : Fragment() {
 		
 		// Inflate the layout for this fragment
 		mBinding =  DataBindingUtil.inflate(inflater,R.layout.account_card,container,false)
-		
+		mBinding.lifecycleOwner = this
 		return mBinding.root
 	}
 	

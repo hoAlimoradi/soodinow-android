@@ -110,38 +110,17 @@
         app:layout_constraintStart_toEndOf="@id/start_guideline"
         app:layout_constraintTop_toBottomOf="@id/accountCardNumber" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/cardSalesLine"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_card_sales_line"
-        app:layout_constraintStart_toEndOf="@+id/start_guideline"
-        app:layout_constraintTop_toBottomOf="@id/center_horizontal_guideline"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/chart"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/line_chart_height"
+            android:layout_marginTop="@dimen/margin_very_small"
+            android:layout_marginEnd="@dimen/margin_very_small"
+            app:layout_constraintStart_toEndOf="@+id/start_guideline"
+            app:layout_constraintTop_toBottomOf="@id/center_horizontal_guideline"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/chart_end_guideline"/>
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/hoverPointSales"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_hover_point"
-        app:layout_constraintBottom_toBottomOf="@id/cardSalesLine"
-        app:layout_constraintStart_toStartOf="@+id/cardSalesLine"
-        android:layout_marginBottom="60dp"
-        android:layout_marginStart="52dp"/>
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/salesValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_card_sales"
-        android:elevation="2dp"
-        android:gravity="center"
-        android:text="44 %"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text_size_10sp"
-        app:layout_constraintBottom_toTopOf="@+id/hoverPointSales"
-        app:layout_constraintStart_toStartOf="@+id/cardSalesLine"
-        android:layout_marginStart="35dp"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
@@ -152,8 +131,8 @@
         android:text="@string/wealth_increase"
         android:textColor="@color/white"
         android:textSize="8sp"
-        app:layout_constraintBottom_toBottomOf="@+id/cardSalesLine"
-        app:layout_constraintEnd_toEndOf="@+id/cardSalesLine" />
+        app:layout_constraintBottom_toBottomOf="@+id/chart"
+        app:layout_constraintEnd_toEndOf="@+id/chart" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/accountUserName"
