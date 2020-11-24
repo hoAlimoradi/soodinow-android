@@ -29,7 +29,7 @@ class NumberTextWatcher(
 		searchFor = searchText
 		
 		coroutineScope?.launch {
-			delay(500)  //debounce timeOut
+			delay(1000)  //debounce timeOut
 			if (searchText != searchFor)
 				return@launch
 			
@@ -42,6 +42,7 @@ class NumberTextWatcher(
 			it.isDigit()
 		}.toLongOrNull()
 		et.setText(df.format(number).toString().replace(".", ""))
+		et.setSelection(et.text.length)
 		et.addTextChangedListener(this)
 	}
 	
