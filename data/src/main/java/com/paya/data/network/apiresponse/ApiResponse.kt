@@ -1,6 +1,10 @@
 package com.paya.data.network.apiresponse
 
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import com.paya.domain.models.remote.BaseModel
 import retrofit2.Response
+import java.lang.reflect.Type
 
 /**
  * Common class used by API responses.
@@ -8,10 +12,23 @@ import retrofit2.Response
 </T> */
 sealed class ApiResponse<T> {
     companion object {
+        
+        private fun parseBaseModel(jsonString: String?): BaseModel<*>? {
+            jsonString ?: return null
+            try {
+                val gson = Gson()
+                val collectionType: Type = object : TypeToken<BaseModel<*>>() {}.type
+                return gson.fromJson(jsonString, collectionType)
+            }catch (e: Exception){
+                return null
+            }
+            
+        }
+        
         fun <T> create(error: Throwable): ApiErrorResponse<T> {
             return ApiErrorResponse(error.message ?: "unknown error")
         }
-
+        
         fun <T> create(response: Response<T>): ApiResponse<T> {
             return if (response.isSuccessful) {
                 val body = response.body()
@@ -21,7 +38,9 @@ sealed class ApiResponse<T> {
                     ApiSuccessResponse(body)
                 }
             } else {
-                val msg = response.errorBody()?.string()
+                val baseModel = parseBaseModel(response.errorBody()?.string())
+                val msg = baseModel?.error?.message ?: response.errorBody()?.string()
+                
                 val errorMsg = if (msg.isNullOrEmpty()) {
                     response.message()
                 } else {
