@@ -71,8 +71,11 @@ class HomeFragment : Fragment() {
 		}
 		
 		personalGroup.setAllOnClickListener {
-			mViewModel.exitAccount()
-			
+			//mViewModel.exitAccount()
+			findNavController().navigateUp()
+			findNavController().navigate(
+				HomeFragmentDirections.navigateToCreateWithoutRiskAccountFragment()
+			)
 		}
 		mBinding.marketRecycleView.layoutManager = manager
 		mBinding.marketRecycleView.adapter = adapter
