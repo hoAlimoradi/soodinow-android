@@ -103,6 +103,7 @@ class HomeFragment : Fragment() {
 			accountCard.visibility = View.GONE
 		}
 		mBinding.alarm.setOnClickListener {
+			findNavController().navigateUp()
 			findNavController().navigate(
 				HomeFragmentDirections.navigateToActivitiesReportFragment()
 			)
@@ -114,12 +115,15 @@ class HomeFragment : Fragment() {
 			Status.SUCCESS ->
 				resource.data.let {
 					if (!it!!.existing) {
+						findNavController().navigateUp()
 						findNavController().navigate(
 							HomeFragmentDirections.navigateToCreateWithoutRiskAccountFragment()
 						)
 					} else {
 						context.let {
-							Toast.makeText(it,resource.message,Toast.LENGTH_SHORT).show()
+							Toast.makeText(it,
+								if(resource.message.isNullOrEmpty()) getString(R.string.create_account_not_compelet) else resource.message,
+								Toast.LENGTH_SHORT).show()
 						}
 					}
 				}
