@@ -125,6 +125,7 @@
     <string name="highest_profit">طبق سال گذشته</string>
     <string name="inventory_management">مدیریت موجودی</string>
     <string name="activity_report">گزارش کار</string>
+    <string name="price_error">مبلغ 5 میلیون ریال و کمتر مجاز نمیباشد</string>
 
     <string-array name="brokerage_list">
         <item>کارگزاری فارابی</item>

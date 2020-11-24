@@ -29,7 +29,7 @@ class NumberTextWatcher(
 		searchFor = searchText
 		
 		coroutineScope?.launch {
-			delay(1000)  //debounce timeOut
+			delay(2000)  //debounce timeOut
 			if (searchText != searchFor)
 				return@launch
 			
