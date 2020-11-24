@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/margin_very_small"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_number"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/circle_green"
+        android:gravity="center"
+        android:padding="@dimen/margin_4_dp"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_small"
+        android:textStyle="bold"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="7" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_title"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/txt_number"
+        android:layout_marginEnd="@dimen/margin_very_small"
+        android:text="ورود به حساب با موفقیت انجام شد"
+        android:textSize="@dimen/text_size_small"
+        android:layout_marginTop="@dimen/margin_4_dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_date_prefix"
+        app:layout_constraintTop_toBottomOf="@id/txt_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="تاریخ:"
+        android:textSize="@dimen/text_size_12sp"
+        android:layout_marginTop="@dimen/margin_small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_date"
+        app:layout_constraintTop_toBottomOf="@id/txt_title"
+        app:layout_constraintEnd_toStartOf="@id/txt_date_prefix"
+        android:layout_marginEnd="@dimen/margin_4_dp"
+        android:text="99/02/08"
+        android:textSize="@dimen/text_size_12sp"
+        android:layout_marginTop="@dimen/margin_small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_hour_prefix"
+        app:layout_constraintTop_toBottomOf="@id/txt_title"
+        app:layout_constraintStart_toEndOf="@id/txt_hour"
+        android:text="ساعت:"
+        android:layout_marginStart="@dimen/margin_4_dp"
+        android:textSize="@dimen/text_size_12sp"
+        android:layout_marginTop="@dimen/margin_small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_hour"
+        app:layout_constraintTop_toBottomOf="@id/txt_title"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="18:35"
+        android:textSize="@dimen/text_size_12sp"
+        android:layout_marginTop="@dimen/margin_small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        app:layout_constraintTop_toBottomOf="@id/txt_hour"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_margin="@dimen/margin_very_small"
+        android:layerType="software"
+        android:src="@drawable/dashed_line" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
