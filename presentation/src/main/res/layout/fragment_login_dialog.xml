@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.custom.LoginDialogFragment">
+
+    <data>
+
+        <import type="androidx.databinding.ObservableField" />
+
+        <variable
+            name="titleDialog"
+            type="java.lang.String" />
+
+        <variable
+            name="hintUsername"
+            type="java.lang.String" />
+
+        <variable
+            name="hintPassword"
+            type="java.lang.String" />
+
+        <variable
+            name="submitTitle"
+            type="java.lang.String" />
+
+        <variable
+            name="cancelTitle"
+            type="java.lang.String" />
+
+        <variable
+            name="username"
+            type="ObservableField&lt;java.lang.String>" />
+
+        <variable
+            name="password"
+            type="ObservableField&lt;java.lang.String>" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        style="@style/GeneralCardView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/toolbar_dialog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:titleDialog="@{titleDialog}" />
+
+            <include
+                android:id="@+id/usernameEditText"
+                layout="@layout/input_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:content="@{username}"
+                app:hintLabel="@{hintPassword}"
+                app:label="@{hintPassword}"
+                app:layout_constraintTop_toBottomOf="@id/toolbar"
+                android:layout_margin="@dimen/margin_small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <include
+                android:id="@+id/passwordEdiText"
+                layout="@layout/input_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:content="@{password}"
+                app:hintLabel="@{hintUsername}"
+                app:label="@{hintUsername}"
+                android:layout_margin="@dimen/margin_small"
+                app:layout_constraintTop_toBottomOf="@id/usernameEditText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/submitBtn"
+                android:layout_width="0dp"
+                app:layout_constraintHorizontal_weight="5"
+                android:layout_height="@dimen/height_medium"
+                android:layout_marginTop="@dimen/margin_small"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:background="@drawable/bg_button_green"
+                android:layout_marginStart="@dimen/margin_small"
+                android:layout_marginEnd="@dimen/margin_small"
+                android:text="@{submitTitle}"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/cancelBtn"
+                app:layout_constraintTop_toBottomOf="@id/passwordEdiText" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/cancelBtn"
+                android:layout_width="0dp"
+                app:layout_constraintHorizontal_weight="5"
+                android:layout_height="@dimen/height_medium"
+                android:layout_marginTop="@dimen/margin_small"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:background="@drawable/bg_button_gray"
+                android:text="@{cancelTitle}"
+                android:textColor="@color/black"
+                android:layout_marginStart="@dimen/margin_small"
+                android:textSize="@dimen/text_size_small"
+                app:layout_constraintEnd_toStartOf="@+id/submitBtn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/passwordEdiText" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</layout>
