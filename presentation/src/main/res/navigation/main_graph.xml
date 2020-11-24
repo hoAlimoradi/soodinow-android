@@ -41,6 +41,9 @@
         <action
             android:id="@+id/navigateToCreateWithoutRiskAccountFragment"
             app:destination="@id/createWithoutRiskAccount" />
+        <action
+            android:id="@+id/navigateToActivitiesReportFragment"
+            app:destination="@id/activitiesReportFragment" />
 
 
     </fragment>
@@ -198,5 +201,9 @@
             app:destination="@id/home" />
 
     </fragment>
+    <fragment
+        android:id="@+id/activitiesReportFragment"
+        android:name="com.paya.presentation.ui.activitiesReport.ActivitiesReportFragment"
+        android:label="ActivitiesReportFragment" />
 
 </navigation>

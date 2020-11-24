@@ -102,6 +102,11 @@ class HomeFragment : Fragment() {
 			mBinding.viewPagerGroup.visibility = View.GONE
 			accountCard.visibility = View.GONE
 		}
+		mBinding.alarm.setOnClickListener {
+			findNavController().navigate(
+				HomeFragmentDirections.navigateToActivitiesReportFragment()
+			)
+		}
 	}
 	
 	private fun readyExitAccount(resource: Resource<ExitAccountRepoModel>) {
