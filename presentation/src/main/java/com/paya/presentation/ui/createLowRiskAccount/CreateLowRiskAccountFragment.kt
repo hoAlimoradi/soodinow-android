@@ -71,6 +71,13 @@ class CreateLowRiskAccountFragment : Fragment() {
 		}
 		
 		mBinding.submitBtn.setOnClickListener {
+			val price = mBinding.inputPrice.text.toString().filter { it.isDigit() }.toLong()
+			if (price <= 5000000){
+				Toast.makeText(
+					requireContext(), getString(R.string.price_error), Toast.LENGTH_SHORT
+				).show()
+				return@setOnClickListener
+			}
 			findNavController().navigate(
 				CreateLowRiskAccountFragmentDirections.navigationToCalculateProfitCapital(
 					percents,
