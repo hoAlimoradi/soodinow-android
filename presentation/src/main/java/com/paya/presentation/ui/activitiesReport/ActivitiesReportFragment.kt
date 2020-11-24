@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.paya.presentation.R
 import com.paya.presentation.databinding.FragmentActivitiesReportBinding
+import com.paya.presentation.ui.question.QuestionAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,6 +30,18 @@ class ActivitiesReportFragment : Fragment() {
 		)
 		
 		return binding.root
+	}
+	
+	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
+		super.onViewCreated(view,savedInstanceState)
+		setupRecyclerView()
+	}
+	
+	private fun setupRecyclerView() {
+		val manager = LinearLayoutManager(requireContext())
+		val adapter = ActivityReportAdapter()
+		binding.activityReportRecycler.layoutManager = manager
+		binding.activityReportRecycler.adapter = adapter
 	}
 	
 }
