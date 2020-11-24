@@ -1,18 +1,20 @@
 package com.paya.presentation.ui.custom
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.ObservableField
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
 import com.paya.presentation.R
 import com.paya.presentation.databinding.FragmentLoginDialogBinding
+import com.paya.presentation.utils.Utils
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val TTTLE = "TITLE"
+private const val TITLE = "TITLE"
 private const val HINT_USERNAME= "HINT_USERNAME"
 private const val HINT_PASSWORD= "HINT_PASSWORD"
 private const val SUBMIT_TITLE= "SUBMIT_TITLE"
@@ -30,17 +32,27 @@ class LoginDialogFragment : DialogFragment() {
 	private var hintPassword: String? = null
 	private var submitTitle: String? = null
 	private var cancelTitle: String? = null
+	private  var username: ObservableField<String> = ObservableField<String>()
+	private  var password: ObservableField<String> = ObservableField<String>()
 	
 	private lateinit var mBinding: FragmentLoginDialogBinding
+	var callBack: CallBack? = null
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		arguments?.let {
-			title = it.getString(TTTLE)
+			title = it.getString(TITLE)
 			hintUsername = it.getString(HINT_USERNAME)
 			hintPassword = it.getString(HINT_PASSWORD)
 			submitTitle = it.getString(SUBMIT_TITLE)
 			cancelTitle = it.getString(CANCEL_TITLE)
 		}
+	}
+	
+	override fun onResume() {
+		super.onResume()
+		dialog?.window?.let {
+			Utils.setTransparentBackgroundDialog(it)
+			Utils.setAutomaticSizeHeightDialog(requireActivity(),it) }
 	}
 	
 	override fun onCreateView(
@@ -49,8 +61,29 @@ class LoginDialogFragment : DialogFragment() {
 	): View? {
 		// Inflate the layout for this fragment
 		mBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_login_dialog,container,false)
-		
+		mBinding.titleDialog = title
+		mBinding.hintUsername = hintUsername
+		mBinding.hintPassword = hintPassword
+		mBinding.submitTitle = submitTitle
+		mBinding.cancelTitle = cancelTitle
+		mBinding.username = username
+		mBinding.password = password
+		mBinding.lifecycleOwner = this
 		return mBinding.root
+	}
+	
+	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
+		super.onViewCreated(view,savedInstanceState)
+		mBinding.submitBtn.setOnClickListener {
+			callBack?.success(username.get().toString(),password.get().toString())
+			
+		}
+		mBinding.cancelBtn.setOnClickListener {
+			callBack?.cancel()
+		}
+		mBinding.toolbar.closeBtn.setOnClickListener {
+			dismissAllowingStateLoss()
+		}
 	}
 	
 	companion object {
@@ -67,7 +100,7 @@ class LoginDialogFragment : DialogFragment() {
 		fun newInstance(title: String,hintUsername: String,hintPassword: String,submitTitle: String,cancelTitle: String) =
 			LoginDialogFragment().apply {
 				arguments = Bundle().apply {
-					putString(TTTLE,title)
+					putString(TITLE,title)
 					putString(HINT_USERNAME,hintUsername)
 					putString(HINT_PASSWORD,hintPassword)
 					putString(SUBMIT_TITLE,submitTitle)
