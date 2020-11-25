@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.util.DisplayMetrics
 import android.view.Gravity
+import android.view.ViewGroup
 import android.view.Window
 import ir.hamsaa.persiandatepicker.util.PersianCalendar
 import saman.zamani.persiandate.PersianDate
@@ -25,8 +26,23 @@ object Utils {
 			dialogW,
 			dialogH
 		)
+		setTransparentBackgroundDialog(window)
+	}
+	@JvmStatic
+	fun setTransparentBackgroundDialog(window: Window) {
 		window.setGravity(Gravity.CENTER)
 		window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+	}
+	
+	@JvmStatic
+	fun setAutomaticSizeHeightDialog(activity: Activity,window: Window) {
+		val displayMetrics = DisplayMetrics()
+		activity.windowManager.defaultDisplay.getMetrics(displayMetrics)
+		val width = displayMetrics.widthPixels
+		val dialogW = (width * 70) / 100
+		window.setLayout(dialogW, ViewGroup.LayoutParams.WRAP_CONTENT);
+		
+		
 	}
 	
 	@JvmStatic
