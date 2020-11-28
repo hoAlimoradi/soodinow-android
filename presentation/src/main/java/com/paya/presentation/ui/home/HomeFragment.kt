@@ -23,9 +23,11 @@ import com.paya.presentation.R
 import com.paya.presentation.databinding.FragmentHomeBinding
 import com.paya.presentation.ui.hint.fragments.CardAccount
 import com.paya.presentation.ui.home.adapter.MarketAdapter
+import com.paya.presentation.utils.BindingAdapters
 import com.paya.presentation.utils.ViewPagerUtil
 import com.paya.presentation.utils.observe
 import com.paya.presentation.utils.setAllOnClickListener
+import com.paya.presentation.utils.shared.Point
 import com.paya.presentation.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -102,6 +104,17 @@ class HomeFragment : Fragment() {
 			mBinding.viewPagerGroup.visibility = View.GONE
 			accountCard.visibility = View.GONE
 		}
+		
+		setChartData()
+	}
+	
+	private fun setChartData() {
+		val points = mutableListOf<Point>()
+		for (i in 0 until 10) {
+			val value = (Math.random() * 100).toFloat()
+			points.add(Point(i.toFloat(),value))
+		}
+		BindingAdapters.setLineAccountChartData(mBinding.accountCard.chart,points)
 	}
 	
 	private fun readyExitAccount(resource: Resource<ExitAccountRepoModel>) {

@@ -128,7 +128,7 @@
                 android:layout_marginTop="@dimen/margin_small"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="@dimen/radius_card"
-                app:layout_constraintTop_toBottomOf="@id/pager">
+                app:layout_constraintTop_toBottomOf="@id/tabAccountCard">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"

@@ -21,6 +21,7 @@ import com.github.mikephil.charting.formatter.IFillFormatter
 import com.paya.presentation.R
 import com.paya.presentation.ui.custom.AccountMarkerView
 import com.paya.presentation.ui.custom.MyMarkerView
+import com.paya.presentation.ui.custom.MyMarkerViewSmall
 import com.paya.presentation.utils.shared.Point
 
 object BindingAdapters {
@@ -233,7 +234,7 @@ object BindingAdapters {
 		chart.description.isEnabled = false
 		
 		// enable touch gestures
-		chart.setTouchEnabled(true)
+		chart.setTouchEnabled(false)
 		
 		// enable scaling and dragging
 		chart.isDragEnabled = true
@@ -252,7 +253,8 @@ object BindingAdapters {
 		
 		chart.axisRight.isEnabled = false
 		
-		chart.marker = AccountMarkerView(chart.context)
+		chart.marker = MyMarkerViewSmall(chart.context)
+		
 		
 		setAccountData(chart,data)
 		
@@ -262,6 +264,18 @@ object BindingAdapters {
 		
 		// don't forget to refresh the drawing
 		chart.invalidate()
+		
+		val index = chart.data.dataSets[0].entryCount / 3
+		
+		val x = chart.data.dataSets[0].getEntryForIndex(index).x
+		
+		val y = chart.data.dataSets[0].getEntryForIndex(index).y
+		
+		chart.highlightValue(x,y,0)
+		chart.marker.refreshContent(
+			chart.data.dataSets[0].getEntryForIndex(index),
+			chart.getHighlightByTouchPoint(x,y)
+		)
 	}
 	
 	private fun setAccountData(chart: LineChart,points: List<Point>) {

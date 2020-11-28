@@ -113,12 +113,12 @@
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/chart"
             android:layout_width="0dp"
-            android:layout_height="@dimen/line_chart_height"
+            android:layout_height="0dp"
             android:layout_marginTop="@dimen/margin_very_small"
             android:layout_marginEnd="@dimen/margin_very_small"
             app:layout_constraintStart_toEndOf="@+id/start_guideline"
             app:layout_constraintTop_toBottomOf="@id/center_horizontal_guideline"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_guideline"
             app:layout_constraintEnd_toStartOf="@+id/chart_end_guideline"/>
 
 
@@ -131,7 +131,7 @@
         android:text="@string/wealth_increase"
         android:textColor="@color/white"
         android:textSize="8sp"
-        app:layout_constraintBottom_toBottomOf="@+id/chart"
+        app:layout_constraintTop_toBottomOf="@+id/chart"
         app:layout_constraintEnd_toEndOf="@+id/chart" />
 
         <androidx.appcompat.widget.AppCompatTextView
