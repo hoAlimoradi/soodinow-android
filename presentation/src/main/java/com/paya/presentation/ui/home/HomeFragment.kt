@@ -124,7 +124,6 @@ class HomeFragment : Fragment() {
 			points.add(Point(i.toFloat(),value))
 		}
 		BindingAdapters.setLineAccountChartData(mBinding.accountCard.chart,points)
-
 	}
 	
 	private fun readyExitAccount(resource: Resource<ExitAccountRepoModel>) {
