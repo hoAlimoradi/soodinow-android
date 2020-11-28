@@ -62,6 +62,7 @@ class SetPasswordViewModel @ViewModelInject constructor(
 		}
 		
 		viewModelScope.launch(Dispatchers.IO) {
+			setPasswordResource.postValue(Resource.loading(null))
 			val resource = setPasswordUseCase.action(password)
 			setPasswordResource.postValue(resource)
 		}

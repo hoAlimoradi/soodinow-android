@@ -73,8 +73,11 @@ class HomeFragment : Fragment() {
 		}
 		
 		personalGroup.setAllOnClickListener {
-			mViewModel.exitAccount()
-			
+			//mViewModel.exitAccount()
+			findNavController().navigateUp()
+			findNavController().navigate(
+				HomeFragmentDirections.navigateToCreateWithoutRiskAccountFragment()
+			)
 		}
 		mBinding.marketRecycleView.layoutManager = manager
 		mBinding.marketRecycleView.adapter = adapter
@@ -104,6 +107,12 @@ class HomeFragment : Fragment() {
 			mBinding.viewPagerGroup.visibility = View.GONE
 			accountCard.visibility = View.GONE
 		}
+			mBinding.alarm.setOnClickListener {
+			findNavController().navigateUp()
+			findNavController().navigate(
+				HomeFragmentDirections.navigateToActivitiesReportFragment()
+			)
+		}
 		
 		setChartData()
 	}
@@ -115,6 +124,7 @@ class HomeFragment : Fragment() {
 			points.add(Point(i.toFloat(),value))
 		}
 		BindingAdapters.setLineAccountChartData(mBinding.accountCard.chart,points)
+
 	}
 	
 	private fun readyExitAccount(resource: Resource<ExitAccountRepoModel>) {
@@ -122,12 +132,15 @@ class HomeFragment : Fragment() {
 			Status.SUCCESS ->
 				resource.data.let {
 					if (!it!!.existing) {
+						findNavController().navigateUp()
 						findNavController().navigate(
 							HomeFragmentDirections.navigateToCreateWithoutRiskAccountFragment()
 						)
 					} else {
 						context.let {
-							Toast.makeText(it,resource.message,Toast.LENGTH_SHORT).show()
+							Toast.makeText(it,
+								if(resource.message.isNullOrEmpty()) getString(R.string.create_account_not_compelet) else resource.message,
+								Toast.LENGTH_SHORT).show()
 						}
 					}
 				}
