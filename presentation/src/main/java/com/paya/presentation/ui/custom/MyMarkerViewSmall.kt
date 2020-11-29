@@ -14,7 +14,7 @@ class MyMarkerViewSmall(context: Context) : MarkerView(context,R.layout.popup_li
 	
 	private val percentTextView: TextView = findViewById(R.id.percent)
 	
-	override fun refreshContent(e: Entry,highlight: Highlight) {
+	override fun refreshContent(e: Entry,highlight: Highlight?) {
 		if (e is CandleEntry) {
 			percentTextView.text = Utils.formatNumber(e.high,0,true)  + " %"
 		} else {

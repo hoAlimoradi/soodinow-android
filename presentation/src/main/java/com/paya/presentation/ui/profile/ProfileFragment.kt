@@ -196,7 +196,7 @@ class ProfileFragment : Fragment() {
 		boxModel.circleChart.forEach { totalQuantity += it.quantity }
 		val pieChartDataList = boxModel.circleChart.map {
 			AppropriateInvestmentFragment.PieChartData(
-				(it.quantity / totalQuantity).toFloat(),
+				(100 * it.quantity / totalQuantity).toFloat(),
 				it.name
 			)
 		}
