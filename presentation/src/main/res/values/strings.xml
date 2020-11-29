@@ -128,6 +128,14 @@
     <string name="price_error">مبلغ 5 میلیون ریال و کمتر مجاز نمیباشد</string>
     <string name="create_account_not_compelet">افتتاح حساب قبلی شما هنوز  تکمیل نشده است</string>
     <string name="complete_profile">تکمیل پروفایل</string>
+    <string name="my_profile">پروفایل من</string>
+    <string name="about_us">درباره ما</string>
+    <string name="asked_question">سوالات متداول</string>
+    <string name="terms_conditions">قوانین و مقرات</string>
+    <string name="active_fingerprint">فعال کردن اثر انگشت</string>
+    <string name="change_password">تغییر رمز عبور</string>
+    <string name="introduce_friends">معرفی به دوستان</string>
+    <string name="exit_app">خروج از برنامه</string>
 
     <string-array name="brokerage_list">
         <item>کارگزاری فارابی</item>

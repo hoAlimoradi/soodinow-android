@@ -3,12 +3,14 @@ package com.paya.presentation.utils
 import android.content.Context
 import android.graphics.Color
 import android.graphics.PorterDuff
+import android.graphics.drawable.Drawable
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.databinding.BindingAdapter
@@ -19,12 +21,18 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IFillFormatter
 import com.paya.presentation.R
-import com.paya.presentation.ui.custom.AccountMarkerView
 import com.paya.presentation.ui.custom.MyMarkerView
 import com.paya.presentation.ui.custom.MyMarkerViewSmall
 import com.paya.presentation.utils.shared.Point
 
+
 object BindingAdapters {
+	
+	@JvmStatic
+	@BindingAdapter("iconSet")
+	fun setImageDrawable(view: ImageView,drawable: Drawable?) {
+		view.setImageDrawable(drawable)
+	}
 	
 	@JvmStatic
 	@BindingAdapter("percentText")
@@ -36,7 +44,7 @@ object BindingAdapters {
 	
 	@JvmStatic
 	@BindingAdapter("progressValue")
-	fun setProgressValue(circleProgressView: CircleProgressView, value: Float?){
+	fun setProgressValue(circleProgressView: CircleProgressView,value: Float?){
 		value ?: return
 		circleProgressView.setValue(value)
 	}

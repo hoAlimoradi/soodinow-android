@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="label"
+            type="java.lang.String" />
+
+        <variable
+            name="img"
+            type="android.graphics.drawable.Drawable" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height"
+        android:elevation="2dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/arrowImage"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/ic_left_arrow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:tint="@color/blue_light"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="@{label}"
+            android:textSize="@dimen/text_size_11sp"
+            android:textColor="@color/purple_gray"
+            android:layout_marginEnd="@dimen/margin_very_small"
+            android:layout_marginStart="@dimen/margin_very_small"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/arrowImage"
+            app:layout_constraintEnd_toStartOf="@+id/iconImage"
+            />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iconImage"
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:src="@{img}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:tint="@color/green"
+            android:scaleType="centerInside"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
