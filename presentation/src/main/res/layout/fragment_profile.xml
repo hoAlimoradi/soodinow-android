@@ -59,10 +59,12 @@
                     app:layout_constraintGuide_percent="0.355" />
 
                 <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/titleImg"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/title"
+                    app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginTop="@dimen/margin_small"
                     android:layout_marginStart="@dimen/margin_very_small"
+                    android:layout_marginEnd="@dimen/margin_small"
                     app:srcCompat="@drawable/ic_add_account"
                     android:layout_width="@dimen/margin_small"
                     android:layout_height="@dimen/margin_small"/>
@@ -76,7 +78,7 @@
                     android:textColor="@color/purple"
                     android:textSize="@dimen/text_size_12sp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/titleImg"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.viewpager2.widget.ViewPager2
@@ -86,7 +88,7 @@
                     android:layout_marginTop="@dimen/margin_very_small"
                     app:layout_constraintEnd_toStartOf="@+id/end_guideline"
                     app:layout_constraintStart_toEndOf="@+id/start_guideline"
-                    app:layout_constraintTop_toBottomOf="@id/txtInventoryManagement" />
+                    app:layout_constraintTop_toBottomOf="@id/title" />
 
                 <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
                     android:id="@+id/tabAccountCard"
@@ -108,22 +110,25 @@
                     android:id="@+id/txtInventoryManagement"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_small"
                     android:layout_marginStart="@dimen/margin_small"
-                    android:layout_marginTop="@dimen/margin_4_dp"
+                    android:layout_marginTop="@dimen/margin_very_small"
                     android:text="@string/inventory_management"
                     android:textColor="@color/purple"
                     android:textSize="@dimen/text_size_12sp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/title" />
+                    app:layout_constraintEnd_toStartOf="@id/managementImg"
+                    app:layout_constraintTop_toBottomOf="@id/tabAccountCard" />
 
                 <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/managementImg"
                     android:layout_width="@dimen/margin_small"
                     android:layout_height="@dimen/margin_small"
                     android:layout_marginStart="@dimen/margin_very_small"
                     android:layout_marginTop="@dimen/margin_very_small"
-                    app:layout_constraintStart_toEndOf="@id/txtInventoryManagement"
-                    app:layout_constraintTop_toBottomOf="@id/title"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    app:layout_constraintTop_toBottomOf="@id/tabAccountCard"
                     app:srcCompat="@drawable/ic_money_bag" />
 
                 <androidx.cardview.widget.CardView
@@ -134,7 +139,7 @@
                     android:layout_marginTop="@dimen/margin_small"
                     app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="@dimen/radius_card"
-                    app:layout_constraintTop_toBottomOf="@id/tabAccountCard">
+                    app:layout_constraintTop_toBottomOf="@id/txtInventoryManagement">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -331,6 +336,7 @@
 
 
         <include
+            tools:visibility="gone"
             layout="@layout/loading_state"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

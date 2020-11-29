@@ -166,7 +166,7 @@ class ProfileFragment : Fragment() {
 	}
 	
 	private fun setCurrentBoxData(cardAccount: CardAccount,boxModel: BoxHistoryRepoModel) {
-		cardAccount.setData(boxModel.cardChart, boxModel.buyValue,boxModel.percent)
+		cardAccount.setData(boxModel.cardChart, boxModel.buyValue,boxModel.percent * 100)
 		
 		val mainChartPoints = mutableListOf<Point>()
 		val mainChartData = boxModel.mainChart.data

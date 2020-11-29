@@ -59,7 +59,7 @@ class AppropriateInvestmentFragment : Fragment() {
 	
 	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
 		super.onViewCreated(view,savedInstanceState)
-		setup()
+//		setup()
 	}
 	
 	fun setup() {
