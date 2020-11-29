@@ -104,6 +104,8 @@ class ProfileFragment : Fragment() {
 		if (resource.status == Status.SUCCESS) {
 			resource.data?.activeBoxId?.let {
 				boxHistoryId = it
+				mBinding.scrollView.visibility = if(boxHistoryId!!.isNotEmpty()) View.VISIBLE else View.GONE
+				mBinding.empty.visibility = if(boxHistoryId!!.isEmpty()) View.VISIBLE else View.GONE
 				it.forEach { id ->
 					boxHistoryHahMap[id] = null
 					cardAccounts.add(CardAccount())
