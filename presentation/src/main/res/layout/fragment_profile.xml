@@ -158,7 +158,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/margin_very_small"
                         android:layout_marginTop="@dimen/margin_small"
-                        android:text="@string/toman"
+                        android:text="@string/rial"
                         android:textColor="@color/purple_gray"
                         android:textSize="@dimen/text_size_11sp"
                         app:layout_constraintEnd_toStartOf="@id/txt_price"
@@ -203,14 +203,14 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/margin_very_small"
                         android:layout_marginTop="@dimen/margin_very_small"
-                        android:checkedButton="@+id/low_risk"
+                        android:checkedButton="@+id/radioButtonDay"
                         android:gravity="end"
                         app:layout_constraintHorizontal_bias="0"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/txt_percent">
 
                         <RadioButton
-                            android:id="@+id/low_risk"
+                            android:id="@+id/radioButtonDay"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:button="@null"
@@ -221,7 +221,7 @@
                             android:textSize="@dimen/text_size_10sp" />
 
                         <RadioButton
-                            android:id="@+id/high_risk"
+                            android:id="@+id/RadioButtonWeek"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_very_small"
@@ -233,7 +233,19 @@
                             android:textSize="@dimen/text_size_10sp" />
 
                         <RadioButton
-                            android:id="@+id/long_term"
+                            android:id="@+id/RadioButtonMonth"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_very_small"
+                            android:button="@null"
+                            android:drawableStart="@drawable/selector_check_box"
+                            android:drawablePadding="@dimen/margin_very_small"
+                            android:layoutDirection="rtl"
+                            android:text="ماهانه"
+                            android:textSize="@dimen/text_size_10sp" />
+
+                        <RadioButton
+                            android:id="@+id/RadioButtonLongTerm"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_very_small"
@@ -249,7 +261,6 @@
 
                     <com.github.mikephil.charting.charts.LineChart
                         android:id="@+id/chart"
-                        chartData="@{viewModel.pointsLiveData}"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/line_chart_height"
                         android:layout_marginTop="@dimen/margin_very_small"

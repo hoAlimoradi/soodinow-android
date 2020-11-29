@@ -1,24 +1,16 @@
 package com.paya.presentation.ui.hint.fragments
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
-import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import com.github.mikephil.charting.charts.LineChart
-import com.github.mikephil.charting.data.Entry
-import com.github.mikephil.charting.data.LineData
-import com.github.mikephil.charting.data.LineDataSet
-import com.github.mikephil.charting.formatter.IFillFormatter
+import com.paya.domain.models.repo.LinearChartRepoModel
 import com.paya.presentation.R
 import com.paya.presentation.databinding.AccountCardBinding
-import com.paya.presentation.ui.custom.MyMarkerView
-import com.paya.presentation.ui.custom.MyMarkerViewSmall
 import com.paya.presentation.utils.BindingAdapters
+import com.paya.presentation.utils.Utils
 import com.paya.presentation.utils.shared.Point
 
 // TODO: Rename parameter arguments, choose names that match
@@ -45,7 +37,7 @@ class CardAccount : Fragment() {
 	}
 	
 	
-	private lateinit var mBinding : AccountCardBinding
+	private lateinit var mBinding: AccountCardBinding
 	
 	override fun onCreateView(
 		inflater: LayoutInflater,container: ViewGroup?,
@@ -53,19 +45,35 @@ class CardAccount : Fragment() {
 	): View? {
 		
 		// Inflate the layout for this fragment
-		mBinding =  DataBindingUtil.inflate(inflater,R.layout.account_card,container,false)
+		mBinding = DataBindingUtil.inflate(inflater,R.layout.account_card,container,false)
 		mBinding.lifecycleOwner = this
 		return mBinding.root
 	}
 	
 	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
 		super.onViewCreated(view,savedInstanceState)
+//		val points = mutableListOf<Point>()
+//		for (i in 0 until 10) {
+//			val value = (Math.random() * 100).toFloat()
+//			points.add(Point(i.toFloat(),value))
+//		}
+//		BindingAdapters.setLineAccountChartData(mBinding.chart,points)
+	}
+	
+	fun setData(linearChartRepoModel: LinearChartRepoModel,buyValue: Long) {
+		mBinding.wealthValue.text = buyValue.toString()
+		
 		val points = mutableListOf<Point>()
-		for (i in 0 until 10) {
-			val value = (Math.random() * 100).toFloat()
-			points.add(Point(i.toFloat(),value))
+		linearChartRepoModel.data.forEachIndexed { index,value ->
+			points.add(Point(index.toFloat(),value.toFloat()))
 		}
 		BindingAdapters.setLineAccountChartData(mBinding.chart,points)
+		
+		val persianDate = Utils.convertStringPersianDate(linearChartRepoModel.startDate)
+		persianDate?.let {
+			val date = "${persianDate.shYear}/${persianDate.shMonth}/${persianDate.shDay}"
+			mBinding.dateValue.text = date
+		}
 	}
 	
 	companion object {

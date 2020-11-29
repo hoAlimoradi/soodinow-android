@@ -139,8 +139,13 @@ class CreateLowRiskAccountFragment : Fragment() {
 				mBinding.highProfit = response.perfect.percent * 100
 				
 				val basket = resource.data?.basket ?: return
-				appropriateInvestmentFragment.basket.clear()
-				appropriateInvestmentFragment.basket.addAll(basket)
+				appropriateInvestmentFragment.pieChartDataList.clear()
+				appropriateInvestmentFragment.pieChartDataList.addAll(
+					basket.map { AppropriateInvestmentFragment.PieChartData(
+						it.percent,
+						it.namad
+					) }
+				)
 				appropriateInvestmentFragment.setup()
 			}
 			Status.ERROR -> Toast.makeText(requireContext(), resource.message, Toast.LENGTH_SHORT).show()
