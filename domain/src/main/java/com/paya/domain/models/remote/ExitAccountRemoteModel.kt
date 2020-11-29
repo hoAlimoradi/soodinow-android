@@ -4,6 +4,6 @@ import com.google.gson.annotations.SerializedName
 
 data class ExitAccountRemoteModel(
 	val existing: Boolean,
-	@SerializedName("active_box_id")
-	val activeBoxId: List<Long>
+	@SerializedName("id")
+	val activeBoxId: Long
 )

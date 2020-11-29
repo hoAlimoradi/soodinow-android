@@ -1,6 +1,7 @@
 package com.paya.presentation.viewmodel
 
 import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,6 +10,7 @@ import com.paya.domain.models.repo.BoxHistoryRequestModel
 import com.paya.domain.models.repo.ExitAccountRepoModel
 import com.paya.domain.models.repo.ProfileRepoModel
 import com.paya.domain.tools.Resource
+import com.paya.domain.tools.Status
 import com.paya.domain.tools.UseCase
 import com.paya.presentation.utils.shared.Point
 import kotlinx.coroutines.Dispatchers
@@ -22,6 +24,24 @@ class ProfileViewModel @ViewModelInject constructor(
 	val pointsLiveData = MutableLiveData<List<Point>>()
 	val profile = MutableLiveData<Resource<BoxHistoryRepoModel>>()
 	val existAccount = MutableLiveData<Resource<ExitAccountRepoModel>>()
+	val loading = MediatorLiveData<Resource<Nothing>>()
+	
+	init {
+		loading.addSource(profile){
+			if (profile.value?.status == Status.LOADING || existAccount.value?.status == Status.LOADING){
+				loading.value = Resource.loading(null)
+			}else{
+				loading.value = Resource.idle(null)
+			}
+		}
+		loading.addSource(existAccount){
+			if (profile.value?.status == Status.LOADING || existAccount.value?.status == Status.LOADING){
+				loading.value = Resource.loading(null)
+			}else{
+				loading.value = Resource.idle(null)
+			}
+		}
+	}
 	
 	fun getPoints() {
 		val points = mutableListOf<Point>()
@@ -33,6 +53,7 @@ class ProfileViewModel @ViewModelInject constructor(
 	}
 	
 	fun getExistAccount(){
+		existAccount.value = Resource.loading(null)
 		viewModelScope.launch(Dispatchers.IO) {
 			existAccount.postValue(existAccountUseCase.action(Unit))
 		}
@@ -43,6 +64,7 @@ class ProfileViewModel @ViewModelInject constructor(
 		type: String,
 		number: Int
 	){
+		profile.value = Resource.loading(null)
 		viewModelScope.launch(Dispatchers.IO){
 			profile.postValue(getBoxHistoryUseCase.action(
 				BoxHistoryRequestModel(boxId, type, number)

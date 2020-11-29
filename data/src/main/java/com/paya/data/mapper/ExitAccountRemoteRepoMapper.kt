@@ -13,7 +13,7 @@ class ExitAccountRemoteRepoMapper @Inject constructor(): Mapper<
 	override fun map(param: ExitAccountRemoteModel): ExitAccountRepoModel {
 		return ExitAccountRepoModel(
 			existing = param.existing,
-			activeBoxId = param.activeBoxId
+			activeBoxId = listOf(param.activeBoxId, param.activeBoxId, param.activeBoxId)
 		)
 	}
 	
