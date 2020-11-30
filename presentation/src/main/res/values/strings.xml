@@ -136,6 +136,9 @@
     <string name="change_password">تغییر رمز عبور</string>
     <string name="introduce_friends">معرفی به دوستان</string>
     <string name="exit_app">خروج از برنامه</string>
+    <string name="old_password">رمز عبور فعلی</string>
+    <string name="new_password">رمز عبور جدید</string>
+    <string name="repeat_new_password">تکرار رمز عبور جدید</string>
 
     <string-array name="brokerage_list">
         <item>کارگزاری فارابی</item>
