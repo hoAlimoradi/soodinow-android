@@ -24,7 +24,6 @@
         android:orientation="vertical"
         android:layout_marginHorizontal="@dimen/margin_medium"
         android:layout_marginTop="@dimen/margin_4_dp"
-        android:elevation="3dp"
         >
 
         <androidx.appcompat.widget.AppCompatTextView

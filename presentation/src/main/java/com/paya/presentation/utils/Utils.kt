@@ -123,11 +123,18 @@ object Utils {
 	
 	@JvmStatic
 	fun convertStringToDate(date: String): Date? {
-		val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",Locale.getDefault())
-		try {
-			return format.parse(date)
-		} catch (e: ParseException) {
-			e.printStackTrace()
+		val formats = arrayListOf<SimpleDateFormat>()
+		formats.apply {
+			add(SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'",Locale.getDefault()))
+			add(SimpleDateFormat("yyyy-MM-dd",Locale.getDefault()))
+			add(SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",Locale.getDefault()))
+		}
+		formats.forEach {
+			try {
+				return it.parse(date)
+			} catch (e: ParseException) {
+				e.printStackTrace()
+			}
 		}
 		return null
 	}

@@ -85,7 +85,7 @@
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/pager"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="180dp"
                     android:maxHeight="180dp"
                     android:layout_marginTop="@dimen/margin_very_small"
                     app:layout_constraintEnd_toStartOf="@+id/end_guideline"
@@ -200,6 +200,7 @@
                             app:layout_constraintTop_toBottomOf="@id/txt_price" />
 
                         <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/imgPath"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/margin_4_dp"
