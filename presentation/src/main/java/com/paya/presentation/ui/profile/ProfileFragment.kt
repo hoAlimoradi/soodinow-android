@@ -102,17 +102,15 @@ class ProfileFragment : Fragment() {
 		if (resource.status == Status.SUCCESS) {
 			resource.data?.activeBoxId?.let {
 				boxHistoryId = it
-//				mBinding.scrollView.visibility = if(boxHistoryId!!.isNotEmpty()) View.VISIBLE else View.GONE
-
-//				mBinding.empty.visibility = if(boxHistoryId!!.isEmpty()) View.VISIBLE else View.GONE
-				viewModel.setErrorMessage("شما هیچ حسابی ایجاد نکرده اید")
 				it.forEach { id ->
 					boxHistoryHahMap[id] = null
 					cardAccounts.add(CardAccount())
 				}
 				setupViewPager()
-				if (it.isEmpty())
+				if (it.isEmpty()) {
+					viewModel.setErrorMessage("شما هیچ حسابی ایجاد نکرده اید")
 					return@let
+				}
 				viewModel.getProfile(it.first(),"day",3)
 			}
 		}else if(resource.status == Status.ERROR){
