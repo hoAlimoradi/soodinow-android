@@ -181,17 +181,16 @@ class ProfileFragment : Fragment() {
 	}
 	
 	private fun setCurrentBoxData(cardAccount: CardAccount,boxModel: BoxHistoryRepoModel) {
-		val roundedPercent = BigDecimal((boxModel.percent * 100).toDouble())
-			.setScale(2, RoundingMode.HALF_UP).toFloat()
+		val roundedPercent = Utils.roundFloat(boxModel.percent * 100)
 		cardAccount.setData(boxModel.cardChart, boxModel.buyValue,roundedPercent, boxModel.name)
 		
 		val mainChartPoints = mutableListOf<Point>()
 		val mainChartData = boxModel.mainChart.data
 		if (mainChartData.isNotEmpty()) {
 			val difference = mainChartData.last() - mainChartData.first()
-			val percent = ((difference * 100) / mainChartData.first())
-			mBinding.txtPercent.text = percent.toString()
-			mBinding.txtPrice.text = mainChartData.last().toString()
+			val percent = ((difference * 100).toFloat() / mainChartData.first())
+			mBinding.txtPercent.text = Utils.roundFloat(percent).toString()
+			mBinding.txtPrice.text = Utils.separatorAmount(mainChartData.last().toString())
 		}
 		val persianDate = Utils.convertStringPersianDate(boxModel.mainChart.endDate)
 		persianDate?.let {

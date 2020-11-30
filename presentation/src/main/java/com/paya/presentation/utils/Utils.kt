@@ -11,6 +11,8 @@ import android.view.Window
 import ir.hamsaa.persiandatepicker.util.PersianCalendar
 import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
+import java.math.BigDecimal
+import java.math.RoundingMode
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -128,6 +130,12 @@ object Utils {
 			e.printStackTrace()
 		}
 		return null
+	}
+
+	@JvmStatic
+	fun roundFloat(value: Float): Float{
+		return BigDecimal(value.toDouble())
+			.setScale(2, RoundingMode.HALF_UP).toFloat()
 	}
 	
 }
