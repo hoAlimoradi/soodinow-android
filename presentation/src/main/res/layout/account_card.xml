@@ -104,11 +104,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_4_dp"
-        android:text="حساب سرمایه گذاری جسور پایا"
+        tools:text="حساب سرمایه گذاری جسور پایا"
         android:textColor="@color/green_gray"
         android:textSize="@dimen/text_size_10sp"
         app:layout_constraintStart_toEndOf="@id/start_guideline"
-        app:layout_constraintTop_toBottomOf="@id/accountCardNumber" />
+        app:layout_constraintTop_toBottomOf="@id/accountCardNumber"
+        android:visibility="gone"/>
 
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/chart"
@@ -139,7 +140,7 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:gravity="top"
-            android:text="رضا کریمی"
+            tools:text="رضا کریمی"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_small"
             app:layout_constraintBottom_toTopOf="@+id/user_name_bottom_guideline"
@@ -151,7 +152,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="top"
-            android:text="99 / 02 / 18"
+            tools:text="99 / 02 / 18"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_11sp"
             app:layout_constraintEnd_toStartOf="@id/end_guideline"
@@ -192,7 +193,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="top"
-        android:text="10.856.000"
+        tools:text="10.856.000"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size_11sp"
         app:layout_constraintEnd_toStartOf="@id/space"
