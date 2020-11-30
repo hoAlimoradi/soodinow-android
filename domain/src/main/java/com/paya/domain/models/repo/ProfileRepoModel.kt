@@ -6,5 +6,7 @@ data class ProfileRepoModel(
 	val personalCode: String,
 	val birthDay: String,
 	val bban: String,
-	val complete: Boolean
+	val complete: Boolean,
+	val mobile: String,
+	
 )

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="androidx.databinding.ObservableField" />
+
+        <variable
+            name="label"
+            type="java.lang.String" />
+
+        <variable
+            name="content"
+            type="ObservableField&lt;java.lang.String>" />
+
+        <variable
+            name="hintLabel"
+            type="java.lang.String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/margin_4_dp"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_4_dp"
+            android:text="@{label}"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="نام کاربری" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/inputContentEditText"
+            hintLabel="@{hintLabel}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_4_dp"
+            android:background="@drawable/round_corner_layout"
+            android:inputType="text"
+            android:lines="1"
+            android:maxLines="1"
+            android:padding="@dimen/margin_very_small"
+            android:singleLine="true"
+            android:text="@={content}"
+            android:textColor="#000000"
+            app:layout_constraintTop_toBottomOf="@id/label" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            enableView="@{@id/inputContentEditText}"
+            android:layout_width="@dimen/height"
+            android:layout_height="0dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_pencil"
+            app:layout_constraintBottom_toBottomOf="@id/inputContentEditText"
+            app:layout_constraintStart_toStartOf="@+id/inputContentEditText"
+            app:layout_constraintTop_toTopOf="@id/inputContentEditText" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
