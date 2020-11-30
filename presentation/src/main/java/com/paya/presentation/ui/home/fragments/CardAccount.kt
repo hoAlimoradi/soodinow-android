@@ -38,6 +38,7 @@ class CardAccount : Fragment() {
 	
 	
 	private lateinit var mBinding: AccountCardBinding
+	private var isDataSet = false
 	
 	override fun onCreateView(
 		inflater: LayoutInflater,container: ViewGroup?,
@@ -51,6 +52,9 @@ class CardAccount : Fragment() {
 	}
 	
 	fun setData(linearChartRepoModel: LinearChartRepoModel,buyValue: Long,percent: Float, name: String) {
+		if (isDataSet)
+			return
+		isDataSet = true
 		mBinding.accountUserName.text = name
 		mBinding.wealthValue.text = Utils.separatorAmount(buyValue.toString())
 		
