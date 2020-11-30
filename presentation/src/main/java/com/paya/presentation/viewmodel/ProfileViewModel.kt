@@ -21,10 +21,10 @@ class ProfileViewModel @ViewModelInject constructor(
 	private val existAccountUseCase: UseCase<Unit,ExitAccountRepoModel>
 ): ViewModel(){
 	
-	val pointsLiveData = MutableLiveData<List<Point>>()
 	val profile = MutableLiveData<Resource<BoxHistoryRepoModel>>()
 	val existAccount = MutableLiveData<Resource<ExitAccountRepoModel>>()
 	val loading = MediatorLiveData<Resource<Nothing>>()
+	val errorMessage = MutableLiveData<String?>(null)
 	
 	init {
 		loading.addSource(profile){
@@ -43,13 +43,8 @@ class ProfileViewModel @ViewModelInject constructor(
 		}
 	}
 	
-	fun getPoints() {
-		val points = mutableListOf<Point>()
-		for (i in 0 until 10) {
-			val value = (Math.random() * 100).toFloat()
-			points.add(Point(i.toFloat(),value))
-		}
-		pointsLiveData.value = points
+	fun setErrorMessage(message: String){
+		errorMessage.value = message
 	}
 	
 	fun getExistAccount(){

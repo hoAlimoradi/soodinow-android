@@ -34,11 +34,6 @@ class ProfileFragment : Fragment() {
 	private lateinit var mBinding: FragmentProfileBinding
 	private lateinit var adapter: SlidePagerAdapter
 	private val viewModel: ProfileViewModel by viewModels()
-
-//	private data class BoxHistoryData(
-//		val data: BoxHistoryRepoModel,
-//		val isFetched: Boolean = false
-//	)
 	
 	private val boxHistoryHahMap = mutableMapOf<Long,BoxHistoryRepoModel?>()
 	private var currentBoxId: Long? = null
@@ -107,8 +102,10 @@ class ProfileFragment : Fragment() {
 		if (resource.status == Status.SUCCESS) {
 			resource.data?.activeBoxId?.let {
 				boxHistoryId = it
-				mBinding.scrollView.visibility = if(boxHistoryId!!.isNotEmpty()) View.VISIBLE else View.GONE
-				mBinding.empty.visibility = if(boxHistoryId!!.isEmpty()) View.VISIBLE else View.GONE
+//				mBinding.scrollView.visibility = if(boxHistoryId!!.isNotEmpty()) View.VISIBLE else View.GONE
+
+//				mBinding.empty.visibility = if(boxHistoryId!!.isEmpty()) View.VISIBLE else View.GONE
+				viewModel.setErrorMessage("شما هیچ حسابی ایجاد نکرده اید")
 				it.forEach { id ->
 					boxHistoryHahMap[id] = null
 					cardAccounts.add(CardAccount())
@@ -119,11 +116,7 @@ class ProfileFragment : Fragment() {
 				viewModel.getProfile(it.first(),"day",3)
 			}
 		}else if(resource.status == Status.ERROR){
-			Toast.makeText(
-				requireContext(),
-				resource.message ?: "خطایی رخ داده است",
-				Toast.LENGTH_SHORT
-			).show()
+			viewModel.setErrorMessage(resource.message ?: "خطایی رخ داده است")
 		}
 	}
 	
@@ -137,11 +130,7 @@ class ProfileFragment : Fragment() {
 				setCurrentBoxData(cardAccount,it)
 			}
 		}else if(resource.status == Status.ERROR){
-			Toast.makeText(
-				requireContext(),
-				resource.message ?: "خطایی رخ داده است",
-				Toast.LENGTH_SHORT
-			).show()
+			viewModel.setErrorMessage(resource.message ?: "خطایی رخ داده است")
 		}
 	}
 	

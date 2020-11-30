@@ -329,10 +329,11 @@
         <include
             android:id="@+id/empty"
             layout="@layout/empty_card_list"
+            app:title="@{viewModel.errorMessage}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:visibility="gone"/>
+            tools:visibility="gone"/>
 
 
         <include
