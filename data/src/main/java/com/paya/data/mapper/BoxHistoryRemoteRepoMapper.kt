@@ -35,7 +35,8 @@ class BoxHistoryRemoteRepoMapper @Inject constructor(): Mapper<
 			mainChart = mainChart,
 			circleChart = circleChart,
 			buyValue = param.buyValue,
-			percent = param.percent
+			percent = param.percent,
+			name = param.name
 		)
 	}
 	

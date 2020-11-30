@@ -60,7 +60,8 @@ class CardAccount : Fragment() {
 //		BindingAdapters.setLineAccountChartData(mBinding.chart,points)
 	}
 	
-	fun setData(linearChartRepoModel: LinearChartRepoModel,buyValue: Long,percent: Float) {
+	fun setData(linearChartRepoModel: LinearChartRepoModel,buyValue: Long,percent: Float, name: String) {
+		mBinding.accountUserName.text = name
 		mBinding.wealthValue.text = buyValue.toString()
 		
 		val points = mutableListOf<Point>()

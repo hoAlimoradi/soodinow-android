@@ -45,7 +45,7 @@
     <string name="toman">تومان</string>
     <string name="rial">ریال</string>
     <string name="create_date">تاریخ افتتاح</string>
-    <string name="wealth_toman">دارایی (تومان)</string>
+    <string name="wealth_toman">دارایی (ریال)</string>
     <string name="wealth_increase">رشد دارایی</string>
     <string name="last_version_update">Last version update</string>
     <string name="write_here">اینجا بنویسید</string>

@@ -11,5 +11,6 @@ data class BoxHistoryRemoteModel(
 	val circleChart: List<CircleChartDataRemoteModel>,
 	@SerializedName("buy_value")
 	val buyValue: Long,
-	val percent: Float
+	val percent: Float,
+	val name: String
 )

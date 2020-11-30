@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -24,6 +25,8 @@ import com.paya.presentation.utils.observe
 import com.paya.presentation.utils.shared.Point
 import com.paya.presentation.viewmodel.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.math.BigDecimal
+import java.math.RoundingMode
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment() {
@@ -115,6 +118,12 @@ class ProfileFragment : Fragment() {
 					return@let
 				viewModel.getProfile(it.first(),"day",3)
 			}
+		}else if(resource.status == Status.ERROR){
+			Toast.makeText(
+				requireContext(),
+				resource.message ?: "خطایی رخ داده است",
+				Toast.LENGTH_SHORT
+			).show()
 		}
 	}
 	
@@ -127,6 +136,12 @@ class ProfileFragment : Fragment() {
 				val cardAccount = cardAccounts[cardAccountIndex]
 				setCurrentBoxData(cardAccount,it)
 			}
+		}else if(resource.status == Status.ERROR){
+			Toast.makeText(
+				requireContext(),
+				resource.message ?: "خطایی رخ داده است",
+				Toast.LENGTH_SHORT
+			).show()
 		}
 	}
 	
@@ -166,7 +181,9 @@ class ProfileFragment : Fragment() {
 	}
 	
 	private fun setCurrentBoxData(cardAccount: CardAccount,boxModel: BoxHistoryRepoModel) {
-		cardAccount.setData(boxModel.cardChart, boxModel.buyValue,boxModel.percent * 100)
+		val roundedPercent = BigDecimal((boxModel.percent * 100).toDouble())
+			.setScale(2, RoundingMode.HALF_UP).toFloat()
+		cardAccount.setData(boxModel.cardChart, boxModel.buyValue,roundedPercent, boxModel.name)
 		
 		val mainChartPoints = mutableListOf<Point>()
 		val mainChartData = boxModel.mainChart.data
