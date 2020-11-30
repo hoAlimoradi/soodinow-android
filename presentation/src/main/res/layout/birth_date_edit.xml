@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="androidx.databinding.ObservableField" />
+
+        <variable
+            name="label"
+            type="java.lang.String" />
+
+        <variable
+            name="date"
+            type="ir.hamsaa.persiandatepicker.util.PersianCalendar" />
+
+        <variable
+            name="callBack"
+            type="com.paya.presentation.ui.custom.uiInterface.BirthDateListener" />
+
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="3dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:text="@{label}"
+            android:textSize="@dimen/text_size_11sp"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/birth_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.43" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/birth_second"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.7" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/dateGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="years,months,day" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/editBtn"
+            android:layout_width="@dimen/height_medium"
+            android:layout_height="@dimen/height_medium"
+            android:layout_marginTop="@dimen/margin_very_small"
+            android:onClick="@{() -> callBack.onSelectedDate()}"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_pencil"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/years"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/height_medium"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_very_small"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:background="@drawable/round_corner_layout"
+            android:drawableStart="@drawable/ic_arrow_bottom"
+            android:gravity="center"
+            android:paddingStart="@dimen/margin_small"
+            setText="@{date.persianYear}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_10sp"
+            app:layout_constraintEnd_toStartOf="@id/birth_start"
+            app:layout_constraintStart_toEndOf="@id/editBtn"
+            app:layout_constraintTop_toBottomOf="@id/title" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/months"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/height_medium"
+            android:layout_marginTop="@dimen/margin_very_small"
+            android:background="@drawable/round_corner_layout"
+            android:drawableStart="@drawable/ic_arrow_bottom"
+            android:gravity="center"
+            android:paddingStart="@dimen/margin_small"
+            tools:text="@{date.persianMonthName}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_10sp"
+            app:layout_constraintEnd_toStartOf="@id/birth_second"
+            app:layout_constraintStart_toEndOf="@id/birth_start"
+            app:layout_constraintTop_toBottomOf="@id/title" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/day"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/height_medium"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_very_small"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:background="@drawable/round_corner_layout"
+            android:drawableStart="@drawable/ic_arrow_bottom"
+            android:gravity="center"
+            android:paddingStart="@dimen/margin_small"
+            setText="@{date.persianDay}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_10sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/birth_second"
+            app:layout_constraintTop_toBottomOf="@id/title" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

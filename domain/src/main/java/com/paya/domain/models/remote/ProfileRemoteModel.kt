@@ -9,6 +9,6 @@ data class ProfileRemoteModel(
 	@SerializedName("birth_day")val birthDay: String,
 	val bban: String,
 	val complete: Boolean,
-	val mobile: String,
+	val mobile: String?,
 	
 )

@@ -30,6 +30,11 @@ import com.paya.presentation.utils.shared.Point
 object BindingAdapters {
 	
 	@JvmStatic
+	@BindingAdapter("setText")
+	fun setText(view: TextView,value: Int) {
+		view.text = value.toString()
+	}
+	@JvmStatic
 	@BindingAdapter("iconSet")
 	fun setImageDrawable(view: ImageView,drawable: Drawable?) {
 		view.setImageDrawable(drawable)
@@ -98,17 +103,22 @@ object BindingAdapters {
 	fun setEnableView(view: View,viewId: Int?) {
 		viewId ?: return
 		view.setOnClickListener {
-			val target = view.findViewById<EditText>(viewId)
+			val target = (view.parent as View).findViewById<EditText>(viewId)
 			if (target.isEnabled) {
-				target.isEnabled = false
+				target.isEnabled = !target.isEnabled
 				target.clearFocus()
 				val imm: InputMethodManager? =
-					view.context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager?
-				imm?.hideSoftInputFromWindow(view.windowToken,0)
+					target.context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager?
+				imm?.hideSoftInputFromWindow(target.windowToken,0)
 			} else {
-				target.isEnabled = true
-				setFocusTarget(view,viewId)
+				target.isEnabled = !target.isEnabled
+				target.requestFocus()
+				val imm: InputMethodManager? =
+					target.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+				imm?.showSoftInput(target,InputMethodManager.SHOW_IMPLICIT)
+				target.setSelection(target.text.length)
 			}
+			
 			
 		}
 	}
