@@ -126,6 +126,7 @@ class ProfileFragment : Fragment() {
 				val cardAccountIndex = boxHistoryId!!.indexOf(currentBoxId)
 				if (cardAccountIndex == -1) return
 				val cardAccount = cardAccounts[cardAccountIndex]
+				mBinding.scrollView.visibility = View.VISIBLE
 				setCurrentBoxData(cardAccount,it)
 			}
 		}else if(resource.status == Status.ERROR){
