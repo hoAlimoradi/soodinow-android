@@ -101,7 +101,7 @@ object Utils {
 	@JvmStatic
 	fun convertStringPersianDate(date: String): PersianDate? {
 		val persianDate = PersianDate()
-		val format = PersianDateFormat("Y-m-dTHH:m:sZ")
+		val format = PersianDateFormat("Y-m-d'T'HH:m:s.SSS'Z'")
 		format.format(persianDate)
 		val gDate = convertStringToDate(date)
 		gDate?.let {
@@ -123,7 +123,7 @@ object Utils {
 	
 	@JvmStatic
 	fun convertStringToDate(date: String): Date? {
-		val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'",Locale.getDefault())
+		val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",Locale.getDefault())
 		try {
 			return format.parse(date)
 		} catch (e: ParseException) {
