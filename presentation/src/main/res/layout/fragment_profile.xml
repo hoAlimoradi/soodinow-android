@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="com.paya.domain.tools.Resource" />
         <import type="com.paya.presentation.viewmodel.ProfileViewModel" />
 
         <variable
@@ -12,296 +12,337 @@
             type="ProfileViewModel" />
     </data>
 
-    <ScrollView
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bg">
+        android:background="@drawable/bottom_round_corner_background">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_small"
-            android:background="@color/bg"
-            tools:context=".ui.profile.ProfileFragment">
+            android:layout_height="match_parent"
+            >
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/start_guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.04" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/end_guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.96" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/account_view_pager_bottom_end_guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.32" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/personal_image_account_top_guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.355" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@id/title"
-                android:layout_marginTop="@dimen/margin_small"
-                android:layout_marginStart="@dimen/margin_very_small"
-                app:srcCompat="@drawable/ic_add_account"
-                android:layout_width="@dimen/margin_small"
-                android:layout_height="@dimen/margin_small"/>
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_small"
-                android:text="افتتاح حساب جدید"
-                android:textColor="@color/purple"
-                android:textSize="@dimen/text_size_12sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/pager"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_very_small"
-                app:layout_constraintEnd_toStartOf="@+id/end_guideline"
-                app:layout_constraintStart_toEndOf="@+id/start_guideline"
-                app:layout_constraintTop_toBottomOf="@id/txtInventoryManagement" />
-
-            <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
-                android:id="@+id/tabAccountCard"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:dotsColor="@color/purple_gray"
-                app:dotsCornerRadius="8dp"
-                app:dotsSize="8dp"
-                app:dotsSpacing="2dp"
-                app:dotsWidthFactor="2.5"
-                app:layout_constraintBottom_toTopOf="@+id/personal_image_account_top_guideline"
-                app:layout_constraintEnd_toStartOf="@+id/end_guideline"
-                app:layout_constraintStart_toEndOf="@+id/start_guideline"
-                app:layout_constraintTop_toBottomOf="@id/pager"
-                app:progressMode="false"
-                app:selectedDotColor="@color/green" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/txtInventoryManagement"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_small"
-                android:layout_marginTop="@dimen/margin_4_dp"
-                android:text="@string/inventory_management"
-                android:textColor="@color/purple"
-                android:textSize="@dimen/text_size_12sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/title" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="@dimen/margin_small"
-                android:layout_height="@dimen/margin_small"
-                android:layout_marginStart="@dimen/margin_very_small"
-                android:layout_marginTop="@dimen/margin_very_small"
-                app:layout_constraintStart_toEndOf="@id/txtInventoryManagement"
-                app:layout_constraintTop_toBottomOf="@id/title"
-                app:srcCompat="@drawable/ic_money_bag" />
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_1"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/margin_small"
-                android:layout_marginTop="@dimen/margin_small"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="@dimen/radius_card"
-                app:layout_constraintTop_toBottomOf="@id/tabAccountCard">
+                android:layout_marginBottom="@dimen/margin_small"
+                android:background="@color/bg"
+                tools:context=".ui.profile.ProfileFragment">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/start_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.04" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/end_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.96" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/account_view_pager_bottom_end_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.32" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/personal_image_account_top_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.355" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/titleImg"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:layout_marginStart="@dimen/margin_very_small"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    app:srcCompat="@drawable/ic_add_account"
+                    android:layout_width="@dimen/margin_small"
+                    android:layout_height="@dimen/margin_small"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_small"
+                    android:text="افتتاح حساب جدید"
+                    android:textColor="@color/purple"
+                    android:textSize="@dimen/text_size_12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/titleImg"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/pager"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_very_small"
+                    app:layout_constraintEnd_toStartOf="@+id/end_guideline"
+                    app:layout_constraintStart_toEndOf="@+id/start_guideline"
+                    app:layout_constraintTop_toBottomOf="@id/title" />
+
+                <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+                    android:id="@+id/tabAccountCard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:dotsColor="@color/purple_gray"
+                    app:dotsCornerRadius="8dp"
+                    app:dotsSize="8dp"
+                    app:dotsSpacing="2dp"
+                    app:dotsWidthFactor="2.5"
+                    app:layout_constraintBottom_toTopOf="@+id/personal_image_account_top_guideline"
+                    app:layout_constraintEnd_toStartOf="@+id/end_guideline"
+                    app:layout_constraintStart_toEndOf="@+id/start_guideline"
+                    app:layout_constraintTop_toBottomOf="@id/pager"
+                    app:progressMode="false"
+                    app:selectedDotColor="@color/green" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txtInventoryManagement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_marginTop="@dimen/margin_very_small"
+                    android:text="@string/inventory_management"
+                    android:textColor="@color/purple"
+                    android:textSize="@dimen/text_size_12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/managementImg"
+                    app:layout_constraintTop_toBottomOf="@id/tabAccountCard" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/managementImg"
+                    android:layout_width="@dimen/margin_small"
+                    android:layout_height="@dimen/margin_small"
+                    android:layout_marginStart="@dimen/margin_very_small"
+                    android:layout_marginTop="@dimen/margin_very_small"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    app:layout_constraintTop_toBottomOf="@id/tabAccountCard"
+                    app:srcCompat="@drawable/ic_money_bag" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/margin_very_small">
+                    android:layout_marginHorizontal="@dimen/margin_small"
+                    android:layout_marginTop="@dimen/margin_small"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/radius_card"
+                    app:layout_constraintTop_toBottomOf="@id/txtInventoryManagement">
 
-                    <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/guideline_end_chart"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintGuide_percent="0.65" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/txt_date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="9 اردیبهشت 99"
-                        android:textColor="@color/purple"
-                        android:textSize="@dimen/text_size_small"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/txt_toman"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_very_small"
-                        android:layout_marginTop="@dimen/margin_small"
-                        android:text="@string/toman"
-                        android:textColor="@color/purple_gray"
-                        android:textSize="@dimen/text_size_11sp"
-                        app:layout_constraintEnd_toStartOf="@id/txt_price"
-                        app:layout_constraintTop_toBottomOf="@id/txt_date" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/txt_price"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="12500 "
-                        android:textColor="@color/purple"
-                        android:textSize="@dimen/text_size_small"
-                        app:layout_constraintStart_toEndOf="@id/guideline_end_chart"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txt_toman" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/txt_percent"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_very_small"
-                        android:text="4%"
-                        android:textColor="@color/purple"
-                        android:textSize="@dimen/text_size_small"
-                        app:layout_constraintStart_toStartOf="@id/txt_price"
-                        app:layout_constraintTop_toBottomOf="@id/txt_price" />
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_4_dp"
-                        android:foregroundTint="@color/green"
-                        app:layout_constraintBottom_toBottomOf="@+id/txt_percent"
-                        app:layout_constraintStart_toEndOf="@id/txt_percent"
-                        app:layout_constraintTop_toTopOf="@+id/txt_percent"
-                        app:srcCompat="@drawable/ic_path_up" />
-
-                    <RadioGroup
-                        android:layout_marginEnd="@dimen/margin_very_small"
-                        android:id="@+id/myRadioGroup"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_very_small"
-                        android:layout_marginTop="@dimen/margin_very_small"
-                        android:checkedButton="@+id/low_risk"
-                        android:gravity="end"
-                        app:layout_constraintHorizontal_bias="0"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txt_percent">
-
-                        <RadioButton
-                            android:id="@+id/low_risk"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:button="@null"
-                            android:drawableStart="@drawable/selector_check_box"
-                            android:drawablePadding="@dimen/margin_very_small"
-                            android:layoutDirection="rtl"
-                            android:text="روزانه"
-                            android:textSize="@dimen/text_size_10sp" />
-
-                        <RadioButton
-                            android:id="@+id/high_risk"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/margin_very_small"
-                            android:button="@null"
-                            android:drawableStart="@drawable/selector_check_box"
-                            android:drawablePadding="@dimen/margin_very_small"
-                            android:layoutDirection="rtl"
-                            android:text="هفتگی"
-                            android:textSize="@dimen/text_size_10sp" />
-
-                        <RadioButton
-                            android:id="@+id/long_term"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/margin_very_small"
-                            android:button="@null"
-                            android:drawableStart="@drawable/selector_check_box"
-                            android:drawablePadding="@dimen/margin_very_small"
-                            android:layoutDirection="rtl"
-                            android:text="بلند مدت"
-                            android:textSize="@dimen/text_size_10sp" />
-
-                    </RadioGroup>
-
-
-                    <com.github.mikephil.charting.charts.LineChart
-                        android:id="@+id/chart"
-                        chartData="@{viewModel.pointsLiveData}"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/line_chart_height"
-                        android:layout_marginTop="@dimen/margin_very_small"
-                        android:layout_marginEnd="@dimen/margin_very_small"
-                        app:layout_constraintEnd_toEndOf="@id/guideline_end_chart"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txt_date" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_small"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="@dimen/radius_card"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/card_1">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/margin_very_small">
-
-                    <fragment
-                        android:id="@+id/appropriate_investment_fragment"
-                        android:name="com.paya.presentation.ui.investment.AppropriateInvestmentFragment"
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:padding="@dimen/margin_very_small">
 
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:layout_width="200dp"
-                        android:layout_height="@dimen/height_medium"
-                        android:layout_marginTop="@dimen/margin_small"
-                        android:background="@drawable/round_corner_layout_border_gray"
-                        android:text="سوابق سبد سرمایه گذاری"
-                        android:textColor="@color/purple_gray"
-                        android:textSize="@dimen/text_size_11sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/appropriate_investment_fragment" />
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline_end_chart"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent="0.65" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/txt_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="9 اردیبهشت 99"
+                            android:textColor="@color/purple"
+                            android:textSize="@dimen/text_size_small"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-            </androidx.cardview.widget.CardView>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/txt_toman"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_very_small"
+                            android:layout_marginTop="@dimen/margin_small"
+                            android:text="@string/rial"
+                            android:textColor="@color/purple_gray"
+                            android:textSize="@dimen/text_size_11sp"
+                            app:layout_constraintEnd_toStartOf="@id/txt_price"
+                            app:layout_constraintTop_toBottomOf="@id/txt_date" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/txt_price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="12500 "
+                            android:textColor="@color/purple"
+                            android:textSize="@dimen/text_size_small"
+                            app:layout_constraintStart_toEndOf="@id/guideline_end_chart"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/txt_toman" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/txt_percent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_very_small"
+                            android:text="4%"
+                            android:textColor="@color/purple"
+                            android:textSize="@dimen/text_size_small"
+                            app:layout_constraintStart_toStartOf="@id/txt_price"
+                            app:layout_constraintTop_toBottomOf="@id/txt_price" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_4_dp"
+                            android:foregroundTint="@color/green"
+                            app:layout_constraintBottom_toBottomOf="@+id/txt_percent"
+                            app:layout_constraintStart_toEndOf="@id/txt_percent"
+                            app:layout_constraintTop_toTopOf="@+id/txt_percent"
+                            app:srcCompat="@drawable/ic_path_up" />
+
+                        <RadioGroup
+                            android:layout_marginEnd="@dimen/margin_very_small"
+                            android:id="@+id/myRadioGroup"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_very_small"
+                            android:layout_marginTop="@dimen/margin_very_small"
+                            android:checkedButton="@+id/radioButtonDay"
+                            android:gravity="end"
+                            app:layout_constraintHorizontal_bias="0"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/txt_percent">
+
+                            <RadioButton
+                                android:id="@+id/radioButtonDay"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:button="@null"
+                                android:drawableStart="@drawable/selector_check_box"
+                                android:drawablePadding="@dimen/margin_very_small"
+                                android:layoutDirection="rtl"
+                                android:text="روزانه"
+                                android:textSize="@dimen/text_size_10sp" />
+
+                            <RadioButton
+                                android:id="@+id/RadioButtonWeek"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin_very_small"
+                                android:button="@null"
+                                android:drawableStart="@drawable/selector_check_box"
+                                android:drawablePadding="@dimen/margin_very_small"
+                                android:layoutDirection="rtl"
+                                android:text="هفتگی"
+                                android:textSize="@dimen/text_size_10sp" />
+
+                            <RadioButton
+                                android:id="@+id/RadioButtonMonth"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin_very_small"
+                                android:button="@null"
+                                android:drawableStart="@drawable/selector_check_box"
+                                android:drawablePadding="@dimen/margin_very_small"
+                                android:layoutDirection="rtl"
+                                android:text="ماهانه"
+                                android:textSize="@dimen/text_size_10sp" />
+
+                            <RadioButton
+                                android:id="@+id/RadioButtonLongTerm"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin_very_small"
+                                android:button="@null"
+                                android:drawableStart="@drawable/selector_check_box"
+                                android:drawablePadding="@dimen/margin_very_small"
+                                android:layoutDirection="rtl"
+                                android:text="بلند مدت"
+                                android:textSize="@dimen/text_size_10sp" />
+
+                        </RadioGroup>
 
 
-    </ScrollView>
+                        <com.github.mikephil.charting.charts.LineChart
+                            android:id="@+id/chart"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/line_chart_height"
+                            android:layout_marginTop="@dimen/margin_very_small"
+                            android:layout_marginEnd="@dimen/margin_very_small"
+                            app:layout_constraintEnd_toEndOf="@id/guideline_end_chart"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/txt_date" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_small"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/radius_card"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/card_1">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/margin_very_small">
+
+                        <fragment
+                            android:id="@+id/appropriate_investment_fragment"
+                            android:name="com.paya.presentation.ui.investment.AppropriateInvestmentFragment"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:layout_width="200dp"
+                            android:layout_height="@dimen/height_medium"
+                            android:layout_marginTop="@dimen/margin_small"
+                            android:background="@drawable/round_corner_layout_border_gray"
+                            android:text="سوابق سبد سرمایه گذاری"
+                            android:textColor="@color/purple_gray"
+                            android:textSize="@dimen/text_size_11sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/appropriate_investment_fragment" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </ScrollView>
+
+        <include
+            android:id="@+id/empty"
+            layout="@layout/empty_card_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:visibility="gone"/>
+
+
+        <include
+            tools:visibility="gone"
+            layout="@layout/loading_state"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            app:resource="@{(Resource) viewModel.loading}" />
+
+    </FrameLayout>
 
 </layout>

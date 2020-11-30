@@ -23,6 +23,7 @@ import com.github.mikephil.charting.formatter.IFillFormatter
 import com.paya.presentation.R
 import com.paya.presentation.ui.custom.MyMarkerView
 import com.paya.presentation.ui.custom.MyMarkerViewSmall
+import com.paya.presentation.utils.shared.EntryPoint
 import com.paya.presentation.utils.shared.Point
 
 
@@ -273,7 +274,7 @@ object BindingAdapters {
 		// don't forget to refresh the drawing
 		chart.invalidate()
 		
-		val index = chart.data.dataSets[0].entryCount / 3
+		val index = chart.data.dataSets[0].entryCount - 1
 		
 		val x = chart.data.dataSets[0].getEntryForIndex(index).x
 		
@@ -289,7 +290,7 @@ object BindingAdapters {
 	private fun setAccountData(chart: LineChart,points: List<Point>) {
 		val set1: LineDataSet
 		
-		val entries = points.map { Entry(it.x,it.y) }
+		val entries = points.map { EntryPoint(it.x,it.y,it.percent) }
 		
 		if (chart.data != null &&
 			chart.data.dataSetCount > 0

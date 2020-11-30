@@ -32,7 +32,15 @@ class AppropriateInvestmentFragment : Fragment() {
 		ChartLabelModel("آگاه","#62B366")
 	)
 	
-	val basket = mutableListOf<BasketRepoModel>()
+//	val basket = mutableListOf<BasketRepoModel>()
+	
+	
+	val pieChartDataList = mutableListOf<PieChartData>()
+	
+	data class PieChartData(
+		val percent: Float,
+		val title: String
+	)
 	
 	private lateinit var mBinding: FragmentAppropriateInvestmentBinding
 	override fun onCreateView(
@@ -51,7 +59,7 @@ class AppropriateInvestmentFragment : Fragment() {
 	
 	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
 		super.onViewCreated(view,savedInstanceState)
-		setup()
+//		setup()
 	}
 	
 	fun setup() {
@@ -64,11 +72,11 @@ class AppropriateInvestmentFragment : Fragment() {
 		layoutManager.reverseLayout = true
 		
 		val cl = mutableListOf<ChartLabelModel>()
-		if (basket.isNotEmpty()) {
-			basket.forEachIndexed { index,basketRepoModel ->
+		if (pieChartDataList.isNotEmpty()) {
+			pieChartDataList.forEachIndexed { index,pieChartData ->
 				cl.add(
 					ChartLabelModel(
-						basketRepoModel.namad,
+						pieChartData.title,
 						chartLabels[index % chartLabels.size].labelColor
 					)
 				)
@@ -144,11 +152,11 @@ class AppropriateInvestmentFragment : Fragment() {
 		
 		// NOTE: The order of the entries when being added to the entries array determines their position around the center of
 		// the chart.
-		if (basket.isNotEmpty()) {
-			for (i in basket.indices) {
+		if (pieChartDataList.isNotEmpty()) {
+			for (i in pieChartDataList.indices) {
 				entries.add(
 					PieEntry(
-						basket[i].percent,
+						pieChartDataList[i].percent,
 						""
 					)
 				)
