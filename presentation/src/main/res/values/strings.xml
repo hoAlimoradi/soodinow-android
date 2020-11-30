@@ -80,6 +80,7 @@
     <string name="long_time">بلند مدت</string>
     <string name="first_information">مشخصات اولیه</string>
     <string name="insert_next">ثبت و ادامه</string>
+    <string name="insert">ثبت</string>
 
     <string name="name_family">نام و نام خانوادگی</string>
     <string name="sub_title_name_family">نام و نام خانوادگی خود را بصورت کامل بنویسید</string>
@@ -139,6 +140,7 @@
     <string name="old_password">رمز عبور فعلی</string>
     <string name="new_password">رمز عبور جدید</string>
     <string name="repeat_new_password">تکرار رمز عبور جدید</string>
+    <string name="update_profile_message">پروفایل با موفقیت بروزرسانی شد</string>
 
     <string-array name="brokerage_list">
         <item>کارگزاری فارابی</item>

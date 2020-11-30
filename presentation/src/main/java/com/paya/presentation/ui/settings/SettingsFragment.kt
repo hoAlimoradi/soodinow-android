@@ -43,6 +43,11 @@ class SettingsFragment : Fragment() {
 				SettingsFragmentDirections.navigateToChangePasswordFragment()
 			)
 		}
+		myProfile.setOnClickListener {
+			findNavController().navigate(
+				SettingsFragmentDirections.navigateToUserUpdateProfileFragment()
+			)
+		}
 	}
 	
 	private fun ready(resource: Resource<ProfileRepoModel>) {

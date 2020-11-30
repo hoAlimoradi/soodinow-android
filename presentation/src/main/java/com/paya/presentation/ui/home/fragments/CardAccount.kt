@@ -60,9 +60,9 @@ class CardAccount : Fragment() {
 		}
 		BindingAdapters.setLineAccountChartData(mBinding.chart,points)
 		
-		val persianDate = Utils.convertStringPersianDate(linearChartRepoModel.startDate)
+		val persianDate = Utils.convertStringToPersianCalender(linearChartRepoModel.startDate)
 		persianDate?.let {
-			val date = "${persianDate.shYear}/${persianDate.shMonth}/${persianDate.shDay}"
+			val date = "${persianDate.persianYear}/${persianDate.persianMonthName}/${persianDate.persianDay}"
 			mBinding.dateValue.text = date
 		}
 	}

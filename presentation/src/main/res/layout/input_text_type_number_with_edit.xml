@@ -26,8 +26,7 @@
         android:layout_marginHorizontal="@dimen/margin_medium"
         android:layout_marginTop="@dimen/margin_4_dp"
         android:orientation="vertical"
-        android:elevation="3dp"
-        android:background="@android:color/transparent">
+        android:elevation="3dp">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/label"
@@ -54,14 +53,14 @@
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:layout_marginTop="@dimen/margin_4_dp"
-            android:inputType="text"
+            android:inputType="number"
             android:lines="1"
             android:maxLines="1"
             android:padding="@dimen/margin_very_small"
+            android:enabled="false"
             android:singleLine="true"
             android:text="@={content}"
             android:textColor="#000000"
-            android:enabled="false"
             app:layout_constraintTop_toBottomOf="@id/label"
             app:layout_constraintEnd_toEndOf="@id/bgEditText"
             app:layout_constraintStart_toEndOf="@+id/editBtn"/>

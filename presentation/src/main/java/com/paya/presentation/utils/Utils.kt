@@ -2,12 +2,15 @@ package com.paya.presentation.utils
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.util.DisplayMetrics
 import android.view.Gravity
 import android.view.ViewGroup
 import android.view.Window
+import ir.hamsaa.persiandatepicker.Listener
+import ir.hamsaa.persiandatepicker.PersianDatePickerDialog
 import ir.hamsaa.persiandatepicker.util.PersianCalendar
 import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
@@ -88,55 +91,65 @@ object Utils {
 	@SuppressLint("SimpleDateFormat")
 	@JvmStatic
 	fun convertToDate(pDate: PersianCalendar): String {
-		val persianDate = PersianDate()
-		val format = PersianDateFormat("YYYY-mm-dd")
-		format.format(persianDate)
-		persianDate.shYear = pDate.persianYear
-		persianDate.shMonth = pDate.persianMonth
-		persianDate.shDay = pDate.persianDay
 		val sdf = SimpleDateFormat("yyyy-MM-dd")
-		return sdf.format(persianDate.toDate())
-	}
-	
-	@JvmStatic
-	fun convertStringPersianDate(date: String): PersianDate? {
-		val persianDate = PersianDate()
-		val format = PersianDateFormat("Y-m-d'T'HH:m:s.SSS'Z'")
-		format.format(persianDate)
-		val gDate = convertStringToDate(date)
-		gDate?.let {
-			val calendar: Calendar = GregorianCalendar()
-			
-			calendar.time = it
-			persianDate.grgYear = calendar.get(Calendar.YEAR)
-			persianDate.grgMonth = calendar.get(Calendar.MONTH) + 1
-			persianDate.grgDay = calendar.get(Calendar.DAY_OF_MONTH)
-			persianDate.hour = calendar.get(Calendar.HOUR_OF_DAY)
-			persianDate.minute = calendar.get(Calendar.MINUTE)
-			persianDate.second = calendar.get(Calendar.SECOND)
-			return persianDate
-		}
-		
-		return null
+		return sdf.format(pDate.time)
 	}
 	
 	
 	@JvmStatic
 	fun convertStringToDate(date: String): Date? {
 		val formats = arrayListOf<SimpleDateFormat>()
-		formats.apply {
-			add(SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'",Locale.getDefault()))
-			add(SimpleDateFormat("yyyy-MM-dd",Locale.getDefault()))
-			add(SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",Locale.getDefault()))
-		}
-		formats.forEach {
+		formats.add(SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'",Locale.getDefault()))
+		formats.add(SimpleDateFormat("yyyy-MM-dd",Locale.getDefault()))
+		formats.add(SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",Locale.getDefault()))
+		for (format in formats) {
 			try {
-				return it.parse(date)
+				return format.parse(date)
 			} catch (e: ParseException) {
 				e.printStackTrace()
 			}
 		}
 		return null
+	}
+	
+	@JvmStatic
+	fun convertStringToPersianCalender(date: String): PersianCalendar? {
+		val gDate = convertStringToDate(date)
+		val persianCalendar = PersianCalendar()
+		gDate?.let {
+			val calendar: Calendar = GregorianCalendar()
+			
+			calendar.time = it
+			persianCalendar.set(
+				calendar.get(Calendar.YEAR),
+				calendar.get(Calendar.MONTH),
+				calendar.get(Calendar.DAY_OF_MONTH),
+				calendar.get(Calendar.HOUR_OF_DAY),
+				calendar.get(Calendar.MINUTE),
+				calendar.get(Calendar.SECOND)
+			)
+			return persianCalendar
+		}
+		
+		return null
+	}
+	
+	@JvmStatic
+	fun openPersianCalender(context: Context?,persianCalendar: PersianCalendar?,listener: Listener) {
+		if (context == null)
+			return
+		PersianDatePickerDialog(context)
+			.setPositiveButtonString("باشه")
+			.setNegativeButton("بیخیال")
+			.setTodayButton("امروز")
+			.setTodayButtonVisible(true)
+			.setInitDate(persianCalendar ?: PersianCalendar())
+			.setMaxYear(PersianDatePickerDialog.THIS_YEAR)
+			.setMinYear(1300)
+			.setActionTextColor(Color.GRAY)
+			.setListener(listener)
+			
+			.show()
 	}
 
 	@JvmStatic
