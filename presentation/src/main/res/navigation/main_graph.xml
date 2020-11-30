@@ -12,6 +12,9 @@
         <action
             android:id="@+id/navigateToSupportFragment"
             app:destination="@id/support" />
+        <action
+            android:id="@+id/navigateToChangePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
 
     </fragment>
 
@@ -204,6 +207,16 @@
     <fragment
         android:id="@+id/activitiesReportFragment"
         android:name="com.paya.presentation.ui.activitiesReport.ActivitiesReportFragment"
-        android:label="ActivitiesReportFragment" />
+        android:label="ActivitiesReportFragment"
+        tools:layout="@layout/fragment_activities_report">
 
+    </fragment>
+
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.paya.presentation.ui.changePassword.ChangePasswordFragment"
+        android:label="ActivitiesReportFragment"
+        tools:layout="@layout/fragment_change_password">
+
+    </fragment>
 </navigation>
