@@ -111,6 +111,7 @@ class ProfileFragment : Fragment() {
 					viewModel.setErrorMessage("شما هیچ حسابی ایجاد نکرده اید")
 					return@let
 				}
+				currentBoxId = it.first()
 				viewModel.getProfile(it.first(),"day",3)
 			}
 		}else if(resource.status == Status.ERROR){

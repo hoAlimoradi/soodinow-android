@@ -50,16 +50,6 @@ class CardAccount : Fragment() {
 		return mBinding.root
 	}
 	
-	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
-		super.onViewCreated(view,savedInstanceState)
-//		val points = mutableListOf<Point>()
-//		for (i in 0 until 10) {
-//			val value = (Math.random() * 100).toFloat()
-//			points.add(Point(i.toFloat(),value))
-//		}
-//		BindingAdapters.setLineAccountChartData(mBinding.chart,points)
-	}
-	
 	fun setData(linearChartRepoModel: LinearChartRepoModel,buyValue: Long,percent: Float, name: String) {
 		mBinding.accountUserName.text = name
 		mBinding.wealthValue.text = buyValue.toString()
