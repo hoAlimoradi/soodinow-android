@@ -12,8 +12,6 @@ import android.view.Window
 import ir.hamsaa.persiandatepicker.Listener
 import ir.hamsaa.persiandatepicker.PersianDatePickerDialog
 import ir.hamsaa.persiandatepicker.util.PersianCalendar
-import saman.zamani.persiandate.PersianDate
-import saman.zamani.persiandate.PersianDateFormat
 import java.math.BigDecimal
 import java.math.RoundingMode
 import java.text.ParseException
