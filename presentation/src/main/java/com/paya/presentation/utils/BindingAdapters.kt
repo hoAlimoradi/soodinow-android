@@ -175,7 +175,7 @@ object BindingAdapters {
 		
 		chart.axisRight.isEnabled = false
 		
-		chart.marker = MyMarkerView(chart.context)
+		chart.marker = MyMarkerView(chart.context,chart)
 		
 		setData(chart,data)
 		
@@ -185,12 +185,24 @@ object BindingAdapters {
 		
 		// don't forget to refresh the drawing
 		chart.invalidate()
+		
+		
+		val index = chart.data.dataSets[0].entryCount - 1
+		
+		val x = chart.data.dataSets[0].getEntryForIndex(index).x
+		
+		val y = chart.data.dataSets[0].getEntryForIndex(index).y
+		chart.highlightValue(x,y,0)
+		chart.marker.refreshContent(
+			chart.data.dataSets[0].getEntryForIndex(index),
+			chart.highlighted[0]
+		)
 	}
 	
 	private fun setData(chart: LineChart,points: List<Point>) {
 		val set1: LineDataSet
 		
-		val entries = points.map { Entry(it.x,it.y) }
+		val entries  = points.map { EntryPoint(it.x,it.y,it.percent,it.price) }
 		
 		if (chart.data != null &&
 			chart.data.dataSetCount > 0
@@ -208,7 +220,7 @@ object BindingAdapters {
 			set1.setDrawCircles(true)
 			set1.lineWidth = 3f
 			set1.circleRadius = 1f
-			set1.setCircleColor(Color.BLACK)
+			set1.setCircleColor(ContextCompat.getColor(chart.context,R.color.green))
 			set1.highLightColor = Color.RED
 			set1.color = ContextCompat.getColor(chart.context,R.color.green)
 			set1.fillColor = ContextCompat.getColor(chart.context,R.color.green)
@@ -292,7 +304,7 @@ object BindingAdapters {
 		
 		chart.axisRight.isEnabled = false
 		
-		chart.marker = MyMarkerViewSmall(chart.context)
+		chart.marker = MyMarkerViewSmall(chart.context,chart)
 		
 		
 		setAccountData(chart,data)

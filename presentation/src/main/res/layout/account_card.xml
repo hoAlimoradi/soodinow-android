@@ -120,7 +120,9 @@
             app:layout_constraintStart_toEndOf="@+id/start_guideline"
             app:layout_constraintTop_toBottomOf="@id/center_horizontal_guideline"
             app:layout_constraintBottom_toTopOf="@+id/bottom_guideline"
-            app:layout_constraintEnd_toStartOf="@+id/chart_end_guideline"/>
+            app:layout_constraintEnd_toStartOf="@+id/chart_end_guideline"
+            android:clipChildren="false"
+            android:clipToPadding="false"/>
 
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -201,7 +203,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/wealthTitle"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:autoSizeMaxTextSize="@dimen/text_size_10sp"
             android:autoSizeMinTextSize="@dimen/text_size_8sp"

@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -28,8 +27,6 @@ import com.paya.presentation.viewmodel.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.math.BigDecimal
-import java.math.RoundingMode
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment() {
@@ -124,11 +121,12 @@ class ProfileFragment : Fragment() {
 	private fun onProfileReady(resource: Resource<BoxHistoryRepoModel>) {
 		if (resource.status == Status.SUCCESS) {
 			boxHistoryHahMap[currentBoxId!!] = resource.data
-			setupViewPager()
 			resource.data?.let {
 				val cardAccountIndex = boxHistoryId!!.indexOf(currentBoxId)
 				if (cardAccountIndex == -1) return
 				val cardAccount = cardAccounts[cardAccountIndex]
+				if (!cardAccount.isDataSet)
+					adapter.notifyItemChanged(cardAccountIndex)
 				mBinding.scrollView.visibility = View.VISIBLE
 				lifecycleScope.launch {
 					delay(500)
@@ -193,7 +191,9 @@ class ProfileFragment : Fragment() {
 			mainChartPoints.add(
 				Point(
 					index.toFloat(),
-					value.toFloat()
+					value.toFloat(),
+					boxModel.percent,
+					boxModel.buyValue
 				)
 			)
 		}

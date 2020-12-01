@@ -38,7 +38,7 @@ class CardAccount : Fragment() {
 	
 	
 	private lateinit var mBinding: AccountCardBinding
-	private var isDataSet = false
+	var isDataSet = false
 	
 	override fun onCreateView(
 		inflater: LayoutInflater,container: ViewGroup?,
@@ -66,7 +66,7 @@ class CardAccount : Fragment() {
 		
 		val persianDate = Utils.convertStringToPersianCalender(linearChartRepoModel.startDate)
 		persianDate?.let {
-			val date = "${persianDate.persianYear}/${persianDate.persianMonthName}/${persianDate.persianDay}"
+			val date = "${persianDate.persianYear}/${persianDate.persianMonth}/${persianDate.persianDay}"
 			mBinding.dateValue.text = date
 		}
 	}

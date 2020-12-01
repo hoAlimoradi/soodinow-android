@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.paya.domain.models.repo.ProfileRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
@@ -59,8 +60,11 @@ class UserUpdateProfileFragment : Fragment(),BirthDateListener {
 	
 	private fun readyGetProfile(resource: Resource<ProfileRepoModel>) {
 		when (resource.status) {
-			Status.ERROR -> context.let {
-				Toast.makeText(it,resource.message,Toast.LENGTH_SHORT).show()
+			Status.ERROR -> {
+				context.let {
+					Toast.makeText(it,resource.message,Toast.LENGTH_SHORT).show()
+				}
+				findNavController().popBackStack()
 			}
 			else -> return
 		}
