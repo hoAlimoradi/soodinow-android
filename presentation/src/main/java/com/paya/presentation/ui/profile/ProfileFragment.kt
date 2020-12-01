@@ -176,9 +176,9 @@ class ProfileFragment : Fragment() {
 			mBinding.txtPercent.text = percent.toString()
 			mBinding.txtPrice.text = mainChartData.last().toString()
 		}
-		val persianDate = Utils.convertStringPersianDate(boxModel.mainChart.endDate)
+		val persianDate = Utils.convertStringToPersianCalender(boxModel.mainChart.endDate)
 		persianDate?.let {
-			val date = "${persianDate.shYear} ${persianDate.monthName()} ${persianDate.shDay}"
+			val date = "${persianDate.persianYear} ${persianDate.persianMonthName} ${persianDate.persianDay}"
 			mBinding.txtDate.text = date
 		}
 		mainChartData.forEachIndexed { index,value ->

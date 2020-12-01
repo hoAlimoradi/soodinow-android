@@ -1,5 +1,6 @@
 package com.paya.presentation.utils
 
+import android.app.Activity
 import android.content.Context
 import android.graphics.Color
 import android.graphics.PorterDuff
@@ -10,7 +11,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.databinding.BindingAdapter
@@ -29,6 +29,11 @@ import com.paya.presentation.utils.shared.Point
 
 object BindingAdapters {
 	
+	@JvmStatic
+	@BindingAdapter("setText")
+	fun setText(view: TextView,value: Int) {
+		view.text = value.toString()
+	}
 	@JvmStatic
 	@BindingAdapter("iconSet")
 	fun setImageDrawable(view: ImageView,drawable: Drawable?) {
@@ -90,6 +95,31 @@ object BindingAdapters {
 			val imm: InputMethodManager? =
 				target.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
 			imm?.showSoftInput(target,InputMethodManager.SHOW_IMPLICIT)
+		}
+	}
+	
+	@JvmStatic
+	@BindingAdapter("enableView")
+	fun setEnableView(view: View,viewId: Int?) {
+		viewId ?: return
+		view.setOnClickListener {
+			val target = (view.parent as View).findViewById<EditText>(viewId)
+			if (target.isEnabled) {
+				target.isEnabled = !target.isEnabled
+				target.clearFocus()
+				val imm: InputMethodManager? =
+					target.context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager?
+				imm?.hideSoftInputFromWindow(target.windowToken,0)
+			} else {
+				target.isEnabled = !target.isEnabled
+				target.requestFocus()
+				val imm: InputMethodManager? =
+					target.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+				imm?.showSoftInput(target,InputMethodManager.SHOW_IMPLICIT)
+				target.setSelection(target.text.length)
+			}
+			
+			
 		}
 	}
 	
