@@ -183,7 +183,7 @@
                             android:layout_height="wrap_content"
                             tools:text="12500 "
                             android:textColor="@color/purple"
-                            android:textSize="@dimen/text_size_small"
+                            android:textSize="@dimen/text_size_12sp"
                             app:layout_constraintStart_toEndOf="@id/guideline_end_chart"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/txt_toman" />
@@ -195,7 +195,7 @@
                             android:layout_marginTop="@dimen/margin_very_small"
                             tools:text="4%"
                             android:textColor="@color/purple"
-                            android:textSize="@dimen/text_size_small"
+                            android:textSize="@dimen/text_size_12sp"
                             app:layout_constraintStart_toStartOf="@id/txt_price"
                             app:layout_constraintTop_toBottomOf="@id/txt_price" />
 

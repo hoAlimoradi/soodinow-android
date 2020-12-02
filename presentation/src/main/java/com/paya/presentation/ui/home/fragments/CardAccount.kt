@@ -51,7 +51,7 @@ class CardAccount : Fragment() {
 		return mBinding.root
 	}
 	
-	fun setData(linearChartRepoModel: LinearChartRepoModel,buyValue: Long,percent: Float, name: String) {
+	fun setData(linearChartRepoModel: LinearChartRepoModel,buyValue: Long,percent: Double, name: String) {
 		if (isDataSet)
 			return
 		isDataSet = true
@@ -60,7 +60,7 @@ class CardAccount : Fragment() {
 		
 		val points = mutableListOf<Point>()
 		linearChartRepoModel.data.forEachIndexed { index,value ->
-			points.add(Point(index.toFloat(),value.toFloat(),percent))
+			points.add(Point(index.toFloat(),value.toFloat(),percent.toFloat()))
 		}
 		BindingAdapters.setLineAccountChartData(mBinding.chart,points)
 		

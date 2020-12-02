@@ -151,9 +151,9 @@ object Utils {
 	}
 
 	@JvmStatic
-	fun roundFloat(value: Float): Float{
-		return BigDecimal(value.toDouble())
-			.setScale(2, RoundingMode.HALF_UP).toFloat()
+	fun roundNumber(value: Double): Double{
+		return BigDecimal(value)
+			.setScale(5, RoundingMode.HALF_UP).toDouble()
 	}
 	
 }

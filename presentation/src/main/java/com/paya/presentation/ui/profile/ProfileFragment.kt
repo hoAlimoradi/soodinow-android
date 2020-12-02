@@ -171,15 +171,15 @@ class ProfileFragment : Fragment() {
 	}
 	
 	private fun setCurrentBoxData(cardAccount: CardAccount,boxModel: BoxHistoryRepoModel) {
-		val roundedPercent = Utils.roundFloat(boxModel.percent * 100)
+		val roundedPercent = Utils.roundNumber((boxModel.percent * 100).toDouble())
 		cardAccount.setData(boxModel.cardChart, boxModel.buyValue,roundedPercent, boxModel.name)
 		
 		val mainChartPoints = mutableListOf<Point>()
 		val mainChartData = boxModel.mainChart.data
 		if (mainChartData.isNotEmpty()) {
 			val difference = mainChartData.last() - mainChartData.first()
-			val percent = ((difference * 100).toFloat() / mainChartData.first())
-			mBinding.txtPercent.text = Utils.roundFloat(percent).toString()
+			val percent = ((difference * 100).toDouble() / mainChartData.first())
+			mBinding.txtPercent.text = Utils.roundNumber(percent).toString()
 			val pathResourceId = if (percent >= 0) R.drawable.ic_path_up else R.drawable.ic_path_down
 			mBinding.imgPath.setImageResource(pathResourceId)
 			mBinding.txtPrice.text = Utils.separatorAmount(mainChartData.last().toString())

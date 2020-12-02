@@ -45,24 +45,24 @@ class ProfileViewModel @ViewModelInject constructor(
 		errorMessage.value = message
 	}
 	
+//	fun getExistAccount(){
+//		existAccount.value = Resource.loading(null)
+//		viewModelScope.launch(Dispatchers.IO) {
+//			existAccount.postValue(existAccountUseCase.action(Unit))
+//		}
+//	}
 	fun getExistAccount(){
-		existAccount.value = Resource.loading(null)
-		viewModelScope.launch(Dispatchers.IO) {
-			existAccount.postValue(existAccountUseCase.action(Unit))
-		}
-	}
-	/*fun getExistAccount(){
 		existAccount.value = Resource.loading(null)
 		viewModelScope.launch(Dispatchers.IO) {
 			existAccount.postValue(getMockE())
 		}
 	}
-	
+
 	private fun getMockE() : Resource<ExitAccountRepoModel> {
 		return Resource.success(ExitAccountRepoModel(true,listOf(1)))
-	}*/
-	
-	/*fun getProfile(
+	}
+
+	fun getProfile(
 		boxId: Long,
 		type: String,
 		number: Int
@@ -74,7 +74,7 @@ class ProfileViewModel @ViewModelInject constructor(
 				getMockData()
 			)
 		}
-	}*/
+	}
 	
 	private fun getMockData(): Resource<BoxHistoryRepoModel> {
 		val cardChart = LinearChartRepoModel(
@@ -87,7 +87,7 @@ class ProfileViewModel @ViewModelInject constructor(
 		)
 		val circleChart = listOf(
 			CircleChartDataRepoModel(250000,3,"فیلان"),
-			CircleChartDataRepoModel(300000,7,"بیسار")
+			CircleChartDataRepoModel(300000,6,"بیسار")
 		)
 		val boxRepoModel = BoxHistoryRepoModel(
 			cardChart,
@@ -100,17 +100,17 @@ class ProfileViewModel @ViewModelInject constructor(
 		return Resource.success(boxRepoModel)
 	}
 	
-	fun getProfile(
-		boxId: Long,
-		type: String,
-		number: Int
-	){
-		profile.value = Resource.loading(null)
-		viewModelScope.launch(Dispatchers.IO){
-			profile.postValue(getBoxHistoryUseCase.action(
-				BoxHistoryRequestModel(boxId, type, number)
-			))
-		}
-	}
+//	fun getProfile(
+//		boxId: Long,
+//		type: String,
+//		number: Int
+//	){
+//		profile.value = Resource.loading(null)
+//		viewModelScope.launch(Dispatchers.IO){
+//			profile.postValue(getBoxHistoryUseCase.action(
+//				BoxHistoryRequestModel(boxId, type, number)
+//			))
+//		}
+//	}
 	
 }
