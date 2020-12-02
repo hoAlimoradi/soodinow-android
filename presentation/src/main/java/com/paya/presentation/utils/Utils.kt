@@ -148,12 +148,10 @@ object Utils {
 			.setListener(listener)
 			
 			.show()
-	}
 
 	@JvmStatic
 	fun roundNumber(value: Double): Double{
 		return BigDecimal(value)
 			.setScale(5, RoundingMode.HALF_UP).toDouble()
 	}
-	
 }
