@@ -3,13 +3,20 @@ package com.paya.presentation.viewmodel
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.paya.domain.models.repo.CurrencyPriceRepoModel
+import com.paya.domain.repository.CurrencyPriceRepository
+import com.paya.domain.tools.Resource
 import com.paya.presentation.utils.shared.Point
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MarketViewModel @ViewModelInject constructor(
-
+	private val currencyRepository: CurrencyPriceRepository
 ) : ViewModel() {
 	
 	val pointsLiveData = MutableLiveData<List<Point>>()
+	val currencyPrice = MutableLiveData<Resource<List<CurrencyPriceRepoModel>>>()
 	
 	fun getPoints() {
 		val points = mutableListOf<Point>()
@@ -18,6 +25,13 @@ class MarketViewModel @ViewModelInject constructor(
 			points.add(Point(i.toFloat(),value))
 		}
 		pointsLiveData.value = points
+	}
+	
+	fun getCurrencyPrices() {
+		currencyPrice.value = Resource.loading(null)
+		viewModelScope.launch(Dispatchers.IO) {
+			currencyPrice.postValue(currencyRepository.getCurrencyPrice())
+		}
 	}
 	
 }

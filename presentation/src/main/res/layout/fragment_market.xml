@@ -5,6 +5,7 @@
 
     <data>
 
+        <import type="com.paya.domain.tools.Resource" />
         <import type="com.paya.presentation.viewmodel.MarketViewModel" />
 
         <import type="com.paya.presentation.utils.shared.Point" />
@@ -187,6 +188,13 @@
             android:layout_marginTop="@dimen/margin_very_small"
             app:layout_constraintTop_toBottomOf="@id/filter_switch"
             tools:listitem="@layout/item_market_stock" />
+
+        <include
+            layout="@layout/loading_state"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            app:resource="@{(Resource) viewModel.currencyPrice}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
