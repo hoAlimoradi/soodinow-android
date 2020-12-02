@@ -22,7 +22,9 @@ class AuthRepositoryImpl @Inject constructor(
 	private val userInfoDbApi: UserInfoDbApi,
 	private val preferenceHelper: PreferenceHelper,
 	private val profileRemoteRepoMapper: Mapper<ProfileRemoteModel,ProfileRepoModel>,
-	private val profileRepoRemoteMapper: Mapper<ProfileBodyRepoModel,ProfileBodyRemoteModel>
+	private val profileRepoRemoteMapper: Mapper<ProfileBodyRepoModel,ProfileBodyRemoteModel>,
+	private val changePasswordRepoRemoteMapper : Mapper<ChangePasswordRepoBodyModel,ChangePasswordRemoteBodyModel>,
+	private val changePasswordRemoteRepoMapper : Mapper<ChangePasswordRemoteModel,ChangePasswordRepoModel>
 ) : AuthRepository {
 	
 	override suspend fun register(phoneNumber: String): Resource<RegisterRepoModel> {
@@ -88,6 +90,13 @@ class AuthRepositoryImpl @Inject constructor(
 		val getProfileApi = authNet.getProfile()
 		return getResourceFromApiResponse(getProfileApi) {
 			profileRemoteRepoMapper.map(it.data)
+		}
+	}
+	
+	override suspend fun changePassword(changePasswordRepoBodyModel: ChangePasswordRepoBodyModel): Resource<ChangePasswordRepoModel> {
+		val response = authNet.changePassword(changePasswordRepoRemoteMapper.map(changePasswordRepoBodyModel))
+		return getResourceFromApiResponse(response) {
+			changePasswordRemoteRepoMapper.map(it.data)
 		}
 	}
 	

@@ -45,13 +45,26 @@ class ProfileViewModel @ViewModelInject constructor(
 		errorMessage.value = message
 	}
 	
-//	fun getExistAccount(){
-//		existAccount.value = Resource.loading(null)
-//		viewModelScope.launch(Dispatchers.IO) {
-//			existAccount.postValue(existAccountUseCase.action(Unit))
-//		}
-//	}
 	fun getExistAccount(){
+		existAccount.value = Resource.loading(null)
+		viewModelScope.launch(Dispatchers.IO) {
+			existAccount.postValue(existAccountUseCase.action(Unit))
+		}
+	}
+	
+		fun getProfile(
+		boxId: Long,
+		type: String,
+		number: Int
+	){
+		profile.value = Resource.loading(null)
+		viewModelScope.launch(Dispatchers.IO){
+			profile.postValue(getBoxHistoryUseCase.action(
+				BoxHistoryRequestModel(boxId, type, number)
+			))
+		}
+	}
+	/*fun getExistAccount(){
 		existAccount.value = Resource.loading(null)
 		viewModelScope.launch(Dispatchers.IO) {
 			existAccount.postValue(getMockE())
@@ -98,19 +111,8 @@ class ProfileViewModel @ViewModelInject constructor(
 			"امید نقی پور"
 		)
 		return Resource.success(boxRepoModel)
-	}
+	}*/
 	
-//	fun getProfile(
-//		boxId: Long,
-//		type: String,
-//		number: Int
-//	){
-//		profile.value = Resource.loading(null)
-//		viewModelScope.launch(Dispatchers.IO){
-//			profile.postValue(getBoxHistoryUseCase.action(
-//				BoxHistoryRequestModel(boxId, type, number)
-//			))
-//		}
-//	}
+
 	
 }

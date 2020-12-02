@@ -128,7 +128,6 @@
     </fragment>
 
 
-
     <fragment
         android:id="@+id/connectBrokerage"
         android:name="com.paya.presentation.ui.createPersonalAccount.ConnectBrokerageFragment"
@@ -145,18 +144,20 @@
         android:name="com.paya.presentation.ui.createLowRiskAccount.CreateAccountWithoutRiskFragment"
         android:label="without_account_risk"
         tools:layout="@layout/fragment_create_account_without_risk">
-        <action android:id="@+id/navigationToCreateLowRiskAccount"
-            app:destination="@+id/createLowRiskAccount"/>
+        <action
+            android:id="@+id/navigationToCreateLowRiskAccount"
+            app:destination="@+id/createLowRiskAccount" />
     </fragment>
 
-    <fragment android:id="@+id/createLowRiskAccount"
+    <fragment
+        android:id="@+id/createLowRiskAccount"
         android:name="com.paya.presentation.ui.createLowRiskAccount.CreateLowRiskAccountFragment"
-        tools:layout="@layout/fragment_create_low_risk_account"
-        android:label="fragment_create_low_risk_account">
-        <action android:id="@+id/navigationToCalculateProfitCapital"
-            app:destination="@+id/calculateProfileCapital"/>
+        android:label="fragment_create_low_risk_account"
+        tools:layout="@layout/fragment_create_low_risk_account">
+        <action
+            android:id="@+id/navigationToCalculateProfitCapital"
+            app:destination="@+id/calculateProfileCapital" />
     </fragment>
-
 
 
     <fragment
@@ -220,8 +221,11 @@
         android:name="com.paya.presentation.ui.changePassword.ChangePasswordFragment"
         android:label="fragment_change_password"
         tools:layout="@layout/fragment_change_password">
-
+        <action
+            android:id="@+id/navigationNavGraph"
+            app:destination="@+id/navGraph" />
     </fragment>
+    <include app:graph="@navigation/nav_graph" />
     <fragment
         android:id="@+id/userUpdateProfile"
         android:name="com.paya.presentation.ui.userUpdateProfile.UserUpdateProfileFragment"
