@@ -42,5 +42,10 @@ interface AuthService {
 	@GET("auth/profile/")
 	suspend fun getProfile(): ApiResponse<BaseModel<ProfileRemoteModel>>
 	
+	
+	@PATCH("auth/change_password/")
+	suspend fun changePassword(
+		@Body body: ChangePasswordRemoteBodyModel
+	): ApiResponse<BaseModel<ChangePasswordRemoteModel>>
 }
 

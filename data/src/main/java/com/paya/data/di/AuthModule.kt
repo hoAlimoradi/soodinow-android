@@ -63,6 +63,18 @@ abstract class AuthModule {
 			>
 	
 	@Binds
+	abstract fun bindChangePasswordRepoRemoteMapper(mapper: ChangePasswordRepoRemoteMapper): Mapper<
+			ChangePasswordRepoBodyModel,
+			ChangePasswordRemoteBodyModel
+			>
+	
+	@Binds
+	abstract fun bindChangePasswordRemoteRepoMapper(mapper: ChangePasswordRemoteRepoMapper): Mapper<
+			ChangePasswordRemoteModel,
+			ChangePasswordRepoModel
+			>
+	
+	@Binds
 	abstract fun registerRepo(dev: AuthRepositoryImpl): AuthRepository
 	
 	@Binds
@@ -94,4 +106,8 @@ abstract class AuthModule {
 	@Binds
 	abstract fun bindGetProfileUseCase(useCase: GetProfileUseCase):
 			UseCase<Unit,ProfileRepoModel>
+	
+	@Binds
+	abstract fun bindChangePasswordUseCase(useCase: ChangePasswordUseCase):
+			UseCase<ChangePasswordRepoBodyModel,ChangePasswordRepoModel>
 }

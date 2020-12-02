@@ -20,4 +20,5 @@ interface AuthRepository {
 	suspend fun setPassword(password: String): Resource<SetPasswordRepoModel>
 	suspend fun updateProfile(body: ProfileBodyRepoModel): Resource<ProfileRepoModel>
 	suspend fun getProfile(): Resource<ProfileRepoModel>
+	suspend fun changePassword(changePasswordRepoBodyModel: ChangePasswordRepoBodyModel) : Resource<ChangePasswordRepoModel>
 }

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
     <domain-config cleartextTrafficPermitted="true">
-        <domain includeSubdomains="true">app.soodinow.com</domain>
+
         <domain includeSubdomains="true">hamyarandroid.com</domain>
         <domain includeSubdomains="true">megaweb.ir</domain>
+        <domain includeSubdomains="true">api.soodinow.com</domain>
     </domain-config>
 </network-security-config>
