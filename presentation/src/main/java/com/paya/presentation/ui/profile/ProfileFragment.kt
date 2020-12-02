@@ -1,12 +1,15 @@
 package com.paya.presentation.ui.profile
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.paya.domain.models.repo.BoxHistoryRepoModel
@@ -24,6 +27,8 @@ import com.paya.presentation.utils.observe
 import com.paya.presentation.utils.shared.Point
 import com.paya.presentation.viewmodel.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment() {
@@ -31,16 +36,13 @@ class ProfileFragment : Fragment() {
 	private lateinit var mBinding: FragmentProfileBinding
 	private lateinit var adapter: SlidePagerAdapter
 	private val viewModel: ProfileViewModel by viewModels()
-
-//	private data class BoxHistoryData(
-//		val data: BoxHistoryRepoModel,
-//		val isFetched: Boolean = false
-//	)
 	
 	private val boxHistoryHahMap = mutableMapOf<Long,BoxHistoryRepoModel?>()
 	private var currentBoxId: Long? = null
 	private var boxHistoryId: List<Long>? = null
 	private val cardAccounts = mutableListOf<CardAccount>()
+	private var boxHistoryType = "day"
+	private var boxHistoryNumber = 3
 	
 	override fun onCreateView(
 		inflater: LayoutInflater,container: ViewGroup?,
@@ -72,31 +74,29 @@ class ProfileFragment : Fragment() {
 	private fun initRadioGroup() {
 		mBinding.myRadioGroup.setOnCheckedChangeListener { _,checkedId ->
 			currentBoxId ?: return@setOnCheckedChangeListener
-			val type: String
-			val number: Int
 			when (checkedId) {
 				R.id.radioButtonDay -> {
-					type = "day"
-					number = 3
+					boxHistoryType = "day"
+					boxHistoryNumber = 3
 				}
 				R.id.RadioButtonWeek -> {
-					type = "week"
-					number = 1
+					boxHistoryType = "week"
+					boxHistoryNumber = 1
 				}
 				R.id.RadioButtonMonth -> {
-					type = "month"
-					number = 1
+					boxHistoryType = "month"
+					boxHistoryNumber = 1
 				}
 				R.id.RadioButtonLongTerm -> {
-					type = "month"
-					number = 3
+					boxHistoryType = "month"
+					boxHistoryNumber = 3
 				}
 				else -> {
-					type = "day"
-					number = 3
+					boxHistoryType = "day"
+					boxHistoryNumber = 3
 				}
 			}
-			currentBoxId?.let { viewModel.getProfile(it,type,number) }
+			currentBoxId?.let { viewModel.getProfile(it,boxHistoryType,boxHistoryNumber) }
 		}
 	}
 	
@@ -104,17 +104,19 @@ class ProfileFragment : Fragment() {
 		if (resource.status == Status.SUCCESS) {
 			resource.data?.activeBoxId?.let {
 				boxHistoryId = it
-				mBinding.scrollView.visibility = if(boxHistoryId!!.isNotEmpty()) View.VISIBLE else View.GONE
-				mBinding.empty.visibility = if(boxHistoryId!!.isEmpty()) View.VISIBLE else View.GONE
 				it.forEach { id ->
 					boxHistoryHahMap[id] = null
 					cardAccounts.add(CardAccount())
 				}
-				setupViewPager()
-				if (it.isEmpty())
+				if (it.isEmpty()) {
+					viewModel.setErrorMessage("شما هیچ حسابی ایجاد نکرده اید")
 					return@let
-				viewModel.getProfile(it.first(),"day",3)
+				}
+				currentBoxId = it.first()
+				viewModel.getProfile(it.first(),boxHistoryType,boxHistoryNumber)
 			}
+		}else if(resource.status == Status.ERROR){
+			viewModel.setErrorMessage(resource.message ?: "خطایی رخ داده است")
 		}
 	}
 	
@@ -125,8 +127,16 @@ class ProfileFragment : Fragment() {
 				val cardAccountIndex = boxHistoryId!!.indexOf(currentBoxId)
 				if (cardAccountIndex == -1) return
 				val cardAccount = cardAccounts[cardAccountIndex]
-				setCurrentBoxData(cardAccount,it)
+				if (!cardAccount.isDataSet)
+					adapter.notifyItemChanged(cardAccountIndex)
+				mBinding.scrollView.visibility = View.VISIBLE
+				lifecycleScope.launch {
+					delay(500)
+					setCurrentBoxData(cardAccount,it)
+				}
 			}
+		}else if(resource.status == Status.ERROR){
+			viewModel.setErrorMessage(resource.message ?: "خطایی رخ داده است")
 		}
 	}
 	
@@ -149,16 +159,11 @@ class ProfileFragment : Fragment() {
 					currentBoxId = boxHistoryId!![position]
 					val boxModel = boxHistoryHahMap[currentBoxId!!]
 					if (boxModel == null) {
-						viewModel.getProfile(currentBoxId!!,"day",3)
+						viewModel.getProfile(currentBoxId!!,boxHistoryType,boxHistoryNumber)
 					} else {
 						setCurrentBoxData(cardAccounts[position],boxModel)
 					}
 					super.onPageSelected(position)
-//					viewModel.getPoints()
-//					val fragment: AppropriateInvestmentFragment =
-//						childFragmentManager.findFragmentById(R.id.appropriate_investment_fragment)
-//								as AppropriateInvestmentFragment
-//					fragment.setup()
 				}
 			}
 		)
@@ -166,15 +171,18 @@ class ProfileFragment : Fragment() {
 	}
 	
 	private fun setCurrentBoxData(cardAccount: CardAccount,boxModel: BoxHistoryRepoModel) {
-		cardAccount.setData(boxModel.cardChart, boxModel.buyValue,boxModel.percent * 100)
+		val roundedPercent = Utils.roundNumber((boxModel.percent * 100).toDouble())
+		cardAccount.setData(boxModel.cardChart, boxModel.buyValue,roundedPercent, boxModel.name)
 		
 		val mainChartPoints = mutableListOf<Point>()
 		val mainChartData = boxModel.mainChart.data
 		if (mainChartData.isNotEmpty()) {
 			val difference = mainChartData.last() - mainChartData.first()
-			val percent = ((difference * 100) / mainChartData.first())
-			mBinding.txtPercent.text = percent.toString()
-			mBinding.txtPrice.text = mainChartData.last().toString()
+			val percent = ((difference * 100).toDouble() / mainChartData.first())
+			mBinding.txtPercent.text = Utils.roundNumber(percent).toString()
+			val pathResourceId = if (percent >= 0) R.drawable.ic_path_up else R.drawable.ic_path_down
+			mBinding.imgPath.setImageResource(pathResourceId)
+			mBinding.txtPrice.text = Utils.separatorAmount(mainChartData.last().toString())
 		}
 		val persianDate = Utils.convertStringToPersianCalender(boxModel.mainChart.endDate)
 		persianDate?.let {
@@ -185,11 +193,22 @@ class ProfileFragment : Fragment() {
 			mainChartPoints.add(
 				Point(
 					index.toFloat(),
-					value.toFloat()
+					value.toFloat(),
+					boxModel.percent,
+					value
 				)
 			)
 		}
-		BindingAdapters.setLineChartData(mBinding.chart,mainChartPoints)
+		BindingAdapters.setLineAccountChartData(
+			mBinding.chart,
+			mainChartPoints,
+			chartColor = ContextCompat.getColor(requireContext(),R.color.green),
+			markerColor = ContextCompat.getColor(requireContext(),R.color.purple_gray),
+			markerTitleColor = Color.WHITE,
+			chartAlpha = 35,
+			markerType = 0,
+			touchEnabled = true
+		)
 		
 		
 		var totalQuantity: Long = 0

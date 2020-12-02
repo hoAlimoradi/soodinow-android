@@ -12,6 +12,8 @@ import android.view.Window
 import ir.hamsaa.persiandatepicker.Listener
 import ir.hamsaa.persiandatepicker.PersianDatePickerDialog
 import ir.hamsaa.persiandatepicker.util.PersianCalendar
+import java.math.BigDecimal
+import java.math.RoundingMode
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -146,5 +148,10 @@ object Utils {
 			.setListener(listener)
 			
 			.show()
+
+	@JvmStatic
+	fun roundNumber(value: Double): Double{
+		return BigDecimal(value)
+			.setScale(5, RoundingMode.HALF_UP).toDouble()
 	}
 }

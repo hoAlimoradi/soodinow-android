@@ -5,15 +5,13 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.paya.domain.models.repo.BoxHistoryRepoModel
-import com.paya.domain.models.repo.BoxHistoryRequestModel
-import com.paya.domain.models.repo.ExitAccountRepoModel
-import com.paya.domain.models.repo.ProfileRepoModel
+import com.paya.domain.models.repo.*
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.domain.tools.UseCase
 import com.paya.presentation.utils.shared.Point
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class ProfileViewModel @ViewModelInject constructor(
@@ -21,10 +19,10 @@ class ProfileViewModel @ViewModelInject constructor(
 	private val existAccountUseCase: UseCase<Unit,ExitAccountRepoModel>
 ): ViewModel(){
 	
-	val pointsLiveData = MutableLiveData<List<Point>>()
 	val profile = MutableLiveData<Resource<BoxHistoryRepoModel>>()
 	val existAccount = MutableLiveData<Resource<ExitAccountRepoModel>>()
 	val loading = MediatorLiveData<Resource<Nothing>>()
+	val errorMessage = MutableLiveData<String?>(null)
 	
 	init {
 		loading.addSource(profile){
@@ -43,33 +41,76 @@ class ProfileViewModel @ViewModelInject constructor(
 		}
 	}
 	
-	fun getPoints() {
-		val points = mutableListOf<Point>()
-		for (i in 0 until 10) {
-			val value = (Math.random() * 100).toFloat()
-			points.add(Point(i.toFloat(),value))
-		}
-		pointsLiveData.value = points
+	fun setErrorMessage(message: String){
+		errorMessage.value = message
 	}
 	
+//	fun getExistAccount(){
+//		existAccount.value = Resource.loading(null)
+//		viewModelScope.launch(Dispatchers.IO) {
+//			existAccount.postValue(existAccountUseCase.action(Unit))
+//		}
+//	}
 	fun getExistAccount(){
 		existAccount.value = Resource.loading(null)
 		viewModelScope.launch(Dispatchers.IO) {
-			existAccount.postValue(existAccountUseCase.action(Unit))
+			existAccount.postValue(getMockE())
 		}
 	}
-	
+
+	private fun getMockE() : Resource<ExitAccountRepoModel> {
+		return Resource.success(ExitAccountRepoModel(true,listOf(1)))
+	}
+
 	fun getProfile(
 		boxId: Long,
 		type: String,
 		number: Int
-	){
+	) {
 		profile.value = Resource.loading(null)
-		viewModelScope.launch(Dispatchers.IO){
-			profile.postValue(getBoxHistoryUseCase.action(
-				BoxHistoryRequestModel(boxId, type, number)
-			))
+		viewModelScope.launch(Dispatchers.IO) {
+			delay(1500)
+			profile.postValue(
+				getMockData()
+			)
 		}
 	}
+	
+	private fun getMockData(): Resource<BoxHistoryRepoModel> {
+		val cardChart = LinearChartRepoModel(
+			listOf(1796666,158666,1656666,1656666,158666,1696666,1736666,1795666,1796666),
+			"2020-11-20T09:13:24.700966Z","2020-11-10T09:13:24.700966Z"
+		)
+		val mainChart = LinearChartRepoModel(
+			listOf(156666,158666,1656666,1696666,1736666,1796666),
+			"2020-11-30T09:13:24.700966Z","2020-10-30T09:13:24.700966Z"
+		)
+		val circleChart = listOf(
+			CircleChartDataRepoModel(250000,3,"فیلان"),
+			CircleChartDataRepoModel(300000,6,"بیسار")
+		)
+		val boxRepoModel = BoxHistoryRepoModel(
+			cardChart,
+			mainChart,
+			circleChart,
+			196000,
+			0.6f,
+			"امید نقی پور"
+		)
+		return Resource.success(boxRepoModel)
+	}
+	
+//	fun getProfile(
+//		boxId: Long,
+//		type: String,
+//		number: Int
+//	){
+//		profile.value = Resource.loading(null)
+//		viewModelScope.launch(Dispatchers.IO){
+//			profile.postValue(getBoxHistoryUseCase.action(
+//				BoxHistoryRequestModel(boxId, type, number)
+//			))
+//		}
+//	}
 	
 }

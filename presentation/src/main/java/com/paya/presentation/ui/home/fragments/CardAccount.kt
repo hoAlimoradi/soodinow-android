@@ -38,6 +38,7 @@ class CardAccount : Fragment() {
 	
 	
 	private lateinit var mBinding: AccountCardBinding
+	var isDataSet = false
 	
 	override fun onCreateView(
 		inflater: LayoutInflater,container: ViewGroup?,
@@ -50,28 +51,22 @@ class CardAccount : Fragment() {
 		return mBinding.root
 	}
 	
-	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
-		super.onViewCreated(view,savedInstanceState)
-//		val points = mutableListOf<Point>()
-//		for (i in 0 until 10) {
-//			val value = (Math.random() * 100).toFloat()
-//			points.add(Point(i.toFloat(),value))
-//		}
-//		BindingAdapters.setLineAccountChartData(mBinding.chart,points)
-	}
-	
-	fun setData(linearChartRepoModel: LinearChartRepoModel,buyValue: Long,percent: Float) {
-		mBinding.wealthValue.text = buyValue.toString()
+	fun setData(linearChartRepoModel: LinearChartRepoModel,buyValue: Long,percent: Double, name: String) {
+		if (isDataSet)
+			return
+		isDataSet = true
+		mBinding.accountUserName.text = name
+		mBinding.wealthValue.text = Utils.separatorAmount(buyValue.toString())
 		
 		val points = mutableListOf<Point>()
 		linearChartRepoModel.data.forEachIndexed { index,value ->
-			points.add(Point(index.toFloat(),value.toFloat(),percent))
+			points.add(Point(index.toFloat(),value.toFloat(),percent.toFloat()))
 		}
 		BindingAdapters.setLineAccountChartData(mBinding.chart,points)
 		
 		val persianDate = Utils.convertStringToPersianCalender(linearChartRepoModel.startDate)
 		persianDate?.let {
-			val date = "${persianDate.persianYear}/${persianDate.persianMonthName}/${persianDate.persianDay}"
+			val date = "${persianDate.persianYear}/${persianDate.persianMonth}/${persianDate.persianDay}"
 			mBinding.dateValue.text = date
 		}
 	}

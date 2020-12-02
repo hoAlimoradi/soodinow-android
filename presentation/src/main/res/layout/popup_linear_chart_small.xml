@@ -6,15 +6,20 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/percent"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:textColor="@color/black"
-        android:textSize="@dimen/text_size_small"
+        android:textSize="@dimen/text_size_11sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/toman"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/bg_card_sales"
+
         tools:text="44 %"
-        android:gravity="center"/>
+        android:minWidth="@dimen/height"
+        android:paddingBottom="2dp"
+        android:paddingTop="2dp"
+        android:gravity="center"
+        android:clipChildren="false"
+        android:clipToPadding="false"/>
 
 </layout>

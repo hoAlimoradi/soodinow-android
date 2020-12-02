@@ -21,6 +21,7 @@
             android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:visibility="invisible"
             >
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -84,7 +85,8 @@
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/pager"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="180dp"
+                    android:maxHeight="180dp"
                     android:layout_marginTop="@dimen/margin_very_small"
                     app:layout_constraintEnd_toStartOf="@+id/end_guideline"
                     app:layout_constraintStart_toEndOf="@+id/start_guideline"
@@ -157,7 +159,7 @@
                             android:id="@+id/txt_date"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="9 اردیبهشت 99"
+                            tools:text="9 اردیبهشت 99"
                             android:textColor="@color/purple"
                             android:textSize="@dimen/text_size_small"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -179,9 +181,9 @@
                             android:id="@+id/txt_price"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="12500 "
+                            tools:text="12500 "
                             android:textColor="@color/purple"
-                            android:textSize="@dimen/text_size_small"
+                            android:textSize="@dimen/text_size_12sp"
                             app:layout_constraintStart_toEndOf="@id/guideline_end_chart"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/txt_toman" />
@@ -191,13 +193,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_very_small"
-                            android:text="4%"
+                            tools:text="4%"
                             android:textColor="@color/purple"
-                            android:textSize="@dimen/text_size_small"
+                            android:textSize="@dimen/text_size_12sp"
                             app:layout_constraintStart_toStartOf="@id/txt_price"
                             app:layout_constraintTop_toBottomOf="@id/txt_price" />
 
                         <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/imgPath"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/margin_4_dp"
@@ -329,10 +332,11 @@
         <include
             android:id="@+id/empty"
             layout="@layout/empty_card_list"
+            app:title="@{viewModel.errorMessage}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:visibility="gone"/>
+            tools:visibility="gone"/>
 
 
         <include

@@ -5,5 +5,6 @@ data class BoxHistoryRepoModel(
 	val mainChart: LinearChartRepoModel,
 	val circleChart: List<CircleChartDataRepoModel>,
 	val buyValue: Long,
-	val percent: Float
+	val percent: Float,
+	val name: String
 )

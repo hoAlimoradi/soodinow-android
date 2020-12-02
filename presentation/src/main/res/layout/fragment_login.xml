@@ -82,7 +82,7 @@
                     <include
                         layout="@layout/input_text"
                         app:content="@{viewModel.password}"
-                        app:label="@{@string/repeat_password}" />
+                        app:label="@{@string/password}" />
 
                 </LinearLayout>
 

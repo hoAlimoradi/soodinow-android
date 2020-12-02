@@ -18,7 +18,7 @@ class BoxHistoryRemoteRepoMapper @Inject constructor(): Mapper<
 			endDate = param.cardChart.endDate
 		)
 		val mainChart = LinearChartRepoModel(
-			data = param.mainChart.data,
+				data = param.mainChart.data,
 			startDate = param.mainChart.startDate,
 			endDate = param.mainChart.endDate
 		)
@@ -35,7 +35,8 @@ class BoxHistoryRemoteRepoMapper @Inject constructor(): Mapper<
 			mainChart = mainChart,
 			circleChart = circleChart,
 			buyValue = param.buyValue,
-			percent = param.percent
+			percent = param.percent,
+			name = param.name
 		)
 	}
 	
