@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.paya.domain.models.repo.ChangePasswordRepoModel
 import com.paya.domain.tools.Resource
@@ -52,9 +53,12 @@ class ChangePasswordFragment : Fragment() {
 				context.let {
 					Toast.makeText(it,resource.data!!.message,Toast.LENGTH_SHORT).show()
 				}
-				findNavController().navigate(
-					R.id.navigationNavGraph
-				)
+				activity.let{
+					it!!.findNavController(R.id.nav_host_fragment).navigate(
+						R.id.hintFragment
+					)
+				}
+				
 			}
 			Status.ERROR -> context.let {
 				Toast.makeText(it,resource.message,Toast.LENGTH_SHORT).show()

@@ -48,8 +48,8 @@ class ChangePasswordViewModel @ViewModelInject constructor(
 		viewModelScope.launch {
 			status.postValue(Resource.loading(null))
 			val body = ChangePasswordRepoBodyModel(
-				oldPassword!!,
-				newPassword!!
+				oldPassword,
+				newPassword
 			)
 			status.postValue(changePasswordUseCase.action(body))
 		}
