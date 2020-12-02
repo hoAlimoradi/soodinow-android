@@ -45,4 +45,9 @@ class ApiServiceFactoryModule{
 	@Reusable
 	fun lowBoxHistoryService(apiService: ApiServiceFactory) =
 		apiService.create(BoxHistoryService::class.java)
+	
+	@Provides
+	@Reusable
+	fun currencyPriceService(apiService: ApiServiceFactory) =
+		apiService.create(CurrencyPriceService::class.java)
 }

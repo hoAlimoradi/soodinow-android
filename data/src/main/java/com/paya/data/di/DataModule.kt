@@ -15,7 +15,8 @@ import dagger.hilt.android.components.ActivityRetainedComponent
 		MarketModule::class,
 		SharedPreferenceModule::class,
 		QuestionModule::class,
-		LowRiskInvestmentModule::class
+		LowRiskInvestmentModule::class,
+		CurrencyPriceModule::class
 	]
 )
 @InstallIn(ActivityRetainedComponent::class)

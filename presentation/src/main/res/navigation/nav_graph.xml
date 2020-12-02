@@ -5,6 +5,7 @@
     app:startDestination="@id/hintFragment"
     android:id="@+id/navGraph">
 
+
     <fragment
         android:id="@+id/hintFragment"
         android:name="com.paya.presentation.ui.hint.HintFragment"

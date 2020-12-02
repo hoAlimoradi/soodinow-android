@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginHorizontal="@dimen/margin_small"
     android:layout_marginVertical="@dimen/margin_4_dp"
     android:background="@drawable/round_corner_layout"
@@ -22,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_very_small"
-        android:text="بیتکوین"
+        tools:text="بیتکوین"
         android:textSize="@dimen/text_size_small"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -34,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_medium"
-        android:text="3500"
+        tools:text="3500"
         android:textColor="@color/purple"
         android:textSize="@dimen/text_size_small"
         android:textStyle="bold"
@@ -50,7 +51,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_path_up" />
+        tools:srcCompat="@drawable/ic_path_up" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/change_percent"
@@ -59,7 +60,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_very_small"
-        android:text="+5%"
+        tools:text="+5%"
         android:textSize="@dimen/text_size_small"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -71,7 +72,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_very_small"
-        android:text="+220"
+        tools:text="+220"
         android:textSize="@dimen/text_size_small"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
