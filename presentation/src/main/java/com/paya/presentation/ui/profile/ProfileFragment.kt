@@ -1,9 +1,11 @@
 package com.paya.presentation.ui.profile
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -193,11 +195,20 @@ class ProfileFragment : Fragment() {
 					index.toFloat(),
 					value.toFloat(),
 					boxModel.percent,
-					boxModel.buyValue
+					value
 				)
 			)
 		}
-		BindingAdapters.setLineChartData(mBinding.chart,mainChartPoints)
+		BindingAdapters.setLineAccountChartData(
+			mBinding.chart,
+			mainChartPoints,
+			chartColor = ContextCompat.getColor(requireContext(),R.color.green),
+			markerColor = ContextCompat.getColor(requireContext(),R.color.purple_gray),
+			markerTitleColor = Color.WHITE,
+			chartAlpha = 35,
+			markerType = 0,
+			touchEnabled = true
+		)
 		
 		
 		var totalQuantity: Long = 0

@@ -2,7 +2,10 @@ package com.paya.presentation.ui.custom
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.*
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.Path
 import android.graphics.Path.FillType
 import android.view.View
 import android.widget.TextView
@@ -15,9 +18,17 @@ import com.github.mikephil.charting.utils.Utils
 import com.paya.presentation.R
 import com.paya.presentation.utils.shared.EntryPoint
 
+const val PRICE = 0
+const val PERCENT = 1
 
 @SuppressLint("ViewConstructor")
-class MyMarkerViewSmall(context: Context,private val parentView: View) :
+class MyMarkerViewSmall(
+	context: Context,
+	private val parentView: View,
+	private val markerColor: Int = Color.WHITE,
+	private val markerTitleColor: Int = Color.BLACK,
+	private val markerType: Int = 1
+) :
 	MarkerView(context,R.layout.popup_linear_chart_small) {
 	
 	private var posY: Int? = null
@@ -27,12 +38,14 @@ class MyMarkerViewSmall(context: Context,private val parentView: View) :
 	
 	@SuppressLint("SetTextI18n")
 	override fun refreshContent(e: Entry,highlight: Highlight?) {
+		percentTextView.setTextColor(markerTitleColor)
 		if (e is EntryPoint) {
-			percentTextView.text = (if (e.percent == 0.0f) Utils.formatNumber(
-				e.y,
-				0,
-				true
-			) else e.percent.toString()) + " %"
+			percentTextView.text =
+				if (markerType == PRICE) {
+					com.paya.presentation.utils.Utils.separatorAmount(e.price.toString())
+				} else {
+					 e.percent.toString() + " %"
+				}
 		} else if (e is CandleEntry) {
 			percentTextView.text = Utils.formatNumber(e.high,0,true) + " %"
 		} else {
@@ -72,7 +85,7 @@ class MyMarkerViewSmall(context: Context,private val parentView: View) :
 		super.onDraw(canvas)
 
 		val paint = Paint()
-		paint.color = Color.WHITE
+		paint.color = markerColor
 		paint.style = Paint.Style.FILL_AND_STROKE
 		paint.isAntiAlias = true
 		

@@ -16,7 +16,6 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.databinding.BindingAdapter
 import at.grabner.circleprogress.CircleProgressView
 import com.github.mikephil.charting.charts.LineChart
-import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IFillFormatter
@@ -275,8 +274,25 @@ object BindingAdapters {
 	
 	
 	@JvmStatic
-	@BindingAdapter("accountChartData")
-	fun setLineAccountChartData(chart: LineChart,data: List<Point>?) {
+	@BindingAdapter(
+		"accountChartData",
+		"chartColor",
+		"markerColor",
+		"markerTitleColor",
+		"markerType",
+		"chartAlpha",
+		"touchEnabled"
+	)
+	fun setLineAccountChartData(
+		chart: LineChart,
+		data: List<Point>?,
+		chartColor: Int = Color.WHITE,
+		markerColor: Int= Color.WHITE,
+		markerTitleColor: Int= Color.BLACK,
+		markerType: Int = 1,
+		chartAlpha: Int = 0,
+		touchEnabled : Boolean = false
+	) {
 		data ?: return
 		chart.setViewPortOffsets(0f,0f,0f,0f)
 		chart.setBackgroundColor(Color.TRANSPARENT)
@@ -285,7 +301,7 @@ object BindingAdapters {
 		chart.description.isEnabled = false
 		
 		// enable touch gestures
-		chart.setTouchEnabled(false)
+		chart.setTouchEnabled(touchEnabled)
 		
 		// enable scaling and dragging
 		chart.isDragEnabled = true
@@ -304,10 +320,16 @@ object BindingAdapters {
 		
 		chart.axisRight.isEnabled = false
 		
-		chart.marker = MyMarkerViewSmall(chart.context,chart)
+		chart.marker = MyMarkerViewSmall(
+			chart.context,
+			chart,
+			markerColor,
+			markerTitleColor,
+			markerType
+		)
 		
 		
-		setAccountData(chart,data)
+		setAccountData(chart,data,chartColor,chartAlpha)
 		
 		chart.legend.isEnabled = false
 		
@@ -329,10 +351,15 @@ object BindingAdapters {
 		)
 	}
 	
-	private fun setAccountData(chart: LineChart,points: List<Point>) {
+	private fun setAccountData(
+		chart: LineChart,
+		points: List<Point>,
+		chartColor: Int = Color.WHITE,
+		chartAlpha: Int = 0
+	) {
 		val set1: LineDataSet
 		
-		val entries = points.map { EntryPoint(it.x,it.y,it.percent) }
+		val entries = points.map { EntryPoint(it.x,it.y,it.percent,it.price) }
 		
 		if (chart.data != null &&
 			chart.data.dataSetCount > 0
@@ -351,9 +378,9 @@ object BindingAdapters {
 			set1.lineWidth = 2f
 			set1.circleRadius = 0f
 			set1.setCircleColor(Color.TRANSPARENT)
-			set1.color = Color.WHITE
-			//set1.fillColor = ContextCompat.getColor(chart.context,R.color.white)
-			set1.fillAlpha = 0
+			set1.color = chartColor
+			set1.fillColor = chartColor
+			set1.fillAlpha = chartAlpha
 			set1.setDrawHorizontalHighlightIndicator(true)
 			set1.fillFormatter =
 				IFillFormatter { _,_ -> chart.axisLeft.axisMinimum }
