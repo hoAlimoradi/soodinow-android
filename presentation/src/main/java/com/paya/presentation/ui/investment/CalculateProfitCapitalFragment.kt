@@ -17,6 +17,7 @@ import com.paya.domain.tools.Status
 import com.paya.presentation.R
 import com.paya.presentation.databinding.FragmentCalculateProfitCapitalBinding
 import com.paya.presentation.ui.createPersonalAccount.ConnectLowRiskBrokerageFragmentArgs
+import com.paya.presentation.ui.createPersonalAccount.enum.NextPageInformation
 import com.paya.presentation.ui.investment.dialog.SelectedDayInMonthDialogFragment
 import com.paya.presentation.ui.investment.dialog.SelectedWithdrawalDialogFragment
 import com.paya.presentation.utils.PriceTextWatcher
@@ -71,7 +72,7 @@ class CalculateProfitCapitalFragment : Fragment() {
 		if (resource.status == Status.SUCCESS) {
 			if (!resource.data!!.complete) {
 				findNavController().navigate(
-					CalculateProfitCapitalFragmentDirections.navigateToFirstInformation()
+					CalculateProfitCapitalFragmentDirections.navigateToFirstInformation(NextPageInformation.withoutRisk)
 				)
 			} else {
 				val bundle = Bundle()

@@ -122,9 +122,18 @@
         android:name="com.paya.presentation.ui.createPersonalAccount.FirstInformationFragment"
         android:label="fragment_first_information"
         tools:layout="@layout/fragment_first_information">
+
+        <argument
+            android:name="nextPage"
+            app:argType="com.paya.presentation.ui.createPersonalAccount.enum.NextPageInformation"
+            />
         <action
             android:id="@+id/navigateToConnectBrokerage"
             app:destination="@id/connectBrokerage" />
+
+        <action
+            android:id="@+id/navigateToConnectLowRiskBrokerage"
+            app:destination="@id/connectLowRiskBrokerage" />
     </fragment>
 
 

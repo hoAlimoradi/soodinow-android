@@ -10,11 +10,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.paya.domain.models.repo.ProfileRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.presentation.R
 import com.paya.presentation.databinding.FragmentFirstInformationBinding
+import com.paya.presentation.ui.createPersonalAccount.enum.NextPageInformation
 import com.paya.presentation.utils.observe
 import com.paya.presentation.utils.setAllOnClickListener
 import com.paya.presentation.viewmodel.FirstInformationViewModel
@@ -28,6 +30,7 @@ class FirstInformationFragment : Fragment() {
 	private val mViewModel: FirstInformationViewModel by viewModels()
 	private lateinit var mBinding: FragmentFirstInformationBinding
 	private var picker: PersianDatePickerDialog? = null
+	private val args by navArgs<FirstInformationFragmentArgs>()
 	override fun onCreateView(
 		inflater: LayoutInflater,container: ViewGroup?,
 		savedInstanceState: Bundle?
@@ -67,7 +70,14 @@ class FirstInformationFragment : Fragment() {
 	
 	private fun onReadyUpdateProfile(resource: Resource<ProfileRepoModel>) {
 		when (resource.status) {
-			Status.SUCCESS -> findNavController().popBackStack()
+			Status.SUCCESS -> {
+				if (args.nextPage == NextPageInformation.personal)
+					findNavController().navigate(
+						FirstInformationFragmentDirections.navigateToConnectBrokerage()
+					)
+				else
+					findNavController().popBackStack()
+			}
 			Status.ERROR -> {
 				context.let {
 					Toast.makeText(it,resource.message,Toast.LENGTH_SHORT)

@@ -62,11 +62,13 @@ class HomeFragment : Fragment() {
 		val manager = LinearLayoutManager(context,HORIZONTAL,true)
 		val adapter = MarketAdapter()
 		mBinding.btnCreateAccount.setOnClickListener {
+			findNavController().navigateUp()
 			findNavController().navigate(
 				HomeFragmentDirections.navigateToCreateAccountFragment()
 			)
 		}
 		mBinding.buttonCreateAccount.setOnClickListener {
+			findNavController().navigateUp()
 			findNavController().navigate(
 				HomeFragmentDirections.navigateToCreateAccountFragment()
 			)

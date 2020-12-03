@@ -297,7 +297,7 @@
                 android:background="@android:color/transparent"
                 android:drawableEnd="@drawable/ic_create_account"
                 android:drawablePadding="@dimen/margin_very_small"
-                android:text="@string/create_account_investment"
+                android:text="افتتاح حساب سرمایه گذاری شخصی"
                 android:textSize="@dimen/text_size_11sp" />
         </RelativeLayout>
 
@@ -392,11 +392,11 @@
             android:drawableEnd="@drawable/ic_account_white"
             android:drawablePadding="@dimen/margin_very_small"
             android:elevation="2dp"
-            android:text="@string/create_personal_account"
+            android:text="افتتاح حساب سرمایه گذاری بدون ریسک"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_small"
+            android:textSize="@dimen/text_size_11sp"
             app:layout_constraintBottom_toTopOf="@id/personal_account_title_bottom_guideline"
-            app:layout_constraintEnd_toStartOf="@+id/personal_account_end_guideline" />
+            app:layout_constraintEnd_toStartOf="@+id/inner_end_guideline" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/whySoodinowCard"

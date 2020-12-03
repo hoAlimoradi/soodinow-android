@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.paya.presentation.R
 import com.paya.presentation.databinding.FragmentInvestmentBinding
+import com.paya.presentation.ui.createPersonalAccount.enum.NextPageInformation
 import com.paya.presentation.ui.investment.dialog.InvestmentScoreDialog
 import com.warkiz.widget.IndicatorSeekBar
 import com.warkiz.widget.OnSeekChangeListener
@@ -35,7 +36,7 @@ class InvestmentFragment : Fragment() {
 		super.onViewCreated(view,savedInstanceState)
 		mBinding.submitBtn.setOnClickListener {
 			findNavController().navigate(
-				InvestmentFragmentDirections.navigateToFirstInformation()
+				InvestmentFragmentDirections.navigateToFirstInformation(NextPageInformation.personal)
 			)
 		}
 		
