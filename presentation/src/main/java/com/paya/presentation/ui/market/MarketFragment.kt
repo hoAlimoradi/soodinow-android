@@ -67,6 +67,8 @@ class MarketFragment : Fragment() {
 					Toast.LENGTH_SHORT
 				).show()
 			}
+			
+			else -> return
 		}
 	}
 	

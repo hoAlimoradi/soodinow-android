@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.HORIZONTAL
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.paya.domain.models.repo.AccountCardRepoModel
+import com.paya.domain.models.repo.CurrencyPriceRepoModel
 import com.paya.domain.models.repo.ExitAccountRepoModel
 import com.paya.domain.models.repo.MarketRepoModel
 import com.paya.domain.tools.Resource
@@ -36,6 +37,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
 class HomeFragment : Fragment() {
 	
 	private lateinit var adapter: SlidePagerAdapter
+	private lateinit var adapterCurrency: MarketAdapter
 	private lateinit var mBinding: FragmentHomeBinding
 	private val mViewModel: HomeViewModel by viewModels()
 	override fun onCreateView(
@@ -59,8 +61,19 @@ class HomeFragment : Fragment() {
 		observe(mViewModel.getAccountCard,::checkGetAccountStatus)
 		observe(mViewModel.getMarketSmallList,::checkGetMarketSmallListStatus)
 		observe(mViewModel.exitAccountStatus,::readyExitAccount)
+		observe(mViewModel.currencyPrice, ::onPricesReady)
 		val manager = LinearLayoutManager(context,HORIZONTAL,true)
-		val adapter = MarketAdapter()
+		adapterCurrency = MarketAdapter()
+		mBinding.marketRecycleView.adapter = adapterCurrency
+		mBinding.marketRecycleView.layoutManager = manager
+		val dividerItemDecoration = DividerItemDecoration(context,DividerItemDecoration.HORIZONTAL)
+		ResourcesCompat.getDrawable(resources,R.drawable.divider_market_row,null)?.let {
+			dividerItemDecoration.setDrawable(
+				it
+			)
+		}
+		mBinding.marketRecycleView.addItemDecoration(dividerItemDecoration)
+		mViewModel.getCurrencyPrices()
 		mBinding.btnCreateAccount.setOnClickListener {
 			findNavController().navigateUp()
 			findNavController().navigate(
@@ -81,19 +94,9 @@ class HomeFragment : Fragment() {
 				HomeFragmentDirections.navigateToCreateWithoutRiskAccountFragment()
 			)
 		}
-		mBinding.marketRecycleView.layoutManager = manager
-		mBinding.marketRecycleView.adapter = adapter
-		val dividerItemDecoration = DividerItemDecoration(context,DividerItemDecoration.HORIZONTAL)
-		ResourcesCompat.getDrawable(resources,R.drawable.divider_market_row,null)?.let {
-			dividerItemDecoration.setDrawable(
-				it
-			)
-		}
-		mBinding.marketRecycleView.addItemDecoration(dividerItemDecoration)
-		
 		setupViewPager()
 		
-		// TODO: 11/11/2020 AD delete
+		/*// TODO: 11/11/2020 AD delete
 		mBinding.createAccountImage.setOnClickListener {
 			mBinding.createAccountGroup.visibility = View.GONE
 			mBinding.viewPagerGroup.visibility = View.GONE
@@ -108,7 +111,7 @@ class HomeFragment : Fragment() {
 			mBinding.createAccountGroup.visibility = View.VISIBLE
 			mBinding.viewPagerGroup.visibility = View.GONE
 			accountCard.visibility = View.GONE
-		}
+		}*/
 			mBinding.alarm.setOnClickListener {
 			findNavController().navigateUp()
 			findNavController().navigate(
@@ -174,9 +177,26 @@ class HomeFragment : Fragment() {
 		mBinding.tabAccountCard.setViewPager2(mBinding.pager)
 	}
 	
+	private fun onPricesReady(resource: Resource<List<CurrencyPriceRepoModel>>){
+		when(resource.status){
+			Status.SUCCESS -> resource.data?.let { adapterCurrency.addAllData(it as ArrayList<CurrencyPriceRepoModel>) }
+			Status.ERROR -> {
+				Toast.makeText(
+					requireContext(),
+					resource.message ?: "خطایی رخ داده است",
+					Toast.LENGTH_SHORT
+				).show()
+			}
+			
+			else -> return
+		}
+	}
+	
 	private inner class SlidePagerAdapter(f: Fragment) : FragmentStateAdapter(f) {
 		override fun getItemCount(): Int = 3
 		
 		override fun createFragment(position: Int): Fragment = CardAccount()
 	}
+	
+	
 }

@@ -36,6 +36,7 @@ object Dependencies{
 		const val STEPVIEW_VER = "1.5.1"
 		const val PERSIAN_DATE = "0.8"
 		const val PERSIAN_DATE_DIALOG = "V1.2"
+		const val COORDINATOR_LAYOUT = "1.1.0"
 	}
 	
 	object Modules{

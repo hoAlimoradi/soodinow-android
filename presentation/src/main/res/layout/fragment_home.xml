@@ -530,7 +530,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            app:resource="@{(Resource) viewModel.exitAccountStatus}"
+            app:resource="@{(Resource) viewModel.currencyPrice}"
             tools:visibility="gone" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

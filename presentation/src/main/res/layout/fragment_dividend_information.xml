@@ -3,432 +3,445 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.dividend.fragments.DividendInformationFragment">
+        android:layout_marginTop="@dimen/margin_small"
+        android:padding="@dimen/margin_very_small"
+        app:cardCornerRadius="@dimen/radius_card"
+        app:layout_constraintTop_toBottomOf="@+id/dividendDetailStock">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/top_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.01" />
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:nestedScrollingEnabled="true">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/bottom_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.99" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/start_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.01" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/center_vertical_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/end_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.99" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/chartImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_monitoring"
-            app:layout_constraintEnd_toStartOf="@id/end_guideline"
-            app:layout_constraintTop_toBottomOf="@+id/top_guideline"
-            />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/titleText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:elevation="2dp"
-            android:gravity="center"
-            android:layout_marginEnd="@dimen/margin_very_small"
-            android:text="@string/days_trading_panel"
-            android:textColor="@color/purple"
-            android:textSize="@dimen/text_size_small"
-            app:layout_constraintEnd_toStartOf="@id/chartImage"
-            app:layout_constraintTop_toBottomOf="@id/top_guideline" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/subTitleText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_very_small"
-            android:layout_marginEnd="@dimen/margin_4_dp"
-            android:elevation="2dp"
-            android:gravity="top"
-            android:text="لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم  ازصنعت چاپ و با استفاده از طراحان گرافیک است"
-            android:textColor="@color/purple_gray"
-            android:textSize="@dimen/text_size_10sp"
-            app:layout_constraintEnd_toStartOf="@id/end_guideline"
-            app:layout_constraintStart_toEndOf="@id/start_guideline"
-            app:layout_constraintTop_toBottomOf="@id/chartImage" />
-
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/salesTitleText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
-            android:elevation="2dp"
-            android:gravity="center"
-            android:text="@string/sell"
-            android:textColor="@color/red"
-            android:textSize="@dimen/text_size_small"
-            app:layout_constraintEnd_toStartOf="@id/center_vertical_guideline"
-            app:layout_constraintStart_toEndOf="@id/start_guideline"
-            app:layout_constraintTop_toBottomOf="@id/subTitleText" />
-
-        <include
-            android:id="@+id/salesTableTitle"
-            layout="@layout/row_dividend_information_sales"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
-            app:layout_constraintEnd_toStartOf="@id/center_vertical_guideline"
-            app:layout_constraintStart_toEndOf="@id/start_guideline"
-            app:layout_constraintTop_toBottomOf="@id/salesTitleText" />
-
-        <View
-            android:id="@+id/salesLine"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:background="@color/black_16"
-            app:layout_constraintEnd_toStartOf="@id/center_vertical_guideline"
-            app:layout_constraintStart_toEndOf="@id/start_guideline"
-            app:layout_constraintTop_toBottomOf="@id/salesTableTitle" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/salesRecyclerView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toStartOf="@id/center_vertical_guideline"
-            app:layout_constraintStart_toEndOf="@id/start_guideline"
-            app:layout_constraintTop_toBottomOf="@id/salesLine"
-            tools:itemCount="4"
-            tools:listitem="@layout/row_dividend_information_sales" />
-
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/buyTitleText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
-            android:elevation="2dp"
-            android:gravity="center"
-            android:text="@string/buy"
-            android:textColor="@color/green"
-            android:textSize="@dimen/text_size_small"
-            app:layout_constraintEnd_toStartOf="@id/end_guideline"
-            app:layout_constraintStart_toEndOf="@id/center_vertical_guideline"
-            app:layout_constraintTop_toBottomOf="@id/subTitleText" />
-
-        <include
-            android:id="@+id/buyTableTitle"
-            layout="@layout/row_dividend_information_buy"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
-            app:layout_constraintEnd_toStartOf="@id/end_guideline"
-            app:layout_constraintStart_toEndOf="@id/center_vertical_guideline"
-            app:layout_constraintTop_toBottomOf="@id/buyTitleText" />
-
-        <View
-            android:id="@+id/buyLine"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:background="@color/black_16"
-            app:layout_constraintEnd_toStartOf="@id/end_guideline"
-            app:layout_constraintStart_toEndOf="@id/center_vertical_guideline"
-            app:layout_constraintTop_toBottomOf="@id/buyTableTitle" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/buyRecyclerView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toStartOf="@id/end_guideline"
-            app:layout_constraintStart_toEndOf="@id/center_vertical_guideline"
-            app:layout_constraintTop_toBottomOf="@id/buyLine"
-            tools:itemCount="4"
-            tools:listitem="@layout/row_dividend_information_buy" />
-
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/buyAndSalesBarrier"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:barrierDirection="bottom"
-            app:constraint_referenced_ids="buyRecyclerView,salesRecyclerView" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/sales_substantive_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.31" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/sales_legal_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.1365" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/buy_substantive_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.81" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/buy_legal_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.64" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/chartLayout"
-            android:layout_width="0dp"
-            android:layout_height="250dp"
-            android:layout_marginTop="@dimen/margin_small"
-            app:layout_constraintEnd_toStartOf="@id/end_guideline"
-            app:layout_constraintStart_toEndOf="@id/start_guideline"
-            app:layout_constraintTop_toBottomOf="@+id/buyAndSalesBarrier">
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/sub_sales_substantive_guideline"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.34" />
+                tools:context=".ui.dividend.fragments.DividendInformationFragment">
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/sub_sales_legal_guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.16" />
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/top_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.01" />
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/sub_buy_substantive_guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.85" />
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/bottom_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.99" />
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/sub_buy_legal_guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.68" />
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/start_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.01" />
 
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/chartSalesAndBuy"
-                chartWithoutData="300"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/center_vertical_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5" />
 
-            <View
-                android:id="@+id/lineSalesLegalA"
-                android:layout_width="4dp"
-                android:layout_height="0dp"
-                android:background="@drawable/bg_chart_line_gray"
-                app:layout_constraintHeight_percent="0.5"
-                app:layout_constraintStart_toStartOf="@id/lineSalesLegalB"
-                app:layout_constraintEnd_toEndOf="@+id/lineSalesLegalB"
-                app:layout_constraintBottom_toBottomOf="@id/chartSalesAndBuy"
-                android:layout_marginBottom="@dimen/margin_line_chart"
-                />
-            <View
-                android:id="@+id/lineSalesLegalB"
-                android:layout_width="12dp"
-                android:layout_height="0dp"
-                android:background="@drawable/bg_chart_line_red_light"
-                app:layout_constraintHeight_percent="0.3"
-                app:layout_constraintStart_toStartOf="@id/sub_sales_legal_guideline"
-                app:layout_constraintBottom_toBottomOf="@id/chartSalesAndBuy"
-                android:layout_marginBottom="@dimen/margin_line_chart"/>
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/end_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.99" />
 
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/chartImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_monitoring"
+                    app:layout_constraintEnd_toStartOf="@id/end_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/top_guideline" />
 
-            <View
-                android:id="@+id/lineSalesSubstantiveA"
-                android:layout_width="4dp"
-                android:layout_height="0dp"
-                android:background="@drawable/bg_chart_line_gray"
-                app:layout_constraintHeight_percent="0.8"
-                app:layout_constraintStart_toStartOf="@id/lineSubstantiveLegalB"
-                app:layout_constraintEnd_toEndOf="@+id/lineSubstantiveLegalB"
-                app:layout_constraintBottom_toBottomOf="@id/chartSalesAndBuy"
-                android:layout_marginBottom="@dimen/margin_line_chart"
-                />
-            <View
-                android:id="@+id/lineSubstantiveLegalB"
-                android:layout_width="12dp"
-                android:layout_height="0dp"
-                android:background="@drawable/bg_chart_line_red"
-                app:layout_constraintHeight_percent="0.5"
-                app:layout_constraintStart_toStartOf="@id/sub_sales_substantive_guideline"
-                app:layout_constraintBottom_toBottomOf="@id/chartSalesAndBuy"
-                android:layout_marginBottom="@dimen/margin_line_chart"/>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/titleText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_very_small"
+                    android:elevation="2dp"
+                    android:gravity="center"
+                    android:text="@string/days_trading_panel"
+                    android:textColor="@color/purple"
+                    android:textSize="@dimen/text_size_small"
+                    app:layout_constraintEnd_toStartOf="@id/chartImage"
+                    app:layout_constraintTop_toBottomOf="@id/top_guideline" />
 
-            <View
-                android:id="@+id/lineBuyLegalA"
-                android:layout_width="4dp"
-                android:layout_height="0dp"
-                android:background="@drawable/bg_chart_line_gray"
-                app:layout_constraintHeight_percent="0.5"
-                app:layout_constraintStart_toStartOf="@id/lineBuyLegalB"
-                app:layout_constraintEnd_toEndOf="@+id/lineBuyLegalB"
-                app:layout_constraintBottom_toBottomOf="@id/chartSalesAndBuy"
-                android:layout_marginBottom="@dimen/margin_line_chart"
-                />
-            <View
-                android:id="@+id/lineBuyLegalB"
-                android:layout_width="12dp"
-                android:layout_height="0dp"
-                android:background="@drawable/bg_chart_line_green_light"
-                app:layout_constraintHeight_percent="0.3"
-                app:layout_constraintStart_toStartOf="@id/sub_buy_legal_guideline"
-                app:layout_constraintBottom_toBottomOf="@id/chartSalesAndBuy"
-                android:layout_marginBottom="@dimen/margin_line_chart"/>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/subTitleText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_very_small"
+                    android:layout_marginEnd="@dimen/margin_4_dp"
+                    android:elevation="2dp"
+                    android:gravity="top"
+                    android:text="لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم  ازصنعت چاپ و با استفاده از طراحان گرافیک است"
+                    android:textColor="@color/purple_gray"
+                    android:textSize="@dimen/text_size_10sp"
+                    app:layout_constraintEnd_toStartOf="@id/end_guideline"
+                    app:layout_constraintStart_toEndOf="@id/start_guideline"
+                    app:layout_constraintTop_toBottomOf="@id/chartImage" />
 
 
-            <View
-                android:id="@+id/lineBuySubstantiveA"
-                android:layout_width="4dp"
-                android:layout_height="0dp"
-                android:background="@drawable/bg_chart_line_gray"
-                app:layout_constraintHeight_percent="0.8"
-                app:layout_constraintStart_toStartOf="@id/lineBuySubstantiveLegalB"
-                app:layout_constraintEnd_toEndOf="@+id/lineBuySubstantiveLegalB"
-                app:layout_constraintBottom_toBottomOf="@id/chartSalesAndBuy"
-                android:layout_marginBottom="@dimen/margin_line_chart"
-                />
-            <View
-                android:id="@+id/lineBuySubstantiveLegalB"
-                android:layout_width="12dp"
-                android:layout_height="0dp"
-                android:background="@drawable/bg_chart_line_green"
-                app:layout_constraintHeight_percent="0.5"
-                app:layout_constraintStart_toStartOf="@id/sub_buy_substantive_guideline"
-                app:layout_constraintBottom_toBottomOf="@id/chartSalesAndBuy"
-                android:layout_marginBottom="@dimen/margin_line_chart"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/salesTitleText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:elevation="2dp"
+                    android:gravity="center"
+                    android:text="@string/sell"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/text_size_small"
+                    app:layout_constraintEnd_toStartOf="@id/center_vertical_guideline"
+                    app:layout_constraintStart_toEndOf="@id/start_guideline"
+                    app:layout_constraintTop_toBottomOf="@id/subTitleText" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/salesLegalChartTitleText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
-            android:elevation="2dp"
-            android:gravity="start"
-            android:text="@string/legal"
-            android:textColor="@color/purple_gray"
-            android:textSize="@dimen/text_size_small"
-            android:rotation="270"
-            app:layout_constraintStart_toStartOf="@id/sales_legal_guideline"
-            app:layout_constraintTop_toBottomOf="@id/chartLayout"
-            />
+                <include
+                    android:id="@+id/salesTableTitle"
+                    layout="@layout/row_dividend_information_sales"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
+                    app:layout_constraintEnd_toStartOf="@id/center_vertical_guideline"
+                    app:layout_constraintStart_toEndOf="@id/start_guideline"
+                    app:layout_constraintTop_toBottomOf="@id/salesTitleText" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/salesSubstantiveChartTitleText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
-            android:elevation="2dp"
-            android:gravity="start"
-            android:text="@string/substantive"
-            android:textColor="@color/purple_gray"
-            android:textSize="@dimen/text_size_small"
-            android:rotation="270"
-            app:layout_constraintStart_toStartOf="@id/sales_substantive_guideline"
-            app:layout_constraintTop_toBottomOf="@id/chartLayout" />
+                <View
+                    android:id="@+id/salesLine"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="@color/black_16"
+                    app:layout_constraintEnd_toStartOf="@id/center_vertical_guideline"
+                    app:layout_constraintStart_toEndOf="@id/start_guideline"
+                    app:layout_constraintTop_toBottomOf="@id/salesTableTitle" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/buyLegalChartTitleText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
-            android:elevation="2dp"
-            android:gravity="start"
-            android:text="@string/legal"
-            android:textColor="@color/purple_gray"
-            android:textSize="@dimen/text_size_small"
-            android:rotation="270"
-            app:layout_constraintStart_toStartOf="@id/buy_legal_guideline"
-            app:layout_constraintTop_toBottomOf="@id/chartLayout" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/buySubstantiveChartTitleText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
-            android:elevation="2dp"
-            android:gravity="start"
-            android:text="@string/substantive"
-            android:textColor="@color/purple_gray"
-            android:textSize="@dimen/text_size_small"
-            android:rotation="270"
-            app:layout_constraintStart_toStartOf="@id/buy_substantive_guideline"
-            app:layout_constraintTop_toBottomOf="@id/chartLayout" />
-
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/chartTitleBarrier"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:barrierDirection="bottom"
-            app:constraint_referenced_ids="salesLegalChartTitleText"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/salesRecyclerView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toStartOf="@id/center_vertical_guideline"
+                    app:layout_constraintStart_toEndOf="@id/start_guideline"
+                    app:layout_constraintTop_toBottomOf="@id/salesLine"
+                    tools:itemCount="4"
+                    tools:listitem="@layout/row_dividend_information_sales" />
 
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/salesChartTitleText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
-            android:elevation="2dp"
-            android:gravity="center"
-            android:text="@string/sell"
-            android:textColor="@color/red"
-            android:textSize="@dimen/text_size_small"
-            app:layout_constraintEnd_toStartOf="@id/center_vertical_guideline"
-            app:layout_constraintStart_toEndOf="@id/start_guideline"
-            app:layout_constraintTop_toBottomOf="@id/chartTitleBarrier" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/buyTitleText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:elevation="2dp"
+                    android:gravity="center"
+                    android:text="@string/buy"
+                    android:textColor="@color/green"
+                    android:textSize="@dimen/text_size_small"
+                    app:layout_constraintEnd_toStartOf="@id/end_guideline"
+                    app:layout_constraintStart_toEndOf="@id/center_vertical_guideline"
+                    app:layout_constraintTop_toBottomOf="@id/subTitleText" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/buyChartTitleText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
-            android:elevation="2dp"
-            android:gravity="center"
-            android:text="@string/buy"
-            android:textColor="@color/green"
-            android:textSize="@dimen/text_size_small"
-            app:layout_constraintEnd_toStartOf="@id/end_guideline"
-            app:layout_constraintStart_toEndOf="@id/center_vertical_guideline"
-            app:layout_constraintTop_toBottomOf="@id/chartTitleBarrier" />
+                <include
+                    android:id="@+id/buyTableTitle"
+                    layout="@layout/row_dividend_information_buy"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
+                    app:layout_constraintEnd_toStartOf="@id/end_guideline"
+                    app:layout_constraintStart_toEndOf="@id/center_vertical_guideline"
+                    app:layout_constraintTop_toBottomOf="@id/buyTitleText" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <View
+                    android:id="@+id/buyLine"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="@color/black_16"
+                    app:layout_constraintEnd_toStartOf="@id/end_guideline"
+                    app:layout_constraintStart_toEndOf="@id/center_vertical_guideline"
+                    app:layout_constraintTop_toBottomOf="@id/buyTableTitle" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/buyRecyclerView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toStartOf="@id/end_guideline"
+                    app:layout_constraintStart_toEndOf="@id/center_vertical_guideline"
+                    app:layout_constraintTop_toBottomOf="@id/buyLine"
+                    tools:itemCount="4"
+                    tools:listitem="@layout/row_dividend_information_buy" />
+
+                <androidx.constraintlayout.widget.Barrier
+                    android:id="@+id/buyAndSalesBarrier"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:barrierDirection="bottom"
+                    app:constraint_referenced_ids="buyRecyclerView,salesRecyclerView" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/sales_substantive_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.31" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/sales_legal_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.1365" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/buy_substantive_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.81" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/buy_legal_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.64" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/chartLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="250dp"
+                    android:layout_marginTop="@dimen/margin_small"
+                    app:layout_constraintEnd_toStartOf="@id/end_guideline"
+                    app:layout_constraintStart_toEndOf="@id/start_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/buyAndSalesBarrier">
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/sub_sales_substantive_guideline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.34" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/sub_sales_legal_guideline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.16" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/sub_buy_substantive_guideline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.85" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/sub_buy_legal_guideline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.68" />
+
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/chartSalesAndBuy"
+                        chartWithoutData="300"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <View
+                        android:id="@+id/lineSalesLegalA"
+                        android:layout_width="4dp"
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="@dimen/margin_line_chart"
+                        android:background="@drawable/bg_chart_line_gray"
+                        app:layout_constraintBottom_toBottomOf="@id/chartSalesAndBuy"
+                        app:layout_constraintEnd_toEndOf="@+id/lineSalesLegalB"
+                        app:layout_constraintHeight_percent="0.5"
+                        app:layout_constraintStart_toStartOf="@id/lineSalesLegalB" />
+
+                    <View
+                        android:id="@+id/lineSalesLegalB"
+                        android:layout_width="12dp"
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="@dimen/margin_line_chart"
+                        android:background="@drawable/bg_chart_line_red_light"
+                        app:layout_constraintBottom_toBottomOf="@id/chartSalesAndBuy"
+                        app:layout_constraintHeight_percent="0.3"
+                        app:layout_constraintStart_toStartOf="@id/sub_sales_legal_guideline" />
+
+
+                    <View
+                        android:id="@+id/lineSalesSubstantiveA"
+                        android:layout_width="4dp"
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="@dimen/margin_line_chart"
+                        android:background="@drawable/bg_chart_line_gray"
+                        app:layout_constraintBottom_toBottomOf="@id/chartSalesAndBuy"
+                        app:layout_constraintEnd_toEndOf="@+id/lineSubstantiveLegalB"
+                        app:layout_constraintHeight_percent="0.8"
+                        app:layout_constraintStart_toStartOf="@id/lineSubstantiveLegalB" />
+
+                    <View
+                        android:id="@+id/lineSubstantiveLegalB"
+                        android:layout_width="12dp"
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="@dimen/margin_line_chart"
+                        android:background="@drawable/bg_chart_line_red"
+                        app:layout_constraintBottom_toBottomOf="@id/chartSalesAndBuy"
+                        app:layout_constraintHeight_percent="0.5"
+                        app:layout_constraintStart_toStartOf="@id/sub_sales_substantive_guideline" />
+
+                    <View
+                        android:id="@+id/lineBuyLegalA"
+                        android:layout_width="4dp"
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="@dimen/margin_line_chart"
+                        android:background="@drawable/bg_chart_line_gray"
+                        app:layout_constraintBottom_toBottomOf="@id/chartSalesAndBuy"
+                        app:layout_constraintEnd_toEndOf="@+id/lineBuyLegalB"
+                        app:layout_constraintHeight_percent="0.5"
+                        app:layout_constraintStart_toStartOf="@id/lineBuyLegalB" />
+
+                    <View
+                        android:id="@+id/lineBuyLegalB"
+                        android:layout_width="12dp"
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="@dimen/margin_line_chart"
+                        android:background="@drawable/bg_chart_line_green_light"
+                        app:layout_constraintBottom_toBottomOf="@id/chartSalesAndBuy"
+                        app:layout_constraintHeight_percent="0.3"
+                        app:layout_constraintStart_toStartOf="@id/sub_buy_legal_guideline" />
+
+
+                    <View
+                        android:id="@+id/lineBuySubstantiveA"
+                        android:layout_width="4dp"
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="@dimen/margin_line_chart"
+                        android:background="@drawable/bg_chart_line_gray"
+                        app:layout_constraintBottom_toBottomOf="@id/chartSalesAndBuy"
+                        app:layout_constraintEnd_toEndOf="@+id/lineBuySubstantiveLegalB"
+                        app:layout_constraintHeight_percent="0.8"
+                        app:layout_constraintStart_toStartOf="@id/lineBuySubstantiveLegalB" />
+
+                    <View
+                        android:id="@+id/lineBuySubstantiveLegalB"
+                        android:layout_width="12dp"
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="@dimen/margin_line_chart"
+                        android:background="@drawable/bg_chart_line_green"
+                        app:layout_constraintBottom_toBottomOf="@id/chartSalesAndBuy"
+                        app:layout_constraintHeight_percent="0.5"
+                        app:layout_constraintStart_toStartOf="@id/sub_buy_substantive_guideline" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/salesLegalChartTitleText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:elevation="2dp"
+                    android:gravity="start"
+                    android:rotation="270"
+                    android:text="@string/legal"
+                    android:textColor="@color/purple_gray"
+                    android:textSize="@dimen/text_size_small"
+                    app:layout_constraintStart_toStartOf="@id/sales_legal_guideline"
+                    app:layout_constraintTop_toBottomOf="@id/chartLayout" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/salesSubstantiveChartTitleText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:elevation="2dp"
+                    android:gravity="start"
+                    android:rotation="270"
+                    android:text="@string/substantive"
+                    android:textColor="@color/purple_gray"
+                    android:textSize="@dimen/text_size_small"
+                    app:layout_constraintStart_toStartOf="@id/sales_substantive_guideline"
+                    app:layout_constraintTop_toBottomOf="@id/chartLayout" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/buyLegalChartTitleText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:elevation="2dp"
+                    android:gravity="start"
+                    android:rotation="270"
+                    android:text="@string/legal"
+                    android:textColor="@color/purple_gray"
+                    android:textSize="@dimen/text_size_small"
+                    app:layout_constraintStart_toStartOf="@id/buy_legal_guideline"
+                    app:layout_constraintTop_toBottomOf="@id/chartLayout" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/buySubstantiveChartTitleText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:elevation="2dp"
+                    android:gravity="start"
+                    android:rotation="270"
+                    android:text="@string/substantive"
+                    android:textColor="@color/purple_gray"
+                    android:textSize="@dimen/text_size_small"
+                    app:layout_constraintStart_toStartOf="@id/buy_substantive_guideline"
+                    app:layout_constraintTop_toBottomOf="@id/chartLayout" />
+
+                <androidx.constraintlayout.widget.Barrier
+                    android:id="@+id/chartTitleBarrier"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:barrierDirection="bottom"
+                    app:constraint_referenced_ids="salesLegalChartTitleText" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/salesChartTitleText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:elevation="2dp"
+                    android:gravity="center"
+                    android:text="@string/sell"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/text_size_small"
+                    app:layout_constraintEnd_toStartOf="@id/center_vertical_guideline"
+                    app:layout_constraintStart_toEndOf="@id/start_guideline"
+                    app:layout_constraintTop_toBottomOf="@id/chartTitleBarrier" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/buyChartTitleText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:elevation="2dp"
+                    android:gravity="center"
+                    android:text="@string/buy"
+                    android:textColor="@color/green"
+                    android:textSize="@dimen/text_size_small"
+                    app:layout_constraintEnd_toStartOf="@id/end_guideline"
+                    app:layout_constraintStart_toEndOf="@id/center_vertical_guideline"
+                    app:layout_constraintTop_toBottomOf="@id/chartTitleBarrier" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </androidx.cardview.widget.CardView>
 </layout>

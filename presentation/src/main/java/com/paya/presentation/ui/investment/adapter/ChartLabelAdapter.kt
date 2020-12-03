@@ -9,7 +9,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.paya.presentation.R
-import com.paya.presentation.ui.home.adapter.MarketAdapter
 
 class ChartLabelAdapter(
 	private val chartLabelModels: List<ChartLabelModel>,
