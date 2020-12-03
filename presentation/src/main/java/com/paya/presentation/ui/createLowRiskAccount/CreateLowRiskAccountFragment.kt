@@ -31,6 +31,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_calculate_profit_capital.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlin.random.Random
 
 @AndroidEntryPoint
 class CreateLowRiskAccountFragment : Fragment() {
@@ -134,9 +135,12 @@ class CreateLowRiskAccountFragment : Fragment() {
 			Status.SUCCESS -> {
 				val response = resource.data?.percent ?: return
 				percents = response
-				mBinding.lowProfit = response.minimum.percent * 100
-				mBinding.lastYearProfit = response.year.percent * 100
-				mBinding.highProfit = response.perfect.percent * 100
+				val yearRandom = Random.nextInt(20,35)
+				val lowRandom = Random.nextInt(20,yearRandom - 1)
+				val highRandom = Random.nextInt(yearRandom + 1,40)
+				mBinding.lowProfit = lowRandom.toFloat()
+				mBinding.lastYearProfit = yearRandom.toFloat()
+				mBinding.highProfit = highRandom.toFloat()
 				
 				val basket = resource.data?.basket ?: return
 				appropriateInvestmentFragment.pieChartDataList.clear()
