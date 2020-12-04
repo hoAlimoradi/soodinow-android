@@ -2,9 +2,11 @@ package com.paya.presentation.utils
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
@@ -143,6 +145,18 @@ object BindingAdapters {
 	fun setHintLabel(editText: EditText,value: String?) {
 		value ?: return
 		editText.hint = value
+	}
+	
+	@JvmStatic
+	@BindingAdapter("calling")
+	fun calling(view: View,phone: String?) {
+		phone ?: return
+		view.setOnClickListener {
+			val uri: Uri = Uri.parse("tel:" + phone.trim())
+			val intent = Intent(Intent.ACTION_DIAL,uri)
+			intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+			view.context.startActivity(intent)
+		}
 	}
 	
 	@JvmStatic
@@ -287,11 +301,11 @@ object BindingAdapters {
 		chart: LineChart,
 		data: List<Point>?,
 		chartColor: Int = Color.WHITE,
-		markerColor: Int= Color.WHITE,
-		markerTitleColor: Int= Color.BLACK,
+		markerColor: Int = Color.WHITE,
+		markerTitleColor: Int = Color.BLACK,
 		markerType: Int = 1,
 		chartAlpha: Int = 0,
-		touchEnabled : Boolean = false
+		touchEnabled: Boolean = false
 	) {
 		data ?: return
 		chart.setViewPortOffsets(0f,0f,0f,0f)

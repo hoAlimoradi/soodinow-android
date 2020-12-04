@@ -148,6 +148,11 @@
     <string name="introduce_friends_social">دعوت از دوستان در شبکه های اجتماعی</string>
     <string name="introduce_friends_count_title">تعداد افرادی که توسط شما معرفی شده اند</string>
     <string name="person">نفر</string>
+    <string name="we_number_phone">شماره تماس ما</string>
+    <string name="call_support_number">02188542</string>
+    <string name="direct_call">تماس مستقیم</string>
+    <string name="call_support_desc">کارشناسان ما بصورت 24 ساعته و شبانه روزی پاسخگوی سوالات شما می باشند</string>
+    <string name="online_chat">چت آنلاین</string>
 
     <string-array name="brokerage_list">
         <item>کارگزاری فارابی</item>

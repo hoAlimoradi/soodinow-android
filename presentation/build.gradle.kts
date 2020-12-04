@@ -93,6 +93,7 @@ dependencies {
 	
 	implementation ("com.github.hamsaadev:Persian-Date-Picker-Dialog:${Dependencies.Versions.PERSIAN_DATE_DIALOG}")
 	implementation ("androidx.coordinatorlayout:coordinatorlayout:${Dependencies.Versions.COORDINATOR_LAYOUT}")
+	implementation ("pl.bclogic:pulsator4droid:${Dependencies.Versions.PULSATOR4DROID}")
 	
 	implementation ("com.github.jakob-grabner:Circle-Progress-View:1.4")
 	

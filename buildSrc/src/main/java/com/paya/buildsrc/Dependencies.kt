@@ -37,6 +37,7 @@ object Dependencies{
 		const val PERSIAN_DATE = "0.8"
 		const val PERSIAN_DATE_DIALOG = "V1.2"
 		const val COORDINATOR_LAYOUT = "1.1.0"
+		const val PULSATOR4DROID = "1.0.3"
 	}
 	
 	object Modules{
