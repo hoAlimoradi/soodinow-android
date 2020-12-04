@@ -48,6 +48,11 @@ class SettingsFragment : Fragment() {
 				SettingsFragmentDirections.navigateToUserUpdateProfileFragment()
 			)
 		}
+		share.setOnClickListener {
+			findNavController().navigate(
+				SettingsFragmentDirections.navigateToIntroduceFriendsFragment()
+			)
+		}
 	}
 	
 	private fun ready(resource: Resource<ProfileRepoModel>) {

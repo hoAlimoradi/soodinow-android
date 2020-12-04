@@ -18,6 +18,9 @@
         <action
             android:id="@+id/navigateToUserUpdateProfileFragment"
             app:destination="@id/userUpdateProfile" />
+        <action
+            android:id="@+id/navigateToIntroduceFriendsFragment"
+            app:destination="@id/introduceFriendsFragment" />
 
     </fragment>
 
@@ -240,6 +243,13 @@
         android:name="com.paya.presentation.ui.userUpdateProfile.UserUpdateProfileFragment"
         android:label="fragment_user_update_profile"
         tools:layout="@layout/fragment_user_update_profile">
+
+    </fragment>
+    <fragment
+        android:id="@+id/introduceFriendsFragment"
+        android:name="com.paya.presentation.ui.introduceFriends.IntroduceFriendsFragment"
+        android:label="fragment_introduce_firends"
+        tools:layout="@layout/fragment_introduce_firends">
 
     </fragment>
 </navigation>

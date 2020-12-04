@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.introduceFriends.IntroduceFriendsFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"
+            app:label="@{@string/introduce_friends}"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            style="@style/GeneralCardView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/margin_small"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/image"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:src="@drawable/image_introduce_friends"
+                    app:layout_constraintBottom_toTopOf="@id/linkTitle"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/linkTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_32"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    android:text="@string/we_send_link"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/text_size_11sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/image" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/link"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_medium"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_marginTop="@dimen/margin_4_dp"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    android:background="@drawable/round_corner_layout"
+                    android:gravity="center"
+                    android:text="564GHF65KJUY76NBTY6LO"
+                    android:textColor="@color/purple_gray"
+                    android:textSize="@dimen/text_size_small"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/linkTitle" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/copy_btn"
+                    android:layout_width="150dp"
+                    android:layout_height="@dimen/height_medium"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:background="@drawable/bg_button_purple_gray"
+                    android:text="@string/copy"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_small"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/link" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/socialTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_marginTop="@dimen/margin_32"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    android:text="@string/introduce_friends_social"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/text_size_11sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/copy_btn" />
+
+                <LinearLayout
+                    android:id="@+id/socialLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/socialTitle">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/faceBookBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/margin_very_small"
+                        android:src="@drawable/ic_facebook" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/linkedinBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/margin_very_small"
+                        android:src="@drawable/ic_linkedin" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/twitterBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/margin_very_small"
+                        android:src="@drawable/ic_twitter" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/instagramBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/margin_very_small"
+                        android:src="@drawable/ic_instagram" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/whatsAppBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/margin_very_small"
+                        android:src="@drawable/ic_whatsapp" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/telegramBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/margin_very_small"
+                        android:src="@drawable/ic_telegram" />
+                </LinearLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/person_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_marginTop="@dimen/margin_32"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    android:layout_marginBottom="@dimen/margin_32"
+                    android:text="@string/introduce_friends_count_title"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/text_size_11sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/socialLayout"
+                    app:layout_constraintStart_toEndOf="@+id/person_barrier"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/person"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_marginTop="@dimen/margin_32"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    android:layout_marginBottom="@dimen/margin_32"
+                    android:text="@string/person"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/text_size_11sp"
+                    app:layout_constraintBaseline_toBaselineOf="@id/person_title"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/socialLayout" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/person_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_4_dp"
+                    android:layout_marginTop="@dimen/margin_32"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    android:layout_marginBottom="@dimen/margin_32"
+                    android:text="3"
+                    android:textColor="@color/green"
+                    android:textSize="@dimen/text_size_11sp"
+                    app:layout_constraintBaseline_toBaselineOf="@id/person_title"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/person"
+                    app:layout_constraintTop_toBottomOf="@id/socialLayout" />
+
+                <androidx.constraintlayout.widget.Barrier
+                    android:id="@+id/person_barrier"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:barrierDirection="end"
+                    app:constraint_referenced_ids="person_count" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
