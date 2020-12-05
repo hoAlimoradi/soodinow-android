@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import com.paya.presentation.R
 import com.paya.presentation.databinding.FragmentSupportBinding
 import kotlinx.android.synthetic.main.fragment_support.*
@@ -26,6 +27,11 @@ class SupportFragment : Fragment() {
 	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
 		super.onViewCreated(view,savedInstanceState)
 		pulsator.start()
+		mBinding.onlineChatLayout.setOnClickListener {
+			findNavController().navigate(
+				SupportFragmentDirections.navigateToChatFragment()
+			)
+		}
 	}
 	
 }

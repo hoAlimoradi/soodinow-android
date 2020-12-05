@@ -31,10 +31,17 @@
         tools:layout="@layout/fragment_support">
         <action
             android:id="@+id/navigateToHomeFragment"
-            app:destination="@id/home" />
+            app:destination="@id/chat" />
+        <action
+            android:id="@+id/navigateToChatFragment"
+            app:destination="@id/chat" />
 
     </fragment>
-
+    <fragment
+        android:id="@+id/chat"
+        android:name="com.paya.presentation.ui.chat.ChatFragment"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chat" />
     <fragment
         android:id="@+id/home"
         android:name="com.paya.presentation.ui.home.HomeFragment"
@@ -43,6 +50,7 @@
         <action
             android:id="@+id/navigateToProfileFragment"
             app:destination="@id/profile" />
+
         <action
             android:id="@+id/navigateToCreateAccountFragment"
             app:destination="@id/createPersonalAccount" />

@@ -2,6 +2,7 @@ package com.paya.data.sharedpreferences
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.paya.domain.tools.Resource
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
@@ -21,8 +22,19 @@ class AppPreferencesHelper @Inject constructor(
             .apply()
     }
     
+    override fun getMobile(): Resource<String> {
+        return Resource.success(mPrefs.getString(PREF_KEY_MOBILE,null) ?: "")
+    }
+    
+    override fun setMobile(mobile: String) {
+        mPrefs.edit()
+            .putString(PREF_KEY_MOBILE, mobile)
+            .apply()
+    }
+    
     companion object {
         private const val PREF_KEY_ACCESS_TOKEN: String = "PREF_KEY_ACCESS_TOKEN"
+        private const val PREF_KEY_MOBILE: String = "PREF_KEY_MOBILE"
     }
 
 }

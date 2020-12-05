@@ -14,6 +14,8 @@ interface AuthRepository {
 		password: String
 	): Resource<UserInfoRepoModel>
 	suspend fun updateAccessToken(accessToken: String)
+	suspend fun getMobile() : Resource<String>
+	suspend fun setMobile(mobile: String)
 	suspend fun updateIsPasswordSet(isPasswordSet: Boolean)
 	suspend fun updateIsHintShowed(isHintShowed: Boolean)
 	suspend fun getUserInfo(): Resource<UserInfoRepoModel>

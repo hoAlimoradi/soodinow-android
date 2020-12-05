@@ -153,6 +153,7 @@
     <string name="direct_call">تماس مستقیم</string>
     <string name="call_support_desc">کارشناسان ما بصورت 24 ساعته و شبانه روزی پاسخگوی سوالات شما می باشند</string>
     <string name="online_chat">چت آنلاین</string>
+    <string name="online_person">کارشناس آنلاین هستند</string>
 
     <string-array name="brokerage_list">
         <item>کارگزاری فارابی</item>

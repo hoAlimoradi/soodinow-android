@@ -82,12 +82,14 @@
 
           >
          <LinearLayout
+             android:id="@+id/onlineChatLayout"
              android:layout_width="100dp"
              android:layout_height="100dp"
              android:background="@drawable/circle_green"
              android:gravity="center"
              android:orientation="vertical"
-             android:layout_centerInParent="true">
+             android:layout_centerInParent="true"
+             android:clickable="true">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="wrap_content"
