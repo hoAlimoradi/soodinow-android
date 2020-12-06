@@ -52,6 +52,14 @@ class AuthRepositoryImpl @Inject constructor(
 		preferenceHelper.setAccessToken(accessToken)
 	}
 	
+	override suspend fun getMobile()  : Resource<String>{
+		return preferenceHelper.getMobile()
+	}
+	
+	override suspend fun setMobile(mobile: String) {
+		preferenceHelper.setMobile(mobile)
+	}
+	
 	override suspend fun updateIsPasswordSet(isPasswordSet: Boolean) {
 		userInfoDbApi.updateIsPasswordSet(isPasswordSet)
 	}

@@ -12,13 +12,23 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class LoginViewModel @ViewModelInject constructor(
-	private val loginUseCase: UseCase<LoginRepoModel, Any>
+	private val loginUseCase: UseCase<LoginRepoModel,Any>,
+	private val getMobileUseCase: UseCase<Unit,String>
 ):ViewModel(){
 
 	val username = ObservableField<String>()
 	val password = ObservableField<String>()
 	
 	val loginResource = VolatileLiveData<Resource<Any>>()
+	
+	init {
+		getMobile()
+	}
+	private fun getMobile() {
+		viewModelScope.launch(Dispatchers.IO) {
+			username.set(getMobileUseCase.action(Unit).data?.replace("+989",""))
+		}
+	}
 
 	fun login(){
 		val username = username.get()

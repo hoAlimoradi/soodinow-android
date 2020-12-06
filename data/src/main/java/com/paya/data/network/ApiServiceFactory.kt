@@ -1,6 +1,7 @@
 package com.paya.data.network
 
-import com.chuckerteam.chucker.BuildConfig
+
+import com.paya.data.BuildConfig
 import com.paya.data.network.interceptor.ChuckIntercept
 import com.paya.data.network.interceptor.HttpLogIntercept
 import com.paya.data.network.apiresponse.ApiResponseCallAdapterFactory

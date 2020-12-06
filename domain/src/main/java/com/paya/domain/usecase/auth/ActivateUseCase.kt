@@ -15,6 +15,7 @@ class ActivateUseCase @Inject constructor(
 			param.username,
 			param.code
 		)
+		authRepository.setMobile(param.username)
 		if (resource.status == Status.SUCCESS){
 			resource.data?.accessToken?.let { authRepository.updateAccessToken(it) }
 		}

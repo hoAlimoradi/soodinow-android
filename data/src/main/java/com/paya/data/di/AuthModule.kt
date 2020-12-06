@@ -110,4 +110,7 @@ abstract class AuthModule {
 	@Binds
 	abstract fun bindChangePasswordUseCase(useCase: ChangePasswordUseCase):
 			UseCase<ChangePasswordRepoBodyModel,ChangePasswordRepoModel>
+	@Binds
+	abstract fun bindGetMobileUseCase(useCase: GetMobileUseCase):
+			UseCase<Unit,String>
 }
