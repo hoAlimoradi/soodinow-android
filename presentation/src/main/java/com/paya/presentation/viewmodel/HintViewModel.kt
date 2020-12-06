@@ -2,17 +2,18 @@ package com.paya.presentation.viewmodel
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.paya.domain.models.repo.UserInfoRepoModel
 import com.paya.domain.tools.Status
 import com.paya.domain.tools.UseCase
+import com.paya.presentation.base.BaseViewModel
+import com.paya.presentation.utils.callResource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class HintViewModel @ViewModelInject constructor(
 	private val getUserInfoUseCase: UseCase<Unit, UserInfoRepoModel>
-): ViewModel(){
+): BaseViewModel(){
 	
 	enum class UserState{IS_HINT_SHOWED, IS_PASSWORD_SET, NONE}
 	val userState = MutableLiveData<UserState>()
@@ -22,7 +23,7 @@ class HintViewModel @ViewModelInject constructor(
 	}
 	
 	private fun checkUserInfo() = viewModelScope.launch(Dispatchers.IO){
-		val userInfoResource = getUserInfoUseCase.action(Unit)
+		val userInfoResource = callResource(this@HintViewModel,getUserInfoUseCase.action(Unit))
 		if (userInfoResource.status != Status.SUCCESS)
 			return@launch
 		

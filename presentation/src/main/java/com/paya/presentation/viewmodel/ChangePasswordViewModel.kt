@@ -2,18 +2,19 @@ package com.paya.presentation.viewmodel
 
 import androidx.databinding.ObservableField
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.paya.domain.models.repo.ChangePasswordRepoBodyModel
 import com.paya.domain.models.repo.ChangePasswordRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.UseCase
+import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.utils.VolatileLiveData
+import com.paya.presentation.utils.callResource
 import kotlinx.coroutines.launch
 
 class ChangePasswordViewModel @ViewModelInject constructor(
 	private val changePasswordUseCase: UseCase<ChangePasswordRepoBodyModel,ChangePasswordRepoModel>
-) : ViewModel() {
+) : BaseViewModel() {
 	
 	var oldPassword = ObservableField<String>()
 	var newPassword = ObservableField<String>()
@@ -51,7 +52,7 @@ class ChangePasswordViewModel @ViewModelInject constructor(
 				oldPassword,
 				newPassword
 			)
-			status.postValue(changePasswordUseCase.action(body))
+			status.postValue(callResource(this@ChangePasswordViewModel,changePasswordUseCase.action(body)))
 		}
 	}
 }

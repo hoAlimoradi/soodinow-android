@@ -8,13 +8,15 @@ import androidx.lifecycle.viewModelScope
 import com.paya.domain.models.repo.RegisterRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.UseCase
+import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.utils.VolatileLiveData
+import com.paya.presentation.utils.callResource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class RegisterViewModel @ViewModelInject constructor(
 	private val registerUseCase: UseCase<String, RegisterRepoModel>
-): ViewModel(){
+): BaseViewModel(){
 	
 	val title = MutableLiveData<String>()
 	
@@ -38,7 +40,7 @@ class RegisterViewModel @ViewModelInject constructor(
 		}
 		viewModelScope.launch (Dispatchers.IO) {
 			registerStatus.postValue(Resource.loading(null))
-			val response = registerUseCase.action("+989$phoneNumber")
+			val response = callResource(this@RegisterViewModel,registerUseCase.action("+989$phoneNumber"))
 			registerStatus.postValue(response)
 		}
 	}

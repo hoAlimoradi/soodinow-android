@@ -8,15 +8,17 @@ import com.paya.domain.models.repo.ProfileBodyRepoModel
 import com.paya.domain.models.repo.ProfileRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.UseCase
+import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.utils.Utils
 import com.paya.presentation.utils.VolatileLiveData
+import com.paya.presentation.utils.callResource
 import ir.hamsaa.persiandatepicker.util.PersianCalendar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class FirstInformationViewModel @ViewModelInject constructor(
 	private val useCaseUpdateProfile: UseCase<ProfileBodyRepoModel,ProfileRepoModel>
-) : ViewModel() {
+) : BaseViewModel() {
 	val name = ObservableField<String>()
 	val nationalCode = ObservableField<String>()
 	val birthDay = ObservableField<PersianCalendar>()
@@ -62,7 +64,7 @@ class FirstInformationViewModel @ViewModelInject constructor(
 				birthDay,
 				"IR$bban"
 			)
-			val response = useCaseUpdateProfile.action(body)
+			val response = callResource(this@FirstInformationViewModel,useCaseUpdateProfile.action(body))
 			status.postValue(response)
 		}
 	}

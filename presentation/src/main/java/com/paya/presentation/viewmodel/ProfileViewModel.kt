@@ -9,6 +9,8 @@ import com.paya.domain.models.repo.*
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.domain.tools.UseCase
+import com.paya.presentation.base.BaseViewModel
+import com.paya.presentation.utils.callResource
 import com.paya.presentation.utils.shared.Point
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -17,7 +19,7 @@ import kotlinx.coroutines.launch
 class ProfileViewModel @ViewModelInject constructor(
 	private val getBoxHistoryUseCase: UseCase<BoxHistoryRequestModel,BoxHistoryRepoModel>,
 	private val existAccountUseCase: UseCase<Unit,ExitAccountRepoModel>
-): ViewModel(){
+): BaseViewModel(){
 	
 	val profile = MutableLiveData<Resource<BoxHistoryRepoModel>>()
 	val existAccount = MutableLiveData<Resource<ExitAccountRepoModel>>()
@@ -48,7 +50,7 @@ class ProfileViewModel @ViewModelInject constructor(
 	fun getExistAccount(){
 		existAccount.value = Resource.loading(null)
 		viewModelScope.launch(Dispatchers.IO) {
-			existAccount.postValue(existAccountUseCase.action(Unit))
+			existAccount.postValue(callResource(this@ProfileViewModel,existAccountUseCase.action(Unit)))
 		}
 	}
 	
@@ -59,9 +61,9 @@ class ProfileViewModel @ViewModelInject constructor(
 	){
 		profile.value = Resource.loading(null)
 		viewModelScope.launch(Dispatchers.IO){
-			profile.postValue(getBoxHistoryUseCase.action(
+			profile.postValue(callResource(this@ProfileViewModel,getBoxHistoryUseCase.action(
 				BoxHistoryRequestModel(boxId, type, number)
-			))
+			)))
 		}
 	}
 	/*fun getExistAccount(){

@@ -12,6 +12,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.paya.presentation.R
+import com.paya.presentation.base.BaseFragment
+import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentConnectBrokerageBinding
 import com.paya.presentation.ui.createPersonalAccount.adapter.InvestAdapter
 import com.paya.presentation.utils.BindingAdapters
@@ -24,7 +26,7 @@ import com.warkiz.widget.SeekParams
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ConnectBrokerageFragment : Fragment() {
+class ConnectBrokerageFragment : BaseFragment<ConnectBrokerageViewModel>() {
 	private lateinit var mBinding: FragmentConnectBrokerageBinding
 	private val mViewModel: ConnectBrokerageViewModel by viewModels()
 	
@@ -116,4 +118,7 @@ class ConnectBrokerageFragment : Fragment() {
 			BindingAdapters.showHide(mBinding.investRecyclerView,false)
 		}
 	}
+	
+	override val baseViewModel: BaseViewModel
+		get() = mViewModel
 }

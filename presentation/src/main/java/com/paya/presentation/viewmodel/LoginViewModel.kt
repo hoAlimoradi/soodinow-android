@@ -2,19 +2,20 @@ package com.paya.presentation.viewmodel
 
 import androidx.databinding.ObservableField
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.paya.domain.models.repo.LoginRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.UseCase
+import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.utils.VolatileLiveData
+import com.paya.presentation.utils.callResource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class LoginViewModel @ViewModelInject constructor(
 	private val loginUseCase: UseCase<LoginRepoModel,Any>,
 	private val getMobileUseCase: UseCase<Unit,String>
-):ViewModel(){
+):BaseViewModel(){
 
 	val username = ObservableField<String>()
 	val password = ObservableField<String>()
@@ -51,7 +52,7 @@ class LoginViewModel @ViewModelInject constructor(
 				username = "+989$username",
 				password = password
 			)
-			val response = loginUseCase.action(loginModel)
+			val response = callResource(this@LoginViewModel,loginUseCase.action(loginModel))
 			loginResource.postValue(response)
 		}
 	}

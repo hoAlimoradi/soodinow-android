@@ -7,6 +7,7 @@ import com.paya.domain.models.repo.DeveloperNameRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.UseCase
 import com.paya.presentation.base.BaseViewModel
+import com.paya.presentation.utils.callResource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -20,7 +21,7 @@ class DeveloperNameViewModel @ViewModelInject constructor(
 	
 	fun getDeveloperName() {
 		viewModelScope.launch(Dispatchers.IO) {
-			val res = getNameCase.action(Unit)
+			val res = callResource(this@DeveloperNameViewModel,getNameCase.action(Unit))
 			withContext(Dispatchers.Main) {
 				developerName.value = res
 			}

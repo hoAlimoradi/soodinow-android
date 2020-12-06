@@ -10,14 +10,16 @@ import com.paya.domain.models.repo.UserInfoRepoModel
 import com.paya.domain.models.repo.SetPasswordRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.UseCase
+import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.utils.VolatileLiveData
+import com.paya.presentation.utils.callResource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class SetPasswordViewModel @ViewModelInject constructor(
 	private val getUserInfoUseCase: UseCase<Unit,UserInfoRepoModel>,
 	private val setPasswordUseCase: UseCase<String,SetPasswordRepoModel>
-) : ViewModel() {
+) : BaseViewModel() {
 	
 	val title = MutableLiveData<String>()
 	private var accessToken: String? = null
@@ -33,7 +35,7 @@ class SetPasswordViewModel @ViewModelInject constructor(
 	
 	private fun getAccessToken() {
 		viewModelScope.launch(Dispatchers.IO) {
-			val accessTokenResource = getUserInfoUseCase.action(Unit)
+			val accessTokenResource = callResource(this@SetPasswordViewModel,getUserInfoUseCase.action(Unit))
 			accessToken = accessTokenResource.data?.accessToken
 			Log.d("SetPasswordViewModel", accessToken ?: "null")
 		}
@@ -63,7 +65,7 @@ class SetPasswordViewModel @ViewModelInject constructor(
 		
 		viewModelScope.launch(Dispatchers.IO) {
 			setPasswordResource.postValue(Resource.loading(null))
-			val resource = setPasswordUseCase.action(password)
+			val resource = callResource(this@SetPasswordViewModel,setPasswordUseCase.action(password))
 			setPasswordResource.postValue(resource)
 		}
 		

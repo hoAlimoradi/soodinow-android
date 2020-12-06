@@ -1,9 +1,6 @@
 package com.paya.data.utils
 
-import com.paya.data.network.apiresponse.ApiEmptyResponse
-import com.paya.data.network.apiresponse.ApiErrorResponse
-import com.paya.data.network.apiresponse.ApiResponse
-import com.paya.data.network.apiresponse.ApiSuccessResponse
+import com.paya.data.network.apiresponse.*
 import com.paya.domain.tools.Resource
 
 fun <ApiType, ResourceType> getResourceFromApiResponse(
@@ -15,5 +12,6 @@ fun <ApiType, ResourceType> getResourceFromApiResponse(
         is ApiSuccessResponse ->
             Resource.success(mapApiTypeToResourceType(apiResponse.body))
         is ApiErrorResponse -> Resource.error(apiResponse.errorMessage, null)
+        is ApiUnAuthorizedResponse -> Resource.unAuthorized(apiResponse.errorMessage,null)
     }
 }

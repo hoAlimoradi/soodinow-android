@@ -8,13 +8,15 @@ import com.paya.domain.models.repo.ProfileRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.UseCase
 import com.paya.domain.usecase.auth.GetProfileUseCase
+import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.utils.VolatileLiveData
+import com.paya.presentation.utils.callResource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class SettingViewModel @ViewModelInject constructor(
 	private val useCaseProfile: UseCase<Unit,ProfileRepoModel>
-) : ViewModel() {
+) : BaseViewModel() {
 
 	init {
 		getProfile()
@@ -24,7 +26,7 @@ class SettingViewModel @ViewModelInject constructor(
 	fun getProfile() {
 		viewModelScope.launch(Dispatchers.IO) {
 			status.postValue(Resource.loading(null))
-			val response  = useCaseProfile.action(Unit)
+			val response  = callResource(this@SettingViewModel,useCaseProfile.action(Unit))
 			status.postValue(response)
 		}
 		

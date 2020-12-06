@@ -8,11 +8,12 @@ import androidx.lifecycle.viewModelScope
 import com.paya.domain.models.repo.UserInfoRepoModel
 import com.paya.domain.tools.Status
 import com.paya.domain.tools.UseCase
+import com.paya.presentation.base.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ConnectBrokerageViewModel @ViewModelInject constructor(
-): ViewModel(){
+): BaseViewModel(){
 
 	
 }

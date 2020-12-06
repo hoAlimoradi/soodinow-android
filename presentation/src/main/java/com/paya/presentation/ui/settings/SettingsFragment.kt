@@ -13,6 +13,8 @@ import com.paya.domain.models.repo.ProfileRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.presentation.R
+import com.paya.presentation.base.BaseFragment
+import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentSettingsBinding
 import com.paya.presentation.utils.observe
 import com.paya.presentation.viewmodel.SettingViewModel
@@ -20,7 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_settings.*
 
 @AndroidEntryPoint
-class SettingsFragment : Fragment() {
+class SettingsFragment : BaseFragment<SettingViewModel>() {
 	
 	private val mViewModel: SettingViewModel by viewModels()
 	private lateinit var mBinding: FragmentSettingsBinding
@@ -66,5 +68,8 @@ class SettingsFragment : Fragment() {
 		}
 		
 	}
+	
+	override val baseViewModel: BaseViewModel
+		get() = mViewModel
 	
 }

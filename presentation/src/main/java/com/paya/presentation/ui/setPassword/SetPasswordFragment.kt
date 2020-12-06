@@ -14,13 +14,15 @@ import com.paya.domain.models.repo.SetPasswordRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.presentation.R
+import com.paya.presentation.base.BaseFragment
+import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentSetPasswordBinding
 import com.paya.presentation.utils.observe
 import com.paya.presentation.viewmodel.SetPasswordViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SetPasswordFragment : Fragment() {
+class SetPasswordFragment : BaseFragment<SetPasswordViewModel>() {
 	
 	private lateinit var mBinding: FragmentSetPasswordBinding
 	private val mViewModel: SetPasswordViewModel by viewModels()
@@ -61,5 +63,8 @@ class SetPasswordFragment : Fragment() {
 			).show()
 		}
 	}
+	
+	override val baseViewModel: BaseViewModel
+		get() = mViewModel
 	
 }

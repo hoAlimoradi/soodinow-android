@@ -18,6 +18,8 @@ import com.paya.domain.models.repo.PercentRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.presentation.R
+import com.paya.presentation.base.BaseFragment
+import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentCreateLowRiskAccountBinding
 import com.paya.presentation.ui.investment.AppropriateInvestmentFragment
 import com.paya.presentation.utils.NumberTextWatcher
@@ -34,7 +36,7 @@ import kotlinx.coroutines.launch
 import kotlin.random.Random
 
 @AndroidEntryPoint
-class CreateLowRiskAccountFragment : Fragment() {
+class CreateLowRiskAccountFragment : BaseFragment<CreateLowRiskAccountViewModel>() {
 	
 	private val mViewModel: CreateLowRiskAccountViewModel by viewModels()
 	private lateinit var mBinding: FragmentCreateLowRiskAccountBinding
@@ -156,5 +158,8 @@ class CreateLowRiskAccountFragment : Fragment() {
 			else -> return
 		}
 	}
+	
+	override val baseViewModel: BaseViewModel
+		get() = mViewModel
 	
 }

@@ -10,8 +10,10 @@ import com.paya.domain.models.repo.ProfileRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.domain.tools.UseCase
+import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.utils.Utils
 import com.paya.presentation.utils.VolatileLiveData
+import com.paya.presentation.utils.callResource
 import ir.hamsaa.persiandatepicker.util.PersianCalendar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,7 +21,7 @@ import kotlinx.coroutines.launch
 class UserUpdateProfileViewModel @ViewModelInject constructor(
 	private val useCaseProfile: UseCase<Unit,ProfileRepoModel>,
 	private val useCaseUpdateProfile: UseCase<ProfileBodyRepoModel,ProfileRepoModel>
-) : ViewModel() {
+) : BaseViewModel() {
 	val statusGetProfile = VolatileLiveData<Resource<ProfileRepoModel>>()
 	val statusUpdateProfile = VolatileLiveData<Resource<ProfileRepoModel>>()
 	val loading = MediatorLiveData<Resource<Nothing>>()
@@ -89,7 +91,7 @@ class UserUpdateProfileViewModel @ViewModelInject constructor(
 				birthDay,
 				"IR${bban}"
 			)
-			val response = useCaseUpdateProfile.action(body)
+			val response = callResource(this@UserUpdateProfileViewModel,useCaseUpdateProfile.action(body))
 			statusUpdateProfile.postValue(response)
 		}
 	}
@@ -97,7 +99,7 @@ class UserUpdateProfileViewModel @ViewModelInject constructor(
 	private fun getProfile() {
 		viewModelScope.launch(Dispatchers.IO) {
 			statusGetProfile.postValue(Resource.loading(null))
-			val response = useCaseProfile.action(Unit)
+			val response =callResource(this@UserUpdateProfileViewModel, useCaseProfile.action(Unit))
 			name.set(response.data?.name)
 			bban.set(response.data?.bban?.replace("IR",""))
 			date.set(response.data?.birthDay?.let { Utils.convertStringToPersianCalender(it) })

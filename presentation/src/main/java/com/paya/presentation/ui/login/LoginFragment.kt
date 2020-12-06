@@ -12,13 +12,15 @@ import androidx.navigation.fragment.findNavController
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.presentation.R
+import com.paya.presentation.base.BaseFragment
+import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentLoginBinding
 import com.paya.presentation.utils.observe
 import com.paya.presentation.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LoginFragment : Fragment() {
+class LoginFragment : BaseFragment<LoginViewModel>() {
 	
 	private lateinit var mBinding: FragmentLoginBinding
 	private val mViewModel: LoginViewModel by viewModels()
@@ -64,5 +66,8 @@ class LoginFragment : Fragment() {
 			).show()
 		}
 	}
+	
+	override val baseViewModel: BaseViewModel
+		get() = mViewModel
 	
 }

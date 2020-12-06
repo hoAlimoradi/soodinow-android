@@ -14,13 +14,15 @@ import com.paya.domain.models.repo.ChangePasswordRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.presentation.R
+import com.paya.presentation.base.BaseFragment
+import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentChangePasswordBinding
 import com.paya.presentation.utils.observe
 import com.paya.presentation.viewmodel.ChangePasswordViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ChangePasswordFragment : Fragment() {
+class ChangePasswordFragment : BaseFragment<ChangePasswordViewModel>() {
 	
 	private val mViewModel: ChangePasswordViewModel by viewModels()
 	private lateinit var mBinding: FragmentChangePasswordBinding
@@ -67,5 +69,8 @@ class ChangePasswordFragment : Fragment() {
 		}
 		
 	}
+	
+	override val baseViewModel: BaseViewModel
+		get() = mViewModel
 	
 }

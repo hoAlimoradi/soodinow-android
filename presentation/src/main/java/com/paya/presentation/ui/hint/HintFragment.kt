@@ -13,6 +13,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.paya.presentation.R
+import com.paya.presentation.base.BaseFragment
+import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentHintBinding
 import com.paya.presentation.ui.hint.fragments.OpenAccount
 import com.paya.presentation.utils.observe
@@ -23,7 +25,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class HintFragment : Fragment() {
+class HintFragment : BaseFragment<HintViewModel>() {
 	
 	private lateinit var mBinding: FragmentHintBinding
 	private val mViewModel: HintViewModel by viewModels()
@@ -110,5 +112,8 @@ class HintFragment : Fragment() {
 		
 		override fun createFragment(position: Int): Fragment = OpenAccount()
 	}
+	
+	override val baseViewModel: BaseViewModel
+		get() = mViewModel
 	
 }

@@ -10,6 +10,7 @@ import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.presentation.R
 import com.paya.presentation.base.BaseFragment
+import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.utils.observe
 import com.paya.presentation.viewmodel.DeveloperNameViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,4 +49,7 @@ class DeveloperNameFragment : BaseFragment<DeveloperNameViewModel>() {
 			tvLastName.text = devName.last
 		}
 	}
+	
+	override val baseViewModel: BaseViewModel
+		get() = viewModel
 }

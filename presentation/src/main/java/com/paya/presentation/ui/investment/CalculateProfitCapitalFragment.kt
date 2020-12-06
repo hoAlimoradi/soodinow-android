@@ -15,6 +15,8 @@ import com.paya.domain.models.repo.ProfileRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.presentation.R
+import com.paya.presentation.base.BaseFragment
+import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentCalculateProfitCapitalBinding
 import com.paya.presentation.ui.createPersonalAccount.ConnectLowRiskBrokerageFragmentArgs
 import com.paya.presentation.ui.createPersonalAccount.enum.NextPageInformation
@@ -31,7 +33,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_calculate_profit_capital.*
 
 @AndroidEntryPoint
-class CalculateProfitCapitalFragment : Fragment() {
+class CalculateProfitCapitalFragment : BaseFragment<CalculateProfitCapitalViewModel>() {
 	private val mViewModel: CalculateProfitCapitalViewModel by viewModels()
 	private lateinit var mBinding: FragmentCalculateProfitCapitalBinding
 	private lateinit var profitMethodFragment: ProfitMethodFragment
@@ -171,5 +173,8 @@ class CalculateProfitCapitalFragment : Fragment() {
 				})
 		)
 	}
+	
+	override val baseViewModel: BaseViewModel
+		get() = mViewModel
 	
 }

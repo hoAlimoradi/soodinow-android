@@ -17,6 +17,8 @@ import com.paya.domain.models.repo.ExitAccountRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.presentation.R
+import com.paya.presentation.base.BaseFragment
+import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentProfileBinding
 import com.paya.presentation.ui.hint.fragments.CardAccount
 import com.paya.presentation.ui.investment.AppropriateInvestmentFragment
@@ -31,7 +33,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class ProfileFragment : Fragment() {
+class ProfileFragment : BaseFragment<ProfileViewModel>() {
 	
 	private lateinit var mBinding: FragmentProfileBinding
 	private lateinit var adapter: SlidePagerAdapter
@@ -233,5 +235,8 @@ class ProfileFragment : Fragment() {
 		
 		override fun createFragment(position: Int): Fragment = cardAccounts[position]
 	}
+	
+	override val baseViewModel: BaseViewModel
+		get() = viewModel
 	
 }

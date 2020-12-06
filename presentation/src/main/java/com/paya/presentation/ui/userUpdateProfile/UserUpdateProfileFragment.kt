@@ -14,6 +14,8 @@ import com.paya.domain.models.repo.ProfileRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.presentation.R
+import com.paya.presentation.base.BaseFragment
+import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentUserUpdateProfileBinding
 import com.paya.presentation.ui.custom.uiInterface.BirthDateListener
 import com.paya.presentation.utils.Utils
@@ -24,7 +26,7 @@ import ir.hamsaa.persiandatepicker.Listener
 import ir.hamsaa.persiandatepicker.util.PersianCalendar
 
 @AndroidEntryPoint
-class UserUpdateProfileFragment : Fragment(),BirthDateListener {
+class UserUpdateProfileFragment : BaseFragment<UserUpdateProfileViewModel>(),BirthDateListener {
 	
 	private val mViewModel: UserUpdateProfileViewModel by viewModels()
 	private lateinit var mBinding: FragmentUserUpdateProfileBinding
@@ -97,6 +99,9 @@ class UserUpdateProfileFragment : Fragment(),BirthDateListener {
 		})
 		
 	}
+	
+	override val baseViewModel: BaseViewModel
+		get() = mViewModel
 	
 	
 }

@@ -18,35 +18,40 @@ sealed class ApiResponse<T> {
             try {
                 val gson = Gson()
                 val collectionType: Type = object : TypeToken<BaseModel<*>>() {}.type
-                return gson.fromJson(jsonString, collectionType)
-            }catch (e: Exception){
+                return gson.fromJson(jsonString,collectionType)
+            } catch (e: Exception) {
                 return null
             }
-            
+    
         }
+    
+        private fun <T> getErrorMessage(response: Response<T>): String? {
+            val baseModel = parseBaseModel(response.errorBody()?.string())
+            val msg = baseModel?.error?.message ?: response.errorBody()?.string()
         
+            return if (msg.isNullOrEmpty()) {
+                response.message()
+            } else {
+                msg
+            }
+        }
+    
         fun <T> create(error: Throwable): ApiErrorResponse<T> {
             return ApiErrorResponse(error.message ?: "unknown error")
         }
-        
+    
         fun <T> create(response: Response<T>): ApiResponse<T> {
             return if (response.isSuccessful) {
                 val body = response.body()
-                if (body == null || response.code() == 204) {
+                if (response.code() == 401) {
+                    ApiUnAuthorizedResponse(getErrorMessage(response) ?: "UnAuthorized")
+                } else if (body == null || response.code() == 204) {
                     ApiEmptyResponse()
                 } else {
                     ApiSuccessResponse(body)
                 }
             } else {
-                val baseModel = parseBaseModel(response.errorBody()?.string())
-                val msg = baseModel?.error?.message ?: response.errorBody()?.string()
-                
-                val errorMsg = if (msg.isNullOrEmpty()) {
-                    response.message()
-                } else {
-                    msg
-                }
-                ApiErrorResponse(errorMsg ?: "unknown error")
+                ApiErrorResponse(getErrorMessage(response) ?: "unknown error")
             }
         }
     }
@@ -56,6 +61,8 @@ sealed class ApiResponse<T> {
  * separate class for HTTP 204 responses so that we can make ApiSuccessResponse's body non-null.
  */
 class ApiEmptyResponse<T> : ApiResponse<T>()
+
+class ApiUnAuthorizedResponse<T>(val errorMessage: String) : ApiResponse<T>()
 
 data class ApiSuccessResponse<T>(val body: T) : ApiResponse<T>()
 

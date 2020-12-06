@@ -21,6 +21,8 @@ import com.paya.domain.models.repo.MarketRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.presentation.R
+import com.paya.presentation.base.BaseFragment
+import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentHomeBinding
 import com.paya.presentation.ui.hint.fragments.CardAccount
 import com.paya.presentation.ui.home.adapter.MarketAdapter
@@ -34,7 +36,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_home.*
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment<HomeViewModel>() {
 	
 	private lateinit var adapter: SlidePagerAdapter
 	private lateinit var adapterCurrency: MarketAdapter
@@ -197,6 +199,9 @@ class HomeFragment : Fragment() {
 		
 		override fun createFragment(position: Int): Fragment = CardAccount()
 	}
+	
+	override val baseViewModel: BaseViewModel
+		get() = mViewModel
 	
 	
 }

@@ -20,6 +20,8 @@ import com.paya.domain.models.repo.AddRiskOrderRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.presentation.R
+import com.paya.presentation.base.BaseFragment
+import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentConnectLowRiskBrokerageBinding
 import com.paya.presentation.ui.createPersonalAccount.adapter.InvestAdapter
 import com.paya.presentation.utils.BindingAdapters
@@ -33,7 +35,7 @@ import com.warkiz.widget.SeekParams
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ConnectLowRiskBrokerageFragment : Fragment() {
+class ConnectLowRiskBrokerageFragment : BaseFragment<ConnectLowRiskBrokerageViewModel>() {
 	private lateinit var mBinding: FragmentConnectLowRiskBrokerageBinding
 	private val mViewModel: ConnectLowRiskBrokerageViewModel by viewModels()
 	private val args: ConnectLowRiskBrokerageFragmentArgs by navArgs()
@@ -158,4 +160,7 @@ class ConnectLowRiskBrokerageFragment : Fragment() {
 			BindingAdapters.showHide(mBinding.investRecyclerView,false)
 		}
 	}
+	
+	override val baseViewModel: BaseViewModel
+		get() = mViewModel
 }

@@ -18,6 +18,9 @@ data class Resource<out T>(val status: Status, val data: T?, val message: String
         fun <T> loading(data: T?): Resource<T> {
             return Resource(Status.LOADING, data, null)
         }
+          fun <T> unAuthorized(msg: String,data: T?): Resource<T> {
+            return Resource(Status.UNAUTHORIZED, data, msg)
+        }
         
         fun <T> idle(data: T?): Resource<T> {
             return Resource(Status.IDLE, data, null)

@@ -6,6 +6,7 @@ import com.paya.data.datasource.developer.DeveloperDataSource
 import com.paya.data.network.apiresponse.ApiEmptyResponse
 import com.paya.data.network.apiresponse.ApiErrorResponse
 import com.paya.data.network.apiresponse.ApiSuccessResponse
+import com.paya.data.network.apiresponse.ApiUnAuthorizedResponse
 import com.paya.data.network.remote_api.DeveloperNameService
 import com.paya.domain.models.local.DeveloperNameDbModel
 import com.paya.domain.models.remote.DeveloperNameServerModel
@@ -28,6 +29,7 @@ class DeveloperRepositoryImpl @Inject constructor(
 			is ApiEmptyResponse -> Resource.success(null)
 			is ApiSuccessResponse -> Resource.success(mapperNet.map(developerName.body))
 			is ApiErrorResponse -> Resource.error(developerName.errorMessage, null)
+			is ApiUnAuthorizedResponse -> Resource.unAuthorized(developerName.errorMessage,null)
 		}
 	}
 	

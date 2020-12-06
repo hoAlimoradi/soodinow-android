@@ -15,6 +15,8 @@ import com.paya.domain.models.repo.CurrencyPriceRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.presentation.R
+import com.paya.presentation.base.BaseFragment
+import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentMarketBinding
 import com.paya.presentation.ui.market.adapter.CurrencyAdapter
 import com.paya.presentation.ui.market.adapter.DayAdapter
@@ -25,7 +27,7 @@ import com.paya.presentation.viewmodel.MarketViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MarketFragment : Fragment() {
+class MarketFragment : BaseFragment<MarketViewModel>() {
 	
 	private lateinit var mBinding: FragmentMarketBinding
 	private val mViewModel: MarketViewModel by viewModels()
@@ -100,5 +102,8 @@ class MarketFragment : Fragment() {
 		mBinding.tagsRecyclerView.layoutManager = layoutManager
 		mBinding.tagsRecyclerView.adapter = adapter
 	}
+	
+	override val baseViewModel: BaseViewModel
+		get() = mViewModel
 	
 }

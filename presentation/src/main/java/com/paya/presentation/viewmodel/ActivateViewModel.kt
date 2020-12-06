@@ -3,23 +3,23 @@ package com.paya.presentation.viewmodel
 import androidx.databinding.ObservableField
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.paya.domain.models.repo.ActivateRepoModel
 import com.paya.domain.models.repo.RegisterRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.domain.tools.UseCase
+import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.utils.VolatileLiveData
+import com.paya.presentation.utils.callResource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class ActivateViewModel @ViewModelInject constructor(
 	private val activateUseCase: UseCase<ActivateRepoModel,Any>,
 	private val registerUseCase: UseCase<String,RegisterRepoModel>
-) : ViewModel() {
+) : BaseViewModel() {
 	
 	val title = MutableLiveData<String>()
 	val remainingTimeText = MutableLiveData<String>()
@@ -50,7 +50,7 @@ class ActivateViewModel @ViewModelInject constructor(
 				phoneNumber,
 				activationCode
 			)
-			val response = activateUseCase.action(activateModel)
+			val response = callResource(this@ActivateViewModel,activateUseCase.action(activateModel))
 			status.postValue(response)
 		}
 	}
@@ -60,7 +60,7 @@ class ActivateViewModel @ViewModelInject constructor(
 			return
 		viewModelScope.launch(Dispatchers.IO) {
 			status.postValue(Resource.loading(null))
-			val response = registerUseCase.action(phoneNumber)
+			val response = callResource(this@ActivateViewModel,registerUseCase.action(phoneNumber))
 			
 			if (response.status == Status.SUCCESS) {
 				status.postValue(Resource.idle(null))

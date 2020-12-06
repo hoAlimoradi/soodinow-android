@@ -15,6 +15,8 @@ import com.paya.domain.models.repo.RegisterRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.presentation.R
+import com.paya.presentation.base.BaseFragment
+import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentRegisterBinding
 import com.paya.presentation.utils.observe
 import com.paya.presentation.viewmodel.RegisterViewModel
@@ -22,7 +24,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class RegisterFragment : Fragment() {
+class RegisterFragment : BaseFragment<RegisterViewModel>() {
 	
 	private val mViewModel: RegisterViewModel by viewModels()
 	private lateinit var mBinding: FragmentRegisterBinding
@@ -68,5 +70,8 @@ class RegisterFragment : Fragment() {
 			).show()
 		}
 	}
+	
+	override val baseViewModel: BaseViewModel
+		get() = mViewModel
 	
 }

@@ -15,6 +15,8 @@ import com.paya.domain.models.repo.ProfileRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.presentation.R
+import com.paya.presentation.base.BaseFragment
+import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentFirstInformationBinding
 import com.paya.presentation.ui.createPersonalAccount.enum.NextPageInformation
 import com.paya.presentation.utils.observe
@@ -26,7 +28,7 @@ import ir.hamsaa.persiandatepicker.PersianDatePickerDialog
 import ir.hamsaa.persiandatepicker.util.PersianCalendar
 
 @AndroidEntryPoint
-class FirstInformationFragment : Fragment() {
+class FirstInformationFragment : BaseFragment<FirstInformationViewModel>() {
 	private val mViewModel: FirstInformationViewModel by viewModels()
 	private lateinit var mBinding: FragmentFirstInformationBinding
 	private var picker: PersianDatePickerDialog? = null
@@ -96,6 +98,9 @@ class FirstInformationFragment : Fragment() {
 		mBinding.birthDate.months.text = persianCalendar.persianMonthName.toString()
 		mBinding.birthDate.day.text = persianCalendar.persianDay.toString()
 	}
+	
+	override val baseViewModel: BaseViewModel
+		get() = mViewModel
 	
 	
 }
