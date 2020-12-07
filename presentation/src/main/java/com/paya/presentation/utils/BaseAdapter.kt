@@ -1,6 +1,5 @@
 package com.paya.presentation.utils
 
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
@@ -42,7 +41,15 @@ abstract class BaseAdapter<VH : RecyclerView.ViewHolder?,Item> : RecyclerView.Ad
 		notifyDataSetChanged()
 	}
 	
-	fun addFakeItem(item : Item) {
+	fun clear() {
+		if (data.size > 0) {
+			this.data.clear()
+			this.notifyItemRangeRemoved(0,data.size - 1)
+			
+		}
+	}
+	
+	fun addFakeItem(item: Item) {
 		addLastItem(item)
 		addLastItem(item)
 		addLastItem(item)

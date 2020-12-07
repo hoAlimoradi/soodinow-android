@@ -181,7 +181,10 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 	
 	private fun onPricesReady(resource: Resource<List<CurrencyPriceRepoModel>>){
 		when(resource.status){
-			Status.SUCCESS -> resource.data?.let { adapterCurrency.addAllData(it as ArrayList<CurrencyPriceRepoModel>) }
+			Status.SUCCESS -> resource.data?.let {
+				adapterCurrency.clear()
+				adapterCurrency.addAllData(it as ArrayList<CurrencyPriceRepoModel>)
+			}
 			Status.ERROR -> {
 				Toast.makeText(
 					requireContext(),
