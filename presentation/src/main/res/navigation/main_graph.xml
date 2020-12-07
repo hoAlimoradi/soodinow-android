@@ -102,7 +102,8 @@
         tools:layout="@layout/fragment_create_account_personal">
         <action
             android:id="@+id/navigateToQuestion"
-            app:destination="@id/questionFragment" />
+            app:destination="@id/questionFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 
 
@@ -124,7 +125,8 @@
         tools:layout="@layout/fragment_investment">
         <action
             android:id="@+id/navigateToFirstInformation"
-            app:destination="@id/firstInformation" />
+            app:destination="@id/firstInformation"
+            app:popUpToInclusive="true"/>
 
     </fragment>
 
@@ -140,11 +142,13 @@
             />
         <action
             android:id="@+id/navigateToConnectBrokerage"
-            app:destination="@id/connectBrokerage" />
+            app:destination="@id/connectBrokerage"
+            app:popUpToInclusive="true"/>
 
         <action
             android:id="@+id/navigateToConnectLowRiskBrokerage"
-            app:destination="@id/connectLowRiskBrokerage" />
+            app:destination="@id/connectLowRiskBrokerage"
+            app:popUpToInclusive="true"/>
     </fragment>
 
 
@@ -176,7 +180,8 @@
         tools:layout="@layout/fragment_create_low_risk_account">
         <action
             android:id="@+id/navigationToCalculateProfitCapital"
-            app:destination="@+id/calculateProfileCapital" />
+            app:destination="@+id/calculateProfileCapital"
+            app:popUpToInclusive="true"/>
     </fragment>
 
 
@@ -200,10 +205,12 @@
 
         <action
             android:id="@+id/navigateToFirstInformation"
-            app:destination="@id/firstInformation" />
+            app:destination="@id/firstInformation"
+            app:popUpToInclusive="true"/>
         <action
             android:id="@+id/navigateToConnectLowRiskBrokerageFragment"
-            app:destination="@id/connectLowRiskBrokerage" />
+            app:destination="@id/connectLowRiskBrokerage"
+            app:popUpToInclusive="true"/>
 
     </fragment>
 
@@ -225,7 +232,8 @@
 
         <action
             android:id="@+id/navigateToHomeFragment"
-            app:destination="@id/home" />
+            app:destination="@id/home"
+            app:popUpToInclusive="true"/>
 
     </fragment>
     <fragment

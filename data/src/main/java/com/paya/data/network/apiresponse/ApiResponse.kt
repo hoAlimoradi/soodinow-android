@@ -43,13 +43,13 @@ sealed class ApiResponse<T> {
         fun <T> create(response: Response<T>): ApiResponse<T> {
             return if (response.isSuccessful) {
                 val body = response.body()
-                if (response.code() == 401) {
-                    ApiUnAuthorizedResponse(getErrorMessage(response) ?: "UnAuthorized")
-                } else if (body == null || response.code() == 204) {
+                if (body == null || response.code() == 204) {
                     ApiEmptyResponse()
                 } else {
                     ApiSuccessResponse(body)
                 }
+            } else if (response.code() == 401) {
+                ApiUnAuthorizedResponse(getErrorMessage(response) ?: "UnAuthorized")
             } else {
                 ApiErrorResponse(getErrorMessage(response) ?: "unknown error")
             }
