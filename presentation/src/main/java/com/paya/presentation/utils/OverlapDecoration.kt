@@ -5,7 +5,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 
-const val overlap = -10
+const val overlap = -20
 
 class OverlapDecoration : ItemDecoration() {
 	override fun getItemOffsets(
@@ -14,9 +14,10 @@ class OverlapDecoration : ItemDecoration() {
 		parent: RecyclerView,
 		state: RecyclerView.State
 	) {
-		val rec = Rect()
-		rec.set(0,0,0,overlap)
-		super.getItemOffsets(rec,view,parent,state)
+		super.getItemOffsets(outRect,view,parent,state)
+		if(parent.getChildAdapterPosition(view)==0)
+			return
+		outRect.set(overlap,0,0,0)
 		
 	}
 	

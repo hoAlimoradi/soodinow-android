@@ -154,6 +154,8 @@
     <string name="call_support_desc">کارشناسان ما بصورت 24 ساعته و شبانه روزی پاسخگوی سوالات شما می باشند</string>
     <string name="online_chat">چت آنلاین</string>
     <string name="online_person">کارشناس آنلاین هستند</string>
+    <string name="send">ارسال</string>
+    <string name="write_question_this">سوال خود را اینجا بنویسید</string>
 
     <string-array name="brokerage_list">
         <item>کارگزاری فارابی</item>
