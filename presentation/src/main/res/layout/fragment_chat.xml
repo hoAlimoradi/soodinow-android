@@ -118,6 +118,57 @@
             tools:itemCount="1"
             tools:listitem="@layout/row_expert_chat" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/chatRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/bottomView"
+            app:layout_constraintEnd_toEndOf="@id/card"
+            app:layout_constraintStart_toStartOf="@id/card"
+            app:layout_constraintTop_toBottomOf="@id/expertRecyclerView"
+            android:elevation="2dp"
+            android:layout_marginTop="@dimen/margin_very_small"
+           />
+
+        <View
+            android:id="@+id/bottomView"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/height"
+            android:background="@color/bg"
+            android:elevation="2dp"
+            app:layout_constraintBottom_toBottomOf="@id/card"
+            app:layout_constraintEnd_toEndOf="@id/card"
+            app:layout_constraintStart_toStartOf="@id/card" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/sendBtn"
+            android:layout_width="@dimen/height"
+            android:layout_height="0dp"
+            android:background="@android:color/transparent"
+            android:text="@string/send"
+            android:textColor="@color/green"
+            app:layout_constraintBottom_toBottomOf="@id/bottomView"
+            app:layout_constraintStart_toStartOf="@id/bottomView"
+            app:layout_constraintTop_toTopOf="@id/bottomView" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/input"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@android:color/transparent"
+            android:elevation="2dp"
+            android:text="test test test test"
+            android:hint="@string/write_question_this"
+            android:paddingStart="@dimen/margin_very_small"
+            android:paddingEnd="@dimen/margin_very_small"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/text_size_11sp"
+            app:layout_constraintBottom_toBottomOf="@id/bottomView"
+            app:layout_constraintEnd_toEndOf="@id/bottomView"
+            app:layout_constraintStart_toEndOf="@id/sendBtn"
+            app:layout_constraintTop_toTopOf="@id/bottomView" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

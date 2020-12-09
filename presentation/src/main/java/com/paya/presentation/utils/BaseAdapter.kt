@@ -31,6 +31,10 @@ abstract class BaseAdapter<VH : RecyclerView.ViewHolder?,Item> : RecyclerView.Ad
 		return data.size
 	}
 	
+	fun getItem(position: Int): Item {
+		return data[position]
+	}
+	
 	fun addLastItem(item: Item) {
 		this.data.add(item)
 		notifyItemChanged(this.data.size - 1)
