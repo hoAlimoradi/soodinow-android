@@ -5,5 +5,6 @@ data class QuestionsRepoModel(
 	val slug: String,
 	val type: String,
 	val answers: List<QuestionRepoModel>,
-	var selectedAnswer: Int? = null
+	var selectedAnswer: MutableList<Int> = mutableListOf(),
+	val values: MutableMap<Int, String?> = mutableMapOf()
 )

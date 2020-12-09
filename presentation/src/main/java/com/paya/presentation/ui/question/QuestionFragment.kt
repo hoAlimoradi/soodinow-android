@@ -5,12 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.paya.domain.models.repo.QuestionsRepoModel
+import com.paya.domain.models.repo.UserTestRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.presentation.R
@@ -25,7 +27,9 @@ import dagger.hilt.android.AndroidEntryPoint
 class QuestionFragment : BaseFragment<QuestionViewModel>() {
 	
 	private lateinit var mBinding: FragmentQuestionBinding
+	private lateinit var adapter: QuestionAdapter
 	private val mViewModel: QuestionViewModel by viewModels()
+	private lateinit var questions: List<QuestionsRepoModel>
 	
 	override fun onCreateView(
 		inflater: LayoutInflater,container: ViewGroup?,
@@ -48,20 +52,45 @@ class QuestionFragment : BaseFragment<QuestionViewModel>() {
 	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
 		super.onViewCreated(view,savedInstanceState)
 		mBinding.submitBtn.setOnClickListener {
-			findNavController().navigate(
-				QuestionFragmentDirections.navigateToInvestment()
-			)
+			val test = adapter.getUserTestResult()
+			val questionSlug = test.map { it.q }
+			questions.forEach {
+				if (!questionSlug.contains(it.slug)){
+					Toast.makeText(
+						requireContext(),
+						"لطفا به همه پرسش ها پاسخ بدهید",
+						Toast.LENGTH_SHORT
+					).show()
+					return@setOnClickListener
+				}
+			}
+			mViewModel.submitTest(test)
 		}
 		mViewModel.getAllQuestions()
 		observe(mViewModel.questions, ::onQuestionsProvided)
+		observe(mViewModel.submitTestStatus, ::onTestSubmit)
+	}
+	
+	private fun onTestSubmit(resource: Resource<UserTestRepoModel>){
+		if (resource.status == Status.SUCCESS){
+			findNavController().navigate(
+				QuestionFragmentDirections.navigateToInvestment()
+			)
+		}else if (resource.status == Status.ERROR){
+			Toast.makeText(
+				requireContext(),
+				resource.message ?: "خطایی رخ داده است",
+				Toast.LENGTH_SHORT
+			).show()
+		}
 	}
 	
 	private fun onQuestionsProvided(questionsResource: Resource<List<QuestionsRepoModel>>){
 		if (questionsResource.status == Status.SUCCESS){
-			val questions = questionsResource.data ?: return
+			questions = questionsResource.data ?: return
 			
 			val manager = LinearLayoutManager(requireContext())
-			val adapter = QuestionAdapter(questions)
+			adapter = QuestionAdapter(questions)
 			mBinding.questionRecycler.layoutManager = manager
 			mBinding.questionRecycler.adapter = adapter
 		}
