@@ -8,6 +8,8 @@ plugins {
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
     id("io.objectbox")
+    id("com.google.firebase.crashlytics")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -59,6 +61,10 @@ dependencies {
     kapt ("com.android.databinding:compiler:${Dependencies.Versions.DATA_BINDING_VER}")
     
     implementation("uk.co.chrisjenx:calligraphy:${Dependencies.Versions.CALLIGRAPHY}")
+
+    implementation (platform("com.google.firebase:firebase-bom:${Dependencies.Versions.FIREBASEـBOM}"))
+    implementation ("com.google.firebase:firebase-crashlytics-ktx")
+    implementation ("com.google.firebase:firebase-analytics-ktx")
     
     implementation(project(Dependencies.Modules.DOMAIN))
     implementation(project(Dependencies.Modules.PRESENTATION))

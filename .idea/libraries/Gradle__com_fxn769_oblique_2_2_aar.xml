@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: com.fxn769:oblique:2.2@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7b5b0e003934eabe2b63d97b6fe9e262/jetified-oblique-2.2/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7b5b0e003934eabe2b63d97b6fe9e262/jetified-oblique-2.2/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7b5b0e003934eabe2b63d97b6fe9e262/jetified-oblique-2.2/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fxn769/oblique/2.2/2b85efc9400c15a3e5984085525453ebc05e589f/oblique-2.2-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fxn769/oblique/2.2/4bb721b4b0114045332ffe7eb0bb3f534c16bfe6/oblique-2.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

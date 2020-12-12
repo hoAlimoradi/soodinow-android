@@ -38,6 +38,9 @@ object Dependencies{
 		const val PERSIAN_DATE_DIALOG = "V1.2"
 		const val COORDINATOR_LAYOUT = "1.1.0"
 		const val PULSATOR4DROID = "1.0.3"
+		const val GOOGLE_SERVICES = "4.3.4"
+		const val FIREBASE_CRASHLYTICS_GRADLE = "2.4.1"
+		const val FIREBASEـBOM = "26.1.1"
 	}
 	
 	object Modules{

@@ -21,6 +21,8 @@ buildscript {
     
         classpath ("com.github.ben-manes:gradle-versions-plugin:0.33.0")
         classpath ("org.jetbrains.kotlin:kotlin-android-extensions:1.4.10")
+        classpath ("com.google.gms:google-services:${com.paya.buildSrc.Dependencies.Versions.GOOGLE_SERVICES}")
+        classpath ("com.google.firebase:firebase-crashlytics-gradle:${com.paya.buildSrc.Dependencies.Versions.FIREBASE_CRASHLYTICS_GRADLE}")
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle.kts.kts.kts files
     }

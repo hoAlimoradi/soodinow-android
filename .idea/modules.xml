@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Soodinow.iml" filepath="$PROJECT_DIR$/.idea/modules/Soodinow.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Soodinow.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Soodinow.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Soodinow.buildSrc.iml" filepath="$PROJECT_DIR$/.idea/modules/Soodinow.buildSrc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/Soodinow.common.iml" filepath="$PROJECT_DIR$/.idea/modules/common/Soodinow.common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/data/Soodinow.data.iml" filepath="$PROJECT_DIR$/.idea/modules/data/Soodinow.data.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/domain/Soodinow.domain.iml" filepath="$PROJECT_DIR$/.idea/modules/domain/Soodinow.domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/presentation/Soodinow.presentation.iml" filepath="$PROJECT_DIR$/.idea/modules/presentation/Soodinow.presentation.iml" />
+    </modules>
+  </component>
+</project>
