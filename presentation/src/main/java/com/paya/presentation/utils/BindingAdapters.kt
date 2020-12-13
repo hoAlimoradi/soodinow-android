@@ -35,6 +35,12 @@ object BindingAdapters {
 	fun setText(view: TextView,value: Int) {
 		view.text = value.toString()
 	}
+
+	@JvmStatic
+	@BindingAdapter("isSelected")
+	fun setSelected(view: View,value: Boolean) {
+		view.isSelected = value
+	}
 	@JvmStatic
 	@BindingAdapter("iconSet")
 	fun setImageDrawable(view: ImageView,drawable: Drawable?) {

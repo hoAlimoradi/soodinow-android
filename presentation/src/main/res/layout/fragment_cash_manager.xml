@@ -144,20 +144,25 @@
                     app:layout_constraintTop_toBottomOf="@id/txt_calculate_profit_capital_desc">
 
 
-
-                    <androidx.appcompat.widget.AppCompatButton
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/withdrawalAccountBtn"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/height_medium"
                         android:layout_weight="5"
                         android:background="@drawable/round_corner_layout_selector_red"
+                        android:gravity="center"
                         android:text="@string/withdrawal_cash"
                         android:textColor="@color/gray"
                         android:textSize="@dimen/text_size_11sp"
-                        android:drawableEnd="@drawable/ic_withdrawal"
-                        android:drawableTint="@color/gray"/>
-                    <androidx.appcompat.widget.AppCompatButton
+                        android:theme="@style/Theme.MaterialComponents.Light.DarkActionBar"
+                        app:icon="@drawable/ic_withdrawal"
+                        app:iconGravity="textEnd"
+                        app:iconTint="@color/gray"
+                        app:backgroundTint="@color/red"/>
+
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/depositAccountBtn"
+                        isSelected="true"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/height_medium"
                         android:layout_weight="5"
@@ -165,8 +170,12 @@
                         android:text="@string/deposit_cash"
                         android:textColor="@color/gray"
                         android:textSize="@dimen/text_size_11sp"
-                        android:drawableEnd="@drawable/ic_deposit_money"
-                        android:drawableTint="@color/gray"/>
+                        android:theme="@style/Theme.MaterialComponents.Light.DarkActionBar"
+                        app:icon="@drawable/ic_deposit_money"
+                        app:iconGravity="textEnd"
+                        app:iconTint="@color/gray"
+                        app:backgroundTint="@color/green"
+                        />
 
                 </LinearLayout>
 

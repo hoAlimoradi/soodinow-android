@@ -75,6 +75,18 @@
             android:id="@+id/navigateToMarketFragment"
             app:destination="@id/market" />
 
+        <action
+            android:id="@+id/navigateToCasFragment"
+            app:destination="@id/cashManager" />
+
+    </fragment>
+<fragment
+        android:id="@+id/cashManager"
+        android:name="com.paya.presentation.ui.cashManager.CashManagerFragment"
+        android:label="fragment_cash_manager"
+        tools:layout="@layout/fragment_cash_manager">
+
+
     </fragment>
 
 
