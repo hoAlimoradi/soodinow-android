@@ -156,6 +156,11 @@
     <string name="online_person">کارشناس آنلاین هستند</string>
     <string name="send">ارسال</string>
     <string name="write_question_this">سوال خود را اینجا بنویسید</string>
+    <string name="account_manager_history">سابقه مدیریت حساب</string>
+    <string name="cash_account">موجودی حساب</string>
+    <string name="deposit_withdrawal_account">واریز و برداشت از حساب</string>
+    <string name="deposit_cash">واریز وجه</string>
+    <string name="withdrawal_cash">برداشت وجه</string>
 
     <string-array name="brokerage_list">
         <item>کارگزاری فارابی</item>

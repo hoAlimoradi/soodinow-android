@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.paya.domain.models.repo.BoxHistoryRepoModel
@@ -71,6 +72,17 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
 		initRadioGroup()
 		observe(viewModel.existAccount,::onExistAccountReady)
 		observe(viewModel.profile,::onProfileReady)
+
+		mBinding.txtInventoryManagement.setOnClickListener {
+			findNavController().navigate(
+				ProfileFragmentDirections.navigateToCasFragment()
+			)
+		}
+		mBinding.managementImg.setOnClickListener {
+			findNavController().navigate(
+				ProfileFragmentDirections.navigateToCasFragment()
+			)
+		}
 	}
 	
 	private fun initRadioGroup() {

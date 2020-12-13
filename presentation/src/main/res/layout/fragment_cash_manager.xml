@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.cashManager.CashManagerFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg">
+
+        <include
+            android:id="@+id/toolbar"
+            label="@{@string/inventory_management}"
+            layout="@layout/toolbar"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/managerAccountHistory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_very_small"
+            android:drawableEnd="@drawable/ic_account_managment"
+            android:drawablePadding="@dimen/margin_very_small"
+            android:text="@string/account_manager_history"
+            android:textColor="@color/dark_gray_2"
+            android:textSize="@dimen/text_size_12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardCash"
+            style="@style/GeneralCardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_small"
+            app:layout_constraintTop_toBottomOf="@id/managerAccountHistory">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/margin_small">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/managerAccount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_small"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:drawableEnd="@drawable/ic_account_cash"
+                    android:drawablePadding="@dimen/margin_very_small"
+                    android:elevation="2dp"
+                    android:text="@string/cash_account"
+                    android:textColor="@color/purple"
+                    android:textSize="@dimen/text_size_small"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/txtPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_medium"
+                    android:layout_margin="@dimen/margin_small"
+                    android:background="@drawable/round_corner_layout_border_gray"
+                    android:elevation="2dp"
+                    android:enabled="false"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:paddingStart="@dimen/margin_very_small"
+                    android:paddingEnd="@dimen/margin_very_small"
+                    android:singleLine="true"
+                    android:text="26,000,000"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/text_size_small"
+                    app:layout_constraintTop_toBottomOf="@id/managerAccount" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tomanTxtPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/height_medium"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:elevation="2dp"
+                    android:gravity="center"
+                    android:text="@string/rial"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/text_size_10sp"
+                    app:layout_constraintBottom_toBottomOf="@id/txtPrice"
+                    app:layout_constraintStart_toStartOf="@id/txtPrice" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardAccount"
+            style="@style/GeneralCardView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/margin_small"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardCash">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/margin_small">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txt_calculate_profit_capital_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/deposit_withdrawal_account"
+                    android:textColor="@color/purple"
+                    android:textSize="@dimen/text_size_11sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txt_calculate_profit_capital_desc"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_very_small"
+                    android:maxLines="2"
+                    android:text="لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه است. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/text_size_10sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/txt_calculate_profit_capital_title" />
+
+                <LinearLayout
+                    android:id="@+id/layoutAccount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:background="@drawable/round_corner_layout"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/margin_4_dp"
+                    app:layout_constraintTop_toBottomOf="@id/txt_calculate_profit_capital_desc">
+
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/withdrawalAccountBtn"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/height_medium"
+                        android:layout_weight="5"
+                        android:background="@drawable/round_corner_layout_selector_red"
+                        android:gravity="center"
+                        android:text="@string/withdrawal_cash"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/text_size_11sp"
+                        android:theme="@style/Theme.MaterialComponents.Light.DarkActionBar"
+                        app:icon="@drawable/ic_withdrawal"
+                        app:iconGravity="textEnd"
+                        app:iconTint="@color/gray"
+                        app:backgroundTint="@color/red"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/depositAccountBtn"
+                        isSelected="true"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/height_medium"
+                        android:layout_weight="5"
+                        android:background="@drawable/round_corner_layout_selector_green"
+                        android:text="@string/deposit_cash"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/text_size_11sp"
+                        android:theme="@style/Theme.MaterialComponents.Light.DarkActionBar"
+                        app:icon="@drawable/ic_deposit_money"
+                        app:iconGravity="textEnd"
+                        app:iconTint="@color/gray"
+                        app:backgroundTint="@color/green"
+                        />
+
+                </LinearLayout>
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/inputPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_medium"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:background="@drawable/round_corner_layout"
+                    android:enabled="false"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:paddingStart="@dimen/margin_very_small"
+                    android:paddingEnd="@dimen/margin_very_small"
+                    android:singleLine="true"
+                    android:text="26,000,000"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/text_size_small"
+                    app:layout_constraintTop_toBottomOf="@id/layoutAccount" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tomanInputPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/height_medium"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:gravity="center"
+                    android:text="@string/rial"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/text_size_10sp"
+                    app:layout_constraintBottom_toBottomOf="@id/inputPrice"
+                    app:layout_constraintStart_toStartOf="@id/inputPrice" />
+
+                <androidx.constraintlayout.widget.Group
+                    android:id="@+id/seekBarGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    app:constraint_referenced_ids="seekBarPrice,startViewSeekBar,endViewSeekBar,minSeekBar,tomanStartSeekBar,maxSeekBar,tomanEndSeekBar" />
+
+
+                <com.warkiz.widget.IndicatorSeekBar
+                    android:id="@+id/seekBarPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:elevation="2dp"
+                    android:layoutDirection="rtl"
+                    app:isb_indicator_text_size="18sp"
+                    app:isb_max="50000000"
+                    app:isb_min="1000000"
+                    app:isb_progress="26000000"
+                    app:isb_show_indicator="none"
+                    app:isb_thumb_color="@color/green"
+                    app:isb_thumb_size="20dp"
+                    app:isb_track_background_color="@color/gray"
+                    app:isb_track_background_size="4dp"
+                    app:isb_track_progress_color="@color/gray"
+                    app:isb_track_progress_size="4dp"
+                    app:layout_constraintTop_toBottomOf="@id/inputPrice" />
+
+                <View
+                    android:id="@+id/startViewSeekBar"
+                    android:layout_width="4dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="12dp"
+                    android:background="@color/gray"
+                    app:layout_constraintStart_toStartOf="@id/seekBarPrice"
+                    app:layout_constraintTop_toTopOf="@id/seekBarPrice" />
+
+                <View
+                    android:id="@+id/endViewSeekBar"
+                    android:layout_width="4dp"
+                    android:layout_height="25dp"
+                    android:layout_marginEnd="12dp"
+                    android:background="@color/gray"
+                    app:layout_constraintEnd_toEndOf="@id/seekBarPrice"
+                    app:layout_constraintTop_toTopOf="@id/seekBarPrice" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/minSeekBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:gravity="center"
+                    android:text="1,000,000"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_11sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/startViewSeekBar" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tomanStartSeekBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:gravity="center"
+                    android:text="@string/rial"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/text_size_10sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/minSeekBar" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/maxSeekBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    android:gravity="center"
+                    android:text="50,000,000"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_11sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/endViewSeekBar" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tomanEndSeekBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    android:gravity="center"
+                    android:text="@string/rial"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/text_size_10sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/maxSeekBar" />
+
+                <androidx.constraintlayout.widget.Barrier
+                    android:id="@+id/seekBarBarrier"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:barrierDirection="bottom"
+                    app:constraint_referenced_ids="tomanEndSeekBar,tomanStartSeekBar" />
+
+                <Button
+                    android:id="@+id/submit_btn"
+                    style="@style/SubmitButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_medium"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginBottom="@dimen/margin_medium"
+                    android:text="@string/submit_and_continue"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/seekBarBarrier"
+                    app:layout_constraintVertical_bias="1" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
