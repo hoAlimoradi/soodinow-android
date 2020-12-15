@@ -4,7 +4,7 @@ data class AddRiskOrderRepoItem(
 	val isin: String,
 	val id: Long,
 	val orderId: Long,
-	val stateId: Long,
+	val stateId: String,
 	val state: String,
 	val statusCode: Int,
 	val ruleAction: String

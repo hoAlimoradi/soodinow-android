@@ -8,7 +8,7 @@ data class AddRiskOrderItem(
 	@SerializedName("order_id")
 	val orderId: Long,
 	@SerializedName("state_id")
-	val stateId: Long,
+	val stateId: String,
 	val state: String,
 	@SerializedName("status_code")
 	val statusCode: Int,
