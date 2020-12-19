@@ -165,4 +165,9 @@
     <string-array name="brokerage_list">
         <item>کارگزاری فارابی</item>
     </string-array>
+
+    <string-array name="account_list">
+        <item>حساب</item>
+        <item>حساب</item>
+    </string-array>
 </resources>
