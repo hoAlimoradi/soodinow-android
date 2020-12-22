@@ -162,6 +162,31 @@
     <string name="deposit_cash">واریز وجه</string>
     <string name="withdrawal_cash">برداشت وجه</string>
 
+    <string name="error_msg_auth_error">خطایی در احراز هویت رخ داد : %1$s</string>
+    <string name="error_msg_auth_failed">عدم موفقیت در احراز هویت</string>
+    <string name="error_device_does_not_support_fingerprint">
+        دستگاه شما از احراز هویت با اثر انگشت پشتیبانی نمیکند
+    </string>
+    <string name="error_fingerprint_permission">
+        لطفا اجازه دسترسی به اثر انگشت را فعال نمایید
+    </string>
+    <string name="error_fingerprint_not_configure">
+        هیچ اثر انگشتی ثبت نشده است. لطفا در تنظیمات دستگاه حداقل یک اثر انگشت تعریف نمایید.
+    </string>
+    <string name="error_lock_screen_not_configure">
+        هیچ مکانیزم امنی تعریف نشده است. لطفا در تنظیمات دستگاه یک مکانیزم امن (رمز عبور، پین و یا الگو) تعریف نمایید.
+    </string>
+    <string name="cancel">انصراف</string>
+    <string name="authentication_title">احراز هویت ضروری است!</string>
+    <string name="authentication_subtitle">احراز هویت مهم</string>
+    <string name="login_authentication_description">
+        برای ورود سنسور اثر انگشت دستگاه را لمس نمایید.
+    </string>
+    <string name="setting_authentication_description">
+        برای فعال سازی اثرانگشت لطفا سنسور اثر انگشت را لمس نمایید.
+    </string>
+    <string name="authentication_successful">احراز هویت با موفقیت انجام شد</string>
+
     <string-array name="brokerage_list">
         <item>کارگزاری فارابی</item>
     </string-array>

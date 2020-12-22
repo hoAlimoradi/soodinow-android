@@ -11,4 +11,12 @@ interface PreferenceHelper {
     fun getMobile() : Resource<String>
     
     fun setMobile(mobile: String)
+
+    fun getPassword(): String?
+
+    fun setPassword(password: String?)
+
+    fun setEncodedCipherIv(iv: String)
+
+    fun getEncodedCipherIv(): String?
 }

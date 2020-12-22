@@ -5,6 +5,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.paya.domain.models.repo.ProfileRepoModel
+import com.paya.domain.repository.AuthRepository
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.UseCase
 import com.paya.domain.usecase.auth.GetProfileUseCase
@@ -15,7 +16,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class SettingViewModel @ViewModelInject constructor(
-	private val useCaseProfile: UseCase<Unit,ProfileRepoModel>
+	private val useCaseProfile: UseCase<Unit,ProfileRepoModel>,
+	private val authRepository: AuthRepository
 ) : BaseViewModel() {
 
 	init {
@@ -31,4 +33,15 @@ class SettingViewModel @ViewModelInject constructor(
 		}
 		
 	}
+
+	fun setPassword(password: String?){
+		authRepository.setUserPassword(password)
+	}
+
+	fun getPassword(): String? = authRepository.getUserPassword()
+
+	fun setIv(iv: String){
+		authRepository.setIV(iv)
+	}
+
 }

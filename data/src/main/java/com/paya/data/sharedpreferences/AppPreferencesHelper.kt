@@ -31,10 +31,32 @@ class AppPreferencesHelper @Inject constructor(
             .putString(PREF_KEY_MOBILE, mobile)
             .apply()
     }
-    
+
+    override fun getPassword(): String? {
+        return mPrefs.getString(PREF_KEY_PASSWORD,null)
+    }
+
+    override fun setPassword(password: String?) {
+        mPrefs.edit()
+            .putString(PREF_KEY_PASSWORD, password)
+            .apply()
+    }
+
+    override fun setEncodedCipherIv(iv: String) {
+        mPrefs.edit()
+            .putString(PREF_KEY_IV, iv)
+            .apply()
+    }
+
+    override fun getEncodedCipherIv(): String? {
+        return mPrefs.getString(PREF_KEY_IV,null)
+    }
+
     companion object {
         private const val PREF_KEY_ACCESS_TOKEN: String = "PREF_KEY_ACCESS_TOKEN"
         private const val PREF_KEY_MOBILE: String = "PREF_KEY_MOBILE"
+        private const val PREF_KEY_PASSWORD: String = "PREF_KEY_PASSWORD"
+        private const val PREF_KEY_IV: String = "PREF_KEY_IV"
     }
 
 }
