@@ -107,5 +107,21 @@ class AuthRepositoryImpl @Inject constructor(
 			changePasswordRemoteRepoMapper.map(it.data)
 		}
 	}
-	
+
+	override fun getUserPassword(): String? {
+		return preferenceHelper.getPassword()
+	}
+
+	override fun setUserPassword(password: String?) {
+		preferenceHelper.setPassword(password)
+	}
+
+	override fun getIV(): String? {
+		return preferenceHelper.getEncodedCipherIv()
+	}
+
+	override fun setIV(iv: String) {
+		preferenceHelper.setEncodedCipherIv(iv)
+	}
+
 }
