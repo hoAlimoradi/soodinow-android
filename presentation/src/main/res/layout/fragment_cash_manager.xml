@@ -5,7 +5,7 @@
     tools:context=".ui.cashManager.CashManagerFragment">
 
     <data>
-
+        <import type="com.paya.domain.tools.Resource" />
         <variable
             name="viewModel"
             type="com.paya.presentation.viewmodel.CashManagerViewModel" />
@@ -186,7 +186,7 @@
                 </LinearLayout>
 
                 <androidx.appcompat.widget.AppCompatSpinner
-                    android:id="@+id/inputSelectAccount"
+                    android:id="@+id/inputSelectTypes"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/height_medium"
                     android:layout_marginTop="@dimen/margin_small"
@@ -211,9 +211,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_arrow_bottom"
-                    app:layout_constraintTop_toTopOf="@id/inputSelectAccount"
-                    app:layout_constraintStart_toStartOf="@id/inputSelectAccount"
-                    app:layout_constraintBottom_toBottomOf="@id/inputSelectAccount"
+                    app:layout_constraintTop_toTopOf="@id/inputSelectTypes"
+                    app:layout_constraintStart_toStartOf="@id/inputSelectTypes"
+                    app:layout_constraintBottom_toBottomOf="@id/inputSelectTypes"
                     android:layout_marginStart="@dimen/margin_small"/>
 
                 <androidx.appcompat.widget.AppCompatEditText
@@ -230,10 +230,10 @@
                     android:paddingStart="@dimen/margin_very_small"
                     android:paddingEnd="@dimen/margin_very_small"
                     android:singleLine="true"
-                    android:text="@={viewModel.price}"
+                    setPrice="@{viewModel.price}"
                     android:textColor="#000000"
                     android:textSize="@dimen/text_size_small"
-                    app:layout_constraintTop_toBottomOf="@id/inputSelectAccount" />
+                    app:layout_constraintTop_toBottomOf="@id/inputSelectTypes" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tomanInputPrice"
@@ -361,10 +361,17 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/seekBarBarrier"
-                    app:layout_constraintVertical_bias="1" />
+                    app:layout_constraintVertical_bias="1"
+                    android:onClick="@{() -> viewModel.setPullPrice()}"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
-
+        <include
+            layout="@layout/loading_state"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            app:resource="@{(Resource) viewModel.loading}"
+            tools:visibility="gone" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

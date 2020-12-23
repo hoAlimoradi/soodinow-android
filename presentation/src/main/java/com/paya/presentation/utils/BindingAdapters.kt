@@ -433,7 +433,7 @@ object BindingAdapters {
 
     @JvmStatic
     @BindingAdapter("setPrice")
-    fun setPrice(view: TextView,labelText:Int?) {
+    fun setPrice(view: TextView,labelText:Long?) {
         view.text = Utils.separatorAmount(labelText.toString())
     }
 
