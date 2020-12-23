@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import com.paya.presentation.R
 import com.paya.presentation.databinding.FragmentLoginDialogBinding
 import com.paya.presentation.utils.Utils
+import com.paya.presentation.utils.shortToast
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -32,8 +33,8 @@ class LoginDialogFragment : DialogFragment() {
 	private var hintPassword: String? = null
 	private var submitTitle: String? = null
 	private var cancelTitle: String? = null
-	private  var username: ObservableField<String> = ObservableField<String>()
-	private  var password: ObservableField<String> = ObservableField<String>()
+	private  var username = ObservableField<String?>()
+	private  var password = ObservableField<String?>()
 	
 	private lateinit var mBinding: FragmentLoginDialogBinding
 	var callBack: CallBack? = null
@@ -75,6 +76,23 @@ class LoginDialogFragment : DialogFragment() {
 	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
 		super.onViewCreated(view,savedInstanceState)
 		mBinding.submitBtn.setOnClickListener {
+			if (username.get().isNullOrBlank()){
+				return@setOnClickListener
+			}
+			if (password.get().isNullOrBlank()){
+				return@setOnClickListener
+			}
+			if (username.get().toString().length != 11 ||
+				!username.get().toString().startsWith("09")){
+				shortToast("شماره تلفن صحیح نمیباشد")
+				return@setOnClickListener
+			}
+			username.get().toString().forEach {
+				if (!it.isDigit()){
+					shortToast("شماره تلفن صحیح نمیباشد")
+					return@setOnClickListener
+				}
+			}
 			callBack?.success(username.get().toString(),password.get().toString())
 			
 		}
@@ -85,7 +103,11 @@ class LoginDialogFragment : DialogFragment() {
 			dismissAllowingStateLoss()
 		}
 	}
-	
+
+	fun onActionsListener(callback: CallBack){
+		this.callBack = callback
+	}
+
 	companion object {
 		/**
 		 * Use this factory method to create a new instance of

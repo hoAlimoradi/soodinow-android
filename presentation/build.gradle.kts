@@ -96,7 +96,8 @@ dependencies {
 	implementation ("pl.bclogic:pulsator4droid:${Dependencies.Versions.PULSATOR4DROID}")
 	
 	implementation ("com.github.jakob-grabner:Circle-Progress-View:1.4")
-	
+
+	implementation ("androidx.biometric:biometric:1.0.1")
 	
 	implementation(project(Dependencies.Modules.DOMAIN))
 }
