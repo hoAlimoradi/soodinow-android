@@ -1,40 +1,40 @@
 package com.paya.presentation.ui.cashManager
 
-import android.graphics.Color
+import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.ObservableField
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.paya.domain.models.repo.BoxTypeParam
 import com.paya.domain.models.repo.BoxTypeRepoModel
-import com.paya.domain.models.repo.PricingCash
+import com.paya.domain.models.repo.TotalBoxValueRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.presentation.R
 import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentCashManagerBinding
-import com.paya.presentation.utils.Utils
 import com.paya.presentation.utils.observe
 import com.paya.presentation.viewmodel.CashManagerViewModel
 import com.warkiz.widget.IndicatorSeekBar
 import com.warkiz.widget.OnSeekChangeListener
 import com.warkiz.widget.SeekParams
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_calculate_profit_capital.*
+
 
 @AndroidEntryPoint
 class CashManagerFragment : BaseFragment<CashManagerViewModel>() {
 
     private val mViewModel: CashManagerViewModel by viewModels()
     private lateinit var mBinding: FragmentCashManagerBinding
+    private var spinnerBoxAdapter: BoxTypeAdapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -56,24 +56,31 @@ class CashManagerFragment : BaseFragment<CashManagerViewModel>() {
         super.onViewCreated(view, savedInstanceState)
         observe(mViewModel.boxTypesStatus, ::readyBoxTypes)
         observe(mViewModel.sellPriceStatus, ::readySellPrice)
-        observe(mViewModel.pullPriceStatus,::readyPullPrice)
+        observe(mViewModel.pullPriceStatus, ::readyPullPrice)
+        observe(mViewModel.totalBoxValueStatus, ::readyTotalBoxValue)
         setupToggle()
-        mBinding.inputSelectTypes.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {
+        mBinding.inputSelectTypes.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                }
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    spinnerBoxAdapter?.let { adapter ->
+                        adapter.getItem(position)?.let {
+                            mViewModel.type.set(it.type)
+                            mViewModel.getSellPrice()
+                        }
+                    }
+
+                }
 
             }
-
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-               mViewModel.type.set(mBinding.inputSelectTypes.selectedItem.toString())
-                mViewModel.getSellPrice()
-            }
-
-        }
 
     }
 
@@ -122,15 +129,30 @@ class CashManagerFragment : BaseFragment<CashManagerViewModel>() {
     private fun readyBoxTypes(resource: Resource<BoxTypeRepoModel>) {
         when (resource.status) {
             Status.SUCCESS -> {
-                mBinding.inputSelectTypes.adapter =
-                    resource.data?.types?.let {
-                        context?.let { con ->
-                            ArrayAdapter<String>(
-                                con, android.R.layout.simple_spinner_item,
-                                it.toList()
-                            )
-                        }
+                spinnerBoxAdapter = resource.data?.types?.let {
+                    context?.let { con ->
+                        BoxTypeAdapter(
+                            it.toList(),
+                            con,
+                            android.R.layout.simple_spinner_item,
+                        )
                     }
+                }
+                mBinding.inputSelectTypes.adapter = spinnerBoxAdapter
+
+            }
+            Status.ERROR -> {
+                Toast.makeText(context, resource.message, Toast.LENGTH_SHORT).show()
+                findNavController().popBackStack()
+            }
+            else -> return
+        }
+    }
+
+    private fun readyTotalBoxValue(resource: Resource<TotalBoxValueRepoModel>) {
+        when (resource.status) {
+            Status.SUCCESS -> {
+
             }
             Status.ERROR -> {
                 Toast.makeText(context, resource.message, Toast.LENGTH_SHORT).show()
@@ -152,10 +174,14 @@ class CashManagerFragment : BaseFragment<CashManagerViewModel>() {
         }
     }
 
-    private fun readyPullPrice(resource: Resource<Unit>) {
+    private fun readyPullPrice(resource: Resource<String>) {
         when (resource.status) {
             Status.SUCCESS -> {
-                Toast.makeText(context, getString(R.string.pull_price_message_insert), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    context,
+                    getString(R.string.pull_price_message_insert),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
             Status.ERROR -> {
                 Toast.makeText(context, resource.message, Toast.LENGTH_SHORT).show()
@@ -167,5 +193,36 @@ class CashManagerFragment : BaseFragment<CashManagerViewModel>() {
     override val baseViewModel: BaseViewModel
         get() = mViewModel
 
+    class BoxTypeAdapter(
+        private val boxTypes: List<BoxTypeParam>,
+        context: Context,
+        val resource: Int
+    ) :
+        ArrayAdapter<BoxTypeParam>(context, resource) {
+        override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+            val inflater = LayoutInflater.from(parent.context)
+            val row = inflater.inflate(resource, parent, false)
+            val item = boxTypes[position]
+            val textView = row.findViewById(android.R.id.text1) as TextView
+            textView.text = item.name
+            return row
+        }
 
+        override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
+            val inflater = LayoutInflater.from(parent.context)
+            val row = inflater.inflate(resource, parent, false) as TextView
+            val item = boxTypes[position]
+            val textView = row.findViewById(android.R.id.text1) as TextView
+            textView.text = item.name
+            return row
+        }
+
+        override fun getCount(): Int {
+            return boxTypes.size
+        }
+
+        override fun getItem(position: Int): BoxTypeParam? {
+            return boxTypes[position]
+        }
+    }
 }

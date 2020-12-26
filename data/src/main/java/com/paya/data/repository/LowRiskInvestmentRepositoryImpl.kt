@@ -17,7 +17,8 @@ data class LowRiskInvestmentRepositoryImpl @Inject constructor(
     private val addRiskOrderRepoRemoteMapper: Mapper<AddRiskOrderRepoBodyModel, AddRiskOrderRemoteBodyModel>,
     private val boxTypesRemoteRepoMapper: Mapper<BoxTypeRemoteModel, BoxTypeRepoModel>,
     private val getSellPriceRemoteRepoMapper: Mapper<@JvmSuppressWildcards List<List<Long>>, @JvmSuppressWildcards List<Long>>,
-    private val pullPriceRemoteRepoMapper: Mapper<Unit, Unit>
+    private val pullPriceRemoteRepoMapper: Mapper<String, String>,
+    private val totalBoxValueRemoteRepoMapper: Mapper<TotalBoxValueRemoteModel, TotalBoxValueRepoModel>
 ) : LowRiskInvestmentRepository {
 
     override suspend fun getLowRiskStocks(lowRiskStockRequest: LowRiskStockRequest): Resource<IsInRiskListRepoModel> {
@@ -61,11 +62,19 @@ data class LowRiskInvestmentRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun setPullPrice(type: String, price: Long): Resource<Unit> {
+    override suspend fun setPullPrice(type: String, price: Long): Resource<String> {
         return getResourceFromApiResponse(
             lowRiskInvestmentService.setPullPrice(type, price)
         ) {
             pullPriceRemoteRepoMapper.map(it.data)
+        }
+    }
+
+    override suspend fun totalBoxValue(): Resource<TotalBoxValueRepoModel> {
+        return getResourceFromApiResponse(
+            lowRiskInvestmentService.totalBoxValue()
+        ) {
+            totalBoxValueRemoteRepoMapper.map(it.data)
         }
     }
 

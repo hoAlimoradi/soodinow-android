@@ -8,6 +8,7 @@ import com.paya.domain.models.repo.BoxTypeRepoModel
 
 import com.paya.domain.models.repo.PricingCash
 import com.paya.domain.models.repo.PullPriceBodyRepoModel
+import com.paya.domain.models.repo.TotalBoxValueRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.domain.tools.UseCase
@@ -24,23 +25,27 @@ import kotlinx.coroutines.launch
 class CashManagerViewModel @ViewModelInject constructor(
     private val boxTypesUseCase: UseCase<Unit, BoxTypeRepoModel>,
     private val sellPriceUseCase: UseCase<String, @JvmSuppressWildcards List<Long>>,
-    private val pullPricePriceUseCase: UseCase<PullPriceBodyRepoModel, Unit>
+    private val pullPricePriceUseCase: UseCase<PullPriceBodyRepoModel, String>,
+    private val totalBoxValueUseCase: UseCase<Unit, TotalBoxValueRepoModel>
 ) : BaseViewModel() {
     val boxTypesStatus = VolatileLiveData<Resource<BoxTypeRepoModel>>()
     val sellPriceStatus = VolatileLiveData<Resource<List<Long>>>()
-    val pullPriceStatus = VolatileLiveData<Resource<Unit>>()
+    val pullPriceStatus = VolatileLiveData<Resource<String>>()
+    val totalBoxValueStatus = VolatileLiveData<Resource<TotalBoxValueRepoModel>>()
     val loading = MediatorLiveData<Resource<Nothing>>()
     val price = ObservableField<Long>()
     val type = ObservableField<String>()
     val minSeek = ObservableField<Long>()
     val maxSeek = ObservableField<Long>()
+    val totalBoxValue = ObservableField<Long>()
 
     init {
         minSeek.set(0)
         maxSeek.set(0)
         price.set(0)
+        totalBoxValue.set(0)
         loading.addSource(boxTypesStatus) {
-            if (boxTypesStatus.value?.status == Status.LOADING) {
+            if (boxTypesStatus.value?.status == Status.LOADING || totalBoxValueStatus.value?.status == Status.LOADING) {
                 loading.value = Resource.loading(null)
             } else {
                 loading.value = Resource.idle(null)
@@ -60,7 +65,15 @@ class CashManagerViewModel @ViewModelInject constructor(
                 loading.value = Resource.idle(null)
             }
         }
+        loading.addSource(totalBoxValueStatus) {
+            if (totalBoxValueStatus.value?.status == Status.LOADING || boxTypesStatus.value?.status == Status.LOADING) {
+                loading.value = Resource.loading(null)
+            } else {
+                loading.value = Resource.idle(null)
+            }
+        }
         boxTypes()
+        totalBoxValue()
 
 
     }
@@ -71,7 +84,7 @@ class CashManagerViewModel @ViewModelInject constructor(
             val response = callResource(this@CashManagerViewModel, boxTypesUseCase.action(Unit))
             if (response.status == Status.SUCCESS) {
                 response.data?.types?.get(0)?.let {
-                    type.set(it)
+                    type.set(it.type)
                     getSellPrice()
                 }
             }
@@ -80,23 +93,36 @@ class CashManagerViewModel @ViewModelInject constructor(
 
     }
 
-     fun getSellPrice() {
-         viewModelScope.launch(Dispatchers.IO) {
-             sellPriceStatus.postValue(Resource.loading(null))
-             val response = callResource(this@CashManagerViewModel, sellPriceUseCase.action(type.get()!!))
-             if (response.status == Status.SUCCESS) {
-                 response.data?.size?.let {
-                     if (it > 0) {
-                         minSeek.set(response.data?.get(0))
-                         maxSeek.set(response.data?.get(it - 1))
-                         price.set(response.data?.get(0))
-                     }
-                 }
-             }
-             sellPriceStatus.postValue(response)
-         }
+    fun totalBoxValue() {
+        viewModelScope.launch(Dispatchers.IO) {
+            totalBoxValueStatus.postValue(Resource.loading(null))
+            val response = callResource(this@CashManagerViewModel, totalBoxValueUseCase.action(Unit))
+            if (response.status == Status.SUCCESS) {
+               totalBoxValue.set(response.data?.totalValue)
+            }
+            totalBoxValueStatus.postValue(response)
+        }
 
-     }
+    }
+
+    fun getSellPrice() {
+        viewModelScope.launch(Dispatchers.IO) {
+            sellPriceStatus.postValue(Resource.loading(null))
+            val response =
+                callResource(this@CashManagerViewModel, sellPriceUseCase.action(type.get()!!))
+            if (response.status == Status.SUCCESS) {
+                response.data?.size?.let {
+                    if (it > 0) {
+                        minSeek.set(response.data?.get(0))
+                        maxSeek.set(response.data?.get(it - 1))
+                        price.set(response.data?.get(0))
+                    }
+                }
+            }
+            sellPriceStatus.postValue(response)
+        }
+
+    }
 
     /*fun getSellPrice() {
         minSeek.set(5009733)
@@ -111,13 +137,13 @@ class CashManagerViewModel @ViewModelInject constructor(
 
     fun setPullPrice() {
         val type = this.type.get()
-        val price : Long = this.price.get()!!
+        val price: Long = this.price.get()!!
         if (type.isNullOrBlank()) {
             pullPriceStatus.setValue(Resource.error("type can not be blank", null))
             return
         }
 
-        if ( price <= 0f) {
+        if (price <= 0f) {
             pullPriceStatus.setValue(Resource.error("price can not be blank", null))
             return
         }

@@ -35,5 +35,10 @@ interface LowRiskInvestmentService {
     @POST("order/pull_price/{type}/")
     suspend fun setPullPrice(
         @Path("type") type: String,
-        @Field("price") price: Long): ApiResponse<BaseModel<Unit>>
+        @Field("price") price: Long): ApiResponse<BaseModel<String>>
+
+
+
+    @GET("order/total_boxes_value/")
+    suspend fun totalBoxValue(): ApiResponse<BaseModel<TotalBoxValueRemoteModel>>
 }

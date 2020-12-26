@@ -38,8 +38,12 @@ abstract class LowRiskInvestmentModule {
             AddRiskOrderRemoteBodyModel>
     @Binds
     abstract fun bindPullPriceRemoteRepoMapper(mapper: PullPriceRemoteRepoMapper): Mapper<
-            Unit,
-            Unit>
+            String,
+            String>
+    @Binds
+    abstract fun bindTotalBoxValueRemoteRepoMapper(mapper: TotalBoxValueRemoteRepoMapper): Mapper<
+            TotalBoxValueRemoteModel,
+            TotalBoxValueRepoModel>
 
     @Binds
     abstract fun bindSellPriceMapperRemoteRepoMapper(mapper: GetSellPriceMapperRemoteRepoMapper): Mapper<@JvmSuppressWildcards  List<List<Long>>,@JvmSuppressWildcards  List<Long>>
@@ -61,7 +65,11 @@ abstract class LowRiskInvestmentModule {
 
     @Binds
     abstract fun bindABoxTypesUseCase(useCase: BoxTypesUseCase): UseCase<Unit, BoxTypeRepoModel>
+
     @Binds
-    abstract fun bindPullPriceUseCase(useCase: PullPriceUseCase): UseCase<PullPriceBodyRepoModel, Unit>
+    abstract fun bindPullPriceUseCase(useCase: PullPriceUseCase): UseCase<PullPriceBodyRepoModel, String>
+
+    @Binds
+    abstract fun bindTotalBoxValueUseCase(useCase: TotalBoxValueUseCase): UseCase<Unit, TotalBoxValueRepoModel>
 
 }

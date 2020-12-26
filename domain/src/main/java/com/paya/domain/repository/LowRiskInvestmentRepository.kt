@@ -18,5 +18,7 @@ interface LowRiskInvestmentRepository {
 
     suspend fun getSellPrice(type: String): Resource<List<Long>>
 
-    suspend fun setPullPrice(type: String, price: Long): Resource<Unit>
+    suspend fun setPullPrice(type: String, price: Long): Resource<String>
+
+    suspend fun totalBoxValue() : Resource<TotalBoxValueRepoModel>
 }

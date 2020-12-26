@@ -10,11 +10,11 @@ import com.paya.domain.models.repo.LinearChartRepoModel
 import javax.inject.Inject
 
 class PullPriceRemoteRepoMapper @Inject constructor() : Mapper<
-        Unit,
-        Unit> {
+        String,
+        String> {
 
-    override fun map(param: Unit): Unit {
-        return param
+    override fun map(param: String): String {
+        return ""
     }
 
 }

@@ -12,8 +12,8 @@ import javax.inject.Inject
 
 class PullPriceUseCase @Inject constructor(
 	private val orderRepository: LowRiskInvestmentRepository
-): UseCase<PullPriceBodyRepoModel, Unit> {
-	override suspend fun action(param: PullPriceBodyRepoModel): Resource<Unit> {
+): UseCase<PullPriceBodyRepoModel, String> {
+	override suspend fun action(param: PullPriceBodyRepoModel): Resource<String> {
 		return orderRepository.setPullPrice(param.type,param.price)
 	}
 }
