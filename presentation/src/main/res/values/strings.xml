@@ -188,7 +188,6 @@
     </string>
     <string name="authentication_successful">احراز هویت با موفقیت انجام شد</string>
 
-    <string name="pull_price_message_insert">درخواست شما با موفقیت ثبت شد</string>
     <string-array name="brokerage_list">
         <item>کارگزاری فارابی</item>
     </string-array>
