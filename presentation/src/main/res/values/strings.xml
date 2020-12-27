@@ -161,6 +161,7 @@
     <string name="deposit_withdrawal_account">واریز و برداشت از حساب</string>
     <string name="deposit_cash">واریز وجه</string>
     <string name="withdrawal_cash">برداشت وجه</string>
+    <string name="pull_price_message_insert">درخواست شما با موفقیت ثبت شد</string>
 
     <string name="error_msg_auth_error">خطایی در احراز هویت رخ داد : %1$s</string>
     <string name="error_msg_auth_failed">عدم موفقیت در احراز هویت</string>
@@ -189,5 +190,10 @@
 
     <string-array name="brokerage_list">
         <item>کارگزاری فارابی</item>
+    </string-array>
+
+    <string-array name="account_list">
+        <item>حساب</item>
+        <item>حساب</item>
     </string-array>
 </resources>

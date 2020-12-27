@@ -138,7 +138,7 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
 		if (resource.status == Status.SUCCESS) {
 			boxHistoryHahMap[currentBoxId!!] = resource.data
 			resource.data?.let {
-				val cardAccountIndex = boxHistoryId!!.indexOf(currentBoxId)
+				val cardAccountIndex = boxHistoryId!!.indexOf(currentBoxId!!)
 				if (cardAccountIndex == -1) return
 				val cardAccount = cardAccounts[cardAccountIndex]
 				if (!cardAccount.isDataSet)
