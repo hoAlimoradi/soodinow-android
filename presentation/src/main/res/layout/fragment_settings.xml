@@ -185,7 +185,7 @@
         <include
             tools:visibility="gone"
             layout="@layout/loading_state"
-            app:resource="@{(Resource) viewModel.status}"
+            app:resource="@{(Resource) viewModel.loading}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"/>

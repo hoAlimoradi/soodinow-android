@@ -5,12 +5,12 @@
     app:startDestination="@id/hintFragment"
     android:id="@+id/navGraph">
 
-    <action
-        android:id="@+id/actionUnAuthorized"
-        app:destination="@id/hintFragment"
-        app:launchSingleTop="true"
-        app:popUpTo="@+id/navGraph"
-        app:popUpToInclusive="true"/>
+<!--    <action-->
+<!--        android:id="@+id/actionUnAuthorized"-->
+<!--        app:destination="@id/hintFragment"-->
+<!--        app:launchSingleTop="true"-->
+<!--        app:popUpTo="@+id/navGraph"-->
+<!--        app:popUpToInclusive="true"/>-->
 
 
     <fragment

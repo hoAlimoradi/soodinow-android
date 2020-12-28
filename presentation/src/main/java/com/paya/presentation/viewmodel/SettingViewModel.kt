@@ -2,8 +2,10 @@ package com.paya.presentation.viewmodel
 
 import androidx.databinding.ObservableField
 import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.paya.domain.models.repo.LoginRepoModel
 import com.paya.domain.models.repo.ProfileRepoModel
 import com.paya.domain.repository.AuthRepository
 import com.paya.domain.tools.Resource
@@ -16,6 +18,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class SettingViewModel @ViewModelInject constructor(
+	private val loginUseCase: UseCase<LoginRepoModel,Any>,
 	private val useCaseProfile: UseCase<Unit,ProfileRepoModel>,
 	private val authRepository: AuthRepository
 ) : BaseViewModel() {
@@ -23,13 +26,17 @@ class SettingViewModel @ViewModelInject constructor(
 	init {
 		getProfile()
 	}
+	val loading = MutableLiveData<Resource<Any>>()
 	val status = VolatileLiveData<Resource<ProfileRepoModel>>()
 	val mobile = ObservableField<String>()
+	val loginResource = VolatileLiveData<Resource<Any>>()
+
 	fun getProfile() {
 		viewModelScope.launch(Dispatchers.IO) {
-			status.postValue(Resource.loading(null))
+			loading.postValue(Resource.loading(null))
 			val response  = callResource(this@SettingViewModel,useCaseProfile.action(Unit))
 			status.postValue(response)
+			loading.postValue(response)
 		}
 		
 	}
@@ -42,6 +49,31 @@ class SettingViewModel @ViewModelInject constructor(
 
 	fun setIv(iv: String){
 		authRepository.setIV(iv)
+	}
+
+	fun login(username: String, password: String){
+		if (username.isNullOrBlank()) {
+			loginResource.setValue(Resource.error("username can not be blank",null))
+			return
+		}
+		if (username.length != 9){
+			loginResource.setValue(Resource.error("username is not valid",null))
+			return
+		}
+		if (password.isNullOrBlank()) {
+			loginResource.setValue(Resource.error("password can not be blank",null))
+			return
+		}
+		viewModelScope.launch(Dispatchers.IO) {
+			loading.postValue(Resource.loading(null))
+			val loginModel = LoginRepoModel(
+				username = "+989$username",
+				password = password
+			)
+			val response = callResource(this@SettingViewModel,loginUseCase.action(loginModel))
+			loginResource.postValue(response)
+			loading.postValue(response)
+		}
 	}
 
 }
