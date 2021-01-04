@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.ChuckerTeam.Chucker:library:3.3.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3da8bd6a32145b2029199fc9fc96da28/jetified-library-3.3.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3da8bd6a32145b2029199fc9fc96da28/jetified-library-3.3.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3da8bd6a32145b2029199fc9fc96da28/jetified-library-3.3.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f05aeb2241debd3110bb792e7ab3b1fb/jetified-library-3.3.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f05aeb2241debd3110bb792e7ab3b1fb/jetified-library-3.3.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f05aeb2241debd3110bb792e7ab3b1fb/jetified-library-3.3.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.ChuckerTeam.Chucker/library/3.3.0/3704cb274360a88cf10ab251dd7bd09fc522ec84/library-3.3.0-javadoc.jar!/" />

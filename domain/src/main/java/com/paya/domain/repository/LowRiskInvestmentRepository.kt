@@ -21,4 +21,7 @@ interface LowRiskInvestmentRepository {
     suspend fun setPullPrice(type: String, price: Long): Resource<String>
 
     suspend fun totalBoxValue() : Resource<TotalBoxValueRepoModel>
+
+    suspend fun getHistoryPrice(page: Int,filter:String) : Resource<HistoryPriceRepoModel>
+
 }

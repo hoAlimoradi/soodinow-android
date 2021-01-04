@@ -59,6 +59,11 @@ class CashManagerFragment : BaseFragment<CashManagerViewModel>() {
         observe(mViewModel.pullPriceStatus, ::readyPullPrice)
         observe(mViewModel.totalBoxValueStatus, ::readyTotalBoxValue)
         setupToggle()
+        mBinding.managerAccountHistory.setOnClickListener {
+            findNavController().navigate(
+                R.id.navigateCashHistory
+            )
+        }
         mBinding.inputSelectTypes.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {

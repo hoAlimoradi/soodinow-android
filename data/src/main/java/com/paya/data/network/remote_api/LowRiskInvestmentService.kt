@@ -41,4 +41,9 @@ interface LowRiskInvestmentService {
 
     @GET("order/total_boxes_value/")
     suspend fun totalBoxValue(): ApiResponse<BaseModel<TotalBoxValueRemoteModel>>
+
+    @GET("/")
+    suspend fun getHistoryPrice(
+        @Query("page") page : Int,
+        @Query("q") filter : String): ApiResponse<BaseModel<HistoryPriceRemoteModel>>
 }

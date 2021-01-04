@@ -8,6 +8,7 @@ import com.paya.domain.models.repo.*
 import com.paya.domain.repository.LowRiskInvestmentRepository
 import com.paya.domain.tools.UseCase
 import com.paya.domain.usecase.order.*
+import com.paya.domain.usecase.price.HistoryPriceUseCase
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -36,17 +37,25 @@ abstract class LowRiskInvestmentModule {
     abstract fun bindAddRiskOrderRepoRemoteMapper(mapper: AddRiskOrderRepoRemoteMapper): Mapper<
             AddRiskOrderRepoBodyModel,
             AddRiskOrderRemoteBodyModel>
+
     @Binds
     abstract fun bindPullPriceRemoteRepoMapper(mapper: PullPriceRemoteRepoMapper): Mapper<
             String,
             String>
+
     @Binds
     abstract fun bindTotalBoxValueRemoteRepoMapper(mapper: TotalBoxValueRemoteRepoMapper): Mapper<
             TotalBoxValueRemoteModel,
             TotalBoxValueRepoModel>
 
     @Binds
-    abstract fun bindSellPriceMapperRemoteRepoMapper(mapper: GetSellPriceMapperRemoteRepoMapper): Mapper<@JvmSuppressWildcards  List<List<Long>>,@JvmSuppressWildcards  List<Long>>
+    abstract fun bindHistoryPriceRemoteRepoMapper(mapper: HistoryPriceRemoteRepoMapper): Mapper<
+            HistoryPriceRemoteModel,
+            HistoryPriceRepoModel
+            >
+
+    @Binds
+    abstract fun bindSellPriceMapperRemoteRepoMapper(mapper: GetSellPriceMapperRemoteRepoMapper): Mapper<@JvmSuppressWildcards List<List<Long>>, @JvmSuppressWildcards List<Long>>
 
     @Binds
     abstract fun bindBoxTypesRemoteRepoMapper(mapper: BoxTypesRemoteRepoMapper): Mapper<BoxTypeRemoteModel, BoxTypeRepoModel>
@@ -58,7 +67,7 @@ abstract class LowRiskInvestmentModule {
     abstract fun bindExitAccountUseCase(useCase: ExitAccountUseCase): UseCase<Unit, ExitAccountRepoModel>
 
     @Binds
-    abstract fun bindSellPriceUseCase(useCase: SellPriceUseCase): UseCase<String,@JvmSuppressWildcards  List<Long>>
+    abstract fun bindSellPriceUseCase(useCase: SellPriceUseCase): UseCase<String, @JvmSuppressWildcards List<Long>>
 
     @Binds
     abstract fun bindAddRiskOrderUseCase(useCase: AddRiskOrderUseCase): UseCase<AddRiskOrderRepoBodyModel, List<AddRiskOrderRepoItem>>
@@ -71,5 +80,8 @@ abstract class LowRiskInvestmentModule {
 
     @Binds
     abstract fun bindTotalBoxValueUseCase(useCase: TotalBoxValueUseCase): UseCase<Unit, TotalBoxValueRepoModel>
+
+    @Binds
+    abstract fun bindHistoryPriceUseCase(useCase: HistoryPriceUseCase): UseCase<HistoryPriceBodyRepoModel, HistoryPriceRepoModel>
 
 }

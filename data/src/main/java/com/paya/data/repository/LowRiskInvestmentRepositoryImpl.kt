@@ -1,6 +1,7 @@
 package com.paya.data.repository
 
 import com.paya.common.Mapper
+import com.paya.data.mapper.HistoryPriceRemoteRepoMapper
 import com.paya.data.network.remote_api.LowRiskInvestmentService
 import com.paya.data.utils.getResourceFromApiResponse
 import com.paya.domain.models.remote.*
@@ -18,7 +19,8 @@ data class LowRiskInvestmentRepositoryImpl @Inject constructor(
     private val boxTypesRemoteRepoMapper: Mapper<BoxTypeRemoteModel, BoxTypeRepoModel>,
     private val getSellPriceRemoteRepoMapper: Mapper<@JvmSuppressWildcards List<List<Long>>, @JvmSuppressWildcards List<Long>>,
     private val pullPriceRemoteRepoMapper: Mapper<String, String>,
-    private val totalBoxValueRemoteRepoMapper: Mapper<TotalBoxValueRemoteModel, TotalBoxValueRepoModel>
+    private val totalBoxValueRemoteRepoMapper: Mapper<TotalBoxValueRemoteModel, TotalBoxValueRepoModel>,
+    private val historyPriceRemoteRepoMapper: Mapper<HistoryPriceRemoteModel, HistoryPriceRepoModel>
 ) : LowRiskInvestmentRepository {
 
     override suspend fun getLowRiskStocks(lowRiskStockRequest: LowRiskStockRequest): Resource<IsInRiskListRepoModel> {
@@ -75,6 +77,17 @@ data class LowRiskInvestmentRepositoryImpl @Inject constructor(
             lowRiskInvestmentService.totalBoxValue()
         ) {
             totalBoxValueRemoteRepoMapper.map(it.data)
+        }
+    }
+
+    override suspend fun getHistoryPrice(
+        page: Int,
+        filter: String
+    ): Resource<HistoryPriceRepoModel> {
+        return getResourceFromApiResponse(
+            lowRiskInvestmentService.getHistoryPrice(page, filter)
+        ) {
+            historyPriceRemoteRepoMapper.map(it.data)
         }
     }
 

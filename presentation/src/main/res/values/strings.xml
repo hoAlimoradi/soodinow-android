@@ -187,6 +187,7 @@
         برای فعال سازی اثرانگشت لطفا سنسور اثر انگشت را لمس نمایید.
     </string>
     <string name="authentication_successful">احراز هویت با موفقیت انجام شد</string>
+    <string name="report_cash_manager">گزارش مدیریت حساب</string>
 
     <string-array name="brokerage_list">
         <item>کارگزاری فارابی</item>

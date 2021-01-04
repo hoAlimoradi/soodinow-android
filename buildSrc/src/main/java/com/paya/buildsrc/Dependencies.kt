@@ -41,6 +41,7 @@ object Dependencies{
 		const val GOOGLE_SERVICES = "4.3.4"
 		const val FIREBASE_CRASHLYTICS_GRADLE = "2.4.1"
 		const val FIREBASEـBOM = "26.1.1"
+		const val PAGING_VERSION = "3.0.0-alpha11"
 	}
 	
 	object Modules{

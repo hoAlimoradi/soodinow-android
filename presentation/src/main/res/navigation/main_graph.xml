@@ -80,12 +80,14 @@
             app:destination="@id/cashManager" />
 
     </fragment>
-<fragment
+    <fragment
         android:id="@+id/cashManager"
         android:name="com.paya.presentation.ui.cashManager.CashManagerFragment"
         android:label="fragment_cash_manager"
         tools:layout="@layout/fragment_cash_manager">
-
+        <action
+            android:id="@+id/navigateCashHistory"
+            app:destination="@id/historyPriceManagerFragment" />
 
     </fragment>
 
@@ -115,7 +117,7 @@
         <action
             android:id="@+id/navigateToQuestion"
             app:destination="@id/questionFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
     </fragment>
 
 
@@ -138,7 +140,7 @@
         <action
             android:id="@+id/navigateToFirstInformation"
             app:destination="@id/firstInformation"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
 
     </fragment>
 
@@ -150,17 +152,16 @@
 
         <argument
             android:name="nextPage"
-            app:argType="com.paya.presentation.ui.createPersonalAccount.enum.NextPageInformation"
-            />
+            app:argType="com.paya.presentation.ui.createPersonalAccount.enum.NextPageInformation" />
         <action
             android:id="@+id/navigateToConnectBrokerage"
             app:destination="@id/connectBrokerage"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
 
         <action
             android:id="@+id/navigateToConnectLowRiskBrokerage"
             app:destination="@id/connectLowRiskBrokerage"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
     </fragment>
 
 
@@ -193,7 +194,7 @@
         <action
             android:id="@+id/navigationToCalculateProfitCapital"
             app:destination="@+id/calculateProfileCapital"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
     </fragment>
 
 
@@ -218,11 +219,11 @@
         <action
             android:id="@+id/navigateToFirstInformation"
             app:destination="@id/firstInformation"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/navigateToConnectLowRiskBrokerageFragment"
             app:destination="@id/connectLowRiskBrokerage"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
 
     </fragment>
 
@@ -245,7 +246,7 @@
         <action
             android:id="@+id/navigateToHomeFragment"
             app:destination="@id/home"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
 
     </fragment>
     <fragment
@@ -278,6 +279,14 @@
         android:name="com.paya.presentation.ui.introduceFriends.IntroduceFriendsFragment"
         android:label="fragment_introduce_firends"
         tools:layout="@layout/fragment_introduce_firends">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/historyPriceManagerFragment"
+        android:name="com.paya.presentation.ui.cashManager.CashHistoryFragment"
+        android:label="fragment_cash_history"
+        tools:layout="@layout/fragment_cash_history">
 
     </fragment>
 </navigation>
