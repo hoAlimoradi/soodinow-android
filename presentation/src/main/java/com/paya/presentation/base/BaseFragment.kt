@@ -30,8 +30,8 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment(){
 	
 	private fun unAuthorized(message : String) {
 		Toast.makeText(requireContext(),message,Toast.LENGTH_SHORT).show()
-		activity?.findNavController(R.id.nav_host_fragment)?.navigate(
-			R.id.actionUnAuthorized
-		)
+//		activity?.findNavController(R.id.nav_host_fragment)?.navigate(
+//			R.id.actionUnAuthorized
+//		)
 	}
 }

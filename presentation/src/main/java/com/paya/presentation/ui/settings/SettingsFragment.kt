@@ -102,12 +102,12 @@ class SettingsFragment : BaseFragment<SettingViewModel>() {
 				object : LoginDialogFragment.CallBack{
 					override fun success(param1: String, param2: String) {
 						password = param2
-						initFingerprint()
 						dialog.dismiss()
+						mViewModel.login(param1, param2)
 					}
 
 					override fun cancel() {
-
+						mBinding.activeFingerprint.switchCompat.isChecked = false
 					}
 
 				}
@@ -131,6 +131,16 @@ class SettingsFragment : BaseFragment<SettingViewModel>() {
 		}
 	}
 
+	private fun checkLoginStatus(resource: Resource<Any>){
+		if (resource.status == Status.SUCCESS){
+			initFingerprint()
+		}else if (resource.status == Status.ERROR){
+			Toast.makeText(
+				requireContext(), resource.message, Toast.LENGTH_SHORT
+			).show()
+		}
+	}
+
 	private fun initFingerprint() {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 			//Get an instance of KeyguardManager and FingerprintManager//
@@ -141,6 +151,7 @@ class SettingsFragment : BaseFragment<SettingViewModel>() {
 			if (!fingerprintManager.isHardwareDetected) {
 				// If a fingerprint sensor isn’t available, then inform the user that they’ll be unable to use your app’s fingerprint functionality//
 				shortToast(getString(R.string.error_device_does_not_support_fingerprint))
+				mBinding.activeFingerprint.switchCompat.isChecked = false
 			}
 			//Check whether the user has granted your app the USE_FINGERPRINT permission//
 			if (ActivityCompat.checkSelfPermission(
@@ -150,18 +161,21 @@ class SettingsFragment : BaseFragment<SettingViewModel>() {
 			) {
 				// If your app doesn't have this permission, then display the following text//
 				shortToast(getString(R.string.error_fingerprint_permission))
+				mBinding.activeFingerprint.switchCompat.isChecked = false
 			}
 
 			//Check that the user has registered at least one fingerprint//
 			if (!fingerprintManager.hasEnrolledFingerprints()) {
 				// If the user hasn’t configured any fingerprints, then display the following message//
 				longToast(getString(R.string.error_fingerprint_not_configure))
+				mBinding.activeFingerprint.switchCompat.isChecked = false
 			}
 
 			//Check that the lockscreen is secured//
 			if (!keyguardManager.isKeyguardSecure) {
 				// If the user hasn’t secured their lockscreen with a PIN password or pattern, then display the following text//
 				longToast(getString(R.string.error_lock_screen_not_configure))
+				mBinding.activeFingerprint.switchCompat.isChecked = false
 			} else {
 				try {
 					generateKey()
@@ -300,11 +314,13 @@ class SettingsFragment : BaseFragment<SettingViewModel>() {
 				) {
 					super.onAuthenticationError(errorCode, errString)
 					longToast(getString(R.string.error_msg_auth_error, errString))
+					mBinding.activeFingerprint.switchCompat.isChecked = false
 				}
 
 				override fun onAuthenticationFailed() {
 					super.onAuthenticationFailed()
 					longToast(getString(R.string.error_msg_auth_failed))
+					mBinding.activeFingerprint.switchCompat.isChecked = false
 				}
 			})
 
