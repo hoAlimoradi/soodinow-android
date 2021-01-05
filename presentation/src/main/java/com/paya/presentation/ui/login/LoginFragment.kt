@@ -285,10 +285,6 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
 
 	fun decrypt(encrypted: String): String? {
 		return try {
-	//			val r = SecureRandom()
-	//			val ivBytes = ByteArray(16)
-	//			r.nextBytes(ivBytes)
-	//			cipher.init(Cipher.DECRYPT_MODE, key, IvParameterSpec(ivBytes))
 			val decrypted = cipher.doFinal(
 				Base64.decode(encrypted.toByteArray(), Base64.DEFAULT)
 			)

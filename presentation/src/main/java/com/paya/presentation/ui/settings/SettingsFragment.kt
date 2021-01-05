@@ -266,9 +266,6 @@ class SettingsFragment : BaseFragment<SettingViewModel>() {
 				KEY_NAME,
 				null
 			) as SecretKey
-			val r = SecureRandom()
-			val ivBytes = ByteArray(16)
-			r.nextBytes(ivBytes)
 			cipher.init(Cipher.ENCRYPT_MODE, key)
 			//Return true if the cipher has been initialized successfully//
 			true
