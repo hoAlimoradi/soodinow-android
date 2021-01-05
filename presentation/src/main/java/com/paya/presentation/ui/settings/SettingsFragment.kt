@@ -78,6 +78,7 @@ class SettingsFragment : BaseFragment<SettingViewModel>() {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 		observe(mViewModel.status, ::ready)
+		observe(mViewModel.loginResource, ::checkLoginStatus)
 		initViews()
 	}
 

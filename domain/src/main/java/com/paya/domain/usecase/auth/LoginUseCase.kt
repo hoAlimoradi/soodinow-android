@@ -16,9 +16,11 @@ class LoginUseCase @Inject constructor(
 			param.username,
 			param.password
 		)
-		authRepository.setMobile(param.username)
 		if (resource.status == Status.SUCCESS){
-			resource.data?.accessToken?.let { authRepository.updateAccessToken(it) }
+			authRepository.setMobile(param.username)
+			if (resource.status == Status.SUCCESS){
+				resource.data?.accessToken?.let { authRepository.updateAccessToken(it) }
+			}
 		}
 		return resource
 	}

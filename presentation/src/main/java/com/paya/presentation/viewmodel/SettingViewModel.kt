@@ -56,7 +56,7 @@ class SettingViewModel @ViewModelInject constructor(
 			loginResource.setValue(Resource.error("username can not be blank",null))
 			return
 		}
-		if (username.length != 9){
+		if (username.length != 11){
 			loginResource.setValue(Resource.error("username is not valid",null))
 			return
 		}
@@ -64,10 +64,11 @@ class SettingViewModel @ViewModelInject constructor(
 			loginResource.setValue(Resource.error("password can not be blank",null))
 			return
 		}
+
 		viewModelScope.launch(Dispatchers.IO) {
 			loading.postValue(Resource.loading(null))
 			val loginModel = LoginRepoModel(
-				username = "+989$username",
+				username = "+98${username.substring(1, username.length)}",
 				password = password
 			)
 			val response = callResource(this@SettingViewModel,loginUseCase.action(loginModel))
