@@ -42,6 +42,9 @@ object Dependencies{
 		const val FIREBASE_CRASHLYTICS_GRADLE = "2.4.1"
 		const val FIREBASEـBOM = "26.1.1"
 		const val PAGING_VERSION = "3.0.0-alpha11"
+		const val SERVICES_AUTH = "17.0.0"
+		const val SERVICES_AUTH_API_PHONE = "17.4.0"
+		const val APP_AUTH_WEB_VIEW = "1.2.7"
 	}
 	
 	object Modules{

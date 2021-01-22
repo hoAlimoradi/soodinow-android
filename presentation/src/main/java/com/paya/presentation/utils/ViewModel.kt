@@ -14,6 +14,8 @@ fun <T> LifecycleOwner.observe(liveData: LiveData<T>?,action: (t: T) -> Unit) {
 fun <T> callResource(viewModel: BaseViewModel,resource: Resource<T>) : Resource<T> {
 	if (resource.status == Status.UNAUTHORIZED) {
 		viewModel.unAuthorized(resource.message!!) {  }
+	} else if (resource.status == Status.FARABITOKEN) {
+		viewModel.farabiAuth()
 	}
 	return resource
 }

@@ -3,9 +3,11 @@
     <CLASSES>
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8467ca8b1fd606a40ff5b39fe749cc5e/jetified-objectbox-android-2.7.1/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5702e5ac313c9c24cba6fb766b3ddae0/jetified-objectbox-android-2.7.1/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/51324740c8b7351c21cb2d6343cd172f/jetified-objectbox-android-2.7.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/51324740c8b7351c21cb2d6343cd172f/jetified-objectbox-android-2.7.1/AndroidManifest.xml" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/51324740c8b7351c21cb2d6343cd172f/jetified-objectbox-android-2.7.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5ec2fa95c4a98933745ab1cf5644b2e6/jetified-objectbox-android-2.7.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/74e6f2956f00f0fa6ead02f0f0fb78a4/jetified-objectbox-android-2.7.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/74e6f2956f00f0fa6ead02f0f0fb78a4/jetified-objectbox-android-2.7.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/74e6f2956f00f0fa6ead02f0f0fb78a4/jetified-objectbox-android-2.7.1/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

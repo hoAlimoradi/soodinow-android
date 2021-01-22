@@ -5,13 +5,19 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModel
+import com.paya.presentation.base.BaseActivity
+import com.paya.presentation.base.BaseViewModel
+import com.paya.presentation.viewmodel.MainActivityViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
 
 @AndroidEntryPoint
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity<MainActivityViewModel>() {
+    private val mViewModel: MainActivityViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         changeColorStatusBar()
@@ -27,6 +33,9 @@ class MainActivity : BaseActivity() {
         window.statusBarColor = Color.WHITE;
         
     }
-    
-    
+
+    override val baseViewModel: BaseViewModel
+        get() = mViewModel
+
+
 }

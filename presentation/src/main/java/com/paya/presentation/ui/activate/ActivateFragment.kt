@@ -1,7 +1,8 @@
 package com.paya.presentation.ui.activate
 
+
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,17 +11,20 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.paya.domain.models.repo.ActivateRepoModel
+import com.google.android.gms.auth.api.phone.SmsRetriever
+import com.google.android.gms.tasks.OnFailureListener
+import com.google.android.gms.tasks.OnSuccessListener
+import com.google.android.gms.tasks.Task
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.presentation.R
 import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentActivateBinding
-import com.paya.presentation.ui.register.RegisterFragmentDirections
 import com.paya.presentation.utils.observe
 import com.paya.presentation.viewmodel.ActivateViewModel
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class ActivateFragment : BaseFragment<ActivateViewModel>() {
@@ -55,6 +59,7 @@ class ActivateFragment : BaseFragment<ActivateViewModel>() {
 		mBinding.changeNumber.setOnClickListener {
 			findNavController().popBackStack()
 		}
+		requestHint()
 	}
 	
 	private fun checkActivateStatus(activateResource: Resource<Any>){
@@ -74,5 +79,29 @@ class ActivateFragment : BaseFragment<ActivateViewModel>() {
 	
 	override val baseViewModel: BaseViewModel
 		get() = mViewModel
-	
+
+	private fun requestHint() {
+
+		val client = context?.let {
+			SmsRetriever.getClient(it /* context */) }
+
+		val task: Task<Void> = client!!.startSmsRetriever()
+
+		task.addOnSuccessListener(OnSuccessListener<Void?> {
+			Log.d("","")
+			// Successfully started retriever, expect broadcast intent
+			// ...
+		})
+
+		task.addOnFailureListener(OnFailureListener {
+			Log.d("","")
+			// Failed to start retriever, inspect Exception for more details
+			// ...
+		})
+
+	}
+
+
+
+
 }

@@ -188,6 +188,7 @@
     </string>
     <string name="authentication_successful">احراز هویت با موفقیت انجام شد</string>
     <string name="report_cash_manager">گزارش مدیریت حساب</string>
+    <string name="farabi_title">کارگزاری فارابی</string>
 
     <string-array name="brokerage_list">
         <item>کارگزاری فارابی</item>

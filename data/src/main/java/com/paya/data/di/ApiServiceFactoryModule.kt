@@ -50,4 +50,9 @@ class ApiServiceFactoryModule{
 	@Reusable
 	fun currencyPriceService(apiService: ApiServiceFactory) =
 		apiService.create(CurrencyPriceService::class.java)
+
+	@Provides
+	@Reusable
+	fun farabiService(apiService: ApiServiceFactory) =
+		apiService.create(FarabiService::class.java)
 }

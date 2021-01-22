@@ -3,10 +3,7 @@ package com.paya.data.repository
 import com.paya.common.Mapper
 import com.paya.data.database.developer_name.DeveloperNameDbApi
 import com.paya.data.datasource.developer.DeveloperDataSource
-import com.paya.data.network.apiresponse.ApiEmptyResponse
-import com.paya.data.network.apiresponse.ApiErrorResponse
-import com.paya.data.network.apiresponse.ApiSuccessResponse
-import com.paya.data.network.apiresponse.ApiUnAuthorizedResponse
+import com.paya.data.network.apiresponse.*
 import com.paya.data.network.remote_api.DeveloperNameService
 import com.paya.domain.models.local.DeveloperNameDbModel
 import com.paya.domain.models.remote.DeveloperNameServerModel
@@ -27,6 +24,7 @@ class DeveloperRepositoryImpl @Inject constructor(
 	override suspend fun getDeveloperNameFromNet(): Resource<DeveloperNameRepoModel> {
 		return when(val developerName = developerNet.getName()){
 			is ApiEmptyResponse -> Resource.success(null)
+			is ApiFarabiTokenResponse -> Resource.fatabiToken(null)
 			is ApiSuccessResponse -> Resource.success(mapperNet.map(developerName.body))
 			is ApiErrorResponse -> Resource.error(developerName.errorMessage, null)
 			is ApiUnAuthorizedResponse -> Resource.unAuthorized(developerName.errorMessage,null)

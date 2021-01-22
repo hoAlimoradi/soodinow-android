@@ -21,6 +21,7 @@ android {
 		targetSdkVersion(30)
 		
 		testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+		manifestPlaceholders["appAuthRedirectScheme"] = "hadiidbouk-appAuthWebView"
 	}
 	
 	compileOptions {
@@ -96,6 +97,10 @@ dependencies {
 	implementation ("pl.bclogic:pulsator4droid:${Dependencies.Versions.PULSATOR4DROID}")
 	implementation ("androidx.paging:paging-runtime:${Dependencies.Versions.PAGING_VERSION}")
 
+	implementation ("com.google.android.gms:play-services-auth:${Dependencies.Versions.SERVICES_AUTH}")
+	implementation ("com.google.android.gms:play-services-auth-api-phone:${Dependencies.Versions.SERVICES_AUTH_API_PHONE}")
+
+	implementation ("com.github.hadiidbouk:AppAuthWebView-Android:${Dependencies.Versions.APP_AUTH_WEB_VIEW}")
 	implementation ("com.github.jakob-grabner:Circle-Progress-View:1.4")
 
 	implementation ("androidx.biometric:biometric:1.0.1")

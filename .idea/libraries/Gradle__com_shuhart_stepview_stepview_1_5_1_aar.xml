@@ -1,12 +1,12 @@
 <component name="libraryTable">
   <library name="Gradle: com.shuhart.stepview:stepview:1.5.1@aar">
     <ANNOTATIONS>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/18863ebcb04e24825fae0b50f2036048/jetified-stepview-1.5.1/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0a3ea25a1484cc9e5a9fab6ba35da2c6/jetified-stepview-1.5.1/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/18863ebcb04e24825fae0b50f2036048/jetified-stepview-1.5.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/18863ebcb04e24825fae0b50f2036048/jetified-stepview-1.5.1/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/18863ebcb04e24825fae0b50f2036048/jetified-stepview-1.5.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0a3ea25a1484cc9e5a9fab6ba35da2c6/jetified-stepview-1.5.1/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0a3ea25a1484cc9e5a9fab6ba35da2c6/jetified-stepview-1.5.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0a3ea25a1484cc9e5a9fab6ba35da2c6/jetified-stepview-1.5.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

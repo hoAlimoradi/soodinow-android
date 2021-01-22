@@ -11,7 +11,8 @@ fun <ApiType, ResourceType> getResourceFromApiResponse(
         is ApiEmptyResponse -> Resource.success(null)
         is ApiSuccessResponse ->
             Resource.success(mapApiTypeToResourceType(apiResponse.body))
+        is ApiFarabiTokenResponse -> Resource.fatabiToken(null)
         is ApiErrorResponse -> Resource.error(apiResponse.errorMessage, null)
-        is ApiUnAuthorizedResponse -> Resource.unAuthorized(apiResponse.errorMessage,null)
+        is ApiUnAuthorizedResponse -> Resource.unAuthorized(apiResponse.errorMessage, null)
     }
 }

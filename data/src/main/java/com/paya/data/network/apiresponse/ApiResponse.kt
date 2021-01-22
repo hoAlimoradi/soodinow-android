@@ -12,34 +12,41 @@ import java.lang.reflect.Type
 </T> */
 sealed class ApiResponse<T> {
     companion object {
-        
+
         private fun parseBaseModel(jsonString: String?): BaseModel<*>? {
             jsonString ?: return null
             try {
                 val gson = Gson()
                 val collectionType: Type = object : TypeToken<BaseModel<*>>() {}.type
-                return gson.fromJson(jsonString,collectionType)
+                return gson.fromJson(jsonString, collectionType)
             } catch (e: Exception) {
                 return null
             }
-    
+
         }
-    
+
         private fun <T> getErrorMessage(response: Response<T>): String? {
             val baseModel = parseBaseModel(response.errorBody()?.string())
             val msg = baseModel?.error?.message ?: response.errorBody()?.string()
-        
+
             return if (msg.isNullOrEmpty()) {
                 response.message()
             } else {
                 msg
             }
         }
-    
+
+        private fun <T> getErrorCode(response: Response<T>): Int? {
+            val baseModel = parseBaseModel(response.errorBody()?.string())
+            return baseModel?.error?.code ?: 0
+
+
+        }
+
         fun <T> create(error: Throwable): ApiErrorResponse<T> {
             return ApiErrorResponse(error.message ?: "unknown error")
         }
-    
+
         fun <T> create(response: Response<T>): ApiResponse<T> {
             return if (response.isSuccessful) {
                 val body = response.body()
@@ -50,6 +57,8 @@ sealed class ApiResponse<T> {
                 }
             } else if (response.code() == 401) {
                 ApiUnAuthorizedResponse(getErrorMessage(response) ?: "UnAuthorized")
+            } else if (response.code() == 400) {
+                ApiFarabiTokenResponse()
             } else {
                 ApiErrorResponse(getErrorMessage(response) ?: "unknown error")
             }
@@ -61,6 +70,8 @@ sealed class ApiResponse<T> {
  * separate class for HTTP 204 responses so that we can make ApiSuccessResponse's body non-null.
  */
 class ApiEmptyResponse<T> : ApiResponse<T>()
+
+class ApiFarabiTokenResponse<T> : ApiResponse<T>()
 
 class ApiUnAuthorizedResponse<T>(val errorMessage: String) : ApiResponse<T>()
 

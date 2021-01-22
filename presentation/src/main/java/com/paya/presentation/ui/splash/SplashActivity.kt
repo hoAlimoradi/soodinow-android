@@ -4,16 +4,19 @@ import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.paya.presentation.BaseActivity
 import com.paya.presentation.MainActivity
 import com.paya.presentation.R
+import com.paya.presentation.base.BaseActivity
+import com.paya.presentation.base.BaseViewModel
+import com.paya.presentation.viewmodel.SpalshActivityViewModel
 import kotlinx.android.synthetic.main.activity_splash.*
 import kotlinx.coroutines.delay
 
 
-class SplashActivity : BaseActivity() {
+class SplashActivity : BaseActivity<SpalshActivityViewModel>() {
+	private val mViewModel : SpalshActivityViewModel by viewModels()
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_splash)
@@ -38,4 +41,7 @@ class SplashActivity : BaseActivity() {
 			e.printStackTrace()
 		}
 	}
+
+	override val baseViewModel: BaseViewModel
+		get() = mViewModel
 }

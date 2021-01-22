@@ -12,5 +12,6 @@ enum class Status {
     ERROR,
     LOADING,
     UNAUTHORIZED,
+    FARABITOKEN,
     IDLE
 }
