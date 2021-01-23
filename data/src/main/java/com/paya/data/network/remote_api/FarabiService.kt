@@ -12,6 +12,6 @@ import retrofit2.http.POST
 interface FarabiService {
 
     @FormUrlEncoded
-    @POST("auth/farabi/set_token")
+    @POST("auth/farabi/set_token/")
     suspend fun setToken(@Field("token") token: String): ApiResponse<BaseModel<String>>
 }

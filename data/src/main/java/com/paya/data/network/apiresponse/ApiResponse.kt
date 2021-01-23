@@ -57,7 +57,7 @@ sealed class ApiResponse<T> {
                 }
             } else if (response.code() == 401) {
                 ApiUnAuthorizedResponse(getErrorMessage(response) ?: "UnAuthorized")
-            } else if (response.code() == 400) {
+            } else if (getErrorCode(response) == 1009) {
                 ApiFarabiTokenResponse()
             } else {
                 ApiErrorResponse(getErrorMessage(response) ?: "unknown error")
