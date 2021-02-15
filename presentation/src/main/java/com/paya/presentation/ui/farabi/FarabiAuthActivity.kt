@@ -50,7 +50,7 @@ class FarabiAuthActivity : BaseActivity<FarabiAuthViewModel>() {
         with(mData) {
             clientId = "soodinow.mobile"
             discoveryUri = "https://auth.farabixo.com/.well-known/openid-configuration"
-            scope = "tse_api"
+            scope = "tse_api base_api"
             authorizationEndpointUri = "https://auth.farabixo.com/connect/authorize"
             redirectLoginUri = "http://api.soodinow.com:5000/callback.html"
             tokenEndpointUri = "https://auth.farabixo.com/connect/token"
