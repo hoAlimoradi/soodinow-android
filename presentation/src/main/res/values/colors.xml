@@ -13,11 +13,9 @@
     <color name="dark_gray">#8e8e8e</color>
     <color name="dark_gray_2">#5e5e5e</color>
     <color name="dark_gray_3">#aeaeae</color>
-    <color name="green">#008C23</color>
     <color name="green_2">#62B366</color>
     <color name="green_3">#A9CFA6</color>
     <color name="green_gray">#A9CFA6</color>
-    <color name="white">#fff</color>
     <color name="black">#000</color>
     <color name="red">#E1261D</color>
     <color name="black_16">#29000000</color>
@@ -35,4 +33,19 @@
     <color name="pink">#FC5581</color>
     <color name="cyan">#23D7DC</color>
     <color name="yellow">#FFE76D</color>
+
+    <color name="shark">#202224</color>
+    <color name="pale_sky">#6F737A</color>
+    <color name="aluminium">#AAAEB3</color>
+    <color name="mercury">#E6E6E6</color>
+    <color name="alabaster">#F7F7F7</color>
+    <color name="white">#FFFFFF</color>
+    <color name="green">#1DCA0A</color>
+    <color name="cinnabar_red">#E53935</color>
+    <color name="japanese_laurel_green">#2b7607</color>
+    <color name="pea_green">#17502f</color>
+    <color name="conifer_green">#85db48</color>
+    <color name="governor_bay_blue">#3e2cad</color>
+    <color name="java_green">#1DE9B6</color>
+    <color name="alto_light">#dedede</color>
 </resources>

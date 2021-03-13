@@ -44,4 +44,26 @@
     <dimen name="line_chart_height">120dp</dimen>
     <dimen name="dialog_w">300dp</dimen>
     <dimen name="dialog_h">500dp</dimen>
+
+    <!--    font size-->
+    <dimen name="text_size_xxl">24sp</dimen>
+    <dimen name="text_size_xl">18sp</dimen>
+    <dimen name="text_size_l">16sp</dimen>
+    <dimen name="text_size_m">14sp</dimen>
+    <dimen name="text_size_s">12sp</dimen>
+    <dimen name="text_size_xs">10sp</dimen>
+
+    <!--      size -->
+    <dimen name="sign_logo_size">70dp</dimen>
+    <dimen name="height_40dp">40dp</dimen>
+
+    <!--    margin-->
+    <dimen name="margin_40dp">40dp</dimen>
+    <dimen name="margin_45dp">45dp</dimen>
+    <dimen name="margin_60dp">60dp</dimen>
+    <dimen name="margin_64dp">64dp</dimen>
+    <dimen name="margin_s">4dp</dimen>
+    <dimen name="margin_m">8dp</dimen>
+    <dimen name="margin_l">16dp</dimen>
+    <dimen name="margin_xl">24dp</dimen>
 </resources>

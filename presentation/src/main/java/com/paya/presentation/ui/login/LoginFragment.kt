@@ -84,9 +84,7 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
 		initFingerprint()
 		mBinding.forgetPassword.setOnClickListener {
 			findNavController().navigate(
-				LoginFragmentDirections.actionLoginFragmentToRegisterFragment(
-					getString(R.string.recover_password)
-				)
+				LoginFragmentDirections.actionLoginFragmentToForgotPasswordFragment()
 			)
 		}
 	}

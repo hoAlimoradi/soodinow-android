@@ -7,6 +7,9 @@ import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.net.Uri
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
@@ -16,21 +19,17 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.databinding.BindingAdapter
-import androidx.databinding.ObservableField
 import at.grabner.circleprogress.CircleProgressView
+import com.alimuzaffar.lib.pin.PinEntryEditText
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IFillFormatter
-import com.paya.domain.models.repo.PricingCash
 import com.paya.presentation.R
 import com.paya.presentation.ui.custom.MyMarkerView
 import com.paya.presentation.ui.custom.MyMarkerViewSmall
 import com.paya.presentation.utils.shared.EntryPoint
 import com.paya.presentation.utils.shared.Point
-import com.warkiz.widget.IndicatorSeekBar
-import com.warkiz.widget.OnSeekChangeListener
-import com.warkiz.widget.SeekParams
 
 
 object BindingAdapters {
@@ -153,11 +152,40 @@ object BindingAdapters {
     }
 
     @JvmStatic
+    @BindingAdapter("verificationPinImage")
+    fun setVerificationPinImage(editText: PinEntryEditText, viewId: Int?) {
+        viewId ?: return
+
+        val parent = editText.parent as View
+        val imageView = parent.findViewById<ImageView>(viewId)
+        setTintColor(imageView, editText.context, R.color.gray)
+
+        editText.doAfterTextChanged {
+            val text = it.toString()
+            val colorId = if (text.length != 5) R.color.gray else R.color.green
+            setTintColor(imageView, editText.context, colorId)
+        }
+    }
+
+    @JvmStatic
     @BindingAdapter("hintLabel")
     fun setHintLabel(editText: EditText, value: String?) {
         value ?: return
         editText.hint = value
     }
+
+    @JvmStatic
+    @BindingAdapter("spannableText", "spannableColor")
+    fun setSpannableRules(textView: TextView, value: String?, color: Int = Color.BLUE) {
+        val spannable = SpannableString(textView.text)
+        val start = value?.let { textView.text.indexOf(it) }
+        val end = value?.let { it.length }
+        if (start != null && end != null) {
+            spannable.setSpan(ForegroundColorSpan(color), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }
+        textView.setText(spannable, TextView.BufferType.SPANNABLE);
+    }
+
 
     @JvmStatic
     @BindingAdapter("calling")

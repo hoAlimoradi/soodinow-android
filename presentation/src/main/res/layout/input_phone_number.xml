@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="androidx.databinding.ObservableField"/>
+
+        <import type="androidx.databinding.ObservableField" />
 
         <variable
             name="label"
@@ -16,66 +17,71 @@
     </data>
 
     <LinearLayout
-        android:background="@color/white"
-        android:paddingHorizontal="@dimen/margin_medium"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/margin_40dp">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_4_dp"
             android:text="@{label}"
-            tools:text="نام کاربری"
-            android:layout_marginTop="@dimen/margin_4_dp"
-            />
+            android:textSize="@dimen/text_size_s"
+            tools:text="نام کاربری" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:orientation="horizontal"
-            focusTarget="@{@id/phone_number_edit_text}"
-            android:layout_marginTop="@dimen/margin_4_dp"
-            android:id="@+id/phone_number_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/round_corner_layout"
-            android:padding="@dimen/margin_very_small">
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/txt_prefix"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="09"
-                android:textSize="@dimen/text_size_medium"
-                android:textStyle="bold" />
 
-            <androidx.appcompat.widget.AppCompatEditText
-                verificationImage="@{@id/verification_img}"
-                android:id="@+id/phone_number_edit_text"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/margin_very_small"
-                android:background="@android:color/transparent"
-                android:inputType="phone"
-                android:text="@={content}"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@id/txt_prefix"
-                app:layout_constraintEnd_toStartOf="@id/verification_img"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/phone_number_layout"
+                focusTarget="@{@id/phone_number_edit_text}"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_40dp"
+                android:background="@drawable/round_corner_layout"
+                android:orientation="horizontal"
+                android:padding="@dimen/margin_s"
+                android:layout_marginTop="@dimen/margin_s"
+                >
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/verification_img"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:srcCompat="@drawable/ic_verification"
-                android:layout_gravity="end"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txt_prefix"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="09"
+                    android:textSize="@dimen/text_size_l"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:gravity="center"/>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/phone_number_edit_text"
+                    verificationImage="@{@id/verification_img}"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/margin_very_small"
+                    android:background="@android:color/transparent"
+                    android:inputType="phone"
+                    android:text="@={content}"
+                    android:gravity="center_vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/verification_img"
+                    app:layout_constraintStart_toEndOf="@id/txt_prefix"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/verification_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_verification" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 
