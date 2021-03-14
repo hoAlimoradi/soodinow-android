@@ -72,12 +72,12 @@ class ConnectLowRiskBrokerageFragment : BaseFragment<ConnectLowRiskBrokerageView
 		
 	}
 	
-	private fun readyAddRiskOrder(resource: Resource<List<AddRiskOrderRepoItem>>) {
+	private fun readyAddRiskOrder(resource: Resource<String>) {
 		when (resource.status) {
 			Status.SUCCESS -> {
 				Toast.makeText(
 					requireContext(),
-					resource.data?.get(0)?.ruleAction ?: "با موفقیت انجام شد",
+					 "با موفقیت انجام شد",
 					Toast.LENGTH_SHORT).show()
 				findNavController().navigate(
 					ConnectLowRiskBrokerageFragmentDirections.navigateToHomeFragment()

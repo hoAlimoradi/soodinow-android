@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 const val TIME_OUT: Long = 60
 
-const val BaseUrl: String = "http://api.soodinow.com/api/v1/"
+const val BaseUrl: String = "https://api.soodinow.com/api/v1/"
 
 
 class ApiServiceFactory @Inject constructor(

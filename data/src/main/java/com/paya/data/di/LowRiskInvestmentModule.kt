@@ -30,7 +30,7 @@ abstract class LowRiskInvestmentModule {
 
     @Binds
     abstract fun bindAddRiskOrderRemoteRepoMapper(mapper: AddRiskOrderRemoteRepoMapper): Mapper<
-            AddRiskOrderItem,
+            String,
             AddRiskOrderRepoItem>
 
     @Binds
@@ -70,7 +70,7 @@ abstract class LowRiskInvestmentModule {
     abstract fun bindSellPriceUseCase(useCase: SellPriceUseCase): UseCase<String, @JvmSuppressWildcards List<Long>>
 
     @Binds
-    abstract fun bindAddRiskOrderUseCase(useCase: AddRiskOrderUseCase): UseCase<AddRiskOrderRepoBodyModel, List<AddRiskOrderRepoItem>>
+    abstract fun bindAddRiskOrderUseCase(useCase: AddRiskOrderUseCase): UseCase<AddRiskOrderRepoBodyModel, String>
 
     @Binds
     abstract fun bindABoxTypesUseCase(useCase: BoxTypesUseCase): UseCase<Unit, BoxTypeRepoModel>

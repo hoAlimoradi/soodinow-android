@@ -13,9 +13,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ConnectLowRiskBrokerageViewModel @ViewModelInject constructor(
-	private val addRiskOrderUseCase: UseCase<AddRiskOrderRepoBodyModel,List<AddRiskOrderRepoItem>>
+	private val addRiskOrderUseCase: UseCase<AddRiskOrderRepoBodyModel,String>
 ) : BaseViewModel() {
-	val status = VolatileLiveData<Resource<List<AddRiskOrderRepoItem>>>()
+	val status = VolatileLiveData<Resource<String>>()
 	fun exitAccount(riskType: String,price: Long) {
 		viewModelScope.launch(Dispatchers.IO) {
 			status.postValue(Resource.loading(null))

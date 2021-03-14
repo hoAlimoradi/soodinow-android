@@ -9,19 +9,11 @@ import com.paya.domain.models.repo.*
 import javax.inject.Inject
 
 class AddRiskOrderRemoteRepoMapper @Inject constructor(): Mapper<
-		AddRiskOrderItem,
+		String,
 		AddRiskOrderRepoItem>{
 	
-	override fun map(param: AddRiskOrderItem): AddRiskOrderRepoItem {
-		return AddRiskOrderRepoItem(
-			param.isin,
-			param.id,
-			param.orderId,
-			param.stateId,
-			param.state,
-			param.statusCode,
-			param.ruleAction
-		)
+	override fun map(param: String): AddRiskOrderRepoItem {
+		return AddRiskOrderRepoItem(param)
 	}
 	
 }

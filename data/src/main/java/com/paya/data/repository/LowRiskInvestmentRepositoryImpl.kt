@@ -14,7 +14,7 @@ data class LowRiskInvestmentRepositoryImpl @Inject constructor(
     private val lowRiskInvestmentService: LowRiskInvestmentService,
     private val isInRiskRemoteRepoMapper: Mapper<IsInRiskListRemoteModel, IsInRiskListRepoModel>,
     private val exitAccountRemoteRepoMapper: Mapper<ExitAccountRemoteModel, ExitAccountRepoModel>,
-    private val addRiskOrderRemoteRepoMapper: Mapper<AddRiskOrderItem, AddRiskOrderRepoItem>,
+    private val addRiskOrderRemoteRepoMapper: Mapper<String,String>,
     private val addRiskOrderRepoRemoteMapper: Mapper<AddRiskOrderRepoBodyModel, AddRiskOrderRemoteBodyModel>,
     private val boxTypesRemoteRepoMapper: Mapper<BoxTypeRemoteModel, BoxTypeRepoModel>,
     private val getSellPriceRemoteRepoMapper: Mapper<@JvmSuppressWildcards List<List<Long>>, @JvmSuppressWildcards List<Long>>,
@@ -40,13 +40,13 @@ data class LowRiskInvestmentRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun addRiskOrder(addRiskOrderRepoBodyModel: AddRiskOrderRepoBodyModel): Resource<List<AddRiskOrderRepoItem>> {
+    override suspend fun addRiskOrder(addRiskOrderRepoBodyModel: AddRiskOrderRepoBodyModel): Resource<String> {
         return getResourceFromApiResponse(
             lowRiskInvestmentService.addRiskOrder(
                 addRiskOrderRepoRemoteMapper.map(addRiskOrderRepoBodyModel)
             )
         ) {
-            it.data.map { item -> addRiskOrderRemoteRepoMapper.map(item) }
+             addRiskOrderRemoteRepoMapper.map(it.data)
         }
     }
 

@@ -12,7 +12,7 @@ interface LowRiskInvestmentRepository {
 
     suspend fun addRiskOrder(
         addRiskOrderRepoBodyModel: AddRiskOrderRepoBodyModel
-    ): Resource<List<AddRiskOrderRepoItem>>
+    ): Resource<String>
 
     suspend fun boxTypes(): Resource<BoxTypeRepoModel>
 
