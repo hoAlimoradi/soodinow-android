@@ -52,6 +52,7 @@
     <dimen name="text_size_m">14sp</dimen>
     <dimen name="text_size_s">12sp</dimen>
     <dimen name="text_size_xs">10sp</dimen>
+    <dimen name="text_size_error">5sp</dimen>
 
     <!--      size -->
     <dimen name="sign_logo_size">70dp</dimen>

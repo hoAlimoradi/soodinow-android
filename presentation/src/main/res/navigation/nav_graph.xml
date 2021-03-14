@@ -132,7 +132,6 @@
             android:id="@+id/navigateCompletePasswordFragment"
             app:destination="@id/completePasswordFragment"
             app:launchSingleTop="true"
-            app:popUpTo="@id/registerFragment"
             app:popUpToInclusive="true" />
     </fragment>
 

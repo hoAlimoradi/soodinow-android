@@ -4,10 +4,9 @@ import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.paya.domain.models.repo.UserInfoRepoModel
 import com.paya.domain.models.repo.SetPasswordRepoModel
+import com.paya.domain.models.repo.UserInfoRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.UseCase
 import com.paya.presentation.base.BaseViewModel
@@ -20,14 +19,16 @@ class SetNewPasswordViewModel @ViewModelInject constructor(
 	private val getUserInfoUseCase: UseCase<Unit,UserInfoRepoModel>,
 	private val setPasswordUseCase: UseCase<String,SetPasswordRepoModel>
 ) : BaseViewModel() {
-	
+
+	var isNewPassword = false
+	var isRepeatPassword = false
 	val title = MutableLiveData<String>()
 	private var accessToken: String? = null
-	
+
 	init {
 		getAccessToken()
 	}
-	
+
 	val password = ObservableField<String>()
 	val repeatPassword = ObservableField<String>()
 	
@@ -45,24 +46,35 @@ class SetNewPasswordViewModel @ViewModelInject constructor(
 		this.title.value = title
 	}
 	
-	fun submit(){
+	fun submit() {
+		isNewPassword = false
+		isRepeatPassword = false
 		val password = password.get()
 		val repeatPassword = repeatPassword.get()
-		
-		if (password.isNullOrBlank() || repeatPassword.isNullOrBlank()){
+
+		if (password.isNullOrBlank()) {
+			isNewPassword = true
 			setPasswordResource.setValue(
-				Resource.error("Passwords can not be empty", null)
+				Resource.error("Password can not be empty", null)
+			)
+			return
+		}
+		if (repeatPassword.isNullOrBlank()) {
+			isRepeatPassword = true
+			setPasswordResource.setValue(
+				Resource.error("Password can not be empty", null)
 			)
 			return
 		}
 		
 		if (password != repeatPassword){
+			isRepeatPassword = true
 			setPasswordResource.setValue(
 				Resource.error("Passwords are not equal", null)
 			)
 			return
 		}
-		
+		isRepeatPassword = true
 		viewModelScope.launch(Dispatchers.IO) {
 			setPasswordResource.postValue(Resource.loading(null))
 			val resource = callResource(this@SetNewPasswordViewModel,setPasswordUseCase.action(password))

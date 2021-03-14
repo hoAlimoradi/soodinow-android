@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -52,6 +51,7 @@ class RegisterFragment : BaseFragment<RegisterViewModel>() {
 	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
 		super.onViewCreated(view,savedInstanceState)
 		observe(mViewModel.registerStatus,::checkRegisterStatus)
+
 	}
 	
 	private fun checkRegisterStatus(registerResource: Resource<RegisterRepoModel>){
@@ -65,8 +65,9 @@ class RegisterFragment : BaseFragment<RegisterViewModel>() {
 				bundle
 			)
 		}else if (registerResource.status == Status.ERROR){
+			registerResource.message?.let { mBinding.phoneNumberLayout.errorLayout.setError(it) }
 			Toast.makeText(
-				requireContext(),registerResource.message,Toast.LENGTH_SHORT
+				requireContext(), registerResource.message, Toast.LENGTH_SHORT
 			).show()
 		}
 	}

@@ -65,6 +65,7 @@ class ForgotPasswordFragment : BaseFragment<ForgotPasswordViewModel>() {
 				bundle
 			)
 		}else if (registerResource.status == Status.ERROR){
+			registerResource.message?.let { mBinding.phoneNumberLayout.errorLayout.setError(it) }
 			Toast.makeText(
 				requireContext(),registerResource.message,Toast.LENGTH_SHORT
 			).show()

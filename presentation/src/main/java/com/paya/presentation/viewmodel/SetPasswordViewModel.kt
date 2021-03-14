@@ -20,7 +20,8 @@ class SetPasswordViewModel @ViewModelInject constructor(
 	private val getUserInfoUseCase: UseCase<Unit,UserInfoRepoModel>,
 	private val setPasswordUseCase: UseCase<String,SetPasswordRepoModel>
 ) : BaseViewModel() {
-	
+	var isNewPassword = false
+	var isRepeatPassword = false
 	val title = MutableLiveData<String>()
 	private var accessToken: String? = null
 	
@@ -46,10 +47,20 @@ class SetPasswordViewModel @ViewModelInject constructor(
 	}
 	
 	fun submit(){
+		isNewPassword = false
+		isRepeatPassword = false
 		val password = password.get()
 		val repeatPassword = repeatPassword.get()
 		
-		if (password.isNullOrBlank() || repeatPassword.isNullOrBlank()){
+		if (password.isNullOrBlank() ){
+			isNewPassword=true
+			setPasswordResource.setValue(
+				Resource.error("Passwords can not be empty", null)
+			)
+			return
+		}
+		if ( repeatPassword.isNullOrBlank()){
+			isRepeatPassword = true
 			setPasswordResource.setValue(
 				Resource.error("Passwords can not be empty", null)
 			)
@@ -57,12 +68,13 @@ class SetPasswordViewModel @ViewModelInject constructor(
 		}
 		
 		if (password != repeatPassword){
+			isRepeatPassword = true
 			setPasswordResource.setValue(
 				Resource.error("Passwords are not equal", null)
 			)
 			return
 		}
-		
+		isRepeatPassword = true
 		viewModelScope.launch(Dispatchers.IO) {
 			setPasswordResource.postValue(Resource.loading(null))
 			val resource = callResource(this@SetPasswordViewModel,setPasswordUseCase.action(password))

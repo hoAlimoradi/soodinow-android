@@ -12,6 +12,10 @@
             type="java.lang.String" />
 
         <variable
+            name="error"
+            type="ObservableField&lt;java.lang.String>" />
+
+        <variable
             name="content"
             type="ObservableField&lt;java.lang.String>" />
     </data>
@@ -32,6 +36,11 @@
             tools:text="نام کاربری" />
 
 
+        <com.paya.presentation.utils.ErrorEditTextLayout
+            android:id="@+id/errorLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_s">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/phone_number_layout"
@@ -40,9 +49,7 @@
                 android:layout_height="@dimen/height_40dp"
                 android:background="@drawable/round_corner_layout"
                 android:orientation="horizontal"
-                android:padding="@dimen/margin_s"
-                android:layout_marginTop="@dimen/margin_s"
-                >
+                android:padding="@dimen/margin_s">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/txt_prefix"
@@ -82,7 +89,7 @@
                     app:srcCompat="@drawable/ic_verification" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
+        </com.paya.presentation.utils.ErrorEditTextLayout>
     </LinearLayout>
 
 </layout>

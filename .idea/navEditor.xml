@@ -538,7 +538,7 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="cPasswordFragment">
+                  <entry key="completePasswordFragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
@@ -549,7 +549,7 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="navigateFromSetPasswordToLoginFragment">
+                            <entry key="navigateToLoginFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -729,7 +729,7 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="navigateFromSetPasswordToLoginFragment">
+                            <entry key="navigateCompletePasswordFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -750,7 +750,7 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="navigateFromSetPasswordToLoginFragment">
+                            <entry key="navigateCompletePasswordFragment">
                               <value>
                                 <LayoutPositions />
                               </value>

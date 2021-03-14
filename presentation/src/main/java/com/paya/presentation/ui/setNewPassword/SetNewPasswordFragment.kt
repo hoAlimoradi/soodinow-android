@@ -54,11 +54,17 @@ class SetNewPasswordFragment : BaseFragment<SetNewPasswordViewModel>() {
 	}
 	
 	private fun checkSetPasswordStatus(resource: Resource<SetPasswordRepoModel>){
+		mBinding.newPassword.errorLayout.setError("")
+		mBinding.repeatPassword.errorLayout.setError("")
 		if (resource.status == Status.SUCCESS){
 			findNavController().navigate(
 				R.id.navigateCompletePasswordFragment
 			)
 		}else if (resource.status == Status.ERROR){
+			if (mViewModel.isNewPassword)
+				resource.message?.let { mBinding.newPassword.errorLayout.setError(it) }
+			else
+				resource.message?.let { mBinding.repeatPassword.errorLayout.setError(it) }
 			Toast.makeText(
 				requireContext(), resource.message, Toast.LENGTH_SHORT
 			).show()

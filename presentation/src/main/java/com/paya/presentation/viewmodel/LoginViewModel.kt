@@ -19,6 +19,8 @@ class LoginViewModel @ViewModelInject constructor(
 	private val authRepository: AuthRepository
 ):BaseViewModel(){
 
+	var isUserNameError = false;
+	var isPasswordError = false;
 	val username = ObservableField<String>()
 	val password = ObservableField<String>()
 	
@@ -34,20 +36,26 @@ class LoginViewModel @ViewModelInject constructor(
 	}
 
 	fun login(){
+		isUserNameError = false;
+		isPasswordError = false;
 		val username = username.get()
 		val password = password.get()
 		if (username.isNullOrBlank()) {
+			isUserNameError = true
 			loginResource.setValue(Resource.error("username can not be blank",null))
 			return
 		}
 		if (username.length != 9){
+			isUserNameError = true
 			loginResource.setValue(Resource.error("username is not valid",null))
 			return
 		}
 		if (password.isNullOrBlank()) {
+			isPasswordError = true
 			loginResource.setValue(Resource.error("password can not be blank",null))
 			return
 		}
+		isPasswordError = true
 		viewModelScope.launch(Dispatchers.IO) {
 			loginResource.postValue(Resource.loading(null))
 			val loginModel = LoginRepoModel(

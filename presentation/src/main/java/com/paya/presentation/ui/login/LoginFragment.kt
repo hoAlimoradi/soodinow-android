@@ -95,6 +95,12 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
 				R.id.navigateToHomeFragment
 			)
 		}else if (resource.status == Status.ERROR){
+			mBinding.phoneNumber.errorLayout.setError("")
+			mBinding.passwordLayout.errorLayout.setError("")
+			if (mViewModel.isUserNameError)
+				resource.message?.let { mBinding.phoneNumber.errorLayout.setError(it) }
+			else
+				resource.message?.let { mBinding.passwordLayout.errorLayout.setError(it) }
 			Toast.makeText(
 				requireContext(), resource.message, Toast.LENGTH_SHORT
 			).show()

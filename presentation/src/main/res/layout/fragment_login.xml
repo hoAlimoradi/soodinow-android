@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.2" />
+            app:layout_constraintGuide_percent="0.18" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_bottom"
@@ -54,7 +54,7 @@
             android:id="@+id/logoImage"
             android:layout_width="@dimen/sign_logo_size"
             android:layout_height="@dimen/sign_logo_size"
-            android:src="@drawable/ic_logo_soodinow"
+            android:src="@drawable/ic_icon_login"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/guideline_top_logo" />
@@ -131,7 +131,6 @@
             style="@style/SignInButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_medium"
             android:onClick="@{() -> viewModel.login()}"
             android:text="@string/login"
             app:layout_constraintBottom_toBottomOf="@id/guideline_bottom"
