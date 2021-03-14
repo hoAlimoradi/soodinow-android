@@ -1,4 +1,4 @@
-package com.paya.presentation.ui.setPassword
+package com.paya.presentation.ui.setNewPassword
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,17 +16,19 @@ import com.paya.domain.tools.Status
 import com.paya.presentation.R
 import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
+import com.paya.presentation.databinding.FragmentSetNewPasswordBinding
 import com.paya.presentation.databinding.FragmentSetPasswordBinding
 import com.paya.presentation.utils.observe
+import com.paya.presentation.viewmodel.SetNewPasswordViewModel
 import com.paya.presentation.viewmodel.SetPasswordViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SetPasswordFragment : BaseFragment<SetPasswordViewModel>() {
+class SetNewPasswordFragment : BaseFragment<SetNewPasswordViewModel>() {
 	
-	private lateinit var mBinding: FragmentSetPasswordBinding
-	private val mViewModel: SetPasswordViewModel by viewModels()
-	val args by navArgs<SetPasswordFragmentArgs>()
+	private lateinit var mBinding: FragmentSetNewPasswordBinding
+	private val mViewModel: SetNewPasswordViewModel by viewModels()
+
 	
 	override fun onCreateView(
 		inflater: LayoutInflater,container: ViewGroup?,
@@ -35,12 +37,11 @@ class SetPasswordFragment : BaseFragment<SetPasswordViewModel>() {
 		// Inflate the layout for this fragment
 		mBinding = DataBindingUtil.inflate(
 			inflater,
-			R.layout.fragment_set_password,
+			R.layout.fragment_set_new_password,
 			container,
 			false
 		)
-		
-		args.title?.let{mViewModel.setTitle(it)}
+
 		mBinding.viewModel = mViewModel
 		mBinding.lifecycleOwner = this
 		

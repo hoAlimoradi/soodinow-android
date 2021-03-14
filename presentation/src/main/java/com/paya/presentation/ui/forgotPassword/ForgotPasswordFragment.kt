@@ -39,7 +39,7 @@ class ForgotPasswordFragment : BaseFragment<ForgotPasswordViewModel>() {
 		// Inflate the layout for this fragment
 		mBinding = DataBindingUtil.inflate(
 			inflater,
-			R.layout.fragment_register,
+			R.layout.fragment_forgot_password,
 			container,
 			false
 		)
@@ -61,7 +61,7 @@ class ForgotPasswordFragment : BaseFragment<ForgotPasswordViewModel>() {
 			val bundle = Bundle()
 			bundle.putString("phoneNumber", registerResource.data?.username!!)
 			findNavController().navigate(
-				R.id.activateFragment,
+				R.id.activateForgotFragment,
 				bundle
 			)
 		}else if (registerResource.status == Status.ERROR){

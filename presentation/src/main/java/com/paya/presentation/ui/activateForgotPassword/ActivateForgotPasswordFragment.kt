@@ -21,6 +21,7 @@ import com.paya.presentation.R
 import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentActivateBinding
+import com.paya.presentation.databinding.FragmentActivateForgotBinding
 import com.paya.presentation.utils.observe
 import com.paya.presentation.viewmodel.ActivateForgotPasswordViewModel
 import com.paya.presentation.viewmodel.ActivateViewModel
@@ -31,7 +32,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class ActivateForgotPasswordFragment : BaseFragment<ActivateForgotPasswordViewModel>() {
 	
 	private val mViewModel: ActivateForgotPasswordViewModel by viewModels()
-	private lateinit var mBinding: FragmentActivateBinding
+	private lateinit var mBinding: FragmentActivateForgotBinding
 	private val args by navArgs<ActivateForgotPasswordFragmentArgs>()
 	
 	override fun onCreateView(
@@ -41,7 +42,7 @@ class ActivateForgotPasswordFragment : BaseFragment<ActivateForgotPasswordViewMo
 		// Inflate the layout for this fragment
 		mBinding = DataBindingUtil.inflate(
 			inflater,
-			R.layout.fragment_activate,
+			R.layout.fragment_activate_forgot,
 			container,
 			false
 		)
@@ -64,11 +65,9 @@ class ActivateForgotPasswordFragment : BaseFragment<ActivateForgotPasswordViewMo
 	
 	private fun checkActivateStatus(activateResource: Resource<Any>){
 		if (activateResource.status == Status.SUCCESS){
-			val bundle = Bundle()
-			bundle.putString("title", args.title)
+
 			findNavController().navigate(
-				R.id.navigateToSetPasswordFragment,
-				bundle
+				R.id.navigateToSetNewPasswordFragment
 			)
 		}else if (activateResource.status == Status.ERROR){
 			Toast.makeText(

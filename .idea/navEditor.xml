@@ -484,6 +484,27 @@
                       <LayoutPositions />
                     </value>
                   </entry>
+                  <entry key="activateForgotFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="7" />
+                            <option name="y" value="17" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="navigateToSetNewPasswordFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="activateFragment">
                     <value>
                       <LayoutPositions>
@@ -517,6 +538,27 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="cPasswordFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="12" />
+                            <option name="y" value="12" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="navigateFromSetPasswordToLoginFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="createLowRiskAccountFragment">
                     <value>
                       <LayoutPositions>
@@ -534,9 +576,18 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="5" />
-                            <option name="y" value="1166" />
+                            <option name="x" value="27" />
+                            <option name="y" value="1243" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="navigateToActivateForgotFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -607,7 +658,7 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_loginFragment_to_registerFragment">
+                            <entry key="action_loginFragment_to_forgotPasswordFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -639,8 +690,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="12" />
-                            <option name="y" value="12" />
+                            <option name="x" value="685" />
+                            <option name="y" value="1391" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -658,6 +709,27 @@
                         <option name="myPositions">
                           <map>
                             <entry key="navigateToActivateFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="setNewPasswordFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="12" />
+                            <option name="y" value="12" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="navigateFromSetPasswordToLoginFragment">
                               <value>
                                 <LayoutPositions />
                               </value>

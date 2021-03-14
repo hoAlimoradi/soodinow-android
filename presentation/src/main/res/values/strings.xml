@@ -191,6 +191,8 @@
     <string name="farabi_title">کارگزاری فارابی</string>
     <string name="rules_description">قوانین ورود و عضویت را مطالعه کرده و می پذیرم</string>
     <string name="rules_spannable_description">قوانین ورود و عضویت</string>
+    <string name="success_password">رمز عبور شما
+        با موفقیت ثبت شد</string>
 
     <string-array name="brokerage_list">
         <item>کارگزاری فارابی</item>
