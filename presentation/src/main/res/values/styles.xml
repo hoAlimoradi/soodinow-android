@@ -80,7 +80,7 @@
     </style>
 
     <style name="BottomNavigation">
-        <item name="android:background">@color/green</item>
+        <item name="android:background">@android:color/transparent</item>
         <item name="itemIconTint">@drawable/selector_menu</item>
         <item name="itemTextColor">@drawable/selector_menu</item>
         <item name="color">@color/blue_gray</item>

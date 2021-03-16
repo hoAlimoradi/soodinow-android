@@ -1,21 +1,19 @@
 package com.paya.presentation.viewmodel
 
+import android.widget.Toast
 import androidx.databinding.ObservableField
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.viewModelScope
+import com.paya.domain.models.repo.AddRiskOrderRepoBodyModel
 import com.paya.domain.models.repo.BoxTypeRepoModel
-
-import com.paya.domain.models.repo.PricingCash
 import com.paya.domain.models.repo.PullPriceBodyRepoModel
 import com.paya.domain.models.repo.TotalBoxValueRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.domain.tools.UseCase
-import com.paya.domain.usecase.order.PullPriceUseCase
-
+import com.paya.presentation.R
 import com.paya.presentation.base.BaseViewModel
-import com.paya.presentation.utils.Utils
 import com.paya.presentation.utils.VolatileLiveData
 import com.paya.presentation.utils.callResource
 import kotlinx.coroutines.Dispatchers
@@ -26,7 +24,8 @@ class CashManagerViewModel @ViewModelInject constructor(
     private val boxTypesUseCase: UseCase<Unit, BoxTypeRepoModel>,
     private val sellPriceUseCase: UseCase<String, @JvmSuppressWildcards List<Long>>,
     private val pullPricePriceUseCase: UseCase<PullPriceBodyRepoModel, String>,
-    private val totalBoxValueUseCase: UseCase<Unit, TotalBoxValueRepoModel>
+    private val totalBoxValueUseCase: UseCase<Unit, TotalBoxValueRepoModel>,
+    private val addRiskOrderUseCase: UseCase<AddRiskOrderRepoBodyModel, String>
 ) : BaseViewModel() {
     val boxTypesStatus = VolatileLiveData<Resource<BoxTypeRepoModel>>()
     val sellPriceStatus = VolatileLiveData<Resource<List<Long>>>()
@@ -38,11 +37,13 @@ class CashManagerViewModel @ViewModelInject constructor(
     val minSeek = ObservableField<Long>()
     val maxSeek = ObservableField<Long>()
     val totalBoxValue = ObservableField<Long>()
+    public var priceType = PriceType.deposit
 
     init {
         minSeek.set(0)
         maxSeek.set(0)
         price.set(0)
+        type.set("no_risk")
         totalBoxValue.set(0)
         loading.addSource(boxTypesStatus) {
             if (boxTypesStatus.value?.status == Status.LOADING || totalBoxValueStatus.value?.status == Status.LOADING) {
@@ -83,10 +84,13 @@ class CashManagerViewModel @ViewModelInject constructor(
             boxTypesStatus.postValue(Resource.loading(null))
             val response = callResource(this@CashManagerViewModel, boxTypesUseCase.action(Unit))
             if (response.status == Status.SUCCESS) {
-                response.data?.types?.get(0)?.let {
-                    type.set(it.type)
-                    getSellPrice()
-                }
+                if (response.data?.types?.size!! > 0)
+                    response.data?.types?.get(0).let {
+                        if (it != null) {
+                            type.set(it.type)
+                        }
+                        getSellPrice()
+                    }
             }
             boxTypesStatus.postValue(response)
         }
@@ -147,15 +151,39 @@ class CashManagerViewModel @ViewModelInject constructor(
             pullPriceStatus.setValue(Resource.error("price can not be blank", null))
             return
         }
-        viewModelScope.launch(Dispatchers.IO) {
-            pullPriceStatus.postValue(Resource.loading(null))
-            val body = PullPriceBodyRepoModel(type, price)
-            val response =
-                callResource(this@CashManagerViewModel, pullPricePriceUseCase.action(body))
+        if (priceType == PriceType.withdrawal) {
+            viewModelScope.launch(Dispatchers.IO) {
+                pullPriceStatus.postValue(Resource.loading(null))
+                val body = PullPriceBodyRepoModel(type, price)
+                val response =
+                    callResource(this@CashManagerViewModel, pullPricePriceUseCase.action(body))
 
-            pullPriceStatus.postValue(response)
+                pullPriceStatus.postValue(response)
+            }
+        } else {
+            if (price <= 5000000){
+                pullPriceStatus.setValue(Resource.error("مبلغ 5 میلیون ریال و کمتر مجاز نمیباشد", null))
+                return
+            }
+            viewModelScope.launch(Dispatchers.IO) {
+                pullPriceStatus.postValue(Resource.loading(null))
+
+                val response = callResource(
+                    this@CashManagerViewModel, addRiskOrderUseCase.action(
+                        AddRiskOrderRepoBodyModel(
+                            type,
+                            price
+                        )
+                    )
+                )
+                pullPriceStatus.postValue(response)
+            }
         }
 
     }
 
+    enum class PriceType {
+        deposit,
+        withdrawal
+    }
 }

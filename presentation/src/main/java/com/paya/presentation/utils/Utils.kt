@@ -63,6 +63,13 @@ object Utils {
     }
 
     @JvmStatic
+    fun getAmount(amount: String?): Long? {
+        if (amount.isNullOrEmpty())
+            return 0
+        return amount.toString().replace(",", "").toLong()
+    }
+
+    @JvmStatic
     fun separatorAmount(amount: Int): String? {
         return try {
             val value = amount.toString()

@@ -8,7 +8,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/green"
+        android:background="@color/bg"
         tools:context=".ui.main.MainFragment">
 
         <androidx.fragment.app.FragmentContainerView
@@ -17,20 +17,31 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:defaultNavHost="true"
-            app:layout_constraintBottom_toTopOf="@+id/bottomNav"
+            app:layout_constraintBottom_toTopOf="@+id/cardBottom"
             app:layout_constraintTop_toTopOf="parent"
-            app:navGraph="@navigation/main_graph" />
+            app:navGraph="@navigation/main_graph"
+            android:layout_marginBottom="@dimen/margin_l"/>
 
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottomNav"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardBottom"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:menu="@menu/bottom_menu_nav"
-            style="@style/BottomNavigation"
-            app:itemHorizontalTranslationEnabled="true"
-            app:labelVisibilityMode="labeled" />
+            app:cardCornerRadius="28dp"
+            android:layout_marginHorizontal="@dimen/margin_l"
+            android:layout_marginBottom="@dimen/margin_l">
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottomNav"
+                style="@style/BottomNavigation"
+                android:layout_width="match_parent"
+
+                android:layout_height="55dp"
+                app:itemHorizontalTranslationEnabled="true"
+                app:labelVisibilityMode="labeled"
+                app:menu="@menu/bottom_menu_nav"
+                />
+        </androidx.cardview.widget.CardView>
 
 
 

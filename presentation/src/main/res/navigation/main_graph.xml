@@ -10,8 +10,8 @@
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings">
         <action
-            android:id="@+id/navigateToSupportFragment"
-            app:destination="@id/support" />
+            android:id="@+id/navigateToHomeFragment"
+            app:destination="@id/home" />
         <action
             android:id="@+id/navigateToChangePasswordFragment"
             app:destination="@id/changePasswordFragment" />

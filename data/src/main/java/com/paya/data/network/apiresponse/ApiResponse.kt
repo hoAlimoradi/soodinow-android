@@ -25,19 +25,19 @@ sealed class ApiResponse<T> {
 
         }
 
-        private fun <T> getErrorMessage(response: Response<T>): String? {
-            val baseModel = parseBaseModel(response.errorBody()?.string())
-            val msg = baseModel?.error?.message ?: response.errorBody()?.string()
+        private fun  getErrorMessage(response: String): String {
+            val baseModel = parseBaseModel(response)
+            val msg = baseModel?.error?.message ?: response
 
             return if (msg.isNullOrEmpty()) {
-                response.message()
+                "خطای ناشنخته"
             } else {
                 msg
             }
         }
 
-        private fun <T> getErrorCode(response: Response<T>): Int? {
-            val baseModel = parseBaseModel(response.errorBody()?.string())
+        private fun getErrorCode(response: String): Int? {
+            val baseModel = parseBaseModel(response)
             return baseModel?.error?.code ?: 0
 
 
@@ -48,6 +48,7 @@ sealed class ApiResponse<T> {
         }
 
         fun <T> create(response: Response<T>): ApiResponse<T> {
+            var errorBody = response.errorBody()?.string()
             return if (response.isSuccessful) {
                 val body = response.body()
                 if (body == null || response.code() == 204) {
@@ -56,11 +57,11 @@ sealed class ApiResponse<T> {
                     ApiSuccessResponse(body)
                 }
             } else if (response.code() == 401) {
-                ApiUnAuthorizedResponse(getErrorMessage(response) ?: "UnAuthorized")
-            } else if (getErrorCode(response) == 1009) {
+                ApiUnAuthorizedResponse(getErrorMessage(errorBody!!) ?: "UnAuthorized")
+            } else if (getErrorCode(errorBody!!) == 1009) {
                 ApiFarabiTokenResponse()
             } else {
-                ApiErrorResponse(getErrorMessage(response) ?: "unknown error")
+                ApiErrorResponse(getErrorMessage(errorBody!!) ?: "unknown error")
             }
         }
     }

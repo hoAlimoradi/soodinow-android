@@ -21,6 +21,8 @@ import com.paya.presentation.R
 import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentCashManagerBinding
+import com.paya.presentation.utils.Utils.getAmount
+import com.paya.presentation.utils.Utils.separatorAmount
 import com.paya.presentation.utils.observe
 import com.paya.presentation.viewmodel.CashManagerViewModel
 import com.warkiz.widget.IndicatorSeekBar
@@ -87,6 +89,11 @@ class CashManagerFragment : BaseFragment<CashManagerViewModel>() {
 
             }
 
+        mBinding.submitBtn.setOnClickListener {
+            if (mViewModel.priceType == CashManagerViewModel.PriceType.deposit)
+                mViewModel.price.set(getAmount(mBinding.inputPrice.text.toString()))
+            mViewModel.setPullPrice()
+        }
     }
 
     private fun setupToggle() {
@@ -94,12 +101,20 @@ class CashManagerFragment : BaseFragment<CashManagerViewModel>() {
         mBinding.depositAccountBtn.setOnClickListener {
             mBinding.depositAccountBtn.isSelected = true
             mBinding.withdrawalAccountBtn.isSelected = false
+            mViewModel.priceType = CashManagerViewModel.PriceType.deposit
+            mBinding.inputPrice.isEnabled = true
+            mBinding.seekBarGroup.visibility = View.INVISIBLE
         }
         mBinding.withdrawalAccountBtn.setOnClickListener {
             mBinding.depositAccountBtn.isSelected = false
             mBinding.withdrawalAccountBtn.isSelected = true
+            mViewModel.priceType = CashManagerViewModel.PriceType.withdrawal
+            mBinding.inputPrice.isEnabled = false
+            mBinding.seekBarGroup.visibility = View.VISIBLE
         }
     }
+
+
 
     private fun seekBarMultiType(
         priceCashList: List<Long>
