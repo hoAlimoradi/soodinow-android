@@ -55,7 +55,7 @@ abstract class LowRiskInvestmentModule {
             >
 
     @Binds
-    abstract fun bindSellPriceMapperRemoteRepoMapper(mapper: GetSellPriceMapperRemoteRepoMapper): Mapper<@JvmSuppressWildcards List<List<Long>>, @JvmSuppressWildcards List<Long>>
+    abstract fun bindSellPriceMapperRemoteRepoMapper(mapper: GetSellPriceMapperRemoteRepoMapper): Mapper<@JvmSuppressWildcards List<List<Float>>, @JvmSuppressWildcards List<Long>>
 
     @Binds
     abstract fun bindBoxTypesRemoteRepoMapper(mapper: BoxTypesRemoteRepoMapper): Mapper<BoxTypeRemoteModel, BoxTypeRepoModel>

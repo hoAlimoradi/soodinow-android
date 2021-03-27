@@ -17,7 +17,7 @@ data class LowRiskInvestmentRepositoryImpl @Inject constructor(
     private val addRiskOrderRemoteRepoMapper: Mapper<String,String>,
     private val addRiskOrderRepoRemoteMapper: Mapper<AddRiskOrderRepoBodyModel, AddRiskOrderRemoteBodyModel>,
     private val boxTypesRemoteRepoMapper: Mapper<BoxTypeRemoteModel, BoxTypeRepoModel>,
-    private val getSellPriceRemoteRepoMapper: Mapper<@JvmSuppressWildcards List<List<Long>>, @JvmSuppressWildcards List<Long>>,
+    private val getSellPriceRemoteRepoMapper: Mapper<@JvmSuppressWildcards List<List<Float>>, @JvmSuppressWildcards List<Long>>,
     private val pullPriceRemoteRepoMapper: Mapper<String, String>,
     private val totalBoxValueRemoteRepoMapper: Mapper<TotalBoxValueRemoteModel, TotalBoxValueRepoModel>,
     private val historyPriceRemoteRepoMapper: Mapper<HistoryPriceRemoteModel, HistoryPriceRepoModel>

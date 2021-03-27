@@ -10,12 +10,12 @@ import com.paya.domain.models.repo.LinearChartRepoModel
 import javax.inject.Inject
 
 class GetSellPriceMapperRemoteRepoMapper @Inject constructor() :
-    Mapper< @JvmSuppressWildcards List<List<Long>>,  @JvmSuppressWildcards List<Long>> {
-    override fun map(param: List<List<Long>>): List<Long> {
+    Mapper< @JvmSuppressWildcards List<List<Float>>,  @JvmSuppressWildcards List<Long>> {
+    override fun map(param: List<List<Float>>): List<Long> {
         val list = mutableListOf<Long>()
         param.map {
             it.forEachIndexed() { _, price ->
-                list.add(price)
+                list.add(price.toLong())
                 if (it[0] == it[it.size-1])
                     return@forEachIndexed
             }

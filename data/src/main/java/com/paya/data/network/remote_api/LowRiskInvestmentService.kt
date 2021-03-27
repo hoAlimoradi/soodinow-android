@@ -29,7 +29,7 @@ interface LowRiskInvestmentService {
 
 
     @GET("order/sell_price/{type}/")
-    suspend fun getSellPrice(@Path("type") type: String): ApiResponse<BaseModel<List<List<Long>>>>
+    suspend fun getSellPrice(@Path("type") type: String): ApiResponse<BaseModel<List<List<Float>>>>
 
     @FormUrlEncoded
     @POST("order/pull_price/{type}/")
