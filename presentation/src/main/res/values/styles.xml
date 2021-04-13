@@ -91,6 +91,9 @@
     <style name="GeneralCardView">
         <item name="cardCornerRadius">@dimen/radius_card</item>
     </style>
+    <style name="MediumCardView">
+        <item name="cardCornerRadius">@dimen/radius_card_m</item>
+    </style>
     <style name="RoundCardView">
         <item name="cardCornerRadius">@dimen/radius_medium</item>
     </style>

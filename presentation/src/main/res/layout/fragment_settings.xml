@@ -13,7 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bottom_round_corner_background"
+        android:background="@color/bg"
         tools:context=".ui.settings.SettingsFragment">
 
 
@@ -21,26 +21,29 @@
             android:id="@+id/card"
             style="@style/GeneralCardView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_marginStart="@dimen/margin_small"
-            android:layout_marginTop="66dp"
+            android:layout_marginTop="45dp"
             android:layout_marginEnd="@dimen/margin_small"
-            android:layout_marginBottom="@dimen/margin_small" />
+            android:paddingBottom="@dimen/margin_l"
+            app:layout_constraintBottom_toBottomOf="@id/completeProfileTxt"
+            app:layout_constraintTop_toTopOf="@id/logo" />
 
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/logo"
-            android:layout_width="95dp"
-            android:layout_height="95dp"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
             android:adjustViewBounds="true"
             android:background="@drawable/bg_setting_logo"
             android:elevation="2dp"
             android:scaleType="centerInside"
-            android:src="@drawable/ic_logo_soodinow"
+            android:layout_marginTop="@dimen/margin_small"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="@dimen/margin_small"/>
+            android:src="@drawable/ic_logo_white"
+            app:layout_constraintBottom_toTopOf="@id/phoneTxt" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/phoneTxt"
@@ -49,11 +52,13 @@
             android:layout_marginTop="@dimen/margin_small"
             android:elevation="2dp"
             android:text="@{viewModel.mobile}"
+            app:layout_constraintBottom_toTopOf="@id/completeProfileTxt"
             android:textColor="@color/green"
             android:textSize="@dimen/text_size_small"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/logo" />
+            app:layout_constraintEnd_toEndOf="@id/card"
+            app:layout_constraintStart_toStartOf="@id/card"
+            app:layout_constraintTop_toBottomOf="@id/logo"
+            tools:text="09364747186" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/completeProfileTxt"
@@ -61,125 +66,182 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_very_small"
             android:elevation="2dp"
-            android:text="@string/complete_profile"
+            android:paddingBottom="@dimen/margin_l"
             android:textColor="@color/blue_light"
             android:textSize="@dimen/text_size_10sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:text="@string/complete_profile_message"
             app:layout_constraintTop_toBottomOf="@id/phoneTxt" />
 
         <ScrollView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_l"
             android:elevation="2dp"
-            app:layout_constraintBottom_toBottomOf="@id/card"
-            app:layout_constraintEnd_toEndOf="@id/card"
-            app:layout_constraintStart_toStartOf="@id/card"
+            android:paddingBottom="@dimen/margin_l"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/completeProfileTxt">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingStart="@dimen/margin_very_small"
-                android:paddingEnd="@dimen/margin_very_small">
+                android:layout_height="wrap_content">
 
-                <include
-                    android:id="@+id/myProfile"
-                    layout="@layout/item_profile_menu"
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/supportLayout"
+                    style="@style/MediumCardView"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/height"
-                    app:img="@{@drawable/ic_profile}"
-                    app:label="@{@string/my_profile}" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@drawable/ic_line_green" />
 
-                <include
-                    android:id="@+id/aboutUs"
-                    layout="@layout/item_profile_menu"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/height"
-                    app:img="@{@drawable/ic_information}"
-                    app:label="@{@string/about_us}" />
+                    <include
+                        android:id="@+id/support"
+                        layout="@layout/item_profile_menu_without_arrow"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/height"
+                        app:img="@{@drawable/ic_support}"
+                        app:label="@{@string/support}" />
+                </androidx.cardview.widget.CardView>
 
-                <View
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/centerLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@drawable/ic_line_green" />
+                    style="@style/MediumCardView"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_marginTop="@dimen/margin_l"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    app:layout_constraintTop_toBottomOf="@id/supportLayout">
 
-                <include
-                    android:id="@+id/askedQuestion"
-                    layout="@layout/item_profile_menu"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/height"
-                    app:img="@{@drawable/ic_aksed_guestions}"
-                    app:label="@{@string/asked_question}" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@drawable/ic_line_green" />
-                <include
-                    android:id="@+id/termsConditions"
-                    layout="@layout/item_profile_menu"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/height"
-                    app:img="@{@drawable/ic_pencil}"
-                    app:label="@{@string/terms_conditions}" />
+                        <include
+                            android:id="@+id/myProfile"
+                            layout="@layout/item_profile_menu"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/height"
+                            app:img="@{@drawable/ic_profile}"
+                            app:label="@{@string/my_profile}" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@drawable/ic_line_green" />
-                <include
-                    android:id="@+id/activeFingerprint"
-                    layout="@layout/item_profile_menu_fingerprint"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/height"
-                    app:img="@{@drawable/ic_fingerprint}"
-                    app:label="@{@string/active_fingerprint}" />
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@drawable/ic_line_green" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@drawable/ic_line_green" />
-                <include
-                    android:id="@+id/changePassword"
-                    layout="@layout/item_profile_menu"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/height"
-                    app:img="@{@drawable/ic_padlock}"
-                    app:label="@{@string/change_password}" />
+                        <include
+                            android:id="@+id/aboutUs"
+                            layout="@layout/item_profile_menu"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/height"
+                            app:img="@{@drawable/ic_information}"
+                            app:label="@{@string/about_us}" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@drawable/ic_line_green" />
-                <include
-                    android:id="@+id/share"
-                    layout="@layout/item_profile_menu"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/height"
-                    app:img="@{@drawable/ic_share}"
-                    app:label="@{@string/introduce_friends}" />
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@drawable/ic_line_green" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@drawable/ic_line_green" />
+                        <include
+                            android:id="@+id/askedQuestion"
+                            layout="@layout/item_profile_menu"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/height"
+                            app:img="@{@drawable/ic_aksed_guestions}"
+                            app:label="@{@string/asked_question}" />
 
-                <include
-                    android:id="@+id/exitApp"
-                    layout="@layout/item_profile_menu"
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@drawable/ic_line_green" />
+
+                        <include
+                            android:id="@+id/termsConditions"
+                            layout="@layout/item_profile_menu"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/height"
+                            app:img="@{@drawable/ic_pencil}"
+                            app:label="@{@string/terms_conditions}" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@drawable/ic_line_green" />
+
+
+                        <include
+                            android:id="@+id/changePassword"
+                            layout="@layout/item_profile_menu"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/height"
+                            app:img="@{@drawable/ic_padlock}"
+                            app:label="@{@string/change_password}" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@drawable/ic_line_green" />
+
+                        <include
+                            android:id="@+id/share"
+                            layout="@layout/item_profile_menu"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/height"
+                            app:img="@{@drawable/ic_share}"
+                            app:label="@{@string/introduce_friends}" />
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/fingerprintLayout"
+                    style="@style/MediumCardView"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/height"
-                    app:img="@{@drawable/ic_logout}"
-                    app:label="@{@string/exit_app}" />
-            </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_marginTop="@dimen/margin_l"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    app:layout_constraintTop_toBottomOf="@id/centerLayout">
+
+
+                    <include
+                        android:id="@+id/activeFingerprint"
+                        layout="@layout/item_profile_menu_fingerprint"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/height"
+                        app:img="@{@drawable/ic_fingerprint}"
+                        app:label="@{@string/active_fingerprint}" />
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/exitLayout"
+                    style="@style/MediumCardView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_l"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    app:layout_constraintTop_toBottomOf="@id/fingerprintLayout">
+
+
+                    <include
+                        android:id="@+id/exitApp"
+                        layout="@layout/item_profile_menu_without_arrow"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/height"
+                        app:img="@{@drawable/ic_logout}"
+                        app:label="@{@string/exit_app}" />
+                </androidx.cardview.widget.CardView>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 
         <include

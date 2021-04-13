@@ -87,8 +87,9 @@ dependencies {
 	implementation ("com.github.PhilJay:MPAndroidChart:${Dependencies.Versions.MP_ANDROID_CHART}")
 	implementation("com.fxn769:oblique:${Dependencies.Versions.OBLIQUE}")
 	implementation ("com.github.warkiz.widget:indicatorseekbar:${Dependencies.Versions.INDICATOR_SEEK_BAR}")
-	implementation("uk.co.chrisjenx:calligraphy:${Dependencies.Versions.CALLIGRAPHY}")
-	
+	implementation("io.github.inflationx:calligraphy3:${Dependencies.Versions.CALLIGRAPHY}")
+	implementation("io.github.inflationx:viewpump:${Dependencies.Versions.VIEWPUMP}")
+
 	implementation("com.shuhart.stepview:stepview:${Dependencies.Versions.STEPVIEW_VER}")
 	implementation("com.github.samanzamani.persiandate:PersianDate:${Dependencies.Versions.PERSIAN_DATE}")
 	

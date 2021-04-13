@@ -173,7 +173,29 @@
     <fragment
         android:id="@+id/createLowRiskAccountFragment"
         android:name="com.paya.presentation.ui.createLowRiskAccount.CreateLowRiskAccountFragment"
-        android:label="CreateLowRiskAccountFragment" >
+        android:label="CreateLowRiskAccountFragment" />
+
+    <fragment
+        android:id="@+id/whySoodinow"
+        android:name="com.paya.presentation.ui.whySoodinow.WhySoodinowFragment"
+        android:label="fragment_why_soodinow"
+        tools:layout="@layout/fragment_why_soodinow" />
+
+    <fragment
+        android:id="@+id/cashManager"
+        android:name="com.paya.presentation.ui.cashManager.CashManagerFragment"
+        android:label="fragment_cash_manager"
+        tools:layout="@layout/fragment_cash_manager">
+
+        <action
+            android:id="@+id/navigateCashHistory"
+            app:destination="@id/historyPriceManagerFragment" />
+
     </fragment>
 
+    <fragment
+        android:id="@+id/historyPriceManagerFragment"
+        android:name="com.paya.presentation.ui.cashManager.CashHistoryFragment"
+        android:label="fragment_cash_history"
+        tools:layout="@layout/fragment_cash_history" />
 </navigation>

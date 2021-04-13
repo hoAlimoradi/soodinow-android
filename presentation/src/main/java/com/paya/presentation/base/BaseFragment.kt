@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.paya.presentation.R
@@ -40,6 +41,9 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment(){
 		)
 	}
 
+	fun getFindViewController(): NavController? {
+		return activity?.findNavController(R.id.nav_host_fragment)
+	}
 
 	private fun farabiAuth(param: Unit) {
 		val intent = Intent(context, FarabiAuthActivity::class.java)

@@ -12,7 +12,7 @@ import com.paya.presentation.base.BaseActivity
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.viewmodel.MainActivityViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
+
 
 
 @AndroidEntryPoint

@@ -71,6 +71,10 @@ object Utils {
 
     @JvmStatic
     fun separatorAmount(amount: Int): String? {
+      return separatorAmount(amount.toLong())
+    }
+    @JvmStatic
+    fun separatorAmount(amount: Long): String? {
         return try {
             val value = amount.toString()
             val reverseValue = StringBuilder(value).reverse().toString()
@@ -91,8 +95,11 @@ object Utils {
 
     @JvmStatic
     fun convertToFloatAmount(s: String): Float {
+        if(s.isNullOrEmpty())
+            return 0f;
         return s.replace(",", "").toFloat()
     }
+
 
     @SuppressLint("SimpleDateFormat")
     @JvmStatic

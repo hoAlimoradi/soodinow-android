@@ -40,12 +40,17 @@
     <color name="mercury">#E6E6E6</color>
     <color name="alabaster">#F7F7F7</color>
     <color name="white">#FFFFFF</color>
-    <color name="green">#1DCA0A</color>
+    <color name="green">#3bb400</color>
     <color name="cinnabar_red">#E53935</color>
     <color name="japanese_laurel_green">#2b7607</color>
     <color name="pea_green">#17502f</color>
+    <color name="deep_fir_green">#002e0c</color>
     <color name="conifer_green">#85db48</color>
     <color name="governor_bay_blue">#3e2cad</color>
     <color name="java_green">#1DE9B6</color>
     <color name="alto_light">#dedede</color>
+    <color name="orange">#ff8800</color>
+    <color name="blue_light_11">#5E989A9B</color>
+    <color name="bg_tab_layout">#f6f6f6</color>
+    <color name="nevada">#6D6F70</color>
 </resources>

@@ -14,8 +14,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_cards" />
-                            <entry key="sourceFile" value="$USER_HOME$/Downloads/cards.svg" />
+                            <entry key="outputName" value="ic_wallet" />
+                            <entry key="sourceFile" value="$USER_HOME$/Downloads/assets_Styleguide_2021-03-27 (1)/037_wallet.svg" />
                           </map>
                         </option>
                       </PersistentState>

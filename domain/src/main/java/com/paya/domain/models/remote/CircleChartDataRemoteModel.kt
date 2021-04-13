@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class CircleChartDataRemoteModel (
 	@SerializedName("buy_price")
-	val buyPrice: Long,
+	val buyPrice: Float,
 	@SerializedName("quantity")
 	val quantity: Long,
 	@SerializedName("namad")

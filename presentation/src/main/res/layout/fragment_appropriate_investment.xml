@@ -10,68 +10,21 @@
         android:padding="@dimen/margin_small"
         tools:context=".ui.investment.AppropriateInvestmentFragment">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_half"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_0.75"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.75" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/imgSearch"
-            android:layout_width="@dimen/margin_small"
-            android:layout_height="@dimen/margin_small"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_search_2" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/title"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/margin_very_small"
-            android:text="سرمایه گذاری مناسب شما"
+            android:text="سبد سرمایه گذاری بدون ریسک شما"
             android:textColor="@color/purple"
             android:textSize="@dimen/text_size_11sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@id/imgSearch"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1"
-            app:layout_constraintStart_toStartOf="@id/guideline_half"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/subtitle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
-            android:text="میزان دارایی در سبد سرمایه گذاری"
-            android:textColor="@color/green"
-            android:textSize="@dimen/text_size_11sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1"
-            app:layout_constraintStart_toStartOf="@id/guideline_half"
-            app:layout_constraintTop_toBottomOf="@id/title" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/description"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
-            android:text="@string/fake_content"
-            android:textSize="@dimen/text_size_10sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/guideline_half"
-            app:layout_constraintTop_toBottomOf="@id/subtitle"
-            app:layout_constraintBottom_toTopOf="@id/chart_label_recycler"
-            />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/chart_label_recycler"
@@ -80,8 +33,8 @@
             android:foregroundGravity="right"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/guideline_half"
-            app:layout_constraintTop_toBottomOf="@id/description"
+            app:layout_constraintStart_toEndOf="@id/chart"
+            app:layout_constraintTop_toBottomOf="@id/title"
             app:layout_constraintVertical_bias="0.1"
             tools:itemCount="4"
             tools:listitem="@layout/item_chart_label" />
@@ -89,12 +42,12 @@
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/chart"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="@dimen/margin_very_small"
-            app:layout_constraintEnd_toEndOf="@id/guideline_half"
+            android:layout_height="wrap_content"
+            android:minHeight="150dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/chart_label_recycler"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/title" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

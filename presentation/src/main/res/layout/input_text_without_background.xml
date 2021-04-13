@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
-        <import type="androidx.databinding.ObservableField"/>
+
+        <import type="androidx.databinding.ObservableField" />
 
         <variable
             name="label"
@@ -20,35 +22,35 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_marginHorizontal="@dimen/margin_medium"
         android:layout_marginTop="@dimen/margin_4_dp"
         android:elevation="3dp"
-        >
+        android:orientation="vertical">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="@dimen/margin_4_dp"
+            android:drawableStart="@drawable/ic_star"
+            android:drawablePadding="@dimen/margin_s"
             android:text="@{label}"
-            tools:text="نام کاربری"
-            android:layout_marginTop="@dimen/margin_4_dp"
-            />
+            android:textSize="@dimen/text_size_m"
+            tools:text="نام کاربری" />
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:layout_marginTop="@dimen/margin_4_dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/margin_very_small"
-            android:text="@={content}"
-            android:textColor="#000000"
-            android:background="@drawable/round_corner_layout"
-            android:inputType="textPassword"
-            android:maxLines="1"
-            android:lines="1"
-            android:singleLine="true"
+        <com.paya.presentation.utils.ClearableEditText
             android:id="@+id/inputContentEditText"
             hintLabel="@{hintLabel}"
-            />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_4_dp"
+            android:inputType="textPassword"
+            android:lines="1"
+            android:maxLines="1"
+            android:padding="@dimen/margin_very_small"
+            android:singleLine="true"
+            android:text="@={content}"
+            android:textColor="#000000" />
     </LinearLayout>
 
 </layout>

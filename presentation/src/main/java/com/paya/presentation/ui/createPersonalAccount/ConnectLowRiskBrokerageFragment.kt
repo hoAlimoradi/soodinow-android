@@ -15,6 +15,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.tabs.TabLayout
 import com.paya.domain.models.repo.AddRiskOrderRepoItem
 import com.paya.domain.models.repo.AddRiskOrderRepoModel
 import com.paya.domain.tools.Resource
@@ -59,107 +60,36 @@ class ConnectLowRiskBrokerageFragment : BaseFragment<ConnectLowRiskBrokerageView
 	
 	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
 		super.onViewCreated(view,savedInstanceState)
-		setupInvestList()
-		setupSeekBar()
-		changeView()
-		observe(mViewModel.status,::readyAddRiskOrder)
+
 		mBinding.addInvestBtn.setOnClickListener {
-			mViewModel.exitAccount(args.riskState,args.SelectedPrice)
+			findNavController().navigate(ConnectLowRiskBrokerageFragmentDirections.navigateToCreateAccountRulesFragment(args.SelectedPrice,args.riskState))
 		}
-		initInputPrice()
-		mBinding.inputPrice.setText(Utils.separatorAmount(args.SelectedPrice.toString()))
-		mBinding.seekBarPrice.setProgress(args.SelectedPrice.toFloat())
-		
-	}
-	
-	private fun readyAddRiskOrder(resource: Resource<String>) {
-		when (resource.status) {
-			Status.SUCCESS -> {
-				Toast.makeText(
-					requireContext(),
-					 "با موفقیت انجام شد",
-					Toast.LENGTH_SHORT).show()
-				findNavController().navigate(
-					ConnectLowRiskBrokerageFragmentDirections.navigateToHomeFragment()
-				)
+		mBinding.cardAccount.wealthValue.text = Utils.separatorAmount(args.SelectedPrice.toString())
+		mBinding.tabLayout.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
+			override fun onTabReselected(tab: TabLayout.Tab?) {
+
 			}
-			Status.ERROR -> context.let {
-				Toast.makeText(it,resource.message,Toast.LENGTH_SHORT).show()
+
+			override fun onTabUnselected(tab: TabLayout.Tab?) {
+
 			}
-			else -> return
-		}
-	}
-	
-	private fun setupSeekBar() {
-		mBinding.seekBarPrice.isEnabled = false
-		mBinding.seekBarPrice.onSeekChangeListener = object : OnSeekChangeListener {
-			override fun onSeeking(seekParams: SeekParams?) {
-				if (seekParams != null) {
-					//mBinding.inputPrice.setText(seekParams.progress.toString())
+
+			override fun onTabSelected(tab: TabLayout.Tab?) {
+				when(mBinding.tabLayout.selectedTabPosition) {
+					0 -> {
+						mViewModel.tabCheckedIsSoodinow.set(true)
+					}
+					1 -> {
+						mViewModel.tabCheckedIsSoodinow.set(false)
+					}
 				}
 			}
-			
-			override fun onStartTrackingTouch(seekBar: IndicatorSeekBar?) {
-			
-			}
-			
-			override fun onStopTrackingTouch(seekBar: IndicatorSeekBar?) {
-			
-			}
-			
-		}
+
+		})
+		mBinding.tabLayout.getTabAt(1)?.select()
 	}
 	
-	private fun initInputPrice() {
-		mBinding.inputPrice.addTextChangedListener(
-			PriceTextWatcher(mBinding.inputPrice,
-				object : PriceTextWatcher.OnChange {
-					override fun change(s: CharSequence?) {
-					
-					}
-					
-					override fun afterChange(s: Editable?) {
-						if (TextUtils.isEmpty(s))
-							return
-						mBinding.seekBarPrice.setProgress(Utils.convertToFloatAmount(s.toString()))
-					}
-					
-				})
-		)
-	}
-	
-	private fun setupInvestList() {
-		val manager = LinearLayoutManager(requireContext())
-		mBinding.investRecyclerView.layoutManager = manager
-		mBinding.investRecyclerView.adapter = InvestAdapter() {
-			val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://reg.irfarabi.com/reg/?j=1&is=1"));
-			startActivity(browserIntent);
-		}
-	}
-	
-	private fun setupSpinner() {
-	
-	}
-	
-	
-	private fun changeView() {
-		BindingAdapters.changeBgRoundPurple(mBinding.yesHaveAccountBtn,true)
-		BindingAdapters.changeBgRoundPurple(mBinding.noHaveAccountBtn,false)
-		BindingAdapters.showHide(mBinding.haveAccountGroup,true)
-		BindingAdapters.showHide(mBinding.investRecyclerView,false)
-		mBinding.noHaveAccountBtn.setOnClickListener {
-			BindingAdapters.changeBgRoundPurple(mBinding.yesHaveAccountBtn,false)
-			BindingAdapters.changeBgRoundPurple(mBinding.noHaveAccountBtn,true)
-			BindingAdapters.showHide(mBinding.haveAccountGroup,false)
-			BindingAdapters.showHide(mBinding.investRecyclerView,true)
-		}
-		mBinding.yesHaveAccountBtn.setOnClickListener {
-			BindingAdapters.changeBgRoundPurple(mBinding.yesHaveAccountBtn,true)
-			BindingAdapters.changeBgRoundPurple(mBinding.noHaveAccountBtn,false)
-			BindingAdapters.showHide(mBinding.haveAccountGroup,true)
-			BindingAdapters.showHide(mBinding.investRecyclerView,false)
-		}
-	}
+
 	
 	override val baseViewModel: BaseViewModel
 		get() = mViewModel

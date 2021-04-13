@@ -130,6 +130,11 @@ class SettingsFragment : BaseFragment<SettingViewModel>() {
 				SettingsFragmentDirections.navigateToIntroduceFriendsFragment()
 			)
 		}
+		support.setOnClickListener {
+			findNavController().navigate(
+				SettingsFragmentDirections.navigateToSupportFragment()
+			)
+		}
 	}
 
 	private fun checkLoginStatus(resource: Resource<Any>){

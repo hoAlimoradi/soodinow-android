@@ -49,25 +49,32 @@ class FirstInformationFragment : BaseFragment<FirstInformationViewModel>() {
 		super.onViewCreated(view,savedInstanceState)
 		observe(mViewModel.status,::onReadyUpdateProfile)
 		setDate(PersianCalendar())
-		mBinding.birthDate.dateGroup.setAllOnClickListener {
-			picker = PersianDatePickerDialog(requireContext())
-				.setPositiveButtonString("باشه")
-				.setNegativeButton("بیخیال")
-				.setTodayButton("امروز")
-				.setTodayButtonVisible(true)
-				.setInitDate(PersianCalendar())
-				.setMaxYear(PersianDatePickerDialog.THIS_YEAR)
-				.setMinYear(1300)
-				.setActionTextColor(Color.GRAY)
-				.setListener(object : Listener {
-					override fun onDateSelected(persianCalendar: PersianCalendar) {
-						setDate(persianCalendar)
-					}
-					
-					override fun onDismissed() {}
-				})
-			picker!!.show()
+		mBinding.birthDate.setOnClickListener {
+			showDatePicker()
 		}
+		mBinding.inputBirthDateEditText.setOnClickListener {
+			showDatePicker()
+		}
+	}
+
+	private fun showDatePicker() {
+		picker = PersianDatePickerDialog(requireContext())
+			.setPositiveButtonString("باشه")
+			.setNegativeButton("بیخیال")
+			.setTodayButton("امروز")
+			.setTodayButtonVisible(true)
+			.setInitDate(PersianCalendar())
+			.setMaxYear(PersianDatePickerDialog.THIS_YEAR)
+			.setMinYear(1300)
+			.setActionTextColor(Color.GRAY)
+			.setListener(object : Listener {
+				override fun onDateSelected(persianCalendar: PersianCalendar) {
+					setDate(persianCalendar)
+				}
+
+				override fun onDismissed() {}
+			})
+		picker!!.show()
 	}
 	
 	private fun onReadyUpdateProfile(resource: Resource<ProfileRepoModel>) {
@@ -94,9 +101,8 @@ class FirstInformationFragment : BaseFragment<FirstInformationViewModel>() {
 	
 	private fun setDate(persianCalendar: PersianCalendar) {
 		mViewModel.birthDay.set(persianCalendar)
-		mBinding.birthDate.years.text = persianCalendar.persianYear.toString()
-		mBinding.birthDate.months.text = persianCalendar.persianMonthName.toString()
-		mBinding.birthDate.day.text = persianCalendar.persianDay.toString()
+		mBinding.inputBirthDateEditText.setText(persianCalendar.persianShortDate)
+
 	}
 	
 	override val baseViewModel: BaseViewModel

@@ -1,14 +1,12 @@
 package com.paya.presentation.ui.createLowRiskAccount
 
+import android.graphics.Color
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.widget.doAfterTextChanged
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -22,144 +20,132 @@ import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentCreateLowRiskAccountBinding
 import com.paya.presentation.ui.investment.AppropriateInvestmentFragment
-import com.paya.presentation.utils.NumberTextWatcher
-import com.paya.presentation.utils.Utils
+import com.paya.presentation.utils.BindingAdapters
 import com.paya.presentation.utils.observe
+import com.paya.presentation.utils.shared.Point
 import com.paya.presentation.viewmodel.CreateLowRiskAccountViewModel
-import com.warkiz.widget.IndicatorSeekBar
-import com.warkiz.widget.OnSeekChangeListener
-import com.warkiz.widget.SeekParams
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_calculate_profit_capital.*
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlin.random.Random
 
 @AndroidEntryPoint
 class CreateLowRiskAccountFragment : BaseFragment<CreateLowRiskAccountViewModel>() {
-	
-	private val mViewModel: CreateLowRiskAccountViewModel by viewModels()
-	private lateinit var mBinding: FragmentCreateLowRiskAccountBinding
-	private lateinit var appropriateInvestmentFragment: AppropriateInvestmentFragment
-	
-	private var percents: PercentRepoModel? = null
-	
-	override fun onCreateView(
-		inflater: LayoutInflater,container: ViewGroup?,
-		savedInstanceState: Bundle?
-	): View? {
-		// Inflate the layout for this fragment
-		mBinding = DataBindingUtil.inflate(
-			inflater,
-			R.layout.fragment_create_low_risk_account,
-			container,
-			false
-		)
-		
-		mBinding.lifecycleOwner = this
-		mBinding.viewModel = mViewModel
-		
-		return mBinding.root
-	}
-	
-	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
-		super.onViewCreated(view,savedInstanceState)
-		getLowRiskStocks()
-		appropriateInvestmentFragment = childFragmentManager.findFragmentById(R.id.appropriate_investment_fragment) as AppropriateInvestmentFragment
-		observe(mViewModel.lowRiskResource, ::onReady)
-		setupInputPrice()
-		
-		mBinding.myRadioGroup.setOnCheckedChangeListener { group, checkedId ->
-			getLowRiskStocks()
-		}
-		
-		mBinding.submitBtn.setOnClickListener {
-			val price = mBinding.inputPrice.text.toString().filter { it.isDigit() }.toLong()
-			if (price <= 5000000){
-				Toast.makeText(
-					requireContext(), getString(R.string.price_error), Toast.LENGTH_SHORT
-				).show()
-				return@setOnClickListener
-			}
-			findNavController().navigate(
-				CreateLowRiskAccountFragmentDirections.navigationToCalculateProfitCapital(
-					percents,
-					mBinding.inputPrice.text.toString().filter { it.isDigit() }.toLong(),
-					(if (mBinding.highRisk.isChecked) "risk" else "no_risk")
-				)
-			)
-		}
-		
-	}
-	
-	private fun setupSeekBar() {
-		seekBarPrice.onSeekChangeListener = object : OnSeekChangeListener {
-			override fun onSeeking(seekParams: SeekParams?) {
-				if (seekParams != null) {
-					inputPrice.setText(Utils.separatorAmount(seekParams.progress.toString()))
-				}
-			}
 
-			override fun onStartTrackingTouch(seekBar: IndicatorSeekBar?) {
+    private val mViewModel: CreateLowRiskAccountViewModel by viewModels()
+    private lateinit var mBinding: FragmentCreateLowRiskAccountBinding
+    private lateinit var appropriateInvestmentFragment: AppropriateInvestmentFragment
 
-			}
+    private var percents: PercentRepoModel? = null
 
-			override fun onStopTrackingTouch(seekBar: IndicatorSeekBar?) {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        mBinding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_create_low_risk_account,
+            container,
+            false
+        )
 
-			}
+        mBinding.lifecycleOwner = this
+        mBinding.viewModel = mViewModel
 
-		}
-	}
-	
-	private fun setupInputPrice() {
-		val watcher = NumberTextWatcher(
-			mBinding.inputPrice,
-			",###",
-			lifecycleScope
-		) { getLowRiskStocks() }
-		
-		mBinding.inputPrice.addTextChangedListener(watcher)
-	}
-	
-	private fun getLowRiskStocks() {
-		val price = (mBinding.inputPrice.text.toString().filter {
-			it.isDigit()
-		}).toLongOrNull() ?: return
-		
-		val checkedId = mBinding.myRadioGroup.checkedRadioButtonId
-		val riskState = if (checkedId == R.id.high_risk) "risk" else "no_risk"
-		
-		mViewModel.getLowRiskStocks(riskState, price)
-	}
-	
-	private fun onReady(resource: Resource<IsInRiskListRepoModel>){
-		when(resource.status){
-			Status.SUCCESS -> {
-				val response = resource.data?.percent ?: return
-				percents = response
-				val yearRandom = Random.nextInt(20,35)
-				val lowRandom = Random.nextInt(20,yearRandom - 1)
-				val highRandom = Random.nextInt(yearRandom + 1,40)
-				mBinding.lowProfit = lowRandom.toFloat()
-				mBinding.lastYearProfit = yearRandom.toFloat()
-				mBinding.highProfit = highRandom.toFloat()
-				
-				val basket = resource.data?.basket ?: return
-				appropriateInvestmentFragment.pieChartDataList.clear()
-				appropriateInvestmentFragment.pieChartDataList.addAll(
-					basket.map { AppropriateInvestmentFragment.PieChartData(
-						it.percent,
-						it.namad
-					) }
-				)
-				appropriateInvestmentFragment.setup()
-			}
-			Status.ERROR -> Toast.makeText(requireContext(), resource.message, Toast.LENGTH_SHORT).show()
-			else -> return
-		}
-	}
-	
-	override val baseViewModel: BaseViewModel
-		get() = mViewModel
-	
+        return mBinding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        getLowRiskStocks()
+        appropriateInvestmentFragment =
+            childFragmentManager.findFragmentById(R.id.appropriate_investment_fragment) as AppropriateInvestmentFragment
+        observe(mViewModel.lowRiskResource, ::onReady)
+        setupInputPrice()
+
+        mBinding.submitBtn.setOnClickListener {
+            val price = mBinding.inputPrice.getPriceLong()
+            if (price <= 0) {
+                Toast.makeText(
+                    requireContext(), getString(R.string.price_error), Toast.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
+            }
+            findNavController().navigate(
+                CreateLowRiskAccountFragmentDirections.navigationToCalculateProfitCapital(
+                    percents,
+                    mBinding.inputPrice.getPriceLong(),
+                    ("no_risk")
+                )
+            )
+        }
+
+    }
+
+    private fun setupInputPrice() {
+        mBinding.inputPrice.setupWatcherPrice(lifecycleScope) {
+            getLowRiskStocks()
+        }
+    }
+
+    private fun getLowRiskStocks() {
+        val price = mBinding.inputPrice.getPriceLong()
+        if (price <= 0) {
+            Toast.makeText(
+                requireContext(), getString(R.string.price_error), Toast.LENGTH_SHORT
+            ).show()
+            return
+        }
+        mViewModel.getLowRiskStocks("no_risk", price)
+    }
+
+    private fun onReady(resource: Resource<IsInRiskListRepoModel>) {
+        when (resource.status) {
+            Status.SUCCESS -> {
+                val response = resource.data?.percent ?: return
+                percents = response
+                val chartData = resource.data?.chart ?: return
+                val mainChartPoints = mutableListOf<Point>()
+                chartData.forEachIndexed { index, value ->
+                    mainChartPoints.add(
+                        Point(
+                            index.toFloat(),
+                            value,
+                            value,
+                            value.toLong()
+                        )
+                    )
+                }
+                BindingAdapters.setLineAccountChartData(
+                    mBinding.chart,
+                    mainChartPoints,
+                    chartColor = ContextCompat.getColor(
+                        requireContext(),
+                        R.color.japanese_laurel_green
+                    ),
+                    markerColor = ContextCompat.getColor(requireContext(), R.color.conifer_green),
+                    markerTitleColor = Color.WHITE,
+                    chartAlpha = 0,
+                    markerType = 0,
+                    touchEnabled = true
+                )
+                val basket = resource.data?.basket ?: return
+                appropriateInvestmentFragment.pieChartDataList.clear()
+                appropriateInvestmentFragment.pieChartDataList.addAll(
+                    basket.map {
+                        AppropriateInvestmentFragment.PieChartData(
+                            it.percent,
+                            it.namad
+                        )
+                    }
+                )
+                appropriateInvestmentFragment.setup()
+            }
+            Status.ERROR -> Toast.makeText(requireContext(), resource.message, Toast.LENGTH_SHORT)
+                .show()
+            else -> return
+        }
+    }
+
+    override val baseViewModel: BaseViewModel
+        get() = mViewModel
+
 }

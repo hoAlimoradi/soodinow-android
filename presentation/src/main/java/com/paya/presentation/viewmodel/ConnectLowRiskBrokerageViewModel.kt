@@ -1,5 +1,6 @@
 package com.paya.presentation.viewmodel
 
+import androidx.databinding.ObservableField
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.viewModelScope
 import com.paya.domain.models.repo.AddRiskOrderRepoBodyModel
@@ -16,6 +17,7 @@ class ConnectLowRiskBrokerageViewModel @ViewModelInject constructor(
 	private val addRiskOrderUseCase: UseCase<AddRiskOrderRepoBodyModel,String>
 ) : BaseViewModel() {
 	val status = VolatileLiveData<Resource<String>>()
+	val tabCheckedIsSoodinow = ObservableField<Boolean>()
 	fun exitAccount(riskType: String,price: Long) {
 		viewModelScope.launch(Dispatchers.IO) {
 			status.postValue(Resource.loading(null))

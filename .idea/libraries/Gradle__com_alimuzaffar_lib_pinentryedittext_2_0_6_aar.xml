@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.alimuzaffar.lib:pinentryedittext:2.0.6@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5f63d7c50ee8ef341f29954f859930a2/jetified-pinentryedittext-2.0.6/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5f63d7c50ee8ef341f29954f859930a2/jetified-pinentryedittext-2.0.6/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5f63d7c50ee8ef341f29954f859930a2/jetified-pinentryedittext-2.0.6/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/33d89b0fe2508b5dc6e60e30372d5633/jetified-pinentryedittext-2.0.6/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/33d89b0fe2508b5dc6e60e30372d5633/jetified-pinentryedittext-2.0.6/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/33d89b0fe2508b5dc6e60e30372d5633/jetified-pinentryedittext-2.0.6/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.alimuzaffar.lib/pinentryedittext/2.0.6/b444e15b83be4787654b7b6da66dfda01a6be6cc/pinentryedittext-2.0.6-javadoc.jar!/" />

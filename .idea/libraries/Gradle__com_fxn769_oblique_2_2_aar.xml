@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.fxn769:oblique:2.2@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1a1686f62ae9a9958212ee5cfed2e544/jetified-oblique-2.2/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1a1686f62ae9a9958212ee5cfed2e544/jetified-oblique-2.2/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1a1686f62ae9a9958212ee5cfed2e544/jetified-oblique-2.2/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/56c8ba03e00142c963e9faaa33d940b5/jetified-oblique-2.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/56c8ba03e00142c963e9faaa33d940b5/jetified-oblique-2.2/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/56c8ba03e00142c963e9faaa33d940b5/jetified-oblique-2.2/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fxn769/oblique/2.2/2b85efc9400c15a3e5984085525453ebc05e589f/oblique-2.2-javadoc.jar!/" />

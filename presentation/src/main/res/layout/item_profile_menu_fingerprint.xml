@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -24,7 +25,8 @@
            style="@style/SwitchCompatStyle2"
            app:layout_constraintBottom_toBottomOf="parent"
            app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toTopOf="parent"/>
+           app:layout_constraintTop_toTopOf="parent"
+           android:layout_marginStart="@dimen/margin_m"/>
 
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -40,6 +42,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/switchCompat"
             app:layout_constraintEnd_toStartOf="@+id/iconImage"
+            tools:text = "عنوان"
             />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -51,7 +54,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:tint="@color/green"
-            android:scaleType="centerInside"/>
+            android:layout_marginEnd="@dimen/margin_m"
+            android:scaleType="centerInside"
+            tools:src = "@drawable/ic_fingerprint"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

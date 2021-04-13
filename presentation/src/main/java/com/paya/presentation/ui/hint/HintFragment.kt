@@ -1,5 +1,6 @@
 package com.paya.presentation.ui.hint
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,6 +17,7 @@ import com.paya.presentation.R
 import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentHintBinding
+import com.paya.presentation.ui.farabi.FarabiAuthActivity
 import com.paya.presentation.ui.hint.fragments.OpenAccount
 import com.paya.presentation.utils.observe
 import com.paya.presentation.viewmodel.HintViewModel
@@ -54,7 +56,8 @@ class HintFragment : BaseFragment<HintViewModel>() {
 			findNavController().navigate(R.id.navigateToRegisterFragment)
 		}
 		mBinding.login.setOnClickListener {
-			findNavController().navigate(R.id.navigateFromHintToLoginFragment)
+			/*findNavController().navigate(R.id.navigateFromHintToLoginFragment)*/
+			startActivity(Intent(context,FarabiAuthActivity::class.java))
 		}
 		setupViewPager()
 	}

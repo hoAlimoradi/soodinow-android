@@ -87,6 +87,7 @@ class MyMarkerViewSmall(
 		val paint = Paint()
 		paint.color = markerColor
 		paint.style = Paint.Style.FILL_AND_STROKE
+
 		paint.isAntiAlias = true
 		
 		

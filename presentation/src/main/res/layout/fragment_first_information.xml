@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    >
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -14,6 +13,7 @@
             name="viewModel"
             type="FirstInformationViewModel" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -29,8 +29,10 @@
             style="@style/GeneralCardView"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_margin="@dimen/margin_small"
-            app:layout_constraintBottom_toTopOf="@+id/insertBtn"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginBottom="@dimen/margin_small"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar">
@@ -46,92 +48,126 @@
 
                     <include
                         android:id="@+id/name"
-                        android:layout_height="wrap_content"
-                        android:layout_width="match_parent"
                         layout="@layout/item_first_information"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:content="@{viewModel.name}"
                         app:hintLabel="@{@string/hint_name_family}"
                         app:label="@{@string/name_family}"
-                        app:subLabel="@{@string/sub_title_name_family}"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:content="@{viewModel.name}"/>
+                        app:subLabel="@{@string/sub_title_name_family}"
+                        android:layout_marginHorizontal="@dimen/margin_m"
+                        android:layout_marginTop="@dimen/margin_l"/>
 
-                    <View
-                        android:id="@+id/nameLine"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_margin="@dimen/margin_small"
-                        android:background="@drawable/ic_line_green"
-                        app:layout_constraintTop_toBottomOf="@id/name"
-                        android:elevation="10dp"/>
 
                     <include
                         android:id="@+id/national"
-                        android:layout_height="wrap_content"
-                        android:layout_width="match_parent"
                         layout="@layout/item_first_information_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/margin_m"
+                        android:layout_marginTop="@dimen/margin_l"
+                        app:content="@{viewModel.nationalCode}"
                         app:hintLabel="@{@string/hint_national_code}"
                         app:label="@{@string/national_code}"
-                        app:subLabel="@{@string/sub_title_national_code}"
-                        app:layout_constraintTop_toBottomOf="@id/nameLine"
-                        app:content="@{viewModel.nationalCode}"/>
+                        app:layout_constraintTop_toBottomOf="@id/name"
+                        app:subLabel="@{@string/sub_title_national_code}" />
 
-                    <View
-                        android:id="@+id/nationalLine"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_margin="@dimen/margin_small"
-                        android:background="@drawable/ic_line_green"
-                        app:layout_constraintTop_toBottomOf="@id/national"/>
 
                     <include
                         android:id="@+id/shaba"
-                        android:layout_height="wrap_content"
-                        android:layout_width="match_parent"
                         layout="@layout/item_first_information_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/margin_m"
+                        android:layout_marginTop="@dimen/margin_l"
+                        app:content="@{viewModel.bban}"
                         app:hintLabel="@{@string/hint_shaba_number}"
                         app:label="@{@string/shaba_number}"
-                        app:subLabel="@{@string/sub_title_shaba_number}"
-                        app:layout_constraintTop_toBottomOf="@id/nationalLine"
-                        app:content="@{viewModel.bban}"/>
+                        app:layout_constraintTop_toBottomOf="@id/national"
+                        app:subLabel="@{@string/sub_title_shaba_number}" />
 
-                    <View
-                        android:id="@+id/shabaLine"
+
+                    <LinearLayout
+                        android:id="@+id/birthDate"
                         android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_margin="@dimen/margin_small"
-                        android:background="@drawable/ic_line_green"
-                        app:layout_constraintTop_toBottomOf="@id/shaba"/>
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/margin_m"
+                        android:layout_marginTop="@dimen/margin_l"
+                        android:elevation="3dp"
+                        android:orientation="vertical"
+                        app:layout_constraintTop_toBottomOf="@id/shaba">
 
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_marginTop="@dimen/margin_4_dp"
+                            android:drawableStart="@drawable/ic_star"
+                            android:drawablePadding="@dimen/margin_s"
+                            android:text="@string/date_of_birth"
+                            android:textSize="@dimen/text_size_s" />
+
+                        <com.paya.presentation.utils.ClearableEditText
+                            android:id="@+id/inputBirthDateEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_4_dp"
+                            android:enabled="false"
+                            android:hint="تاریخ تولد خود را دقیق انتخاب کنید"
+                            android:lines="1"
+                            android:maxLines="1"
+                            android:padding="@dimen/margin_very_small"
+                            android:singleLine="true"
+                            android:textColor="#000000"
+                            android:textSize="@dimen/text_size_xs" />
+                    </LinearLayout>
 
                     <include
-                        android:id="@+id/birthDate"
-                        android:layout_height="wrap_content"
+                        android:id="@+id/gender"
+                        layout="@layout/item_first_information"
                         android:layout_width="match_parent"
-                        layout="@layout/item_first_information_birth_date"
-                        app:label="@{@string/date_of_birth}"
-                        app:subLabel="@{@string/sub_title_date_of_birth}"
-                        app:layout_constraintTop_toBottomOf="@id/shabaLine"/>
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/margin_m"
+                        android:layout_marginTop="@dimen/margin_l"
+                        app:hintLabel="@{@string/hint_gender}"
+                        app:label="@{@string/gender}"
+                        app:layout_constraintTop_toBottomOf="@id/birthDate" />
 
+                    <include
+                        android:id="@+id/address"
+                        layout="@layout/item_first_information"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/margin_m"
+                        android:layout_marginTop="@dimen/margin_l"
+                        app:hintLabel="@{@string/hint_address}"
+                        app:label="@{@string/address}"
+                        app:layout_constraintTop_toBottomOf="@id/gender" />
 
-
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/insertBtn"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/height_medium"
+                        android:layout_marginStart="@dimen/margin_xxxl"
+                        android:layout_marginTop="@dimen/margin_xxxl"
+                        android:layout_marginEnd="@dimen/margin_xxxl"
+                        android:layout_marginBottom="@dimen/margin_small"
+                        android:background="@drawable/bg_button_green"
+                        android:onClick="@{() -> viewModel.updateProfile()}"
+                        android:text="@string/insert_next"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_small"
+                        app:layout_constraintTop_toBottomOf="@id/address"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintVertical_bias="1"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.core.widget.NestedScrollView>
         </androidx.cardview.widget.CardView>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/insertBtn"
-            android:layout_width="211dp"
-            android:layout_height="@dimen/height_medium"
-            android:layout_marginTop="@dimen/margin_small"
-            android:layout_marginBottom="@dimen/margin_small"
-            android:background="@drawable/bg_button_green"
-            android:text="@string/insert_next"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size_small"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:onClick="@{() -> viewModel.updateProfile()}"/>
+
 
         <include
             layout="@layout/loading_state"

@@ -60,8 +60,9 @@ dependencies {
     
     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.11.0")
     kapt ("com.android.databinding:compiler:${Dependencies.Versions.DATA_BINDING_VER}")
-    
-    implementation("uk.co.chrisjenx:calligraphy:${Dependencies.Versions.CALLIGRAPHY}")
+
+    implementation("io.github.inflationx:calligraphy3:${Dependencies.Versions.CALLIGRAPHY}")
+    implementation("io.github.inflationx:viewpump:${Dependencies.Versions.VIEWPUMP}")
 
     implementation (platform("com.google.firebase:firebase-bom:${Dependencies.Versions.FIREBASEـBOM}"))
     implementation ("com.google.firebase:firebase-crashlytics-ktx")

@@ -32,12 +32,12 @@ class SettingViewModel @ViewModelInject constructor(
 	val loginResource = VolatileLiveData<Resource<Any>>()
 
 	fun getProfile() {
-		viewModelScope.launch(Dispatchers.IO) {
+		/*viewModelScope.launch(Dispatchers.IO) {
 			loading.postValue(Resource.loading(null))
 			val response  = callResource(this@SettingViewModel,useCaseProfile.action(Unit))
 			status.postValue(response)
 			loading.postValue(response)
-		}
+		}*/
 		
 	}
 

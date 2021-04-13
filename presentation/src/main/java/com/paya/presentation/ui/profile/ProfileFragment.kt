@@ -13,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
 import com.paya.domain.models.repo.BoxHistoryRepoModel
 import com.paya.domain.models.repo.ExitAccountRepoModel
 import com.paya.domain.tools.Resource
@@ -73,61 +74,70 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
         observe(viewModel.existAccount, ::onExistAccountReady)
         observe(viewModel.profile, ::onProfileReady)
 
-        mBinding.txtInventoryManagement.setOnClickListener {
-            findNavController().navigate(
-                ProfileFragmentDirections.navigateToCasFragment()
-            )
-        }
-        mBinding.managementImg.setOnClickListener {
-            findNavController().navigate(
-                ProfileFragmentDirections.navigateToCasFragment()
-            )
-        }
+
     }
 
     private fun initRadioGroup() {
-        mBinding.myRadioGroup.setOnCheckedChangeListener { _, checkedId ->
-            currentBoxId ?: return@setOnCheckedChangeListener
-            when (checkedId) {
-                R.id.radioButtonDay -> {
-                    boxHistoryType = "day"
-                    boxHistoryNumber = 3
-                }
-                R.id.RadioButtonWeek -> {
-                    boxHistoryType = "week"
-                    boxHistoryNumber = 1
-                }
-                R.id.RadioButtonMonth -> {
-                    boxHistoryType = "month"
-                    boxHistoryNumber = 1
-                }
-                R.id.RadioButtonLongTerm -> {
-                    boxHistoryType = "month"
-                    boxHistoryNumber = 3
-                }
-                else -> {
-                    boxHistoryType = "day"
-                    boxHistoryNumber = 3
-                }
+        mBinding.chartTabLayout.getTabAt(3)?.select()
+        mBinding.chartTabLayout.addOnTabSelectedListener( object : TabLayout.OnTabSelectedListener{
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+
             }
-            currentBoxId?.let { viewModel.getProfile(it, boxHistoryType, boxHistoryNumber) }
-        }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+            }
+
+            // TODO: 4/2/21 box history Number what?
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                currentBoxId ?: return
+                when (mBinding.chartTabLayout.selectedTabPosition) {
+                    // day
+                   3 -> {
+                        boxHistoryType = "day"
+                        boxHistoryNumber = 3
+                    }
+                    //week
+                    2 -> {
+                        boxHistoryType = "week"
+                        boxHistoryNumber = 1
+                    }
+                    //month
+                    1 -> {
+                        boxHistoryType = "month"
+                        boxHistoryNumber = 1
+                    }
+                    //years
+                    0 -> {
+                        boxHistoryType = "month"
+                        boxHistoryNumber = 3
+                    }
+                    else -> {
+                        boxHistoryType = "day"
+                        boxHistoryNumber = 3
+                    }
+                }
+                currentBoxId?.let { viewModel.getProfile(it, boxHistoryType, boxHistoryNumber) }
+            }
+
+        })
+
     }
 
     private fun onExistAccountReady(resource: Resource<ExitAccountRepoModel>) {
         if (resource.status == Status.SUCCESS) {
-            resource.data?.activeBoxId?.let {
-                boxHistoryId = it
-                it.forEach { id ->
-                    boxHistoryHahMap[id] = null
-                    cardAccounts.add(CardAccount())
+            resource.data?.activeBox?.let {
+                boxHistoryId = it.map { activeBox -> activeBox.id }
+                it.forEach { activeBox ->
+                    boxHistoryHahMap[activeBox.id] = null
+                    cardAccounts.add(CardAccount.newInstance(activeBox))
                 }
                 if (it.isEmpty()) {
                     viewModel.setErrorMessage("شما هیچ حسابی ایجاد نکرده اید")
                     return@let
                 }
-                currentBoxId = it.first()
-                viewModel.getProfile(it.first(), boxHistoryType, boxHistoryNumber)
+                currentBoxId = it.first().id
+                viewModel.getProfile(it.first().id, boxHistoryType, boxHistoryNumber)
             }
         } else if (resource.status == Status.ERROR) {
             viewModel.setErrorMessage(resource.message ?: "خطایی رخ داده است")
@@ -143,7 +153,7 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
                 val cardAccount = cardAccounts[cardAccountIndex]
                 if (!cardAccount.isDataSet)
                     adapter.notifyItemChanged(cardAccountIndex)
-                mBinding.scrollView.visibility = View.VISIBLE
+                mBinding.parentView.visibility = View.VISIBLE
                 lifecycleScope.launch {
                     delay(500)
                     setCurrentBoxData(cardAccount, it)
@@ -158,15 +168,14 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
         adapter = SlidePagerAdapter(this)
         mBinding.pager.offscreenPageLimit = 1
         mBinding.pager.adapter = adapter
-        if (adapter.itemCount > 1) {
-            mBinding.pager.setPadding(
-                resources.getDimension(R.dimen.viewpager_item_padding).toInt(),
-                0,
-                resources.getDimension(R.dimen.viewpager_item_padding).toInt(), 0
-            )
-            mBinding.pager.setPageTransformer(ViewPagerUtil.getTransformer(requireContext().resources))
-            mBinding.pager.addItemDecoration(ViewPagerUtil.getItemDecoration(requireContext()))
-        }
+        mBinding.pager.setPadding(
+            resources.getDimension(R.dimen.viewpager_item_padding).toInt(),
+            0,
+            resources.getDimension(R.dimen.viewpager_item_padding).toInt(), 0
+        )
+        mBinding.pager.setPageTransformer(ViewPagerUtil.getTransformer(requireContext().resources))
+        mBinding.pager.addItemDecoration(ViewPagerUtil.getItemDecoration(requireContext()))
+
         mBinding.pager.registerOnPageChangeCallback(
             object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
@@ -181,30 +190,12 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
                 }
             }
         )
-        mBinding.tabAccountCard.setViewPager2(mBinding.pager)
+
     }
 
     private fun setCurrentBoxData(cardAccount: CardAccount, boxModel: BoxHistoryRepoModel) {
-        val roundedPercent = Utils.roundNumber((boxModel.percent * 100).toDouble())
-        cardAccount.setData(boxModel.cardChart, boxModel.buyValue, roundedPercent, boxModel.name)
-
         val mainChartPoints = mutableListOf<Point>()
         val mainChartData = boxModel.mainChart.data
-        if (mainChartData.isNotEmpty()) {
-            val difference = mainChartData.last() - mainChartData.first()
-            val percent = ((difference * 100).toDouble() / mainChartData.first())
-            mBinding.txtPercent.text = Utils.roundNumber(percent).toString()
-            val pathResourceId =
-                if (percent >= 0) R.drawable.ic_path_up else R.drawable.ic_path_down
-            mBinding.imgPath.setImageResource(pathResourceId)
-            mBinding.txtPrice.text = Utils.separatorAmount(mainChartData.last().toString())
-        }
-        val persianDate = Utils.convertStringToPersianCalender(boxModel.mainChart.endDate)
-        persianDate?.let {
-            val date =
-                "${persianDate.persianYear} ${persianDate.persianMonthName} ${persianDate.persianDay}"
-            mBinding.txtDate.text = date
-        }
         mainChartData.forEachIndexed { index, value ->
             mainChartPoints.add(
                 Point(
@@ -218,10 +209,10 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
         BindingAdapters.setLineAccountChartData(
             mBinding.chart,
             mainChartPoints,
-            chartColor = ContextCompat.getColor(requireContext(), R.color.green),
-            markerColor = ContextCompat.getColor(requireContext(), R.color.purple_gray),
+            chartColor = ContextCompat.getColor(requireContext(), R.color.japanese_laurel_green),
+            markerColor = ContextCompat.getColor(requireContext(), R.color.conifer_green),
             markerTitleColor = Color.WHITE,
-            chartAlpha = 35,
+            chartAlpha = 0,
             markerType = 0,
             touchEnabled = true
         )

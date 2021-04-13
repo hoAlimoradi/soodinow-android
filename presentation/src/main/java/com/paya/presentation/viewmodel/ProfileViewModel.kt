@@ -3,7 +3,6 @@ package com.paya.presentation.viewmodel
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.paya.domain.models.repo.*
 import com.paya.domain.tools.Resource
@@ -11,7 +10,6 @@ import com.paya.domain.tools.Status
 import com.paya.domain.tools.UseCase
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.utils.callResource
-import com.paya.presentation.utils.shared.Point
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -46,7 +44,6 @@ class ProfileViewModel @ViewModelInject constructor(
 	fun setErrorMessage(message: String){
 		errorMessage.value = message
 	}
-	
 	fun getExistAccount(){
 		existAccount.value = Resource.loading(null)
 		viewModelScope.launch(Dispatchers.IO) {
@@ -74,7 +71,7 @@ class ProfileViewModel @ViewModelInject constructor(
 	}
 
 	private fun getMockE() : Resource<ExitAccountRepoModel> {
-		return Resource.success(ExitAccountRepoModel(true,listOf(1)))
+		return Resource.success(ExitAccountRepoModel(true,listOf(1,2)))
 	}
 
 	fun getProfile(
@@ -101,8 +98,10 @@ class ProfileViewModel @ViewModelInject constructor(
 			"2020-11-30T09:13:24.700966Z","2020-10-30T09:13:24.700966Z"
 		)
 		val circleChart = listOf(
-			CircleChartDataRepoModel(250000,3,"فیلان"),
-			CircleChartDataRepoModel(300000,6,"بیسار")
+			CircleChartDataRepoModel(250000F,3,"فیلان"),
+			CircleChartDataRepoModel(300000F,6,"بیسار2"),
+			CircleChartDataRepoModel(300000F,2,"بیسار"),
+			CircleChartDataRepoModel(300000F,4,"بیسار1")
 		)
 		val boxRepoModel = BoxHistoryRepoModel(
 			cardChart,

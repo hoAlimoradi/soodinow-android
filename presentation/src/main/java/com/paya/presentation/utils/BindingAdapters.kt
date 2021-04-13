@@ -22,6 +22,7 @@ import androidx.databinding.BindingAdapter
 import at.grabner.circleprogress.CircleProgressView
 import com.alimuzaffar.lib.pin.PinEntryEditText
 import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.components.YAxis.YAxisLabelPosition.INSIDE_CHART
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IFillFormatter
@@ -181,7 +182,12 @@ object BindingAdapters {
         val start = value?.let { textView.text.indexOf(it) }
         val end = value?.let { it.length }
         if (start != null && end != null) {
-            spannable.setSpan(ForegroundColorSpan(color), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            spannable.setSpan(
+                ForegroundColorSpan(color),
+                start,
+                end,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
         }
         textView.setText(spannable, TextView.BufferType.SPANNABLE);
     }
@@ -370,7 +376,21 @@ object BindingAdapters {
 
         chart.xAxis.isEnabled = false
 
-        chart.axisLeft.isEnabled = false
+
+        chart.axisLeft.apply {
+            isEnabled = true
+            axisMinimum = 0f
+            mAxisMaximum = 150f
+            setLabelCount(4, false)
+            textColor = Color.RED
+            setPosition(INSIDE_CHART)
+            setDrawGridLines(true)
+            zeroLineColor = Color.LTGRAY
+            axisLineColor = Color.LTGRAY;
+        }
+
+
+
 
         chart.axisRight.isEnabled = false
 
@@ -428,8 +448,8 @@ object BindingAdapters {
             set1.mode = LineDataSet.Mode.CUBIC_BEZIER
             set1.cubicIntensity = 0.2f
             set1.setDrawFilled(true)
-            set1.setDrawCircles(true)
-            set1.lineWidth = 2f
+            set1.setDrawCircles(false)
+            set1.lineWidth = 3f
             set1.circleRadius = 0f
             set1.setCircleColor(Color.TRANSPARENT)
             set1.color = chartColor
@@ -461,8 +481,23 @@ object BindingAdapters {
 
     @JvmStatic
     @BindingAdapter("setPrice")
-    fun setPrice(view: TextView,labelText:Long?) {
+    fun setPrice(view: TextView, labelText: Long?) {
         view.text = Utils.separatorAmount(labelText.toString())
+    }
+
+    @JvmStatic
+    @BindingAdapter( "arrayStringText", "colorArrayText")
+    fun setArrayStringText(
+        view: TextView,
+        stringArray: Array<String>,
+        colorArrayText: Int
+    ) {
+        view.text = BulletTextUtil.makeBulletListFromStringArrayResource(
+            view.context.resources.getDimension(R.dimen.margin_s).toInt(),
+            view.context,
+            colorArrayText,
+            stringArray
+        )
     }
 
 

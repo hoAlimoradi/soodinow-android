@@ -21,6 +21,9 @@
         <action
             android:id="@+id/navigateToIntroduceFriendsFragment"
             app:destination="@id/introduceFriendsFragment" />
+        <action
+            android:id="@+id/navigateToSupportFragment"
+            app:destination="@id/support" />
 
     </fragment>
 
@@ -29,9 +32,6 @@
         android:name="com.paya.presentation.ui.support.SupportFragment"
         android:label="fragment_support"
         tools:layout="@layout/fragment_support">
-        <action
-            android:id="@+id/navigateToHomeFragment"
-            app:destination="@id/chat" />
         <action
             android:id="@+id/navigateToChatFragment"
             app:destination="@id/chat" />
@@ -63,6 +63,8 @@
             app:destination="@id/activitiesReportFragment" />
 
 
+
+
     </fragment>
 
 
@@ -74,20 +76,6 @@
         <action
             android:id="@+id/navigateToMarketFragment"
             app:destination="@id/market" />
-
-        <action
-            android:id="@+id/navigateToCasFragment"
-            app:destination="@id/cashManager" />
-
-    </fragment>
-    <fragment
-        android:id="@+id/cashManager"
-        android:name="com.paya.presentation.ui.cashManager.CashManagerFragment"
-        android:label="fragment_cash_manager"
-        tools:layout="@layout/fragment_cash_manager">
-        <action
-            android:id="@+id/navigateCashHistory"
-            app:destination="@id/historyPriceManagerFragment" />
 
     </fragment>
 
@@ -244,6 +232,28 @@
 
 
         <action
+            android:id="@+id/navigateToCreateAccountRulesFragment"
+            app:destination="@id/createAccountRules"
+             />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/createAccountRules"
+        android:name="com.paya.presentation.ui.createAccountRules.CreateAccountRulesFragment"
+        android:label="fragment_create_account_rules"
+        tools:layout="@layout/fragment_create_account_rules">
+
+        <argument
+            android:name="SelectedPrice"
+            app:argType="long" />
+
+        <argument
+            android:name="riskState"
+            app:argType="string" />
+
+
+        <action
             android:id="@+id/navigateToHomeFragment"
             app:destination="@id/home"
             app:popUpToInclusive="true" />
@@ -266,7 +276,6 @@
             android:id="@+id/navigationNavGraph"
             app:destination="@+id/navGraph" />
     </fragment>
-    <include app:graph="@navigation/nav_graph" />
     <fragment
         android:id="@+id/userUpdateProfile"
         android:name="com.paya.presentation.ui.userUpdateProfile.UserUpdateProfileFragment"
@@ -282,11 +291,17 @@
 
     </fragment>
 
-    <fragment
-        android:id="@+id/historyPriceManagerFragment"
-        android:name="com.paya.presentation.ui.cashManager.CashHistoryFragment"
-        android:label="fragment_cash_history"
-        tools:layout="@layout/fragment_cash_history">
 
+    <fragment
+    android:id="@+id/newCardAccount"
+    android:name="com.paya.presentation.ui.cardAccount.NewCardAccountFragment"
+    android:label="new_card_account"
+    tools:layout="@layout/fragment_new_card_account">
+        <action
+            android:id="@+id/navigateToCreateWithoutRiskAccountFragment"
+            app:destination="@id/createWithoutRiskAccount" />
     </fragment>
+
+
+
 </navigation>

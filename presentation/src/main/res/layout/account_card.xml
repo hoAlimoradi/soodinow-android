@@ -7,199 +7,99 @@
         android:id="@+id/accountCardLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_account_card"
-        android:minHeight="150dp"
+        android:background="@drawable/ic_cards"
+        android:minHeight="168dp"
         tools:context=".ui.home.fragments.CardAccount">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/top_guideline"
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/logoImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.07" />
+            android:layout_marginTop="@dimen/margin_s"
+            android:layout_marginEnd="@dimen/margin_m"
+            android:src="@drawable/ic_logo_white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:scaleType="center"/>
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/top_card_number_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.1" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/bottom_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.93" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/inner_bottom_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.9" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/start_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.04" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/end_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.96" />
-
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/chart_end_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.35" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/center_horizontal_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.5" />
-
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/user_name_bottom_guideline"
-            android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.7" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/logoImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_logo_white"
-        app:layout_constraintEnd_toStartOf="@id/end_guideline"
-        app:layout_constraintTop_toBottomOf="@id/top_guideline" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/accountCardNumber"
-            android:layout_width="0dp"
+            android:id="@+id/accountSubCardNumber"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:autoSizeMaxTextSize="@dimen/text_size_card_number"
-            android:autoSizeMinTextSize="@dimen/text_size_small"
-            android:autoSizeTextType="uniform"
-            android:text="5585  2588 2555  2154"
+            android:layout_marginEnd="@dimen/margin_sub_cards"
+            android:layout_marginBottom="@dimen/margin_m"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_card_number"
-            app:layout_constraintEnd_toStartOf="@id/logoImage"
-            app:layout_constraintStart_toEndOf="@id/start_guideline"
-            app:layout_constraintTop_toBottomOf="@id/top_card_number_guideline"
-            tools:targetApi="o" />
+            android:textSize="@dimen/text_size_10sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="حساب سرمایه گذاری جسور پایا"
+            app:layout_constraintTop_toBottomOf="@id/dateTitle"
+            app:layout_constraintVertical_bias="1"/>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/accountSubCardNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_4_dp"
-        tools:text="حساب سرمایه گذاری جسور پایا"
-        android:textColor="@color/green_gray"
-        android:textSize="@dimen/text_size_10sp"
-        app:layout_constraintStart_toEndOf="@id/start_guideline"
-        app:layout_constraintTop_toBottomOf="@id/accountCardNumber"
-        android:visibility="gone"/>
-
-        <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/chart"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="@dimen/margin_very_small"
-            android:layout_marginEnd="@dimen/margin_very_small"
-            app:layout_constraintStart_toEndOf="@+id/start_guideline"
-            app:layout_constraintTop_toBottomOf="@id/center_horizontal_guideline"
-            app:layout_constraintBottom_toTopOf="@+id/bottom_guideline"
-            app:layout_constraintEnd_toStartOf="@+id/chart_end_guideline"
-            android:clipChildren="false"
-            android:clipToPadding="false"/>
-
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_very_small"
-        android:elevation="2dp"
-        android:gravity="center"
-        android:text="@string/wealth_increase"
-        android:textColor="@color/white"
-        android:textSize="8sp"
-        app:layout_constraintTop_toBottomOf="@+id/chart"
-        app:layout_constraintEnd_toEndOf="@+id/chart" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/accountUserName"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:gravity="top"
             tools:text="رضا کریمی"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_small"
-            app:layout_constraintBottom_toTopOf="@+id/user_name_bottom_guideline"
-            app:layout_constraintEnd_toStartOf="@id/end_guideline"
-            app:layout_constraintTop_toBottomOf="@id/center_horizontal_guideline" />
+            android:layout_marginTop="@dimen/margin_m"
+            android:layout_marginEnd="@dimen/margin_sub_cards"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/logoImage" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/dateValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="top"
-            tools:text="99 / 02 / 18"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size_11sp"
-            app:layout_constraintEnd_toStartOf="@id/end_guideline"
-            app:layout_constraintTop_toBottomOf="@id/user_name_bottom_guideline" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/dateTitle"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:autoSizeMaxTextSize="@dimen/text_size_10sp"
             android:autoSizeMinTextSize="@dimen/text_size_8sp"
             android:autoSizeTextType="uniform"
             android:gravity="center"
             android:text="@string/create_date"
-            android:textColor="@color/green_gray"
+            android:textColor="@color/white"
             android:textSize="@dimen/text_size_8sp"
-            app:layout_constraintEnd_toStartOf="@id/end_guideline"
-            app:layout_constraintStart_toEndOf="@id/dateBarrier"
-            app:layout_constraintTop_toBottomOf="@id/dateValue"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="@dimen/margin_sub_cards"
+            android:layout_marginTop="@dimen/margin_l"
+            app:layout_constraintTop_toBottomOf="@id/accountUserName"
             tools:targetApi="o" />
 
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/dateBarrier"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="start"
-        app:constraint_referenced_ids="dateTitle,dateValue" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/managementAccountBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginStart="@dimen/margin_l"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/bg_btn_create_card"
 
-    <Space
-        android:id="@+id/space"
-        android:layout_width="@dimen/margin_medium"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/bottom_guideline"
-        app:layout_constraintEnd_toStartOf="@id/dateBarrier" />
+            android:paddingStart="@dimen/margin_m"
+            android:paddingEnd="@dimen/margin_m"
+            android:text="@string/inventory_management"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_xs"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="@dimen/margin_l"/>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/wealthValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="top"
-        tools:text="10.856.000"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_size_11sp"
-        app:layout_constraintEnd_toStartOf="@id/space"
-        app:layout_constraintTop_toBottomOf="@id/user_name_bottom_guideline" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/wealthValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:textColor="@color/green_gray"
+            android:textSize="@dimen/text_size_l"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/managementAccountBtn"
+            android:layout_marginStart="@dimen/margin_l"
+            android:layout_marginTop="@dimen/margin_l"
+            tools:text="10.856.000" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/wealthTitle"
@@ -210,12 +110,12 @@
             android:autoSizeTextType="uniform"
             android:gravity="center"
             android:text="@string/wealth_toman"
-            android:textColor="@color/green_gray"
+            android:textColor="@color/white"
             android:textSize="@dimen/text_size_8sp"
-            app:layout_constraintEnd_toStartOf="@id/space"
             app:layout_constraintStart_toEndOf="@+id/wealthBarrier"
             app:layout_constraintTop_toBottomOf="@id/wealthValue"
             tools:targetApi="o" />
+
 
         <androidx.constraintlayout.widget.Barrier
             android:id="@+id/wealthBarrier"
@@ -225,6 +125,15 @@
             app:barrierDirection="start"
             app:constraint_referenced_ids="wealthTitle,wealthValue" />
 
-
+<ImageView
+    android:layout_width="44dp"
+    android:layout_height="44dp"
+    android:background="@drawable/round_corner_layout_white"
+    app:layout_constraintBottom_toBottomOf="parent"
+    android:layout_marginBottom="@dimen/margin_m"
+    android:layout_marginStart="@dimen/margin_xl"
+    app:layout_constraintStart_toStartOf="parent"
+    android:src="@drawable/ic_farabi"
+    android:scaleType="center"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

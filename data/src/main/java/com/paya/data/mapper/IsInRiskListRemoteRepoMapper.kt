@@ -15,6 +15,9 @@ class IsInRiskListRemoteRepoMapper @Inject constructor(): Mapper<
 	override fun map(param: IsInRiskListRemoteModel): IsInRiskListRepoModel {
 		return IsInRiskListRepoModel(
 			param.basket.map {
+				it.percent
+			},
+			param.basket.map {
 				BasketRepoModel(
 					it.name,
 					it.namad,

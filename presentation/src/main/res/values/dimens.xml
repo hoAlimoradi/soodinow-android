@@ -6,6 +6,7 @@
     <dimen name="radius_chart">48dp</dimen>
     <dimen name="radius_medium">36dp</dimen>
     <dimen name="radius_card">15dp</dimen>
+    <dimen name="radius_card_m">10dp</dimen>
     <dimen name="height">48dp</dimen>
     <dimen name="height_medium">36dp</dimen>
     <dimen name="margin_medium">24dp</dimen>
@@ -36,12 +37,12 @@
     <dimen name="design_bottom_navigation_active_text_size" tools:override="true">10sp</dimen>
     <dimen name="create_account_button_height">40dp</dimen>
     <dimen name="text_size_card_number">18sp</dimen>
-    <dimen name="viewpager_next_item_visible">20dp</dimen>
-    <dimen name="viewpager_item_padding">10dp</dimen>
-    <dimen name="viewpager_current_item_horizontal_margin">30dp</dimen>
+    <dimen name="viewpager_next_item_visible">10dp</dimen>
+    <dimen name="viewpager_item_padding">5dp</dimen>
+    <dimen name="viewpager_current_item_horizontal_margin">20dp</dimen>
     <dimen name="elevation">10dp</dimen>
 
-    <dimen name="line_chart_height">120dp</dimen>
+    <dimen name="line_chart_height">150dp</dimen>
     <dimen name="dialog_w">300dp</dimen>
     <dimen name="dialog_h">500dp</dimen>
 
@@ -52,6 +53,8 @@
     <dimen name="text_size_m">14sp</dimen>
     <dimen name="text_size_s">12sp</dimen>
     <dimen name="text_size_xs">10sp</dimen>
+    <dimen name="text_size_xxs">8sp</dimen>
+
     <dimen name="text_size_error">5sp</dimen>
 
     <!--      size -->
@@ -67,4 +70,8 @@
     <dimen name="margin_m">8dp</dimen>
     <dimen name="margin_l">16dp</dimen>
     <dimen name="margin_xl">24dp</dimen>
+    <dimen name="margin_xxxl">40dp</dimen>
+    <dimen name="margin_sub_cards">32dp</dimen>
+    <dimen name="bullet_size">40dp</dimen>
+    <dimen name="why_soodinow_text_height">68dp</dimen>
 </resources>

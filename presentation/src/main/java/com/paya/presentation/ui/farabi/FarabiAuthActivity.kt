@@ -1,13 +1,12 @@
 package com.paya.presentation.ui.farabi
 
 import android.app.Activity
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.viewModels
 import com.hadiidbouk.appauthwebview.AppAuthWebView
 import com.hadiidbouk.appauthwebview.AppAuthWebViewData
 import com.hadiidbouk.appauthwebview.IAppAuthWebViewListener
@@ -23,10 +22,9 @@ import com.paya.presentation.utils.shortToast
 import com.paya.presentation.viewmodel.FarabiAuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_farabi_auth.*
-import kotlinx.android.synthetic.main.loading_state.view.*
 import kotlinx.android.synthetic.main.toolbar.view.*
 import net.openid.appauth.AuthState
-import kotlin.reflect.KProperty
+
 
 @AndroidEntryPoint
 class FarabiAuthActivity : BaseActivity<FarabiAuthViewModel>() {
@@ -68,7 +66,13 @@ class FarabiAuthActivity : BaseActivity<FarabiAuthViewModel>() {
                 .authData(this)
                 .listener(object : IAppAuthWebViewListener {
                     override fun onUserAuthorize(p0: AuthState?) {
-                        p0?.accessToken?.let { mViewModel.setToken(it) }
+                        p0?.accessToken?.let {
+                           // mViewModel.setToken(it)
+                            val clipboard: ClipboardManager =
+                                getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                            val clip = ClipData.newPlainText("token", it)
+                            clipboard.setPrimaryClip(clip)
+                        }
                     }
 
                     override fun onLogoutFinish() {

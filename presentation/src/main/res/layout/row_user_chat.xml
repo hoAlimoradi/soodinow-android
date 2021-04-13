@@ -16,11 +16,13 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card"
-        app:cardBackgroundColor="@color/purple"
+        app:cardBackgroundColor="@color/green"
         app:cardCornerRadius="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toStartOf="@id/image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="1"
         app:layout_constraintTop_toTopOf="parent"
         android:minWidth="@dimen/height"
         android:layout_marginEnd="@dimen/margin_4_dp"

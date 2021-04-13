@@ -5,7 +5,11 @@
     tools:context=".ui.cashManager.CashManagerFragment">
 
     <data>
+
         <import type="com.paya.domain.tools.Resource" />
+
+        <import type="com.paya.presentation.viewmodel.CashManagerViewModel.PriceType" />
+
         <variable
             name="viewModel"
             type="com.paya.presentation.viewmodel.CashManagerViewModel" />
@@ -22,84 +26,38 @@
             layout="@layout/toolbar"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/pager"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_very_small"
+            android:maxHeight="180dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/managerAccountHistory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_small"
-            android:layout_marginTop="@dimen/margin_very_small"
+            android:layout_marginEnd="@dimen/margin_l"
             android:drawableEnd="@drawable/ic_account_managment"
             android:drawablePadding="@dimen/margin_very_small"
+            android:elevation="4dp"
             android:text="@string/account_manager_history"
-            android:textColor="@color/dark_gray_2"
+            android:textColor="@color/purple_gray"
             android:textSize="@dimen/text_size_12sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar" />
+            app:layout_constraintBottom_toBottomOf="@id/cardViewHistory"
+            app:layout_constraintEnd_toEndOf="@id/cardViewHistory"
+            app:layout_constraintTop_toTopOf="@id/cardViewHistory" />
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardCash"
-            style="@style/GeneralCardView"
+            android:id="@+id/cardViewHistory"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_small"
-            app:layout_constraintTop_toBottomOf="@id/managerAccountHistory">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="@dimen/margin_small">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/managerAccount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin_small"
-                    android:layout_marginStart="@dimen/margin_small"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:drawableEnd="@drawable/ic_account_cash"
-                    android:drawablePadding="@dimen/margin_very_small"
-                    android:elevation="2dp"
-                    android:text="@string/cash_account"
-                    android:textColor="@color/purple"
-                    android:textSize="@dimen/text_size_small"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/txtPrice"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/height_medium"
-                    android:layout_margin="@dimen/margin_small"
-                    android:background="@drawable/round_corner_layout_border_gray"
-                    android:elevation="2dp"
-                    android:enabled="false"
-                    android:gravity="center"
-                    android:inputType="number"
-                    android:lines="1"
-                    android:maxLines="1"
-                    android:paddingStart="@dimen/margin_very_small"
-                    android:paddingEnd="@dimen/margin_very_small"
-                    android:singleLine="true"
-                    android:text="26,000,000"
-                    android:textColor="#000000"
-                    android:textSize="@dimen/text_size_small"
-                    setPrice="@{viewModel.totalBoxValue}"
-                    app:layout_constraintTop_toBottomOf="@id/managerAccount" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tomanTxtPrice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/height_medium"
-                    android:layout_marginStart="@dimen/margin_small"
-                    android:elevation="2dp"
-                    android:gravity="center"
-                    android:text="@string/rial"
-                    android:textColor="@color/gray"
-                    android:textSize="@dimen/text_size_10sp"
-                    app:layout_constraintBottom_toBottomOf="@id/txtPrice"
-                    app:layout_constraintStart_toStartOf="@id/txtPrice" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
+            android:layout_height="38dp"
+            android:layout_margin="@dimen/margin_l"
+            app:cardCornerRadius="4dp"
+            app:layout_constraintTop_toBottomOf="@id/pager" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardAccount"
@@ -108,7 +66,7 @@
             android:layout_height="0dp"
             android:layout_margin="@dimen/margin_small"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardCash">
+            app:layout_constraintTop_toBottomOf="@id/cardViewHistory">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -119,236 +77,136 @@
                     android:id="@+id/txt_calculate_profit_capital_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_wallet"
+                    android:drawablePadding="@dimen/margin_m"
                     android:text="@string/deposit_withdrawal_account"
-                    android:textColor="@color/purple"
+                    android:textColor="@color/purple_gray"
                     android:textSize="@dimen/text_size_11sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:layout_marginHorizontal="@dimen/margin_xxxl"
+                    android:layout_marginTop="@dimen/margin_l"
+                    android:background="@drawable/bg_tab_layout_mini"
+                    app:layout_constraintTop_toBottomOf="@id/txt_calculate_profit_capital_title"
+                    app:tabBackground="@drawable/selector_tab_brokerage"
+                    app:tabGravity="fill"
+                    app:tabIndicatorHeight="0dp"
+                    app:tabMode="fixed"
+                    app:tabSelectedTextColor="@color/brokerage_tab_color">
+
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/withdrawalTab"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/withdrawal_cash" />
+
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/depositTab"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/deposit_cash" />
+
+
+                </com.google.android.material.tabs.TabLayout>
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/txt_calculate_profit_capital_desc"
+                    android:id="@+id/titlePrice"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_very_small"
-                    android:maxLines="2"
-                    android:text="لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه است. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده"
-                    android:textColor="@color/gray"
-                    android:textSize="@dimen/text_size_10sp"
+                    android:layout_marginTop="@dimen/margin_xl"
+                    android:gravity="center"
+                    android:text="@{viewModel.priceType ==PriceType.deposit ? @string/deposit_price : @string/withdrawal_price}"
+                    android:textColor="#515151"
+                    android:textSize="@dimen/text_size_xs"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/txt_calculate_profit_capital_title" />
+                    app:layout_constraintTop_toBottomOf="@id/tabLayout"
+                    tools:text="@string/withdrawal_price" />
 
-                <LinearLayout
-                    android:id="@+id/layoutAccount"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:background="@drawable/round_corner_layout"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/margin_4_dp"
-                    app:layout_constraintTop_toBottomOf="@id/txt_calculate_profit_capital_desc">
-
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/withdrawalAccountBtn"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/height_medium"
-                        android:layout_weight="5"
-                        android:background="@drawable/round_corner_layout_selector_red"
-                        android:gravity="center"
-                        android:text="@string/withdrawal_cash"
-                        android:textColor="@color/gray"
-                        android:textSize="@dimen/text_size_11sp"
-                        android:theme="@style/Theme.MaterialComponents.Light.DarkActionBar"
-                        app:backgroundTint="@color/red"
-                        app:icon="@drawable/ic_withdrawal"
-                        app:iconGravity="textEnd"
-                        app:iconTint="@color/gray" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/depositAccountBtn"
-                        isSelected="true"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/height_medium"
-                        android:layout_weight="5"
-                        android:background="@drawable/round_corner_layout_selector_green"
-                        android:text="@string/deposit_cash"
-                        android:textColor="@color/gray"
-                        android:textSize="@dimen/text_size_11sp"
-                        android:theme="@style/Theme.MaterialComponents.Light.DarkActionBar"
-                        app:backgroundTint="@color/green"
-                        app:icon="@drawable/ic_deposit_money"
-                        app:iconGravity="textEnd"
-                        app:iconTint="@color/gray" />
-
-                </LinearLayout>
-
-                <androidx.appcompat.widget.AppCompatSpinner
-                    android:id="@+id/inputSelectTypes"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/height_medium"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:background="@drawable/round_corner_layout"
-                    android:drawableStart="@drawable/ic_tick"
-                    android:hint="@string/select_brokerage"
-                    android:inputType="text"
-                    android:lines="1"
-                    android:maxLines="1"
-                    android:paddingStart="@dimen/margin_very_small"
-                    android:paddingEnd="@dimen/margin_very_small"
-                    android:singleLine="true"
-                    android:textColor="#000000"
-                    android:textSize="@dimen/text_size_11sp"
-                    app:layout_constraintTop_toBottomOf="@id/layoutAccount"
-                    android:entries="@array/account_list"
-                    android:spinnerMode="dropdown"
-                    android:overlapAnchor="false"
-                    />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_arrow_bottom"
-                    app:layout_constraintTop_toTopOf="@id/inputSelectTypes"
-                    app:layout_constraintStart_toStartOf="@id/inputSelectTypes"
-                    app:layout_constraintBottom_toBottomOf="@id/inputSelectTypes"
-                    android:layout_marginStart="@dimen/margin_small"/>
-
-                <androidx.appcompat.widget.AppCompatEditText
+                <com.paya.presentation.utils.InputPrice
                     android:id="@+id/inputPrice"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/height_medium"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:background="@drawable/round_corner_layout"
-                    android:enabled="true"
-                    android:gravity="center"
-                    android:inputType="number"
-                    android:lines="1"
-                    android:maxLines="1"
-                    android:paddingStart="@dimen/margin_very_small"
-                    android:paddingEnd="@dimen/margin_very_small"
-                    android:singleLine="true"
-                    setPrice="@{viewModel.price}"
-                    android:textColor="#000000"
-                    android:textSize="@dimen/text_size_small"
-                    app:layout_constraintTop_toBottomOf="@id/inputSelectTypes" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tomanInputPrice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/height_medium"
-                    android:layout_marginStart="@dimen/margin_small"
-                    android:gravity="center"
-                    android:text="@string/rial"
-                    android:textColor="@color/gray"
-                    android:textSize="@dimen/text_size_10sp"
-                    app:layout_constraintBottom_toBottomOf="@id/inputPrice"
-                    app:layout_constraintStart_toStartOf="@id/inputPrice" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/margin_m"
+                    android:layout_marginTop="@dimen/margin_m"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/titlePrice" />
 
                 <androidx.constraintlayout.widget.Group
-                    android:id="@+id/seekBarGroup"
+                    android:id="@+id/percentGroup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:visibility="invisible"
-                    app:constraint_referenced_ids="seekBarPrice,startViewSeekBar,endViewSeekBar,minSeekBar,tomanStartSeekBar,maxSeekBar,tomanEndSeekBar" />
-                <View
-                    android:id="@+id/startViewSeekBar"
-                    android:layout_width="4dp"
-                    android:layout_height="25dp"
-                    android:layout_marginStart="11dp"
-                    android:background="@color/gray"
-                    app:layout_constraintStart_toStartOf="@id/seekBarPrice"
-                    app:layout_constraintTop_toTopOf="@id/seekBarPrice" />
+                    app:constraint_referenced_ids="percentBg,topSemicircle,bottomSemicircle,verticalLine,percentTxt,percentValueTxt" />
 
                 <View
-                    android:id="@+id/endViewSeekBar"
-                    android:layout_width="4dp"
-                    android:layout_height="25dp"
-                    android:layout_marginEnd="11dp"
-                    android:background="@color/gray"
-                    app:layout_constraintEnd_toEndOf="@id/seekBarPrice"
-                    app:layout_constraintTop_toTopOf="@id/seekBarPrice" />
-
-                <com.warkiz.widget.IndicatorSeekBar
-                    android:id="@+id/seekBarPrice"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_medium"
-                    app:isb_show_indicator="none"
-                    app:isb_show_tick_marks_type="none"
-                    app:isb_show_tick_texts="false"
-                    app:isb_seek_smoothly="true"
-                    app:isb_thumb_adjust_auto="true"
-                    app:isb_thumb_color="@color/green"
-                    app:isb_thumb_size="20dp"
-                    app:isb_track_background_color="@color/gray"
-                    app:isb_track_background_size="4dp"
-                    app:isb_track_progress_color="@color/gray"
-                    app:isb_track_progress_size="4dp"
+                    android:id="@+id/percentBg"
+                    android:layout_width="106dp"
+                    android:layout_height="32dp"
+                    android:layout_marginTop="@dimen/margin_m"
+                    android:background="@drawable/round_corner_layout_cash_percent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/inputPrice"
-                    android:enabled="false"/>
+                   />
 
+                <View
+                    android:id="@+id/topSemicircle"
+                    android:layout_width="10dp"
+                    android:layout_height="5dp"
+                    android:layout_marginStart="30dp"
+                    android:background="@drawable/semicircle"
+                    app:layout_constraintStart_toStartOf="@id/percentBg"
+                    app:layout_constraintTop_toTopOf="@id/percentBg" />
 
+                <View
+                    android:id="@+id/bottomSemicircle"
+                    android:layout_width="10dp"
+                    android:layout_height="5dp"
+                    android:background="@drawable/semicircle"
+                    android:rotation="180"
+                    app:layout_constraintBottom_toBottomOf="@id/percentBg"
+                    app:layout_constraintStart_toStartOf="@id/topSemicircle" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/minSeekBar"
-                    setPrice="@{viewModel.minSeek}"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_small"
-                    android:gravity="center"
-                    android:text="1,000,000"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_11sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/startViewSeekBar" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tomanStartSeekBar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_small"
-                    android:gravity="center"
-                    android:text="@string/rial"
-                    android:textColor="@color/gray"
-                    android:textSize="@dimen/text_size_10sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/minSeekBar" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/maxSeekBar"
-                    setPrice="@{viewModel.maxSeek}"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/margin_small"
-                    android:gravity="center"
-                    android:text="50,000,000"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_11sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/endViewSeekBar" />
+                <View
+                    android:id="@+id/verticalLine"
+                    android:layout_width="1dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/verical_lin_dash"
+                    app:layout_constraintBottom_toTopOf="@id/bottomSemicircle"
+                    app:layout_constraintEnd_toEndOf="@id/topSemicircle"
+                    app:layout_constraintStart_toStartOf="@id/topSemicircle"
+                    app:layout_constraintTop_toBottomOf="@id/topSemicircle" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tomanEndSeekBar"
+                    android:id="@+id/percentTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/margin_small"
-                    android:gravity="center"
-                    android:text="@string/rial"
-                    android:textColor="@color/gray"
-                    android:textSize="@dimen/text_size_10sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/maxSeekBar" />
+                    android:text="%"
+                    android:textColor="#515151"
+                    android:textSize="@dimen/text_size_l"
+                    app:layout_constraintBottom_toBottomOf="@id/percentBg"
+                    app:layout_constraintEnd_toStartOf="@id/verticalLine"
+                    app:layout_constraintStart_toStartOf="@id/percentBg"
+                    app:layout_constraintTop_toTopOf="@id/percentBg" />
 
-                <androidx.constraintlayout.widget.Barrier
-                    android:id="@+id/seekBarBarrier"
-                    android:layout_width="wrap_content"
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/percentValueTxt"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:barrierDirection="bottom"
-                    app:constraint_referenced_ids="tomanEndSeekBar,tomanStartSeekBar" />
+                    android:gravity="center"
+                    android:text="25"
+                    android:textColor="@color/blue_light"
+                    android:textSize="@dimen/text_size_l"
+                    app:layout_constraintBottom_toBottomOf="@id/percentBg"
+                    app:layout_constraintEnd_toEndOf="@id/percentBg"
+                    app:layout_constraintStart_toEndOf="@id/verticalLine"
+                    app:layout_constraintTop_toTopOf="@id/percentBg" />
 
                 <Button
                     android:id="@+id/submit_btn"
@@ -356,17 +214,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/height_medium"
                     android:layout_marginTop="@dimen/margin_medium"
-                    android:layout_marginBottom="@dimen/margin_medium"
+                    android:layout_marginBottom="@dimen/margin_l"
                     android:text="@string/submit_and_continue"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/seekBarBarrier"
-                    app:layout_constraintVertical_bias="1"
-                    />
+                    app:layout_constraintTop_toBottomOf="@id/percentBg"
+                    app:layout_constraintVertical_bias="1" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
+
         <include
             layout="@layout/loading_state"
             android:layout_width="match_parent"

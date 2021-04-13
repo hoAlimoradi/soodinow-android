@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.data.PieData
@@ -68,9 +69,6 @@ class AppropriateInvestmentFragment : Fragment() {
 	}
 	
 	private fun setupChartLabelRecyclerView() {
-		val layoutManager = GridLayoutManager(requireContext(),2,RecyclerView.VERTICAL,true)
-		layoutManager.reverseLayout = true
-		
 		val cl = mutableListOf<ChartLabelModel>()
 		if (pieChartDataList.isNotEmpty()) {
 			pieChartDataList.forEachIndexed { index,pieChartData ->
@@ -96,7 +94,7 @@ class AppropriateInvestmentFragment : Fragment() {
 			val y = chart.data.dataSets[0].getEntryForIndex(it).y
 			chart.highlightValue(it.toFloat(),y,0)
 		}
-		mBinding.chartLabelRecycler.layoutManager = layoutManager
+		mBinding.chartLabelRecycler.layoutManager = LinearLayoutManager(context)
 		mBinding.chartLabelRecycler.adapter = adapter
 	}
 	
@@ -114,27 +112,17 @@ class AppropriateInvestmentFragment : Fragment() {
 		chart.setTransparentCircleColor(Color.WHITE)
 		chart.setTransparentCircleAlpha(110)
 		
-		chart.holeRadius = 45f
-		chart.transparentCircleRadius = 48f
+		chart.holeRadius = 75f
+		chart.transparentCircleRadius = 76f
 		
 		chart.setDrawCenterText(true)
 		
 		chart.rotationAngle = 0f
-		// enable rotation of the chart by touch
-		// enable rotation of the chart by touch
+
 		chart.isRotationEnabled = true
 		chart.isHighlightPerTapEnabled = true
 		
-		// chart.setUnit(" €");
-		// chart.setDrawUnitsInChart(true);
-		
-		// add a selection listener
-		
-		// chart.setUnit(" €");
-		// chart.setDrawUnitsInChart(true);
-		
-		// add a selection listener
-//		chart.setOnChartValueSelectedListener(this)
+
 		setData()
 		
 		chart.animateY(1400,Easing.EaseInOutQuad)
@@ -175,9 +163,9 @@ class AppropriateInvestmentFragment : Fragment() {
 		
 		val dataSet = PieDataSet(entries,"")
 		dataSet.setDrawIcons(false)
-		dataSet.sliceSpace = 3f
+		dataSet.sliceSpace = 0f
 		dataSet.iconsOffset = MPPointF(0f,40f)
-		dataSet.selectionShift = 5f
+		dataSet.selectionShift = 3f
 		
 		// add a lot of colors
 		val colors = ArrayList<Int>()
@@ -190,7 +178,7 @@ class AppropriateInvestmentFragment : Fragment() {
 		//dataSet.setSelectionShift(0f);
 		val data = PieData(dataSet)
 		data.setValueFormatter(PercentFormatter())
-		data.setValueTextSize(11f)
+		data.setValueTextSize(0f)
 		data.setValueTextColor(Color.WHITE)
 		chart.data = data
 		

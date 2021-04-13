@@ -13,10 +13,10 @@ class ProfileRemoteRepoMapper @Inject constructor() : Mapper<
 	override fun map(param: ProfileRemoteModel): ProfileRepoModel {
 		return ProfileRepoModel(
 			param.id,
-			param.name ?:"",
-			param.personalCode?:"",
-			param.birthDay?:"",
-			param.bban?:"",
+			param.name ?: "",
+			param.personalCode ?: "",
+			param.birthDay ?: "",
+			param.bban ?: "",
 			param.complete,
 			param.mobile
 		)

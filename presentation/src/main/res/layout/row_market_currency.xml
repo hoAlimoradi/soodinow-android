@@ -4,131 +4,121 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="110dp"
-        android:layout_height="match_parent"
-        android:background="@drawable/row_market_round_corner_card_layout"
-        android:maxHeight="150dp"
-        android:minHeight="100dp">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/top_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.05" />
+        <androidx.cardview.widget.CardView
+            android:id="@+id/bgCardView"
+            style="@style/MediumCardView"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            app:cardBackgroundColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="@dimen/margin_s"
+            android:layout_marginBottom="@dimen/margin_s"/>
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/bottom_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.95" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/start_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.05" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/end_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.95" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/center_horizontal_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.50" />
+        <androidx.cardview.widget.CardView
+            android:id="@+id/iconCard"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginEnd="@dimen/margin_m"
+            app:cardBackgroundColor="#ffc025"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="2dp"
+            app:cardMaxElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/bgCardView"
+            app:layout_constraintEnd_toEndOf="@+id/bgCardView"
+            app:layout_constraintTop_toTopOf="@id/bgCardView" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/marketIcon"
             android:layout_width="25dp"
             android:layout_height="0dp"
+            android:elevation="3dp"
+            android:scaleType="center"
             android:src="@drawable/ic_market_gold"
-            app:layout_constraintBottom_toTopOf="@id/center_horizontal_guideline"
-            app:layout_constraintStart_toEndOf="@+id/start_guideline"
-            app:layout_constraintTop_toBottomOf="@id/top_guideline"/>
+            android:tint="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/iconCard"
+            app:layout_constraintEnd_toEndOf="@id/iconCard"
+            app:layout_constraintStart_toStartOf="@+id/iconCard"
+            app:layout_constraintTop_toTopOf="@id/iconCard" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/marketTitle"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_l"
             android:elevation="2dp"
             android:gravity="center_vertical"
             android:text="شاخص کل"
             android:textColor="@color/blue_light"
-            android:textSize="@dimen/text_size_11sp"
-            app:layout_constraintBottom_toTopOf="@id/center_horizontal_guideline"
-            app:layout_constraintEnd_toStartOf="@id/end_guideline"
-            app:layout_constraintStart_toEndOf="@+id/marketIcon"
-            app:layout_constraintTop_toBottomOf="@id/top_guideline"/>
+            android:textSize="@dimen/text_size_xs"
+            app:layout_constraintBottom_toBottomOf="@+id/bgCardView"
+            app:layout_constraintEnd_toStartOf="@id/iconCard"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintTop_toTopOf="@id/bgCardView" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/centerLine"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layerType="software"
-            android:src="@drawable/ic_line"
-            app:layout_constraintEnd_toStartOf="@id/end_guideline"
-            app:layout_constraintStart_toEndOf="@+id/start_guideline"
-            app:layout_constraintTop_toBottomOf="@id/center_horizontal_guideline" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/marketPercentageIcon"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginBottom="@dimen/margin_4_dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_l"
+            android:elevation="2dp"
             android:scaleType="fitEnd"
             android:src="@drawable/ic_market_downturn"
-            app:layout_constraintBottom_toTopOf="@id/marketPercentageValue"
-            app:layout_constraintEnd_toStartOf="@id/end_guideline"
-            app:layout_constraintTop_toBottomOf="@+id/centerLine"/>
+            app:layout_constraintBottom_toBottomOf="@+id/bgCardView"
+            app:layout_constraintStart_toStartOf="@id/bgCardView"
+            app:layout_constraintTop_toTopOf="@id/bgCardView" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/marketPercentageValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_l"
             android:elevation="2dp"
             android:gravity="center_vertical"
-            tools:text="0 %"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_11sp"
-            app:layout_constraintBottom_toTopOf="@id/bottom_guideline"
-            app:layout_constraintEnd_toStartOf="@id/end_guideline" />
+            app:layout_constraintBottom_toBottomOf="@+id/bgCardView"
+            android:layout_marginStart="@dimen/margin_l"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toEndOf="@id/marketPercentageIcon"
+            app:layout_constraintTop_toTopOf="@id/bgCardView"
+            tools:text="0 %" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/marketWealthValue"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/margin_very_small"
             android:elevation="2dp"
             android:gravity="center_vertical"
             android:text="1.258.400"
             android:textColor="@color/black"
-            android:textSize="8sp"
-            app:layout_constraintBottom_toTopOf="@id/bottom_guideline"
-            app:layout_constraintEnd_toStartOf="@id/marketPercentageIcon"
-            app:layout_constraintStart_toEndOf="@+id/start_guideline" />
+            android:textSize="@dimen/text_size_l"
+            app:layout_constraintBottom_toBottomOf="@+id/bgCardView"
+            app:layout_constraintEnd_toStartOf="@id/marketTitle"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toEndOf="@id/marketPercentageValue"
+            app:layout_constraintTop_toTopOf="@id/bgCardView" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/marketWealthCurrencyValue"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/margin_very_small"
-            android:layout_marginBottom="@dimen/margin_4_dp"
             android:elevation="2dp"
             android:gravity="bottom"
             android:text="@string/toman"
             android:textColor="@color/gray"
-            android:textSize="@dimen/text_size_11sp"
-            app:layout_constraintBottom_toTopOf="@id/marketWealthValue"
-            app:layout_constraintStart_toEndOf="@+id/start_guideline"
-            app:layout_constraintTop_toBottomOf="@+id/centerLine" />
+            android:textSize="@dimen/text_size_8sp"
+            app:layout_constraintBottom_toBottomOf="@+id/bgCardView"
+            app:layout_constraintEnd_toStartOf="@id/marketWealthValue"
+            app:layout_constraintTop_toTopOf="@id/bgCardView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
