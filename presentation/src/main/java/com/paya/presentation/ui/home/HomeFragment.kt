@@ -72,8 +72,8 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 
 			mBinding.alarm.setOnClickListener {
 			findNavController().navigateUp()
-			findNavController().navigate(
-				HomeFragmentDirections.navigateToActivitiesReportFragment()
+			getFindViewController()?.navigate(
+				R.id.activitiesReportFragment
 			)
 		}
 		
@@ -114,7 +114,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 	}
 	
 	private inner class SlidePagerAdapter(f: Fragment) : FragmentStateAdapter(f) {
-		override fun getItemCount(): Int = 3
+		override fun getItemCount(): Int = 1
 		
 		override fun createFragment(position: Int): Fragment = NewCardAccountFragment()
 	}

@@ -30,6 +30,7 @@ import com.paya.presentation.R
 import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentSettingsBinding
+import com.paya.presentation.ui.createPersonalAccount.FirstInformationFragment
 import com.paya.presentation.ui.custom.LoginDialogFragment
 import com.paya.presentation.utils.longToast
 import com.paya.presentation.utils.observe
@@ -116,23 +117,23 @@ class SettingsFragment : BaseFragment<SettingViewModel>() {
 			dialog.show(parentFragmentManager, "login")
 		}
 		changePassword.setOnClickListener {
-			findNavController().navigate(
-				SettingsFragmentDirections.navigateToChangePasswordFragment()
+			getFindViewController()?.navigate(
+				R.id.changePasswordFragment
 			)
 		}
 		myProfile.setOnClickListener {
-			findNavController().navigate(
-				SettingsFragmentDirections.navigateToUserUpdateProfileFragment()
+			getFindViewController()?.navigate(
+				R.id.firstInformation,FirstInformationFragment.newBundle(false)
 			)
 		}
 		share.setOnClickListener {
-			findNavController().navigate(
-				SettingsFragmentDirections.navigateToIntroduceFriendsFragment()
+			getFindViewController()?.navigate(
+				R.id.introduceFriendsFragment
 			)
 		}
 		support.setOnClickListener {
-			findNavController().navigate(
-				SettingsFragmentDirections.navigateToSupportFragment()
+			getFindViewController()?.navigate(
+				R.id.support
 			)
 		}
 	}

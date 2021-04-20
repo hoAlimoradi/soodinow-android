@@ -5,4 +5,8 @@ data class ProfileBodyRepoModel(
 	val personalCode: String,
 	val birthDay: String,
 	val bban: String,
+	val gender: String,
+	val state: String,
+	val city: String,
+	val address: String
 )

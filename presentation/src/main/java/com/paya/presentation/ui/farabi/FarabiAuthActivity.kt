@@ -10,7 +10,9 @@ import androidx.databinding.DataBindingUtil
 import com.hadiidbouk.appauthwebview.AppAuthWebView
 import com.hadiidbouk.appauthwebview.AppAuthWebViewData
 import com.hadiidbouk.appauthwebview.IAppAuthWebViewListener
+import com.paya.domain.models.repo.FarabiInfoRepoModel
 import com.paya.domain.models.repo.FarabiTokenRepoModel
+import com.paya.domain.models.repo.UserFarabiRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.presentation.R
@@ -36,6 +38,8 @@ class FarabiAuthActivity : BaseActivity<FarabiAuthViewModel>() {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_farabi_auth)
         setContentView(mBinding.root)
         observe(mViewModel.status, ::readyFarabiAuth)
+        observe(mViewModel.statusGetUserFarabi, ::readyUserFarabi)
+        observe(mViewModel.statusFarabiInfo, ::readyFarabiInfo)
         createAppAuth()
         toolbar.backButton.setOnClickListener {
             finish()
@@ -68,6 +72,7 @@ class FarabiAuthActivity : BaseActivity<FarabiAuthViewModel>() {
                     override fun onUserAuthorize(p0: AuthState?) {
                         p0?.accessToken?.let {
                            // mViewModel.setToken(it)
+                            mViewModel.getUserFarabi("Bearer $it")
                             val clipboard: ClipboardManager =
                                 getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
                             val clip = ClipData.newPlainText("token", it)
@@ -108,6 +113,27 @@ class FarabiAuthActivity : BaseActivity<FarabiAuthViewModel>() {
             Status.SUCCESS -> {
                 setResult(Activity.RESULT_OK)
                 finish()
+            }
+            Status.ERROR -> resource.message?.let { shortToast(it) }
+            else -> return
+        }
+    }
+
+    private fun readyFarabiInfo(resource: Resource<FarabiInfoRepoModel>) {
+        when (resource.status) {
+            Status.SUCCESS -> {
+                setResult(Activity.RESULT_OK)
+                finish()
+            }
+            Status.ERROR -> resource.message?.let { shortToast(it) }
+            else -> return
+        }
+    }
+
+    private fun readyUserFarabi(resource: Resource<UserFarabiRepoModel>) {
+        when (resource.status) {
+            Status.SUCCESS -> {
+                resource.data?.let { mViewModel.setFarabiInfo(it) }
             }
             Status.ERROR -> resource.message?.let { shortToast(it) }
             else -> return

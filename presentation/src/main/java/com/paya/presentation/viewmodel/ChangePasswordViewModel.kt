@@ -27,22 +27,22 @@ class ChangePasswordViewModel @ViewModelInject constructor(
 		val newPassword = newPassword.get()
 		val repeatPassword = repeatPassword.get()
 		if (oldPassword.isNullOrEmpty()) {
-			status.setValue(Resource.error("old password can not be blank",null))
+			status.setValue(Resource.error("لطفا پسورد خود را وارد کنید",null))
 			return
 		}
 		
 		if (newPassword.isNullOrEmpty()) {
-			status.setValue(Resource.error("new password can not be blank",null))
+			status.setValue(Resource.error("لطفا پسورد جدید خود را وارد کنید",null))
 			return
 		}
 		
 		if(repeatPassword.isNullOrEmpty()) {
-			status.setValue(Resource.error("repeat password can not be blank",null))
+			status.setValue(Resource.error("لطفا تکرار پسورد جدید خود را وارد کنید",null))
 			return
 		}
 		
 		if (newPassword != repeatPassword) {
-			status.setValue(Resource.error("unequal new password with repeat password ",null))
+			status.setValue(Resource.error("پسورد حدید با تکرار آن بکسان نیست",null))
 			return
 		}
 		

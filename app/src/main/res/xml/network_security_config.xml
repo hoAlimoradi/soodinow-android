@@ -5,6 +5,7 @@
         <domain includeSubdomains="true">hamyarandroid.com</domain>
         <domain includeSubdomains="true">megaweb.ir</domain>
         <domain includeSubdomains="true">api.soodinow.com</domain>
+        <domain includeSubdomains="true">tse.farabixo.com</domain>
         <!-- // use local service-->
       <!--  <domain includeSubdomains="true">192.168.192.112:8000</domain>-->
     </domain-config>

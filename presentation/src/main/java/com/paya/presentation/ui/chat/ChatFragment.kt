@@ -38,7 +38,7 @@ class ChatFragment : Fragment() {
 	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
 		super.onViewCreated(view,savedInstanceState)
 		mBinding.pulsator.start()
-		setupExpertRecyclerView()
+
 		setupChatRecyclerView()
 		mBinding.sendBtn.setOnClickListener {
 			val chat = ChatRepoModel(
@@ -50,13 +50,7 @@ class ChatFragment : Fragment() {
 		}
 	}
 	
-	private fun setupExpertRecyclerView() {
-		val adapter = ExpertAdapter()
-		val manager = LinearLayoutManager(requireContext(),RecyclerView.HORIZONTAL,false)
-		mBinding.expertRecyclerView.adapter = adapter
-		mBinding.expertRecyclerView.layoutManager = manager
-		mBinding.expertRecyclerView.addItemDecoration(OverlapDecoration())
-	}
+
 	
 	private fun setupChatRecyclerView() {
 		val manager = LinearLayoutManager(requireContext(),RecyclerView.VERTICAL,false)

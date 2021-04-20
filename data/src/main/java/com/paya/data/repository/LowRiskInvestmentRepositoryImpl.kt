@@ -3,6 +3,7 @@ package com.paya.data.repository
 import com.paya.common.Mapper
 import com.paya.data.mapper.HistoryPriceRemoteRepoMapper
 import com.paya.data.network.remote_api.LowRiskInvestmentService
+import com.paya.data.sharedpreferences.PreferenceHelper
 import com.paya.data.utils.getResourceFromApiResponse
 import com.paya.domain.models.remote.*
 import com.paya.domain.models.repo.*
@@ -20,12 +21,15 @@ data class LowRiskInvestmentRepositoryImpl @Inject constructor(
     private val getSellPriceRemoteRepoMapper: Mapper<@JvmSuppressWildcards List<List<Float>>, @JvmSuppressWildcards List<Long>>,
     private val pullPriceRemoteRepoMapper: Mapper<String, String>,
     private val totalBoxValueRemoteRepoMapper: Mapper<TotalBoxValueRemoteModel, TotalBoxValueRepoModel>,
-    private val historyPriceRemoteRepoMapper: Mapper<HistoryPriceRemoteModel, HistoryPriceRepoModel>
+    private val historyPriceRemoteRepoMapper: Mapper<HistoryPriceRemoteModel, HistoryPriceRepoModel>,
+    private val investmentLogsRemoteRepoMapper: Mapper<List<InvestmentLogsRemoteModel>, List<InvestmentLogsRepoModel>>,
+    private val preferenceHelper: PreferenceHelper,
 ) : LowRiskInvestmentRepository {
 
     override suspend fun getLowRiskStocks(lowRiskStockRequest: LowRiskStockRequest): Resource<IsInRiskListRepoModel> {
         return getResourceFromApiResponse(
             lowRiskInvestmentService.getLowRiskInvestment(
+                preferenceHelper.getAccessToken(),
                 lowRiskStockRequest.price,
                 lowRiskStockRequest.type
             )
@@ -35,7 +39,7 @@ data class LowRiskInvestmentRepositoryImpl @Inject constructor(
     }
 
     override suspend fun exitAccount(): Resource<ExitAccountRepoModel> {
-        return getResourceFromApiResponse(lowRiskInvestmentService.exitAccount()) {
+        return getResourceFromApiResponse(lowRiskInvestmentService.exitAccount(preferenceHelper.getAccessToken())) {
             exitAccountRemoteRepoMapper.map(it.data)
         }
     }
@@ -43,6 +47,7 @@ data class LowRiskInvestmentRepositoryImpl @Inject constructor(
     override suspend fun addRiskOrder(addRiskOrderRepoBodyModel: AddRiskOrderRepoBodyModel): Resource<String> {
         return getResourceFromApiResponse(
             lowRiskInvestmentService.addRiskOrder(
+                preferenceHelper.getAccessToken(),
                 addRiskOrderRepoRemoteMapper.map(addRiskOrderRepoBodyModel)
             )
         ) {
@@ -51,14 +56,14 @@ data class LowRiskInvestmentRepositoryImpl @Inject constructor(
     }
 
     override suspend fun boxTypes(): Resource<BoxTypeRepoModel> {
-        return getResourceFromApiResponse(lowRiskInvestmentService.boxTypes()) {
+        return getResourceFromApiResponse(lowRiskInvestmentService.boxTypes(preferenceHelper.getAccessToken())) {
             boxTypesRemoteRepoMapper.map(it.data)
         }
     }
 
     override suspend fun getSellPrice(type: String): Resource<List<Long>> {
         return getResourceFromApiResponse(
-            lowRiskInvestmentService.getSellPrice(type)
+            lowRiskInvestmentService.getSellPrice(preferenceHelper.getAccessToken(),type)
         ) {
             getSellPriceRemoteRepoMapper.map(it.data)
         }
@@ -66,7 +71,7 @@ data class LowRiskInvestmentRepositoryImpl @Inject constructor(
 
     override suspend fun setPullPrice(type: String, price: Long): Resource<String> {
         return getResourceFromApiResponse(
-            lowRiskInvestmentService.setPullPrice(type, price)
+            lowRiskInvestmentService.setPullPrice(preferenceHelper.getAccessToken(),type, price)
         ) {
             pullPriceRemoteRepoMapper.map(it.data)
         }
@@ -74,7 +79,7 @@ data class LowRiskInvestmentRepositoryImpl @Inject constructor(
 
     override suspend fun totalBoxValue(): Resource<TotalBoxValueRepoModel> {
         return getResourceFromApiResponse(
-            lowRiskInvestmentService.totalBoxValue()
+            lowRiskInvestmentService.totalBoxValue(preferenceHelper.getAccessToken())
         ) {
             totalBoxValueRemoteRepoMapper.map(it.data)
         }
@@ -85,9 +90,17 @@ data class LowRiskInvestmentRepositoryImpl @Inject constructor(
         filter: String
     ): Resource<HistoryPriceRepoModel> {
         return getResourceFromApiResponse(
-            lowRiskInvestmentService.getHistoryPrice(page, filter)
+            lowRiskInvestmentService.getHistoryPrice(preferenceHelper.getAccessToken(),page, filter)
         ) {
             historyPriceRemoteRepoMapper.map(it.data)
+        }
+    }
+
+    override suspend fun getInvestmentLogs(): Resource<List<InvestmentLogsRepoModel>> {
+        return getResourceFromApiResponse(
+            lowRiskInvestmentService.getInvestmentLogs(preferenceHelper.getAccessToken())
+        ) {
+            investmentLogsRemoteRepoMapper.map(it.data)
         }
     }
 

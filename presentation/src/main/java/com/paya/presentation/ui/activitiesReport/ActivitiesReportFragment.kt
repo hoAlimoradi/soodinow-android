@@ -1,15 +1,17 @@
 package com.paya.presentation.ui.activitiesReport
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.google.android.material.tabs.TabLayoutMediator
 import com.paya.presentation.R
 import com.paya.presentation.databinding.FragmentActivitiesReportBinding
-import com.paya.presentation.ui.question.QuestionAdapter
+import com.paya.presentation.ui.activitiesReport.fragments.FinancialReportFragment
+import com.paya.presentation.ui.activitiesReport.fragments.LoginExitReportFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,20 +30,31 @@ class ActivitiesReportFragment : Fragment() {
 			container,
 			false
 		)
-		
+
 		return binding.root
 	}
-	
-	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
-		super.onViewCreated(view,savedInstanceState)
-		setupRecyclerView()
+
+	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+		super.onViewCreated(view, savedInstanceState)
+		setupPagerAdapter()
 	}
-	
-	private fun setupRecyclerView() {
-		val manager = LinearLayoutManager(requireContext())
-		val adapter = ActivityReportAdapter()
-		binding.activityReportRecycler.layoutManager = manager
-		binding.activityReportRecycler.adapter = adapter
+
+	private fun setupPagerAdapter() {
+		binding.pager.adapter = PagerAdapter(this)
+		TabLayoutMediator(binding.tabLayout, binding.pager) { tab, position ->
+			tab.text =
+				if (position == 0) getString(R.string.activity_report_login_exit) else getString(R.string.activity_report_financial)
+		}.attach()
+		binding.pager.post {
+			binding.pager.setCurrentItem(1, true)
+		}
 	}
-	
+
+	private inner class PagerAdapter(f: Fragment) : FragmentStateAdapter(f) {
+		override fun getItemCount(): Int = 2
+
+		override fun createFragment(position: Int): Fragment =
+			if (position == 0) LoginExitReportFragment() else FinancialReportFragment()
+	}
+
 }

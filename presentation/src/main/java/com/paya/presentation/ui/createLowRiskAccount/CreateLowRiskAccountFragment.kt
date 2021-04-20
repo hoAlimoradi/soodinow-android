@@ -70,8 +70,7 @@ class CreateLowRiskAccountFragment : BaseFragment<CreateLowRiskAccountViewModel>
                 return@setOnClickListener
             }
             findNavController().navigate(
-                CreateLowRiskAccountFragmentDirections.navigationToCalculateProfitCapital(
-                    percents,
+                CreateLowRiskAccountFragmentDirections.navigationToConnectLowRiskBrokerage(
                     mBinding.inputPrice.getPriceLong(),
                     ("no_risk")
                 )

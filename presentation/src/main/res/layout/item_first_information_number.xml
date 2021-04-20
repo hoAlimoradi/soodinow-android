@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -24,7 +23,8 @@
             type="ObservableField&lt;java.lang.String>" />
     </data>
 
-    <LinearLayout
+    <com.paya.presentation.utils.ErrorEditTextLayout
+        android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/margin_medium"
@@ -47,15 +47,17 @@
             android:id="@+id/inputContentEditText"
             hintLabel="@{hintLabel}"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/height"
             android:layout_marginTop="@dimen/margin_4_dp"
             android:inputType="number"
             android:lines="1"
             android:maxLines="1"
-            android:padding="@dimen/margin_very_small"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/margin_very_small"
             android:singleLine="true"
             android:text="@={content}"
             android:textColor="#000000"
-            android:textSize="@dimen/text_size_xs"/>
-    </LinearLayout>
+            android:paddingEnd="@dimen/margin_very_small"
+            android:textSize="@dimen/text_size_s" />
+    </com.paya.presentation.utils.ErrorEditTextLayout>
 </layout>

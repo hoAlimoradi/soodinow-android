@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.paya.domain.tools.Resource" />
+
+        <import type="com.paya.presentation.viewmodel.FinancialReportViewModel" />
+
+        <variable
+            name="viewModel"
+            type="FinancialReportViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.activitiesReport.fragments.FinancialReportFragment">
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/titleBarrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="txtTitleDate,txtTitleNumber,txtTitlePrice" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtTitleDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="@dimen/margin_l"
+            android:elevation="2dp"
+            android:gravity="center"
+            android:text="تاریخ وساعت"
+            android:textColor="@color/blue_light"
+            android:textSize="@dimen/text_size_xs"
+            app:layout_constraintEnd_toStartOf="@id/txtTitleNumber"
+            app:layout_constraintHorizontal_weight="0.3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtTitleNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_m"
+            android:layout_marginTop="@dimen/margin_l"
+            android:elevation="2dp"
+            android:gravity="center"
+            android:text="شماره پیگیری"
+            android:textColor="@color/blue_light"
+            android:textSize="@dimen/text_size_xs"
+            app:layout_constraintEnd_toStartOf="@id/txtTitlePrice"
+            app:layout_constraintHorizontal_weight="0.3"
+            app:layout_constraintStart_toEndOf="@+id/txtTitleDate"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtTitlePrice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_m"
+            android:layout_marginTop="@dimen/margin_l"
+            android:layout_marginEnd="61dp"
+            android:elevation="2dp"
+            android:gravity="center"
+            android:text="مبلغ تراکنش"
+            android:textColor="@color/blue_light"
+            android:textSize="@dimen/text_size_xs"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="0.3"
+            app:layout_constraintStart_toEndOf="@+id/txtTitleNumber"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/financialRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:elevation="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/titleBarrier"
+            tools:itemCount="10"
+            tools:listitem="@layout/item_financial_report" />
+
+        <include
+            layout="@layout/loading_state"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            app:resource="@{(Resource) viewModel.status}"
+            tools:visibility="gone" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

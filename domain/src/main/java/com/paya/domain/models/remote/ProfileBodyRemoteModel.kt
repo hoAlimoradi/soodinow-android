@@ -7,4 +7,8 @@ data class ProfileBodyRemoteModel(
 	@SerializedName("personal_code")val personalCode: String,
 	@SerializedName("birth_day")val birthDay: String,
 	val bban: String,
+	val gender: String,
+	val state: String,
+	val city: String,
+	val address: String
 )

@@ -23,16 +23,28 @@
             android:layout_height="wrap_content"
             app:label="@{@string/online_chat}" />
 
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardTop"
+            style="@style/GeneralCardView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_marginBottom="@dimen/margin_small"
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
         <androidx.cardview.widget.CardView
             android:id="@+id/card"
             style="@style/GeneralCardView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginStart="@dimen/margin_small"
-            android:layout_marginEnd="@dimen/margin_small"
-            android:layout_marginBottom="@dimen/margin_small"
+            android:layout_marginStart="@dimen/margin_l"
+            android:layout_marginTop="@dimen/margin_l"
+            android:layout_marginEnd="@dimen/margin_l"
+            android:layout_marginBottom="@dimen/margin_l"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar" />
+            app:layout_constraintTop_toBottomOf="@id/cardTop" />
 
         <View
             android:id="@+id/countPersonView"
@@ -47,6 +59,19 @@
             app:layout_constraintStart_toStartOf="@id/pulsator"
             app:layout_constraintTop_toTopOf="@id/pulsator" />
 
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@+id/cardTop"
+            app:layout_constraintBottom_toBottomOf="@+id/cardTop"
+            app:layout_constraintEnd_toEndOf="@+id/cardTop"
+            app:layout_constraintStart_toEndOf="@+id/countPersonView"
+            android:text="@string/support_soodinow"
+            android:textColor="@color/japanese_laurel_green"
+            android:elevation="3dp"
+            android:textSize="@dimen/text_size_s"
+            android:paddingEnd="@dimen/margin_l"/>
+
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/onlinePersonTxt"
             android:layout_width="0dp"
@@ -57,25 +82,10 @@
             android:textColor="@color/purple_gray"
             android:textSize="@dimen/text_size_11sp"
             app:layout_constraintBottom_toBottomOf="@id/countPersonView"
-            app:layout_constraintEnd_toStartOf="@id/onlinePersonCountTxt"
+            app:layout_constraintEnd_toEndOf="@id/countPersonView"
             app:layout_constraintStart_toEndOf="@id/pulsator"
-            app:layout_constraintTop_toTopOf="@id/countPersonView" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/onlinePersonCountTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_4_dp"
-            android:layout_marginEnd="@dimen/margin_very_small"
-            android:elevation="2dp"
-            android:maxLines="1"
-            android:text="33"
-            android:textColor="@color/green"
-            android:textSize="@dimen/text_size_11sp"
-            app:layout_constraintBottom_toBottomOf="@id/countPersonView"
-            app:layout_constraintEnd_toEndOf="@+id/countPersonView"
-            app:layout_constraintStart_toEndOf="@id/onlinePersonTxt"
-            app:layout_constraintTop_toTopOf="@id/countPersonView" />
+            app:layout_constraintTop_toTopOf="@id/countPersonView"
+            android:layout_marginEnd="@dimen/margin_m"/>
 
 
         <pl.bclogic.pulsator4droid.library.PulsatorLayout
@@ -84,8 +94,9 @@
             android:layout_height="30dp"
             android:layout_margin="@dimen/margin_very_small"
             android:elevation="3dp"
-            app:layout_constraintStart_toStartOf="@id/card"
-            app:layout_constraintTop_toTopOf="@id/card"
+            app:layout_constraintBottom_toBottomOf="@+id/cardTop"
+            app:layout_constraintStart_toStartOf="@id/cardTop"
+            app:layout_constraintTop_toTopOf="@id/cardTop"
             app:pulse_color="@color/green"
             app:pulse_count="4"
             app:pulse_duration="3000"
@@ -106,26 +117,13 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/expertRecyclerView"
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:layout_margin="@dimen/margin_very_small"
-            android:elevation="2dp"
-            android:nestedScrollingEnabled="false"
-            app:layout_constraintEnd_toEndOf="@id/card"
-            app:layout_constraintStart_toEndOf="@id/topVerticalGuide"
-            app:layout_constraintTop_toTopOf="@id/card"
-            tools:itemCount="1"
-            tools:listitem="@layout/row_expert_chat" />
-
-        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/chatRecyclerView"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toTopOf="@id/bottomView"
             app:layout_constraintEnd_toEndOf="@id/card"
             app:layout_constraintStart_toStartOf="@id/card"
-            app:layout_constraintTop_toBottomOf="@id/expertRecyclerView"
+            app:layout_constraintTop_toTopOf="@id/card"
             android:elevation="2dp"
             android:layout_marginTop="@dimen/margin_very_small"
            />
@@ -134,19 +132,21 @@
             android:id="@+id/bottomView"
             android:layout_width="0dp"
             android:layout_height="@dimen/height"
-            android:background="@color/bg"
+            android:background="@drawable/round_corner_bottom_layout_white_bg_color"
             android:elevation="2dp"
             app:layout_constraintBottom_toBottomOf="@id/card"
             app:layout_constraintEnd_toEndOf="@id/card"
             app:layout_constraintStart_toStartOf="@id/card" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/sendBtn"
             android:layout_width="@dimen/height"
             android:layout_height="0dp"
             android:background="@android:color/transparent"
             android:text="@string/send"
+            android:src="@drawable/ic_send_chat"
             android:textColor="@color/green"
+            android:elevation="2dp"
             app:layout_constraintBottom_toBottomOf="@id/bottomView"
             app:layout_constraintStart_toStartOf="@id/bottomView"
             app:layout_constraintTop_toTopOf="@id/bottomView" />
@@ -161,8 +161,8 @@
             android:hint="@string/write_question_this"
             android:paddingStart="@dimen/margin_very_small"
             android:paddingEnd="@dimen/margin_very_small"
-            android:textColor="@color/gray"
-            android:textSize="@dimen/text_size_11sp"
+            android:textColor="@color/blue_light"
+            android:textSize="@dimen/text_size_m"
             app:layout_constraintBottom_toBottomOf="@id/bottomView"
             app:layout_constraintEnd_toEndOf="@id/bottomView"
             app:layout_constraintStart_toEndOf="@id/sendBtn"

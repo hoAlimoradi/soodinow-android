@@ -12,6 +12,7 @@ import com.paya.presentation.R
 import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.AccountCardBinding
+import com.paya.presentation.ui.cashManager.CashManagerFragment
 import com.paya.presentation.utils.Utils
 
 // TODO: Rename parameter arguments, choose names that match
@@ -55,7 +56,8 @@ class CardAccount : BaseFragment<BaseViewModel>() {
         setData()
         mBinding.managementAccountBtn.visibility = if (haveButton) View.VISIBLE else View.INVISIBLE
         mBinding.managementAccountBtn.setOnClickListener {
-            getFindViewController()?.navigate(R.id.cashManager)
+            getFindViewController()?.navigate(R.id.cashManager,
+                activeBoxRepo?.id?.let { it1 -> CashManagerFragment.newBundle(it1) })
         }
     }
 

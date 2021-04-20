@@ -99,6 +99,12 @@ object BindingAdapters {
     }
 
     @JvmStatic
+    @BindingAdapter("visibleInVisible")
+    fun showInVisible(view: View, show: Boolean) {
+        view.visibility = if (show) View.VISIBLE else View.INVISIBLE
+    }
+
+    @JvmStatic
     @BindingAdapter("focusTarget")
     fun setFocusTarget(view: View, viewId: Int?) {
         viewId ?: return

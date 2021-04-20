@@ -41,7 +41,7 @@ class ActivateForgotPasswordViewModel @ViewModelInject constructor(
 	fun activate() {
 		val activationCode = activationCode.get()
 		if (activationCode.isNullOrBlank() || activationCode.length != 5) {
-			status.setValue(Resource.error("code is not valid",null))
+			status.setValue(Resource.error("کد وارد شده اشتباه است",null))
 			return
 		}
 		viewModelScope.launch(Dispatchers.IO) {

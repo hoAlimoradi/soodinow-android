@@ -41,9 +41,9 @@ class CreateAccountWithoutRiskFragment : Fragment() {
 	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
 		super.onViewCreated(view,savedInstanceState)
 		mBinding.createAccountBtn.setOnClickListener {
-			findNavController().navigate(
+			/*findNavController().navigate(
 				CreateAccountWithoutRiskFragmentDirections.navigationToCreateLowRiskAccount()
-			)
+			)*/
 		}
 		setupTagsRecyclerView()
 		val points = mutableListOf<Point>()

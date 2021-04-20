@@ -10,7 +10,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
@@ -25,7 +24,6 @@ import com.paya.presentation.databinding.FragmentProfileBinding
 import com.paya.presentation.ui.hint.fragments.CardAccount
 import com.paya.presentation.ui.investment.AppropriateInvestmentFragment
 import com.paya.presentation.utils.BindingAdapters
-import com.paya.presentation.utils.Utils
 import com.paya.presentation.utils.ViewPagerUtil
 import com.paya.presentation.utils.observe
 import com.paya.presentation.utils.shared.Point
@@ -73,7 +71,11 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
         initRadioGroup()
         observe(viewModel.existAccount, ::onExistAccountReady)
         observe(viewModel.profile, ::onProfileReady)
-
+mBinding.alarm.setOnClickListener {
+    getFindViewController()?.navigate(
+        R.id.activitiesReportFragment
+    )
+}
 
     }
 
@@ -206,16 +208,20 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
                 )
             )
         }
-        BindingAdapters.setLineAccountChartData(
-            mBinding.chart,
-            mainChartPoints,
-            chartColor = ContextCompat.getColor(requireContext(), R.color.japanese_laurel_green),
-            markerColor = ContextCompat.getColor(requireContext(), R.color.conifer_green),
-            markerTitleColor = Color.WHITE,
-            chartAlpha = 0,
-            markerType = 0,
-            touchEnabled = true
-        )
+        if (mainChartPoints.size > 0)
+            BindingAdapters.setLineAccountChartData(
+                mBinding.chart,
+                mainChartPoints,
+                chartColor = ContextCompat.getColor(
+                    requireContext(),
+                    R.color.japanese_laurel_green
+                ),
+                markerColor = ContextCompat.getColor(requireContext(), R.color.conifer_green),
+                markerTitleColor = Color.WHITE,
+                chartAlpha = 0,
+                markerType = 0,
+                touchEnabled = true
+            )
 
 
         var totalQuantity: Long = 0

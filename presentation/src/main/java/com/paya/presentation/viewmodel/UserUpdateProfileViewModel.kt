@@ -60,27 +60,27 @@ class UserUpdateProfileViewModel @ViewModelInject constructor(
 		val bban = bban.get()
 		
 		if (name.isNullOrBlank()) {
-			statusUpdateProfile.setValue(Resource.error("name can not be blank",null))
+			statusUpdateProfile.setValue(Resource.error("لطفا نام را وارد کنید",null))
 			return
 		}
 		
 		if (nationalCode.isNullOrBlank()) {
-			statusUpdateProfile.setValue(Resource.error("nationalCode can not be blank",null))
+			statusUpdateProfile.setValue(Resource.error("لطفا کد ملی را وارد کنید",null))
 			return
 		}
 		
 		if (nationalCode.length != 10) {
-			statusUpdateProfile.setValue(Resource.error("nationalCode is not valid",null))
+			statusUpdateProfile.setValue(Resource.error("کد ملی وارد شده اشتباه است",null))
 			return
 		}
 		
 		if (birthDay.isNullOrBlank()) {
-			statusUpdateProfile.setValue(Resource.error("birthDay can not be blank",null))
+			statusUpdateProfile.setValue(Resource.error("لطفا ناریخ تولد را وارد کنید",null))
 			return
 		}
 		
 		if (bban.isNullOrBlank()) {
-			statusUpdateProfile.setValue(Resource.error("shaba can not be blank",null))
+			statusUpdateProfile.setValue(Resource.error("لطفا شماره شبا را وارد کنید",null))
 			return
 		}
 		viewModelScope.launch(Dispatchers.IO) {
@@ -89,7 +89,11 @@ class UserUpdateProfileViewModel @ViewModelInject constructor(
 				name,
 				nationalCode,
 				birthDay,
-				"IR${bban}"
+				"IR${bban}",
+				"",
+				"",
+				"",
+				""
 			)
 			val response = callResource(this@UserUpdateProfileViewModel,useCaseUpdateProfile.action(body))
 			statusUpdateProfile.postValue(response)

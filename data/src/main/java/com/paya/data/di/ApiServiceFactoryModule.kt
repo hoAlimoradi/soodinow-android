@@ -55,4 +55,8 @@ class ApiServiceFactoryModule{
 	@Reusable
 	fun farabiService(apiService: ApiServiceFactory) =
 		apiService.create(FarabiService::class.java)
+	@Provides
+	@Reusable
+	fun commonService(apiService: ApiServiceFactory) =
+		apiService.create(CommonService::class.java)
 }

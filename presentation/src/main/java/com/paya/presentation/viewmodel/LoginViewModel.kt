@@ -42,17 +42,17 @@ class LoginViewModel @ViewModelInject constructor(
 		val password = password.get()
 		if (username.isNullOrBlank()) {
 			isUserNameError = true
-			loginResource.setValue(Resource.error("username can not be blank",null))
+			loginResource.setValue(Resource.error("لطفا شماره موبایل را وارد کنید",null))
 			return
 		}
 		if (username.length != 9){
 			isUserNameError = true
-			loginResource.setValue(Resource.error("username is not valid",null))
+			loginResource.setValue(Resource.error("شماره موبایل وارد شده اشتباه است",null))
 			return
 		}
 		if (password.isNullOrBlank()) {
 			isPasswordError = true
-			loginResource.setValue(Resource.error("password can not be blank",null))
+			loginResource.setValue(Resource.error("لطفا رمز عبور را وارد کنید",null))
 			return
 		}
 		isPasswordError = true

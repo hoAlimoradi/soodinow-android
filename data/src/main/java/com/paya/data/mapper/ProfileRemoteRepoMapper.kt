@@ -18,7 +18,11 @@ class ProfileRemoteRepoMapper @Inject constructor() : Mapper<
 			param.birthDay ?: "",
 			param.bban ?: "",
 			param.complete,
-			param.mobile
+			param.mobile,
+			param.gender,
+			param.state,
+			param.city,
+			param.address
 		)
 	}
 	

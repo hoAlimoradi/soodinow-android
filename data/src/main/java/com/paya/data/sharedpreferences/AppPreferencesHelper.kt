@@ -13,7 +13,8 @@ class AppPreferencesHelper @Inject constructor(
     private val mPrefs: SharedPreferences = context.getSharedPreferences("Soodinow_Pref", Context.MODE_PRIVATE)
 
     override fun getAccessToken(): String {
-        return mPrefs.getString(PREF_KEY_ACCESS_TOKEN,null) ?: ""
+        val token = mPrefs.getString(PREF_KEY_ACCESS_TOKEN,null) ?: ""
+        return "Bearer $token"
     }
 
     override fun setAccessToken(accessToken: String) {

@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
@@ -21,23 +22,26 @@ import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentCashManagerBinding
 import com.paya.presentation.ui.hint.fragments.CardAccount
+import com.paya.presentation.utils.Utils
 import com.paya.presentation.utils.ViewPagerUtil
 import com.paya.presentation.utils.observe
 import com.paya.presentation.viewmodel.CashManagerViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
-
+private const val ARG_ACCOUNT_ID = "account_id"
 @AndroidEntryPoint
 class CashManagerFragment : BaseFragment<CashManagerViewModel>() {
 
     private val mViewModel: CashManagerViewModel by viewModels()
     private lateinit var mBinding: FragmentCashManagerBinding
     private val cardAccounts = mutableListOf<CardAccount>()
-
+    private var accountId: Long = 0
     private lateinit var adapter: SlidePagerAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        arguments?.let {
+            accountId = it.getLong(ARG_ACCOUNT_ID)
+        }
     }
 
     override fun onCreateView(
@@ -58,6 +62,7 @@ class CashManagerFragment : BaseFragment<CashManagerViewModel>() {
         observe(mViewModel.existAccount, ::onExistAccountReady)
         observe(mViewModel.sellPriceStatus, ::readySellPrice)
         observe(mViewModel.pullPriceStatus, ::readyPullPrice)
+        mBinding.inputPrice.setupWatcherPrice(lifecycleScope = lifecycleScope){}
         mBinding.managerAccountHistory.setOnClickListener {
             findNavController().navigate(
                 R.id.navigateCashHistory
@@ -86,7 +91,7 @@ class CashManagerFragment : BaseFragment<CashManagerViewModel>() {
                         mViewModel.priceType.set(CashManagerViewModel.PriceType.withdrawal)
                         mBinding.inputPrice.maxPrice = mViewModel.maxSeek.get()!!
                         mBinding.inputPrice.minPrice = mViewModel.minSeek.get()!!
-                        mBinding.inputPrice.setMessage("مبلغ وارد شده باید بین ${mViewModel.minSeek.get()!!} تا ${mViewModel.maxSeek.get()!!} ریال باشد")
+                        mBinding.inputPrice.setMessage("مبلغ وارد شده باید بین ${Utils.separatorAmount(mViewModel.minSeek.get()!!)} تا ${Utils.separatorAmount(mViewModel.maxSeek.get()!!)} ریال باشد")
                     }
                     1 -> {
                         mViewModel.priceType.set(CashManagerViewModel.PriceType.deposit)
@@ -174,14 +179,17 @@ class CashManagerFragment : BaseFragment<CashManagerViewModel>() {
     private fun onExistAccountReady(resource: Resource<ExitAccountRepoModel>) {
         if (resource.status == Status.SUCCESS) {
             resource.data?.activeBox?.let {
+                var selectionPager = 0
                 it.forEach { activeBox ->
-                    cardAccounts.add(CardAccount.newInstance(activeBox,false))
-
-                    mViewModel.getSellPrice(activeBox.type!!)
-                    mViewModel.type.set(activeBox.subType)
-                    mBinding.inputPrice.setPrice(activeBox.price.toString())
-
+                    cardAccounts.add(CardAccount.newInstance(activeBox, false))
+                    if (accountId == activeBox.id) {
+                        selectionPager = cardAccounts.size - 1
+                        mViewModel.getSellPrice(activeBox.type)
+                        mViewModel.type.set(activeBox.subType)
+                        mBinding.inputPrice.setPrice(activeBox.price.toString())
+                    }
                 }
+                mBinding.pager.currentItem = selectionPager
                 if (it.isEmpty()) {
                     return@let
                 }
@@ -201,4 +209,13 @@ class CashManagerFragment : BaseFragment<CashManagerViewModel>() {
 
         override fun createFragment(position: Int): Fragment = cardAccounts[position]
     }
+
+    companion object {
+        @JvmStatic
+        fun newBundle(accountId: Long) =
+            Bundle().apply {
+                putSerializable(ARG_ACCOUNT_ID, accountId)
+            }
+    }
+
 }

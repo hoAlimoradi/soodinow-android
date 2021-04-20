@@ -31,11 +31,11 @@ class ForgotPasswordViewModel @ViewModelInject constructor(
 	fun register(){
 		val phoneNumber = phoneNumber.get()
 		if (phoneNumber == null) {
-			registerStatus.setValue(Resource.error("Phone number cannot be empty", null))
+			registerStatus.setValue(Resource.error("لطفا شماره موبایل را وارد کنید", null))
 			return
 		}
 		if(phoneNumber.length != 9){
-			registerStatus.setValue(Resource.error("Phone number is not valid", null))
+			registerStatus.setValue(Resource.error("شماره موبایل وارد شده شده اشتباه است", null))
 			return
 		}
 		viewModelScope.launch (Dispatchers.IO) {

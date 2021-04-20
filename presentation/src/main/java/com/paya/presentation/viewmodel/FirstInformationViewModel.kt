@@ -2,11 +2,14 @@ package com.paya.presentation.viewmodel
 
 import androidx.databinding.ObservableField
 import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.paya.domain.models.repo.ProfileBodyRepoModel
 import com.paya.domain.models.repo.ProfileRepoModel
+import com.paya.domain.models.repo.ProvinceRepoModel
 import com.paya.domain.tools.Resource
+import com.paya.domain.tools.Status
 import com.paya.domain.tools.UseCase
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.utils.Utils
@@ -17,55 +20,108 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class FirstInformationViewModel @ViewModelInject constructor(
-	private val useCaseUpdateProfile: UseCase<ProfileBodyRepoModel,ProfileRepoModel>
+	private val useCaseUpdateProfile: UseCase<ProfileBodyRepoModel, ProfileRepoModel>,
+	private val cityUseCase: UseCase<Unit, List<ProvinceRepoModel>>,
+	private val useCaseProfile: UseCase<Unit,ProfileRepoModel>
 ) : BaseViewModel() {
 	val name = ObservableField<String>()
 	val nationalCode = ObservableField<String>()
 	val birthDay = ObservableField<PersianCalendar>()
 	val bban = ObservableField<String>()
-	
-	val status = VolatileLiveData<Resource<ProfileRepoModel>>()
-	
-	fun updateProfile() {
-		val name = name.get()
-		val nationalCode = nationalCode.get()
-		val birthDay = birthDay.get()?.let { Utils.convertToDate(it) }
-		val bban = bban.get()
-		
-		if (name.isNullOrBlank()) {
-			status.setValue(Resource.error("name can not be blank",null))
-			return
+	val gender = ObservableField<String>()
+	val province = ObservableField<String>()
+	val city = ObservableField<String>()
+	val address = ObservableField<String>()
+	val cityList = mutableListOf<ProvinceRepoModel>()
+	var citySelection = 0
+	var provinceSelection = 0
+	val loading = MediatorLiveData<Resource<Nothing>>()
+	val statusUpdate = VolatileLiveData<Resource<ProfileRepoModel>>()
+	val statusCity = VolatileLiveData<Resource<List<ProvinceRepoModel>>>()
+	val statusProfile = VolatileLiveData<Resource<ProfileRepoModel>>()
+
+
+	init {
+		loading.addSource(statusProfile){
+			if (statusProfile.value?.status == Status.LOADING || statusCity.value?.status == Status.LOADING){
+				loading.value = Resource.loading(null)
+			}else{
+				loading.value = Resource.idle(null)
+			}
 		}
-		
-		if (nationalCode.isNullOrBlank()) {
-			status.setValue(Resource.error("nationalCode can not be blank",null))
-			return
+		loading.addSource(statusUpdate){
+			if (statusUpdate.value?.status == Status.LOADING) {
+				loading.value = Resource.loading(null)
+			}else{
+				loading.value = Resource.idle(null)
+			}
 		}
-		
-		if (nationalCode.length != 10) {
-			status.setValue(Resource.error("nationalCode is not valid",null))
-			return
+		loading.addSource(statusCity){
+			if (statusCity.value?.status == Status.LOADING || statusProfile.value?.status == Status.LOADING){
+				loading.value = Resource.loading(null)
+			}else{
+				loading.value = Resource.idle(null)
+			}
 		}
-		
-		if (birthDay.isNullOrBlank()) {
-			status.setValue(Resource.error("birthDay can not be blank",null))
-			return
-		}
-		
-		if (bban.isNullOrBlank()) {
-			status.setValue(Resource.error("shaba can not be blank",null))
-			return
-		}
+		getCity()
+		getProfile()
+	}
+
+	fun updateProfile(
+		name: String,
+		nationalCode: String,
+		birthDay: String,
+		bban: String,
+		gender: String,
+		city: String,
+		province: String,
+		address : String
+	) {
+
 		viewModelScope.launch(Dispatchers.IO) {
-			status.postValue(Resource.loading(null))
+			statusUpdate.postValue(Resource.loading(null))
 			val body = ProfileBodyRepoModel(
 				name,
 				nationalCode,
 				birthDay,
-				"IR$bban"
+				"IR$bban",
+				gender,
+				province,
+				city,
+				address
 			)
-			val response = callResource(this@FirstInformationViewModel,useCaseUpdateProfile.action(body))
-			status.postValue(response)
+			val response =
+				callResource(this@FirstInformationViewModel, useCaseUpdateProfile.action(body))
+			statusUpdate.postValue(response)
 		}
+	}
+
+	fun getCity() {
+		viewModelScope.launch(Dispatchers.IO) {
+			statusCity.postValue(Resource.loading(null))
+			val response = callResource(this@FirstInformationViewModel, cityUseCase.action(Unit))
+			if (response.status == Status.SUCCESS)
+				cityList.addAll(response.data!!)
+			statusCity.postValue(response)
+		}
+	}
+
+	fun getProfile() {
+		viewModelScope.launch(Dispatchers.IO) {
+			statusProfile.postValue(Resource.loading(null))
+			val response  = callResource(this@FirstInformationViewModel,useCaseProfile.action(Unit))
+			if (response.status == Status.SUCCESS && response.data?.complete!!) {
+				name.set(response.data?.name)
+				bban.set(response.data?.bban?.replace("IR",""))
+				birthDay.set(response.data?.birthDay?.let { Utils.convertStringToPersianCalender(it) })
+				nationalCode.set(response.data?.personalCode)
+				gender.set(response.data?.gender)
+				province.set(response.data?.state)
+				city.set(response.data?.city)
+				address.set(response.data?.address)
+			}
+			statusProfile.postValue(response)
+		}
+
 	}
 }

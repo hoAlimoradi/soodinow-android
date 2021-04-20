@@ -66,7 +66,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/margin_m"
-                        android:layout_marginTop="@dimen/margin_l"
+                        android:layout_marginTop="@dimen/margin_s"
                         app:content="@{viewModel.nationalCode}"
                         app:hintLabel="@{@string/hint_national_code}"
                         app:label="@{@string/national_code}"
@@ -80,7 +80,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/margin_m"
-                        android:layout_marginTop="@dimen/margin_l"
+                        android:layout_marginTop="@dimen/margin_s"
                         app:content="@{viewModel.bban}"
                         app:hintLabel="@{@string/hint_shaba_number}"
                         app:label="@{@string/shaba_number}"
@@ -88,51 +88,52 @@
                         app:subLabel="@{@string/sub_title_shaba_number}" />
 
 
-                    <LinearLayout
+
+                    <include
                         android:id="@+id/birthDate"
+                        layout="@layout/item_first_information_disable"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/margin_m"
-                        android:layout_marginTop="@dimen/margin_l"
-                        android:elevation="3dp"
-                        android:orientation="vertical"
-                        app:layout_constraintTop_toBottomOf="@id/shaba">
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="end"
-                            android:layout_marginTop="@dimen/margin_4_dp"
-                            android:drawableStart="@drawable/ic_star"
-                            android:drawablePadding="@dimen/margin_s"
-                            android:text="@string/date_of_birth"
-                            android:textSize="@dimen/text_size_s" />
-
-                        <com.paya.presentation.utils.ClearableEditText
-                            android:id="@+id/inputBirthDateEditText"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/margin_4_dp"
-                            android:enabled="false"
-                            android:hint="تاریخ تولد خود را دقیق انتخاب کنید"
-                            android:lines="1"
-                            android:maxLines="1"
-                            android:padding="@dimen/margin_very_small"
-                            android:singleLine="true"
-                            android:textColor="#000000"
-                            android:textSize="@dimen/text_size_xs" />
-                    </LinearLayout>
+                        android:layout_marginTop="@dimen/margin_s"
+                        app:hintLabel="@{@string/birth_date_hint}"
+                        app:label="@{@string/date_of_birth}"
+                        app:layout_constraintTop_toBottomOf="@id/shaba" />
 
                     <include
                         android:id="@+id/gender"
-                        layout="@layout/item_first_information"
+                        layout="@layout/item_first_information_disable"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/margin_m"
-                        android:layout_marginTop="@dimen/margin_l"
+                        android:layout_marginTop="@dimen/margin_s"
                         app:hintLabel="@{@string/hint_gender}"
                         app:label="@{@string/gender}"
                         app:layout_constraintTop_toBottomOf="@id/birthDate" />
+
+                    <include
+                        android:id="@+id/province"
+                        layout="@layout/item_first_information_disable"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/margin_m"
+                        android:layout_marginTop="@dimen/margin_s"
+                        app:hintLabel="@{@string/hint_province}"
+                        app:label="@{@string/province}"
+                        app:content="@{viewModel.province}"
+                        app:layout_constraintTop_toBottomOf="@id/gender" />
+
+                    <include
+                        android:id="@+id/city"
+                        layout="@layout/item_first_information_disable"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/margin_m"
+                        android:layout_marginTop="@dimen/margin_s"
+                        app:hintLabel="@{@string/hint_city}"
+                        app:label="@{@string/city}"
+                        app:content="@{viewModel.city}"
+                        app:layout_constraintTop_toBottomOf="@id/province" />
 
                     <include
                         android:id="@+id/address"
@@ -140,10 +141,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/margin_m"
-                        android:layout_marginTop="@dimen/margin_l"
+                        android:layout_marginTop="@dimen/margin_s"
                         app:hintLabel="@{@string/hint_address}"
                         app:label="@{@string/address}"
-                        app:layout_constraintTop_toBottomOf="@id/gender" />
+                        app:content="@{viewModel.address}"
+                        app:layout_constraintTop_toBottomOf="@id/city" />
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/insertBtn"
@@ -154,7 +156,6 @@
                         android:layout_marginEnd="@dimen/margin_xxxl"
                         android:layout_marginBottom="@dimen/margin_small"
                         android:background="@drawable/bg_button_green"
-                        android:onClick="@{() -> viewModel.updateProfile()}"
                         android:text="@string/insert_next"
                         android:textColor="@color/white"
                         android:textSize="@dimen/text_size_small"
@@ -174,7 +175,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            app:resource="@{(Resource) viewModel.status}"
+            app:resource="@{(Resource) viewModel.loading}"
             tools:visibility="gone" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

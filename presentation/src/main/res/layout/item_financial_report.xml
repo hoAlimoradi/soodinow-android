@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        style="@style/GeneralCardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_l"
+        android:layout_marginTop="@dimen/margin_m"
+        android:layout_marginBottom="@dimen/margin_m"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iconImageView"
+                android:layout_width="37dp"
+                android:layout_height="37dp"
+                android:layout_marginTop="@dimen/margin_l"
+                android:layout_marginEnd="@dimen/margin_m"
+                android:background="@drawable/bg_image_financial_report"
+                android:scaleType="center"
+                android:src="@drawable/ic_arrow_dposit"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtTitleDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_m"
+                android:gravity="center"
+                android:text="99/02/08"
+                android:textColor="@color/pea_green"
+                android:textSize="@dimen/text_size_xs"
+                app:layout_constraintBottom_toBottomOf="@+id/iconImageView"
+                app:layout_constraintEnd_toStartOf="@id/txtTitleNumber"
+                app:layout_constraintHorizontal_weight="0.3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/iconImageView" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtTitleNumber"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_m"
+                android:gravity="center"
+                android:text="320256"
+                android:textColor="@color/pea_green"
+                android:textSize="@dimen/text_size_s"
+                app:layout_constraintBottom_toBottomOf="@+id/iconImageView"
+                app:layout_constraintEnd_toStartOf="@id/txtTitlePrice"
+                app:layout_constraintHorizontal_weight="0.3"
+                app:layout_constraintStart_toEndOf="@+id/txtTitleDate"
+                app:layout_constraintTop_toTopOf="@+id/iconImageView" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtTitlePrice"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_m"
+                android:gravity="center"
+                android:text="360.000.000"
+                android:textColor="@color/pea_green"
+                android:textSize="@dimen/text_size_m"
+                app:layout_constraintBottom_toBottomOf="@+id/iconImageView"
+                app:layout_constraintEnd_toStartOf="@id/iconImageView"
+                app:layout_constraintHorizontal_weight="0.3"
+                app:layout_constraintStart_toEndOf="@+id/txtTitleNumber"
+                app:layout_constraintTop_toTopOf="@+id/iconImageView" />
+
+            <View
+                android:id="@+id/line"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="@dimen/margin_l"
+                android:layout_marginTop="@dimen/margin_l"
+                android:background="#2E707070"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iconImageView" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/detailBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_l"
+                android:layout_marginVertical="29dp"
+                android:drawableStart="@drawable/ic_arrow_left"
+                android:drawablePadding="@dimen/margin_s"
+                android:gravity="center"
+                android:text="جزئیات"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_xs"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/errorTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_l"
+                android:drawableEnd="@drawable/dot_orange"
+                android:drawablePadding="@dimen/margin_l"
+                android:gravity="center"
+                android:text="تراکنش شما در انتظار تایید می باشد"
+                android:textColor="@color/orange"
+                android:textSize="@dimen/text_size_xs"
+                app:layout_constraintBottom_toBottomOf="@id/detailBtn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/detailBtn" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

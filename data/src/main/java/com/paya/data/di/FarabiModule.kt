@@ -2,24 +2,17 @@ package com.paya.data.di
 
 import com.paya.common.Mapper
 import com.paya.data.mapper.FarabiAuthRemoteRepoMapper
-import com.paya.data.mapper.QuestionsRemoteRepoMapper
-import com.paya.data.mapper.UserTestRemoteRepoMapper
-import com.paya.data.repository.AccountRepositoryImpl
+import com.paya.data.mapper.FarabiInfoRemoteRepoMapper
+import com.paya.data.mapper.UserFarabiRemoteRepoMapper
+
 import com.paya.data.repository.FarabiRepositoryImpl
-import com.paya.data.repository.QuestionsRepositoryImpl
-import com.paya.domain.models.remote.QuestionsRemoteModel
-import com.paya.domain.models.remote.UserTestBody
-import com.paya.domain.models.remote.UserTestRemoteModel
-import com.paya.domain.models.repo.FarabiTokenRepoModel
-import com.paya.domain.models.repo.QuestionsRepoModel
-import com.paya.domain.models.repo.UserTestRepoModel
-import com.paya.domain.repository.AccountRepository
+import com.paya.domain.models.repo.*
 import com.paya.domain.repository.FarabiRepository
-import com.paya.domain.repository.QuestionsRepository
 import com.paya.domain.tools.UseCase
 import com.paya.domain.usecase.farabi.FarabiAuthUseCase
-import com.paya.domain.usecase.question.GetAllQuestionsUseCase
-import com.paya.domain.usecase.question.SubmitTestUseCase
+import com.paya.domain.usecase.farabi.FarabiInfoUseCase
+import com.paya.domain.usecase.farabi.UserFarabiUseCase
+
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -35,8 +28,22 @@ abstract class FarabiModule {
 			FarabiTokenRepoModel
 			>
 	@Binds
+	abstract fun bindFarabiInfoRemoteRepoMapper(mapper: FarabiInfoRemoteRepoMapper): Mapper<
+			String,
+			FarabiInfoRepoModel
+			>
+	@Binds
+	abstract fun bindUserFarabiRemoteRepoMapper(mapper: UserFarabiRemoteRepoMapper): Mapper<
+			List<*>,
+			UserFarabiRepoModel
+			>
+	@Binds
 	abstract fun farabiRepo(dev: FarabiRepositoryImpl): FarabiRepository
 	@Binds
 	abstract fun bindFarabiAuthUseCase(useCase: FarabiAuthUseCase): UseCase<String, FarabiTokenRepoModel>
+	@Binds
+	abstract fun bindFarabiInfoUseCase(useCase: FarabiInfoUseCase): UseCase<UserFarabiRepoModel, FarabiInfoRepoModel>
+	@Binds
+	abstract fun bindUserFarabiUseCase(useCase: UserFarabiUseCase): UseCase<String, UserFarabiRepoModel>
 	
 }

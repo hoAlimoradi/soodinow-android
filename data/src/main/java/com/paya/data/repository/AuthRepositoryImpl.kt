@@ -14,35 +14,35 @@ import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(
 	private val authNet: AuthService,
-	private val registerMapperRemoteRepo: Mapper<RegisterRemoteModel,RegisterRepoModel>,
-	private val userInfoMapperRemoteRepo: Mapper<AccessTokenRemoteModel,UserInfoRepoModel>,
-	private val userInfoMapperRepoEntity: Mapper<UserInfoRepoModel?,UserInfoDbModel>,
-	private val userInfoMapperEntityRepo: Mapper<UserInfoDbModel?,UserInfoRepoModel>,
-	private val setPasswordRemoteRepoMapper: Mapper<SetPasswordRemoteModel,SetPasswordRepoModel>,
+	private val registerMapperRemoteRepo: Mapper<RegisterRemoteModel, RegisterRepoModel>,
+	private val userInfoMapperRemoteRepo: Mapper<AccessTokenRemoteModel, UserInfoRepoModel>,
+	private val userInfoMapperRepoEntity: Mapper<UserInfoRepoModel?, UserInfoDbModel>,
+	private val userInfoMapperEntityRepo: Mapper<UserInfoDbModel?, UserInfoRepoModel>,
+	private val setPasswordRemoteRepoMapper: Mapper<SetPasswordRemoteModel, SetPasswordRepoModel>,
 	private val userInfoDbApi: UserInfoDbApi,
 	private val preferenceHelper: PreferenceHelper,
-	private val profileRemoteRepoMapper: Mapper<ProfileRemoteModel,ProfileRepoModel>,
-	private val profileRepoRemoteMapper: Mapper<ProfileBodyRepoModel,ProfileBodyRemoteModel>,
-	private val changePasswordRepoRemoteMapper : Mapper<ChangePasswordRepoBodyModel,ChangePasswordRemoteBodyModel>,
-	private val changePasswordRemoteRepoMapper : Mapper<ChangePasswordRemoteModel,ChangePasswordRepoModel>
+	private val profileRemoteRepoMapper: Mapper<ProfileRemoteModel, ProfileRepoModel>,
+	private val profileRepoRemoteMapper: Mapper<ProfileBodyRepoModel, ProfileBodyRemoteModel>,
+	private val changePasswordRepoRemoteMapper: Mapper<ChangePasswordRepoBodyModel, ChangePasswordRemoteBodyModel>,
+	private val changePasswordRemoteRepoMapper: Mapper<ChangePasswordRemoteModel, ChangePasswordRepoModel>,
 ) : AuthRepository {
 	
 	override suspend fun register(phoneNumber: String): Resource<RegisterRepoModel> {
-		val registerApiResponse = authNet.register(phoneNumber)
-		return getResourceFromApiResponse(registerApiResponse){
+		val registerApiResponse = authNet.register(preferenceHelper.getAccessToken(), phoneNumber)
+		return getResourceFromApiResponse(registerApiResponse) {
 			registerMapperRemoteRepo.map(it.data)
 		}
 	}
 	
 	override suspend fun activate(phoneNumber: String, code: String): Resource<UserInfoRepoModel> {
-		val activateApiResponse = authNet.activate(phoneNumber, code)
+		val activateApiResponse = authNet.activate(preferenceHelper.getAccessToken(),phoneNumber, code)
 		return getResourceFromApiResponse(activateApiResponse){
 			userInfoMapperRemoteRepo.map(it.data)
 		}
 	}
 	
 	override suspend fun login(username: String,password: String): Resource<UserInfoRepoModel> {
-		val loginApiResponse = authNet.login(username, password)
+		val loginApiResponse = authNet.login(preferenceHelper.getAccessToken(),username, password)
 		return getResourceFromApiResponse(loginApiResponse){
 			userInfoMapperRemoteRepo.map(it.data)
 		}
@@ -81,28 +81,34 @@ class AuthRepositoryImpl @Inject constructor(
 	}
 	
 	override suspend fun setPassword(password: String): Resource<SetPasswordRepoModel> {
-		val setPasswordApiResponse = authNet.setPassword(password)
+		val setPasswordApiResponse = authNet.setPassword(preferenceHelper.getAccessToken(),password)
 		return getResourceFromApiResponse(setPasswordApiResponse) {
 			setPasswordRemoteRepoMapper.map(it.data)
 		}
 	}
 	
 	override suspend fun updateProfile(body: ProfileBodyRepoModel): Resource<ProfileRepoModel> {
-		val updateProfileApi = authNet.updateProfile(profileRepoRemoteMapper.map(body))
+		val updateProfileApi = authNet.updateProfile(
+			preferenceHelper.getAccessToken(),
+			profileRepoRemoteMapper.map(body)
+		)
 		return getResourceFromApiResponse(updateProfileApi) {
 			profileRemoteRepoMapper.map(it.data)
 		}
 	}
 	
 	override suspend fun getProfile(): Resource<ProfileRepoModel> {
-		val getProfileApi = authNet.getProfile()
+		val getProfileApi = authNet.getProfile(preferenceHelper.getAccessToken())
 		return getResourceFromApiResponse(getProfileApi) {
 			profileRemoteRepoMapper.map(it.data)
 		}
 	}
 	
 	override suspend fun changePassword(changePasswordRepoBodyModel: ChangePasswordRepoBodyModel): Resource<ChangePasswordRepoModel> {
-		val response = authNet.changePassword(changePasswordRepoRemoteMapper.map(changePasswordRepoBodyModel))
+		val response = authNet.changePassword(
+			preferenceHelper.getAccessToken(),
+			changePasswordRepoRemoteMapper.map(changePasswordRepoBodyModel)
+		)
 		return getResourceFromApiResponse(response) {
 			changePasswordRemoteRepoMapper.map(it.data)
 		}

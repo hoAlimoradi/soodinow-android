@@ -130,7 +130,9 @@
     <string name="based_on_last_year">طبق سال گذشته</string>
     <string name="highest_profit">حالت خوشبینانه و ایده آل</string>
     <string name="inventory_management">مدیریت موجودی</string>
-    <string name="activity_report">گزارش کار</string>
+    <string name="activity_report">گزارش </string>
+    <string name="activity_report_financial">گزارش مالی </string>
+    <string name="activity_report_login_exit">گزارش ورود و خروج </string>
     <string name="price_error">مبلغ وارد شده مجاز نمیباشد</string>
     <string name="create_account_not_compelet">افتتاح حساب قبلی شما هنوز  تکمیل نشده است</string>
     <string name="complete_profile">تکمیل پروفایل</string>
@@ -168,7 +170,11 @@
     <string name="withdrawal_cash">برداشت</string>
     <string name="pull_price_message_insert">درخواست شما با موفقیت ثبت شد</string>
     <string name="gender">جنسیت</string>
-    <string name="hint_gender"> جنسیت خود را تایپ کنید</string>
+    <string name="hint_gender"> جنسیت خود را انتخاب کنید</string>
+    <string name="hint_province"> استان خود را انتخاب کنید</string>
+    <string name="province">استان</string>
+    <string name="hint_city"> شهر خود را انتخاب کنید</string>
+    <string name="city"> شهر</string>
     <string name="address">آدرس</string>
     <string name="hint_address">آدرس خود را تایپ کنید</string>
 
@@ -211,6 +217,8 @@
     <string name="accept_rules_you">قوانین شما رو را می پذیرم</string>
     <string name="withdrawal_price">مبلغ برداشت وجه را وارد کنید</string>
     <string name="deposit_price">مبلغ واریز وجه را وارد کنید</string>
+    <string name="support_soodinow">پشتیبانی سودینو</string>
+    <string name="birth_date_hint">تاریخ تولد خود را دقیق انتخاب کنید</string>
 
     <string-array name="brokerage_list">
         <item>کارگزاری فارابی</item>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        style="@style/GeneralCardView"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:layout_marginHorizontal="@dimen/margin_l"
+        android:layout_marginTop="@dimen/margin_m"
+        android:layout_marginBottom="@dimen/margin_m"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iconImageView"
+        android:layout_width="37dp"
+        android:layout_height="37dp"
+        android:layout_marginEnd="@dimen/margin_m"
+        android:background="@drawable/bg_image_financial_report"
+        android:elevation="2dp"
+        android:scaleType="center"
+        android:src="@drawable/ic_arrow_login"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView"
+        app:layout_constraintEnd_toEndOf="@+id/cardView"
+        app:layout_constraintTop_toTopOf="@+id/cardView" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtTitleDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_m"
+        android:elevation="2dp"
+        android:gravity="center"
+        android:text="99/02/08"
+        android:textColor="@color/pea_green"
+        android:textSize="@dimen/text_size_xs"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView"
+        app:layout_constraintHorizontal_weight="0.3"
+        app:layout_constraintStart_toStartOf="@+id/cardView"
+        app:layout_constraintTop_toTopOf="@+id/cardView"
+        app:layout_constraintEnd_toStartOf="@id/txtTitle"/>
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:elevation="2dp"
+        android:gravity="center_vertical"
+        android:paddingEnd="@dimen/margin_m"
+        android:text="خروج از حساب کاربری"
+        android:textColor="@color/pea_green"
+        android:textSize="@dimen/text_size_s"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView"
+        app:layout_constraintEnd_toStartOf="@id/iconImageView"
+        app:layout_constraintHorizontal_weight="0.6"
+        app:layout_constraintTop_toTopOf="@+id/cardView"
+        app:layout_constraintStart_toEndOf="@id/txtTitleDate"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

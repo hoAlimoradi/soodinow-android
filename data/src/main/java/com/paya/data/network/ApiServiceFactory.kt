@@ -41,7 +41,6 @@ class ApiServiceFactory @Inject constructor(
 			.readTimeout(TIME_OUT, TimeUnit.SECONDS)
 			.retryOnConnectionFailure(true)
 			.addInterceptor(httpLogIntercept.getIntercept())
-			.addInterceptor(authenticatorInterceptor)
 		if (BuildConfig.DEBUG) {
 			builder.addInterceptor(chuckIntercept.getIntercept())
 		}

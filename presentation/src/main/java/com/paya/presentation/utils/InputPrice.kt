@@ -63,7 +63,7 @@ class InputPrice @JvmOverloads constructor(
 
 
     fun setPrice(price: String) {
-        input.setText(price)
+        input.setText(Utils.separatorAmount(price))
     }
 
     fun setMessage(message: String) {

@@ -79,8 +79,6 @@ class CashManagerViewModel @ViewModelInject constructor(
                 loading.value = Resource.idle(null)
             }
         }
-        boxTypes()
-        totalBoxValue()
         getExistAccount()
 
     }
@@ -163,12 +161,12 @@ class CashManagerViewModel @ViewModelInject constructor(
         val type = this.type.get()
         val price: Long = this.price.get()!!
         if (type.isNullOrBlank()) {
-            pullPriceStatus.setValue(Resource.error("type can not be blank", null))
+            pullPriceStatus.setValue(Resource.error("نوع حساب انتخاب تشده است", null))
             return
         }
 
         if (price <= 0f) {
-            pullPriceStatus.setValue(Resource.error("price can not be blank", null))
+            pullPriceStatus.setValue(Resource.error("مبلغ وارد شده اشتباه است", null))
             return
         }
         if (priceType.get() == PriceType.withdrawal) {

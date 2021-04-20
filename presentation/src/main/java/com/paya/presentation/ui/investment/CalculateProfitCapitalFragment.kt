@@ -37,7 +37,6 @@ class CalculateProfitCapitalFragment : BaseFragment<CalculateProfitCapitalViewMo
 	private val mViewModel: CalculateProfitCapitalViewModel by viewModels()
 	private lateinit var mBinding: FragmentCalculateProfitCapitalBinding
 	private lateinit var profitMethodFragment: ProfitMethodFragment
-	val args: CalculateProfitCapitalFragmentArgs by navArgs()
 	override fun onCreateView(
 		inflater: LayoutInflater,container: ViewGroup?,
 		savedInstanceState: Bundle?
@@ -63,23 +62,23 @@ class CalculateProfitCapitalFragment : BaseFragment<CalculateProfitCapitalViewMo
 		observe(mViewModel.statusProfile,::checkProfile)
 		profitMethodFragment =
 			childFragmentManager.findFragmentById(R.id.profit_method_invest) as ProfitMethodFragment
-		profitMethodFragment.percent = args.Percents
+	/*	profitMethodFragment.percent = args.Percents
 		mBinding.inputPrice.setText(Utils.separatorAmount(args.SelectedPrice.toString()))
 		mBinding.inputWithdrawalAmount.setText(Utils.separatorAmount(args.SelectedPrice.toString()))
-		mBinding.inputAmount.setText(Utils.separatorAmount(args.SelectedPrice.toString()))
+		mBinding.inputAmount.setText(Utils.separatorAmount(args.SelectedPrice.toString()))*/
 		
 	}
 	
 	private fun checkProfile(resource: Resource<ProfileRepoModel>) {
 		if (resource.status == Status.SUCCESS) {
 			if (!resource.data!!.complete) {
-				findNavController().navigate(
+				/*findNavController().navigate(
 					CalculateProfitCapitalFragmentDirections.navigateToFirstInformation(NextPageInformation.withoutRisk)
-				)
+				)*/
 			} else {
 				val bundle = Bundle()
-				bundle.putLong("SelectedPrice", args.SelectedPrice)
-				bundle.putString("riskState", args.riskState)
+				/*bundle.putLong("SelectedPrice", args.SelectedPrice)
+				bundle.putString("riskState", args.riskState)*/
 				findNavController().navigate(
 					R.id.connectLowRiskBrokerage,
 					bundle

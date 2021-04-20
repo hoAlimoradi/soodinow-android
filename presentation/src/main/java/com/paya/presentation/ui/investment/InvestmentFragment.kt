@@ -35,9 +35,9 @@ class InvestmentFragment : Fragment() {
 	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
 		super.onViewCreated(view,savedInstanceState)
 		mBinding.submitBtn.setOnClickListener {
-			findNavController().navigate(
+			/*findNavController().navigate(
 				InvestmentFragmentDirections.navigateToFirstInformation(NextPageInformation.personal)
-			)
+			)*/
 		}
 		
 		seekBar.onSeekChangeListener = object : OnSeekChangeListener {

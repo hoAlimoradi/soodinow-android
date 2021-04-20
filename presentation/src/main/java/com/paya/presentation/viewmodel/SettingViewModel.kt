@@ -53,15 +53,15 @@ class SettingViewModel @ViewModelInject constructor(
 
 	fun login(username: String, password: String){
 		if (username.isNullOrBlank()) {
-			loginResource.setValue(Resource.error("username can not be blank",null))
+			loginResource.setValue(Resource.error("لطفا نام کاربری را وارد کنید",null))
 			return
 		}
 		if (username.length != 11){
-			loginResource.setValue(Resource.error("username is not valid",null))
+			loginResource.setValue(Resource.error("نام کاربری وارد شده اشتباه است",null))
 			return
 		}
 		if (password.isNullOrBlank()) {
-			loginResource.setValue(Resource.error("password can not be blank",null))
+			loginResource.setValue(Resource.error("لطفا رمز عبور را وارد کنید",null))
 			return
 		}
 

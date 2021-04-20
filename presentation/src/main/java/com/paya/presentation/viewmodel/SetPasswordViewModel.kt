@@ -55,14 +55,14 @@ class SetPasswordViewModel @ViewModelInject constructor(
 		if (password.isNullOrBlank() ){
 			isNewPassword=true
 			setPasswordResource.setValue(
-				Resource.error("Passwords can not be empty", null)
+				Resource.error("لطفا رمز عبور را وارد کنید", null)
 			)
 			return
 		}
 		if ( repeatPassword.isNullOrBlank()){
 			isRepeatPassword = true
 			setPasswordResource.setValue(
-				Resource.error("Passwords can not be empty", null)
+				Resource.error("لطفا تکرار رمز عبور را وارد کنید", null)
 			)
 			return
 		}
@@ -70,7 +70,7 @@ class SetPasswordViewModel @ViewModelInject constructor(
 		if (password != repeatPassword){
 			isRepeatPassword = true
 			setPasswordResource.setValue(
-				Resource.error("Passwords are not equal", null)
+				Resource.error("رمز عبور با تکرار آن یکسان نیست", null)
 			)
 			return
 		}

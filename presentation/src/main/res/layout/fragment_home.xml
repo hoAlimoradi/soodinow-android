@@ -44,6 +44,16 @@
             app:layout_constraintGuide_percent="0.96" />
 
 
+        <View
+            android:id="@+id/bg_card"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/bg_card"
+            app:layout_constraintBottom_toBottomOf="@id/tabAccountCard"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/alarm"
             android:layout_width="@dimen/height"
@@ -76,11 +86,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_l"
+            android:paddingBottom="@dimen/margin_m"
             app:dotsColor="@color/purple_gray"
             app:dotsCornerRadius="8dp"
             app:dotsSize="8dp"
             app:dotsSpacing="2dp"
             app:dotsWidthFactor="2.5"
+            app:layout_constraintBottom_toBottomOf="@+id/bg_card"
             app:layout_constraintEnd_toStartOf="@+id/end_guideline"
             app:layout_constraintStart_toEndOf="@+id/start_guideline"
             app:layout_constraintTop_toBottomOf="@id/pager"
@@ -96,7 +108,7 @@
             android:background="@drawable/bg_why_soodinow_in_home"
             app:layout_constraintEnd_toStartOf="@+id/end_guideline"
             app:layout_constraintStart_toEndOf="@+id/start_guideline"
-            app:layout_constraintTop_toBottomOf="@id/tabAccountCard" />
+            app:layout_constraintTop_toBottomOf="@id/bg_card" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/whySoodinowTitle"
@@ -117,11 +129,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_m"
             android:elevation="2dp"
+            android:gravity="center"
             android:maxLines="1"
             android:text="@string/why_soodinow_description"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_xs"
-            android:gravity="center"
             app:layout_constraintEnd_toEndOf="@id/whySoodinowCard"
             app:layout_constraintStart_toStartOf="@+id/whySoodinowCard"
             app:layout_constraintTop_toBottomOf="@id/whySoodinowTitle" />
@@ -203,15 +215,15 @@
             android:id="@+id/marketRecycleView"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginTop="@dimen/margin_m"
             android:elevation="2dp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/end_guideline"
             app:layout_constraintStart_toEndOf="@id/start_guideline"
             app:layout_constraintTop_toBottomOf="@id/marketCardView"
-            tools:listitem="@layout/row_market_currency"
             tools:itemCount="4"
-            android:layout_marginTop="@dimen/margin_m"/>
+            tools:listitem="@layout/row_market_currency" />
 
         <include
             layout="@layout/loading_state"
