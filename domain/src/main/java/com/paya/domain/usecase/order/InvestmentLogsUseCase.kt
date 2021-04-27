@@ -9,8 +9,8 @@ import javax.inject.Inject
 
 class InvestmentLogsUseCase @Inject constructor(
 	private val orderRepository: LowRiskInvestmentRepository
-): UseCase<Unit, @JvmSuppressWildcards List<InvestmentLogsRepoModel>> {
-	override suspend fun action(param: Unit): Resource<List<InvestmentLogsRepoModel>> {
-		return orderRepository.getInvestmentLogs()
+): UseCase<InvestmentLogsRepoBodyModel, @JvmSuppressWildcards InvestmentLogsRepoModel> {
+	override suspend fun action(param: InvestmentLogsRepoBodyModel): Resource<InvestmentLogsRepoModel> {
+		return orderRepository.getInvestmentLogs(param.page,param.pageSize)
 	}
 }

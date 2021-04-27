@@ -92,7 +92,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            app:resource="@{(Resource) viewModel.status}"
-            tools:visibility="gone" />
+            tools:visibility="gone"
+            app:resource="@{(Resource) viewModel.loading}"
+            android:id="@+id/loadingView"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

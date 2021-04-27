@@ -31,7 +31,6 @@ class CardAccount : BaseFragment<BaseViewModel>() {
     var activeBoxRepo: ActiveBoxRepo? = null
     var haveButton: Boolean = true
     private val viewModel: BaseViewModel by viewModels()
-    var isDataSet = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -62,9 +61,8 @@ class CardAccount : BaseFragment<BaseViewModel>() {
     }
 
     private fun setData() {
-        if (isDataSet || activeBoxRepo == null)
+        if ( activeBoxRepo == null)
             return
-        isDataSet = true
         activeBoxRepo?.let {
             mBinding.accountUserName.text = it.userName
             mBinding.wealthValue.text = Utils.separatorAmount(it.price.toString())

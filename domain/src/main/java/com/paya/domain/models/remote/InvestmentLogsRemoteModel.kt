@@ -2,7 +2,14 @@ package com.paya.domain.models.remote
 
 import com.google.gson.annotations.SerializedName
 
+
 data class InvestmentLogsRemoteModel(
+	val count: Int,
+	val next: String?,
+	val previous: String?,
+	val results: List<InvestmentLogsModel>,
+)
+data class InvestmentLogsModel(
 	@SerializedName("id")
 	val id: Long,
 	@SerializedName("start_price")

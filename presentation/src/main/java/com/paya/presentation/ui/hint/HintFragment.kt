@@ -51,10 +51,10 @@ class HintFragment : BaseFragment<HintViewModel>() {
 		super.onViewCreated(view,savedInstanceState)
 		observe(mViewModel.userState, ::checkUserStatus)
 		mBinding.register.setOnClickListener {
-			findNavController().navigate(R.id.navigateToRegisterFragment)
+			findNavController().navigate(R.id.registerFragment)
 		}
 		mBinding.login.setOnClickListener {
-			findNavController().navigate(R.id.navigateFromHintToLoginFragment)
+			findNavController().navigate(R.id.loginFragment)
 		}
 		setupViewPager()
 	}

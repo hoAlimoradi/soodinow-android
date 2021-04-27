@@ -56,8 +56,8 @@ abstract class LowRiskInvestmentModule {
 
     @Binds
     abstract fun bindHInvestmentLogsRemoteRepoMapper(mapper: InvestmentLogsRemoteRepoMapper):Mapper<
-            @JvmSuppressWildcards List<InvestmentLogsRemoteModel>,
-            @JvmSuppressWildcards List<InvestmentLogsRepoModel>
+            @JvmSuppressWildcards InvestmentLogsRemoteModel,
+            @JvmSuppressWildcards InvestmentLogsRepoModel
             >
 
     @Binds
@@ -91,6 +91,6 @@ abstract class LowRiskInvestmentModule {
     abstract fun bindHistoryPriceUseCase(useCase: HistoryPriceUseCase): UseCase<HistoryPriceBodyRepoModel, HistoryPriceRepoModel>
 
     @Binds
-    abstract fun bindInvestmentLogsUseCase(useCase: InvestmentLogsUseCase): UseCase<Unit, @JvmSuppressWildcards List<InvestmentLogsRepoModel>>
+    abstract fun bindInvestmentLogsUseCase(useCase: InvestmentLogsUseCase): UseCase<InvestmentLogsRepoBodyModel, @JvmSuppressWildcards InvestmentLogsRepoModel>
 
 }

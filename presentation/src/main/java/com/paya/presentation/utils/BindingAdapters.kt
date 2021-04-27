@@ -22,10 +22,14 @@ import androidx.databinding.BindingAdapter
 import at.grabner.circleprogress.CircleProgressView
 import com.alimuzaffar.lib.pin.PinEntryEditText
 import com.github.mikephil.charting.charts.LineChart
-import com.github.mikephil.charting.components.YAxis.YAxisLabelPosition.INSIDE_CHART
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.formatter.DefaultAxisValueFormatter
+import com.github.mikephil.charting.formatter.IAxisValueFormatter
 import com.github.mikephil.charting.formatter.IFillFormatter
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.paya.presentation.R
 import com.paya.presentation.ui.custom.MyMarkerView
 import com.paya.presentation.ui.custom.MyMarkerViewSmall
@@ -371,7 +375,7 @@ object BindingAdapters {
 
         // enable scaling and dragging
         chart.isDragEnabled = true
-        chart.setScaleEnabled(true)
+        chart.setScaleEnabled(false)
 
         // if disabled, scaling can be done on x- and y-axis separately
         chart.setPinchZoom(false)
@@ -379,20 +383,25 @@ object BindingAdapters {
 
         chart.setDrawGridBackground(false)
         chart.maxHighlightDistance = 300f
-
-        chart.xAxis.isEnabled = false
+        var dayList = mutableListOf("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat")
+        chart.xAxis.apply {
+            isEnabled = true
+            setDrawGridLines(false)
+            position = XAxis.XAxisPosition.BOTTOM_INSIDE
+//            valueFormatter =
+//                 IndexAxisValueFormatter(dayList)
+        }
 
 
         chart.axisLeft.apply {
             isEnabled = true
-            axisMinimum = 0f
-            mAxisMaximum = 150f
-            setLabelCount(4, false)
-            textColor = Color.RED
-            setPosition(INSIDE_CHART)
+
+            setLabelCount(5, false)
+            textColor = Color.LTGRAY
+            setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART)
             setDrawGridLines(true)
-            zeroLineColor = Color.LTGRAY
-            axisLineColor = Color.LTGRAY;
+            zeroLineColor = ContextCompat.getColor(chart.context, R.color.white_smoke)
+            axisLineColor = ContextCompat.getColor(chart.context, R.color.white_smoke)
         }
 
 

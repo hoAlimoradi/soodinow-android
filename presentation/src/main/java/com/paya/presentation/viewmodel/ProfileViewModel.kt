@@ -4,14 +4,15 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.paya.domain.models.repo.*
+import com.paya.domain.models.repo.BoxHistoryRepoModel
+import com.paya.domain.models.repo.BoxHistoryRequestModel
+import com.paya.domain.models.repo.ExitAccountRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.domain.tools.UseCase
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.utils.callResource
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class ProfileViewModel @ViewModelInject constructor(
@@ -50,17 +51,25 @@ class ProfileViewModel @ViewModelInject constructor(
 			existAccount.postValue(callResource(this@ProfileViewModel,existAccountUseCase.action(Unit)))
 		}
 	}
-	
-		fun getProfile(
+
+	fun getProfile(
 		boxId: Long,
 		type: String,
 		number: Int
-	){
+	) {
+		profile.value?.let {
+			if(it.status == Status.LOADING)
+				return
+		}
 		profile.value = Resource.loading(null)
-		viewModelScope.launch(Dispatchers.IO){
-			profile.postValue(callResource(this@ProfileViewModel,getBoxHistoryUseCase.action(
-				BoxHistoryRequestModel(boxId, type, number)
-			)))
+		viewModelScope.launch(Dispatchers.IO) {
+			profile.postValue(
+				callResource(
+					this@ProfileViewModel, getBoxHistoryUseCase.action(
+						BoxHistoryRequestModel(boxId, type, number)
+					)
+				)
+			)
 		}
 	}
 	/*fun getExistAccount(){

@@ -128,6 +128,10 @@ class CashManagerViewModel @ViewModelInject constructor(
     }
 
     fun getSellPrice(type: String) {
+        sellPriceStatus.value?.let {
+            if (it.status == Status.LOADING)
+                return
+        }
         viewModelScope.launch(Dispatchers.IO) {
             sellPriceStatus.postValue(Resource.loading(null))
             val response =

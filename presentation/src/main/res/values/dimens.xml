@@ -42,7 +42,7 @@
     <dimen name="viewpager_current_item_horizontal_margin">20dp</dimen>
     <dimen name="elevation">10dp</dimen>
 
-    <dimen name="line_chart_height">150dp</dimen>
+    <dimen name="line_chart_height">170dp</dimen>
     <dimen name="dialog_w">300dp</dimen>
     <dimen name="dialog_h">500dp</dimen>
 

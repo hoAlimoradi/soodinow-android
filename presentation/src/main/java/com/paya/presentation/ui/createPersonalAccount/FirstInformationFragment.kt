@@ -61,9 +61,6 @@ class FirstInformationFragment : BaseFragment<FirstInformationViewModel>() {
 		mBinding.birthDate.layout.setOnClickListener {
 			showDatePicker()
 		}
-		mBinding.birthDate.inputContentEditText.setOnClickListener {
-			showDatePicker()
-		}
 		mBinding.gender.layout.setOnClickListener {
 			fragmentManager?.let { it1 ->
 				PickerViewDialog()

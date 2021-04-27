@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.paya.domain.models.repo.InvestmentLogsRepoModel
 import com.paya.domain.models.repo.ProfileRepoModel
@@ -19,12 +21,15 @@ import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentFinancialReportBinding
 import com.paya.presentation.ui.activitiesReport.adapter.FinancialReportAdapter
 import com.paya.presentation.ui.createPersonalAccount.FirstInformationFragment
+import com.paya.presentation.utils.ListLoadStateAdapter
 import com.paya.presentation.utils.observe
 import com.paya.presentation.viewmodel.CalculateProfitCapitalViewModel
 import com.paya.presentation.viewmodel.FinancialReportViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_financial_report.*
 import kotlinx.android.synthetic.main.fragment_new_card_account.*
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class FinancialReportFragment : BaseFragment<FinancialReportViewModel>() {
@@ -56,19 +61,23 @@ class FinancialReportFragment : BaseFragment<FinancialReportViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        observe(mViewModel.status,::readyInvestmentLogs)
         financialRecyclerView.layoutManager = LinearLayoutManager(context)
-        financialRecyclerView.adapter = adapter
-    }
-
-    private fun readyInvestmentLogs(resource: Resource<List<InvestmentLogsRepoModel>>) {
-        if (resource.status == Status.SUCCESS) {
-            resource.data?.let { adapter.setItems(it) }
-        } else if (resource.status == Status.ERROR) {
-            Toast.makeText(
-                requireContext(),resource.message, Toast.LENGTH_SHORT
-            ).show()
+        financialRecyclerView.adapter = adapter.withLoadStateHeaderAndFooter(ListLoadStateAdapter(),ListLoadStateAdapter())
+        viewLifecycleOwner.lifecycleScope.launch {
+            mViewModel.status.collectLatest {
+                adapter.submitData(it)
+            }
         }
+        viewLifecycleOwner.lifecycleScope.launch {
+            adapter.loadStateFlow.collectLatest {
+                when(it.refresh) {
+                    is LoadState.Error -> Toast.makeText(context,
+                        (it.refresh as LoadState.Error).error.message,Toast.LENGTH_SHORT).show()
+                    else -> return@collectLatest
+                }
+            }
+        }
+
     }
 
     override val baseViewModel: BaseViewModel

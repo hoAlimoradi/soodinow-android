@@ -9,7 +9,6 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
@@ -29,8 +28,6 @@ import com.paya.presentation.utils.observe
 import com.paya.presentation.utils.shared.Point
 import com.paya.presentation.viewmodel.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ProfileFragment : BaseFragment<ProfileViewModel>() {
@@ -67,21 +64,20 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupViewPager()
-        viewModel.getExistAccount()
         initRadioGroup()
         observe(viewModel.existAccount, ::onExistAccountReady)
         observe(viewModel.profile, ::onProfileReady)
-mBinding.alarm.setOnClickListener {
-    getFindViewController()?.navigate(
-        R.id.activitiesReportFragment
-    )
-}
-
+        mBinding.alarm.setOnClickListener {
+            getFindViewController()?.navigate(
+                R.id.activitiesReportFragment
+            )
+        }
+        viewModel.getExistAccount()
     }
 
     private fun initRadioGroup() {
         mBinding.chartTabLayout.getTabAt(3)?.select()
-        mBinding.chartTabLayout.addOnTabSelectedListener( object : TabLayout.OnTabSelectedListener{
+        mBinding.chartTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(tab: TabLayout.Tab?) {
 
             }
@@ -95,7 +91,7 @@ mBinding.alarm.setOnClickListener {
                 currentBoxId ?: return
                 when (mBinding.chartTabLayout.selectedTabPosition) {
                     // day
-                   3 -> {
+                    3 -> {
                         boxHistoryType = "day"
                         boxHistoryNumber = 3
                     }
@@ -110,6 +106,7 @@ mBinding.alarm.setOnClickListener {
                         boxHistoryNumber = 1
                     }
                     //years
+                    // TODO: 4/26/21 change to years
                     0 -> {
                         boxHistoryType = "month"
                         boxHistoryNumber = 3
@@ -119,7 +116,9 @@ mBinding.alarm.setOnClickListener {
                         boxHistoryNumber = 3
                     }
                 }
-                currentBoxId?.let { viewModel.getProfile(it, boxHistoryType, boxHistoryNumber) }
+                currentBoxId?.let {
+                    viewModel.getProfile(it, boxHistoryType, boxHistoryNumber)
+                }
             }
 
         })
@@ -128,12 +127,14 @@ mBinding.alarm.setOnClickListener {
 
     private fun onExistAccountReady(resource: Resource<ExitAccountRepoModel>) {
         if (resource.status == Status.SUCCESS) {
+            cardAccounts.clear()
             resource.data?.activeBox?.let {
                 boxHistoryId = it.map { activeBox -> activeBox.id }
                 it.forEach { activeBox ->
                     boxHistoryHahMap[activeBox.id] = null
                     cardAccounts.add(CardAccount.newInstance(activeBox))
                 }
+                adapter.notifyDataSetChanged()
                 if (it.isEmpty()) {
                     viewModel.setErrorMessage("شما هیچ حسابی ایجاد نکرده اید")
                     return@let
@@ -150,16 +151,8 @@ mBinding.alarm.setOnClickListener {
         if (resource.status == Status.SUCCESS) {
             boxHistoryHahMap[currentBoxId!!] = resource.data
             resource.data?.let {
-                val cardAccountIndex = boxHistoryId!!.indexOf(currentBoxId!!)
-                if (cardAccountIndex == -1) return
-                val cardAccount = cardAccounts[cardAccountIndex]
-                if (!cardAccount.isDataSet)
-                    adapter.notifyItemChanged(cardAccountIndex)
                 mBinding.parentView.visibility = View.VISIBLE
-                lifecycleScope.launch {
-                    delay(500)
-                    setCurrentBoxData(cardAccount, it)
-                }
+                setCurrentBoxData(it)
             }
         } else if (resource.status == Status.ERROR) {
             viewModel.setErrorMessage(resource.message ?: "خطایی رخ داده است")
@@ -181,21 +174,23 @@ mBinding.alarm.setOnClickListener {
         mBinding.pager.registerOnPageChangeCallback(
             object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
-                    currentBoxId = boxHistoryId!![position]
-                    val boxModel = boxHistoryHahMap[currentBoxId!!]
-                    if (boxModel == null) {
-                        viewModel.getProfile(currentBoxId!!, boxHistoryType, boxHistoryNumber)
-                    } else {
-                        setCurrentBoxData(cardAccounts[position], boxModel)
+                    cardAccounts[position].activeBoxRepo?.let {
+                        currentBoxId = it.id
+                        val boxModel = boxHistoryHahMap[currentBoxId!!]
+                        if (boxModel == null) {
+                            viewModel.getProfile(currentBoxId!!, boxHistoryType, boxHistoryNumber)
+                        } else {
+                            setCurrentBoxData(boxModel)
+                        }
+                        super.onPageSelected(position)
                     }
-                    super.onPageSelected(position)
                 }
             }
         )
 
     }
 
-    private fun setCurrentBoxData(cardAccount: CardAccount, boxModel: BoxHistoryRepoModel) {
+    private fun setCurrentBoxData(boxModel: BoxHistoryRepoModel) {
         val mainChartPoints = mutableListOf<Point>()
         val mainChartData = boxModel.mainChart.data
         mainChartData.forEachIndexed { index, value ->

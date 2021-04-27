@@ -178,13 +178,14 @@ class CashManagerFragment : BaseFragment<CashManagerViewModel>() {
 
     private fun onExistAccountReady(resource: Resource<ExitAccountRepoModel>) {
         if (resource.status == Status.SUCCESS) {
+            cardAccounts.clear()
             resource.data?.activeBox?.let {
                 var selectionPager = 0
                 it.forEach { activeBox ->
                     cardAccounts.add(CardAccount.newInstance(activeBox, false))
                     if (accountId == activeBox.id) {
                         selectionPager = cardAccounts.size - 1
-                        mViewModel.getSellPrice(activeBox.type)
+//                        mViewModel.getSellPrice(activeBox.type)
                         mViewModel.type.set(activeBox.subType)
                         mBinding.inputPrice.setPrice(activeBox.price.toString())
                     }

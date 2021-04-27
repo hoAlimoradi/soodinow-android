@@ -1,7 +1,6 @@
 package com.paya.data.repository
 
 import com.paya.common.Mapper
-import com.paya.data.mapper.HistoryPriceRemoteRepoMapper
 import com.paya.data.network.remote_api.LowRiskInvestmentService
 import com.paya.data.sharedpreferences.PreferenceHelper
 import com.paya.data.utils.getResourceFromApiResponse
@@ -15,14 +14,14 @@ data class LowRiskInvestmentRepositoryImpl @Inject constructor(
     private val lowRiskInvestmentService: LowRiskInvestmentService,
     private val isInRiskRemoteRepoMapper: Mapper<IsInRiskListRemoteModel, IsInRiskListRepoModel>,
     private val exitAccountRemoteRepoMapper: Mapper<ExitAccountRemoteModel, ExitAccountRepoModel>,
-    private val addRiskOrderRemoteRepoMapper: Mapper<String,String>,
+    private val addRiskOrderRemoteRepoMapper: Mapper<String, String>,
     private val addRiskOrderRepoRemoteMapper: Mapper<AddRiskOrderRepoBodyModel, AddRiskOrderRemoteBodyModel>,
     private val boxTypesRemoteRepoMapper: Mapper<BoxTypeRemoteModel, BoxTypeRepoModel>,
     private val getSellPriceRemoteRepoMapper: Mapper<@JvmSuppressWildcards List<List<Float>>, @JvmSuppressWildcards List<Long>>,
     private val pullPriceRemoteRepoMapper: Mapper<String, String>,
     private val totalBoxValueRemoteRepoMapper: Mapper<TotalBoxValueRemoteModel, TotalBoxValueRepoModel>,
     private val historyPriceRemoteRepoMapper: Mapper<HistoryPriceRemoteModel, HistoryPriceRepoModel>,
-    private val investmentLogsRemoteRepoMapper: Mapper<List<InvestmentLogsRemoteModel>, List<InvestmentLogsRepoModel>>,
+    private val investmentLogsRemoteRepoMapper: Mapper<InvestmentLogsRemoteModel, InvestmentLogsRepoModel>,
     private val preferenceHelper: PreferenceHelper,
 ) : LowRiskInvestmentRepository {
 
@@ -90,15 +89,26 @@ data class LowRiskInvestmentRepositoryImpl @Inject constructor(
         filter: String
     ): Resource<HistoryPriceRepoModel> {
         return getResourceFromApiResponse(
-            lowRiskInvestmentService.getHistoryPrice(preferenceHelper.getAccessToken(),page, filter)
+            lowRiskInvestmentService.getHistoryPrice(
+                preferenceHelper.getAccessToken(),
+                page,
+                filter
+            )
         ) {
             historyPriceRemoteRepoMapper.map(it.data)
         }
     }
 
-    override suspend fun getInvestmentLogs(): Resource<List<InvestmentLogsRepoModel>> {
+    override suspend fun getInvestmentLogs(
+        page: Int,
+        pageSize: Int
+    ): Resource<InvestmentLogsRepoModel> {
         return getResourceFromApiResponse(
-            lowRiskInvestmentService.getInvestmentLogs(preferenceHelper.getAccessToken())
+            lowRiskInvestmentService.getInvestmentLogs(
+                preferenceHelper.getAccessToken(),
+                page,
+                pageSize
+            )
         ) {
             investmentLogsRemoteRepoMapper.map(it.data)
         }

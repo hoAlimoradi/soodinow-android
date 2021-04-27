@@ -3,6 +3,12 @@ package com.paya.domain.models.repo
 import com.google.gson.annotations.SerializedName
 
 data class InvestmentLogsRepoModel(
+	val count: Int,
+	val next: String,
+	val previous: String,
+	val results: List<InvestmentLogsModel>,
+)
+data class InvestmentLogsModel(
 	val id: Long,
 	val startPrice: Long,
 	val finalPrice: Long,

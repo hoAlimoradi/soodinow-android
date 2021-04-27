@@ -1,20 +1,24 @@
 package com.paya.presentation.ui.activitiesReport.adapter
 
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.paya.domain.models.repo.InvestmentLogsModel
 import com.paya.domain.models.repo.InvestmentLogsRepoModel
+import com.paya.domain.models.repo.PriceModel
 import com.paya.presentation.R
+import com.paya.presentation.ui.cashManager.adapter.HistoryPriceAdapter
 import com.paya.presentation.utils.Utils
 import kotlinx.android.synthetic.main.item_financial_report.view.*
 
 class FinancialReportAdapter() :
-	RecyclerView.Adapter<FinancialReportAdapter.ActivityReportViewHolder>() {
+	PagingDataAdapter<InvestmentLogsModel, FinancialReportAdapter.ActivityReportViewHolder>(FinancialPriceComparator) {
 
-	private val list = mutableListOf<InvestmentLogsRepoModel>()
+
 
 	class ActivityReportViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -29,7 +33,9 @@ class FinancialReportAdapter() :
 	}
 
 	override fun onBindViewHolder(holder: ActivityReportViewHolder, position: Int) {
-		val item = list[position]
+		val item = getItem(position)
+		if (item == null)
+			return
 		with(holder.itemView) {
 			iconImageView.setImageResource(
 				when (item.type) {
@@ -71,15 +77,6 @@ class FinancialReportAdapter() :
 		}
 	}
 
-	override fun getItemCount(): Int {
-		return list.size
-	}
-
-	fun setItems(list: List<InvestmentLogsRepoModel>) {
-		this.list.addAll(list)
-		notifyDataSetChanged()
-	}
-
 	enum class TypeInvestment {
 		Open,
 		Increase,
@@ -91,6 +88,18 @@ class FinancialReportAdapter() :
 		Running,
 		Completed,
 		Error
+	}
+
+	object FinancialPriceComparator : DiffUtil.ItemCallback<InvestmentLogsModel>() {
+		override fun areItemsTheSame(oldItem: InvestmentLogsModel, newItem: InvestmentLogsModel): Boolean {
+			// Id is unique.
+			return oldItem.id == newItem.id
+		}
+
+		override fun areContentsTheSame(oldItem: InvestmentLogsModel, newItem: InvestmentLogsModel): Boolean {
+			return oldItem == newItem
+
+		}
 	}
 
 }
