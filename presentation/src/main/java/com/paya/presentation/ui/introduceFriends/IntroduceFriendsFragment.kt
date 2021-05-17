@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import com.paya.presentation.R
 import com.paya.presentation.databinding.FragmentIntroduceFirendsBinding
 
@@ -32,6 +33,9 @@ class IntroduceFriendsFragment : Fragment() {
 	
 	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
 		super.onViewCreated(view,savedInstanceState)
+		mBinding.toolbar.backButton.setOnClickListener {
+			findNavController().popBackStack()
+		}
 	}
 	
 }

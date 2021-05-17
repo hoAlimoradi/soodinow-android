@@ -46,6 +46,9 @@ class ChangePasswordFragment : BaseFragment<ChangePasswordViewModel>() {
 	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
 		super.onViewCreated(view,savedInstanceState)
 		observe(mViewModel.status,::ready)
+		mBinding.toolbar.backButton.setOnClickListener {
+			findNavController().popBackStack()
+		}
 		
 	}
 	
@@ -62,9 +65,7 @@ class ChangePasswordFragment : BaseFragment<ChangePasswordViewModel>() {
 				}
 				
 			}
-			Status.ERROR -> context.let {
-				Toast.makeText(it,resource.message,Toast.LENGTH_SHORT).show()
-			}
+
 			else -> return
 		}
 		

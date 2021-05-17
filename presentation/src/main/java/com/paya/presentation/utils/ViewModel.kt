@@ -16,6 +16,8 @@ fun <T> callResource(viewModel: BaseViewModel,resource: Resource<T>) : Resource<
 		viewModel.unAuthorized(resource.message!!) {  }
 	} else if (resource.status == Status.FARABITOKEN) {
 		viewModel.farabiAuth()
+	} else if (resource.status == Status.ERROR) {
+		viewModel.showError(resource.message ?: "عملیات شما با خطا مواجه شد")
 	}
 	return resource
 }

@@ -55,6 +55,9 @@ class UserUpdateProfileFragment : BaseFragment<UserUpdateProfileViewModel>(),Bir
 	
 	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
 		super.onViewCreated(view,savedInstanceState)
+		mBinding.toolbar.backButton.setOnClickListener {
+			findNavController().popBackStack()
+		}
 		mBinding.birthDate.callBack = this
 		observe(mViewModel.statusGetProfile,::readyGetProfile)
 		observe(mViewModel.statusUpdateProfile,::updateGetProfile)
@@ -64,9 +67,6 @@ class UserUpdateProfileFragment : BaseFragment<UserUpdateProfileViewModel>(),Bir
 	private fun readyGetProfile(resource: Resource<ProfileRepoModel>) {
 		when (resource.status) {
 			Status.ERROR -> {
-				context.let {
-					Toast.makeText(it,resource.message,Toast.LENGTH_SHORT).show()
-				}
 				findNavController().popBackStack()
 			}
 			else -> return
@@ -78,9 +78,6 @@ class UserUpdateProfileFragment : BaseFragment<UserUpdateProfileViewModel>(),Bir
 			Status.SUCCESS -> context.let {
 				Toast.makeText(it,getString(R.string.update_profile_message),Toast.LENGTH_SHORT)
 					.show()
-			}
-			Status.ERROR -> context.let {
-				Toast.makeText(it,resource.message,Toast.LENGTH_SHORT).show()
 			}
 			else -> return
 		}

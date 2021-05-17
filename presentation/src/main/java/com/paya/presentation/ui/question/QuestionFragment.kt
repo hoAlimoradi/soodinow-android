@@ -86,12 +86,6 @@ class QuestionFragment : BaseFragment<QuestionViewModel>() {
             findNavController().navigate(
                 QuestionFragmentDirections.navigateToInvestment()
             )
-        } else if (resource.status == Status.ERROR) {
-            Toast.makeText(
-                requireContext(),
-                resource.message ?: "خطایی رخ داده است",
-                Toast.LENGTH_SHORT
-            ).show()
         }
     }
 

@@ -19,9 +19,9 @@
     <dimen name="margin_4_dp">4dp</dimen>
 
 
-    <dimen name="text_size_title">30sp</dimen>
+
     <dimen name="text_size_title_small">26sp</dimen>
-    <dimen name="text_size_small">14sp</dimen>
+
     <dimen name="text_size_very_small">12sp</dimen>
     <dimen name="text_size_normal">16sp</dimen>
     <dimen name="text_size_medium">18sp</dimen>
@@ -33,18 +33,15 @@
     <dimen name="text_size_8sp">8sp</dimen>
     <dimen name="text_size_menu">10sp</dimen>
 
-    <dimen name="design_bottom_navigation_text_size" tools:override="true">10sp</dimen>
-    <dimen name="design_bottom_navigation_active_text_size" tools:override="true">10sp</dimen>
+
     <dimen name="create_account_button_height">40dp</dimen>
-    <dimen name="text_size_card_number">18sp</dimen>
     <dimen name="viewpager_next_item_visible">10dp</dimen>
     <dimen name="viewpager_item_padding">5dp</dimen>
     <dimen name="viewpager_current_item_horizontal_margin">20dp</dimen>
     <dimen name="elevation">10dp</dimen>
 
     <dimen name="line_chart_height">170dp</dimen>
-    <dimen name="dialog_w">300dp</dimen>
-    <dimen name="dialog_h">500dp</dimen>
+
 
     <!--    font size-->
     <dimen name="text_size_xxl">24sp</dimen>
@@ -74,4 +71,5 @@
     <dimen name="margin_sub_cards">32dp</dimen>
     <dimen name="bullet_size">40dp</dimen>
     <dimen name="why_soodinow_text_height">68dp</dimen>
+    <dimen name="space_bottom_navigation">70dp</dimen>
 </resources>

@@ -17,6 +17,7 @@
         tools:ignore="AllowBackup,UnusedAttribute">
        <!-- // use local service and use http request-->
       <!--  android:usesCleartextTraffic="true">-->
+        <meta-data android:name="io.sentry.dsn" android:value="https://ece3280805e649bdb3cd0927871c5d35@o482086.ingest.sentry.io/5760713" />
     </application>
 
 </manifest>

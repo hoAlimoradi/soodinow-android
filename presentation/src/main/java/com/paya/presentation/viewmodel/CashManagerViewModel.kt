@@ -141,7 +141,7 @@ class CashManagerViewModel @ViewModelInject constructor(
                     if (it > 0) {
                         minSeek.set(response.data?.get(0))
                         maxSeek.set(response.data?.get(it - 1))
-                        price.set(response.data?.get(0))
+                        //price.set(response.data?.get(0))
                     }
                 }
             }

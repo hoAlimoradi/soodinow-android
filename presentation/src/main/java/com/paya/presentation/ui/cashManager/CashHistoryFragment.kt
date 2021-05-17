@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.paya.presentation.R
@@ -48,6 +49,9 @@ private val mViewModel: CashHistoryManagerViewModel by viewModels()
         super.onViewCreated(view, savedInstanceState)
         setupAdapter()
         setupTabLayout()
+        mBinding.toolbar.backButton.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     private fun setupTabLayout() {

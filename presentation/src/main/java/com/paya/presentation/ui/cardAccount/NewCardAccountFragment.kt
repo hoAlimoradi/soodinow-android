@@ -44,7 +44,7 @@ class NewCardAccountFragment : BaseFragment<NewCardAccountViewModel>() {
         observe(mViewModel.statusProfile,::checkProfile)
         createAccountBtn.setOnClickListener {
             progress_bar.visibility = View.VISIBLE
-            createAccountBtn.visibility = View.GONE
+            createAccountBtn.visibility = View.INVISIBLE
            mViewModel.getProfile()
         }
     }
@@ -61,10 +61,6 @@ class NewCardAccountFragment : BaseFragment<NewCardAccountViewModel>() {
                     R.id.createLowRiskAccount
                 )
             }
-        } else if (resource.status == Status.ERROR) {
-            Toast.makeText(
-                requireContext(),resource.message, Toast.LENGTH_SHORT
-            ).show()
         }
     }
 

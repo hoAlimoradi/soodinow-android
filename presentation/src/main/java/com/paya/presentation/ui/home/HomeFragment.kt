@@ -1,5 +1,6 @@
 package com.paya.presentation.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +20,7 @@ import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentHomeBinding
 import com.paya.presentation.ui.cardAccount.NewCardAccountFragment
+import com.paya.presentation.ui.farabi.FarabiAuthActivity
 import com.paya.presentation.ui.home.adapter.MarketAdapter
 import com.paya.presentation.utils.ViewPagerUtil
 import com.paya.presentation.utils.observe
@@ -70,13 +72,10 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 		}*/
 		setupViewPager()
 
-			mBinding.alarm.setOnClickListener {
-			findNavController().navigateUp()
-			getFindViewController()?.navigate(
-				R.id.activitiesReportFragment
-			)
+		mBinding.alarm.setOnClickListener {
+			//startActivity(Intent(context, FarabiAuthActivity::class.java))
 		}
-		
+
 
 	}
 
@@ -101,13 +100,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 				adapterCurrency.clear()
 				adapterCurrency.addAllData(it as ArrayList<CurrencyPriceRepoModel>)
 			}
-			Status.ERROR -> {
-				Toast.makeText(
-					requireContext(),
-					resource.message ?: "خطایی رخ داده است",
-					Toast.LENGTH_SHORT
-				).show()
-			}
+
 			
 			else -> return
 		}

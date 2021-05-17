@@ -94,7 +94,7 @@
                 android:layout_marginEnd="@dimen/margin_small"
                 android:text="@{submitTitle}"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_size_small"
+                android:textSize="@dimen/text_size_m"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/cancelBtn"
                 app:layout_constraintTop_toBottomOf="@id/passwordEdiText" />
@@ -110,7 +110,7 @@
                 android:text="@{cancelTitle}"
                 android:textColor="@color/black"
                 android:layout_marginStart="@dimen/margin_small"
-                android:textSize="@dimen/text_size_small"
+                android:textSize="@dimen/text_size_m"
                 app:layout_constraintEnd_toStartOf="@+id/submitBtn"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/passwordEdiText" />

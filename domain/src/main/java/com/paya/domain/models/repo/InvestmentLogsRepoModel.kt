@@ -1,12 +1,10 @@
 package com.paya.domain.models.repo
 
-import com.google.gson.annotations.SerializedName
-
 data class InvestmentLogsRepoModel(
 	val count: Int,
 	val next: String,
 	val previous: String,
-	val results: List<InvestmentLogsModel>,
+	val results: List<Any>,
 )
 data class InvestmentLogsModel(
 	val id: Long,
@@ -23,3 +21,5 @@ data class InvestmentLogsModel(
 	val createdAt: String,
 	val updatedAt: String,
 )
+
+data class InvestmentHeaderDate(val date: String)

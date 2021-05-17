@@ -19,49 +19,35 @@
           app:layout_constraintTop_toTopOf="parent" />
 
 
-      <androidx.cardview.widget.CardView
-          android:id="@+id/cardTop"
-          style="@style/GeneralCardView"
-          android:layout_width="match_parent"
-          android:layout_height="0dp"
-          android:layout_marginStart="@dimen/margin_small"
-          android:layout_marginEnd="@dimen/margin_small"
-
-          app:layout_constraintBottom_toTopOf="@id/cardBottom"
-          app:layout_constraintTop_toBottomOf="@id/toolbar"
-          app:layout_constraintVertical_weight="0.5" />
-
-      <androidx.cardview.widget.CardView
-          android:id="@+id/cardBottom"
-          style="@style/GeneralCardView"
-          android:layout_width="match_parent"
-          android:layout_height="0dp"
-          android:layout_marginStart="@dimen/margin_small"
+      <androidx.appcompat.widget.AppCompatImageView
+          android:id="@+id/image"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_marginHorizontal="53dp"
           android:layout_marginTop="@dimen/margin_l"
-          android:layout_marginEnd="@dimen/margin_small"
-android:layout_marginBottom="@dimen/margin_l"
-          app:layout_constraintBottom_toBottomOf="parent"
-          app:layout_constraintTop_toBottomOf="@id/cardTop"
-          app:layout_constraintVertical_weight="0.5" />
+          android:scaleType="fitCenter"
+          android:src="@drawable/image_support"
+          app:layout_constraintTop_toBottomOf="@id/toolbar"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintVertical_bias="1" />
 
 
       <androidx.appcompat.widget.AppCompatTextView
           android:id="@+id/desc"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
-          android:layout_marginStart="@dimen/margin_l"
-          android:layout_marginTop="@dimen/margin_small"
-          android:layout_marginEnd="@dimen/margin_l"
+          android:layout_marginHorizontal="38dp"
+          android:layout_marginTop="@dimen/margin_xl"
           android:elevation="2dp"
           android:gravity="center"
           android:lineSpacingExtra="@dimen/margin_m"
           android:text="@string/call_support_desc"
           android:textColor="@color/purple_gray"
-          android:textSize="@dimen/text_size_12sp"
-          app:layout_constraintBottom_toTopOf="@id/buttonLayout"
-          app:layout_constraintEnd_toEndOf="@id/cardTop"
-          app:layout_constraintStart_toStartOf="@id/cardTop"
-          app:layout_constraintTop_toTopOf="@id/cardTop"
+          android:textSize="@dimen/text_size_m"
+app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/image"
           app:layout_constraintVertical_bias="0" />
 
       <RelativeLayout
@@ -74,8 +60,8 @@ android:layout_marginBottom="@dimen/margin_l"
           app:layout_constraintStart_toStartOf="parent"
           android:layout_marginTop="@dimen/margin_small"
           android:elevation="2dp"
-          app:layout_constraintBottom_toTopOf="@id/image"
-          app:layout_constraintTop_toBottomOf="@id/desc">
+          app:layout_constraintTop_toBottomOf="@id/desc"
+         >
 
          <androidx.appcompat.widget.AppCompatButton
              android:layout_width="wrap_content"
@@ -86,54 +72,37 @@ android:layout_marginBottom="@dimen/margin_l"
              android:drawablePadding="@dimen/margin_small"
              android:text="@string/direct_call"
              android:textColor="@color/white"
-             android:textSize="@dimen/text_size_small"
+             android:textSize="@dimen/text_size_m"
              calling="@{@string/call_support_number}" />
 
       </RelativeLayout>
 
-      <androidx.appcompat.widget.AppCompatImageView
-          android:id="@+id/image"
-          android:layout_width="wrap_content"
-          android:layout_height="100dp"
-          android:layout_marginTop="@dimen/margin_l"
-          android:elevation="2dp"
-          android:scaleType="fitCenter"
-          android:src="@drawable/image_support"
-          app:layout_constraintBottom_toBottomOf="@id/cardTop"
-          app:layout_constraintEnd_toEndOf="@id/cardTop"
-          app:layout_constraintStart_toStartOf="@id/cardTop"
 
-          app:layout_constraintVertical_bias="1" />
 
       <androidx.appcompat.widget.AppCompatTextView
           android:id="@+id/descChat"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
-          android:layout_marginStart="@dimen/margin_xl"
-          android:layout_marginTop="@dimen/margin_small"
-          android:layout_marginEnd="@dimen/margin_xl"
+          android:layout_marginTop="40dp"
+        android:layout_marginHorizontal="38dp"
           android:elevation="2dp"
           android:gravity="center"
           android:lineSpacingExtra="@dimen/margin_m"
           android:text="@string/call_support_desc_chat"
           android:textColor="@color/purple_gray"
-          android:textSize="@dimen/text_size_12sp"
-          app:layout_constraintEnd_toEndOf="@id/cardBottom"
-          app:layout_constraintStart_toStartOf="@id/cardBottom"
-          app:layout_constraintTop_toTopOf="@id/cardBottom" />
+          android:textSize="@dimen/text_size_m"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/buttonLayout" />
 
       <pl.bclogic.pulsator4droid.library.PulsatorLayout
           android:id="@+id/pulsator"
           android:layout_width="0dp"
           android:layout_height="0dp"
-          android:layout_marginStart="@dimen/margin_small"
-          android:layout_marginEnd="@dimen/margin_small"
-          android:layout_marginBottom="@dimen/margin_small"
-          android:layout_marginTop="@dimen/margin_l"
-          android:elevation="2dp"
-          app:layout_constraintBottom_toBottomOf="@id/cardBottom"
-          app:layout_constraintEnd_toEndOf="@id/cardBottom"
-          app:layout_constraintStart_toStartOf="@id/cardBottom"
+          android:layout_margin="@dimen/margin_xl"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
           app:pulse_color="@color/green"
           app:pulse_count="4"
           app:pulse_duration="3000"
@@ -141,6 +110,7 @@ android:layout_marginBottom="@dimen/margin_l"
           app:pulse_repeat="0"
           app:pulse_startFromScratch="true"
           app:layout_constraintTop_toBottomOf="@id/descChat"
+          android:background="@color/bg"
           >
 
          <LinearLayout

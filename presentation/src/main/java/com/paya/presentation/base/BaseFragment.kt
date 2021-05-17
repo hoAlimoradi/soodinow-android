@@ -13,11 +13,13 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.paya.presentation.R
+import com.paya.presentation.ui.errorDoalog.ErrorDialog
 import com.paya.presentation.ui.farabi.FarabiAuthActivity
 import com.paya.presentation.utils.observe
 
 abstract class BaseFragment<VM : BaseViewModel> : Fragment(){
 	abstract val baseViewModel: BaseViewModel
+	var errorDialog = ErrorDialog()
 	inline fun <reified VM : BaseViewModel> viewModelProvider(
 		mode: LazyThreadSafetyMode = LazyThreadSafetyMode.NONE,
 		crossinline provider: () -> VM
@@ -32,6 +34,7 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment(){
 		super.onCreate(savedInstanceState)
 		observe(baseViewModel.unAuthorizeLiveData,::unAuthorized)
 		observe(baseViewModel.unFarabiAuth, ::farabiAuth)
+		observe(baseViewModel.errorLiveData, ::readyError)
 	}
 	
 	private fun unAuthorized(message : String) {
@@ -50,6 +53,10 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment(){
 		resultLauncher.launch(intent)
 	}
 
+	private fun readyError(error:String) {
+		errorDialog.setMessage(error)
+		errorDialog.show(parentFragmentManager,"errorTag")
+	}
 	var resultLauncher =
 		registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
 			if (result.resultCode === Activity.RESULT_OK) {
@@ -59,5 +66,13 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment(){
 
 	open fun farabiAccessToken() {
 
+	}
+
+	override fun onDestroy() {
+		super.onDestroy()
+		errorDialog.dialog?.let {
+			if (it.isShowing)
+				it.dismiss()
+		}
 	}
 }

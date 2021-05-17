@@ -22,12 +22,12 @@ import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentProfileBinding
 import com.paya.presentation.ui.hint.fragments.CardAccount
 import com.paya.presentation.ui.investment.AppropriateInvestmentFragment
-import com.paya.presentation.utils.BindingAdapters
-import com.paya.presentation.utils.ViewPagerUtil
-import com.paya.presentation.utils.observe
+import com.paya.presentation.utils.*
 import com.paya.presentation.utils.shared.Point
 import com.paya.presentation.viewmodel.ProfileViewModel
+import com.paya.presentation.viewmodel.ProfileViewModel.FilterProfile.*
 import dagger.hilt.android.AndroidEntryPoint
+import ir.hamsaa.persiandatepicker.util.PersianCalendar
 
 @AndroidEntryPoint
 class ProfileFragment : BaseFragment<ProfileViewModel>() {
@@ -36,12 +36,6 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
     private lateinit var adapter: SlidePagerAdapter
     private val viewModel: ProfileViewModel by viewModels()
 
-    private val boxHistoryHahMap = mutableMapOf<Long, BoxHistoryRepoModel?>()
-    private var currentBoxId: Long? = null
-    private var boxHistoryId: List<Long>? = null
-    private val cardAccounts = mutableListOf<CardAccount>()
-    private var boxHistoryType = "day"
-    private var boxHistoryNumber = 3
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -68,15 +62,20 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
         observe(viewModel.existAccount, ::onExistAccountReady)
         observe(viewModel.profile, ::onProfileReady)
         mBinding.alarm.setOnClickListener {
-            getFindViewController()?.navigate(
-                R.id.activitiesReportFragment
-            )
+
         }
         viewModel.getExistAccount()
+        context?.let {
+            var param = mBinding.pager.layoutParams
+            param.height = getCardHeight(it,60f).toInt()
+            mBinding.pager.layoutParams = param
+        }
+
+
     }
 
     private fun initRadioGroup() {
-        mBinding.chartTabLayout.getTabAt(3)?.select()
+        mBinding.chartTabLayout.getTabAt(2)?.select()
         mBinding.chartTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(tab: TabLayout.Tab?) {
 
@@ -88,36 +87,36 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
 
             // TODO: 4/2/21 box history Number what?
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                currentBoxId ?: return
+                viewModel.currentBoxId ?: return
                 when (mBinding.chartTabLayout.selectedTabPosition) {
                     // day
-                    3 -> {
-                        boxHistoryType = "day"
-                        boxHistoryNumber = 3
+                    2 -> {
+                        viewModel.boxHistoryType = day
+                        viewModel.boxHistoryNumber = 3
                     }
                     //week
-                    2 -> {
-                        boxHistoryType = "week"
-                        boxHistoryNumber = 1
+                    1 -> {
+                        viewModel.boxHistoryType = week
+                        viewModel.boxHistoryNumber = 1
                     }
                     //month
-                    1 -> {
-                        boxHistoryType = "month"
-                        boxHistoryNumber = 1
+                    0 -> {
+                        viewModel.boxHistoryType = month
+                        viewModel.boxHistoryNumber = 1
                     }
                     //years
                     // TODO: 4/26/21 change to years
-                    0 -> {
-                        boxHistoryType = "month"
-                        boxHistoryNumber = 3
+                    -1 -> {
+                        viewModel.boxHistoryType = month
+                        viewModel.boxHistoryNumber = 3
                     }
                     else -> {
-                        boxHistoryType = "day"
-                        boxHistoryNumber = 3
+                        viewModel.boxHistoryType = day
+                        viewModel.boxHistoryNumber = 3
                     }
                 }
-                currentBoxId?.let {
-                    viewModel.getProfile(it, boxHistoryType, boxHistoryNumber)
+                viewModel.currentBoxId?.let {
+                    viewModel.getProfile(it, viewModel.boxHistoryType, viewModel.boxHistoryNumber)
                 }
             }
 
@@ -127,35 +126,36 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
 
     private fun onExistAccountReady(resource: Resource<ExitAccountRepoModel>) {
         if (resource.status == Status.SUCCESS) {
-            cardAccounts.clear()
+            viewModel.cardAccounts.clear()
             resource.data?.activeBox?.let {
-                boxHistoryId = it.map { activeBox -> activeBox.id }
+                viewModel.boxHistoryId = it.map { activeBox -> activeBox.id }
                 it.forEach { activeBox ->
-                    boxHistoryHahMap[activeBox.id] = null
-                    cardAccounts.add(CardAccount.newInstance(activeBox))
+                    viewModel.boxHistoryHahMap[activeBox.id] = null
+                    viewModel.cardAccounts.add(CardAccount.newInstance(activeBox))
                 }
                 adapter.notifyDataSetChanged()
                 if (it.isEmpty()) {
                     viewModel.setErrorMessage("شما هیچ حسابی ایجاد نکرده اید")
                     return@let
                 }
-                currentBoxId = it.first().id
-                viewModel.getProfile(it.first().id, boxHistoryType, boxHistoryNumber)
+                viewModel.currentBoxId = it.first().id
+                viewModel.getProfile(
+                    it.first().id,
+                    viewModel.boxHistoryType,
+                    viewModel.boxHistoryNumber
+                )
             }
-        } else if (resource.status == Status.ERROR) {
-            viewModel.setErrorMessage(resource.message ?: "خطایی رخ داده است")
         }
+
     }
 
     private fun onProfileReady(resource: Resource<BoxHistoryRepoModel>) {
         if (resource.status == Status.SUCCESS) {
-            boxHistoryHahMap[currentBoxId!!] = resource.data
+            viewModel.boxHistoryHahMap[viewModel.currentBoxId!!] = resource.data
             resource.data?.let {
                 mBinding.parentView.visibility = View.VISIBLE
                 setCurrentBoxData(it)
             }
-        } else if (resource.status == Status.ERROR) {
-            viewModel.setErrorMessage(resource.message ?: "خطایی رخ داده است")
         }
     }
 
@@ -174,11 +174,15 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
         mBinding.pager.registerOnPageChangeCallback(
             object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
-                    cardAccounts[position].activeBoxRepo?.let {
-                        currentBoxId = it.id
-                        val boxModel = boxHistoryHahMap[currentBoxId!!]
+                    viewModel.cardAccounts[position].activeBoxRepo?.let {
+                        viewModel.currentBoxId = it.id
+                        val boxModel = viewModel.boxHistoryHahMap[viewModel.currentBoxId!!]
                         if (boxModel == null) {
-                            viewModel.getProfile(currentBoxId!!, boxHistoryType, boxHistoryNumber)
+                            viewModel.getProfile(
+                                viewModel.currentBoxId!!,
+                                viewModel.boxHistoryType,
+                                viewModel.boxHistoryNumber
+                            )
                         } else {
                             setCurrentBoxData(boxModel)
                         }
@@ -193,13 +197,17 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
     private fun setCurrentBoxData(boxModel: BoxHistoryRepoModel) {
         val mainChartPoints = mutableListOf<Point>()
         val mainChartData = boxModel.mainChart.data
-        mainChartData.forEachIndexed { index, value ->
+        viewModel.xListChart.clear()
+
+        mainChartData.forEachIndexed{ index , value ->
+            val date = convertToPersianDate(value.date)
+            viewModel.xListChart.add("${date.persianMonth} / ${date.persianDay}")
             mainChartPoints.add(
                 Point(
                     index.toFloat(),
-                    value.toFloat(),
+                    value.price.toFloat(),
                     boxModel.percent,
-                    value
+                    value.price.toLong()
                 )
             )
         }
@@ -215,7 +223,8 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
                 markerTitleColor = Color.WHITE,
                 chartAlpha = 0,
                 markerType = 0,
-                touchEnabled = true
+                touchEnabled = true,
+                xList = viewModel.xListChart
             )
 
 
@@ -224,7 +233,8 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
         val pieChartDataList = boxModel.circleChart.map {
             AppropriateInvestmentFragment.PieChartData(
                 (100 * it.quantity / totalQuantity).toFloat(),
-                it.name
+                it.name,
+                it.color
             )
         }
         val fragment: AppropriateInvestmentFragment =
@@ -240,9 +250,9 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
     }
 
     private inner class SlidePagerAdapter(f: Fragment) : FragmentStateAdapter(f) {
-        override fun getItemCount(): Int = cardAccounts.size
+        override fun getItemCount(): Int = viewModel.cardAccounts.size
 
-        override fun createFragment(position: Int): Fragment = cardAccounts[position]
+        override fun createFragment(position: Int): Fragment = viewModel.cardAccounts[position]
     }
 
 

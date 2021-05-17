@@ -59,6 +59,7 @@ interface LowRiskInvestmentService {
     suspend fun getInvestmentLogs(
         @Header("Authorization") auth: String,
         @Query("page") page: Int,
-        @Query("page_size") pageSize: Int
+        @Query("page_size") pageSize: Int,
+        @QueryMap filters:Map<String,String>
     ): ApiResponse<BaseModel<InvestmentLogsRemoteModel>>
 }

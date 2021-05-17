@@ -55,7 +55,6 @@ class LoginViewModel @ViewModelInject constructor(
 			loginResource.setValue(Resource.error("لطفا رمز عبور را وارد کنید",null))
 			return
 		}
-		isPasswordError = true
 		viewModelScope.launch(Dispatchers.IO) {
 			loginResource.postValue(Resource.loading(null))
 			val loginModel = LoginRepoModel(

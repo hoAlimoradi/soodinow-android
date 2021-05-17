@@ -25,22 +25,12 @@ import kotlinx.android.synthetic.main.fragment_appropriate_investment.*
 import java.util.*
 
 class AppropriateInvestmentFragment : Fragment() {
-	
-	val chartLabels = listOf(
-		ChartLabelModel("بذر","#008C23"),
-		ChartLabelModel("کاریز","#A9CFA6"),
-		ChartLabelModel("افق ملت ","#035058"),
-		ChartLabelModel("آگاه","#62B366")
-	)
-	
-//	val basket = mutableListOf<BasketRepoModel>()
-	
-	
 	val pieChartDataList = mutableListOf<PieChartData>()
 	
 	data class PieChartData(
 		val percent: Float,
-		val title: String
+		val title: String,
+		val color : String
 	)
 	
 	private lateinit var mBinding: FragmentAppropriateInvestmentBinding
@@ -71,20 +61,11 @@ class AppropriateInvestmentFragment : Fragment() {
 	private fun setupChartLabelRecyclerView() {
 		val cl = mutableListOf<ChartLabelModel>()
 		if (pieChartDataList.isNotEmpty()) {
-			pieChartDataList.forEachIndexed { index,pieChartData ->
+			pieChartDataList.forEachIndexed { _, pieChartData ->
 				cl.add(
 					ChartLabelModel(
 						pieChartData.title,
-						chartLabels[index % chartLabels.size].labelColor
-					)
-				)
-			}
-		} else {
-			chartLabels.forEachIndexed { index,chartLabelModel ->
-				cl.add(
-					ChartLabelModel(
-						chartLabelModel.labelName,
-						chartLabels[index % chartLabels.size].labelColor
+						pieChartData.color
 					)
 				)
 			}
@@ -101,7 +82,8 @@ class AppropriateInvestmentFragment : Fragment() {
 	private fun setupPieChart() {
 		chart.setUsePercentValues(true)
 		chart.description.isEnabled = false
-		chart.setExtraOffsets(5f,5f,5f,5f)
+		//chart.setViewPortOffsets(0f, 0f, 0f, 0f)
+		chart.setExtraOffsets(0f,0f,0f,0f)
 		
 		chart.dragDecelerationFrictionCoef = 0.95f
 		
@@ -149,16 +131,6 @@ class AppropriateInvestmentFragment : Fragment() {
 					)
 				)
 			}
-		} else {
-			val parties = chartLabels.map { it.labelName }.toTypedArray()
-			for (i in parties.indices) {
-				entries.add(
-					PieEntry(
-						(Math.random() * range + range / 5).toFloat(),
-						""
-					)
-				)
-			}
 		}
 		
 		val dataSet = PieDataSet(entries,"")
@@ -166,15 +138,10 @@ class AppropriateInvestmentFragment : Fragment() {
 		dataSet.sliceSpace = 0f
 		dataSet.iconsOffset = MPPointF(0f,40f)
 		dataSet.selectionShift = 3f
-		
-		// add a lot of colors
-		val colors = ArrayList<Int>()
-		
-		val labelColors = chartLabels.map { it.labelColor }.toTypedArray()
-		for (colorString in labelColors) {
-			colors.add(Color.parseColor(colorString))
-		}
-		dataSet.colors = colors
+
+		val labelColors = pieChartDataList.map { Color.parseColor(it.color) }
+
+		dataSet.colors = labelColors
 		//dataSet.setSelectionShift(0f);
 		val data = PieData(dataSet)
 		data.setValueFormatter(PercentFormatter())

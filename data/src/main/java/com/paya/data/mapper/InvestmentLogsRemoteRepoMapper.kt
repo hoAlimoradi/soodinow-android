@@ -2,6 +2,7 @@ package com.paya.data.mapper
 
 import com.paya.common.Mapper
 import com.paya.domain.models.remote.InvestmentLogsRemoteModel
+import com.paya.domain.models.repo.InvestmentHeaderDate
 import com.paya.domain.models.repo.InvestmentLogsModel
 import com.paya.domain.models.repo.InvestmentLogsRepoModel
 import javax.inject.Inject
@@ -12,11 +13,15 @@ class InvestmentLogsRemoteRepoMapper @Inject constructor() : Mapper<
         > {
 
     override fun map(param: InvestmentLogsRemoteModel): InvestmentLogsRepoModel {
-        return InvestmentLogsRepoModel(
-            param.count,
-            param.next ?: "",
-            param.previous ?: "",
-            param.results.map {
+        val list = mutableListOf<Any>()
+        var lastDate = "";
+        param.results.forEach {
+            var currentDate = it.createdAt.substring(0,it.createdAt.indexOf("T"))
+            if(lastDate.isEmpty() || lastDate != currentDate) {
+                list.add(InvestmentHeaderDate(it.createdAt))
+                lastDate = currentDate;
+            }
+            list.add(
                 InvestmentLogsModel(
                     it.id,
                     it.startPrice,
@@ -32,7 +37,13 @@ class InvestmentLogsRemoteRepoMapper @Inject constructor() : Mapper<
                     it.createdAt,
                     it.updatedAt
                 )
-            }
+            )
+        }
+        return InvestmentLogsRepoModel(
+            param.count,
+            param.next ?: "",
+            param.previous ?: "",
+            list
         )
     }
 

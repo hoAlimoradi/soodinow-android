@@ -3,6 +3,7 @@ package com.paya.presentation.ui.home.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.paya.domain.models.repo.CurrencyPriceRepoModel
@@ -20,6 +21,9 @@ class MarketAdapter() : BaseAdapter<MarketAdapter.MarketViewHolder,CurrencyPrice
 	}
 	
 	override fun onBindHolder(holder: MarketViewHolder,model: CurrencyPriceRepoModel,position: Int) {
+		val params = holder.itemView.layoutParams as RecyclerView.LayoutParams
+		params.bottomMargin = if (data.lastIndex == position) holder.itemView.resources.getDimension(R.dimen.space_bottom_navigation).toInt() else 0
+		holder.itemView.layoutParams = params
 		with(holder.itemView) {
 			model.price?.let {
 				val currencyPrice = Utils.separatorAmount(it.toInt()).toString()

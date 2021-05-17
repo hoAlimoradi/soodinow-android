@@ -74,7 +74,6 @@ class SetPasswordViewModel @ViewModelInject constructor(
 			)
 			return
 		}
-		isRepeatPassword = true
 		viewModelScope.launch(Dispatchers.IO) {
 			setPasswordResource.postValue(Resource.loading(null))
 			val resource = callResource(this@SetPasswordViewModel,setPasswordUseCase.action(password))

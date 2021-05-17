@@ -4,7 +4,10 @@ import android.app.Activity
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
+import android.webkit.CookieManager
+import android.webkit.CookieSyncManager
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import com.hadiidbouk.appauthwebview.AppAuthWebView
@@ -28,8 +31,10 @@ import kotlinx.android.synthetic.main.toolbar.view.*
 import net.openid.appauth.AuthState
 
 
+
 @AndroidEntryPoint
 class FarabiAuthActivity : BaseActivity<FarabiAuthViewModel>() {
+    private var appAuthWebView: AppAuthWebView? = null
     private lateinit var mBinding: ActivityFarabiAuthBinding
     private lateinit var mData: AppAuthWebViewData
     private val mViewModel: FarabiAuthViewModel by viewModels()
@@ -48,6 +53,9 @@ class FarabiAuthActivity : BaseActivity<FarabiAuthViewModel>() {
     }
 
     private fun createAppAuth() {
+        mBinding.webView.clearCache(true)
+        mBinding.webView.clearFormData()
+        clearCookies(this)
         mData = AppAuthWebViewData()
         with(mData) {
             clientId = "soodinow.mobile"
@@ -62,16 +70,16 @@ class FarabiAuthActivity : BaseActivity<FarabiAuthViewModel>() {
 
             //Todo: delete after refactoring the code
             registrationEndpointUri = ""
-            redirectLogoutUri = ""
+            redirectLogoutUri = "http://api.soodinow.com:5000/callback.html"
             clientSecret = ""
 
-            AppAuthWebView.Builder()
+            appAuthWebView = AppAuthWebView.Builder()
                 .webView(webView)
                 .authData(this)
                 .listener(object : IAppAuthWebViewListener {
                     override fun onUserAuthorize(p0: AuthState?) {
                         p0?.accessToken?.let {
-                           // mViewModel.setToken(it)
+                            // mViewModel.setToken(it)
                             mViewModel.getUserFarabi("Bearer $it")
                             val clipboard: ClipboardManager =
                                 getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
@@ -81,7 +89,8 @@ class FarabiAuthActivity : BaseActivity<FarabiAuthViewModel>() {
                     }
 
                     override fun onLogoutFinish() {
-
+                        setResult(Activity.RESULT_OK)
+                        finish()
                     }
 
                     override fun showLoadingLayout() {
@@ -89,7 +98,7 @@ class FarabiAuthActivity : BaseActivity<FarabiAuthViewModel>() {
                     }
 
                     override fun hideLoadingLayout() {
-                    //    includeLoading.loading.visibility = View.GONE
+                        //    includeLoading.loading.visibility = View.GONE
                     }
 
                     override fun hideConnectionErrorLayout() {
@@ -101,10 +110,11 @@ class FarabiAuthActivity : BaseActivity<FarabiAuthViewModel>() {
 
                     }
 
-                })
-                .build().apply {
-                    performLoginRequest()
-                }
+                }).build()
+            appAuthWebView?.let {
+                it.performLoginRequest()
+
+            }
         }
     }
 
@@ -114,7 +124,6 @@ class FarabiAuthActivity : BaseActivity<FarabiAuthViewModel>() {
                 setResult(Activity.RESULT_OK)
                 finish()
             }
-            Status.ERROR -> resource.message?.let { shortToast(it) }
             else -> return
         }
     }
@@ -125,8 +134,11 @@ class FarabiAuthActivity : BaseActivity<FarabiAuthViewModel>() {
                 setResult(Activity.RESULT_OK)
                 finish()
             }
-            Status.ERROR -> resource.message?.let { shortToast(it) }
             else -> return
+        }
+        appAuthWebView?.let {
+            it.performLogoutRequest()
+
         }
     }
 
@@ -135,7 +147,6 @@ class FarabiAuthActivity : BaseActivity<FarabiAuthViewModel>() {
             Status.SUCCESS -> {
                 resource.data?.let { mViewModel.setFarabiInfo(it) }
             }
-            Status.ERROR -> resource.message?.let { shortToast(it) }
             else -> return
         }
     }
@@ -143,5 +154,19 @@ class FarabiAuthActivity : BaseActivity<FarabiAuthViewModel>() {
     override val baseViewModel: BaseViewModel
         get() = mViewModel
 
-
+    @SuppressWarnings("deprecation")
+    fun clearCookies(context: Context?) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
+            CookieManager.getInstance().removeAllCookies(null)
+            CookieManager.getInstance().flush()
+        } else if (context != null) {
+            val cookieSyncManager = CookieSyncManager.createInstance(context)
+            cookieSyncManager.startSync()
+            val cookieManager: CookieManager = CookieManager.getInstance()
+            cookieManager.removeAllCookie()
+            cookieManager.removeSessionCookie()
+            cookieSyncManager.stopSync()
+            cookieSyncManager.sync()
+        }
+    }
 }

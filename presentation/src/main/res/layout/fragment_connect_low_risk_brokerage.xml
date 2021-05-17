@@ -105,12 +105,12 @@
                     </com.google.android.material.tabs.TabLayout>
 
 
-                    <androidx.cardview.widget.CardView
+                    <View
                         android:id="@+id/imageCardView"
                         android:layout_width="62dp"
                         android:layout_height="62dp"
                         android:layout_marginTop="@dimen/margin_l"
-                        app:cardCornerRadius="8dp"
+                        android:background="@drawable/shadow_8dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tabLayout" />
@@ -217,7 +217,7 @@
                         android:background="@drawable/bg_button_green"
                         android:text="@string/create_account"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/text_size_small"
+                        android:textSize="@dimen/text_size_m"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/bottom_barrier" />

@@ -66,7 +66,7 @@
                     android:gravity="center"
                     android:text="@string/summary"
                     android:textColor="@color/purple"
-                    android:textSize="@dimen/text_size_small"
+                    android:textSize="@dimen/text_size_m"
                     app:layout_constraintEnd_toStartOf="@id/chartImage"
                     app:layout_constraintTop_toBottomOf="@id/top_guideline" />
 
@@ -96,7 +96,7 @@
                     android:gravity="center"
                     android:text="@string/trading_history"
                     android:textColor="@color/purple_gray"
-                    android:textSize="@dimen/text_size_small"
+                    android:textSize="@dimen/text_size_m"
                     app:layout_constraintStart_toEndOf="@id/start_guideline"
                     app:layout_constraintTop_toBottomOf="@id/subTitleText" />
 
@@ -110,7 +110,7 @@
                     android:gravity="center"
                     android:text="@string/details_price"
                     android:textColor="@color/green"
-                    android:textSize="@dimen/text_size_small"
+                    android:textSize="@dimen/text_size_m"
                     app:layout_constraintEnd_toStartOf="@id/end_guideline"
                     app:layout_constraintTop_toBottomOf="@id/tradingHistoryText" />
 
@@ -139,7 +139,7 @@
                     android:gravity="center"
                     android:text="@string/symbol_market"
                     android:textColor="@color/green"
-                    android:textSize="@dimen/text_size_small"
+                    android:textSize="@dimen/text_size_m"
                     app:layout_constraintEnd_toStartOf="@id/end_guideline"
                     app:layout_constraintTop_toBottomOf="@id/priceRecyclerView" />
 
@@ -153,7 +153,7 @@
                     android:gravity="center"
                     android:text="@string/exchange"
                     android:textColor="@color/green"
-                    android:textSize="@dimen/text_size_small"
+                    android:textSize="@dimen/text_size_m"
                     app:layout_constraintStart_toEndOf="@id/start_guideline"
                     app:layout_constraintTop_toBottomOf="@id/priceRecyclerView" />
 

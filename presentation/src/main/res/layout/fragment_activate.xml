@@ -142,7 +142,7 @@
             android:onClick="@{() -> viewModel.register()}"
             android:text="@string/resend_code"
             android:textColor="@color/japanese_laurel_green"
-            android:textSize="@dimen/text_size_small"
+            android:textSize="@dimen/text_size_m"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txt_pin_entry" />
@@ -167,7 +167,7 @@
             android:layout_marginTop="@dimen/margin_medium"
             android:text="@{viewModel.remainingTimeText}"
             android:textColor="@color/green"
-            android:textSize="@dimen/text_size_small"
+            android:textSize="@dimen/text_size_m"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txt_pin_entry" />

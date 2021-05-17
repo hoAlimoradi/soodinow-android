@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 
 open class BaseViewModel : ViewModel() {
 	val unAuthorizeLiveData = MutableLiveData<String>()
+	val errorLiveData = MutableLiveData<String>()
 	val unFarabiAuth = MutableLiveData<Unit>()
 	override fun onCleared() {
 		super.onCleared()
@@ -20,5 +21,9 @@ open class BaseViewModel : ViewModel() {
 
 	fun farabiAuth() {
 		unFarabiAuth.postValue(Unit)
+	}
+
+	fun showError(error:String) {
+		errorLiveData.postValue(error)
 	}
 }

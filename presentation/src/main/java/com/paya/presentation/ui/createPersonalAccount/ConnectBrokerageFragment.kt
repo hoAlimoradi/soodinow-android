@@ -51,7 +51,9 @@ class ConnectBrokerageFragment : BaseFragment<ConnectBrokerageViewModel>() {
 			)
 		}
 		initInputPrice()
-		
+		mBinding.toolbar.backButton.setOnClickListener {
+			findNavController().popBackStack()
+		}
 	}
 	
 	private fun setupSeekBar() {

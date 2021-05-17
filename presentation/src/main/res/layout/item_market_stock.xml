@@ -23,7 +23,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:text="ایران خودرو"
-            android:textSize="@dimen/text_size_small"
+            android:textSize="@dimen/text_size_m"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
@@ -41,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/last_deal"
-            android:textSize="@dimen/text_size_small"
+            android:textSize="@dimen/text_size_m"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -51,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/toman"
-            android:textSize="@dimen/text_size_small"
+            android:textSize="@dimen/text_size_m"
             app:layout_constraintBaseline_toBaselineOf="@+id/txt_last_deal_price"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -73,7 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="+5%"
-            android:textSize="@dimen/text_size_small"
+            android:textSize="@dimen/text_size_m"
             app:layout_constraintBottom_toTopOf="@id/txt_last_deal_price"
             app:layout_constraintStart_toEndOf="@id/txt_last_deal_price" />
 
@@ -92,7 +92,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="مجاز"
-            android:textSize="@dimen/text_size_small"
+            android:textSize="@dimen/text_size_m"
             app:layout_constraintBaseline_toBaselineOf="@+id/txt_last_deal_price"
             app:layout_constraintEnd_toStartOf="@id/img_path"
             android:layout_marginEnd="@dimen/margin_very_small"/>
@@ -120,7 +120,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/sell"
-            android:textSize="@dimen/text_size_small"
+            android:textSize="@dimen/text_size_m"
             app:layout_constraintTop_toBottomOf="@id/chart"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBaseline_toBaselineOf="@id/txt_sell_price"
@@ -145,7 +145,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/buy"
-            android:textSize="@dimen/text_size_small"
+            android:textSize="@dimen/text_size_m"
             app:layout_constraintTop_toBottomOf="@id/chart"
             app:layout_constraintStart_toEndOf="@id/txt_buy_price"
             app:layout_constraintBaseline_toBaselineOf="@id/txt_buy_price"

@@ -5,134 +5,84 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
+        android:background="@color/bg"
         tools:context=".ui.hint.HintFragment">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_top_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.08" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_start_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.36" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_end_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.64" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_top_slider"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.32" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_vertical_half"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5" />
-
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/bottom_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.85" />
-
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/logo"
+            android:id="@+id/image"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_logo_soodinow"
-            app:layout_constraintEnd_toEndOf="@id/guideline_end_icon"
-            app:layout_constraintStart_toStartOf="@id/guideline_start_icon"
-            app:layout_constraintTop_toTopOf="@id/guideline_top_icon" />
-
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/pager"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginBottom="@dimen/margin_medium"
-            app:layout_constraintTop_toBottomOf="@id/logo"
-            android:layout_marginTop="@dimen/margin_medium"
-            app:layout_constraintBottom_toTopOf="@id/bottom_guideline"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginHorizontal="53dp"
+            android:src="@drawable/image_hint"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintBottom_toTopOf="@id/welcomeTextView"
             />
 
-        <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
-            android:id="@+id/hintIndicator"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/welcomeTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:dotsColor="@color/purple_gray"
-            app:dotsCornerRadius="8dp"
-            app:dotsSize="8dp"
-            app:dotsSpacing="2dp"
-            app:dotsWidthFactor="2.5"
+            android:text="@string/welcome_soodinow"
+            android:textSize="@dimen/text_size_m"
+            android:textColor="@color/emperor"
+            app:layout_constraintTop_toBottomOf="@id/image"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/img_left_arrow"
-            app:layout_constraintBottom_toBottomOf="@id/img_left_arrow"
-            app:progressMode="false"
-            app:selectedDotColor="@color/green" />
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintBottom_toTopOf="@id/login"/>
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/img_left_arrow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/margin_medium"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/pager"
-            app:srcCompat="@drawable/ic_left_arrow" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/img_right_arrow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/margin_medium"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/pager"
-            app:srcCompat="@drawable/ic_right_arrow" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/register"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_very_small"
-            android:gravity="center_horizontal"
-            android:text="@string/register"
-            app:layout_constraintVertical_bias="1"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:backgroundTint="@color/green"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/guideline_vertical_half"
-            app:layout_constraintTop_toBottomOf="@id/bottom_guideline"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_very_small"
-            app:layout_constraintVertical_bias="1"
-            android:gravity="center_horizontal"
+            android:layout_width="192dp"
+            android:layout_height="@dimen/height_medium"
+            android:layout_marginTop="50dp"
+            android:gravity="center"
             android:textColor="@color/white"
-            android:backgroundTint="@color/green"
+            android:background="@drawable/bg_button_green"
             android:text="@string/login"
             android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/welcomeTextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintBottom_toTopOf="@id/register"/>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/register"
+            android:layout_width="192dp"
+            android:layout_height="@dimen/height_medium"
+            android:layout_margin="@dimen/margin_xl"
+            android:gravity="center"
+            android:text="@string/register"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:background="@drawable/bg_button_green"
+            app:layout_constraintTop_toBottomOf="@id/login"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintBottom_toTopOf="@id/versionTxt"
+            app:layout_constraintVertical_chainStyle="packed"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/versionTxt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/margin_l"
+            android:layout_marginTop="@dimen/margin_l"
+            android:gravity="center_horizontal"
+            android:text="نسخه"
+            android:textColor="@color/blue_light"
+            android:textSize="@dimen/text_size_s"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/guideline_vertical_half"
-            app:layout_constraintTop_toBottomOf="@id/bottom_guideline"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -112,6 +112,7 @@ object Utils {
     @JvmStatic
     fun convertStringToDate(date: String): Date? {
         val formats = arrayListOf<SimpleDateFormat>()
+        formats.add(SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault()))
         formats.add(SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault()))
         formats.add(SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()))
         formats.add(SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault()))

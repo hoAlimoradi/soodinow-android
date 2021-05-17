@@ -59,9 +59,7 @@ class CreateAccountRulesFragment : BaseFragment<CreateAccountRulesViewModel>() {
                     CreateAccountRulesFragmentDirections.navigateToHomeFragment()
                 )
             }
-            Status.ERROR -> context.let {
-                Toast.makeText(it,resource.message, Toast.LENGTH_SHORT).show()
-            }
+
             else -> return
         }
     }

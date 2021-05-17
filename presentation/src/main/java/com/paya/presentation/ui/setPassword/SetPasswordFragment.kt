@@ -62,11 +62,8 @@ class SetPasswordFragment : BaseFragment<SetPasswordViewModel>() {
 		}else if (resource.status == Status.ERROR){
 			if (mViewModel.isNewPassword)
 				resource.message?.let { mBinding.newPassword.errorLayout.setError(it) }
-			else
+			else if(mViewModel.isRepeatPassword)
 				resource.message?.let { mBinding.repeatPassword.errorLayout.setError(it) }
-			Toast.makeText(
-				requireContext(), resource.message, Toast.LENGTH_SHORT
-			).show()
 		}
 	}
 	

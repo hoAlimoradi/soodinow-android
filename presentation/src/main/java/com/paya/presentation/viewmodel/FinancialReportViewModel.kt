@@ -22,8 +22,11 @@ import kotlinx.coroutines.launch
 class FinancialReportViewModel @ViewModelInject constructor(
 	private val investmentUseCase: UseCase<InvestmentLogsRepoBodyModel,InvestmentLogsRepoModel>
 ) : BaseViewModel() {
+	var type: String = ""
+	var dateFrom: String = ""
+	var dateTo: String = ""
 	val loading = VolatileLiveData<Resource<Unit>>()
-	val status: Flow<PagingData<InvestmentLogsModel>> = Pager(PagingConfig(pageSize = 25)) {
+	val status: Flow<PagingData<Any>> = Pager(PagingConfig(pageSize = 25)) {
 		InvestmentLogsDataSource(investmentUseCase,this@FinancialReportViewModel)
 	}.flow
 		.cachedIn(viewModelScope)

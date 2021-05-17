@@ -93,7 +93,7 @@
                         android:layout_height="wrap_content"
                         android:text="سرمایه گذاری مناسب شما"
                         android:textColor="@color/purple"
-                        android:textSize="@dimen/text_size_small"
+                        android:textSize="@dimen/text_size_m"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="1.0"
@@ -106,7 +106,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_small"
                         android:text="@string/fake_content"
-                        android:textSize="@dimen/text_size_small"
+                        android:textSize="@dimen/text_size_m"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@id/guideline_0.4"
                         app:layout_constraintTop_toBottomOf="@id/title" />

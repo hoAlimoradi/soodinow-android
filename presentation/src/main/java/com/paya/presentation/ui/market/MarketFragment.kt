@@ -53,56 +53,16 @@ class MarketFragment : BaseFragment<MarketViewModel>() {
 	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
 		super.onViewCreated(view,savedInstanceState)
 		observe(mViewModel.currencyPrice, ::onPricesReady)
-		mViewModel.getCurrencyPrices()
-		mViewModel.getPoints()
-		setupStockRecyclerView()
-		setupTagsRecyclerView()
+
 	}
 	
 	private fun onPricesReady(resource: Resource<List<CurrencyPriceRepoModel>>){
-		when(resource.status){
-			Status.SUCCESS -> resource.data?.let { setupCurrencyRecyclerView(it) }
-			Status.ERROR -> {
-				Toast.makeText(
-					requireContext(),
-					resource.message ?: "خطایی رخ داده است",
-					Toast.LENGTH_SHORT
-				).show()
-			}
-			
-			else -> return
-		}
+
 	}
 	
-	private fun setupStockRecyclerView() {
-		val layoutManager = LinearLayoutManager(context)
-		val adapter = StockAdapter()
-		adapter.addFakeItem("")
-		adapter.addOnClickListenerItem(object : BaseAdapter.OnClickListenerItem<String> {
-			override fun onClickListenerItem(adapter: BaseAdapter<*,String>,item: String,position: Int) {
-				findNavController().navigate(
-					MarketFragmentDirections.navigateToDividendFragment()
-				)
-			}
-		})
-		mBinding.stockRecyclerView.layoutManager = layoutManager
-		mBinding.stockRecyclerView.adapter = adapter
-	}
+
 	
-	private fun setupCurrencyRecyclerView(prices: List<CurrencyPriceRepoModel>) {
-		val layoutManager = LinearLayoutManager(context)
-		val adapter = CurrencyAdapter(prices)
-		mBinding.currencyRecyclerView.layoutManager = layoutManager
-		mBinding.currencyRecyclerView.adapter = adapter
-	}
-	
-	private fun setupTagsRecyclerView() {
-		val layoutManager = LinearLayoutManager(context,RecyclerView.HORIZONTAL,true)
-		val adapter = DayAdapter()
-		mBinding.tagsRecyclerView.layoutManager = layoutManager
-		mBinding.tagsRecyclerView.adapter = adapter
-	}
-	
+
 	override val baseViewModel: BaseViewModel
 		get() = mViewModel
 	

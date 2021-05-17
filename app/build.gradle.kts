@@ -21,7 +21,7 @@ android {
         minSdkVersion(21)
         targetSdkVersion(30)
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders["appAuthRedirectScheme"] = "hadiidbouk-appAuthWebView"
@@ -38,7 +38,16 @@ android {
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
+
+        getByName("debug") {
+            isMinifyEnabled = true
+            isShrinkResources = true
+            isDebuggable = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
     }
+
+
     
     buildFeatures {
         dataBinding = true
@@ -68,7 +77,8 @@ dependencies {
     implementation (platform("com.google.firebase:firebase-bom:${Dependencies.Versions.FIREBASEـBOM}"))
     implementation ("com.google.firebase:firebase-crashlytics-ktx")
     implementation ("com.google.firebase:firebase-analytics-ktx")
-    
+    implementation ("io.sentry:sentry-android:${Dependencies.Versions.SENTRY}")
+
     implementation(project(Dependencies.Modules.DOMAIN))
     implementation(project(Dependencies.Modules.PRESENTATION))
     implementation(project(Dependencies.Modules.DATA))

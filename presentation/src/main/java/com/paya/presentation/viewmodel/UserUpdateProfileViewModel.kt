@@ -83,7 +83,7 @@ class UserUpdateProfileViewModel @ViewModelInject constructor(
 			statusUpdateProfile.setValue(Resource.error("لطفا شماره شبا را وارد کنید",null))
 			return
 		}
-		viewModelScope.launch(Dispatchers.IO) {
+		/*viewModelScope.launch(Dispatchers.IO) {
 			statusUpdateProfile.postValue(Resource.loading(null))
 			val body = ProfileBodyRepoModel(
 				name,
@@ -97,11 +97,11 @@ class UserUpdateProfileViewModel @ViewModelInject constructor(
 			)
 			val response = callResource(this@UserUpdateProfileViewModel,useCaseUpdateProfile.action(body))
 			statusUpdateProfile.postValue(response)
-		}
+		}*/
 	}
 	
 	private fun getProfile() {
-		viewModelScope.launch(Dispatchers.IO) {
+		/*viewModelScope.launch(Dispatchers.IO) {
 			statusGetProfile.postValue(Resource.loading(null))
 			val response =callResource(this@UserUpdateProfileViewModel, useCaseProfile.action(Unit))
 			name.set(response.data?.name)
@@ -109,7 +109,7 @@ class UserUpdateProfileViewModel @ViewModelInject constructor(
 			date.set(response.data?.birthDay?.let { Utils.convertStringToPersianCalender(it) })
 			nationalCode.set(response.data?.personalCode)
 			statusGetProfile.postValue(response)
-		}
+		}*/
 		
 	}
 }

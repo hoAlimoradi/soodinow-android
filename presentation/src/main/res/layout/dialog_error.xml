@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <View
+        android:id="@+id/card"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="53dp"
+        app:layout_constraintBottom_toBottomOf="@id/bottomSpace"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/shadow_general"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dialog_error_circle"
+        android:elevation="2dp"
+        android:scaleType="center"
+        android:src="@drawable/ic_close_white"
+        app:layout_constraintEnd_toEndOf="@id/card"
+        app:layout_constraintStart_toStartOf="@id/card"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/titleTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_l"
+        android:layout_marginTop="35dp"
+        android:gravity="center"
+        android:elevation="2dp"
+        android:text="ناموفق"
+        android:textColor="@color/red"
+        android:textSize="@dimen/text_size_xxl"
+        app:layout_constraintEnd_toEndOf="@id/card"
+        app:layout_constraintStart_toStartOf="@id/card"
+        app:layout_constraintTop_toBottomOf="@id/icon" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/errorTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_l"
+        android:layout_marginTop="35dp"
+        android:gravity="center"
+        android:elevation="2dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_xl"
+        app:layout_constraintEnd_toEndOf="@id/card"
+        app:layout_constraintStart_toStartOf="@id/card"
+        app:layout_constraintTop_toBottomOf="@id/titleTextView"
+        tools:text="عملیات شما با خطا مواجهه شد" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tryAgainTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_l"
+        android:layout_marginTop="@dimen/margin_s"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:elevation="2dp"
+        android:textSize="@dimen/text_size_m"
+        app:layout_constraintEnd_toEndOf="@id/card"
+        app:layout_constraintStart_toStartOf="@id/card"
+        app:layout_constraintTop_toBottomOf="@id/errorTextView"
+        android:text="لطفا مجدد تلاش کنید" />
+
+    <Space
+        android:id="@+id/bottomSpace"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/height"
+        app:layout_constraintTop_toBottomOf="@id/tryAgainTextView"
+        app:layout_constraintBottom_toBottomOf="@id/card"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

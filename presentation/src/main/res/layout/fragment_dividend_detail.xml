@@ -47,6 +47,7 @@
             app:layout_constraintGuide_percent="0.96" />
 
         <include
+            android:id="@+id/toolbar"
             layout="@layout/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

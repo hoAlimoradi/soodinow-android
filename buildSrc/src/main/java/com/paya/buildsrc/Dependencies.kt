@@ -46,6 +46,8 @@ object Dependencies{
 		const val SERVICES_AUTH = "17.0.0"
 		const val SERVICES_AUTH_API_PHONE = "17.4.0"
 		const val APP_AUTH_WEB_VIEW = "1.2.7"
+		const val SENTRY = "4.3.0"
+		const val SENTRY_PLUGIN = "1.7.36"
 	}
 	
 	object Modules{

@@ -45,6 +45,9 @@ class CreateAccountPersonalFragment : Fragment() {
 				CreateAccountPersonalFragmentDirections.navigateToQuestion()
 			)
 		}
+		mBinding.toolbar.backButton.setOnClickListener {
+			findNavController().popBackStack()
+		}
 		setupTagsRecyclerView()
 		val points = mutableListOf<Point>()
 		for (i in 0 until 10) {

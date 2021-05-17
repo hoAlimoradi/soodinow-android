@@ -1,14 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.lifecycle:lifecycle-livedata-core-ktx:2.3.0-beta01@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/090a66098d8d949cab87ad1cd2962ef9/jetified-lifecycle-livedata-core-ktx-2.3.0-beta01/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/aa9f317ce821d489ecd703ab9e668e76/jetified-lifecycle-livedata-core-ktx-2.3.0-beta01/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0d23052dd27b1c3a7984c6980dc7c0ef/jetified-lifecycle-livedata-core-ktx-2.3.0-beta01/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f1f9b3aaad3ce9791bb691d3be838b77/jetified-lifecycle-livedata-core-ktx-2.3.0-beta01/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2ddee7bed0917ff75f7ec21fd262c5ac/jetified-lifecycle-livedata-core-ktx-2.3.0-beta01/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e6801435ba71efa9648d6391002a4261/jetified-lifecycle-livedata-core-ktx-2.3.0-beta01/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e6801435ba71efa9648d6391002a4261/jetified-lifecycle-livedata-core-ktx-2.3.0-beta01/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e6801435ba71efa9648d6391002a4261/jetified-lifecycle-livedata-core-ktx-2.3.0-beta01/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b1a3a3ce046364e35066ea5f6dc81b80/jetified-lifecycle-livedata-core-ktx-2.3.0-beta01/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b1a3a3ce046364e35066ea5f6dc81b80/jetified-lifecycle-livedata-core-ktx-2.3.0-beta01/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b1a3a3ce046364e35066ea5f6dc81b80/jetified-lifecycle-livedata-core-ktx-2.3.0-beta01/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

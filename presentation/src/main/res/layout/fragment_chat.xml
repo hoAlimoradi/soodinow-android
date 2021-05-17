@@ -24,9 +24,9 @@
             app:label="@{@string/online_chat}" />
 
 
-        <androidx.cardview.widget.CardView
+        <View
             android:id="@+id/cardTop"
-            style="@style/GeneralCardView"
+            android:background="@drawable/shadow_general"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height"
             android:layout_marginStart="@dimen/margin_small"
@@ -34,9 +34,9 @@
             android:layout_marginBottom="@dimen/margin_small"
             app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
-        <androidx.cardview.widget.CardView
+        <View
             android:id="@+id/card"
-            style="@style/GeneralCardView"
+            android:background="@drawable/shadow_general"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/margin_l"

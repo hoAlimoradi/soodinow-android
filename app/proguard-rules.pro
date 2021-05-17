@@ -19,3 +19,18 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# Keep class names of Hilt injected ViewModels since their name are used as a multibinding map key.
+-keepnames @dagger.hilt.android.lifecycle.HiltViewModel class * extends androidx.lifecycle.ViewModel
+
+-keep class io.sentry.android.core.SentryAndroidOptions
+-keep class io.sentry.android.ndk.SentryNdk
+-keep class androidx.lifecycle.** { *; }
+-keep class * extends androidx.fragment.app.Fragment{}
+-keepnames class * extends android.os.Parcelable
+-keepnames class * extends java.io.Serializable
+-keep class com.paya.domain.tools.NoObfuscate
+-keep class * implements com.paya.domain.tools.NoObfuscate { *; }
+
+-keepnames class androidx.navigation.fragment.NavHostFragment
+-keepattributes *Annotation*

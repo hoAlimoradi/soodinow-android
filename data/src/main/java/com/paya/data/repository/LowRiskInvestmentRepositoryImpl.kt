@@ -101,13 +101,15 @@ data class LowRiskInvestmentRepositoryImpl @Inject constructor(
 
     override suspend fun getInvestmentLogs(
         page: Int,
-        pageSize: Int
+        pageSize: Int,
+        filters: Map<String,String>
     ): Resource<InvestmentLogsRepoModel> {
         return getResourceFromApiResponse(
             lowRiskInvestmentService.getInvestmentLogs(
                 preferenceHelper.getAccessToken(),
                 page,
-                pageSize
+                pageSize,
+                filters
             )
         ) {
             investmentLogsRemoteRepoMapper.map(it.data)

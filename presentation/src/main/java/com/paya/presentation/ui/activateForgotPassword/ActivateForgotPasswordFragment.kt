@@ -69,10 +69,6 @@ class ActivateForgotPasswordFragment : BaseFragment<ActivateForgotPasswordViewMo
 			findNavController().navigate(
 				R.id.navigateToSetNewPasswordFragment
 			)
-		}else if (activateResource.status == Status.ERROR){
-			Toast.makeText(
-				requireContext(), activateResource.message, Toast.LENGTH_SHORT
-			).show()
 		}
 	}
 	

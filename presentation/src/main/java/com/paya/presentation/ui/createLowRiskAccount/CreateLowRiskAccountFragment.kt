@@ -60,7 +60,9 @@ class CreateLowRiskAccountFragment : BaseFragment<CreateLowRiskAccountViewModel>
             childFragmentManager.findFragmentById(R.id.appropriate_investment_fragment) as AppropriateInvestmentFragment
         observe(mViewModel.lowRiskResource, ::onReady)
         setupInputPrice()
-
+        mBinding.toolbar.backButton.setOnClickListener {
+            findNavController().popBackStack()
+        }
         mBinding.submitBtn.setOnClickListener {
             val price = mBinding.inputPrice.getPriceLong()
             if (price <= 0) {
@@ -132,14 +134,14 @@ class CreateLowRiskAccountFragment : BaseFragment<CreateLowRiskAccountViewModel>
                     basket.map {
                         AppropriateInvestmentFragment.PieChartData(
                             it.percent,
-                            it.namad
+                            it.namad,
+                            it.color
                         )
                     }
                 )
                 appropriateInvestmentFragment.setup()
             }
-            Status.ERROR -> Toast.makeText(requireContext(), resource.message, Toast.LENGTH_SHORT)
-                .show()
+
             else -> return
         }
     }

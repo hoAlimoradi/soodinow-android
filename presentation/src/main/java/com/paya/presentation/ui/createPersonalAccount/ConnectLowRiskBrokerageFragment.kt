@@ -64,7 +64,7 @@ class ConnectLowRiskBrokerageFragment : BaseFragment<ConnectLowRiskBrokerageView
 		mBinding.addInvestBtn.setOnClickListener {
 			findNavController().navigate(ConnectLowRiskBrokerageFragmentDirections.navigateToCreateAccountRulesFragment(args.SelectedPrice,args.riskState))
 		}
-		mBinding.cardAccount.wealthValue.text = Utils.separatorAmount(args.SelectedPrice.toString())
+		mBinding.cardAccount.wealthValue.text = Utils.separatorAmount(args.SelectedPrice)
 		mBinding.tabLayout.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
 			override fun onTabReselected(tab: TabLayout.Tab?) {
 

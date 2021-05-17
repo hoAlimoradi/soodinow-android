@@ -54,7 +54,7 @@
             android:gravity="center"
             android:text="نمره سرمایه گذاری شما"
             android:textColor="@color/purple_gray"
-            android:textSize="@dimen/text_size_small"
+            android:textSize="@dimen/text_size_m"
             app:layout_constraintBottom_toTopOf="@id/inner_top_guideline"
             app:layout_constraintEnd_toStartOf="@id/end_guideline"
             app:layout_constraintTop_toBottomOf="@+id/top_guideline" />
@@ -71,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_small"
                 android:adjustViewBounds="true"
-                android:src="@drawable/image_investment_score"
+
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.constraintlayout.widget.Guideline
@@ -156,7 +156,7 @@
                             android:layout_height="wrap_content"
                             android:text="مدیریت ریسک"
                             android:textColor="@color/purple"
-                            android:textSize="@dimen/text_size_small"
+                            android:textSize="@dimen/text_size_m"
                             android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="1.0"
@@ -192,7 +192,7 @@
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginEnd="@dimen/margin_small"
                                 android:text="75 درصد صندوق طلا"
-                                android:textSize="@dimen/text_size_small"
+                                android:textSize="@dimen/text_size_m"
                                 android:textStyle="bold" />
 
                             <at.grabner.circleprogress.CircleProgressView
@@ -237,7 +237,7 @@
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginEnd="@dimen/margin_small"
                                 android:text="45 درصد صندوق سهام"
-                                android:textSize="@dimen/text_size_small"
+                                android:textSize="@dimen/text_size_m"
                                 android:textStyle="bold" />
 
                             <at.grabner.circleprogress.CircleProgressView
@@ -282,7 +282,7 @@
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginEnd="@dimen/margin_small"
                                 android:text="15 درصد صندوق درامد ثابت"
-                                android:textSize="@dimen/text_size_small"
+                                android:textSize="@dimen/text_size_m"
                                 android:textStyle="bold" />
 
                             <at.grabner.circleprogress.CircleProgressView
@@ -354,7 +354,7 @@
                             android:layout_marginTop="@dimen/margin_medium"
                             android:text="تغییر دستی درصد ریسک"
                             android:textColor="@color/purple"
-                            android:textSize="@dimen/text_size_small"
+                            android:textSize="@dimen/text_size_m"
                             android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="1.0"

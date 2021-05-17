@@ -1,5 +1,6 @@
 package com.paya.presentation.viewmodel
 
+import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,32 +12,43 @@ import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.domain.tools.UseCase
 import com.paya.presentation.base.BaseViewModel
-import com.paya.presentation.utils.callResource
+import com.paya.presentation.ui.hint.fragments.CardAccount
+import com.paya.presentation.utils.*
+import ir.hamsaa.persiandatepicker.util.PersianCalendar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ProfileViewModel @ViewModelInject constructor(
-	private val getBoxHistoryUseCase: UseCase<BoxHistoryRequestModel,BoxHistoryRepoModel>,
-	private val existAccountUseCase: UseCase<Unit,ExitAccountRepoModel>
-): BaseViewModel(){
-	
+	private val getBoxHistoryUseCase: UseCase<BoxHistoryRequestModel, BoxHistoryRepoModel>,
+	private val existAccountUseCase: UseCase<Unit, ExitAccountRepoModel>
+) : BaseViewModel() {
+
 	val profile = MutableLiveData<Resource<BoxHistoryRepoModel>>()
 	val existAccount = MutableLiveData<Resource<ExitAccountRepoModel>>()
 	val loading = MediatorLiveData<Resource<Nothing>>()
 	val errorMessage = MutableLiveData<String?>(null)
-	
+
+	val boxHistoryHahMap = mutableMapOf<Long, BoxHistoryRepoModel?>()
+	var currentBoxId: Long? = null
+	var boxHistoryId: List<Long>? = null
+	val cardAccounts = mutableListOf<CardAccount>()
+	var boxHistoryType = FilterProfile.day
+	var boxHistoryNumber = 3
+	var currentDate = PersianCalendar()
+	var xListChart = mutableListOf<String>()
+
 	init {
-		loading.addSource(profile){
-			if (profile.value?.status == Status.LOADING || existAccount.value?.status == Status.LOADING){
+		loading.addSource(profile) {
+			if (profile.value?.status == Status.LOADING || existAccount.value?.status == Status.LOADING) {
 				loading.value = Resource.loading(null)
-			}else{
+			} else {
 				loading.value = Resource.idle(null)
 			}
 		}
-		loading.addSource(existAccount){
-			if (profile.value?.status == Status.LOADING || existAccount.value?.status == Status.LOADING){
+		loading.addSource(existAccount) {
+			if (profile.value?.status == Status.LOADING || existAccount.value?.status == Status.LOADING) {
 				loading.value = Resource.loading(null)
-			}else{
+			} else {
 				loading.value = Resource.idle(null)
 			}
 		}
@@ -54,7 +66,7 @@ class ProfileViewModel @ViewModelInject constructor(
 
 	fun getProfile(
 		boxId: Long,
-		type: String,
+		type: FilterProfile,
 		number: Int
 	) {
 		profile.value?.let {
@@ -66,10 +78,65 @@ class ProfileViewModel @ViewModelInject constructor(
 			profile.postValue(
 				callResource(
 					this@ProfileViewModel, getBoxHistoryUseCase.action(
-						BoxHistoryRequestModel(boxId, type, number)
+						BoxHistoryRequestModel(boxId, type.name, number)
 					)
 				)
 			)
+		}
+	}
+
+	fun xListChart() {
+		val list = mutableListOf<String>()
+		when(boxHistoryType) {
+			FilterProfile.day -> {
+				for (index in 11 downTo 1) {
+					list.add(
+						getBeforeHour(
+							currentDate.timeInMillis,
+							index * -1
+						).getHourPersianDate().toString()
+					)
+				}
+				list.add(currentDate.getHourPersianDate().toString())
+			}
+			FilterProfile.month -> {
+				for (index in 11 downTo 1) {
+					list.add(
+						getBeforeDay(
+							currentDate.timeInMillis,
+							index * -1
+						).persianShortDate
+					)
+				}
+				list.add(currentDate.persianShortDate)
+			}
+			FilterProfile.week -> {
+				for (index in 6 downTo 1) {
+					list.add(
+						getBeforeDay(
+							currentDate.timeInMillis,
+							index * -1
+						).persianWeekDayName
+					)
+				}
+				list.add(currentDate.persianWeekDayName)
+			}
+			FilterProfile.years -> {
+				for (index in 11 downTo 1) {
+					list.add(
+						getBeforeMonth(
+							currentDate.timeInMillis,
+							index * -1
+						).persianMonthName
+					)
+				}
+				list.add(currentDate.persianMonthName)
+			}
+		}
+
+
+		list.forEachIndexed { index, s ->
+			Log.d("dayInMonth", "$index : $s")
 		}
 	}
 	/*fun getExistAccount(){
@@ -122,7 +189,12 @@ class ProfileViewModel @ViewModelInject constructor(
 		)
 		return Resource.success(boxRepoModel)
 	}*/
-	
 
+	enum class FilterProfile {
+		day,
+		week,
+		month,
+		years
+	}
 	
 }

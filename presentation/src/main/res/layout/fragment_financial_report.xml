@@ -17,65 +17,86 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.activitiesReport.fragments.FinancialReportFragment">
+        android:background="@color/bg"
+        tools:context=".ui.activitiesReport.FinancialReportFragment">
 
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/titleBarrier"
-            android:layout_width="wrap_content"
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"
             android:layout_height="wrap_content"
-            app:barrierDirection="bottom"
-            app:constraint_referenced_ids="txtTitleDate,txtTitleNumber,txtTitlePrice" />
+            android:layout_width="match_parent"
+            app:label="@{@string/transaction}"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/txtTitleDate"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="@dimen/margin_l"
-            android:elevation="2dp"
-            android:gravity="center"
-            android:text="تاریخ وساعت"
-            android:textColor="@color/blue_light"
-            android:textSize="@dimen/text_size_xs"
-            app:layout_constraintEnd_toStartOf="@id/txtTitleNumber"
-            app:layout_constraintHorizontal_weight="0.3"
+        <View
+            android:id="@+id/calenderCardView"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="@dimen/margin_l"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            android:background="@drawable/shadow_4dp"/>
 
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/txtTitleNumber"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/calenderbtn"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_m"
-            android:layout_marginTop="@dimen/margin_l"
+            android:layout_height="0dp"
+            android:scaleType="center"
+            android:src="@drawable/ic_calendar_gray"
+            app:layout_constraintBottom_toBottomOf="@id/calenderCardView"
+            app:layout_constraintEnd_toEndOf="@id/calenderCardView"
+            app:layout_constraintStart_toStartOf="@id/calenderCardView"
             android:elevation="2dp"
-            android:gravity="center"
-            android:text="شماره پیگیری"
-            android:textColor="@color/blue_light"
-            android:textSize="@dimen/text_size_xs"
-            app:layout_constraintEnd_toStartOf="@id/txtTitlePrice"
-            app:layout_constraintHorizontal_weight="0.3"
-            app:layout_constraintStart_toEndOf="@+id/txtTitleDate"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@id/calenderCardView" />
 
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/txtTitlePrice"
+        <View
+            android:id="@+id/tabCardView"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_m"
-            android:layout_marginTop="@dimen/margin_l"
-            android:layout_marginEnd="61dp"
-            android:elevation="2dp"
-            android:gravity="center"
-            android:text="مبلغ تراکنش"
-            android:textColor="@color/blue_light"
-            android:textSize="@dimen/text_size_xs"
+            android:layout_height="32dp"
+            android:layout_marginHorizontal="@dimen/margin_l"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_weight="0.3"
-            app:layout_constraintStart_toEndOf="@+id/txtTitleNumber"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:layout_constraintStart_toEndOf="@id/calenderCardView"
+            android:background="@drawable/shadow_4dp"/>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/margin_s"
+            android:background="@android:color/transparent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:tabGravity="fill"
+            app:tabIndicatorHeight="0dp"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="@color/brokerage_tab_color"
+            app:layout_constraintTop_toTopOf="@id/tabCardView"
+            app:layout_constraintBottom_toBottomOf="@id/tabCardView"
+            app:layout_constraintEnd_toEndOf="@id/tabCardView"
+            app:layout_constraintStart_toStartOf="@id/tabCardView"
+            app:tabBackground="@drawable/selector_tab_brokerage">
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/withdrawalTab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/withdrawal_cash" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/depositTab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/deposit_cash" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/allTab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/all" />
+
+
+        </com.google.android.material.tabs.TabLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/financialRecyclerView"
@@ -83,9 +104,10 @@
             android:layout_height="0dp"
             android:elevation="2dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/titleBarrier"
+            app:layout_constraintTop_toBottomOf="@id/tabCardView"
             tools:itemCount="10"
-            tools:listitem="@layout/item_financial_report" />
+            tools:listitem="@layout/item_financial_report"
+            android:layout_marginTop="@dimen/margin_l"/>
 
         <include
             layout="@layout/loading_state"

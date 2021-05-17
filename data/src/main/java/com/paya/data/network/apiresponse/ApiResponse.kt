@@ -1,5 +1,6 @@
 package com.paya.data.network.apiresponse
 
+import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.paya.domain.models.remote.BaseModel
@@ -27,7 +28,7 @@ sealed class ApiResponse<T> {
 
         private fun  getErrorMessage(response: String): String {
             val baseModel = parseBaseModel(response)
-            val msg = baseModel?.error?.message ?: response
+            val msg = baseModel?.error?.message ?: "عملیات شما با خطا مواجه شد"
 
             return if (msg.isNullOrEmpty()) {
                 "خطای ناشنخته"

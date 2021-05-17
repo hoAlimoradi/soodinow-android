@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import com.paya.presentation.R
 import com.paya.presentation.databinding.FragmentActivitiesReportBinding
-import com.paya.presentation.ui.activitiesReport.fragments.FinancialReportFragment
 import com.paya.presentation.ui.activitiesReport.fragments.LoginExitReportFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -37,6 +37,9 @@ class ActivitiesReportFragment : Fragment() {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 		setupPagerAdapter()
+		binding.toolbar.backButton.setOnClickListener {
+			findNavController().popBackStack()
+		}
 	}
 
 	private fun setupPagerAdapter() {

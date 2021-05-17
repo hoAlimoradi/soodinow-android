@@ -70,10 +70,6 @@ class ActivateFragment : BaseFragment<ActivateViewModel>() {
 				R.id.navigateToSetPasswordFragment,
 				bundle
 			)
-		}else if (activateResource.status == Status.ERROR){
-			Toast.makeText(
-				requireContext(), activateResource.message, Toast.LENGTH_SHORT
-			).show()
 		}
 	}
 	

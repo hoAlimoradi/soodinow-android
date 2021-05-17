@@ -91,7 +91,7 @@
                 tools:text="حالت خوشبینانه و ایده آل"
                 android:text="@{subtitle}"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_size_small"
+                android:textSize="@dimen/text_size_m"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"

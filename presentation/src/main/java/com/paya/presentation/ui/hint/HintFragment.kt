@@ -17,10 +17,13 @@ import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentHintBinding
 import com.paya.presentation.ui.hint.fragments.OpenAccount
+import com.paya.presentation.utils.getVersionName
 import com.paya.presentation.utils.observe
 import com.paya.presentation.viewmodel.HintViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.dialog_update_app.*
 import kotlinx.android.synthetic.main.fragment_hint.*
+import kotlinx.android.synthetic.main.fragment_hint.versionTxt
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -49,63 +52,20 @@ class HintFragment : BaseFragment<HintViewModel>() {
 	
 	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
 		super.onViewCreated(view,savedInstanceState)
-		observe(mViewModel.userState, ::checkUserStatus)
 		mBinding.register.setOnClickListener {
 			findNavController().navigate(R.id.registerFragment)
 		}
 		mBinding.login.setOnClickListener {
 			findNavController().navigate(R.id.loginFragment)
 		}
-		setupViewPager()
+		versionTxt.text = "  نسخه  ${context?.let { getVersionName(it) }}"
 	}
 	
-	private fun setupViewPager() {
-		adapter = ScreenSlidePagerAdapter(this)
-		mBinding.pager.adapter = adapter
-		
-		mBinding.pager.registerOnPageChangeCallback(
-			object : ViewPager2.OnPageChangeCallback() {
-				override fun onPageSelected(position: Int) {
-					super.onPageSelected(position)
-					selectedIndex = position
-					checkSelectedIndex()
-				}
-			}
-		)
-		
-		mBinding.imgLeftArrow.setOnClickListener {
-			pager.setCurrentItem(--selectedIndex, true)
-		}
-		mBinding.imgRightArrow.setOnClickListener {
-			pager.setCurrentItem(++selectedIndex, true)
-		}
-		
-		mBinding.hintIndicator.setViewPager2(mBinding.pager)
-		
-	}
+
 	
-	private fun checkSelectedIndex() {
-		mBinding.imgRightArrow.visibility = View.VISIBLE
-		mBinding.imgLeftArrow.visibility = View.VISIBLE
-		
-		if (selectedIndex == 0){
-			mBinding.imgLeftArrow.visibility = View.INVISIBLE
-		}else if (selectedIndex == adapter.itemCount - 1){
-			mBinding.imgRightArrow.visibility = View.INVISIBLE
-		}
-	}
+
 	
-	private fun checkUserStatus(userStatus: HintViewModel.UserState){
-		when(userStatus){
-			HintViewModel.UserState.IS_HINT_SHOWED -> {
-				findNavController().navigate(R.id.navigateToRegisterFragment)
-			}
-			HintViewModel.UserState.IS_PASSWORD_SET -> {
-				findNavController().navigate(R.id.navigateFromHintToLoginFragment)
-			}
-			HintViewModel.UserState.NONE -> return
-		}
-	}
+
 	
 	private inner class ScreenSlidePagerAdapter(f: Fragment) : FragmentStateAdapter(f) {
 		override fun getItemCount(): Int = 3

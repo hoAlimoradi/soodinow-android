@@ -136,15 +136,16 @@ class SettingsFragment : BaseFragment<SettingViewModel>() {
 				R.id.support
 			)
 		}
+		financialLayout.setOnClickListener {
+			getFindViewController()?.navigate(
+				R.id.financialReportFragment
+			)
+		}
 	}
 
 	private fun checkLoginStatus(resource: Resource<Any>){
 		if (resource.status == Status.SUCCESS){
 			initFingerprint()
-		}else if (resource.status == Status.ERROR){
-			Toast.makeText(
-				requireContext(), resource.message, Toast.LENGTH_SHORT
-			).show()
 		}
 	}
 
@@ -364,9 +365,6 @@ class SettingsFragment : BaseFragment<SettingViewModel>() {
 	private fun ready(resource: Resource<ProfileRepoModel>) {
 		when (resource.status) {
 			Status.SUCCESS -> mViewModel.mobile.set(resource.data?.mobile)
-			Status.ERROR -> context.let {
-				Toast.makeText(it, resource.message, Toast.LENGTH_SHORT).show()
-			}
 			else -> return
 			
 		}

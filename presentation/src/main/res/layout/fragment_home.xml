@@ -77,8 +77,8 @@
             android:id="@+id/pager"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toStartOf="@+id/end_guideline"
-            app:layout_constraintStart_toEndOf="@+id/start_guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/alarm" />
 
         <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
@@ -118,7 +118,7 @@
             android:elevation="2dp"
             android:text="@string/why_soodinow"
             android:textColor="@color/japanese_laurel_green"
-            android:textSize="@dimen/text_size_medium"
+            android:textSize="@dimen/text_size_m"
             app:layout_constraintEnd_toEndOf="@id/whySoodinowCard"
             app:layout_constraintStart_toStartOf="@+id/whySoodinowCard"
             app:layout_constraintTop_toTopOf="@id/whySoodinowCard" />
@@ -166,11 +166,11 @@
             app:layout_constraintVertical_bias="1" />
 
 
-        <androidx.cardview.widget.CardView
+        <View
             android:id="@+id/marketCardView"
-            style="@style/MediumCardView"
+           android:background="@drawable/shadow_medium"
             android:layout_width="0dp"
-            android:layout_height="36dp"
+            android:layout_height="38dp"
             android:layout_marginTop="@dimen/margin_l"
             app:cardBackgroundColor="@color/white"
             app:layout_constraintEnd_toStartOf="@+id/end_guideline"
@@ -189,7 +189,7 @@
             android:gravity="center"
             android:text="@string/market_view"
             android:textColor="@color/purple_gray"
-            android:textSize="@dimen/text_size_small"
+            android:textSize="@dimen/text_size_m"
             app:layout_constraintBottom_toBottomOf="@+id/marketCardView"
             app:layout_constraintEnd_toEndOf="@id/marketCardView"
             app:layout_constraintHorizontal_bias="1"
@@ -222,8 +222,9 @@
             app:layout_constraintEnd_toStartOf="@id/end_guideline"
             app:layout_constraintStart_toEndOf="@id/start_guideline"
             app:layout_constraintTop_toBottomOf="@id/marketCardView"
-            tools:itemCount="4"
-            tools:listitem="@layout/row_market_currency" />
+            tools:itemCount="10"
+            tools:listitem="@layout/row_market_currency"
+            />
 
         <include
             layout="@layout/loading_state"

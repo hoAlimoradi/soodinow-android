@@ -33,13 +33,14 @@
     <string name="support">پشتیبانی</string>
     <string name="home">خانه</string>
     <string name="profile">پروفایل</string>
+    <string name="invest">سرمایه</string>
     <string name="market">بازار</string>
     <string name="create_account_investment">افتتاح حساب سرمایه گذاری</string>
     <string name="create_without_risk_account">افتتاح حساب بدون ریسک</string>
     <string name="create_personal_account">افتتاح حساب شخصی</string>
     <string name="create_account">انجام سرمایه گذاری </string>
-    <string name="why_soodinow">چرا سودینو...</string>
-    <string name="why_soodinow_description">شما می توانید چندین حساب سرمایه گذاری با مبالغ دلخواه خود داشته باشید.</string>
+    <string name="why_soodinow">با سودینو بیشترآشنا شوید ...</string>
+    <string name="why_soodinow_description">مسیر های متنوع سرمایه گذاری در بازار های مالی</string>
     <string name="why_soodinow_in_page">چرا سودینو</string>
     <string name="why_soodinow_description_in_page">گروه نرم افزاری سودینو به وسیله جمعی از متخصصین حوزه  و مالی که همه گی جزوه دانش آموختگان دانشگاه تهران هستند و از سال 1397 با هدف تامین نیاز های نرم افزاری مالی و سرمایه گذاری  برای فعالان بازار سرمایه کشور تاسیس گردید</string>
     <string name="more_description">توضیحات بیشتر</string>
@@ -86,9 +87,15 @@
     <string name="insert_next">ثبت و ادامه</string>
     <string name="insert">ثبت</string>
 
-    <string name="name_family">نام و نام خانوادگی</string>
+    <string name="first_name">نام و نام خانوادگی</string>
+    <string name="name_family"> نام خانوادگی</string>
     <string name="sub_title_name_family">نام و نام خانوادگی خود را بصورت کامل بنویسید</string>
-    <string name="hint_name_family">نام و نام خانوادگی خود را بصورت کامل بنویسید</string>
+    <string name="hint_first_name">نام  خود را بصورت کامل بنویسید</string>
+    <string name="hint_name_family"> نام خانوادگی خود را بصورت کامل بنویسید</string>
+    <string name="email">ایمیل</string>
+    <string name="hint_email"> ایمیل خود را بصورت کامل بنویسید</string>
+    <string name="phone">شماره تلفن</string>
+    <string name="hint_phone"> شماره تلفن خود را بصورت کامل بنویسید</string>
     <string name="national_code">کد ملی</string>
     <string name="sub_title_national_code">کد ملی خود را بدون خط تیره بنویسید</string>
     <string name="hint_national_code">کد ملی خود را بدون خط تیره بنویسید</string>
@@ -140,7 +147,7 @@
     <string name="my_profile">پروفایل من</string>
     <string name="about_us">درباره ما</string>
     <string name="asked_question">سوالات متداول</string>
-    <string name="terms_conditions">قوانین و مقرات</string>
+    <string name="terms_conditions">قوانین و مقررات</string>
     <string name="active_fingerprint">فعال کردن اثر انگشت</string>
     <string name="change_password">تغییر رمز عبور</string>
     <string name="introduce_friends">معرفی به دوستان</string>
@@ -157,8 +164,8 @@
     <string name="we_number_phone">شماره تماس ما</string>
     <string name="call_support_number">02188542</string>
     <string name="direct_call">تماس مستقیم</string>
-    <string name="call_support_desc">کارشناسان ما بصورت 24 ساعته و شبانه روزی پاسخگوی سوالات شما می باشند</string>
-    <string name="call_support_desc_chat">می توانید به کارشناسان ما پیام دهید و در سریع ترین زمان پاسخگوی شما خواهیم بود</string>
+    <string name="call_support_desc">کارشناسان ما از ساعت 9 الی 17 پاسخگوی سوالات شما می باشند</string>
+    <string name="call_support_desc_chat">برای ارتباط در سریعترین زمان به کارشناسان ما پیام دهید</string>
     <string name="online_chat">چت آنلاین</string>
     <string name="online_person">کارشناس آنلاین هستند</string>
     <string name="send">ارسال</string>
@@ -209,6 +216,7 @@
     <string name="success_password">رمز عبور شما
         با موفقیت ثبت شد</string>
     <string name="you_intention_tomorrow">تو هم به فردا فکر کن</string>
+    <string name="card_sub_home_title">افتتاح پیمان سرمایه گذاری بدون ریسک سودینو</string>
     <string name="card_sub_title">برای افتتاح حساب سرمایه گذاری مطمن با ما همراه باشید</string>
     <string name="create_account_without_risk">افتتاح حساب سرمایه گذاری بدون ریسک</string>
     <string name="soodinow">سودینو</string>
@@ -219,6 +227,9 @@
     <string name="deposit_price">مبلغ واریز وجه را وارد کنید</string>
     <string name="support_soodinow">پشتیبانی سودینو</string>
     <string name="birth_date_hint">تاریخ تولد خود را دقیق انتخاب کنید</string>
+    <string name="all">همه</string>
+    <string name="transaction">تراکنش</string>
+    <string name="welcome_soodinow">به سودینو خوش آمدید</string>
 
     <string-array name="brokerage_list">
         <item>کارگزاری فارابی</item>

@@ -2,7 +2,10 @@ package com.paya.domain.models.repo
 
 data class ProfileRepoModel(
 	val id:Int,
-	val name: String,
+	val firstName: String,
+	val lastName: String,
+	val phone: String,
+	val email: String,
 	val personalCode: String,
 	val birthDay: String,
 	val bban: String,

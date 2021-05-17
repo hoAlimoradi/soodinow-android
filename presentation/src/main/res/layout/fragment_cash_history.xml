@@ -39,7 +39,7 @@
                     android:drawablePadding="@dimen/margin_small"
                     android:text="@string/report_cash_manager"
                     android:textColor="@color/purple"
-                    android:textSize="@dimen/text_size_small" />
+                    android:textSize="@dimen/text_size_m" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"

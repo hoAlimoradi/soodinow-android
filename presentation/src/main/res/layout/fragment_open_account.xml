@@ -48,6 +48,6 @@
         android:text="@string/fake_content"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/text_size_small"/>
+        android:textSize="@dimen/text_size_m"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

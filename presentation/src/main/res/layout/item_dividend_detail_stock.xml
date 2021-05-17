@@ -31,7 +31,7 @@
                 android:paddingVertical="@dimen/margin_4_dp"
                 android:text="ایران خودرو"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_size_small"
+                android:textSize="@dimen/text_size_m"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -52,7 +52,7 @@
                 android:drawableEnd="@drawable/ic_path"
                 android:drawablePadding="4dp"
                 android:text="99 / 08 / 22"
-                android:textSize="@dimen/text_size_small"
+                android:textSize="@dimen/text_size_m"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_arrow_red"
                 android:text="4%"
-                android:textSize="@dimen/text_size_small"
+                android:textSize="@dimen/text_size_m"
                 app:layout_constraintBaseline_toBaselineOf="@+id/title_price"
                 app:layout_constraintEnd_toStartOf="@id/title_price"
                 android:layout_marginEnd="@dimen/margin_4_dp"/>
@@ -85,7 +85,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/toman"
-                android:textSize="@dimen/text_size_small"
+                android:textSize="@dimen/text_size_m"
                 app:layout_constraintBaseline_toBaselineOf="@+id/txt_last_deal_price"
                 app:layout_constraintEnd_toStartOf="@id/txt_last_deal_price"
                 android:layout_marginEnd="@dimen/margin_4_dp"/>

@@ -1,5 +1,6 @@
 package com.paya.presentation.ui.activitiesReport.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,99 +8,89 @@ import androidx.core.content.ContextCompat
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.paya.domain.models.repo.InvestmentHeaderDate
 import com.paya.domain.models.repo.InvestmentLogsModel
-import com.paya.domain.models.repo.InvestmentLogsRepoModel
-import com.paya.domain.models.repo.PriceModel
 import com.paya.presentation.R
-import com.paya.presentation.ui.cashManager.adapter.HistoryPriceAdapter
+import com.paya.presentation.ui.activitiesReport.enum.StateInvestment
+import com.paya.presentation.ui.activitiesReport.enum.TypeAccount
+import com.paya.presentation.ui.activitiesReport.enum.TypeInvestment
 import com.paya.presentation.utils.Utils
+import com.paya.presentation.utils.getDifferenceDate
+import com.paya.presentation.utils.getTimeHoursAndMinute
 import kotlinx.android.synthetic.main.item_financial_report.view.*
+import kotlinx.android.synthetic.main.item_financial_report_header.view.*
+import java.util.*
+
+const val HEADER = 1
+const val OTHER = 0
 
 class FinancialReportAdapter() :
-	PagingDataAdapter<InvestmentLogsModel, FinancialReportAdapter.ActivityReportViewHolder>(FinancialPriceComparator) {
+    PagingDataAdapter<Any, RecyclerView.ViewHolder>(FinancialPriceComparator) {
 
 
+    class ActivityReportViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    class ActivityReportViewHolderHeader(itemView: View) : RecyclerView.ViewHolder(itemView)
 
-	class ActivityReportViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        val view = inflater.inflate(
+            if (viewType == HEADER)
+                R.layout.item_financial_report_header
+            else
+                R.layout.item_financial_report
+            , parent, false
+        )
+        return if (viewType == HEADER) ActivityReportViewHolderHeader(view) else ActivityReportViewHolder(
+            view
+        )
+    }
 
-	}
+    override fun getItemViewType(position: Int): Int {
+        return if (getItem(position) is InvestmentHeaderDate) HEADER else OTHER
+    }
 
-	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActivityReportViewHolder {
-		val inflater = LayoutInflater.from(parent.context)
-		val view = inflater.inflate(R.layout.item_financial_report, parent, false)
-		return ActivityReportViewHolder(
-			view
-		)
-	}
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if (holder is ActivityReportViewHolderHeader) {
+            val item = getItem(position) as InvestmentHeaderDate
+            with(holder.itemView) {
+                val date = Utils.convertStringToPersianCalender(item.date)
+                if (date != null) {
+                    txtHeaderTitleDate.text = date.persianShortDate
+                }
+                txtHeaderTitleDateText.text = Date().getDifferenceDate(item.date)
+            }
+        } else {
+            val item = getItem(position) as InvestmentLogsModel
+            with(holder.itemView) {
+                iconImageView.setImageResource(TypeInvestment.getTypeWithString(item.type).icon)
+                txtTitlePrice.text = Utils.separatorAmount(item.startPrice)
+                txtTitleTypeAccount.text = TypeAccount.getTypeWithString(item.investmentType).title
+                val date = Utils.convertStringToDate(item.createdAt)
+                if (date != null) {
+                    txtTitleDate.text = date.getTimeHoursAndMinute()
+                }
+                with(errorTxt) {
+                    val state = StateInvestment.getStateWithString(item.state)
+                    text = state.title
+                    setTextColor(ContextCompat.getColor(context,state.color))
+                    setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, state.dot, 0)
+                }
+            }
+        }
+    }
 
-	override fun onBindViewHolder(holder: ActivityReportViewHolder, position: Int) {
-		val item = getItem(position)
-		if (item == null)
-			return
-		with(holder.itemView) {
-			iconImageView.setImageResource(
-				when (item.type) {
-					TypeInvestment.Reduction.name -> R.drawable.ic_arrow_withdrawal
-					else -> R.drawable.ic_arrow_dposit
-				}
-			)
-			txtTitlePrice.text = Utils.separatorAmount(item.startPrice)
-			txtTitleNumber.text = item.trackingNumber
-			val date = Utils.convertStringToPersianCalender(item.createdAt)
-			if (date != null) {
-				txtTitleDate.text = date.persianShortDate.replace(" ","\n")
-			}
-			with(errorTxt) {
-				val errorText: String
-				val colorText: Int
-				val dot: Int
-				when(item.state) {
-					StateInvestmen.Completed.name -> {
-						 errorText = "تراکنش شما با موفقیت انجام شد"
-						 colorText =  ContextCompat.getColor(context,R.color.green)
-						 dot = R.drawable.dot_green
-					}
-					StateInvestmen.Error.name -> {
-						 errorText = "تراکنش شما با موفقیت انجام شد"
-						 colorText =  ContextCompat.getColor(context,R.color.green)
-						 dot = R.drawable.dot_green
-					}
-					else -> {
-						 errorText = "تراکنش شما ناموفق می باشد"
-						 colorText =  ContextCompat.getColor(context,R.color.red)
-						 dot = R.drawable.dot_red
-					}
-				}
-				text = errorText
-				setTextColor(colorText)
-				setCompoundDrawablesRelativeWithIntrinsicBounds(0,0,dot,0)
-			}
-		}
-	}
 
-	enum class TypeInvestment {
-		Open,
-		Increase,
-		Reduction
-	}
+    object FinancialPriceComparator : DiffUtil.ItemCallback<Any>() {
+        override fun areItemsTheSame(oldItem: Any, newItem: Any): Boolean {
+            // Id is unique.
+            return oldItem == newItem
+        }
 
-	enum class StateInvestmen {
-		Pending,
-		Running,
-		Completed,
-		Error
-	}
+        @SuppressLint("DiffUtilEquals")
+        override fun areContentsTheSame(oldItem: Any, newItem: Any): Boolean {
+            return newItem == oldItem
 
-	object FinancialPriceComparator : DiffUtil.ItemCallback<InvestmentLogsModel>() {
-		override fun areItemsTheSame(oldItem: InvestmentLogsModel, newItem: InvestmentLogsModel): Boolean {
-			// Id is unique.
-			return oldItem.id == newItem.id
-		}
-
-		override fun areContentsTheSame(oldItem: InvestmentLogsModel, newItem: InvestmentLogsModel): Boolean {
-			return oldItem == newItem
-
-		}
-	}
+        }
+    }
 
 }

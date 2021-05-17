@@ -1,6 +1,7 @@
 package com.paya.domain.models.remote
 
 import com.google.gson.annotations.SerializedName
+import com.paya.domain.tools.NoObfuscate
 
 
 data class InvestmentLogsRemoteModel(
@@ -8,7 +9,7 @@ data class InvestmentLogsRemoteModel(
 	val next: String?,
 	val previous: String?,
 	val results: List<InvestmentLogsModel>,
-)
+): NoObfuscate
 data class InvestmentLogsModel(
 	@SerializedName("id")
 	val id: Long,
@@ -36,4 +37,4 @@ data class InvestmentLogsModel(
 	val createdAt: String,
 	@SerializedName("updated_at")
 	val updatedAt: String,
-)
+): NoObfuscate

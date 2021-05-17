@@ -319,5 +319,15 @@
     </fragment>
     <!--    setting-->
 
+    <fragment
+        android:id="@+id/financialReportFragment"
+        android:name="com.paya.presentation.ui.activitiesReport.FinancialReportFragment"
+        android:label="fragment_financial_report"
+        tools:layout="@layout/fragment_financial_report"/>
+    <fragment
+        android:id="@+id/selectDateFilterFragment"
+        android:name="com.paya.presentation.ui.activitiesReport.SelectDateFilterFragment"
+        android:label="fragment_select_date_filter"
+        tools:layout="@layout/fragment_select_date_filter"/>
 
 </navigation>

@@ -66,7 +66,9 @@ class CalculateProfitCapitalFragment : BaseFragment<CalculateProfitCapitalViewMo
 		mBinding.inputPrice.setText(Utils.separatorAmount(args.SelectedPrice.toString()))
 		mBinding.inputWithdrawalAmount.setText(Utils.separatorAmount(args.SelectedPrice.toString()))
 		mBinding.inputAmount.setText(Utils.separatorAmount(args.SelectedPrice.toString()))*/
-		
+		mBinding.toolbar.backButton.setOnClickListener {
+			findNavController().popBackStack()
+		}
 	}
 	
 	private fun checkProfile(resource: Resource<ProfileRepoModel>) {
@@ -84,10 +86,6 @@ class CalculateProfitCapitalFragment : BaseFragment<CalculateProfitCapitalViewMo
 					bundle
 				)
 			}
-		} else if (resource.status == Status.ERROR) {
-			Toast.makeText(
-				requireContext(),resource.message,Toast.LENGTH_SHORT
-			).show()
 		}
 	}
 	

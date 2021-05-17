@@ -3,7 +3,6 @@ package com.paya.presentation.viewmodel
 import androidx.databinding.ObservableField
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.paya.domain.models.repo.ProfileBodyRepoModel
 import com.paya.domain.models.repo.ProfileRepoModel
@@ -24,7 +23,10 @@ class FirstInformationViewModel @ViewModelInject constructor(
 	private val cityUseCase: UseCase<Unit, List<ProvinceRepoModel>>,
 	private val useCaseProfile: UseCase<Unit,ProfileRepoModel>
 ) : BaseViewModel() {
-	val name = ObservableField<String>()
+	val firstName = ObservableField<String>()
+	val lastName = ObservableField<String>()
+	val phone = ObservableField<String>()
+	val email = ObservableField<String>()
 	val nationalCode = ObservableField<String>()
 	val birthDay = ObservableField<PersianCalendar>()
 	val bban = ObservableField<String>()
@@ -68,20 +70,26 @@ class FirstInformationViewModel @ViewModelInject constructor(
 	}
 
 	fun updateProfile(
-		name: String,
+		firstName: String,
+		lastName: String,
+		phone: String,
+		email: String,
 		nationalCode: String,
 		birthDay: String,
 		bban: String,
 		gender: String,
 		city: String,
 		province: String,
-		address : String
+		address: String
 	) {
 
 		viewModelScope.launch(Dispatchers.IO) {
 			statusUpdate.postValue(Resource.loading(null))
 			val body = ProfileBodyRepoModel(
-				name,
+				firstName,
+				lastName,
+				phone,
+				email,
 				nationalCode,
 				birthDay,
 				"IR$bban",
@@ -111,7 +119,10 @@ class FirstInformationViewModel @ViewModelInject constructor(
 			statusProfile.postValue(Resource.loading(null))
 			val response  = callResource(this@FirstInformationViewModel,useCaseProfile.action(Unit))
 			if (response.status == Status.SUCCESS && response.data?.complete!!) {
-				name.set(response.data?.name)
+				firstName.set(response.data?.firstName)
+				lastName.set(response.data?.lastName)
+				phone.set(response.data?.phone)
+				email.set(response.data?.email)
 				bban.set(response.data?.bban?.replace("IR",""))
 				birthDay.set(response.data?.birthDay?.let { Utils.convertStringToPersianCalender(it) })
 				nationalCode.set(response.data?.personalCode)

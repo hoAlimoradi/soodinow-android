@@ -30,7 +30,7 @@
             android:gravity="center"
             android:text="@={titleDialog}"
             android:textColor="@color/purple_gray"
-            android:textSize="@dimen/text_size_small"
+            android:textSize="@dimen/text_size_m"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

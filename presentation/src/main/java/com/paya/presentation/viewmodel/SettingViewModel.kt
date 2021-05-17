@@ -20,17 +20,22 @@ import kotlinx.coroutines.launch
 class SettingViewModel @ViewModelInject constructor(
 	private val loginUseCase: UseCase<LoginRepoModel,Any>,
 	private val useCaseProfile: UseCase<Unit,ProfileRepoModel>,
+	private val getMobileUseCase: UseCase<Unit,String>,
 	private val authRepository: AuthRepository
 ) : BaseViewModel() {
 
 	init {
-		getProfile()
+		getMobile()
 	}
 	val loading = MutableLiveData<Resource<Any>>()
 	val status = VolatileLiveData<Resource<ProfileRepoModel>>()
 	val mobile = ObservableField<String>()
 	val loginResource = VolatileLiveData<Resource<Any>>()
-
+	private fun getMobile() {
+		viewModelScope.launch(Dispatchers.IO) {
+			mobile.set(getMobileUseCase.action(Unit).data)
+		}
+	}
 	fun getProfile() {
 		/*viewModelScope.launch(Dispatchers.IO) {
 			loading.postValue(Resource.loading(null))

@@ -51,12 +51,12 @@
             app:layout_constraintEnd_toEndOf="@id/cardViewHistory"
             app:layout_constraintTop_toTopOf="@id/cardViewHistory" />
 
-        <androidx.cardview.widget.CardView
+        <View
             android:id="@+id/cardViewHistory"
             android:layout_width="match_parent"
             android:layout_height="38dp"
             android:layout_margin="@dimen/margin_l"
-            app:cardCornerRadius="4dp"
+            android:background="@drawable/shadow_4dp"
             app:layout_constraintTop_toBottomOf="@id/pager" />
 
         <androidx.cardview.widget.CardView
@@ -121,7 +121,7 @@
                     android:layout_marginTop="@dimen/margin_xl"
                     android:gravity="center"
                     android:text="@{viewModel.priceType ==PriceType.deposit ? @string/deposit_price : @string/withdrawal_price}"
-                    android:textColor="#515151"
+                    android:textColor="@color/emperor"
                     android:textSize="@dimen/text_size_xs"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -188,7 +188,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="%"
-                    android:textColor="#515151"
+                    android:textColor="@color/emperor"
                     android:textSize="@dimen/text_size_l"
                     app:layout_constraintBottom_toBottomOf="@id/percentBg"
                     app:layout_constraintEnd_toStartOf="@id/verticalLine"

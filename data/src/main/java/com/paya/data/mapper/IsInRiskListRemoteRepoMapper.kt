@@ -21,7 +21,8 @@ class IsInRiskListRemoteRepoMapper @Inject constructor(): Mapper<
 				BasketRepoModel(
 					it.name,
 					it.namad,
-					it.percent
+					it.percent,
+					it.color
 				)
 			},
 			PercentRepoModel(

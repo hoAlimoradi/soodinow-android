@@ -6,6 +6,7 @@ import com.paya.data.network.remote_api.QuestionService
 import com.paya.data.sharedpreferences.PreferenceHelper
 import com.paya.data.utils.getResourceFromApiResponse
 import com.paya.domain.models.remote.*
+import com.paya.domain.models.repo.CheckVersionRepoModel
 import com.paya.domain.models.repo.ProvinceRepoModel
 import com.paya.domain.models.repo.QuestionsRepoModel
 import com.paya.domain.models.repo.UserTestRepoModel
@@ -17,6 +18,7 @@ import javax.inject.Inject
 class CommonRepositoryImpl @Inject constructor(
 	private val commonService: CommonService,
 	private val cityRemoteRepoMapper: Mapper<List<ProvinceRemoteModel>, List<ProvinceRepoModel>>,
+	private val checkVersionRemoteRepoMapper: Mapper<CheckVersionRemoteModel, CheckVersionRepoModel>,
 
 ): CommonRepository{
 	
@@ -27,5 +29,12 @@ class CommonRepositoryImpl @Inject constructor(
 		}
 	}
 
-	
+	override suspend fun checkVersion(version: String): Resource<CheckVersionRepoModel> {
+		val response = commonService.checkVersion(version)
+		return getResourceFromApiResponse(response){
+			checkVersionRemoteRepoMapper.map(it.data)
+		}
+	}
+
+
 }

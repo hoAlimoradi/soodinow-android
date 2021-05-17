@@ -26,8 +26,6 @@ import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
-import com.github.mikephil.charting.formatter.DefaultAxisValueFormatter
-import com.github.mikephil.charting.formatter.IAxisValueFormatter
 import com.github.mikephil.charting.formatter.IFillFormatter
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.paya.presentation.R
@@ -351,7 +349,8 @@ object BindingAdapters {
         "markerTitleColor",
         "markerType",
         "chartAlpha",
-        "touchEnabled"
+        "touchEnabled",
+        "xList",
     )
     fun setLineAccountChartData(
         chart: LineChart,
@@ -361,20 +360,21 @@ object BindingAdapters {
         markerTitleColor: Int = Color.BLACK,
         markerType: Int = 1,
         chartAlpha: Int = 0,
-        touchEnabled: Boolean = false
+        touchEnabled: Boolean = false,
+        xList: List<String> = mutableListOf()
     ) {
         data ?: return
-        chart.setViewPortOffsets(0f, 0f, 0f, 0f)
+        // chart.setViewPortOffsets(0f, 0f, 0f, 0f)
         chart.setBackgroundColor(Color.TRANSPARENT)
 
         // no description text
         chart.description.isEnabled = false
 
         // enable touch gestures
-        chart.setTouchEnabled(touchEnabled)
+        chart.setTouchEnabled(true)
 
         // enable scaling and dragging
-        chart.isDragEnabled = true
+        chart.isDragEnabled = false
         chart.setScaleEnabled(false)
 
         // if disabled, scaling can be done on x- and y-axis separately
@@ -383,25 +383,37 @@ object BindingAdapters {
 
         chart.setDrawGridBackground(false)
         chart.maxHighlightDistance = 300f
-        var dayList = mutableListOf("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat")
-        chart.xAxis.apply {
-            isEnabled = true
-            setDrawGridLines(false)
-            position = XAxis.XAxisPosition.BOTTOM_INSIDE
-//            valueFormatter =
-//                 IndexAxisValueFormatter(dayList)
-        }
+        chart.xAxis.isEnabled = xList.isNotEmpty()
+        if (xList.isNotEmpty())
+            chart.xAxis.apply {
+                isEnabled = true
+                setDrawGridLines(false)
+                setLabelCount(xList.size, true)
+                axisMinimum = 0f
+                textSize = 8f
+                labelRotationAngle = 90f
+                textColor = Color.LTGRAY
+                axisMaximum = xList.size.toFloat() - 1
+                position = XAxis.XAxisPosition.BOTTOM
+                valueFormatter =
+                    IndexAxisValueFormatter(xList)
+
+            }
 
 
         chart.axisLeft.apply {
             isEnabled = true
-
-            setLabelCount(5, false)
+            setLabelCount(6, true)
             textColor = Color.LTGRAY
-            setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART)
+            setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART)
             setDrawGridLines(true)
+            if (data.size == 1)
+                axisMinimum = 0f
+            textSize = 8f
             zeroLineColor = ContextCompat.getColor(chart.context, R.color.white_smoke)
             axisLineColor = ContextCompat.getColor(chart.context, R.color.white_smoke)
+            gridColor = ContextCompat.getColor(chart.context, R.color.white_smoke)
+
         }
 
 
@@ -460,8 +472,8 @@ object BindingAdapters {
         } else {
             // create a dataset and give it a type
             set1 = LineDataSet(entries, "DataSet 1")
-            set1.mode = LineDataSet.Mode.CUBIC_BEZIER
-            set1.cubicIntensity = 0.2f
+//            set1.mode = LineDataSet.Mode.CUBIC_BEZIER
+//            set1.cubicIntensity = 0.2f
             set1.setDrawFilled(true)
             set1.setDrawCircles(false)
             set1.lineWidth = 3f

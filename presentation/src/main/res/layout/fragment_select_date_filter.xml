@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.activitiesReport.SelectDateFilterFragment">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/closeBtn"
+        android:layout_width="@dimen/height"
+        android:layout_height="@dimen/height"
+        android:layout_marginStart="@dimen/margin_l"
+        android:layout_marginTop="@dimen/margin_l"
+        android:padding="@dimen/margin_s"
+        android:src="@drawable/ic_close"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_l"
+        android:layout_marginTop="@dimen/margin_l"
+        android:gravity="center"
+        android:text="بازه زمانی مورد نظر رو انتخاب کنید"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_m"
+        app:layout_constraintTop_toBottomOf="@id/closeBtn" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/dateFromTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_l"
+        android:layout_marginTop="@dimen/margin_xl"
+        android:background="@drawable/bg_border_dove_gray"
+        android:gravity="center"
+        android:padding="@dimen/margin_m"
+        tools:text="17/11/1399"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_m"
+        app:layout_constraintStart_toEndOf="@id/dateToTextView"
+        app:layout_constraintHorizontal_weight="0.5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="34dp"
+        android:layout_height="12dp"
+        android:layout_marginEnd="@dimen/margin_m"
+        android:background="@color/white"
+        android:gravity="center"
+        android:text="از تاریخ"
+        app:layout_constraintBottom_toTopOf="@id/dateFromTextView"
+        android:textColor="@color/emperor"
+        android:textSize="@dimen/text_size_xxs"
+        app:layout_constraintEnd_toEndOf="@id/dateFromTextView"
+        app:layout_constraintTop_toTopOf="@id/dateFromTextView" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/dateToTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_l"
+        android:background="@drawable/bg_border_dove_gray"
+        android:gravity="center"
+        android:padding="@dimen/margin_m"
+        tools:text="17/11/1400"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_m"
+        app:layout_constraintBaseline_toBaselineOf="@id/dateFromTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_weight="0.5"
+        app:layout_constraintEnd_toStartOf="@id/dateFromTextView"
+        app:layout_constraintTop_toTopOf="@id/dateFromTextView" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="34dp"
+        android:layout_height="12dp"
+        android:layout_marginEnd="@dimen/margin_m"
+        android:background="@color/white"
+        android:gravity="center"
+        android:text="تا تاریخ"
+        app:layout_constraintBottom_toTopOf="@id/dateToTextView"
+        android:textColor="@color/emperor"
+        android:textSize="@dimen/text_size_xxs"
+        app:layout_constraintEnd_toEndOf="@id/dateToTextView"
+        app:layout_constraintTop_toTopOf="@id/dateToTextView" />
+    
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="100dp"
+        android:layout_height="@dimen/height_medium"
+        android:id="@+id/acceptBtn"
+        app:layout_constraintTop_toBottomOf="@id/dateFromTextView"
+        android:background="@drawable/bg_disable_button"
+        android:text="اعمال"
+        android:textSize="@dimen/text_size_m"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="@dimen/margin_l"
+        android:layout_marginTop="@dimen/margin_xl"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

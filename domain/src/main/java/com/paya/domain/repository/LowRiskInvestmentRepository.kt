@@ -23,6 +23,6 @@ interface LowRiskInvestmentRepository {
     suspend fun totalBoxValue() : Resource<TotalBoxValueRepoModel>
 
     suspend fun getHistoryPrice(page: Int, filter: String): Resource<HistoryPriceRepoModel>
-    suspend fun getInvestmentLogs(page: Int, pageSize: Int): Resource<InvestmentLogsRepoModel>
+    suspend fun getInvestmentLogs(page: Int, pageSize: Int,filters:Map<String,String>): Resource<InvestmentLogsRepoModel>
 
 }

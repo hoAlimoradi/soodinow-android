@@ -37,6 +37,7 @@ class CardAccount : BaseFragment<BaseViewModel>() {
             activeBoxRepo = it.getSerializable(ARG_ACTIVE_BOX) as ActiveBoxRepo
             haveButton = it.getBoolean(ARG_HAVE_BUTTON, true)
         }
+
     }
 
     override fun onCreateView(
@@ -60,6 +61,9 @@ class CardAccount : BaseFragment<BaseViewModel>() {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+    }
     private fun setData() {
         if ( activeBoxRepo == null)
             return

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingHorizontal="@dimen/margin_l"
+    android:paddingTop="@dimen/margin_m">
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtHeaderTitleDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:text="۹۹/۰۲/۰۸8"
+        android:textColor="@color/blue_light"
+        android:textSize="@dimen/text_size_xs"
+        app:layout_constraintBottom_toBottomOf="@+id/iconImageView"
+        app:layout_constraintEnd_toStartOf="@id/txtHeaderTitleDateText"
+        app:layout_constraintHorizontal_weight="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/iconImageView" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtHeaderTitleDateText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_m"
+        tools:text="۲ ماه قبل"
+        android:textColor="@color/blue_light"
+        android:textSize="@dimen/text_size_s"
+        app:layout_constraintBottom_toBottomOf="@+id/iconImageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="0.3"
+        app:layout_constraintStart_toEndOf="@+id/txtTitleDate"
+        app:layout_constraintTop_toTopOf="@+id/iconImageView" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,14 +16,16 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:defaultNavHost="true"
-            app:layout_constraintBottom_toTopOf="@+id/cardBottom"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:navGraph="@navigation/main_graph"
-            android:layout_marginBottom="@dimen/margin_m"/>
+            />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardBottom"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             android:layout_height="55dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:cardCornerRadius="28dp"

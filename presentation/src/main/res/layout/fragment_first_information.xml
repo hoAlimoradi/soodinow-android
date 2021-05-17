@@ -25,52 +25,85 @@
             layout="@layout/toolbar"
             app:label="@{@string/first_information}" />
 
-        <androidx.cardview.widget.CardView
-            style="@style/GeneralCardView"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginEnd="@dimen/margin_small"
-            android:layout_marginStart="@dimen/margin_small"
-            android:layout_marginBottom="@dimen/margin_small"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar">
 
             <androidx.core.widget.NestedScrollView
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:paddingBottom="@dimen/margin_small">
+                android:paddingBottom="@dimen/margin_small"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/toolbar">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <include
-                        android:id="@+id/name"
+                        android:id="@+id/firstName"
                         layout="@layout/item_first_information"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:content="@{viewModel.name}"
+                        android:layout_marginHorizontal="@dimen/margin_l"
+                        android:layout_marginTop="@dimen/margin_s"
+                        app:content="@{viewModel.firstName}"
+                        app:hintLabel="@{@string/hint_first_name}"
+                        app:label="@{@string/first_name}"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:subLabel="@{@string/sub_title_name_family}" />
+
+                    <include
+                        android:id="@+id/lastName"
+                        layout="@layout/item_first_information"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/margin_l"
+                        android:layout_marginTop="@dimen/margin_s"
+                        app:content="@{viewModel.lastName}"
                         app:hintLabel="@{@string/hint_name_family}"
                         app:label="@{@string/name_family}"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:subLabel="@{@string/sub_title_name_family}"
-                        android:layout_marginHorizontal="@dimen/margin_m"
-                        android:layout_marginTop="@dimen/margin_l"/>
+                        app:layout_constraintTop_toBottomOf="@id/firstName"
+                        app:subLabel="@{@string/sub_title_name_family}" />
 
+
+                    <include
+                        android:id="@+id/phone"
+                        layout="@layout/item_first_information"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/margin_l"
+                        android:layout_marginTop="@dimen/margin_s"
+                        app:content="@{viewModel.phone}"
+                        app:hintLabel="@{@string/hint_phone}"
+                        app:label="@{@string/phone}"
+                        app:layout_constraintTop_toBottomOf="@id/lastName"
+                        app:subLabel="@{@string/sub_title_name_family}" />
+
+
+                    <include
+                        android:id="@+id/email"
+                        layout="@layout/item_first_information"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/margin_l"
+                        android:layout_marginTop="@dimen/margin_s"
+                        app:content="@{viewModel.email}"
+                        app:hintLabel="@{@string/hint_email}"
+                        app:label="@{@string/email}"
+                        app:layout_constraintTop_toBottomOf="@id/phone"
+                        app:subLabel="@{@string/sub_title_name_family}" />
 
                     <include
                         android:id="@+id/national"
                         layout="@layout/item_first_information_number"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="@dimen/margin_m"
+                        android:layout_marginHorizontal="@dimen/margin_l"
                         android:layout_marginTop="@dimen/margin_s"
                         app:content="@{viewModel.nationalCode}"
                         app:hintLabel="@{@string/hint_national_code}"
                         app:label="@{@string/national_code}"
-                        app:layout_constraintTop_toBottomOf="@id/name"
+                        app:layout_constraintTop_toBottomOf="@id/email"
                         app:subLabel="@{@string/sub_title_national_code}" />
 
 
@@ -79,7 +112,7 @@
                         layout="@layout/item_first_information_number"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="@dimen/margin_m"
+                        android:layout_marginHorizontal="@dimen/margin_l"
                         android:layout_marginTop="@dimen/margin_s"
                         app:content="@{viewModel.bban}"
                         app:hintLabel="@{@string/hint_shaba_number}"
@@ -88,13 +121,12 @@
                         app:subLabel="@{@string/sub_title_shaba_number}" />
 
 
-
                     <include
                         android:id="@+id/birthDate"
                         layout="@layout/item_first_information_disable"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="@dimen/margin_m"
+                        android:layout_marginHorizontal="@dimen/margin_l"
                         android:layout_marginTop="@dimen/margin_s"
                         app:hintLabel="@{@string/birth_date_hint}"
                         app:label="@{@string/date_of_birth}"
@@ -105,7 +137,7 @@
                         layout="@layout/item_first_information_disable"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="@dimen/margin_m"
+                        android:layout_marginHorizontal="@dimen/margin_l"
                         android:layout_marginTop="@dimen/margin_s"
                         app:hintLabel="@{@string/hint_gender}"
                         app:label="@{@string/gender}"
@@ -116,11 +148,11 @@
                         layout="@layout/item_first_information_disable"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="@dimen/margin_m"
+                        android:layout_marginHorizontal="@dimen/margin_l"
                         android:layout_marginTop="@dimen/margin_s"
+                        app:content="@{viewModel.province}"
                         app:hintLabel="@{@string/hint_province}"
                         app:label="@{@string/province}"
-                        app:content="@{viewModel.province}"
                         app:layout_constraintTop_toBottomOf="@id/gender" />
 
                     <include
@@ -128,11 +160,11 @@
                         layout="@layout/item_first_information_disable"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="@dimen/margin_m"
+                        android:layout_marginHorizontal="@dimen/margin_l"
                         android:layout_marginTop="@dimen/margin_s"
+                        app:content="@{viewModel.city}"
                         app:hintLabel="@{@string/hint_city}"
                         app:label="@{@string/city}"
-                        app:content="@{viewModel.city}"
                         app:layout_constraintTop_toBottomOf="@id/province" />
 
                     <include
@@ -140,11 +172,11 @@
                         layout="@layout/item_first_information"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="@dimen/margin_m"
+                        android:layout_marginHorizontal="@dimen/margin_l"
                         android:layout_marginTop="@dimen/margin_s"
+                        app:content="@{viewModel.address}"
                         app:hintLabel="@{@string/hint_address}"
                         app:label="@{@string/address}"
-                        app:content="@{viewModel.address}"
                         app:layout_constraintTop_toBottomOf="@id/city" />
 
                     <androidx.appcompat.widget.AppCompatButton
@@ -158,15 +190,14 @@
                         android:background="@drawable/bg_button_green"
                         android:text="@string/insert_next"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/text_size_small"
-                        app:layout_constraintTop_toBottomOf="@id/address"
+                        android:textSize="@dimen/text_size_m"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintVertical_bias="1"/>
+                        app:layout_constraintTop_toBottomOf="@id/address"
+                        app:layout_constraintVertical_bias="1" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.core.widget.NestedScrollView>
-        </androidx.cardview.widget.CardView>
 
 
 

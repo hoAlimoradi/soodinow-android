@@ -5,5 +5,5 @@
     android:text=" ۱"
     android:gravity="center"
     android:textColor="@color/purple_gray"
-    android:textSize="@dimen/text_size_small"
+    android:textSize="@dimen/text_size_m"
     android:id="@+id/day"/>

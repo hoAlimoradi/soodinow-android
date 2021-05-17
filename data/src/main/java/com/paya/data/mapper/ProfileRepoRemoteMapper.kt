@@ -16,7 +16,10 @@ class ProfileRepoRemoteMapper @Inject constructor() : Mapper<
 	
 	override fun map(param: ProfileBodyRepoModel): ProfileBodyRemoteModel {
 		return ProfileBodyRemoteModel(
-			param.name,
+			param.firstName,
+			param.lastName,
+			param.phone,
+			param.email,
 			param.personalCode,
 			param.birthDay,
 			param.bban,

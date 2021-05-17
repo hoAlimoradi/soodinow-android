@@ -59,13 +59,16 @@ class CashManagerFragment : BaseFragment<CashManagerViewModel>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupViewPager()
+        mBinding.toolbar.backButton.setOnClickListener {
+            findNavController().popBackStack()
+        }
         observe(mViewModel.existAccount, ::onExistAccountReady)
         observe(mViewModel.sellPriceStatus, ::readySellPrice)
         observe(mViewModel.pullPriceStatus, ::readyPullPrice)
         mBinding.inputPrice.setupWatcherPrice(lifecycleScope = lifecycleScope){}
         mBinding.managerAccountHistory.setOnClickListener {
             findNavController().navigate(
-                R.id.navigateCashHistory
+                R.id.financialReportFragment
             )
         }
 
@@ -126,9 +129,7 @@ class CashManagerFragment : BaseFragment<CashManagerViewModel>() {
             Status.SUCCESS -> {
                 resource.data?.let { }
             }
-            Status.ERROR -> {
-                Toast.makeText(context, resource.message, Toast.LENGTH_SHORT).show()
-            }
+
             else -> return
         }
     }
@@ -142,9 +143,7 @@ class CashManagerFragment : BaseFragment<CashManagerViewModel>() {
                     Toast.LENGTH_SHORT
                 ).show()
             }
-            Status.ERROR -> {
-                Toast.makeText(context, resource.message, Toast.LENGTH_SHORT).show()
-            }
+
             else -> return
         }
     }

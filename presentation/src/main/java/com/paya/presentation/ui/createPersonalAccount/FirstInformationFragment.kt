@@ -18,6 +18,7 @@ import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentFirstInformationBinding
 import com.paya.presentation.utils.Utils
+import com.paya.presentation.utils.isValidEmail
 import com.paya.presentation.utils.observe
 import com.paya.presentation.utils.picker.PickerViewDialog
 import com.paya.presentation.viewmodel.FirstInformationViewModel
@@ -25,6 +26,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import ir.hamsaa.persiandatepicker.Listener
 import ir.hamsaa.persiandatepicker.PersianDatePickerDialog
 import ir.hamsaa.persiandatepicker.util.PersianCalendar
+import kotlinx.android.synthetic.main.fragment_first_information.*
 
 private const val ARG_IS_NEXT_PAGE: String = "next_page"
 @AndroidEntryPoint
@@ -54,14 +56,17 @@ class FirstInformationFragment : BaseFragment<FirstInformationViewModel>() {
 	
 	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
+		mBinding.toolbar.backButton.setOnClickListener {
+			findNavController().popBackStack()
+		}
 		observe(mViewModel.statusUpdate, ::onReadyUpdateProfile)
 		observe(mViewModel.statusCity, ::onReadyCity)
 		observe(mViewModel.statusProfile, ::onReadyProfile)
 		setDate(PersianCalendar())
-		mBinding.birthDate.layout.setOnClickListener {
+		mBinding.birthDate.clickLayout.setOnClickListener {
 			showDatePicker()
 		}
-		mBinding.gender.layout.setOnClickListener {
+		mBinding.gender.clickLayout.setOnClickListener {
 			fragmentManager?.let { it1 ->
 				PickerViewDialog()
 					.selectionIndex(
@@ -77,7 +82,7 @@ class FirstInformationFragment : BaseFragment<FirstInformationViewModel>() {
 					}.show(it1, "gender")
 			}
 		}
-		mBinding.city.layout.setOnClickListener {
+		mBinding.city.clickLayout.setOnClickListener {
 			if (mViewModel.cityList.size > 0)
 				fragmentManager?.let { it1 ->
 					PickerViewDialog()
@@ -90,7 +95,7 @@ class FirstInformationFragment : BaseFragment<FirstInformationViewModel>() {
 						}.show(it1, "city")
 				}
 		}
-		mBinding.province.layout.setOnClickListener {
+		mBinding.province.clickLayout.setOnClickListener {
 			if (mViewModel.cityList.size > 0)
 				fragmentManager?.let { it1 ->
 					PickerViewDialog()
@@ -110,7 +115,10 @@ class FirstInformationFragment : BaseFragment<FirstInformationViewModel>() {
 
 	private fun updateProfile() {
 		var isError = false
-		val name = mViewModel.name.get()
+		val firstName = mViewModel.firstName.get()
+		val lastName= mViewModel.lastName.get()
+		val phone= mViewModel.phone.get()
+		val email= mViewModel.email.get()
 		val nationalCode = mViewModel.nationalCode.get()
 		val birthDay = mViewModel.birthDay.get()?.let { Utils.convertToDate(it) }
 		val bban = mViewModel.bban.get()
@@ -119,8 +127,28 @@ class FirstInformationFragment : BaseFragment<FirstInformationViewModel>() {
 		val province = mViewModel.province.get()
 		val address = mViewModel.address.get()
 
-		if (name.isNullOrBlank()) {
-			mBinding.name.layout.setError("لطفا نام را وارد کنید")
+		if (firstName.isNullOrBlank()) {
+			mBinding.firstName.layout.setError("لطفا نام را وارد کنید")
+			isError = true
+
+		}
+		if (lastName.isNullOrBlank()) {
+			mBinding.lastName.layout.setError("لطفا نام‌ و خانوادگی را وارد کنید")
+			isError = true
+
+		}
+		if (phone.isNullOrBlank()) {
+			mBinding.phone.layout.setError("لطفا تلفن را وارد کنید")
+			isError = true
+
+		}
+		if (email.isNullOrBlank()) {
+			mBinding.email.layout.setError("لطفا ایمیل را وارد کنید")
+			isError = true
+
+		}
+		if (!isValidEmail(email)) {
+			mBinding.email.layout.setError("ایمیل وارد شده اشتباه است")
 			isError = true
 
 		}
@@ -165,7 +193,10 @@ class FirstInformationFragment : BaseFragment<FirstInformationViewModel>() {
 		if (isError)
 			return
 		mViewModel.updateProfile(
-			name!!,
+			firstName!!,
+			lastName!!,
+			phone!!,
+			email!!,
 			nationalCode!!,
 			birthDay!!,
 			bban!!,
@@ -210,13 +241,7 @@ class FirstInformationFragment : BaseFragment<FirstInformationViewModel>() {
 					}
 
 			}
-			Status.ERROR -> {
-				context.let {
-					Toast.makeText(it, resource.message, Toast.LENGTH_SHORT)
-						.show()
-				}
 
-			}
 			else -> return
 		}
 
@@ -227,13 +252,7 @@ class FirstInformationFragment : BaseFragment<FirstInformationViewModel>() {
 			Status.SUCCESS -> {
 				citySelection()
 			}
-			Status.ERROR -> {
-				context.let {
-					Toast.makeText(it, resource.message, Toast.LENGTH_SHORT)
-						.show()
-				}
 
-			}
 			else -> return
 		}
 
@@ -249,10 +268,6 @@ class FirstInformationFragment : BaseFragment<FirstInformationViewModel>() {
 					mBinding.birthDate.inputContentEditText.setText(" ${date.persianYear}/${date.persianMonth}/${date.persianDay} ")
 				}
 			}
-		} else if (resource.status == Status.ERROR) {
-			Toast.makeText(
-				requireContext(), resource.message, Toast.LENGTH_SHORT
-			).show()
 		}
 	}
 

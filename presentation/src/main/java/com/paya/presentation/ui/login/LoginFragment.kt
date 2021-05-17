@@ -99,11 +99,9 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
 			mBinding.passwordLayout.errorLayout.setError("")
 			if (mViewModel.isUserNameError)
 				resource.message?.let { mBinding.phoneNumber.errorLayout.setError(it) }
-			else
+			else if(mViewModel.isPasswordError)
 				resource.message?.let { mBinding.passwordLayout.errorLayout.setError(it) }
-			Toast.makeText(
-				requireContext(), resource.message, Toast.LENGTH_SHORT
-			).show()
+
 		}
 	}
 	
