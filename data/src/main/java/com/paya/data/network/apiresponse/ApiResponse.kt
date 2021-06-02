@@ -45,7 +45,7 @@ sealed class ApiResponse<T> {
         }
 
         fun <T> create(error: Throwable): ApiErrorResponse<T> {
-            return ApiErrorResponse(error.message ?: "unknown error")
+            return ApiErrorResponse("عملیات شما با خطا مواجه شد")
         }
 
         fun <T> create(response: Response<T>): ApiResponse<T> {
