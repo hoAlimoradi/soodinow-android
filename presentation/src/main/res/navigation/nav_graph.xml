@@ -223,7 +223,7 @@
 
     <fragment
         android:id="@+id/connectLowRiskBrokerage"
-        android:name="com.paya.presentation.ui.createPersonalAccount.ConnectLowRiskBrokerageFragment"
+        android:name="com.paya.presentation.ui.createLowRiskAccount.ConnectLowRiskBrokerageFragment"
         android:label="fragment_connect_low_risk_brokerage"
         tools:layout="@layout/fragment_connect_low_risk_brokerage">
 

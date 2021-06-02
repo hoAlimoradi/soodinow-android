@@ -48,9 +48,12 @@
         <include
             android:id="@+id/cardAccount"
             layout="@layout/brokerage_account_card"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/margin_xxxl"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="H,2:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginHorizontal="@dimen/margin_xl"
             app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
 
@@ -65,9 +68,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cardAccount">
 
-            <androidx.core.widget.NestedScrollView
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:paddingBottom="@dimen/margin_small">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -138,9 +141,10 @@
                         android:layout_marginTop="@dimen/margin_l"
                         android:lineSpacingExtra="@dimen/margin_m"
                         android:textColor="@color/deep_fir_green"
-                        android:textSize="@dimen/text_size_xxs"
+                        android:textSize="@dimen/text_size_xs"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/imageCardView" />
 
                     <View
@@ -186,6 +190,7 @@
                     </RadioGroup>
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        visibleGone="@{!viewModel.tabCheckedIsSoodinow}"
                         android:id="@+id/txtDescBrokerage"
                         arrayStringText="@{@stringArray/brokerage_desc_bottom}"
                         colorArrayText="@{@color/green}"
@@ -195,17 +200,34 @@
                         android:layout_marginTop="@dimen/margin_xl"
                         android:lineSpacingExtra="@dimen/margin_m"
                         android:textColor="@color/deep_fir_green"
-                        android:textSize="@dimen/text_size_xxs"
+                        android:textSize="@dimen/text_size_s"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/line" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        visibleGone="@{viewModel.tabCheckedIsSoodinow}"
+                        android:id="@+id/txtDescBrokerageSoodinow"
+                        arrayStringText="@{@stringArray/brokerage_desc_bottom_soodinow}"
+                        colorArrayText="@{@color/green}"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/margin_l"
+                        android:layout_marginTop="@dimen/margin_xl"
+                        android:lineSpacingExtra="@dimen/margin_m"
+                        android:textColor="@color/deep_fir_green"
+                        android:textSize="@dimen/text_size_xs"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/line" />
+
 
                     <androidx.constraintlayout.widget.Barrier
                         android:id="@+id/bottom_barrier"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:barrierDirection="bottom"
-                        app:constraint_referenced_ids="txtDescBrokerage,radioGroupPriceType"/>
+                        app:constraint_referenced_ids="txtDescBrokerageSoodinow,txtDescBrokerage,radioGroupPriceType"/>
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/addInvestBtn"
@@ -224,7 +246,7 @@
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.core.widget.NestedScrollView>
+            </ScrollView>
         </androidx.cardview.widget.CardView>
 
         <include

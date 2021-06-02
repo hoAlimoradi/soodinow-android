@@ -9,10 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 
 import com.paya.presentation.R
-import com.paya.presentation.utils.getVersionName
-import com.paya.presentation.utils.openLink
-import com.paya.presentation.utils.setFullScreen
-import com.paya.presentation.utils.setWidthPercent
+import com.paya.presentation.utils.*
 import kotlinx.android.synthetic.main.dialog_update_app.*
 
 class UpdateAppDialog : DialogFragment() {
@@ -50,7 +47,7 @@ class UpdateAppDialog : DialogFragment() {
             dismissAllowingStateLoss()
         }
         updateBtn.setOnClickListener {
-            openLink(link)
+            openUrl(link)
         }
         versionTxt.text = "  نسخه  ${context?.let { getVersionName(it) }}"
     }

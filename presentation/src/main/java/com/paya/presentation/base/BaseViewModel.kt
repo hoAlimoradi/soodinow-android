@@ -23,7 +23,9 @@ open class BaseViewModel : ViewModel() {
 		unFarabiAuth.postValue(Unit)
 	}
 
-	fun showError(error:String) {
+	fun showError(error:String,isShowError: Boolean = true) {
+		if (!isShowError)
+			return
 		errorLiveData.postValue(error)
 	}
 }

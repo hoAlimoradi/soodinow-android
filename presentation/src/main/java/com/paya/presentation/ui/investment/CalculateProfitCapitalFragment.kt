@@ -18,8 +18,7 @@ import com.paya.presentation.R
 import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentCalculateProfitCapitalBinding
-import com.paya.presentation.ui.createPersonalAccount.ConnectLowRiskBrokerageFragmentArgs
-import com.paya.presentation.ui.createPersonalAccount.enum.NextPageInformation
+
 import com.paya.presentation.ui.investment.dialog.SelectedDayInMonthDialogFragment
 import com.paya.presentation.ui.investment.dialog.SelectedWithdrawalDialogFragment
 import com.paya.presentation.utils.PriceTextWatcher

@@ -6,10 +6,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/accountCardLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@drawable/ic_cards"
-        android:minHeight="168dp"
         tools:context=".ui.home.fragments.CardAccount">
+
 
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -34,7 +34,7 @@
             android:textSize="@dimen/text_size_s"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:text="حساب سرمایه گذاری جسور پایا"
+            android:text="پیمان سرمایه گذاری بدون ریسک سودینو"
             app:layout_constraintTop_toBottomOf="@id/dateTitle"
             app:layout_constraintVertical_bias="1"/>
 
@@ -93,7 +93,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="top"
-            android:textColor="@color/green_gray"
+            android:textColor="@color/white"
             android:textSize="@dimen/text_size_xl"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/accountUserName"

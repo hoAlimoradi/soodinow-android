@@ -2,10 +2,10 @@ package com.paya.presentation.ui.activitiesReport.enum
 
 import com.paya.presentation.R
 
-enum class TypeInvestment(val icon: Int) {
-    Open(R.drawable.ic_arrow_dposit),
-    Increase(R.drawable.ic_arrow_dposit),
-    Reduction(R.drawable.ic_arrow_withdrawal);
+enum class TypeInvestment(val icon: Int,val title:String) {
+    Open(R.drawable.ic_arrow_dposit,"خرید"),
+    Increase(R.drawable.ic_arrow_dposit,"خرید"),
+    Reduction(R.drawable.ic_arrow_withdrawal,"برداشت");
 
     companion object {
         @JvmStatic

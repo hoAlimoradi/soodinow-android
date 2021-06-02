@@ -5,7 +5,9 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.paya.domain.models.repo.ActivateRepoModel
+import com.paya.domain.models.repo.ActivateResetPasswordRepoModel
 import com.paya.domain.models.repo.RegisterRepoModel
+import com.paya.domain.models.repo.ResetPasswordRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.domain.tools.UseCase
@@ -17,8 +19,8 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class ActivateForgotPasswordViewModel @ViewModelInject constructor(
-	private val activateUseCase: UseCase<ActivateRepoModel,Any>,
-	private val registerUseCase: UseCase<String,RegisterRepoModel>
+	private val activateUseCase: UseCase<ActivateResetPasswordRepoModel,Any>,
+	private val resetPasswordUseCase: UseCase<String,ResetPasswordRepoModel>
 ) : BaseViewModel() {
 	
 	val title = MutableLiveData<String>()
@@ -46,7 +48,7 @@ class ActivateForgotPasswordViewModel @ViewModelInject constructor(
 		}
 		viewModelScope.launch(Dispatchers.IO) {
 			status.postValue(Resource.loading(null))
-			val activateModel = ActivateRepoModel(
+			val activateModel = ActivateResetPasswordRepoModel(
 				phoneNumber,
 				activationCode
 			)
@@ -60,7 +62,7 @@ class ActivateForgotPasswordViewModel @ViewModelInject constructor(
 			return
 		viewModelScope.launch(Dispatchers.IO) {
 			status.postValue(Resource.loading(null))
-			val response = callResource(this@ActivateForgotPasswordViewModel,registerUseCase.action(phoneNumber))
+			val response = callResource(this@ActivateForgotPasswordViewModel,resetPasswordUseCase.action(phoneNumber))
 			
 			if (response.status == Status.SUCCESS) {
 				status.postValue(Resource.idle(null))

@@ -14,7 +14,7 @@ class ChangePasswordRemoteRepoMapper @Inject constructor() : Mapper<
 	
 	override fun map(param: ChangePasswordRemoteModel): ChangePasswordRepoModel {
 		return ChangePasswordRepoModel(
-			param.message,
+			param.message?:"",
 		)
 	}
 	

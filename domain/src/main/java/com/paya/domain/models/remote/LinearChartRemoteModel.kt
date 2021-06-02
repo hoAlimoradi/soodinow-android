@@ -4,9 +4,9 @@ import com.google.gson.annotations.SerializedName
 import com.paya.domain.tools.NoObfuscate
 
 data class LinearChartRemoteModel (
-	val data: List<List<*>>,
+	val data: List<List<*>>?,
 	@SerializedName("start_date")
-	val startDate: String,
+	val startDate: String?,
 	@SerializedName("end_date")
-	val endDate: String
+	val endDate: String?
 ): NoObfuscate

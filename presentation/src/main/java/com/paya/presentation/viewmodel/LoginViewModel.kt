@@ -10,6 +10,7 @@ import com.paya.domain.tools.UseCase
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.utils.VolatileLiveData
 import com.paya.presentation.utils.callResource
+import com.paya.presentation.utils.md5
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -59,7 +60,7 @@ class LoginViewModel @ViewModelInject constructor(
 			loginResource.postValue(Resource.loading(null))
 			val loginModel = LoginRepoModel(
 				username = "+989$username",
-				password = password
+				password = password.md5()!!
 			)
 			val response = callResource(this@LoginViewModel,loginUseCase.action(loginModel))
 			loginResource.postValue(response)

@@ -6,19 +6,19 @@ import com.paya.domain.tools.NoObfuscate
 data class ExitAccountRemoteModel(
 	val existing: Boolean,
 	@SerializedName("active_box_id")
-	val activeBox: List<ActiveBoxRemote>
+	val activeBox: List<ActiveBoxRemote>?
 ): NoObfuscate
 
 data class ActiveBoxRemote(
-	val id: Long,
-	val type:String,
+	val id: Long?,
+	val type:String?,
 	@SerializedName("sub_type")
-	val subType:String,
+	val subType:String?,
 	@SerializedName("create_at")
-	val createAt:String,
+	val createAt:String?,
 	@SerializedName("user_name")
-	val userName:String,
+	val userName:String?,
 	@SerializedName("total_price")
-	val price:Float,
+	val price:Float?,
 ): NoObfuscate
 

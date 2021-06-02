@@ -74,8 +74,7 @@ class CashManagerFragment : BaseFragment<CashManagerViewModel>() {
 
 
         mBinding.submitBtn.setOnClickListener {
-            if (mViewModel.priceType.get() == CashManagerViewModel.PriceType.deposit)
-                mViewModel.price.set(mBinding.inputPrice.getPriceLong())
+            mViewModel.price.set(mBinding.inputPrice.getPriceLong())
             mViewModel.setPullPrice()
         }
 
@@ -95,12 +94,14 @@ class CashManagerFragment : BaseFragment<CashManagerViewModel>() {
                         mBinding.inputPrice.maxPrice = mViewModel.maxSeek.get()!!
                         mBinding.inputPrice.minPrice = mViewModel.minSeek.get()!!
                         mBinding.inputPrice.setMessage("مبلغ وارد شده باید بین ${Utils.separatorAmount(mViewModel.minSeek.get()!!)} تا ${Utils.separatorAmount(mViewModel.maxSeek.get()!!)} ریال باشد")
+                        mViewModel.type.set("Fixed")
                     }
                     1 -> {
                         mViewModel.priceType.set(CashManagerViewModel.PriceType.deposit)
                         mBinding.inputPrice.maxPrice = 0L
                         mBinding.inputPrice.minPrice = 0L
                         mBinding.inputPrice.setMessage("")
+                        mViewModel.type.set("no_risk")
                     }
                 }
                 mBinding.percentGroup.visibility =

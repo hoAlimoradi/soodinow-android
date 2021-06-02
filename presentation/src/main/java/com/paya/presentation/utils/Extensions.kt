@@ -5,21 +5,28 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
 import android.graphics.Rect
+import android.graphics.Typeface
 import android.net.Uri
 import android.text.TextUtils
 import android.util.Patterns
 import android.util.TypedValue
 import android.view.ViewGroup
+import android.webkit.URLUtil
 import android.widget.Toast
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.constraintlayout.widget.Constraints
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
+import com.paya.presentation.R
 import ir.hamsaa.persiandatepicker.util.PersianCalendar
+import java.io.UnsupportedEncodingException
+import java.math.RoundingMode
+import java.security.MessageDigest
+import java.text.DecimalFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
+import java.util.regex.Pattern
 
 fun Fragment.longToast(text: String) {
     Toast.makeText(
@@ -35,6 +42,44 @@ fun Fragment.shortToast(text: String) {
         text,
         Toast.LENGTH_SHORT
     ).show()
+}
+
+fun Fragment.openUrl(url: String) {
+    if (url.isEmpty() || !URLUtil.isValidUrl(url))
+        return
+    val intent = Intent(Intent.ACTION_VIEW)
+    intent.data = Uri.parse(url)
+    startActivity(intent)
+}
+
+fun DialogFragment.openUrl(url: String) {
+    if (url.isEmpty() || !URLUtil.isValidUrl(url))
+        return
+    val intent = Intent(Intent.ACTION_VIEW)
+    intent.data = Uri.parse(url)
+    startActivity(intent)
+}
+
+fun String.isSecretPassword(): Boolean {
+    val passwordPattern = "^(?=.*?[0-9])(?=.*?[a-z])(?=.*?[A-Z]).{8,}\$"
+    val pattern = Pattern.compile(passwordPattern)
+    val matcher = pattern.matcher(this)
+    return matcher.matches()
+}
+
+fun String.md5(): String? {
+    try {
+        val md = MessageDigest.getInstance("MD5")
+        val array = md.digest(this.toByteArray())
+        val sb = StringBuffer()
+        for (i in array.indices) {
+            sb.append(Integer.toHexString(array[i].toInt() and 0xFF or 0x100).substring(1, 3))
+        }
+        return sb.toString()
+    } catch (e: java.security.NoSuchAlgorithmException) {
+    } catch (ex: UnsupportedEncodingException) {
+    }
+    return null
 }
 
 fun Activity.longToast(text: String) {
@@ -76,6 +121,19 @@ fun Date.getTimeHoursAndMinute(): String {
     return "$hours : $minute"
 }
 
+fun RecyclerView.removeAllDecoration() {
+    while (itemDecorationCount > 0) {
+        removeItemDecorationAt(0)
+    }
+}
+
+fun getIranSans(context: Context?): Typeface? {
+    context?.let {
+        return Typeface.createFromAsset(it.assets, it.getString(R.string.font_farsi_regular))
+    }
+    return null
+}
+
 fun isValidEmail(target: CharSequence?): Boolean {
     return !TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target)
         .matches()
@@ -84,7 +142,7 @@ fun isValidEmail(target: CharSequence?): Boolean {
 fun Date.getDifferenceDate(date: String): String {
 
     val endDateValue = Date()
-    val startDateValue = convertDate(date)
+    val startDateValue = convertDateWithoutHour(date)
     startDateValue?.let {
         val diff: Long = endDateValue.time - it.time
         val day = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS)
@@ -98,7 +156,7 @@ fun Date.getDifferenceDate(date: String): String {
                 "$year سال قبل "
             }
             else -> {
-                "$day روز قبل "
+                if (day == 0L) "امروز" else if (day == 1L) "دیروز" else "$day روز قبل "
             }
         }
     }
@@ -117,6 +175,16 @@ fun convertDate(date: String): Date? {
         } catch (e: ParseException) {
             e.printStackTrace()
         }
+    }
+    return null
+}
+
+fun convertDateWithoutHour(date: String): Date? {
+    val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+    try {
+        return format.parse(date)
+    } catch (e: ParseException) {
+        e.printStackTrace()
     }
     return null
 }
@@ -157,10 +225,6 @@ fun getVersionName(context: Context): String {
     return info.versionName
 }
 
-fun DialogFragment.openLink(link: String) {
-    if (link.isNotEmpty())
-        startActivity(Intent(Intent.ACTION_VIEW).setData(Uri.parse(link)))
-}
 
 fun getScreenWidth(): Int {
     return Resources.getSystem().displayMetrics.widthPixels
@@ -174,10 +238,11 @@ fun convertDpToPixels(dp: Float, resources: Resources): Float {
     )
 }
 
-fun getCardHeight(context: Context,margin: Float): Float {
-    val defaultWidth = convertDpToPixels(291f, context.resources)
-    val defaultHeight = convertDpToPixels(150f, context.resources)
-    val screenWidth = getScreenWidth().toFloat() - margin
-    return (screenWidth * defaultHeight) / defaultWidth
-
+fun roundOffDecimal(number: Float): Float? {
+    val df = DecimalFormat("#.##")
+    df.roundingMode = RoundingMode.CEILING
+    return df.format(number).toFloat()
 }
+
+
+

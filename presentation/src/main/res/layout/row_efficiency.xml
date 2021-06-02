@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/titleEfficiency"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="بازدهی"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_s"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/percentEfficiency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_m"
+        android:gravity="center"
+        android:text="30%"
+        android:textColor="@color/green"
+        android:textSize="@dimen/text_size_xl"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@id/percentIconEfficiency"
+        app:layout_constraintTop_toBottomOf="@id/titleEfficiency" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/percentIconEfficiency"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:background="@drawable/bg_icon_15_size_corner_3_green"
+        android:padding="4dp"
+        android:src="@drawable/ic_arrow_dposit"
+        app:layout_constraintBottom_toBottomOf="@id/percentEfficiency"
+        app:layout_constraintEnd_toStartOf="@id/percentEfficiency"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/percentEfficiency"
+        android:layout_marginEnd="@dimen/margin_m"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/priceEfficiency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="40,000"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_s"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/percentEfficiency"
+        app:layout_constraintStart_toEndOf="@id/currencyPriceEfficiency"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        android:layout_marginTop="@dimen/margin_m"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/currencyPriceEfficiency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/toman"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_xs"
+        android:layout_marginEnd="@dimen/margin_s"
+        app:layout_constraintEnd_toStartOf="@id/priceEfficiency"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/priceEfficiency"
+        app:layout_constraintBottom_toBottomOf="@+id/priceEfficiency"
+        app:layout_constraintHorizontal_chainStyle="packed"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

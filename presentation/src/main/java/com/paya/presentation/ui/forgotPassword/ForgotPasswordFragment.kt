@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.paya.domain.models.repo.RegisterRepoModel
+import com.paya.domain.models.repo.ResetPasswordRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.presentation.R
@@ -52,10 +53,10 @@ class ForgotPasswordFragment : BaseFragment<ForgotPasswordViewModel>() {
 	
 	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
 		super.onViewCreated(view,savedInstanceState)
-		observe(mViewModel.registerStatus,::checkRegisterStatus)
+		observe(mViewModel.resetPasswordStatus,::checkRegisterStatus)
 	}
 	
-	private fun checkRegisterStatus(registerResource: Resource<RegisterRepoModel>){
+	private fun checkRegisterStatus(registerResource: Resource<ResetPasswordRepoModel>){
 		Log.d("checkRegisterStatus",registerResource.status.toString())
 		if (registerResource.status == Status.SUCCESS){
 			val bundle = Bundle()

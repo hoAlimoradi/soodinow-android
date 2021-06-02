@@ -41,14 +41,14 @@ class ChatFragment : Fragment() {
 		mBinding.pulsator.start()
 
 		setupChatRecyclerView()
-		mBinding.sendBtn.setOnClickListener {
+		/*mBinding.sendBtn.setOnClickListener {
 			val chat = ChatRepoModel(
 				mBinding.input.text.toString(),
 				if (adapterChat.itemCount % 2 == 0) 0 else 1
 			)
 			adapterChat.addItem(chat)
 			mBinding.chatRecyclerView.scrollToPosition(adapterChat.itemCount -1)
-		}
+		}*/
 		mBinding.toolbar.backButton.setOnClickListener {
 			findNavController().popBackStack()
 		}

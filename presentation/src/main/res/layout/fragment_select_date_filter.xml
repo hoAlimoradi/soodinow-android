@@ -49,7 +49,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="34dp"
-        android:layout_height="12dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_m"
         android:background="@color/white"
         android:gravity="center"
@@ -81,7 +81,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="34dp"
-        android:layout_height="12dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_m"
         android:background="@color/white"
         android:gravity="center"

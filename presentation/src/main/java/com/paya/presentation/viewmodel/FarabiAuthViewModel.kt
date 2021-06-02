@@ -27,7 +27,7 @@ private val getUserFarabiUseCase : UseCase<String, UserFarabiRepoModel>
 
 	fun setToken(token:String) {
         if (token.isNullOrBlank()) {
-            status.setValue(Resource.error("متاسفانه فارابی دچار مشکل شده است",null))
+            showError("متاسفانه فارابی دچار مشکل شده است")
             return
         }
 
@@ -39,7 +39,7 @@ private val getUserFarabiUseCase : UseCase<String, UserFarabiRepoModel>
     }
 	fun getUserFarabi(token:String) {
         if (token.isNullOrBlank()) {
-            statusGetUserFarabi.setValue(Resource.error("متاسفانه فارابی دچار مشکل شده است",null))
+            showError("متاسفانه فارابی دچار مشکل شده است")
             return
         }
 

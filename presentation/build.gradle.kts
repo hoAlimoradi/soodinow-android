@@ -103,6 +103,7 @@ dependencies {
 
 	implementation ("com.github.hadiidbouk:AppAuthWebView-Android:${Dependencies.Versions.APP_AUTH_WEB_VIEW}")
 	implementation ("com.github.jakob-grabner:Circle-Progress-View:1.4")
+	implementation ("com.google.android:flexbox:2.0.1")
 
 	implementation ("androidx.biometric:biometric:1.0.1")
 	

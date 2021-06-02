@@ -4,12 +4,15 @@ import com.google.gson.annotations.SerializedName
 import com.paya.domain.tools.NoObfuscate
 
 data class PercentRemoteModel(
-	val minimum: PercentEntity,
-	val year: PercentEntity,
-	val perfect: PercentEntity
+	@SerializedName("one_week")
+	val oneWeek: PercentEntity?,
+	@SerializedName("one_month")
+	val oneMonth: PercentEntity?,
+	@SerializedName("three_month")
+	val threeMonth: PercentEntity?
 ): NoObfuscate
 
 data class PercentEntity(
-	val percent: Float,
-	val price: Float
+	val percent: Float?,
+	val price: Float?
 ): NoObfuscate

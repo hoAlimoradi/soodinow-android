@@ -53,10 +53,10 @@ class HintFragment : BaseFragment<HintViewModel>() {
 	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
 		super.onViewCreated(view,savedInstanceState)
 		mBinding.register.setOnClickListener {
-			findNavController().navigate(R.id.registerFragment)
+			findNavController().navigate(R.id.navigateToRegisterFragment)
 		}
 		mBinding.login.setOnClickListener {
-			findNavController().navigate(R.id.loginFragment)
+			findNavController().navigate(R.id.navigateFromHintToLoginFragment)
 		}
 		versionTxt.text = "  نسخه  ${context?.let { getVersionName(it) }}"
 	}

@@ -50,7 +50,7 @@
                 android:maxLines="1"
                 android:minWidth="100dp"
                 android:singleLine="true"
-                android:text="5000,000"
+                android:text="100,000,000"
                 android:textColor="@color/emperor"
                 android:textSize="@dimen/text_size_l"
                 app:layout_constraintBottom_toBottomOf="parent"

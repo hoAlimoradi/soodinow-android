@@ -165,17 +165,17 @@ class CashManagerViewModel @ViewModelInject constructor(
         val type = this.type.get()
         val price: Long = this.price.get()!!
         if (type.isNullOrBlank()) {
-            pullPriceStatus.setValue(Resource.error("نوع حساب انتخاب تشده است", null))
+            showError("نوع حساب انتخاب تشده است")
             return
         }
 
         if (price <= 0f) {
-            pullPriceStatus.setValue(Resource.error("مبلغ وارد شده اشتباه است", null))
+            showError("مبلغ وارد شده اشتباه است")
             return
         }
         if (priceType.get() == PriceType.withdrawal) {
+            pullPriceStatus.postValue(Resource.loading(null))
             viewModelScope.launch(Dispatchers.IO) {
-                pullPriceStatus.postValue(Resource.loading(null))
                 val body = PullPriceBodyRepoModel(type, price)
                 val response =
                     callResource(this@CashManagerViewModel, pullPricePriceUseCase.action(body))
@@ -184,12 +184,11 @@ class CashManagerViewModel @ViewModelInject constructor(
             }
         } else {
             if (price <= 0) {
-                pullPriceStatus.setValue(Resource.error("مبلغ  مجاز نمیباشد", null))
+                showError("مبلغ  مجاز نمیباشد")
                 return
             }
+            pullPriceStatus.postValue(Resource.loading(null))
             viewModelScope.launch(Dispatchers.IO) {
-                pullPriceStatus.postValue(Resource.loading(null))
-
                 val response = callResource(
                     this@CashManagerViewModel, addRiskOrderUseCase.action(
                         AddRiskOrderRepoBodyModel(

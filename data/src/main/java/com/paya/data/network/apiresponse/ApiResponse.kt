@@ -60,7 +60,7 @@ sealed class ApiResponse<T> {
             } else if (response.code() == 401) {
                 ApiUnAuthorizedResponse(getErrorMessage(errorBody!!) ?: "UnAuthorized")
             } else if (getErrorCode(errorBody!!) == 1009) {
-                ApiFarabiTokenResponse()
+                ApiFarabiTokenResponse(getErrorMessage(errorBody!!))
             } else {
                 ApiErrorResponse(getErrorMessage(errorBody!!) ?: "unknown error")
             }
@@ -73,7 +73,7 @@ sealed class ApiResponse<T> {
  */
 class ApiEmptyResponse<T> : ApiResponse<T>()
 
-class ApiFarabiTokenResponse<T> : ApiResponse<T>()
+class ApiFarabiTokenResponse<T>(val errorMessage: String) : ApiResponse<T>()
 
 class ApiUnAuthorizedResponse<T>(val errorMessage: String) : ApiResponse<T>()
 

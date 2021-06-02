@@ -36,13 +36,14 @@ android {
         getByName("release") {
             isMinifyEnabled = true
             isShrinkResources = true
+            isDebuggable = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
 
         getByName("debug") {
+
             isMinifyEnabled = true
             isShrinkResources = true
-            isDebuggable = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
@@ -87,4 +88,5 @@ dependencies {
     testImplementation("junit:junit:${Dependencies.Versions.JUNIT_VER}")
     androidTestImplementation("androidx.test.ext:junit:${Dependencies.Versions.TEST_JUNIT_VER}")
     androidTestImplementation("androidx.test.espresso:espresso-core:${Dependencies.Versions.ESPRESSO_VER}")
+    debugImplementation ("com.squareup.leakcanary:leakcanary-android:${Dependencies.Versions.LEAK_CANARY}")
 }

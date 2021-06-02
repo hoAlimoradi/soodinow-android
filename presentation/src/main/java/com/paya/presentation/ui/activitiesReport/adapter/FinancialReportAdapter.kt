@@ -24,7 +24,7 @@ import java.util.*
 const val HEADER = 1
 const val OTHER = 0
 
-class FinancialReportAdapter() :
+class FinancialReportAdapter(private val onItemClicked:(InvestmentLogsModel) -> Unit) :
     PagingDataAdapter<Any, RecyclerView.ViewHolder>(FinancialPriceComparator) {
 
 
@@ -62,6 +62,7 @@ class FinancialReportAdapter() :
         } else {
             val item = getItem(position) as InvestmentLogsModel
             with(holder.itemView) {
+                setOnClickListener { onItemClicked.invoke(item) }
                 iconImageView.setImageResource(TypeInvestment.getTypeWithString(item.type).icon)
                 txtTitlePrice.text = Utils.separatorAmount(item.startPrice)
                 txtTitleTypeAccount.text = TypeAccount.getTypeWithString(item.investmentType).title
@@ -71,8 +72,8 @@ class FinancialReportAdapter() :
                 }
                 with(errorTxt) {
                     val state = StateInvestment.getStateWithString(item.state)
-                    text = state.title
-                    setTextColor(ContextCompat.getColor(context,state.color))
+                    text = (item.description + " " + state.title).trim()
+                    setTextColor(ContextCompat.getColor(context, state.color))
                     setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, state.dot, 0)
                 }
             }

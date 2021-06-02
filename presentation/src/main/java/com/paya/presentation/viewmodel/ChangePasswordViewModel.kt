@@ -10,6 +10,8 @@ import com.paya.domain.tools.UseCase
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.utils.VolatileLiveData
 import com.paya.presentation.utils.callResource
+import com.paya.presentation.utils.isSecretPassword
+import com.paya.presentation.utils.md5
 import kotlinx.coroutines.launch
 
 class ChangePasswordViewModel @ViewModelInject constructor(
@@ -27,30 +29,35 @@ class ChangePasswordViewModel @ViewModelInject constructor(
 		val newPassword = newPassword.get()
 		val repeatPassword = repeatPassword.get()
 		if (oldPassword.isNullOrEmpty()) {
-			status.setValue(Resource.error("لطفا پسورد خود را وارد کنید",null))
+			showError("لطفا پسورد خود را وارد کنید")
 			return
 		}
 		
 		if (newPassword.isNullOrEmpty()) {
-			status.setValue(Resource.error("لطفا پسورد جدید خود را وارد کنید",null))
+			showError("لطفا پسورد جدید خود را وارد کنید")
+			return
+		}
+
+		if (!newPassword.isSecretPassword()) {
+			showError("پسورد باید از ۸ کارکتر بیشتر باشد و از حروف بزرگ و کوچک استفاده شود")
 			return
 		}
 		
 		if(repeatPassword.isNullOrEmpty()) {
-			status.setValue(Resource.error("لطفا تکرار پسورد جدید خود را وارد کنید",null))
+			showError("لطفا تکرار پسورد جدید خود را وارد کنید")
 			return
 		}
 		
 		if (newPassword != repeatPassword) {
-			status.setValue(Resource.error("پسورد حدید با تکرار آن بکسان نیست",null))
+			showError("پسورد حدید با تکرار آن بکسان نیست")
 			return
 		}
 		
 		viewModelScope.launch {
 			status.postValue(Resource.loading(null))
 			val body = ChangePasswordRepoBodyModel(
-				oldPassword,
-				newPassword
+				oldPassword.md5()!!,
+				newPassword.md5()!!
 			)
 			status.postValue(callResource(this@ChangePasswordViewModel,changePasswordUseCase.action(body)))
 		}

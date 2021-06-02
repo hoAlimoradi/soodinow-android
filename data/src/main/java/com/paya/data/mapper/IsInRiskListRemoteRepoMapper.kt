@@ -4,8 +4,7 @@ import com.paya.common.Mapper
 import com.paya.domain.models.remote.IsInRiskListRemoteModel
 import com.paya.domain.models.repo.BasketRepoModel
 import com.paya.domain.models.repo.IsInRiskListRepoModel
-import com.paya.domain.models.repo.Percent
-import com.paya.domain.models.repo.PercentRepoModel
+import com.paya.domain.models.repo.PercentEfficiency
 import javax.inject.Inject
 
 class IsInRiskListRemoteRepoMapper @Inject constructor(): Mapper<
@@ -13,23 +12,54 @@ class IsInRiskListRemoteRepoMapper @Inject constructor(): Mapper<
 		IsInRiskListRepoModel>{
 	
 	override fun map(param: IsInRiskListRemoteModel): IsInRiskListRepoModel {
-		return IsInRiskListRepoModel(
-			param.basket.map {
-				it.percent
-			},
-			param.basket.map {
-				BasketRepoModel(
-					it.name,
-					it.namad,
-					it.percent,
-					it.color
+		val percentEfficiencyList = mutableListOf<PercentEfficiency>()
+		param.percent?.let { percent ->
+			percent.threeMonth?.let { threeMonth ->
+				percentEfficiencyList.add(
+					PercentEfficiency(
+						"بازدهی 3 ماهه",
+						threeMonth.percent?.let { it * 100 } ?: 0f,
+						threeMonth.price ?: 0f
+					)
 				)
-			},
-			PercentRepoModel(
-				minimum = Percent(param.percent.minimum.percent, param.percent.minimum.price),
-				year = Percent(param.percent.year.percent, param.percent.year.price),
-				perfect = Percent(param.percent.perfect.percent, param.percent.perfect.price)
-			)
+			}
+			percent.oneMonth?.let { oneMonth ->
+				percentEfficiencyList.add(
+					PercentEfficiency(
+						"بازدهی ماهانه",
+						oneMonth.percent?.let { it * 100 } ?: 0f,
+						oneMonth.price ?: 0f
+					)
+				)
+			}
+			percent.oneWeek?.let { oneWeek ->
+				percentEfficiencyList.add(
+					PercentEfficiency(
+						"بازدهی هفتگی",
+						oneWeek.percent?.let { it * 100 } ?: 0f,
+						oneWeek.price ?: 0f
+					)
+				)
+			}
+		}
+		return IsInRiskListRepoModel(
+			param.basket?.let {
+				it.map { item ->
+					item.percent?.let { percent -> percent * 100 } ?: 0f
+				}
+			} ?: emptyList(),
+			param.basket?.let {
+				it.map { item ->
+					BasketRepoModel(
+						item.name ?: "",
+						item.namad ?: "",
+						item.percent?.let { percent -> percent * 100 } ?: 0f,
+						item.quantity ?: 0f,
+						item.color ?: "#3bb400"
+					)
+				}
+			} ?: emptyList(),
+			percentEfficiencyList
 		)
 	}
 	

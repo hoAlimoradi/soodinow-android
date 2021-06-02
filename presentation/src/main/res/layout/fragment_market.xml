@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
         <import type="com.paya.domain.tools.Resource" />
+
         <import type="com.paya.presentation.viewmodel.MarketViewModel" />
 
         <import type="com.paya.presentation.utils.shared.Point" />
@@ -23,16 +23,30 @@
         android:layout_height="match_parent"
         android:background="@drawable/bottom_round_corner_background">
 
-      <androidx.appcompat.widget.AppCompatTextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintTop_toTopOf="parent"
-          app:layout_constraintBottom_toBottomOf="parent"
-          android:textColor="@color/purple"
-          android:text="بزودی"
-          android:textSize="30sp"/>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_wrench"
+            app:layout_constraintBottom_toTopOf="@id/title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="بزودی"
+            android:textColor="@color/green"
+            android:textSize="@dimen/text_size_xl"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image"
+            app:layout_constraintVertical_chainStyle="packed"
+            android:layout_marginTop="@dimen/margin_xl"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

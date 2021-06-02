@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/closeBtn"
+        android:layout_width="@dimen/height_medium"
+        android:layout_height="@dimen/height_medium"
+        android:layout_marginStart="@dimen/margin_l"
+        android:layout_marginTop="@dimen/margin_l"
+        android:src="@drawable/ic_close"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/closeBtn">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:id="@+id/card"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="@dimen/margin_l"
+                android:layout_marginTop="53dp"
+                android:layout_marginBottom="@dimen/margin_l"
+                android:background="@drawable/shadow_general"
+                app:layout_constraintBottom_toBottomOf="@id/space"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/icon"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_l"
+                android:background="@drawable/green_gradiant_circle"
+                android:elevation="2dp"
+                android:scaleType="center"
+                android:src="@drawable/ic_tick"
+                app:layout_constraintEnd_toEndOf="@id/card"
+                app:layout_constraintStart_toStartOf="@id/card"
+               app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/titleTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_l"
+                android:layout_marginTop="35dp"
+                android:elevation="2dp"
+                android:gravity="center"
+                android:text="ناموفق"
+                android:textColor="@color/green"
+                android:textSize="@dimen/text_size_xxl"
+                app:layout_constraintBottom_toTopOf="@id/nameTextView"
+                app:layout_constraintEnd_toEndOf="@id/card"
+                app:layout_constraintStart_toStartOf="@id/card"
+                app:layout_constraintTop_toBottomOf="@id/icon" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/nameTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_l"
+                android:layout_marginTop="35dp"
+                android:elevation="2dp"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_xl"
+                app:layout_constraintBottom_toTopOf="@id/topLine"
+                app:layout_constraintEnd_toEndOf="@id/card"
+                app:layout_constraintStart_toStartOf="@id/card"
+                app:layout_constraintTop_toBottomOf="@id/titleTextView"
+                tools:text="عملیات شما با خطا مواجهه شد" />
+
+
+            <ImageView
+                android:id="@+id/topLine"
+                android:layout_width="0dp"
+                android:layout_height="3dp"
+                android:layout_marginHorizontal="@dimen/margin_l"
+                android:layout_marginTop="@dimen/margin_xl"
+                android:layerType="software"
+                android:src="@drawable/dashed_line"
+                app:layout_constraintBottom_toTopOf="@id/priceTextView"
+                app:layout_constraintEnd_toEndOf="@id/card"
+                app:layout_constraintStart_toStartOf="@id/card"
+                app:layout_constraintTop_toBottomOf="@id/nameTextView" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/currencyTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_l"
+                android:text="@string/toman"
+                android:textColor="@color/oslo_gray"
+                android:textSize="@dimen/text_size_xs"
+                app:layout_constraintBottom_toBottomOf="@id/priceTextView"
+                app:layout_constraintStart_toStartOf="@id/card"
+                app:layout_constraintTop_toTopOf="@id/priceTextView" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/priceTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_m"
+                android:layout_marginTop="@dimen/margin_xl"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_l"
+                app:layout_constraintBottom_toTopOf="@id/finalPriceTextView"
+                app:layout_constraintEnd_toStartOf="@id/titlePriceTextView"
+                app:layout_constraintStart_toEndOf="@id/currencyTextView"
+                app:layout_constraintTop_toBottomOf="@id/topLine"
+                tools:text="@string/toman" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/titlePriceTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_l"
+                android:text="درخواست شما"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_m"
+                app:layout_constraintBottom_toBottomOf="@id/priceTextView"
+                app:layout_constraintEnd_toEndOf="@id/card"
+                app:layout_constraintStart_toEndOf="@id/priceTextView"
+                app:layout_constraintTop_toTopOf="@id/priceTextView" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/finalCurrencyTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_l"
+                android:text="@string/toman"
+                android:textColor="@color/oslo_gray"
+                android:textSize="@dimen/text_size_xs"
+                app:layout_constraintBottom_toBottomOf="@id/finalPriceTextView"
+                app:layout_constraintStart_toStartOf="@id/card"
+                app:layout_constraintTop_toTopOf="@id/finalPriceTextView" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/finalPriceTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_m"
+                android:layout_marginTop="@dimen/margin_xl"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_l"
+                app:layout_constraintBottom_toTopOf="@id/bottomLine"
+                app:layout_constraintEnd_toStartOf="@id/finalTitlePriceTextView"
+                app:layout_constraintStart_toEndOf="@id/currencyTextView"
+                app:layout_constraintTop_toBottomOf="@id/priceTextView"
+                tools:text="@string/toman" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/finalTitlePriceTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_l"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_m"
+                app:layout_constraintBottom_toBottomOf="@id/finalPriceTextView"
+                app:layout_constraintEnd_toEndOf="@id/card"
+                app:layout_constraintStart_toEndOf="@id/finalPriceTextView"
+                app:layout_constraintTop_toTopOf="@id/finalPriceTextView"
+                tools:text=" مبلغ فروخته شده" />
+
+
+            <ImageView
+                android:id="@+id/bottomLine"
+                android:layout_width="0dp"
+                android:layout_height="3dp"
+                android:layout_marginHorizontal="@dimen/margin_l"
+                android:layout_marginTop="@dimen/margin_xl"
+                android:layerType="software"
+                android:src="@drawable/dashed_line"
+                app:layout_constraintBottom_toTopOf="@id/dateTextView"
+                app:layout_constraintEnd_toEndOf="@id/card"
+                app:layout_constraintStart_toStartOf="@id/card"
+                app:layout_constraintTop_toBottomOf="@id/finalPriceTextView" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/dateTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_l"
+                android:layout_marginTop="@dimen/margin_xl"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_s"
+                app:layout_constraintBottom_toTopOf="@id/numberTextView"
+                app:layout_constraintEnd_toStartOf="@id/titleDateTextView"
+                app:layout_constraintStart_toStartOf="@id/card"
+                app:layout_constraintTop_toBottomOf="@id/bottomLine"
+                tools:text="زمان" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/titleDateTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_l"
+                android:text="زمان"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_m"
+                app:layout_constraintBottom_toBottomOf="@id/dateTextView"
+                app:layout_constraintEnd_toEndOf="@id/card"
+                app:layout_constraintStart_toEndOf="@id/dateTextView"
+                app:layout_constraintTop_toTopOf="@id/dateTextView" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/numberTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_l"
+                android:layout_marginTop="@dimen/margin_xl"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_s"
+                app:layout_constraintBottom_toTopOf="@id/space1"
+                app:layout_constraintEnd_toStartOf="@id/titleNumberTextView"
+                app:layout_constraintStart_toStartOf="@id/card"
+                app:layout_constraintTop_toBottomOf="@id/dateTextView"
+                tools:text="@string/toman" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/titleNumberTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_l"
+                android:text="شماره پیگیری"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_m"
+                app:layout_constraintBottom_toBottomOf="@id/numberTextView"
+                app:layout_constraintEnd_toEndOf="@id/card"
+                app:layout_constraintStart_toEndOf="@id/numberTextView"
+                app:layout_constraintTop_toTopOf="@id/numberTextView" />
+
+            <Space
+                android:id="@+id/space1"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/margin_xxxl"
+                app:layout_constraintBottom_toBottomOf="@id/card"
+                app:layout_constraintEnd_toEndOf="@id/card"
+                app:layout_constraintStart_toStartOf="@id/card"
+                app:layout_constraintTop_toBottomOf="@id/numberTextView" />
+
+            <Space
+                android:id="@+id/space"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/margin_xl"
+                app:layout_constraintBottom_toBottomOf="@id/card"
+                app:layout_constraintEnd_toEndOf="@id/card"
+                app:layout_constraintStart_toStartOf="@id/card"
+                app:layout_constraintTop_toBottomOf="@id/space1" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/errorTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_m"
+                android:layout_marginBottom="@dimen/margin_l"
+                android:drawableEnd="@drawable/dot_red"
+                android:drawablePadding="@dimen/margin_m"
+                android:elevation="2dp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_s"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/card"
+                app:layout_constraintStart_toStartOf="@id/card"
+                app:layout_constraintTop_toBottomOf="@id/card"
+                app:layout_constraintVertical_bias="0"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="عملیات شما با خطا مواجهه شد" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

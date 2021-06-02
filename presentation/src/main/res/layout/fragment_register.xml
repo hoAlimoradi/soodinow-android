@@ -28,12 +28,6 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.09" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_top_logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.25" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_bottom"
@@ -60,7 +54,10 @@
             android:src="@drawable/ic_icon_register"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/guideline_top_logo" />
+            android:layout_marginTop="@dimen/margin_l"
+            app:layout_constraintBottom_toTopOf="@id/titleTextView"
+            app:layout_constraintTop_toTopOf="@id/container"
+            app:layout_constraintVertical_chainStyle="packed" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/titleTextView"
@@ -71,7 +68,9 @@
             android:text="@string/register"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/logoImage" />
+            app:layout_constraintBottom_toTopOf="@id/phone_number_layout"
+            app:layout_constraintTop_toBottomOf="@id/logoImage"
+            app:layout_constraintVertical_chainStyle="packed" />
 
 
         <include
@@ -82,8 +81,10 @@
             app:content="@={viewModel.phoneNumber}"
             app:label="@{@string/register_description}"
             app:layout_constraintTop_toBottomOf="@id/titleTextView"
-            android:layout_marginTop="@dimen/margin_64dp"
-            />
+            android:layout_marginTop="@dimen/margin_xl"
+
+            app:layout_constraintBottom_toTopOf="@id/rulesCheckBox"
+            app:layout_constraintVertical_chainStyle="packed" />
 
         <CheckBox
             android:id="@+id/rulesCheckBox"
@@ -101,20 +102,23 @@
             android:layout_marginHorizontal="@dimen/margin_40dp"
             android:button="@null"
             android:checked="false"
-            spannableText = "@{@string/rules_spannable_description}"
-            spannableColor="@{@color/governor_bay_blue}"/>
+            spannableColor="@{@color/governor_bay_blue}"
+            spannableText="@{@string/rules_spannable_description}"
+            android:layout_marginBottom="@dimen/margin_l"
+            app:layout_constraintBottom_toTopOf="@id/submitButton"
+            app:layout_constraintVertical_chainStyle="packed" />
 
 
 
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/submitButton"
             style="@style/SignInButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="@{() -> viewModel.register()}"
+            android:layout_height="@dimen/height_medium"
             android:text="@string/submit_and_continue"
             app:layout_constraintBottom_toTopOf="@id/guideline_bottom"
-            app:layout_constraintTop_toBottomOf="@id/rulesCheckBox"
+
             app:layout_constraintVertical_bias="1"
             android:layout_marginTop="@dimen/margin_l"
             />

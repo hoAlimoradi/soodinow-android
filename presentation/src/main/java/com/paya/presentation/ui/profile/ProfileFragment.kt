@@ -9,10 +9,15 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
-import com.google.android.material.tabs.TabLayout
-import com.paya.domain.models.repo.BoxHistoryRepoModel
+import com.github.mikephil.charting.animation.Easing
+import com.github.mikephil.charting.data.PieData
+import com.github.mikephil.charting.data.PieDataSet
+import com.github.mikephil.charting.formatter.PercentFormatter
+import com.github.mikephil.charting.utils.MPPointF
+import com.paya.domain.models.repo.EfficiencyRepoModel
 import com.paya.domain.models.repo.ExitAccountRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
@@ -20,14 +25,15 @@ import com.paya.presentation.R
 import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentProfileBinding
+import com.paya.presentation.ui.adapter.chartLablel.ChartLabelAdapter
 import com.paya.presentation.ui.hint.fragments.CardAccount
-import com.paya.presentation.ui.investment.AppropriateInvestmentFragment
+import com.paya.presentation.ui.model.PieChartModel
+import com.paya.presentation.ui.profile.adapter.EfficiencyAdapter
+import com.paya.presentation.ui.profile.dialog.ChartProfileDialog
+import com.paya.presentation.ui.publicDialog.NotificationEmptyDialog
 import com.paya.presentation.utils.*
-import com.paya.presentation.utils.shared.Point
 import com.paya.presentation.viewmodel.ProfileViewModel
-import com.paya.presentation.viewmodel.ProfileViewModel.FilterProfile.*
 import dagger.hilt.android.AndroidEntryPoint
-import ir.hamsaa.persiandatepicker.util.PersianCalendar
 
 @AndroidEntryPoint
 class ProfileFragment : BaseFragment<ProfileViewModel>() {
@@ -58,104 +64,93 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupViewPager()
-        initRadioGroup()
+        setupPieChart()
+        initChartLabelRecyclerView()
         observe(viewModel.existAccount, ::onExistAccountReady)
         observe(viewModel.profile, ::onProfileReady)
-        mBinding.alarm.setOnClickListener {
+        observe(viewModel.pieChartStatus, ::setData)
 
+        mBinding.historyLogBtn.setOnClickListener {
+            getFindViewController()?.navigate(R.id.financialReportFragment)
         }
         viewModel.getExistAccount()
-        context?.let {
-            var param = mBinding.pager.layoutParams
-            param.height = getCardHeight(it,60f).toInt()
-            mBinding.pager.layoutParams = param
+
+        mBinding.chartEfficiencyBtn.setOnClickListener {
+            openChart()
+        }
+        mBinding.alarm.setOnClickListener {
+            NotificationEmptyDialog().show(parentFragmentManager, "notification dialog")
         }
 
-
     }
 
-    private fun initRadioGroup() {
-        mBinding.chartTabLayout.getTabAt(2)?.select()
-        mBinding.chartTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-
-            }
-
-            // TODO: 4/2/21 box history Number what?
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                viewModel.currentBoxId ?: return
-                when (mBinding.chartTabLayout.selectedTabPosition) {
-                    // day
-                    2 -> {
-                        viewModel.boxHistoryType = day
-                        viewModel.boxHistoryNumber = 3
-                    }
-                    //week
-                    1 -> {
-                        viewModel.boxHistoryType = week
-                        viewModel.boxHistoryNumber = 1
-                    }
-                    //month
-                    0 -> {
-                        viewModel.boxHistoryType = month
-                        viewModel.boxHistoryNumber = 1
-                    }
-                    //years
-                    // TODO: 4/26/21 change to years
-                    -1 -> {
-                        viewModel.boxHistoryType = month
-                        viewModel.boxHistoryNumber = 3
-                    }
-                    else -> {
-                        viewModel.boxHistoryType = day
-                        viewModel.boxHistoryNumber = 3
-                    }
-                }
-                viewModel.currentBoxId?.let {
-                    viewModel.getProfile(it, viewModel.boxHistoryType, viewModel.boxHistoryNumber)
-                }
-            }
-
-        })
-
+    private fun openChart() {
+        var dialog = ChartProfileDialog()
+        dialog.boxId = viewModel.currentBoxId
+        dialog.show(parentFragmentManager, "chartDialog")
     }
+
+    private fun setupEfficiencyAdapter(list: MutableList<EfficiencyRepoModel>) {
+        context?.let { context ->
+            /*  val verticalDivider = WithoutLastDividerItemDecorator(context, RecyclerView.VERTICAL)
+              ContextCompat.getDrawable(context, R.drawable.divider_efficiency_vertical)
+                  ?.let { divider ->
+                      verticalDivider.setDrawable(
+                          divider
+                      )
+                  }*/
+            val horizontalDivider =
+                WithoutLastDividerItemDecorator(context, RecyclerView.HORIZONTAL)
+            ContextCompat.getDrawable(context, R.drawable.divider_efficiency_horizontal)
+                ?.let { divider ->
+                    horizontalDivider.setDrawable(
+                        divider
+                    )
+                }
+
+//            mBinding.efficiencyRecyclerView.addItemDecoration(verticalDivider)
+            mBinding.efficiencyRecyclerView.addItemDecoration(horizontalDivider)
+            mBinding.efficiencyRecyclerView.adapter = EfficiencyAdapter(list.sortedBy { it.position })
+
+        }
+    }
+
 
     private fun onExistAccountReady(resource: Resource<ExitAccountRepoModel>) {
         if (resource.status == Status.SUCCESS) {
             viewModel.cardAccounts.clear()
             resource.data?.activeBox?.let {
-                viewModel.boxHistoryId = it.map { activeBox -> activeBox.id }
+
                 it.forEach { activeBox ->
-                    viewModel.boxHistoryHahMap[activeBox.id] = null
                     viewModel.cardAccounts.add(CardAccount.newInstance(activeBox))
                 }
                 adapter.notifyDataSetChanged()
                 if (it.isEmpty()) {
-                    viewModel.setErrorMessage("شما هیچ حسابی ایجاد نکرده اید")
+                    viewModel.setErrorMessage("شما حساب فعال ندارید \n" +
+                            "ابتدا پیمان خود را با ما ببندید")
                     return@let
                 }
                 viewModel.currentBoxId = it.first().id
                 viewModel.getProfile(
-                    it.first().id,
-                    viewModel.boxHistoryType,
-                    viewModel.boxHistoryNumber
+                    it.first().id
                 )
             }
+        } else  {
+            resource.message?.let { viewModel.setErrorMessage(it) }
         }
 
     }
 
-    private fun onProfileReady(resource: Resource<BoxHistoryRepoModel>) {
+    private fun onProfileReady(resource: Resource<MutableList<EfficiencyRepoModel>>) {
+
         if (resource.status == Status.SUCCESS) {
-            viewModel.boxHistoryHahMap[viewModel.currentBoxId!!] = resource.data
-            resource.data?.let {
+            resource.data?.let { list ->
                 mBinding.parentView.visibility = View.VISIBLE
-                setCurrentBoxData(it)
+                setupEfficiencyAdapter(list)
             }
+
+        } else {
+            resource.message?.let { viewModel.setErrorMessage(it) }
         }
     }
 
@@ -176,16 +171,9 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
                 override fun onPageSelected(position: Int) {
                     viewModel.cardAccounts[position].activeBoxRepo?.let {
                         viewModel.currentBoxId = it.id
-                        val boxModel = viewModel.boxHistoryHahMap[viewModel.currentBoxId!!]
-                        if (boxModel == null) {
-                            viewModel.getProfile(
-                                viewModel.currentBoxId!!,
-                                viewModel.boxHistoryType,
-                                viewModel.boxHistoryNumber
-                            )
-                        } else {
-                            setCurrentBoxData(boxModel)
-                        }
+                        viewModel.getProfile(
+                            it.id
+                        )
                         super.onPageSelected(position)
                     }
                 }
@@ -194,55 +182,112 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
 
     }
 
-    private fun setCurrentBoxData(boxModel: BoxHistoryRepoModel) {
-        val mainChartPoints = mutableListOf<Point>()
-        val mainChartData = boxModel.mainChart.data
-        viewModel.xListChart.clear()
+    private fun setupPieChart() {
+        with(mBinding.pieChart) {
+            setUsePercentValues(true)
+            description.isEnabled = false
+            context?.let { context ->
+                setNoDataText(context.getString(R.string.no_data_chart))
+                setNoDataTextColor(ContextCompat.getColor(context,R.color.japanese_laurel_green))
+            }
+            setExtraOffsets(0f, 20f, 0f, 20f)
 
-        mainChartData.forEachIndexed{ index , value ->
-            val date = convertToPersianDate(value.date)
-            viewModel.xListChart.add("${date.persianMonth} / ${date.persianDay}")
-            mainChartPoints.add(
-                Point(
-                    index.toFloat(),
-                    value.price.toFloat(),
-                    boxModel.percent,
-                    value.price.toLong()
-                )
-            )
+            dragDecelerationFrictionCoef = 0.95f
+
+
+            isDrawHoleEnabled = true
+            setHoleColor(Color.WHITE)
+
+            setTransparentCircleColor(Color.WHITE)
+            setTransparentCircleAlpha(110)
+
+            holeRadius = 75f
+            transparentCircleRadius = 76f
+
+            setDrawCenterText(true)
+
+            rotationAngle = 0f
+
+            isRotationEnabled = true
+            isHighlightPerTapEnabled = true
+
+
+
+
+            animateY(1400, Easing.EaseInOutQuad)
+
+
+            legend.isEnabled = false
+
+            // entry label styling
+            setEntryLabelColor(Color.WHITE)
+            setEntryLabelTextSize(12f)
         }
-        if (mainChartPoints.size > 0)
-            BindingAdapters.setLineAccountChartData(
-                mBinding.chart,
-                mainChartPoints,
-                chartColor = ContextCompat.getColor(
-                    requireContext(),
-                    R.color.japanese_laurel_green
-                ),
-                markerColor = ContextCompat.getColor(requireContext(), R.color.conifer_green),
-                markerTitleColor = Color.WHITE,
-                chartAlpha = 0,
-                markerType = 0,
-                touchEnabled = true,
-                xList = viewModel.xListChart
-            )
+    }
 
-
-        var totalQuantity: Long = 0
-        boxModel.circleChart.forEach { totalQuantity += it.quantity }
-        val pieChartDataList = boxModel.circleChart.map {
-            AppropriateInvestmentFragment.PieChartData(
-                (100 * it.quantity / totalQuantity).toFloat(),
-                it.name,
-                it.color
-            )
+    private fun setData(pieChartModel: PieChartModel) {
+        val dataSet = PieDataSet(pieChartModel.entries, "")
+        dataSet.setDrawIcons(false)
+        dataSet.sliceSpace = 0f
+        dataSet.iconsOffset = MPPointF(0f, 40f)
+        dataSet.selectionShift = 3f
+        dataSet.colors = pieChartModel.chartColor
+        dataSet.valueLinePart1OffsetPercentage = 80f
+        dataSet.valueLinePart1Length = 0.5f
+        dataSet.valueLinePart2Length = 0.3f
+        dataSet.yValuePosition = PieDataSet.ValuePosition.OUTSIDE_SLICE
+        //dataSet.selectionShift = 0f;
+        context?.let {
+            dataSet.valueLineColor = ContextCompat.getColor(it, R.color.green)
+            val data = PieData(dataSet)
+            data.setValueFormatter(PercentFormatter())
+            data.setValueTextSize(12f)
+            data.setValueTextColor(ContextCompat.getColor(it, R.color.green))
+            getIranSans(it)?.let { typeFace ->
+                data.setValueTypeface(typeFace)
+            }
+            with(mBinding.pieChart) {
+                this.data = data
+                // undo all highlights
+                highlightValues(null)
+                notifyDataSetChanged()
+            }
         }
-        val fragment: AppropriateInvestmentFragment =
-            childFragmentManager.findFragmentById(R.id.appropriate_investment_fragment)
-                    as AppropriateInvestmentFragment
-        fragment.pieChartDataList.clear()
-        fragment.pieChartDataList.addAll(pieChartDataList)
-        fragment.setup()
+        setupChartLabelRecyclerView(pieChartModel)
+
+    }
+
+    private fun initChartLabelRecyclerView() {
+        mBinding.chartLabelRecyclerView.layoutManager =
+            RtlGridLayoutManager(context, 4)
+        context?.let { context ->
+            val divider = WithoutLastDividerItemDecorator(context, RecyclerView.HORIZONTAL)
+            val dividerVertical = WithoutLastDividerItemDecorator(context, RecyclerView.VERTICAL)
+            ContextCompat.getDrawable(
+                context,
+                R.drawable.chart_divider
+            )?.let {
+                divider.setDrawable(it)
+                dividerVertical.setDrawable(it)
+            }
+            mBinding.chartLabelRecyclerView.removeAllDecoration()
+            mBinding.chartLabelRecyclerView.addItemDecoration(divider)
+            mBinding.chartLabelRecyclerView.addItemDecoration(dividerVertical)
+        }
+        if (!viewModel.cardAccounts.isEmpty()) {
+            viewModel.cardAccounts.clear()
+            adapter.notifyDataSetChanged()
+        }
+    }
+
+    private fun setupChartLabelRecyclerView(pieChartModel: PieChartModel) {
+        val adapter = ChartLabelAdapter(pieChartModel.chartLabels) {
+            val y = mBinding.pieChart.data.dataSets[0].getEntryForIndex(it).y
+            mBinding.pieChart.highlightValue(it.toFloat(), y, 0)
+        }
+
+        mBinding.chartLabelRecyclerView.adapter = adapter
+
     }
 
     override fun farabiAccessToken() {

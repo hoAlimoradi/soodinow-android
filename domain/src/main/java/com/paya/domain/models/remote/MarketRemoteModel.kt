@@ -5,5 +5,5 @@ import com.paya.domain.tools.NoObfuscate
 
 data class MarketRemoteModel(
 	@SerializedName("number")
-	val number: String
+	val number: String?
 ): NoObfuscate

@@ -17,7 +17,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bg_green"
+        android:background="@color/japanese_laurel_green"
         tools:context=".ui.activate.ActivateFragment">
 
         <androidx.constraintlayout.widget.Guideline
@@ -27,13 +27,6 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.09" />
 
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_top_logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.25" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_bottom"
@@ -59,7 +52,10 @@
             android:src="@drawable/ic_icon_activate"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/guideline_top_logo" />
+            app:layout_constraintTop_toTopOf="@id/container"
+            android:layout_marginTop="@dimen/margin_l"
+            app:layout_constraintBottom_toTopOf="@id/titleTextView"
+            app:layout_constraintVertical_chainStyle="packed"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/titleTextView"
@@ -67,10 +63,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_45dp"
-            android:text="@string/register"
+            android:text="@string/forget_password"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/logoImage" />
+            app:layout_constraintTop_toBottomOf="@id/logoImage"
+            app:layout_constraintBottom_toTopOf="@id/description"
+            app:layout_constraintVertical_chainStyle="packed"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/description"
@@ -80,19 +78,21 @@
             android:layout_marginTop="@dimen/margin_medium"
             android:text="@string/activation_description"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/titleTextView" />
+            app:layout_constraintTop_toBottomOf="@id/titleTextView"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintBottom_toTopOf="@id/txt_pin_entry"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/change_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_medium"
-            android:layout_marginTop="@dimen/margin_medium"
             android:text="@string/change_phone_number"
             android:textColor="@color/dark_blue"
             app:layout_constraintBaseline_toBaselineOf="@id/description"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/titleTextView" />
+            app:layout_constraintTop_toTopOf="@id/description"
+            app:layout_constraintBottom_toBottomOf="@id/description"/>
 
         <com.alimuzaffar.lib.pin.PinEntryEditText
             android:id="@+id/txt_pin_entry"
@@ -119,7 +119,9 @@
             app:pinLineStrokeSelected="4dp"
             app:pinCharacterMask="*"
             android:layout_marginEnd="@dimen/margin_m"
-            verificationPinImage="@{@id/verification_img}"/>
+            verificationPinImage="@{@id/verification_img}"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintBottom_toTopOf="@id/resend_code"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/verification_img"
@@ -145,43 +147,47 @@
             android:textSize="@dimen/text_size_m"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txt_pin_entry" />
+            app:layout_constraintTop_toBottomOf="@id/txt_pin_entry"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintBottom_toTopOf="@id/submitButton"
+            android:layout_marginBottom="@dimen/margin_xl"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/resend_code_after"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_small"
-            android:layout_marginTop="@dimen/margin_medium"
             android:text="@string/resend_code_after"
             android:textColor="@color/japanese_laurel_green"
             android:textSize="@dimen/text_size_s"
             app:layout_constraintStart_toEndOf="@id/resend_code_time"
-            app:layout_constraintTop_toBottomOf="@id/txt_pin_entry" />
+            app:layout_constraintTop_toTopOf="@id/resend_code"
+            app:layout_constraintBottom_toBottomOf="@id/resend_code"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/resend_code_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_medium"
-            android:layout_marginTop="@dimen/margin_medium"
             android:text="@{viewModel.remainingTimeText}"
             android:textColor="@color/green"
             android:textSize="@dimen/text_size_m"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txt_pin_entry" />
+            app:layout_constraintTop_toTopOf="@+id/resend_code_after"
+            app:layout_constraintBottom_toBottomOf="@+id/resend_code_after"/>
 
         <Button
+            android:id="@+id/submitButton"
             style="@style/SignInButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/height_medium"
             android:layout_marginTop="@dimen/margin_large"
             app:layout_constraintVertical_bias="1"
             android:onClick="@{() -> viewModel.activate()}"
             android:text="@string/submit_and_continue"
             app:layout_constraintBottom_toBottomOf="@id/guideline_bottom"
-            app:layout_constraintTop_toBottomOf="@id/resend_code" />
+            />
 
 
         <include

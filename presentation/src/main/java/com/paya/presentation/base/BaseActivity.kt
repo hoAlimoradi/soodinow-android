@@ -59,8 +59,12 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
     }
 
     private fun readyError(error: String) {
+        errorDialog.dialog?.let {
+            if (it.isShowing)
+                return
+        }
         errorDialog.setMessage(error)
-        errorDialog.show(supportFragmentManager, "errorTag")
+        errorDialog.show(supportFragmentManager,"errorTag")
     }
 
     var resultLauncher =

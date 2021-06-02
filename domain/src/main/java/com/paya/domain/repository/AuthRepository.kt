@@ -5,7 +5,13 @@ import com.paya.domain.tools.Resource
 
 interface AuthRepository {
 	suspend fun register(phoneNumber: String): Resource<RegisterRepoModel>
+	suspend fun resetPassword(phoneNumber: String): Resource<ResetPasswordRepoModel>
 	suspend fun activate(
+		phoneNumber: String,
+		code: String
+	): Resource<UserInfoRepoModel>
+
+	suspend fun activateResetPassword(
 		phoneNumber: String,
 		code: String
 	): Resource<UserInfoRepoModel>
@@ -20,6 +26,7 @@ interface AuthRepository {
 	suspend fun updateIsHintShowed(isHintShowed: Boolean)
 	suspend fun getUserInfo(): Resource<UserInfoRepoModel>
 	suspend fun setPassword(password: String): Resource<SetPasswordRepoModel>
+	suspend fun setResetPassword(password: String): Resource<SetResetPasswordRepoModel>
 	suspend fun updateProfile(body: ProfileBodyRepoModel): Resource<ProfileRepoModel>
 	suspend fun getProfile(): Resource<ProfileRepoModel>
 	suspend fun changePassword(changePasswordRepoBodyModel: ChangePasswordRepoBodyModel) : Resource<ChangePasswordRepoModel>

@@ -6,10 +6,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/accountCardLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/ic_cards"
-        android:minHeight="168dp"
-        tools:context=".ui.home.fragments.CardAccount">
+        android:layout_height="match_parent"
+        tools:context=".ui.home.fragments.CardAccount"
+        android:background="@drawable/ic_cards">
 
 
         <androidx.appcompat.widget.AppCompatImageView

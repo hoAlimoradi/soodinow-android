@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.paya.domain.models.repo.SetPasswordRepoModel
+import com.paya.domain.models.repo.SetResetPasswordRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.presentation.R
@@ -53,7 +54,7 @@ class SetNewPasswordFragment : BaseFragment<SetNewPasswordViewModel>() {
 		observe(mViewModel.setPasswordResource, ::checkSetPasswordStatus)
 	}
 	
-	private fun checkSetPasswordStatus(resource: Resource<SetPasswordRepoModel>){
+	private fun checkSetPasswordStatus(resource: Resource<SetResetPasswordRepoModel>){
 		mBinding.newPassword.errorLayout.setError("")
 		mBinding.repeatPassword.errorLayout.setError("")
 		if (resource.status == Status.SUCCESS){

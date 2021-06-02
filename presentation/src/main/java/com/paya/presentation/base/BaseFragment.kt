@@ -53,9 +53,14 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment(){
 		resultLauncher.launch(intent)
 	}
 
-	private fun readyError(error:String) {
+	fun readyError(error:String) {
+		errorDialog.dialog?.let {
+			if (it.isShowing)
+				return
+		}
 		errorDialog.setMessage(error)
 		errorDialog.show(parentFragmentManager,"errorTag")
+
 	}
 	var resultLauncher =
 		registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->

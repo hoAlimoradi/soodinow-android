@@ -1,20 +1,22 @@
 package com.paya.presentation.viewmodel
 
+import android.graphics.Color
 import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.paya.domain.models.repo.BoxHistoryRepoModel
-import com.paya.domain.models.repo.BoxHistoryRequestModel
-import com.paya.domain.models.repo.ExitAccountRepoModel
+import com.github.mikephil.charting.data.PieEntry
+import com.paya.domain.models.repo.*
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.domain.tools.UseCase
 import com.paya.presentation.base.BaseViewModel
+import com.paya.presentation.ui.adapter.chartLablel.ChartLabelAdapter
 import com.paya.presentation.ui.hint.fragments.CardAccount
-import com.paya.presentation.utils.*
-import ir.hamsaa.persiandatepicker.util.PersianCalendar
+import com.paya.presentation.ui.model.PieChartModel
+import com.paya.presentation.ui.profile.enum.FilterProfile
+import com.paya.presentation.utils.callResource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -23,19 +25,20 @@ class ProfileViewModel @ViewModelInject constructor(
 	private val existAccountUseCase: UseCase<Unit, ExitAccountRepoModel>
 ) : BaseViewModel() {
 
-	val profile = MutableLiveData<Resource<BoxHistoryRepoModel>>()
+	val profile = MutableLiveData<Resource<MutableList<EfficiencyRepoModel>>>()
+	val pieChartStatus = MutableLiveData<PieChartModel>()
+	private var pieChartModel: PieChartModel? = null
+	private var profileDay: Resource<BoxHistoryRepoModel>? = null
+	private var profileMonth: Resource<BoxHistoryRepoModel>? = null
+	private var profileWeek: Resource<BoxHistoryRepoModel>? = null
+	private val efficiencyList: MutableList<EfficiencyRepoModel> = mutableListOf()
 	val existAccount = MutableLiveData<Resource<ExitAccountRepoModel>>()
 	val loading = MediatorLiveData<Resource<Nothing>>()
 	val errorMessage = MutableLiveData<String?>(null)
-
-	val boxHistoryHahMap = mutableMapOf<Long, BoxHistoryRepoModel?>()
-	var currentBoxId: Long? = null
-	var boxHistoryId: List<Long>? = null
 	val cardAccounts = mutableListOf<CardAccount>()
-	var boxHistoryType = FilterProfile.day
-	var boxHistoryNumber = 3
-	var currentDate = PersianCalendar()
-	var xListChart = mutableListOf<String>()
+
+	var currentBoxId: Long = 0
+
 
 	init {
 		loading.addSource(profile) {
@@ -53,148 +56,161 @@ class ProfileViewModel @ViewModelInject constructor(
 			}
 		}
 	}
-	
-	fun setErrorMessage(message: String){
+
+	fun setErrorMessage(message: String) {
 		errorMessage.value = message
 	}
-	fun getExistAccount(){
+
+	fun getExistAccount() {
 		existAccount.value = Resource.loading(null)
 		viewModelScope.launch(Dispatchers.IO) {
-			existAccount.postValue(callResource(this@ProfileViewModel,existAccountUseCase.action(Unit)))
-		}
-	}
-
-	fun getProfile(
-		boxId: Long,
-		type: FilterProfile,
-		number: Int
-	) {
-		profile.value?.let {
-			if(it.status == Status.LOADING)
-				return
-		}
-		profile.value = Resource.loading(null)
-		viewModelScope.launch(Dispatchers.IO) {
-			profile.postValue(
+			existAccount.postValue(
 				callResource(
-					this@ProfileViewModel, getBoxHistoryUseCase.action(
-						BoxHistoryRequestModel(boxId, type.name, number)
-					)
+					this@ProfileViewModel,
+					existAccountUseCase.action(Unit)
 				)
 			)
 		}
 	}
 
-	fun xListChart() {
-		val list = mutableListOf<String>()
-		when(boxHistoryType) {
-			FilterProfile.day -> {
-				for (index in 11 downTo 1) {
-					list.add(
-						getBeforeHour(
-							currentDate.timeInMillis,
-							index * -1
-						).getHourPersianDate().toString()
-					)
-				}
-				list.add(currentDate.getHourPersianDate().toString())
-			}
-			FilterProfile.month -> {
-				for (index in 11 downTo 1) {
-					list.add(
-						getBeforeDay(
-							currentDate.timeInMillis,
-							index * -1
-						).persianShortDate
-					)
-				}
-				list.add(currentDate.persianShortDate)
-			}
-			FilterProfile.week -> {
-				for (index in 6 downTo 1) {
-					list.add(
-						getBeforeDay(
-							currentDate.timeInMillis,
-							index * -1
-						).persianWeekDayName
-					)
-				}
-				list.add(currentDate.persianWeekDayName)
-			}
-			FilterProfile.years -> {
-				for (index in 11 downTo 1) {
-					list.add(
-						getBeforeMonth(
-							currentDate.timeInMillis,
-							index * -1
-						).persianMonthName
-					)
-				}
-				list.add(currentDate.persianMonthName)
-			}
-		}
-
-
-		list.forEachIndexed { index, s ->
-			Log.d("dayInMonth", "$index : $s")
-		}
-	}
-	/*fun getExistAccount(){
-		existAccount.value = Resource.loading(null)
-		viewModelScope.launch(Dispatchers.IO) {
-			existAccount.postValue(getMockE())
-		}
-	}
-
-	private fun getMockE() : Resource<ExitAccountRepoModel> {
-		return Resource.success(ExitAccountRepoModel(true,listOf(1,2)))
-	}
-
 	fun getProfile(
-		boxId: Long,
-		type: String,
-		number: Int
+		boxId: Long
 	) {
+		efficiencyList.clear()
+		pieChartModel = null
+		profileWeek = null
+		profileDay = null
+		profileMonth = null
+		profile.value?.let {
+			if (it.status == Status.LOADING)
+				return
+		}
 		profile.value = Resource.loading(null)
+		getProfileWeek(boxId)
+		getProfileDay(boxId)
+		getProfileMonth(boxId)
+	}
+
+
+	private fun getProfileWeek(
+		boxId: Long
+	) {
 		viewModelScope.launch(Dispatchers.IO) {
-			delay(1500)
-			profile.postValue(
-				getMockData()
+			val response = callResource(
+				this@ProfileViewModel, getBoxHistoryUseCase.action(
+					BoxHistoryRequestModel(boxId, FilterProfile.week.name, 1)
+				)
 			)
+			if (response.status == Status.SUCCESS) {
+				response.data?.efficiency?.let {
+					it.title = "بازدهی هفتگی"
+					it.position = 1
+					efficiencyList.add(it)
+				}
+			}
+			profileWeek = response
+			Log.d("getProfileWeek", "getProfileWeek")
+			endProfile(response)
 		}
 	}
-	
-	private fun getMockData(): Resource<BoxHistoryRepoModel> {
-		val cardChart = LinearChartRepoModel(
-			listOf(1796666,158666,1656666,1656666,158666,1696666,1736666,1795666,1796666),
-			"2020-11-20T09:13:24.700966Z","2020-11-10T09:13:24.700966Z"
-		)
-		val mainChart = LinearChartRepoModel(
-			listOf(156666,158666,1656666,1696666,1736666,1796666),
-			"2020-11-30T09:13:24.700966Z","2020-10-30T09:13:24.700966Z"
-		)
-		val circleChart = listOf(
-			CircleChartDataRepoModel(250000F,3,"فیلان"),
-			CircleChartDataRepoModel(300000F,6,"بیسار2"),
-			CircleChartDataRepoModel(300000F,2,"بیسار"),
-			CircleChartDataRepoModel(300000F,4,"بیسار1")
-		)
-		val boxRepoModel = BoxHistoryRepoModel(
-			cardChart,
-			mainChart,
-			circleChart,
-			196000,
-			0.6f,
-			"امید نقی پور"
-		)
-		return Resource.success(boxRepoModel)
-	}*/
 
-	enum class FilterProfile {
-		day,
-		week,
-		month,
-		years
+	private fun getProfileDay(
+		boxId: Long
+	) {
+		viewModelScope.launch(Dispatchers.IO) {
+			val response = callResource(
+				this@ProfileViewModel, getBoxHistoryUseCase.action(
+					BoxHistoryRequestModel(boxId, FilterProfile.day.name, 3)
+				)
+			)
+			if (response.status == Status.SUCCESS) {
+				response.data?.efficiency?.let {
+					it.title = "بازدهی روزانه"
+					it.position = 2
+					efficiencyList.add(it)
+				}
+			}
+			profileDay = response
+			Log.d("getProfileDay", "getProfileDay")
+			endProfile(response)
+		}
 	}
-	
+
+	private fun getProfileMonth(
+		boxId: Long
+	) {
+		viewModelScope.launch(Dispatchers.IO) {
+			val response = callResource(
+				this@ProfileViewModel, getBoxHistoryUseCase.action(
+					BoxHistoryRequestModel(boxId, FilterProfile.month.name, 3)
+				)
+			)
+			if (response.status == Status.SUCCESS) {
+				response.data?.efficiency?.let {
+					it.title = "بازدهی ماهانه"
+					it.position = 0
+					efficiencyList.add(it)
+				}
+			}
+			profileMonth = response
+			Log.d("getProfileMonth", "getProfileMonth")
+			endProfile(response)
+		}
+	}
+
+
+	private fun endProfile(resource: Resource<BoxHistoryRepoModel>) {
+		viewModelScope.launch(Dispatchers.Main) {
+			if (resource.status == Status.SUCCESS) {
+				resource.data?.circleChart?.let {
+					fillEntries(it)
+				}
+
+			}
+			if (resource.status == Status.ERROR)
+				profile.postValue(resource.message?.let { Resource.error(it, null) })
+			if (profileDay != null && profileMonth != null && profileWeek != null && efficiencyList.size == 3) {
+				efficiencyList.sortedBy { it.position }
+				profile.value?.let {
+					if (it.status == Status.SUCCESS)
+						return@launch
+				}
+				Log.d("endProfile", efficiencyList.size.toString())
+				profile.postValue(Resource.success(efficiencyList))
+			}
+		}
+	}
+
+	private fun fillEntries(chartData: List<CircleChartDataRepoModel>) {
+		viewModelScope.launch(Dispatchers.Main) {
+			if (pieChartModel != null)
+				return@launch
+			pieChartModel = PieChartModel()
+			pieChartModel?.let { pieChartModel ->
+				if (chartData.isNotEmpty() && pieChartModel.chartLabels.isEmpty() && pieChartModel.entries.isEmpty()) {
+					var allSize: Long = 0
+					chartData.forEach {
+						allSize += it.quantity
+					}
+					chartData.forEachIndexed { _, pieChartData ->
+						if (pieChartModel.entries.size <= chartData.size)
+							pieChartModel.entries.add(PieEntry(((pieChartData.quantity * 100) / allSize).toFloat()))
+						if (pieChartModel.chartColor.size <= chartData.size)
+							pieChartModel.chartColor.add(Color.parseColor(pieChartData.color))
+						if (pieChartModel.chartLabels.size <= chartData.size)
+							pieChartModel.chartLabels.add(
+								ChartLabelAdapter.ChartLabelModel(
+									pieChartData.name,
+									pieChartData.color
+								)
+							)
+					}
+					pieChartStatus.value = pieChartModel
+				}
+			}
+		}
+	}
+
+
 }
+

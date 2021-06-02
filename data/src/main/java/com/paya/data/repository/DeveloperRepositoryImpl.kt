@@ -24,7 +24,7 @@ class DeveloperRepositoryImpl @Inject constructor(
 	override suspend fun getDeveloperNameFromNet(): Resource<DeveloperNameRepoModel> {
 		return when(val developerName = developerNet.getName()){
 			is ApiEmptyResponse -> Resource.success(null)
-			is ApiFarabiTokenResponse -> Resource.fatabiToken(null)
+			is ApiFarabiTokenResponse -> Resource.fatabiToken("",null)
 			is ApiSuccessResponse -> Resource.success(mapperNet.map(developerName.body))
 			is ApiErrorResponse -> Resource.error(developerName.errorMessage, null)
 			is ApiUnAuthorizedResponse -> Resource.unAuthorized(developerName.errorMessage,null)

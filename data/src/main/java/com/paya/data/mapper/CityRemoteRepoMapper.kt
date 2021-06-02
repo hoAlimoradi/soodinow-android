@@ -13,8 +13,8 @@ class CityRemoteRepoMapper @Inject constructor() : Mapper<
     override fun map(param: List<ProvinceRemoteModel>): List<ProvinceRepoModel> =
         param.map { province ->
             ProvinceRepoModel(
-                province.name,
-                province.cities.map { city -> City(city.name) }
+                province.name ?: "",
+                province.cities?.let { it.map { city -> City(city.name ?: "") } } ?: emptyList()
             )
         }
 }

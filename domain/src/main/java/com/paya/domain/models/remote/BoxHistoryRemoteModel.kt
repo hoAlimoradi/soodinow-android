@@ -5,13 +5,11 @@ import com.paya.domain.tools.NoObfuscate
 
 data class BoxHistoryRemoteModel(
 	@SerializedName("up_chart")
-	val cardChart: LinearChartRemoteModel,
+	val cardChart: LinearChartRemoteModel?,
 	@SerializedName("down_chart")
-	val mainChart: LinearChartRemoteModel,
+	val mainChart: LinearChartRemoteModel?,
 	@SerializedName("circle_chart")
-	val circleChart: List<CircleChartDataRemoteModel>,
-	@SerializedName("buy_value")
-	val buyValue: List<*>,
-	val percent: Float,
-	val name: String
+	val circleChart: List<CircleChartDataRemoteModel>?,
+	val percent: Float?,
+	val name: String?
 ): NoObfuscate

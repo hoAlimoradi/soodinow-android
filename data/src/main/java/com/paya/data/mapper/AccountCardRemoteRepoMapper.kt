@@ -13,7 +13,7 @@ class AccountCardRemoteRepoMapper @Inject constructor() : Mapper<
 		> {
 	
 	override fun map(param: AccountCardRemoteModel): AccountCardRepoModel {
-		return AccountCardRepoModel(param.number)
+		return AccountCardRepoModel(param.number ?: "")
 	}
 	
 }

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.profile.dialog.ChartProfileDialog">
+
+
+    <data>
+
+        <import type="com.paya.domain.tools.Resource" />
+
+        <import type="com.paya.presentation.viewmodel.ChartProfileViewModel" />
+
+        <variable
+            name="viewModel"
+            type="ChartProfileViewModel" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shadow_general">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/closeBtn"
+            android:layout_width="@dimen/height_medium"
+            android:layout_height="@dimen/height_medium"
+            android:padding="@dimen/margin_s"
+            android:src="@drawable/ic_close"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/chartTabLayout"
+            android:layout_width="0dp"
+            android:layout_height="31dp"
+            android:elevation="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/closeBtn"
+            app:tabGravity="fill"
+            app:tabIndicator="@color/japanese_laurel_green"
+            app:tabIndicatorColor="@color/japanese_laurel_green"
+            app:tabIndicatorFullWidth="false"
+            app:tabIndicatorHeight="3dp"
+            app:tabMode="fixed"
+
+            app:tabSelectedTextColor="@color/japanese_laurel_green">
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ماه" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/week"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="هفته" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="روز" />
+        </com.google.android.material.tabs.TabLayout>
+
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/chart"
+            android:layout_width="0dp"
+            android:layout_height="170dp"
+            android:layout_marginHorizontal="@dimen/margin_s"
+            android:layout_marginTop="@dimen/margin_m"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chartTabLayout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="@dimen/margin_l"/>
+
+        <include
+            layout="@layout/loading_state"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            app:resource="@{(Resource) viewModel.profile}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:visibility="gone"
+             />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

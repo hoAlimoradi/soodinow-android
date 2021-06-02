@@ -1,11 +1,9 @@
 package com.paya.data.di
 
 import com.paya.common.Mapper
-import com.paya.data.mapper.CryptoPriceRemoteMapper
-import com.paya.data.mapper.CurrencyPriceRemoteRepoMapper
+import com.paya.data.mapper.CommonMarktDataRemoteMapper
 import com.paya.data.repository.CurrencyPriceRepositoryImpl
-import com.paya.domain.models.remote.CryptoPriceRemoteModel
-import com.paya.domain.models.remote.CurrencyPriceRemoteModel
+import com.paya.domain.models.remote.CommonMarktDataPriceRemoteModel
 import com.paya.domain.models.repo.CurrencyPriceRepoModel
 import com.paya.domain.repository.CurrencyPriceRepository
 import dagger.Binds
@@ -18,14 +16,9 @@ import dagger.hilt.android.components.ActivityComponent
 abstract class CurrencyPriceModule {
 	
 	@Binds
-	abstract fun bindCryptoMapper(mapper: CryptoPriceRemoteMapper): Mapper<
-			CryptoPriceRemoteModel,
-			CurrencyPriceRepoModel>
-	
-	@Binds
-	abstract fun bindCurrencyMapper(mapper: CurrencyPriceRemoteRepoMapper): Mapper<
-			CurrencyPriceRemoteModel,
-			CurrencyPriceRepoModel>
+	abstract fun bindCryptoMapper(mapper: CommonMarktDataRemoteMapper): Mapper<
+			@JvmSuppressWildcards List<CommonMarktDataPriceRemoteModel>,
+			@JvmSuppressWildcards List<CurrencyPriceRepoModel>>
 	
 	@Binds
 	abstract fun bindRepository(repo: CurrencyPriceRepositoryImpl): CurrencyPriceRepository

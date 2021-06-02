@@ -11,7 +11,7 @@ class UserTestRemoteRepoMapper @Inject constructor(): Mapper<
 	
 	override fun map(param: UserTestRemoteModel): UserTestRepoModel {
 		return UserTestRepoModel(
-			param.score
+			param.score ?: 0f
 		)
 	}
 	

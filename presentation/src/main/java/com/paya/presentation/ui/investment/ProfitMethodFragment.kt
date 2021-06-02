@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import com.paya.domain.models.repo.PercentRepoModel
+
 import com.paya.presentation.R
 import com.paya.presentation.databinding.FragmentProfitMethodBinding
 import com.paya.presentation.utils.Utils
@@ -15,7 +15,7 @@ import com.paya.presentation.utils.Utils
 class ProfitMethodFragment : Fragment() {
 	
 	private lateinit var mBinding: FragmentProfitMethodBinding
-	var percent: PercentRepoModel? = null
+
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		
@@ -41,7 +41,7 @@ class ProfitMethodFragment : Fragment() {
 	}
 	
 	fun setup() {
-		percent?.let {
+		/*percent?.let {
 			mBinding.progressIdeal.setValue(it.perfect.percent * 100)
 			mBinding.progressLowProfit.setValue(it.minimum.percent * 100)
 			mBinding.progressYearsOld.setValue(it.year.percent * 100)
@@ -49,7 +49,7 @@ class ProfitMethodFragment : Fragment() {
 			mBinding.txtIdealPrice.text = Utils.separatorAmount(it.perfect.price.toBigDecimal().toBigInteger().toString())
 			mBinding.txtLowProfitPrice.text = Utils.separatorAmount(it.minimum.price.toBigDecimal().toBigInteger().toString())
 			mBinding.txtYearsOldPrice.text = Utils.separatorAmount(it.year.price.toBigDecimal().toBigInteger().toString())
-		}
+		}*/
 		
 	}
 	

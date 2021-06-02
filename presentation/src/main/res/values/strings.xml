@@ -42,7 +42,7 @@
     <string name="why_soodinow">با سودینو بیشترآشنا شوید ...</string>
     <string name="why_soodinow_description">مسیر های متنوع سرمایه گذاری در بازار های مالی</string>
     <string name="why_soodinow_in_page">چرا سودینو</string>
-    <string name="why_soodinow_description_in_page">گروه نرم افزاری سودینو به وسیله جمعی از متخصصین حوزه  و مالی که همه گی جزوه دانش آموختگان دانشگاه تهران هستند و از سال 1397 با هدف تامین نیاز های نرم افزاری مالی و سرمایه گذاری  برای فعالان بازار سرمایه کشور تاسیس گردید</string>
+    <string name="why_soodinow_description_in_page">ارائه ابزار های هوشمند مدیریت ثروت برای  تجربه بکر و جدید یک سرمایه گذاری خودکار و شخصی سازی شده برای تمام سرمایه گذاران</string>
     <string name="more_description">توضیحات بیشتر</string>
     <string name="market_view">مشاهده بازار</string>
     <string name="all_currency">همه ارزها</string>
@@ -132,7 +132,7 @@
     <string name="ideal"> ایده آل</string>
     <string name="low_profit">کمترین سوددهی</string>
     <string name="select_item">می توانید یکی از حالات زیر را انتخاب نمایید</string>
-    <string name="create_low_risk_account">افتتاح حساب سرمایه گذاری بدون ریسک </string>
+    <string name="create_low_risk_account">افتتاح حساب </string>
 
     <string name="based_on_last_year">طبق سال گذشته</string>
     <string name="highest_profit">حالت خوشبینانه و ایده آل</string>
@@ -162,7 +162,7 @@
     <string name="introduce_friends_count_title">تعداد افرادی که توسط شما معرفی شده اند</string>
     <string name="person">نفر</string>
     <string name="we_number_phone">شماره تماس ما</string>
-    <string name="call_support_number">02188542</string>
+    <string name="call_support_number">02191073240</string>
     <string name="direct_call">تماس مستقیم</string>
     <string name="call_support_desc">کارشناسان ما از ساعت 9 الی 17 پاسخگوی سوالات شما می باشند</string>
     <string name="call_support_desc_chat">برای ارتباط در سریعترین زمان به کارشناسان ما پیام دهید</string>
@@ -222,6 +222,8 @@
     <string name="soodinow">سودینو</string>
     <string name="brokerages">کارگزاری ها</string>
     <string name="rules_soodinow">قوانین سودینو</string>
+    <string name="rule">قوانین</string>
+    <string name="rules_brokerage">قوانین کارگزاری</string>
     <string name="accept_rules_you">قوانین شما رو را می پذیرم</string>
     <string name="withdrawal_price">مبلغ برداشت وجه را وارد کنید</string>
     <string name="deposit_price">مبلغ واریز وجه را وارد کنید</string>
@@ -230,6 +232,8 @@
     <string name="all">همه</string>
     <string name="transaction">تراکنش</string>
     <string name="welcome_soodinow">به سودینو خوش آمدید</string>
+    <string name="no_data_chart">داده‌ای برای نمایش چارت وجود ندارد</string>
+    <string name="rule_error">شما هنوز قوانین ما را نپذیرفته اید</string>
 
     <string-array name="brokerage_list">
         <item>کارگزاری فارابی</item>
@@ -246,30 +250,34 @@
     </string-array>
 
     <string-array name="brokerage_desc_soodinow">
-        <item>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ </item>
-        <item>کارمزد پایین</item>
-        <item>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ </item>
-        <item>سرعت بالا </item>
-        <item>پشتیبانی 24 ساعته و آنلاین</item>
+        <item>بستر جدید سرمایه گذاری های خرد</item>
+        <item> انجام سرمایه گذاری 24 ساعته</item>
+        <item> سریع ترین نقدشوندگی دارایی </item>
+        <item>پشتیبانی مشتریان 24 ساعته</item>
     </string-array>
 
     <string-array name="brokerage_desc_bottom">
-        <item>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ </item>
+        <item>افتتاح حساب کارگزاری فارابی در کمتر از 5 دقیقه </item>
+    </string-array>
+  <string-array name="brokerage_desc_bottom_soodinow">
+        <item>ایجاد کیف سرمایه گذاری سودینو، بزودی</item>
     </string-array>
 
     <string-array name="brokerage_desc">
-        <item>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ </item>
-        <item>کارمزد پایین</item>
-        <item>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ </item>
-        <item>سرعت بالا </item>
-        <item>پشتیبانی 24 ساعته و آنلاین</item>
+        <item>کارگزاری رسمی بورس اوراق بهادار </item>
+        <item>کارگزار برتر در سال ۱۳۹۷</item>
+        <item>بیش از 60 شعبه در سراسر کشور </item>
+        <item>بستر امن و نوآور سرمایه گذاری ها </item>
+        <item>پشتیبانی مشتریان 24 ساعته</item>
     </string-array>
 
     <string-array name="soodinow_rules">
-        <item>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ </item>
-        <item>کارمزد پایین</item>
-        <item>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ </item>
-        <item>سرعت بالا </item>
-        <item>پشتیبانی 24 ساعته و آنلاین</item>
+        <item>سودینو جهت اطمینان خاطر از هویت افراد و رضایت آن ها از این سرمایه گذاری مدارک هویتی سرمایه گذاران را بررسی می‌کند و در این احزار هویت، داشتن نام کاربری و رمز حساب کارگزاری به معنای مالکیت بر آن حساب نیز می باشد. این مدارک ممکن است بصورت آنلاین و یا آفلاین از کاربر دریافت شود. سودینو از مدارک دریافتی بجز احراز هویت و کشف تقلب ، استفاده دیگری نمی شود </item>
+        <item>کلیه اطلاعات شما در سرورهای امن سودینو نگهداری می‌شود و ما از این داده‌ها به عنوان دارایی‌های که باید حداکثر حفاظت از آنها وجود داشته باشد ، محافظت خواهیم کرد و انتشار اطلاعات در در صورت لزوم با موافقت مقام قضایی خواهد بود</item>
+        <item>کاربر می پذیرد که سودینو اجازه انجام معاملات مورد توافق بر بستر حساب کارگزاری وی را دارا می باشد و این اجازه تا زمانی که کاربر بخواهد ادامه پیدا می‌کند. </item>
+        <item>در صورتیکه انجام معاملات به دلیل وقوع نقص های فنی از سوی سازمان با مشکل روبرو شوند، سودینو تا حد الامکان بر مدیریت معاملات تلاش خواهد کرد اما مسئولیتی را به علت وقوع امر خارج از کنترلش دارا نمی باشد</item>
+        <item>در صورتی که کاربر اقدام به خرید یا فروش دارایی های معرفی شده و تحت مدیریت سودینو کند و چنانچه در سرمایه گذاری مشکلی ناشی از آن به وقوع بپیوندد سودینو مسئولیتی را دارا نمی باشد.</item>
+        <item>کاربر می پذیرد انجام معاملات با اجازه وی بوده و حقی بابت اعتراض به انجام این سرمایه گذاری ندارد.</item>
+        <item>سودینو بابت میزان قطعی سوددهی این سرمایه گذاری هیچ تعهد دقیقی ندارد.</item>
     </string-array>
 </resources>

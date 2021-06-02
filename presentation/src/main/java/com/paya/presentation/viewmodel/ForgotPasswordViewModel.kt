@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.paya.domain.models.repo.RegisterRepoModel
+import com.paya.domain.models.repo.ResetPasswordRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.UseCase
 import com.paya.presentation.base.BaseViewModel
@@ -15,14 +16,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ForgotPasswordViewModel @ViewModelInject constructor(
-	private val registerUseCase: UseCase<String, RegisterRepoModel>
+	private val resetPasswordUseCase: UseCase<String, ResetPasswordRepoModel>
 ): BaseViewModel(){
 	
 	val title = MutableLiveData<String>()
 	
 	val phoneNumber = ObservableField<String>()
 	
-	val registerStatus = VolatileLiveData<Resource<RegisterRepoModel>>()
+	val resetPasswordStatus = VolatileLiveData<Resource<ResetPasswordRepoModel>>()
 	
 	fun setTitle(title: String) {
 		this.title.value = title
@@ -31,17 +32,17 @@ class ForgotPasswordViewModel @ViewModelInject constructor(
 	fun register(){
 		val phoneNumber = phoneNumber.get()
 		if (phoneNumber == null) {
-			registerStatus.setValue(Resource.error("لطفا شماره موبایل را وارد کنید", null))
+			resetPasswordStatus.setValue(Resource.error("لطفا شماره موبایل را وارد کنید", null))
 			return
 		}
 		if(phoneNumber.length != 9){
-			registerStatus.setValue(Resource.error("شماره موبایل وارد شده شده اشتباه است", null))
+			resetPasswordStatus.setValue(Resource.error("شماره موبایل وارد شده شده اشتباه است", null))
 			return
 		}
 		viewModelScope.launch (Dispatchers.IO) {
-			registerStatus.postValue(Resource.loading(null))
-			val response = callResource(this@ForgotPasswordViewModel,registerUseCase.action("+989$phoneNumber"))
-			registerStatus.postValue(response)
+			resetPasswordStatus.postValue(Resource.loading(null))
+			val response = callResource(this@ForgotPasswordViewModel,resetPasswordUseCase.action("+989$phoneNumber"))
+			resetPasswordStatus.postValue(response)
 		}
 	}
 	

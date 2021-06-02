@@ -18,6 +18,7 @@ const val TIME_OUT: Long = 60
 //const val BaseUrl: String = "http://192.168.192.112:8000/api/v1/"
 
 const val BaseUrl: String = "https://api.soodinow.com/api/v1/"
+const val BaseUrlDev: String = "https://dev.soodinow.com/api/v1/"
 
 class ApiServiceFactory @Inject constructor(
 	private val chuckIntercept : ChuckIntercept,
@@ -28,7 +29,7 @@ class ApiServiceFactory @Inject constructor(
 	fun <T> create(serviceClass: Class<T>): T = retrofit().create(serviceClass)
 	
 	private fun retrofit(): Retrofit = Retrofit.Builder()
-		.baseUrl(BaseUrl)
+		.baseUrl(if (BuildConfig.DEBUG) BaseUrlDev else BaseUrl)
 		.addConverterFactory(GsonConverterFactory.create())
 		.addCallAdapterFactory(ApiResponseCallAdapterFactory())
 		.client(okHttpClientBuilder().build())

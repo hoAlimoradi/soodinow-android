@@ -128,6 +128,7 @@
             android:layout_marginTop="@dimen/margin_very_small"
            />
 
+
         <View
             android:id="@+id/bottomView"
             android:layout_width="0dp"
@@ -149,7 +150,8 @@
             android:elevation="2dp"
             app:layout_constraintBottom_toBottomOf="@id/bottomView"
             app:layout_constraintStart_toStartOf="@id/bottomView"
-            app:layout_constraintTop_toTopOf="@id/bottomView" />
+            app:layout_constraintTop_toTopOf="@id/bottomView"
+            />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/input"
@@ -157,12 +159,13 @@
             android:layout_height="0dp"
             android:background="@android:color/transparent"
             android:elevation="2dp"
-            android:text="test test test test"
+            android:text="چت در دسترس نمی باشد"
             android:hint="@string/write_question_this"
             android:paddingStart="@dimen/margin_very_small"
             android:paddingEnd="@dimen/margin_very_small"
             android:textColor="@color/blue_light"
             android:textSize="@dimen/text_size_m"
+            android:enabled="false"
             app:layout_constraintBottom_toBottomOf="@id/bottomView"
             app:layout_constraintEnd_toEndOf="@id/bottomView"
             app:layout_constraintStart_toEndOf="@id/sendBtn"

@@ -7,9 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.paya.presentation.R
+import com.paya.presentation.base.BaseFragment
+import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.utils.Utils
+import com.paya.presentation.utils.convertDateWithoutHour
 import ir.hamsaa.persiandatepicker.Listener
 import ir.hamsaa.persiandatepicker.PersianDatePickerDialog
 import ir.hamsaa.persiandatepicker.util.PersianCalendar
@@ -19,8 +23,9 @@ import java.io.Serializable
 private const val PARAM_DATE_FROM = "date_from"
 private const val PARAM_DATE_TO = "date_to"
 
-class SelectDateFilterFragment : Fragment() {
+class SelectDateFilterFragment : BaseFragment<BaseViewModel>() {
 
+    private val mViewModel: BaseViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -84,6 +89,10 @@ class SelectDateFilterFragment : Fragment() {
         acceptBtn.setOnClickListener {
             if (!acceptBtn.isEnabled)
                 return@setOnClickListener
+            if (dateTo.isNotEmpty() && dateFrom.isNotEmpty() && convertDateWithoutHour(dateTo)?.before(convertDateWithoutHour(dateFrom))!!) {
+                mViewModel.showError("تاریخ پایان نمی تواند از تاریخ شروع بیشتر باشد ")
+                return@setOnClickListener
+            }
             val navController = findNavController()
             FinancialReportFragment.setParamDate(navController, DateFilter(dateFrom, dateTo))
             navController.popBackStack()
@@ -124,5 +133,8 @@ class SelectDateFilterFragment : Fragment() {
             return bundle
         }
     }
+
+    override val baseViewModel: BaseViewModel
+        get() = mViewModel
 }
 

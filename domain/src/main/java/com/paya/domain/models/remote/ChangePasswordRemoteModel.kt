@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 import com.paya.domain.tools.NoObfuscate
 
 data class ChangePasswordRemoteModel(
-	val message:String,
+	val message:String?,
 ): NoObfuscate

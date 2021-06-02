@@ -25,7 +25,12 @@ abstract class AuthModule {
 			RegisterRemoteModel,
 			RegisterRepoModel
 			>
-	
+	@Binds
+	abstract fun bindResetPasswordMapperRemoteRepo(mapper:RestPasswordRemoteRepoMapper): Mapper<
+			ResetPasswordRemoteModel,
+			ResetPasswordRepoModel
+			>
+
 	@Binds
 	abstract fun bindAccessTokenRemoteRepoMapper(mapper: AccessTokenRemoteRepoMapper): Mapper<
 			AccessTokenRemoteModel,
@@ -48,6 +53,11 @@ abstract class AuthModule {
 	abstract fun bindSetPasswordRemoteRepoMapper(mapper: SetPasswordRemoteRepoMapper): Mapper<
 			SetPasswordRemoteModel,
 			SetPasswordRepoModel
+			>
+	@Binds
+	abstract fun bindSetResetPasswordRemoteRepoMapper(mapper: SetResetPasswordRemoteRepoMapper): Mapper<
+			SetResetPasswordRemoteModel,
+			SetResetPasswordRepoModel
 			>
 	
 	@Binds
@@ -76,16 +86,24 @@ abstract class AuthModule {
 	
 	@Binds
 	abstract fun registerRepo(dev: AuthRepositoryImpl): AuthRepository
-	
+
 	@Binds
 	abstract fun accessTokenDbApi(api: UserInfoDbApiImpl): UserInfoDbApi
 	
 	@Binds
 	abstract fun bindRegisterUseCase(useCase: RegisterUseCase): UseCase<String,RegisterRepoModel>
-	
+
+	@Binds
+	abstract fun bindResetPasswordUseCase(useCase: ResetPasswordUseCase): UseCase<String,ResetPasswordRepoModel>
+
 	@Binds
 	abstract fun bindActivateUseCase(useCase: ActivateUseCase):
 			UseCase<ActivateRepoModel,Any>
+
+
+	@Binds
+	abstract fun bindActivateResetPasswordUseCase(useCase: ActivateResetPasswordUseCase):
+			UseCase<ActivateResetPasswordRepoModel,Any>
 	
 	@Binds
 	abstract fun bindLoginUseCase(useCase: LoginUseCase):
@@ -96,9 +114,13 @@ abstract class AuthModule {
 			UseCase<Unit,UserInfoRepoModel>
 	
 	@Binds
+	abstract fun bindSetResetPasswordUseCase(useCase: SetResetPasswordUseCase):
+			UseCase<String,SetResetPasswordRepoModel>
+
+	@Binds
 	abstract fun bindSetPasswordUseCase(useCase: SetPasswordUseCase):
 			UseCase<String,SetPasswordRepoModel>
-	
+
 	@Binds
 	abstract fun bindUpdateProfileUseCase(useCase: UpdateProfileUseCase):
 			UseCase<ProfileBodyRepoModel,ProfileRepoModel>

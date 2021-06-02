@@ -5,5 +5,5 @@ import com.paya.domain.tools.NoObfuscate
 
 data class SetPasswordRemoteModel(
 	@SerializedName("message")
-	val message: String
+	val message: String?
 ): NoObfuscate

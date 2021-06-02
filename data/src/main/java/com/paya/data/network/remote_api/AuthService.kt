@@ -12,7 +12,14 @@ interface AuthService {
 		@Header("Authorization") auth: String,
 		@Field("username") username: String
 	): ApiResponse<BaseModel<RegisterRemoteModel>>
-	
+
+	@FormUrlEncoded
+	@POST("auth/reset_password/")
+	suspend fun resetPassword(
+		@Header("Authorization") auth: String,
+		@Field("username") username: String
+	): ApiResponse<BaseModel<ResetPasswordRemoteModel>>
+
 	@FormUrlEncoded
 	@POST("auth/activate/")
 	suspend fun activate(
@@ -20,14 +27,29 @@ interface AuthService {
 		@Field("username") username: String,
 		@Field("code") code: String
 	): ApiResponse<BaseModel<AccessTokenRemoteModel>>
-	
+
+	@FormUrlEncoded
+	@POST("auth/reset_password/activate/")
+	suspend fun resetPasswordActivate(
+		@Header("Authorization") auth: String,
+		@Field("username") username: String,
+		@Field("code") code: String
+	): ApiResponse<BaseModel<AccessTokenRemoteModel>>
+
+	@FormUrlEncoded
+	@PATCH("auth/reset_password/password/")
+	suspend fun setResetPassword(
+		@Header("Authorization") auth: String,
+		@Field("password") password: String
+	): ApiResponse<BaseModel<SetResetPasswordRemoteModel>>
+
 	@FormUrlEncoded
 	@PATCH("auth/password/")
 	suspend fun setPassword(
 		@Header("Authorization") auth: String,
 		@Field("password") password: String
 	): ApiResponse<BaseModel<SetPasswordRemoteModel>>
-	
+
 	@FormUrlEncoded
 	@POST("auth/login/")
 	suspend fun login(

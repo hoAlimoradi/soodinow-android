@@ -48,6 +48,7 @@ import javax.crypto.NoSuchPaddingException
 import javax.crypto.SecretKey
 import javax.crypto.spec.IvParameterSpec
 import javax.security.cert.CertificateException
+import kotlin.system.exitProcess
 
 @AndroidEntryPoint
 class SettingsFragment : BaseFragment<SettingViewModel>() {
@@ -140,6 +141,10 @@ class SettingsFragment : BaseFragment<SettingViewModel>() {
 			getFindViewController()?.navigate(
 				R.id.financialReportFragment
 			)
+		}
+
+		exitApp.setOnClickListener {
+			exitProcess(-1)
 		}
 	}
 

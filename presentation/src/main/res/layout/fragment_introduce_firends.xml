@@ -26,6 +26,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:layout_constraintVertical_chainStyle="packed"
             />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -38,7 +39,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/image"
-            app:layout_constraintBottom_toTopOf="@+id/link"/>
+            app:layout_constraintBottom_toTopOf="@+id/link"
+            app:layout_constraintVertical_chainStyle="packed"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/link"
@@ -52,7 +54,9 @@
             android:textColor="@color/purple_gray"
             android:textSize="@dimen/text_size_m"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/linkTitle" />
+            app:layout_constraintTop_toBottomOf="@id/linkTitle"
+            app:layout_constraintBottom_toTopOf="@id/copy_btn"
+            app:layout_constraintVertical_chainStyle="packed"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/copy_btn"
@@ -66,7 +70,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/link"
-
+app:layout_constraintBottom_toTopOf="@id/socialTitle"
             app:layout_constraintVertical_bias="0"/>
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -81,7 +85,6 @@
             android:textSize="@dimen/text_size_11sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/copy_btn"
             app:layout_constraintVertical_bias="1"
             app:layout_constraintBottom_toTopOf="@id/socialLayout"
             android:layout_marginBottom="@dimen/margin_m"/>

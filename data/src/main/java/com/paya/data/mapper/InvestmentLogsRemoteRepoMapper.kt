@@ -15,29 +15,32 @@ class InvestmentLogsRemoteRepoMapper @Inject constructor() : Mapper<
     override fun map(param: InvestmentLogsRemoteModel): InvestmentLogsRepoModel {
         val list = mutableListOf<Any>()
         var lastDate = "";
-        param.results.forEach {
-            var currentDate = it.createdAt.substring(0,it.createdAt.indexOf("T"))
-            if(lastDate.isEmpty() || lastDate != currentDate) {
-                list.add(InvestmentHeaderDate(it.createdAt))
-                lastDate = currentDate;
-            }
-            list.add(
-                InvestmentLogsModel(
-                    it.id,
-                    it.startPrice,
-                    it.finalPrice,
-                    it.type,
-                    it.investmentType,
-                    it.investmentSubType ?: "",
-                    it.user,
-                    it.state,
-                    it.trackingNumber,
-                    it.hasError,
-                    it.errorDescription ?: "",
-                    it.createdAt,
-                    it.updatedAt
+        param.results?.let { results ->
+            results.forEach {
+                var currentDate = it.createdAt.substring(0, it.createdAt.indexOf("T"))
+                if (lastDate.isEmpty() || lastDate != currentDate) {
+                    list.add(InvestmentHeaderDate(it.createdAt))
+                    lastDate = currentDate;
+                }
+                list.add(
+                    InvestmentLogsModel(
+                        it.id ?: 0,
+                        it.startPrice ?: 0,
+                        it.finalPrice ?: 0,
+                        it.type ?: "",
+                        it.investmentType ?: "",
+                        it.investmentSubType ?: "",
+                        it.user ?: "",
+                        it.state ?: "",
+                        it.trackingNumber ?: "",
+                        it.hasError,
+                        it.errorDescription ?: "",
+                        it.createdAt,
+                        it.updatedAt,
+                        it.description ?: ""
+                    )
                 )
-            )
+            }
         }
         return InvestmentLogsRepoModel(
             param.count,

@@ -32,16 +32,21 @@ class CreateAccountRulesFragment : BaseFragment<CreateAccountRulesViewModel>() {
     ): View? {
         // Inflate the layout for this fragment
         mBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_create_account_rules, container, false)
+        mBinding.lifecycleOwner = this
+        mBinding.viewModel = mViewModel
         return mBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observe(mViewModel.status,::readyAddRiskOrder)
+        mBinding.toolbar.backButton.setOnClickListener {
+            findNavController().popBackStack()
+        }
         mBinding.addInvestBtn.setOnClickListener {
             if (!mBinding.rulesCheckBox.isChecked)
             {
-                Toast.makeText(context,"شما هنوز قوانین ما را نپذیرفت اید",Toast.LENGTH_SHORT).show()
+                mViewModel.showError(getString(R.string.rule_error))
                 return@setOnClickListener
             }
             mViewModel.exitAccount(args.riskState,args.SelectedPrice)

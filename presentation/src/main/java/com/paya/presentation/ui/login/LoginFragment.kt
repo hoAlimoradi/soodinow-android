@@ -81,7 +81,9 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
 	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
 		super.onViewCreated(view,savedInstanceState)
 		observe(mViewModel.loginResource, ::checkLoginStatus)
-		initFingerprint()
+		mBinding.fingerprint.setOnClickListener {
+			initFingerprint()
+		}
 		mBinding.forgetPassword.setOnClickListener {
 			findNavController().navigate(
 				LoginFragmentDirections.actionLoginFragmentToForgotPasswordFragment()

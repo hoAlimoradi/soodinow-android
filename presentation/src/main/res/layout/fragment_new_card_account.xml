@@ -19,14 +19,10 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:background="@drawable/ic_cards">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="fitXY"
-            android:src="@drawable/ic_cards"
-            app:layout_constraintTop_toTopOf="parent" />
+
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/logoImage"
@@ -74,13 +70,13 @@
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:layout_marginStart="@dimen/margin_l"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="@dimen/margin_l"
             android:background="@drawable/bg_btn_create_card"
             android:drawableEnd="@drawable/ic_plus"
             android:drawablePadding="@dimen/margin_m"
             android:paddingStart="@dimen/margin_m"
             android:paddingEnd="@dimen/margin_m"
-            android:text="پیمان خود رو ببندید"
+            android:text="پیمان خود را ببندید"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_s"
             app:layout_constraintBottom_toBottomOf="parent"

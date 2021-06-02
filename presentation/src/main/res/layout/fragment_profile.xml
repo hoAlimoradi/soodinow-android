@@ -24,7 +24,7 @@
             android:id="@+id/parentView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/bg"
+            android:background="@color/blue_light_11"
             android:visibility="invisible">
 
             <androidx.constraintlayout.widget.Guideline
@@ -41,23 +41,6 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.96" />
 
-
-            <View
-                android:id="@+id/bg_card"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:background="@drawable/bg_card"
-                app:layout_constraintBottom_toTopOf="@id/viewGuidLineBgCard"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <View
-                android:id="@+id/viewGuidLineBgCard"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="@dimen/margin_l"
-                app:layout_constraintTop_toTopOf="@id/card" />
-
-
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/alarm"
                 android:layout_width="@dimen/height"
@@ -69,135 +52,162 @@
                 app:layout_constraintStart_toEndOf="@+id/start_guideline"
                 app:layout_constraintTop_toBottomOf="@+id/top_guideline" />
 
-
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/pager"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_very_small"
-                android:maxHeight="180dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/alarm" />
-
-            <View
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="@drawable/triangle_profile"
-                app:layout_constraintBottom_toTopOf="@+id/card"
-                app:layout_constraintEnd_toEndOf="@id/card"
-                app:layout_constraintStart_toStartOf="@id/card" />
-
-            <View
-                android:id="@+id/card"
-                android:layout_marginBottom="@dimen/space_bottom_navigation"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginHorizontal="@dimen/margin_small"
-                android:layout_marginTop="@dimen/margin_small"
-                app:cardBackgroundColor="@color/white"
-                android:background="@drawable/shadow_medium"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/pager" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/subTitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/margin_l"
-                android:layout_marginVertical="@dimen/margin_s"
-                android:elevation="2dp"
-                android:text="بازدهی"
-                android:textColor="@color/purple"
-                android:textSize="@dimen/text_size_m"
-                android:gravity="center"
-                app:layout_constraintEnd_toEndOf="@id/card"
-                app:layout_constraintStart_toStartOf="@id/card"
-                app:layout_constraintTop_toTopOf="@id/card" />
-
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/chartTabLayout"
-                android:layout_width="0dp"
-                android:layout_height="31dp"
-                android:layout_marginTop="@dimen/margin_s"
-                android:elevation="2dp"
-                app:layout_constraintEnd_toEndOf="@id/card"
-                app:layout_constraintStart_toStartOf="@id/card"
-                app:layout_constraintTop_toBottomOf="@id/subTitle"
-                app:tabGravity="fill"
-                app:tabIndicator="@color/japanese_laurel_green"
-                app:tabIndicatorColor="@color/japanese_laurel_green"
-                app:tabIndicatorFullWidth="false"
-                app:tabIndicatorHeight="3dp"
-                app:tabMode="fixed"
-                app:tabPaddingEnd="25dp"
-                app:tabPaddingStart="25dp"
-                app:tabSelectedTextColor="@color/japanese_laurel_green">
-
-
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/month"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="ماه" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/week"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="هفته" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/day"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="روز" />
-            </com.google.android.material.tabs.TabLayout>
-
             <ScrollView
+                android:id="@+id/scrollView"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:elevation="2dp"
-                app:layout_constraintBottom_toBottomOf="@id/card"
-                app:layout_constraintEnd_toEndOf="@id/card"
-                app:layout_constraintStart_toStartOf="@id/card"
-                app:layout_constraintTop_toBottomOf="@id/chartTabLayout">
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/alarm"
+                android:background="@color/bg">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <com.github.mikephil.charting.charts.LineChart
-                        android:id="@+id/chart"
+                    <View
+                        android:id="@+id/bg_card"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:background="@drawable/bg_card"
+                        app:layout_constraintBottom_toTopOf="@id/viewGuidLineBgCard"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <View
+                        android:id="@+id/viewGuidLineBgCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="36dp"
+                        app:layout_constraintTop_toTopOf="@id/card" />
+
+
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/pager"
                         android:layout_width="0dp"
-                        android:layout_height="150dp"
-                        android:layout_marginHorizontal="@dimen/margin_s"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="@dimen/margin_very_small"
+                        app:layout_constraintDimensionRatio="H,2:1"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <fragment
-                        android:id="@+id/appropriate_investment_fragment"
-                        android:name="com.paya.presentation.ui.investment.AppropriateInvestmentFragment"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@id/chart" />
 
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:layout_width="133dp"
-                        android:layout_height="25dp"
-                        android:layout_marginStart="@dimen/margin_l"
-                        android:layout_marginTop="@dimen/margin_small"
-                        android:layout_marginBottom="@dimen/margin_l"
-                        android:background="@drawable/round_corner_layout_border_gray"
-                        android:text="سوابق سبد سرمایه گذاری"
-                        android:textColor="@color/purple_gray"
-                        android:textSize="@dimen/text_size_xs"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                    <View
+                        android:id="@+id/card"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginHorizontal="@dimen/margin_l"
+                        android:layout_marginTop="@dimen/margin_xl"
+                        android:background="@drawable/shadow_medium"
+                        app:cardBackgroundColor="@color/white"
+                        app:layout_constraintBottom_toBottomOf="@id/expandableBtn"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/appropriate_investment_fragment" />
+                        app:layout_constraintTop_toBottomOf="@id/pager" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/efficiencyRecyclerView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="12dp"
+                        android:layout_marginTop="12dp"
+                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                        app:layout_constraintBottom_toTopOf="@id/expandableBtn"
+                        app:layout_constraintEnd_toEndOf="@id/card"
+                        app:layout_constraintStart_toStartOf="@id/card"
+                        app:layout_constraintTop_toTopOf="@id/card"
+                        app:spanCount="3"
+                        tools:itemCount="6"
+                        tools:listitem="@layout/row_efficiency" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/expandableBtn"
+                        android:layout_width="0dp"
+                        android:layout_height="24dp"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_arrow_bottom_gray"
+                        app:layout_constraintBottom_toBottomOf="@id/card"
+                        app:layout_constraintEnd_toEndOf="@id/card"
+                        app:layout_constraintStart_toStartOf="@id/card"
+                        app:layout_constraintTop_toBottomOf="@id/efficiencyRecyclerView"
+                        android:visibility="invisible"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/historyLogBtn"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/height_medium"
+                        android:layout_marginTop="@dimen/margin_l"
+                        android:background="@drawable/round_corner_border_oslo_gray_6"
+                        android:gravity="center"
+                        android:text="سوابق سبد سرمایه گذاری"
+                        android:textColor="@color/emperor"
+                        android:textSize="@dimen/text_size_s"
+                        app:layout_constraintEnd_toStartOf="@id/chartEfficiencyBtn"
+                        app:layout_constraintStart_toStartOf="@id/card"
+                        app:layout_constraintTop_toBottomOf="@id/card"
+                        />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/chartEfficiencyBtn"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/height_medium"
+                        android:layout_marginStart="@dimen/margin_l"
+                        android:background="@drawable/round_corner_border_oslo_gray_6"
+                        android:gravity="center"
+                        android:text="نمودار بازدهی"
+                        android:textColor="@color/emperor"
+                        android:textSize="@dimen/text_size_s"
+                        app:layout_constraintBottom_toBottomOf="@id/historyLogBtn"
+                        app:layout_constraintEnd_toEndOf="@id/card"
+                        app:layout_constraintStart_toEndOf="@id/historyLogBtn"
+                        app:layout_constraintTop_toTopOf="@id/historyLogBtn" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/titleBasket"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_l"
+                        android:layout_marginEnd="@dimen/margin_very_small"
+                        android:text="سبد سرمایه گذاری بدون ریسک شما"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_s"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="@id/card"
+                        app:layout_constraintHorizontal_bias="1"
+                        app:layout_constraintStart_toStartOf="@id/card"
+                        app:layout_constraintTop_toBottomOf="@id/historyLogBtn" />
+
+
+                    <com.github.mikephil.charting.charts.PieChart
+                        android:id="@+id/pieChart"
+                        android:layout_width="0dp"
+                        android:layout_height="190dp"
+                        android:layout_marginTop="@dimen/margin_l"
+                        app:layout_constraintEnd_toEndOf="@id/card"
+                        app:layout_constraintStart_toStartOf="@id/card"
+                        app:layout_constraintTop_toBottomOf="@id/titleBasket" />
+
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/chartLabelRecyclerView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_m"
+                        android:layout_marginBottom="@dimen/space_bottom_navigation"
+                        android:foregroundGravity="right"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@id/card"
+                        app:layout_constraintStart_toStartOf="@id/card"
+                        app:layout_constraintTop_toBottomOf="@id/pieChart"
+                        app:layout_constraintVertical_bias="0.1"
+                        tools:itemCount="10"
+                        tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/item_chart_label"
+                        tools:orientation="horizontal"
+                        tools:scrollbars="horizontal" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </ScrollView>
 

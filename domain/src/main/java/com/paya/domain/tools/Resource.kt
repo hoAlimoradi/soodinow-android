@@ -23,8 +23,8 @@ data class Resource<out T>(val status: Status, val data: T?, val message: String
             return Resource(Status.UNAUTHORIZED, data, msg)
         }
 
-        fun <T> fatabiToken( data: T?): Resource<T> {
-            return Resource(Status.FARABITOKEN, data, null)
+        fun <T> fatabiToken(msg: String, data: T?): Resource<T> {
+            return Resource(Status.FARABITOKEN, data, msg)
         }
 
         fun <T> idle(data: T?): Resource<T> {

@@ -5,11 +5,11 @@ import com.paya.domain.tools.NoObfuscate
 
 data class CircleChartDataRemoteModel (
 	@SerializedName("buy_price")
-	val buyPrice: Float,
+	val buyPrice: Float?,
 	@SerializedName("quantity")
-	val quantity: Long,
+	val quantity: Long?,
 	@SerializedName("namad")
-	val name: String,
+	val name: String?,
 	@SerializedName("color")
-	val color: String
+	val color: String?
 ): NoObfuscate

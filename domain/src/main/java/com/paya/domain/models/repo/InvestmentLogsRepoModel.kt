@@ -20,6 +20,7 @@ data class InvestmentLogsModel(
 	val errorDescription: String,
 	val createdAt: String,
 	val updatedAt: String,
+	val description: String,
 )
 
 data class InvestmentHeaderDate(val date: String)

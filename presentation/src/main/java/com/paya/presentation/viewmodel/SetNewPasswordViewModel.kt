@@ -6,18 +6,21 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.paya.domain.models.repo.SetPasswordRepoModel
+import com.paya.domain.models.repo.SetResetPasswordRepoModel
 import com.paya.domain.models.repo.UserInfoRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.UseCase
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.utils.VolatileLiveData
 import com.paya.presentation.utils.callResource
+import com.paya.presentation.utils.isSecretPassword
+import com.paya.presentation.utils.md5
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class SetNewPasswordViewModel @ViewModelInject constructor(
 	private val getUserInfoUseCase: UseCase<Unit,UserInfoRepoModel>,
-	private val setPasswordUseCase: UseCase<String,SetPasswordRepoModel>
+	private val setPasswordUseCase: UseCase<String,SetResetPasswordRepoModel>
 ) : BaseViewModel() {
 
 	var isNewPassword = false
@@ -32,7 +35,7 @@ class SetNewPasswordViewModel @ViewModelInject constructor(
 	val password = ObservableField<String>()
 	val repeatPassword = ObservableField<String>()
 	
-	val setPasswordResource = VolatileLiveData<Resource<SetPasswordRepoModel>>()
+	val setPasswordResource = VolatileLiveData<Resource<SetResetPasswordRepoModel>>()
 	
 	private fun getAccessToken() {
 		viewModelScope.launch(Dispatchers.IO) {
@@ -54,30 +57,29 @@ class SetNewPasswordViewModel @ViewModelInject constructor(
 
 		if (password.isNullOrBlank()) {
 			isNewPassword = true
-			setPasswordResource.setValue(
-				Resource.error("لطفا رمز عبور را وارد کنید", null)
-			)
+			showError("لطفا رمز عبور را وارد کنید")
+			return
+		}
+
+		if (!password.isSecretPassword()) {
+			showError("پسورد باید از ۸ کارکتر بیشتر باشد و از حروف بزرگ و کوچک و نماد استفاده شود")
 			return
 		}
 		if (repeatPassword.isNullOrBlank()) {
 			isRepeatPassword = true
-			setPasswordResource.setValue(
-				Resource.error("لطفا تکرار رمز عبور را وارد کنید", null)
-			)
+			showError("لطفا تکرار رمز عبور را وارد کنید")
 			return
 		}
 		
 		if (password != repeatPassword){
 			isRepeatPassword = true
-			setPasswordResource.setValue(
-				Resource.error("رمز عبور با تکرار آن یکسان نیست", null)
-			)
+			showError("رمز عبور با تکرار آن یکسان نیست")
 			return
 		}
 
 		viewModelScope.launch(Dispatchers.IO) {
 			setPasswordResource.postValue(Resource.loading(null))
-			val resource = callResource(this@SetNewPasswordViewModel,setPasswordUseCase.action(password))
+			val resource = callResource(this@SetNewPasswordViewModel,setPasswordUseCase.action(password.md5()!!))
 			setPasswordResource.postValue(resource)
 		}
 		

@@ -3,7 +3,8 @@ package com.paya.buildSrc
 object Dependencies{
 	
 	object Versions{
-		const val KOTLIN_VERSION = "1.3.72"
+		const val LEAK_CANARY = "2.7"
+        const val KOTLIN_VERSION = "1.3.72"
 		const val KTX_VER = "1.5.0-alpha04"
 		const val APPCOMPAT_VER = "1.3.0-alpha02"
 		const val CONSTRAINT_LAYOUT_VER = "2.0.2"

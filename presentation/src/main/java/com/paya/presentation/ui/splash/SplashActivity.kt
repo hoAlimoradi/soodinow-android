@@ -47,7 +47,7 @@ class SplashActivity : BaseActivity<SplashActivityViewModel>() {
                 updateAppDialog.show(supportFragmentManager, "updateDialog")
             } else {
                 lifecycleScope.launchWhenStarted {
-                    delay(3000)
+                    delay(1000)
                     startActivity(Intent(this@SplashActivity, MainActivity::class.java))
                     finish()
                 }

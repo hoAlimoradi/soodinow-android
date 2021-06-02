@@ -19,6 +19,7 @@ import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentFinancialReportBinding
 import com.paya.presentation.ui.activitiesReport.adapter.FinancialReportAdapter
+import com.paya.presentation.ui.activitiesReport.dlalog.FinancialLogDetailDialog
 import com.paya.presentation.ui.activitiesReport.enum.TypeInvestment
 import com.paya.presentation.utils.ListLoadStateAdapter
 import com.paya.presentation.viewmodel.FinancialReportViewModel
@@ -33,7 +34,7 @@ private const val KEY_DATE = "date_key"
 class FinancialReportFragment : BaseFragment<FinancialReportViewModel>() {
     private val mViewModel: FinancialReportViewModel by viewModels()
     private lateinit var mBinding: FragmentFinancialReportBinding
-    private val adapter = FinancialReportAdapter()
+    private lateinit var adapter: FinancialReportAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,8 +60,14 @@ class FinancialReportFragment : BaseFragment<FinancialReportViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         mBinding.toolbar.backButton.setOnClickListener {
             findNavController().popBackStack()
+        }
+        adapter = FinancialReportAdapter {
+            val dialog = FinancialLogDetailDialog()
+            dialog.item = it
+            dialog.show(parentFragmentManager, "financial dialog")
         }
         financialRecyclerView.layoutManager = LinearLayoutManager(context)
         financialRecyclerView.adapter =

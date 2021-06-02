@@ -34,11 +34,9 @@
             android:id="@+id/marketIcon"
             android:layout_width="25dp"
             android:layout_height="0dp"
-
             android:scaleType="center"
             android:src="@drawable/ic_market_gold"
             android:tint="@color/white"
-
             app:layout_constraintBottom_toBottomOf="@+id/iconCard"
             app:layout_constraintEnd_toEndOf="@id/iconCard"
             app:layout_constraintStart_toStartOf="@+id/iconCard"
@@ -46,60 +44,32 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/marketTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/margin_l"
-            android:elevation="2dp"
+            android:layout_marginEnd="@dimen/margin_m"
             android:gravity="center_vertical"
             android:text="شاخص کل"
             android:textColor="@color/blue_light"
             android:textSize="@dimen/text_size_s"
             app:layout_constraintBottom_toBottomOf="@+id/bgCardView"
             app:layout_constraintEnd_toStartOf="@id/iconCard"
-            app:layout_constraintHorizontal_chainStyle="spread"
-            app:layout_constraintTop_toTopOf="@id/bgCardView" />
-
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/marketPercentageIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_l"
-            android:elevation="2dp"
-            android:scaleType="fitEnd"
-            android:src="@drawable/ic_market_downturn"
-            app:layout_constraintBottom_toBottomOf="@+id/bgCardView"
-            app:layout_constraintStart_toStartOf="@id/bgCardView"
-            app:layout_constraintTop_toTopOf="@id/bgCardView" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/marketPercentageValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/margin_l"
-            android:elevation="2dp"
-            android:gravity="center_vertical"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_11sp"
-            app:layout_constraintBottom_toBottomOf="@+id/bgCardView"
-            android:layout_marginStart="@dimen/margin_l"
-            app:layout_constraintHorizontal_chainStyle="spread"
-            app:layout_constraintStart_toEndOf="@id/marketPercentageIcon"
+            app:layout_constraintStart_toEndOf="@+id/marketWealthValue"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintTop_toTopOf="@id/bgCardView"
-            tools:text="0 %" />
+            />
+
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/marketWealthValue"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:elevation="2dp"
             android:gravity="center_vertical"
             android:text="1.258.400"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_l"
             app:layout_constraintBottom_toBottomOf="@+id/bgCardView"
             app:layout_constraintEnd_toStartOf="@id/marketTitle"
-            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toEndOf="@id/marketPercentageValue"
             app:layout_constraintTop_toTopOf="@id/bgCardView" />
 
@@ -108,14 +78,40 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/margin_very_small"
-            android:elevation="2dp"
             android:gravity="bottom"
             android:text="@string/toman"
             android:textColor="@color/gray"
             android:textSize="@dimen/text_size_8sp"
             app:layout_constraintBottom_toBottomOf="@+id/bgCardView"
             app:layout_constraintEnd_toStartOf="@id/marketWealthValue"
-            app:layout_constraintTop_toTopOf="@id/bgCardView" />
-
+            app:layout_constraintTop_toTopOf="@id/bgCardView"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toEndOf="@id/marketPercentageValue"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/marketPercentageValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_m"
+            android:gravity="center_vertical"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_11sp"
+            app:layout_constraintBottom_toBottomOf="@+id/bgCardView"
+            android:layout_marginStart="@dimen/margin_m"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toEndOf="@id/marketPercentageIcon"
+            app:layout_constraintTop_toTopOf="@id/bgCardView"
+            app:layout_constraintEnd_toStartOf="@id/marketWealthCurrencyValue"
+            tools:text="0 %" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/marketPercentageIcon"
+            android:layout_width="19dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_m"
+            android:scaleType="fitEnd"
+            android:src="@drawable/ic_path_up"
+            app:layout_constraintBottom_toBottomOf="@+id/bgCardView"
+            app:layout_constraintStart_toStartOf="@id/bgCardView"
+            app:layout_constraintTop_toTopOf="@id/bgCardView"
+            app:layout_constraintEnd_toStartOf="@id/marketPercentageValue"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import com.paya.presentation.R
 import com.paya.presentation.databinding.FragmentLoginDialogBinding
 import com.paya.presentation.utils.Utils
+import com.paya.presentation.utils.setWidthPercent
 import com.paya.presentation.utils.shortToast
 
 // TODO: Rename parameter arguments, choose names that match
@@ -53,7 +54,8 @@ class LoginDialogFragment : DialogFragment() {
 		super.onResume()
 		dialog?.window?.let {
 			Utils.setTransparentBackgroundDialog(it)
-			Utils.setAutomaticSizeHeightDialog(requireActivity(),it) }
+		}
+		setWidthPercent(90)
 	}
 	
 	override fun onCreateView(

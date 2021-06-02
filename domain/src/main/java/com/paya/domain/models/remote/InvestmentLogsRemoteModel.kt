@@ -8,27 +8,27 @@ data class InvestmentLogsRemoteModel(
 	val count: Int,
 	val next: String?,
 	val previous: String?,
-	val results: List<InvestmentLogsModel>,
+	val results: List<InvestmentLogsModel>?,
 ): NoObfuscate
 data class InvestmentLogsModel(
 	@SerializedName("id")
-	val id: Long,
+	val id: Long?,
 	@SerializedName("start_price")
-	val startPrice: Long,
+	val startPrice: Long?,
 	@SerializedName("final_price")
-	val finalPrice: Long,
+	val finalPrice: Long?,
 	@SerializedName("type")
-	val type: String,
+	val type: String?,
 	@SerializedName("investment_type")
-	val investmentType: String,
+	val investmentType: String?,
 	@SerializedName("investment_sub_type")
 	val investmentSubType: String?,
 	@SerializedName("user")
-	val user: String,
+	val user: String?,
 	@SerializedName("state")
-	val state: String,
+	val state: String?,
 	@SerializedName("tracking_number")
-	val trackingNumber: String,
+	val trackingNumber: String?,
 	@SerializedName("has_error")
 	val hasError: Boolean,
 	@SerializedName("error_description")
@@ -37,4 +37,6 @@ data class InvestmentLogsModel(
 	val createdAt: String,
 	@SerializedName("updated_at")
 	val updatedAt: String,
+	@SerializedName("description")
+	val description: String?,
 ): NoObfuscate

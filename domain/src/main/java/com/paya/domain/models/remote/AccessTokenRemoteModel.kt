@@ -5,5 +5,5 @@ import com.paya.domain.tools.NoObfuscate
 
 data class AccessTokenRemoteModel(
 	@SerializedName("access")
-	val accessToken: String
+	val accessToken: String?
 ): NoObfuscate

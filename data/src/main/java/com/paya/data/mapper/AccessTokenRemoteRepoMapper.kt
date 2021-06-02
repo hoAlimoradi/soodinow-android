@@ -11,7 +11,7 @@ class AccessTokenRemoteRepoMapper @Inject constructor() : Mapper<
 		> {
 	
 	override fun map(param: AccessTokenRemoteModel): UserInfoRepoModel {
-		return UserInfoRepoModel(param.accessToken)
+		return UserInfoRepoModel(param.accessToken ?: "")
 	}
 	
 }
