@@ -27,7 +27,7 @@ private const val ARG_HAVE_BUTTON = "have_button"
  * create an instance of this fragment.
  */
 class CardAccount : BaseFragment<BaseViewModel>() {
-    private lateinit var mBinding: AccountCardBinding
+    private var mBinding: AccountCardBinding? = null
     var activeBoxRepo: ActiveBoxRepo? = null
     var haveButton: Boolean = true
     private val viewModel: BaseViewModel by viewModels()
@@ -47,17 +47,19 @@ class CardAccount : BaseFragment<BaseViewModel>() {
 
         // Inflate the layout for this fragment
         mBinding = DataBindingUtil.inflate(inflater, R.layout.account_card, container, false)
-        mBinding.lifecycleOwner = this
-        return mBinding.root
+        mBinding?.apply { lifecycleOwner = this@CardAccount }
+        return mBinding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setData()
-        mBinding.managementAccountBtn.visibility = if (haveButton) View.VISIBLE else View.INVISIBLE
-        mBinding.managementAccountBtn.setOnClickListener {
-            getFindViewController()?.navigate(R.id.cashManager,
-                activeBoxRepo?.id?.let { it1 -> CashManagerFragment.newBundle(it1) })
+        mBinding?.managementAccountBtn?.apply {
+            visibility = if (haveButton) View.VISIBLE else View.INVISIBLE
+            setOnClickListener {
+                getFindViewController()?.navigate(R.id.cashManager,
+                    activeBoxRepo?.id?.let { it1 -> CashManagerFragment.newBundle(it1) })
+            }
         }
     }
 
@@ -68,16 +70,23 @@ class CardAccount : BaseFragment<BaseViewModel>() {
         if ( activeBoxRepo == null)
             return
         activeBoxRepo?.let {
-            mBinding.accountUserName.text = it.userName
-            mBinding.wealthValue.text = Utils.separatorAmount(it.price.toString())
-            val persianDate = Utils.convertStringToPersianCalender(it.createAt)
-            persianDate?.let { date ->
-                mBinding.dateTitle.text =
-                    "${date.persianYear}/${date.persianMonth}/${date.persianDay}"
+            mBinding?.apply {
+                accountUserName.text = it.userName
+                wealthValue.text = Utils.separatorAmount(it.price.toString())
+                val persianDate = Utils.convertStringToPersianCalender(it.createAt)
+                persianDate?.let { date ->
+                    dateTitle.text =
+                        "${date.persianYear}/${date.persianMonth}/${date.persianDay}"
+                }
             }
         }
 
 
+    }
+
+    override fun onDestroyView() {
+        mBinding = null
+        super.onDestroyView()
     }
 
     companion object {

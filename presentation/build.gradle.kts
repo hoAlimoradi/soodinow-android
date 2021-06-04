@@ -67,8 +67,8 @@ dependencies {
 	
 	implementation("com.google.dagger:hilt-android:${Dependencies.Versions.HILT_VER}")
 	kapt("com.google.dagger:hilt-android-compiler:${Dependencies.Versions.HILT_VER}")
-	implementation("androidx.hilt:hilt-lifecycle-viewmodel:${Dependencies.Versions.ANDROIDX_HILT_VER}")
-	kapt("androidx.hilt:hilt-compiler:${Dependencies.Versions.ANDROIDX_HILT_VER}")
+//	implementation("androidx.hilt:hilt-lifecycle-viewmodel:${Dependencies.Versions.ANDROIDX_HILT_VER}")
+//	kapt("androidx.hilt:hilt-compiler:${Dependencies.Versions.ANDROIDX_HILT_VER}")
 	
 	implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${Dependencies.Versions.LIFECYCLE_VER}")
 	implementation("androidx.lifecycle:lifecycle-livedata-ktx:${Dependencies.Versions.LIFECYCLE_VER}")

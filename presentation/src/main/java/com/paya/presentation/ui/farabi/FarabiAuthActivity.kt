@@ -150,7 +150,10 @@ class FarabiAuthActivity : BaseActivity<FarabiAuthViewModel>() {
             else -> return
         }
     }
-
+    override fun onDestroy() {
+        super.onDestroy()
+        mBinding.unbind()
+    }
     override val baseViewModel: BaseViewModel
         get() = mViewModel
 

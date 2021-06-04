@@ -1,6 +1,5 @@
 package com.paya.presentation.viewmodel
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -11,10 +10,12 @@ import com.paya.domain.tools.UseCase
 
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.ui.cashManager.source.HistoryPriceDataSource
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-
-class CashHistoryManagerViewModel @ViewModelInject constructor(
+@HiltViewModel
+class CashHistoryManagerViewModel @Inject constructor(
     private val historyPriceUseCase: UseCase<HistoryPriceBodyRepoModel, HistoryPriceRepoModel>
 ) : BaseViewModel() {
     val status: Flow<PagingData<PriceModel>> = Pager(PagingConfig(pageSize = 10)) {

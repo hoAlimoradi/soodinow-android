@@ -38,8 +38,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ProfileFragment : BaseFragment<ProfileViewModel>() {
 
-    private lateinit var mBinding: FragmentProfileBinding
-    private lateinit var adapter: SlidePagerAdapter
+    private var mBinding: FragmentProfileBinding? = null
+    private var adapterSlide: SlidePagerAdapter? = null
     private val viewModel: ProfileViewModel by viewModels()
 
 
@@ -55,10 +55,12 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
             false
         )
 
-        mBinding.lifecycleOwner = this
-        mBinding.viewModel = viewModel
+        mBinding?.apply {
+            lifecycleOwner = this@ProfileFragment
+            viewModel = viewModel
+        }
 
-        return mBinding.root
+        return mBinding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -70,17 +72,18 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
         observe(viewModel.profile, ::onProfileReady)
         observe(viewModel.pieChartStatus, ::setData)
 
-        mBinding.historyLogBtn.setOnClickListener {
-            getFindViewController()?.navigate(R.id.financialReportFragment)
+        mBinding?.apply {
+            historyLogBtn.setOnClickListener {
+                getFindViewController()?.navigate(R.id.financialReportFragment)
+            }
+            chartEfficiencyBtn.setOnClickListener {
+                openChart()
+            }
+            alarm.setOnClickListener {
+                NotificationEmptyDialog().show(parentFragmentManager, "notification dialog")
+            }
         }
         viewModel.getExistAccount()
-
-        mBinding.chartEfficiencyBtn.setOnClickListener {
-            openChart()
-        }
-        mBinding.alarm.setOnClickListener {
-            NotificationEmptyDialog().show(parentFragmentManager, "notification dialog")
-        }
 
     }
 
@@ -108,9 +111,15 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
                     )
                 }
 
+
 //            mBinding.efficiencyRecyclerView.addItemDecoration(verticalDivider)
-            mBinding.efficiencyRecyclerView.addItemDecoration(horizontalDivider)
-            mBinding.efficiencyRecyclerView.adapter = EfficiencyAdapter(list.sortedBy { it.position })
+            mBinding?.apply {
+                efficiencyRecyclerView.apply {
+                    addItemDecoration(horizontalDivider)
+                    adapter =
+                        EfficiencyAdapter(list.sortedBy { it.position })
+                }
+            }
 
         }
     }
@@ -124,7 +133,7 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
                 it.forEach { activeBox ->
                     viewModel.cardAccounts.add(CardAccount.newInstance(activeBox))
                 }
-                adapter.notifyDataSetChanged()
+                adapterSlide?.apply { notifyDataSetChanged() }
                 if (it.isEmpty()) {
                     viewModel.setErrorMessage("شما حساب فعال ندارید \n" +
                             "ابتدا پیمان خود را با ما ببندید")
@@ -145,7 +154,7 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
 
         if (resource.status == Status.SUCCESS) {
             resource.data?.let { list ->
-                mBinding.parentView.visibility = View.VISIBLE
+                mBinding?.apply { parentView.visibility = View.VISIBLE }
                 setupEfficiencyAdapter(list)
             }
 
@@ -155,40 +164,41 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
     }
 
     private fun setupViewPager() {
-        adapter = SlidePagerAdapter(this)
-        mBinding.pager.offscreenPageLimit = 1
-        mBinding.pager.adapter = adapter
-        mBinding.pager.setPadding(
-            resources.getDimension(R.dimen.viewpager_item_padding).toInt(),
-            0,
-            resources.getDimension(R.dimen.viewpager_item_padding).toInt(), 0
-        )
-        mBinding.pager.setPageTransformer(ViewPagerUtil.getTransformer(requireContext().resources))
-        mBinding.pager.addItemDecoration(ViewPagerUtil.getItemDecoration(requireContext()))
+        adapterSlide = SlidePagerAdapter(this)
+        mBinding?.pager?.apply {
+            offscreenPageLimit = 1
+            adapterSlide?.let { adapter = it }
+            setPadding(
+                resources.getDimension(R.dimen.viewpager_item_padding).toInt(),
+                0,
+                resources.getDimension(R.dimen.viewpager_item_padding).toInt(), 0
+            )
+            setPageTransformer(ViewPagerUtil.getTransformer(requireContext().resources))
+            addItemDecoration(ViewPagerUtil.getItemDecoration(requireContext()))
 
-        mBinding.pager.registerOnPageChangeCallback(
-            object : ViewPager2.OnPageChangeCallback() {
-                override fun onPageSelected(position: Int) {
-                    viewModel.cardAccounts[position].activeBoxRepo?.let {
-                        viewModel.currentBoxId = it.id
-                        viewModel.getProfile(
-                            it.id
-                        )
-                        super.onPageSelected(position)
+            registerOnPageChangeCallback(
+                object : ViewPager2.OnPageChangeCallback() {
+                    override fun onPageSelected(position: Int) {
+                        viewModel.cardAccounts[position].activeBoxRepo?.let {
+                            viewModel.currentBoxId = it.id
+                            viewModel.getProfile(
+                                it.id
+                            )
+                            super.onPageSelected(position)
+                        }
                     }
                 }
-            }
-        )
-
+            )
+        }
     }
 
     private fun setupPieChart() {
-        with(mBinding.pieChart) {
+        mBinding?.pieChart?.apply {
             setUsePercentValues(true)
             description.isEnabled = false
             context?.let { context ->
                 setNoDataText(context.getString(R.string.no_data_chart))
-                setNoDataTextColor(ContextCompat.getColor(context,R.color.japanese_laurel_green))
+                setNoDataTextColor(ContextCompat.getColor(context, R.color.japanese_laurel_green))
             }
             setExtraOffsets(0f, 20f, 0f, 20f)
 
@@ -246,7 +256,7 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
             getIranSans(it)?.let { typeFace ->
                 data.setValueTypeface(typeFace)
             }
-            with(mBinding.pieChart) {
+            mBinding?.pieChart?.apply {
                 this.data = data
                 // undo all highlights
                 highlightValues(null)
@@ -258,35 +268,40 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
     }
 
     private fun initChartLabelRecyclerView() {
-        mBinding.chartLabelRecyclerView.layoutManager =
-            RtlGridLayoutManager(context, 4)
-        context?.let { context ->
-            val divider = WithoutLastDividerItemDecorator(context, RecyclerView.HORIZONTAL)
-            val dividerVertical = WithoutLastDividerItemDecorator(context, RecyclerView.VERTICAL)
-            ContextCompat.getDrawable(
-                context,
-                R.drawable.chart_divider
-            )?.let {
-                divider.setDrawable(it)
-                dividerVertical.setDrawable(it)
+        mBinding?.chartLabelRecyclerView?.apply {
+            layoutManager =
+                RtlGridLayoutManager(context, 4)
+            context?.let { context ->
+                val divider = WithoutLastDividerItemDecorator(context, RecyclerView.HORIZONTAL)
+                val dividerVertical =
+                    WithoutLastDividerItemDecorator(context, RecyclerView.VERTICAL)
+                ContextCompat.getDrawable(
+                    context,
+                    R.drawable.chart_divider
+                )?.let {
+                    divider.setDrawable(it)
+                    dividerVertical.setDrawable(it)
+                }
+                removeAllDecoration()
+                addItemDecoration(divider)
+                addItemDecoration(dividerVertical)
             }
-            mBinding.chartLabelRecyclerView.removeAllDecoration()
-            mBinding.chartLabelRecyclerView.addItemDecoration(divider)
-            mBinding.chartLabelRecyclerView.addItemDecoration(dividerVertical)
-        }
-        if (!viewModel.cardAccounts.isEmpty()) {
-            viewModel.cardAccounts.clear()
-            adapter.notifyDataSetChanged()
+            if (viewModel.cardAccounts.isNotEmpty()) {
+                viewModel.cardAccounts.clear()
+                adapterSlide?.apply { notifyDataSetChanged() }
+            }
         }
     }
 
     private fun setupChartLabelRecyclerView(pieChartModel: PieChartModel) {
-        val adapter = ChartLabelAdapter(pieChartModel.chartLabels) {
-            val y = mBinding.pieChart.data.dataSets[0].getEntryForIndex(it).y
-            mBinding.pieChart.highlightValue(it.toFloat(), y, 0)
+        val adapterChart = ChartLabelAdapter(pieChartModel.chartLabels) {
+            mBinding?.pieChart?.apply {
+                val y = data.dataSets[0].getEntryForIndex(it).y
+                highlightValue(it.toFloat(), y, 0)
+            }
         }
 
-        mBinding.chartLabelRecyclerView.adapter = adapter
+        mBinding?.chartLabelRecyclerView?.apply{adapter = adapterChart}
 
     }
 
@@ -300,6 +315,12 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
         override fun createFragment(position: Int): Fragment = viewModel.cardAccounts[position]
     }
 
+    override fun onDestroyView() {
+        mBinding?.pager?.apply { adapter = null }
+        adapterSlide = null
+        mBinding = null
+        super.onDestroyView()
+    }
 
     override val baseViewModel: BaseViewModel
         get() = viewModel

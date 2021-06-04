@@ -71,7 +71,10 @@ class RegisterFragment : BaseFragment<RegisterViewModel>() {
             )
         }
     }
-
+    override fun onDestroy() {
+        super.onDestroy()
+        mBinding.unbind()
+    }
     override val baseViewModel: BaseViewModel
         get() = mViewModel
 

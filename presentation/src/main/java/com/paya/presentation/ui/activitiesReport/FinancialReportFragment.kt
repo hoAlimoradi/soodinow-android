@@ -133,7 +133,10 @@ class FinancialReportFragment : BaseFragment<FinancialReportViewModel>() {
 
         })
     }
-
+    override fun onDestroy() {
+        super.onDestroy()
+        mBinding.unbind()
+    }
     companion object {
         @JvmStatic
         fun setParamDate(

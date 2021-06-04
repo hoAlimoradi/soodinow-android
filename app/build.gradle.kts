@@ -36,16 +36,9 @@ android {
         getByName("release") {
             isMinifyEnabled = true
             isShrinkResources = true
-            isDebuggable = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
 
-        getByName("debug") {
-
-            isMinifyEnabled = true
-            isShrinkResources = true
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-        }
     }
 
 
@@ -66,8 +59,8 @@ dependencies {
     
     implementation ("com.google.dagger:hilt-android:${Dependencies.Versions.HILT_VER}")
     kapt ("com.google.dagger:hilt-android-compiler:${Dependencies.Versions.HILT_VER}")
-    implementation ("androidx.hilt:hilt-lifecycle-viewmodel:${Dependencies.Versions.ANDROIDX_HILT_VER}")
-    kapt ("androidx.hilt:hilt-compiler:${Dependencies.Versions.ANDROIDX_HILT_VER}")
+//    implementation ("androidx.hilt:hilt-lifecycle-viewmodel:${Dependencies.Versions.ANDROIDX_HILT_VER}")
+//    kapt ("androidx.hilt:hilt-compiler:${Dependencies.Versions.ANDROIDX_HILT_VER}")
     
     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.11.0")
     kapt ("com.android.databinding:compiler:${Dependencies.Versions.DATA_BINDING_VER}")

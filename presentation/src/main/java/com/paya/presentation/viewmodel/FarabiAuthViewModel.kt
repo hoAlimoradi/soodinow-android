@@ -1,7 +1,7 @@
 package com.paya.presentation.viewmodel
 
 import androidx.databinding.ObservableField
-import androidx.hilt.lifecycle.ViewModelInject
+import javax.inject.Inject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.paya.domain.models.repo.*
@@ -9,21 +9,21 @@ import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.domain.tools.UseCase
 import com.paya.presentation.base.BaseViewModel
-import com.paya.presentation.utils.VolatileLiveData
 import com.paya.presentation.utils.callResource
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-
-class FarabiAuthViewModel @ViewModelInject constructor(
+@HiltViewModel
+class FarabiAuthViewModel @Inject constructor(
 private val farabiAuthUseCase : UseCase<String, FarabiTokenRepoModel>,
 private val farabiInfoUseCase : UseCase<UserFarabiRepoModel, FarabiInfoRepoModel>,
 private val getUserFarabiUseCase : UseCase<String, UserFarabiRepoModel>
 ) : BaseViewModel() {
 
-    val status=  VolatileLiveData<Resource<FarabiTokenRepoModel>>()
-    val statusGetUserFarabi=  VolatileLiveData<Resource<UserFarabiRepoModel>>()
-    val statusFarabiInfo=  VolatileLiveData<Resource<FarabiInfoRepoModel>>()
+    val status=  MutableLiveData<Resource<FarabiTokenRepoModel>>()
+    val statusGetUserFarabi=  MutableLiveData<Resource<UserFarabiRepoModel>>()
+    val statusFarabiInfo=  MutableLiveData<Resource<FarabiInfoRepoModel>>()
 
 	fun setToken(token:String) {
         if (token.isNullOrBlank()) {
@@ -31,7 +31,7 @@ private val getUserFarabiUseCase : UseCase<String, UserFarabiRepoModel>
             return
         }
 
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             status.postValue(Resource.loading(null))
             val response = callResource(this@FarabiAuthViewModel,farabiAuthUseCase.action(token))
             status.postValue(response)
@@ -43,14 +43,14 @@ private val getUserFarabiUseCase : UseCase<String, UserFarabiRepoModel>
             return
         }
 
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             statusGetUserFarabi.postValue(Resource.loading(null))
             val response = callResource(this@FarabiAuthViewModel,getUserFarabiUseCase.action(token))
             statusGetUserFarabi.postValue(response)
         }
     }
 	fun setFarabiInfo(userFarabiRepoModel: UserFarabiRepoModel) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             statusFarabiInfo.postValue(Resource.loading(null))
             val response = callResource(this@FarabiAuthViewModel,farabiInfoUseCase.action(userFarabiRepoModel))
             statusFarabiInfo.postValue(response)

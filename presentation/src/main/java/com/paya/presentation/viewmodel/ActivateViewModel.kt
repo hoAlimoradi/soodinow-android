@@ -1,7 +1,6 @@
 package com.paya.presentation.viewmodel
 
 import androidx.databinding.ObservableField
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.paya.domain.models.repo.ActivateRepoModel
@@ -10,13 +9,15 @@ import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.domain.tools.UseCase
 import com.paya.presentation.base.BaseViewModel
-import com.paya.presentation.utils.VolatileLiveData
 import com.paya.presentation.utils.callResource
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ActivateViewModel @ViewModelInject constructor(
+@HiltViewModel
+class ActivateViewModel @Inject constructor(
 	private val activateUseCase: UseCase<ActivateRepoModel,Any>,
 	private val registerUseCase: UseCase<String,RegisterRepoModel>
 ) : BaseViewModel() {
@@ -32,7 +33,7 @@ class ActivateViewModel @ViewModelInject constructor(
 	lateinit var phoneNumber: String
 	val activationCode = ObservableField<String>()
 	
-	val status = VolatileLiveData<Resource<Any>>()
+	val status = MutableLiveData<Resource<Any>>()
 	
 	fun setTitle(title: String) {
 		this.title.value = title
@@ -44,7 +45,7 @@ class ActivateViewModel @ViewModelInject constructor(
 			status.setValue(Resource.error("کد وارد شده اشتباه است",null))
 			return
 		}
-		viewModelScope.launch(Dispatchers.IO) {
+		viewModelScope.launch {
 			status.postValue(Resource.loading(null))
 			val activateModel = ActivateRepoModel(
 				phoneNumber,
@@ -58,7 +59,7 @@ class ActivateViewModel @ViewModelInject constructor(
 	fun register() {
 		if (remainingTime.value != 0)
 			return
-		viewModelScope.launch(Dispatchers.IO) {
+		viewModelScope.launch {
 			status.postValue(Resource.loading(null))
 			val response = callResource(this@ActivateViewModel,registerUseCase.action(phoneNumber))
 			

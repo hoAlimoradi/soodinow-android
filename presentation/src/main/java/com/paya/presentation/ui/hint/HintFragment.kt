@@ -60,12 +60,15 @@ class HintFragment : BaseFragment<HintViewModel>() {
 		}
 		versionTxt.text = "  نسخه  ${context?.let { getVersionName(it) }}"
 	}
-	
 
-	
 
-	
 
+
+
+	override fun onDestroy() {
+		super.onDestroy()
+		mBinding.unbind()
+	}
 	
 	private inner class ScreenSlidePagerAdapter(f: Fragment) : FragmentStateAdapter(f) {
 		override fun getItemCount(): Int = 3

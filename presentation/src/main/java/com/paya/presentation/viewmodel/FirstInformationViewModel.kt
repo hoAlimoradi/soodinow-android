@@ -1,8 +1,9 @@
 package com.paya.presentation.viewmodel
 
 import androidx.databinding.ObservableField
-import androidx.hilt.lifecycle.ViewModelInject
+import javax.inject.Inject
 import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.paya.domain.models.repo.ProfileBodyRepoModel
 import com.paya.domain.models.repo.ProfileRepoModel
@@ -12,13 +13,13 @@ import com.paya.domain.tools.Status
 import com.paya.domain.tools.UseCase
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.utils.Utils
-import com.paya.presentation.utils.VolatileLiveData
 import com.paya.presentation.utils.callResource
+import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.hamsaa.persiandatepicker.util.PersianCalendar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-
-class FirstInformationViewModel @ViewModelInject constructor(
+@HiltViewModel
+class FirstInformationViewModel @Inject constructor(
 	private val useCaseUpdateProfile: UseCase<ProfileBodyRepoModel, ProfileRepoModel>,
 	private val cityUseCase: UseCase<Unit, List<ProvinceRepoModel>>,
 	private val useCaseProfile: UseCase<Unit,ProfileRepoModel>
@@ -38,9 +39,9 @@ class FirstInformationViewModel @ViewModelInject constructor(
 	var citySelection = 0
 	var provinceSelection = 0
 	val loading = MediatorLiveData<Resource<Nothing>>()
-	val statusUpdate = VolatileLiveData<Resource<ProfileRepoModel>>()
-	val statusCity = VolatileLiveData<Resource<List<ProvinceRepoModel>>>()
-	val statusProfile = VolatileLiveData<Resource<ProfileRepoModel>>()
+	val statusUpdate = MutableLiveData<Resource<ProfileRepoModel>>()
+	val statusCity = MutableLiveData<Resource<List<ProvinceRepoModel>>>()
+	val statusProfile = MutableLiveData<Resource<ProfileRepoModel>>()
 
 
 	init {
@@ -83,7 +84,7 @@ class FirstInformationViewModel @ViewModelInject constructor(
 		address: String
 	) {
 
-		viewModelScope.launch(Dispatchers.IO) {
+		viewModelScope.launch {
 			statusUpdate.postValue(Resource.loading(null))
 			val body = ProfileBodyRepoModel(
 				firstName,
@@ -105,7 +106,7 @@ class FirstInformationViewModel @ViewModelInject constructor(
 	}
 
 	fun getCity() {
-		viewModelScope.launch(Dispatchers.IO) {
+		viewModelScope.launch {
 			statusCity.postValue(Resource.loading(null))
 			val response = callResource(this@FirstInformationViewModel, cityUseCase.action(Unit))
 			if (response.status == Status.SUCCESS)
@@ -115,7 +116,7 @@ class FirstInformationViewModel @ViewModelInject constructor(
 	}
 
 	fun getProfile() {
-		viewModelScope.launch(Dispatchers.IO) {
+		viewModelScope.launch {
 			statusProfile.postValue(Resource.loading(null))
 			val response  = callResource(this@FirstInformationViewModel,useCaseProfile.action(Unit))
 			if (response.status == Status.SUCCESS && response.data?.complete!!) {

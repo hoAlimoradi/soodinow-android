@@ -30,7 +30,10 @@ class IntroduceFriendsFragment : Fragment() {
 		
 		return mBinding.root
 	}
-	
+	override fun onDestroy() {
+		super.onDestroy()
+		mBinding.unbind()
+	}
 	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
 		super.onViewCreated(view,savedInstanceState)
 		mBinding.toolbar.backButton.setOnClickListener {

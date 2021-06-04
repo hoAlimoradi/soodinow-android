@@ -1,6 +1,6 @@
 package com.paya.presentation.viewmodel
 
-import androidx.hilt.lifecycle.ViewModelInject
+import javax.inject.Inject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.paya.domain.models.repo.*
@@ -10,9 +10,10 @@ import com.paya.domain.tools.UseCase
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.utils.SingleLiveEvent
 import com.paya.presentation.utils.callResource
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-
-class HomeViewModel @ViewModelInject constructor(
+@HiltViewModel
+class HomeViewModel @Inject constructor(
 	private val currencyRepository: CurrencyPriceRepository,
 	private val useCaseProfile: UseCase<Unit, ProfileRepoModel>
 ) : BaseViewModel() {

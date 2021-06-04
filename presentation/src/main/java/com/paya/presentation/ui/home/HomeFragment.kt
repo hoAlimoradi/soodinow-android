@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.NonNull
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import androidx.viewpager2.adapter.FragmentViewHolder
 import com.paya.domain.models.repo.CurrencyPriceRepoModel
 import com.paya.domain.models.repo.ProfileRepoModel
 import com.paya.domain.tools.Resource
@@ -27,17 +29,16 @@ import com.paya.presentation.utils.observe
 import com.paya.presentation.utils.setAllOnClickListener
 import com.paya.presentation.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_new_card_account.*
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<HomeViewModel>() {
-	
-	private lateinit var adapter: SlidePagerAdapter
-	private lateinit var adapterCurrency: MarketAdapter
-	private lateinit var mBinding: FragmentHomeBinding
+
+	private var adapter: SlidePagerAdapter? = null
+	private var adapterCurrency: MarketAdapter? = null
+	private  var mBinding: FragmentHomeBinding? = null
 	private val mViewModel: HomeViewModel by viewModels()
 	override fun onCreateView(
-		inflater: LayoutInflater,container: ViewGroup?,
+		inflater: LayoutInflater, container: ViewGroup?,
 		savedInstanceState: Bundle?
 	): View? {
 		// Inflate the layout for this fragment
@@ -47,9 +48,11 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 			container,
 			false
 		)
-		mBinding.viewModel = mViewModel
-		mBinding.lifecycleOwner = this
-		return mBinding.root
+		mBinding?.apply{
+			viewModel = mViewModel
+			lifecycleOwner = this@HomeFragment
+		}
+		return mBinding?.let{it.root}
 	}
 	
 	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
@@ -58,44 +61,57 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 		observe(mViewModel.statusProfile, ::checkProfile)
 		val manager = LinearLayoutManager(context)
 		adapterCurrency = MarketAdapter()
-		mBinding.marketRecycleView.adapter = adapterCurrency
-		mBinding.marketRecycleView.layoutManager = manager
-		mViewModel.getCurrencyPrices()
-		mBinding.whyGroup.setAllOnClickListener {
-			getFindViewController()?.navigate(R.id.whySoodinow)
+		adapterCurrency?.let {
+			mBinding?.apply {
+				marketRecycleView.adapter = it
+			}
 		}
+		mBinding?.apply {
+			marketRecycleView.layoutManager = manager
+			whyGroup.setAllOnClickListener {
+				getFindViewController()?.navigate(R.id.whySoodinow)
+			}
+			alarm.setOnClickListener {
+				NotificationEmptyDialog().show(parentFragmentManager, "notification dialog")
+			}
+		}
+		mViewModel.getCurrencyPrices()
 
 		setupViewPager()
 
-		mBinding.alarm.setOnClickListener {
-			NotificationEmptyDialog().show(parentFragmentManager, "notification dialog")
-		}
 
 
 	}
 
 	
 	private fun setupViewPager() {
-		adapter = SlidePagerAdapter(this) {
+		adapter = SlidePagerAdapter(childFragmentManager,viewLifecycleOwner.lifecycle) {
 			mViewModel.getProfile()
 		}
-		mBinding.pager.offscreenPageLimit = 1
-		mBinding.pager.adapter = adapter
-		mBinding.pager.setPadding(
-			resources.getDimension(R.dimen.viewpager_item_padding).toInt(),
-			0,
-			resources.getDimension(R.dimen.viewpager_item_padding).toInt(), 0
-		)
-		mBinding.pager.setPageTransformer(ViewPagerUtil.getTransformer(requireContext().resources))
-		mBinding.pager.addItemDecoration(ViewPagerUtil.getItemDecoration(requireContext()))
-		mBinding.tabAccountCard.setViewPager2(mBinding.pager)
+		mBinding?.apply {
+			pager.offscreenPageLimit = 1
+			adapter?.let {
+				pager.adapter = it
+			}
+			pager.setPadding(
+				resources.getDimension(R.dimen.viewpager_item_padding).toInt(),
+				0,
+				resources.getDimension(R.dimen.viewpager_item_padding).toInt(), 0
+			)
+			pager.setPageTransformer(ViewPagerUtil.getTransformer(requireContext().resources))
+			pager.addItemDecoration(ViewPagerUtil.getItemDecoration(requireContext()))
+			tabAccountCard.setViewPager2(pager)
+		}
+
 	}
 	
 	private fun onPricesReady(resource: Resource<List<CurrencyPriceRepoModel>>){
-		when(resource.status){
-			Status.SUCCESS -> resource.data?.let {
-				adapterCurrency.clear()
-				adapterCurrency.addAllData(it as ArrayList<CurrencyPriceRepoModel>)
+		when (resource.status) {
+			Status.SUCCESS -> resource.data?.let { markets ->
+				adapterCurrency?.let {
+					it.clear()
+					it.addAllData(markets as ArrayList<CurrencyPriceRepoModel>)
+				}
 			}
 
 
@@ -103,8 +119,9 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 		}
 	}
 
-	private inner class SlidePagerAdapter(f: Fragment, val onItemClick: (position: Int) -> Unit) :
-		FragmentStateAdapter(f) {
+	private inner class SlidePagerAdapter(val fragmentManager: FragmentManager,
+										  val lifecycle: Lifecycle, val onItemClick: (position: Int) -> Unit) :
+		FragmentStateAdapter(fragmentManager,lifecycle) {
 		override fun getItemCount(): Int = 1
 
 		override fun createFragment(position: Int): Fragment {
@@ -126,6 +143,20 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 				)
 			}
 		}
+	}
+
+	override fun onDestroyView() {
+		mBinding?.pager?.apply {
+			adapter = null
+		}
+		adapter = null
+		adapterCurrency = null
+		mBinding = null
+		super.onDestroyView()
+	}
+	override fun onDestroy() {
+		super.onDestroy()
+
 	}
 
 	override val baseViewModel: BaseViewModel

@@ -50,4 +50,8 @@ class DividendInformationFragment : Fragment() {
 		mBinding.buyRecyclerView.adapter = InformationBuyAdapter()
 		mBinding.buyRecyclerView.isNestedScrollingEnabled = false
 	}
+	override fun onDestroy() {
+		super.onDestroy()
+		mBinding.unbind()
+	}
 }

@@ -80,5 +80,8 @@ class InvestmentFragment : Fragment() {
 		}
 		
 	}
-	
+	override fun onDestroy() {
+		super.onDestroy()
+		mBinding.unbind()
+	}
 }

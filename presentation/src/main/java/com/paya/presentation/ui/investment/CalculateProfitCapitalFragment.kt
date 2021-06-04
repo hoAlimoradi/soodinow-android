@@ -152,7 +152,10 @@ class CalculateProfitCapitalFragment : BaseFragment<CalculateProfitCapitalViewMo
 				})
 		)
 	}
-	
+	override fun onDestroy() {
+		super.onDestroy()
+		mBinding.unbind()
+	}
 	
 	private fun setupInputAmount() {
 		inputAmount.addTextChangedListener(

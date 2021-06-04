@@ -1,20 +1,21 @@
 package com.paya.presentation.viewmodel
 
 import androidx.databinding.ObservableField
-import androidx.hilt.lifecycle.ViewModelInject
+import javax.inject.Inject
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.paya.domain.models.repo.LoginRepoModel
 import com.paya.domain.repository.AuthRepository
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.UseCase
 import com.paya.presentation.base.BaseViewModel
-import com.paya.presentation.utils.VolatileLiveData
 import com.paya.presentation.utils.callResource
 import com.paya.presentation.utils.md5
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-
-class LoginViewModel @ViewModelInject constructor(
+@HiltViewModel
+class LoginViewModel @Inject constructor(
 	private val loginUseCase: UseCase<LoginRepoModel,Any>,
 	private val getMobileUseCase: UseCase<Unit,String>,
 	private val authRepository: AuthRepository
@@ -25,13 +26,13 @@ class LoginViewModel @ViewModelInject constructor(
 	val username = ObservableField<String>()
 	val password = ObservableField<String>()
 	
-	val loginResource = VolatileLiveData<Resource<Any>>()
+	val loginResource = MutableLiveData<Resource<Any>>()
 	
 	init {
 		getMobile()
 	}
 	private fun getMobile() {
-		viewModelScope.launch(Dispatchers.IO) {
+		viewModelScope.launch {
 			username.set(getMobileUseCase.action(Unit).data?.replace("+989",""))
 		}
 	}
@@ -56,7 +57,7 @@ class LoginViewModel @ViewModelInject constructor(
 			loginResource.setValue(Resource.error("لطفا رمز عبور را وارد کنید",null))
 			return
 		}
-		viewModelScope.launch(Dispatchers.IO) {
+		viewModelScope.launch {
 			loginResource.postValue(Resource.loading(null))
 			val loginModel = LoginRepoModel(
 				username = "+989$username",

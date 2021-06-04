@@ -56,7 +56,10 @@ class CreateAccountPersonalFragment : Fragment() {
 		}
 		BindingAdapters.setLineChartData(mBinding.chart,points)
 	}
-	
+	override fun onDestroy() {
+		super.onDestroy()
+		mBinding.unbind()
+	}
 	private fun setupTagsRecyclerView() {
 		val layoutManager = LinearLayoutManager(context,RecyclerView.HORIZONTAL,true)
 		val adapter = DayAdapter()

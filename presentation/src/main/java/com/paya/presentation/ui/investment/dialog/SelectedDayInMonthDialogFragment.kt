@@ -76,7 +76,10 @@ class SelectedDayInMonthDialogFragment(
 		})
 		dayRecyclerView.adapter = adapter
 	}
-	
+	override fun onDestroy() {
+		super.onDestroy()
+		mBinding.unbind()
+	}
 	interface OnSelectedDay {
 		fun day(day: String)
 	}

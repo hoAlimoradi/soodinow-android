@@ -39,7 +39,10 @@ class ProfitMethodFragment : Fragment() {
 		super.onViewCreated(view,savedInstanceState)
 		setup()
 	}
-	
+	override fun onDestroy() {
+		super.onDestroy()
+		mBinding.unbind()
+	}
 	fun setup() {
 		/*percent?.let {
 			mBinding.progressIdeal.setValue(it.perfect.percent * 100)

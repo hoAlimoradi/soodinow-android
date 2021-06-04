@@ -9,36 +9,38 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.paya.domain.models.repo.ChatRepoModel
 import com.paya.presentation.R
 import com.paya.presentation.databinding.FragmentChatBinding
 import com.paya.presentation.ui.chat.adapter.ChatAdapter
-import com.paya.presentation.ui.chat.adapter.ExpertAdapter
-import com.paya.presentation.utils.OverlapDecoration
 
 
 class ChatFragment : Fragment() {
-	
+
 	private var adapterChat: ChatAdapter = ChatAdapter(mutableListOf())
-	private lateinit var mBinding: FragmentChatBinding
+	private var mBinding: FragmentChatBinding? = null
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		
+
 	}
-	
+
 	override fun onCreateView(
-		inflater: LayoutInflater,container: ViewGroup?,
+		inflater: LayoutInflater, container: ViewGroup?,
 		savedInstanceState: Bundle?
 	): View? {
 		// Inflate the layout for this fragment
-		mBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_chat,container,false)
-		mBinding.lifecycleOwner = this
-		return mBinding.root
+		mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_chat, container, false)
+		mBinding?.apply { lifecycleOwner = this@ChatFragment }
+		return mBinding?.root
 	}
 	
 	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
-		super.onViewCreated(view,savedInstanceState)
-		mBinding.pulsator.start()
+		super.onViewCreated(view, savedInstanceState)
+		mBinding?.apply {
+			pulsator.start()
+			toolbar.backButton.setOnClickListener {
+				findNavController().popBackStack()
+			}
+		}
 
 		setupChatRecyclerView()
 		/*mBinding.sendBtn.setOnClickListener {
@@ -49,18 +51,23 @@ class ChatFragment : Fragment() {
 			adapterChat.addItem(chat)
 			mBinding.chatRecyclerView.scrollToPosition(adapterChat.itemCount -1)
 		}*/
-		mBinding.toolbar.backButton.setOnClickListener {
-			findNavController().popBackStack()
+	}
+
+	override fun onDestroyView() {
+		mBinding?.apply { pulsator.stop() }
+		mBinding = null
+		super.onDestroyView()
+	}
+
+	private fun setupChatRecyclerView() {
+		val manager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+		mBinding?.apply {
+			chatRecyclerView.apply {
+				adapter = adapterChat
+				layoutManager = manager
+			}
 		}
 	}
-	
 
-	
-	private fun setupChatRecyclerView() {
-		val manager = LinearLayoutManager(requireContext(),RecyclerView.VERTICAL,false)
-		mBinding.chatRecyclerView.adapter = adapterChat
-		mBinding.chatRecyclerView.layoutManager = manager
-	}
-	
-	
+
 }

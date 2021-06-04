@@ -1,7 +1,7 @@
 package com.paya.presentation.viewmodel
 
 import android.graphics.Color
-import androidx.hilt.lifecycle.ViewModelInject
+import javax.inject.Inject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.github.mikephil.charting.data.PieEntry
@@ -15,10 +15,11 @@ import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.ui.adapter.chartLablel.ChartLabelAdapter
 import com.paya.presentation.ui.model.PieChartModel
 import com.paya.presentation.utils.callResource
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-
-class CreateLowRiskAccountViewModel @ViewModelInject constructor(
+@HiltViewModel
+class CreateLowRiskAccountViewModel @Inject constructor(
 	private val lowRiskInvestmentRepository: LowRiskInvestmentRepository
 ) : BaseViewModel() {
 
@@ -28,7 +29,7 @@ class CreateLowRiskAccountViewModel @ViewModelInject constructor(
 
 	fun getLowRiskStocks(type: String, price: Long) {
 		lowRiskResource.value = Resource.loading(null)
-		viewModelScope.launch(Dispatchers.IO) {
+		viewModelScope.launch {
 			val response = callResource(
 				this@CreateLowRiskAccountViewModel, lowRiskInvestmentRepository.getLowRiskStocks(
 					LowRiskStockRequest(type, price)

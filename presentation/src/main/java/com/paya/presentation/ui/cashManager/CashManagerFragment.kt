@@ -33,10 +33,10 @@ private const val ARG_ACCOUNT_ID = "account_id"
 class CashManagerFragment : BaseFragment<CashManagerViewModel>() {
 
     private val mViewModel: CashManagerViewModel by viewModels()
-    private lateinit var mBinding: FragmentCashManagerBinding
+    private  var mBinding: FragmentCashManagerBinding?=null
     private val cardAccounts = mutableListOf<CardAccount>()
     private var accountId: Long = 0
-    private lateinit var adapter: SlidePagerAdapter
+    private  var adapterSlide: SlidePagerAdapter?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -51,77 +51,88 @@ class CashManagerFragment : BaseFragment<CashManagerViewModel>() {
         // Inflate the layout for this fragment
         mBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_cash_manager, container, false)
-        mBinding.lifecycleOwner = this
-        mBinding.viewModel = mViewModel
-        return mBinding.root
+        mBinding?.apply {
+            lifecycleOwner = this@CashManagerFragment
+            viewModel = mViewModel
+        }
+        return mBinding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupViewPager()
-        mBinding.toolbar.backButton.setOnClickListener {
-            findNavController().popBackStack()
-        }
+
         observe(mViewModel.existAccount, ::onExistAccountReady)
         observe(mViewModel.sellPriceStatus, ::readySellPrice)
         observe(mViewModel.pullPriceStatus, ::readyPullPrice)
-        mBinding.inputPrice.setupWatcherPrice(lifecycleScope = lifecycleScope){}
-        mBinding.managerAccountHistory.setOnClickListener {
-            findNavController().navigate(
-                R.id.financialReportFragment
-            )
-        }
-
-
-        mBinding.submitBtn.setOnClickListener {
-            mViewModel.price.set(mBinding.inputPrice.getPriceLong())
-            mViewModel.setPullPrice()
-        }
-
-        mBinding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-
+        mBinding?.apply {
+            toolbar.backButton.setOnClickListener {
+                findNavController().popBackStack()
+            }
+            inputPrice.setupWatcherPrice(lifecycleScope = lifecycleScope) {}
+            managerAccountHistory.setOnClickListener {
+                findNavController().navigate(
+                    R.id.financialReportFragment
+                )
             }
 
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
 
+            submitBtn.setOnClickListener {
+                mViewModel.price.set(inputPrice.getPriceLong())
+                mViewModel.setPullPrice()
             }
 
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                when (mBinding.tabLayout.selectedTabPosition) {
-                    0 -> {
-                        mViewModel.priceType.set(CashManagerViewModel.PriceType.withdrawal)
-                        mBinding.inputPrice.maxPrice = mViewModel.maxSeek.get()!!
-                        mBinding.inputPrice.minPrice = mViewModel.minSeek.get()!!
-                        mBinding.inputPrice.setMessage("مبلغ وارد شده باید بین ${Utils.separatorAmount(mViewModel.minSeek.get()!!)} تا ${Utils.separatorAmount(mViewModel.maxSeek.get()!!)} ریال باشد")
-                        mViewModel.type.set("Fixed")
-                    }
-                    1 -> {
-                        mViewModel.priceType.set(CashManagerViewModel.PriceType.deposit)
-                        mBinding.inputPrice.maxPrice = 0L
-                        mBinding.inputPrice.minPrice = 0L
-                        mBinding.inputPrice.setMessage("")
-                        mViewModel.type.set("no_risk")
-                    }
+            tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+                override fun onTabReselected(tab: TabLayout.Tab?) {
+
                 }
-                mBinding.percentGroup.visibility =
-                    if (mViewModel.priceType.get() == CashManagerViewModel.PriceType.deposit) View.GONE else View.VISIBLE
-            }
 
-        })
-        changeTabColor()
-        mBinding.tabLayout.getTabAt(1)?.select()
+                override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+                }
+
+                override fun onTabSelected(tab: TabLayout.Tab?) {
+                    when (tabLayout.selectedTabPosition) {
+                        0 -> {
+                            mViewModel.priceType.set(CashManagerViewModel.PriceType.withdrawal)
+                            inputPrice.maxPrice = mViewModel.maxSeek.get()!!
+                            inputPrice.minPrice = mViewModel.minSeek.get()!!
+                            inputPrice.setMessage(
+                                "مبلغ وارد شده باید بین ${Utils.separatorAmount(
+                                    mViewModel.minSeek.get()!!
+                                )} تا ${Utils.separatorAmount(mViewModel.maxSeek.get()!!)} ریال باشد"
+                            )
+                            mViewModel.type.set("Fixed")
+                        }
+                        1 -> {
+                            mViewModel.priceType.set(CashManagerViewModel.PriceType.deposit)
+                            inputPrice.maxPrice = 0L
+                            inputPrice.minPrice = 0L
+                            inputPrice.setMessage("")
+                            mViewModel.type.set("no_risk")
+                        }
+                    }
+                    percentGroup.visibility =
+                        if (mViewModel.priceType.get() == CashManagerViewModel.PriceType.deposit) View.GONE else View.VISIBLE
+                }
+
+            })
+            changeTabColor()
+            tabLayout.getTabAt(1)?.select()
+        }
 
     }
 
 
     private fun changeTabColor() {
-        val tempLinearLayout1: LinearLayout =
-            (mBinding.tabLayout.getChildAt(0) as LinearLayout).getChildAt(0) as LinearLayout
-        tempLinearLayout1.setBackgroundResource(R.drawable.selector_tab_brokerage_red)
-        val tempLinearLayout2: LinearLayout =
-            (mBinding.tabLayout.getChildAt(0) as LinearLayout).getChildAt(1) as LinearLayout
-        tempLinearLayout2.setBackgroundResource(R.drawable.selector_tab_brokerage)
+        mBinding?.apply {
+            val tempLinearLayout1: LinearLayout =
+                (tabLayout.getChildAt(0) as LinearLayout).getChildAt(0) as LinearLayout
+            tempLinearLayout1.setBackgroundResource(R.drawable.selector_tab_brokerage_red)
+            val tempLinearLayout2: LinearLayout =
+                (tabLayout.getChildAt(0) as LinearLayout).getChildAt(1) as LinearLayout
+            tempLinearLayout2.setBackgroundResource(R.drawable.selector_tab_brokerage)
+        }
     }
 
 
@@ -150,30 +161,31 @@ class CashManagerFragment : BaseFragment<CashManagerViewModel>() {
     }
 
     private fun setupViewPager() {
-        adapter = SlidePagerAdapter(this)
-        mBinding.pager.offscreenPageLimit = 1
-        mBinding.pager.adapter = adapter
-        mBinding.pager.setPadding(
-            resources.getDimension(R.dimen.viewpager_item_padding).toInt(),
-            0,
-            resources.getDimension(R.dimen.viewpager_item_padding).toInt(), 0
-        )
-        mBinding.pager.setPageTransformer(ViewPagerUtil.getTransformer(requireContext().resources))
-        mBinding.pager.addItemDecoration(ViewPagerUtil.getItemDecoration(requireContext()))
+        adapterSlide = SlidePagerAdapter(this)
+        mBinding?.pager?.apply {
+            offscreenPageLimit = 1
+            adapter = adapterSlide
+            setPadding(
+                resources.getDimension(R.dimen.viewpager_item_padding).toInt(),
+                0,
+                resources.getDimension(R.dimen.viewpager_item_padding).toInt(), 0
+            )
+            setPageTransformer(ViewPagerUtil.getTransformer(requireContext().resources))
+            addItemDecoration(ViewPagerUtil.getItemDecoration(requireContext()))
 
-        mBinding.pager.registerOnPageChangeCallback(
-            object : ViewPager2.OnPageChangeCallback() {
-                override fun onPageSelected(position: Int) {
-                    super.onPageSelected(position)
-                    cardAccounts[position].activeBoxRepo?.let {
-                        mViewModel.getSellPrice(it.type!!)
-                        mViewModel.type.set(it.subType)
-                        mBinding.inputPrice.setPrice(it.price.toString())
+            registerOnPageChangeCallback(
+                object : ViewPager2.OnPageChangeCallback() {
+                    override fun onPageSelected(position: Int) {
+                        super.onPageSelected(position)
+                        cardAccounts[position].activeBoxRepo?.let {
+                            mViewModel.getSellPrice(it.type!!)
+                            mViewModel.type.set(it.subType)
+                            mBinding?.apply{inputPrice.setPrice(it.price.toString())}
+                        }
                     }
                 }
-            }
-        )
-
+            )
+        }
     }
 
     private fun onExistAccountReady(resource: Resource<ExitAccountRepoModel>) {
@@ -187,14 +199,14 @@ class CashManagerFragment : BaseFragment<CashManagerViewModel>() {
                         selectionPager = cardAccounts.size - 1
 //                        mViewModel.getSellPrice(activeBox.type)
                         mViewModel.type.set(activeBox.subType)
-                        mBinding.inputPrice.setPrice(activeBox.price.toString())
+                        mBinding?.apply{inputPrice.setPrice(activeBox.price.toString())}
                     }
                 }
-                mBinding.pager.currentItem = selectionPager
+                mBinding?.pager?.apply{currentItem = selectionPager}
                 if (it.isEmpty()) {
                     return@let
                 }
-                adapter.notifyDataSetChanged()
+                adapterSlide?.apply{notifyDataSetChanged()}
                 // TODO: 4/11/21 add type and price
             }
         }
@@ -211,6 +223,11 @@ class CashManagerFragment : BaseFragment<CashManagerViewModel>() {
         override fun createFragment(position: Int): Fragment = cardAccounts[position]
     }
 
+    override fun onDestroyView() {
+        mBinding?.pager?.apply { adapter = null }
+        mBinding = null
+        super.onDestroyView()
+    }
     companion object {
         @JvmStatic
         fun newBundle(accountId: Long) =

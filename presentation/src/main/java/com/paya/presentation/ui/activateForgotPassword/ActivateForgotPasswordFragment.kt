@@ -62,7 +62,10 @@ class ActivateForgotPasswordFragment : BaseFragment<ActivateForgotPasswordViewMo
 		}
 		requestHint()
 	}
-	
+	override fun onDestroy() {
+		super.onDestroy()
+		mBinding.unbind()
+	}
 	private fun checkActivateStatus(activateResource: Resource<Any>){
 		if (activateResource.status == Status.SUCCESS){
 

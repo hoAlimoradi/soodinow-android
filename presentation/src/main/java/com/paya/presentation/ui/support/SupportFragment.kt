@@ -13,28 +13,36 @@ import kotlinx.android.synthetic.main.fragment_support.*
 
 class SupportFragment : Fragment() {
 	
-	private lateinit var mBinding: FragmentSupportBinding
+	private  var mBinding: FragmentSupportBinding? = null
 	override fun onCreateView(
 		inflater: LayoutInflater,container: ViewGroup?,
 		savedInstanceState: Bundle?
 	): View? {
 		// Inflate the layout for this fragment
 		mBinding =  DataBindingUtil.inflate(inflater,R.layout.fragment_support,container,false)
-		mBinding.lifecycleOwner = this
-		return mBinding.root
+		mBinding?.apply{lifecycleOwner = this@SupportFragment}
+		return mBinding?.let{it.root}
 	}
 	
 	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
 		super.onViewCreated(view,savedInstanceState)
-		mBinding.toolbar.backButton.setOnClickListener {
-			findNavController().popBackStack()
+		mBinding?.apply {
+			toolbar.backButton.setOnClickListener {
+				findNavController().popBackStack()
+			}
+			onlineChatLayout.setOnClickListener {
+				findNavController().navigate(
+					SupportFragmentDirections.navigateToChatFragment()
+				)
+			}
+			pulsator.start()
 		}
-		pulsator.start()
-		mBinding.onlineChatLayout.setOnClickListener {
-			findNavController().navigate(
-				SupportFragmentDirections.navigateToChatFragment()
-			)
-		}
+
 	}
-	
+
+	override fun onDestroyView() {
+		mBinding?.apply { pulsator.stop() }
+		mBinding = null
+		super.onDestroyView()
+	}
 }

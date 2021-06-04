@@ -28,4 +28,8 @@ class InvestmentScoreFragment : Fragment() {
 		
 		}
 	}
+	override fun onDestroy() {
+		super.onDestroy()
+		mBinding.unbind()
+	}
 }

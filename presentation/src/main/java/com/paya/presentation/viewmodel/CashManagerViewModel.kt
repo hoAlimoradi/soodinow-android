@@ -1,7 +1,6 @@
 package com.paya.presentation.viewmodel
 
 import androidx.databinding.ObservableField
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -10,13 +9,14 @@ import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.domain.tools.UseCase
 import com.paya.presentation.base.BaseViewModel
-import com.paya.presentation.utils.VolatileLiveData
 import com.paya.presentation.utils.callResource
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-
-class CashManagerViewModel @ViewModelInject constructor(
+@HiltViewModel
+class CashManagerViewModel @Inject constructor(
     private val boxTypesUseCase: UseCase<Unit, BoxTypeRepoModel>,
     private val sellPriceUseCase: UseCase<String, @JvmSuppressWildcards List<Long>>,
     private val pullPricePriceUseCase: UseCase<PullPriceBodyRepoModel, String>,
@@ -25,17 +25,17 @@ class CashManagerViewModel @ViewModelInject constructor(
     private val existAccountUseCase: UseCase<Unit, ExitAccountRepoModel>
 ) : BaseViewModel() {
     val existAccount = MutableLiveData<Resource<ExitAccountRepoModel>>()
-    val boxTypesStatus = VolatileLiveData<Resource<BoxTypeRepoModel>>()
-    val sellPriceStatus = VolatileLiveData<Resource<List<Long>>>()
-    val pullPriceStatus = VolatileLiveData<Resource<String>>()
-    val totalBoxValueStatus = VolatileLiveData<Resource<TotalBoxValueRepoModel>>()
+    val boxTypesStatus = MutableLiveData<Resource<BoxTypeRepoModel>>()
+    val sellPriceStatus = MutableLiveData<Resource<List<Long>>>()
+    val pullPriceStatus = MutableLiveData<Resource<String>>()
+    val totalBoxValueStatus = MutableLiveData<Resource<TotalBoxValueRepoModel>>()
     val loading = MediatorLiveData<Resource<Nothing>>()
     val price = ObservableField<Long>()
     val type = ObservableField<String>()
     val minSeek = ObservableField<Long>()
     val maxSeek = ObservableField<Long>()
     val totalBoxValue = ObservableField<Long>()
-    var priceType =  ObservableField<PriceType>()
+    var priceType = ObservableField<PriceType>()
 
     init {
         priceType.set(PriceType.deposit)
@@ -85,7 +85,7 @@ class CashManagerViewModel @ViewModelInject constructor(
 
     fun getExistAccount() {
         existAccount.value = Resource.loading(null)
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             existAccount.postValue(
                 callResource(
                     this@CashManagerViewModel,
@@ -97,7 +97,7 @@ class CashManagerViewModel @ViewModelInject constructor(
 
 
     fun boxTypes() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             boxTypesStatus.postValue(Resource.loading(null))
             val response = callResource(this@CashManagerViewModel, boxTypesUseCase.action(Unit))
             if (response.status == Status.SUCCESS) {
@@ -115,7 +115,7 @@ class CashManagerViewModel @ViewModelInject constructor(
     }
 
     fun totalBoxValue() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             totalBoxValueStatus.postValue(Resource.loading(null))
             val response =
                 callResource(this@CashManagerViewModel, totalBoxValueUseCase.action(Unit))
@@ -132,7 +132,7 @@ class CashManagerViewModel @ViewModelInject constructor(
             if (it.status == Status.LOADING)
                 return
         }
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             sellPriceStatus.postValue(Resource.loading(null))
             val response =
                 callResource(this@CashManagerViewModel, sellPriceUseCase.action(type))
@@ -156,7 +156,7 @@ class CashManagerViewModel @ViewModelInject constructor(
         price.set(5009733)
 
         val list = mutableListOf<Long>(5009733, 8191881, 13217941, 16132461, 28720961, 30887961)
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             sellPriceStatus.postValue(Resource.success(list))
         }
     }*/
@@ -175,7 +175,7 @@ class CashManagerViewModel @ViewModelInject constructor(
         }
         if (priceType.get() == PriceType.withdrawal) {
             pullPriceStatus.postValue(Resource.loading(null))
-            viewModelScope.launch(Dispatchers.IO) {
+            viewModelScope.launch {
                 val body = PullPriceBodyRepoModel(type, price)
                 val response =
                     callResource(this@CashManagerViewModel, pullPricePriceUseCase.action(body))
@@ -188,7 +188,7 @@ class CashManagerViewModel @ViewModelInject constructor(
                 return
             }
             pullPriceStatus.postValue(Resource.loading(null))
-            viewModelScope.launch(Dispatchers.IO) {
+            viewModelScope.launch {
                 val response = callResource(
                     this@CashManagerViewModel, addRiskOrderUseCase.action(
                         AddRiskOrderRepoBodyModel(

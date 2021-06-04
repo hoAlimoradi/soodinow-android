@@ -109,7 +109,10 @@ class LoginDialogFragment : DialogFragment() {
 	fun onActionsListener(callback: CallBack){
 		this.callBack = callback
 	}
-
+	override fun onDestroy() {
+		super.onDestroy()
+		mBinding.unbind()
+	}
 	companion object {
 		/**
 		 * Use this factory method to create a new instance of
@@ -132,7 +135,7 @@ class LoginDialogFragment : DialogFragment() {
 				}
 			}
 	}
-	
+
 	interface CallBack {
 		fun success(param1:String,param2:String)
 		fun cancel()

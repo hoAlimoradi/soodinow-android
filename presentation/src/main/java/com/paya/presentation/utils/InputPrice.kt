@@ -52,6 +52,8 @@ class InputPrice @JvmOverloads constructor(
     }
 
     fun setupWatcherPrice(lifecycleScope: CoroutineScope? = null, onTextChanged: (String) -> Unit) {
+        if (lifecycleScope==null)
+            return
         val watcher = NumberTextWatcher(
             input,
             ",###",

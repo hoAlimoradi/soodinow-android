@@ -1,20 +1,22 @@
 package com.paya.presentation.viewmodel
 
 import androidx.databinding.ObservableField
-import androidx.hilt.lifecycle.ViewModelInject
+import javax.inject.Inject
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.paya.domain.models.repo.ChangePasswordRepoBodyModel
 import com.paya.domain.models.repo.ChangePasswordRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.UseCase
 import com.paya.presentation.base.BaseViewModel
-import com.paya.presentation.utils.VolatileLiveData
 import com.paya.presentation.utils.callResource
 import com.paya.presentation.utils.isSecretPassword
 import com.paya.presentation.utils.md5
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 
-class ChangePasswordViewModel @ViewModelInject constructor(
+@HiltViewModel
+class ChangePasswordViewModel @Inject constructor(
 	private val changePasswordUseCase: UseCase<ChangePasswordRepoBodyModel,ChangePasswordRepoModel>
 ) : BaseViewModel() {
 	
@@ -22,7 +24,7 @@ class ChangePasswordViewModel @ViewModelInject constructor(
 	var newPassword = ObservableField<String>()
 	var repeatPassword = ObservableField<String>()
 	
-	var status = VolatileLiveData<Resource<ChangePasswordRepoModel>>()
+	var status = MutableLiveData<Resource<ChangePasswordRepoModel>>()
 	
 	fun changePassword() {
 		val oldPassword = oldPassword.get()

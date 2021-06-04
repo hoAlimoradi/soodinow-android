@@ -90,6 +90,7 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
 			)
 		}
 	}
+
 	
 	private fun checkLoginStatus(resource: Resource<Any>){
 		if (resource.status == Status.SUCCESS){
@@ -106,7 +107,10 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
 
 		}
 	}
-	
+	override fun onDestroy() {
+		super.onDestroy()
+		mBinding.unbind()
+	}
 	override val baseViewModel: BaseViewModel
 		get() = mViewModel
 

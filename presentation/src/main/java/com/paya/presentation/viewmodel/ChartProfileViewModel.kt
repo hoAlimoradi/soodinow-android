@@ -2,7 +2,7 @@ package com.paya.presentation.viewmodel
 
 import android.graphics.Color
 import android.util.Log
-import androidx.hilt.lifecycle.ViewModelInject
+import javax.inject.Inject
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -17,12 +17,13 @@ import com.paya.presentation.ui.hint.fragments.CardAccount
 import com.paya.presentation.ui.profile.enum.FilterProfile
 import com.paya.presentation.utils.*
 import com.paya.presentation.utils.shared.Point
+import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.hamsaa.persiandatepicker.util.PersianCalendar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
-
-class ChartProfileViewModel @ViewModelInject constructor(
+@HiltViewModel
+class ChartProfileViewModel @Inject constructor(
 	private val getBoxHistoryUseCase: UseCase<BoxHistoryRequestModel, BoxHistoryRepoModel>
 ) : BaseViewModel() {
 
@@ -41,7 +42,7 @@ class ChartProfileViewModel @ViewModelInject constructor(
 				return
 		}
 		profile.value = Resource.loading(null)
-		viewModelScope.launch(Dispatchers.IO) {
+		viewModelScope.launch {
 			val response = callResource(
 				this@ChartProfileViewModel, getBoxHistoryUseCase.action(
 					BoxHistoryRequestModel(boxId, filterProfile.name, number)

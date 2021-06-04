@@ -55,7 +55,10 @@ class ForgotPasswordFragment : BaseFragment<ForgotPasswordViewModel>() {
 		super.onViewCreated(view,savedInstanceState)
 		observe(mViewModel.resetPasswordStatus,::checkRegisterStatus)
 	}
-	
+	override fun onDestroy() {
+		super.onDestroy()
+		mBinding.unbind()
+	}
 	private fun checkRegisterStatus(registerResource: Resource<ResetPasswordRepoModel>){
 		Log.d("checkRegisterStatus",registerResource.status.toString())
 		if (registerResource.status == Status.SUCCESS){

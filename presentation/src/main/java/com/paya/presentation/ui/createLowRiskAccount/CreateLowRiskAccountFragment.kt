@@ -36,7 +36,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class CreateLowRiskAccountFragment : BaseFragment<CreateLowRiskAccountViewModel>() {
 
     private val mViewModel: CreateLowRiskAccountViewModel by viewModels()
-    private lateinit var mBinding: FragmentCreateLowRiskAccountBinding
+    private var mBinding: FragmentCreateLowRiskAccountBinding? = null
 
 
     override fun onCreateView(
@@ -51,10 +51,12 @@ class CreateLowRiskAccountFragment : BaseFragment<CreateLowRiskAccountViewModel>
             false
         )
 
-        mBinding.lifecycleOwner = this
-        mBinding.viewModel = mViewModel
+        mBinding?.apply {
+            lifecycleOwner = this@CreateLowRiskAccountFragment
+            viewModel = mViewModel
+        }
 
-        return mBinding.root
+        return mBinding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -64,24 +66,26 @@ class CreateLowRiskAccountFragment : BaseFragment<CreateLowRiskAccountViewModel>
         observe(mViewModel.lowRiskResource, ::onReady)
         observe(mViewModel.pieChartStatus, ::setData)
         setupInputPrice()
-        mBinding.toolbar.backButton.setOnClickListener {
-            findNavController().popBackStack()
-        }
-
-        mBinding.submitBtn.setOnClickListener {
-            val price = mBinding.inputPrice.getPriceLong()
-            if (price <= 0) {
-                Toast.makeText(
-                    requireContext(), getString(R.string.price_error), Toast.LENGTH_SHORT
-                ).show()
-                return@setOnClickListener
+        mBinding?.apply {
+            toolbar.backButton.setOnClickListener {
+                findNavController().popBackStack()
             }
-            findNavController().navigate(
-                CreateLowRiskAccountFragmentDirections.navigationToConnectLowRiskBrokerage(
-                    mBinding.inputPrice.getPriceLong(),
-                    ("no_risk")
+
+            submitBtn.setOnClickListener {
+                val price = inputPrice.getPriceLong()
+                if (price <= 0) {
+                    Toast.makeText(
+                        requireContext(), getString(R.string.price_error), Toast.LENGTH_SHORT
+                    ).show()
+                    return@setOnClickListener
+                }
+                findNavController().navigate(
+                    CreateLowRiskAccountFragmentDirections.navigationToConnectLowRiskBrokerage(
+                        inputPrice.getPriceLong(),
+                        ("no_risk")
+                    )
                 )
-            )
+            }
         }
         callFirstItem()
     }
@@ -95,13 +99,15 @@ class CreateLowRiskAccountFragment : BaseFragment<CreateLowRiskAccountViewModel>
     }
 
     private fun setupInputPrice() {
-        mBinding.inputPrice.setupWatcherPrice(lifecycleScope) {
-            getLowRiskStocks()
+        mBinding?.inputPrice?.apply {
+            setupWatcherPrice(lifecycleScope) {
+                getLowRiskStocks()
+            }
         }
     }
 
     private fun getLowRiskStocks() {
-        val price = mBinding.inputPrice.getPriceLong()
+        val price: Long = mBinding?.inputPrice?.getPriceLong()?.let { it } ?: 0
         if (price <= 0) {
             Toast.makeText(
                 requireContext(), getString(R.string.price_error), Toast.LENGTH_SHORT
@@ -141,14 +147,16 @@ class CreateLowRiskAccountFragment : BaseFragment<CreateLowRiskAccountViewModel>
                 }
 
 //            mBinding.efficiencyRecyclerView.addItemDecoration(verticalDivider)
-            mBinding.efficiencyRecyclerView.addItemDecoration(horizontalDivider)
-            mBinding.efficiencyRecyclerView.adapter = PercentEfficiencyAdapter(list)
+            mBinding?.efficiencyRecyclerView?.apply {
+                addItemDecoration(horizontalDivider)
+                adapter = PercentEfficiencyAdapter(list)
+            }
 
         }
     }
 
     private fun setupPieChart() {
-        with(mBinding.pieChart) {
+        mBinding?.pieChart?.apply {
             setUsePercentValues(true)
             description.isEnabled = false
             context?.let { context ->
@@ -212,7 +220,7 @@ class CreateLowRiskAccountFragment : BaseFragment<CreateLowRiskAccountViewModel>
             }
             data.setValueTextColor(ContextCompat.getColor(it, R.color.green))
 
-            with(mBinding.pieChart) {
+            mBinding?.pieChart?.apply {
                 this.data = data
                 // undo all highlights
                 highlightValues(null)
@@ -224,30 +232,41 @@ class CreateLowRiskAccountFragment : BaseFragment<CreateLowRiskAccountViewModel>
     }
 
     private fun initChartLabelRecyclerView() {
-        mBinding.chartLabelRecyclerView.layoutManager =
-            RtlGridLayoutManager(context, 4)
-        context?.let { context ->
-            val divider = WithoutLastDividerItemDecorator(context, RecyclerView.HORIZONTAL)
-            val dividerVertical = WithoutLastDividerItemDecorator(context, RecyclerView.VERTICAL)
-            ContextCompat.getDrawable(
-                context,
-                R.drawable.chart_divider
-            )?.let {
-                divider.setDrawable(it)
-                dividerVertical.setDrawable(it)
+        mBinding?.chartLabelRecyclerView?.apply {
+            layoutManager =
+                RtlGridLayoutManager(context, 4)
+            context?.let { context ->
+                val divider = WithoutLastDividerItemDecorator(context, RecyclerView.HORIZONTAL)
+                val dividerVertical =
+                    WithoutLastDividerItemDecorator(context, RecyclerView.VERTICAL)
+                ContextCompat.getDrawable(
+                    context,
+                    R.drawable.chart_divider
+                )?.let {
+                    divider.setDrawable(it)
+                    dividerVertical.setDrawable(it)
+                }
+                removeAllDecoration()
+                addItemDecoration(divider)
+                addItemDecoration(dividerVertical)
             }
-            mBinding.chartLabelRecyclerView.removeAllDecoration()
-            mBinding.chartLabelRecyclerView.addItemDecoration(divider)
-            mBinding.chartLabelRecyclerView.addItemDecoration(dividerVertical)
         }
     }
 
     private fun setupChartLabelRecyclerView(pieChartModel: PieChartModel) {
-        val adapter = ChartLabelAdapter(pieChartModel.chartLabels) {
-            val y = mBinding.pieChart.data.dataSets[0].getEntryForIndex(it).y
-            mBinding.pieChart.highlightValue(it.toFloat(), y, 0)
+        val adapterChart = ChartLabelAdapter(pieChartModel.chartLabels) {
+            mBinding?.pieChart?.apply {
+                val y = data.dataSets[0].getEntryForIndex(it).y
+                highlightValue(it.toFloat(), y, 0)
+            }
         }
-        mBinding.chartLabelRecyclerView.adapter = adapter
+        mBinding?.chartLabelRecyclerView?.apply { adapter = adapterChart }
+
+    }
+
+    override fun onDestroyView() {
+        mBinding = null
+        super.onDestroyView()
 
     }
 

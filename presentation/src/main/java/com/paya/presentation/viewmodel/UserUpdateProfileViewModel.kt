@@ -1,8 +1,9 @@
 package com.paya.presentation.viewmodel
 
 import androidx.databinding.ObservableField
-import androidx.hilt.lifecycle.ViewModelInject
+import javax.inject.Inject
 import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.paya.domain.models.repo.ProfileBodyRepoModel
@@ -12,18 +13,18 @@ import com.paya.domain.tools.Status
 import com.paya.domain.tools.UseCase
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.utils.Utils
-import com.paya.presentation.utils.VolatileLiveData
 import com.paya.presentation.utils.callResource
+import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.hamsaa.persiandatepicker.util.PersianCalendar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-
-class UserUpdateProfileViewModel @ViewModelInject constructor(
+@HiltViewModel
+class UserUpdateProfileViewModel @Inject constructor(
 	private val useCaseProfile: UseCase<Unit,ProfileRepoModel>,
 	private val useCaseUpdateProfile: UseCase<ProfileBodyRepoModel,ProfileRepoModel>
 ) : BaseViewModel() {
-	val statusGetProfile = VolatileLiveData<Resource<ProfileRepoModel>>()
-	val statusUpdateProfile = VolatileLiveData<Resource<ProfileRepoModel>>()
+	val statusGetProfile = MutableLiveData<Resource<ProfileRepoModel>>()
+	val statusUpdateProfile = MutableLiveData<Resource<ProfileRepoModel>>()
 	val loading = MediatorLiveData<Resource<Nothing>>()
 	
 	
@@ -83,7 +84,7 @@ class UserUpdateProfileViewModel @ViewModelInject constructor(
 			statusUpdateProfile.setValue(Resource.error("لطفا شماره شبا را وارد کنید",null))
 			return
 		}
-		/*viewModelScope.launch(Dispatchers.IO) {
+		/*viewModelScope.launch {
 			statusUpdateProfile.postValue(Resource.loading(null))
 			val body = ProfileBodyRepoModel(
 				name,
@@ -101,7 +102,7 @@ class UserUpdateProfileViewModel @ViewModelInject constructor(
 	}
 	
 	private fun getProfile() {
-		/*viewModelScope.launch(Dispatchers.IO) {
+		/*viewModelScope.launch {
 			statusGetProfile.postValue(Resource.loading(null))
 			val response =callResource(this@UserUpdateProfileViewModel, useCaseProfile.action(Unit))
 			name.set(response.data?.name)

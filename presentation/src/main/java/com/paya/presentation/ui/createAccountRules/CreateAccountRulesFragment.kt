@@ -22,7 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class CreateAccountRulesFragment : BaseFragment<CreateAccountRulesViewModel>() {
 
-    private lateinit var mBinding: FragmentCreateAccountRulesBinding
+    private  var mBinding: FragmentCreateAccountRulesBinding? = null
     private val mViewModel: CreateAccountRulesViewModel by viewModels()
     private val args: CreateAccountRulesFragmentArgs by navArgs()
 
@@ -32,24 +32,27 @@ class CreateAccountRulesFragment : BaseFragment<CreateAccountRulesViewModel>() {
     ): View? {
         // Inflate the layout for this fragment
         mBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_create_account_rules, container, false)
-        mBinding.lifecycleOwner = this
-        mBinding.viewModel = mViewModel
-        return mBinding.root
+        mBinding?.apply {
+            lifecycleOwner = this@CreateAccountRulesFragment
+            viewModel = mViewModel
+        }
+        return mBinding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        observe(mViewModel.status,::readyAddRiskOrder)
-        mBinding.toolbar.backButton.setOnClickListener {
-            findNavController().popBackStack()
-        }
-        mBinding.addInvestBtn.setOnClickListener {
-            if (!mBinding.rulesCheckBox.isChecked)
-            {
-                mViewModel.showError(getString(R.string.rule_error))
-                return@setOnClickListener
+        observe(mViewModel.status, ::readyAddRiskOrder)
+        mBinding?.apply {
+            toolbar.backButton.setOnClickListener {
+                findNavController().popBackStack()
             }
-            mViewModel.exitAccount(args.riskState,args.SelectedPrice)
+            addInvestBtn.setOnClickListener {
+                if (!rulesCheckBox.isChecked) {
+                    mViewModel.showError(getString(R.string.rule_error))
+                    return@setOnClickListener
+                }
+                mViewModel.exitAccount(args.riskState, args.SelectedPrice)
+            }
         }
     }
 
@@ -69,6 +72,10 @@ class CreateAccountRulesFragment : BaseFragment<CreateAccountRulesViewModel>() {
         }
     }
 
+    override fun onDestroyView() {
+        mBinding = null
+        super.onDestroyView()
+    }
     override val baseViewModel: BaseViewModel
         get() = mViewModel
 

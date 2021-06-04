@@ -48,13 +48,14 @@ import javax.crypto.NoSuchPaddingException
 import javax.crypto.SecretKey
 import javax.crypto.spec.IvParameterSpec
 import javax.security.cert.CertificateException
+import kotlin.jvm.Throws
 import kotlin.system.exitProcess
 
 @AndroidEntryPoint
 class SettingsFragment : BaseFragment<SettingViewModel>() {
 	
 	private val mViewModel: SettingViewModel by viewModels()
-	private lateinit var mBinding: FragmentSettingsBinding
+	private  var mBinding: FragmentSettingsBinding? = null
 	private var password: String? = null
 
 	private val KEY_NAME = "SOODINOW_KEY"
@@ -69,82 +70,92 @@ class SettingsFragment : BaseFragment<SettingViewModel>() {
 	override fun onCreateView(
 		inflater: LayoutInflater, container: ViewGroup?,
 		savedInstanceState: Bundle?
-	): View {
+	): View? {
 		// Inflate the layout for this fragment
 		mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_settings, container, false)
-		mBinding.lifecycleOwner = this
-		mBinding.viewModel = mViewModel
-		return mBinding.root
+		mBinding?.apply {
+			lifecycleOwner = this@SettingsFragment
+			viewModel = mViewModel
+		}
+		return mBinding?.root
 	}
 	
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 		observe(mViewModel.status, ::ready)
 		observe(mViewModel.loginResource, ::checkLoginStatus)
+		observe(mViewModel.mobile, ::readyMobile)
 		initViews()
+		mViewModel.getMobile()
 	}
 
+	override fun onDestroyView() {
+		mBinding = null
+		super.onDestroyView()
+	}
 	private fun initViews() {
 		if (mViewModel.getPassword() != null){
 			switchCompat.isChecked = true
 		}
-		mBinding.activeFingerprint.switchCompat.setOnCheckedChangeListener { _, isChecked ->
-			if (!isChecked) {
-				mViewModel.setPassword(null)
-				return@setOnCheckedChangeListener
-			}
-//			initFingerprint()
-			val dialog = LoginDialogFragment.newInstance(
-				"ابتدا نام کاربری و رمز عبور خود را وارد نمایید",
-				getString(R.string.username_or_phone),
-				getString(R.string.password),
-				getString(R.string.submit_and_continue),
-				"انصراف"
-			)
-			dialog.onActionsListener(
-				object : LoginDialogFragment.CallBack{
-					override fun success(param1: String, param2: String) {
-						password = param2
-						dialog.dismiss()
-						mViewModel.login(param1, param2)
-					}
-
-					override fun cancel() {
-						mBinding.activeFingerprint.switchCompat.isChecked = false
-					}
-
+		mBinding?.apply {
+			activeFingerprint.switchCompat.setOnCheckedChangeListener { _, isChecked ->
+				if (!isChecked) {
+					mViewModel.setPassword(null)
+					return@setOnCheckedChangeListener
 				}
-			)
-			dialog.show(parentFragmentManager, "login")
-		}
-		changePassword.setOnClickListener {
-			getFindViewController()?.navigate(
-				R.id.changePasswordFragment
-			)
-		}
-		myProfile.setOnClickListener {
-			getFindViewController()?.navigate(
-				R.id.firstInformation,FirstInformationFragment.newBundle(false)
-			)
-		}
-		share.setOnClickListener {
-			getFindViewController()?.navigate(
-				R.id.introduceFriendsFragment
-			)
-		}
-		support.setOnClickListener {
-			getFindViewController()?.navigate(
-				R.id.support
-			)
-		}
-		financialLayout.setOnClickListener {
-			getFindViewController()?.navigate(
-				R.id.financialReportFragment
-			)
-		}
+//			initFingerprint()
+				val dialog = LoginDialogFragment.newInstance(
+					"ابتدا نام کاربری و رمز عبور خود را وارد نمایید",
+					getString(R.string.username_or_phone),
+					getString(R.string.password),
+					getString(R.string.submit_and_continue),
+					"انصراف"
+				)
+				dialog.onActionsListener(
+					object : LoginDialogFragment.CallBack {
+						override fun success(param1: String, param2: String) {
+							password = param2
+							dialog.dismiss()
+							mViewModel.login(param1, param2)
+						}
 
-		exitApp.setOnClickListener {
-			exitProcess(-1)
+						override fun cancel() {
+							activeFingerprint.switchCompat.isChecked = false
+						}
+
+					}
+				)
+				dialog.show(parentFragmentManager, "login")
+			}
+			changePassword.layout.setOnClickListener {
+				getFindViewController()?.navigate(
+					R.id.changePasswordFragment
+				)
+			}
+			myProfile.layout.setOnClickListener {
+				getFindViewController()?.navigate(
+					R.id.firstInformation, FirstInformationFragment.newBundle(false)
+				)
+			}
+			share.layout.setOnClickListener {
+				getFindViewController()?.navigate(
+					R.id.introduceFriendsFragment
+				)
+			}
+			support.layout.setOnClickListener {
+				getFindViewController()?.navigate(
+					R.id.support
+				)
+			}
+			financialLayout.setOnClickListener {
+				getFindViewController()?.navigate(
+					R.id.financialReportFragment
+				)
+			}
+
+			exitApp.layout.setOnClickListener {
+				exitProcess(-1)
+			}
 		}
 	}
 
@@ -164,7 +175,7 @@ class SettingsFragment : BaseFragment<SettingViewModel>() {
 			if (!fingerprintManager.isHardwareDetected) {
 				// If a fingerprint sensor isn’t available, then inform the user that they’ll be unable to use your app’s fingerprint functionality//
 				shortToast(getString(R.string.error_device_does_not_support_fingerprint))
-				mBinding.activeFingerprint.switchCompat.isChecked = false
+				mBinding?.apply{activeFingerprint.switchCompat.isChecked = false}
 			}
 			//Check whether the user has granted your app the USE_FINGERPRINT permission//
 			if (ActivityCompat.checkSelfPermission(
@@ -174,21 +185,21 @@ class SettingsFragment : BaseFragment<SettingViewModel>() {
 			) {
 				// If your app doesn't have this permission, then display the following text//
 				shortToast(getString(R.string.error_fingerprint_permission))
-				mBinding.activeFingerprint.switchCompat.isChecked = false
+				mBinding?.apply{activeFingerprint.switchCompat.isChecked = false}
 			}
 
 			//Check that the user has registered at least one fingerprint//
 			if (!fingerprintManager.hasEnrolledFingerprints()) {
 				// If the user hasn’t configured any fingerprints, then display the following message//
 				longToast(getString(R.string.error_fingerprint_not_configure))
-				mBinding.activeFingerprint.switchCompat.isChecked = false
+				mBinding?.apply{activeFingerprint.switchCompat.isChecked = false}
 			}
 
 			//Check that the lockscreen is secured//
 			if (!keyguardManager.isKeyguardSecure) {
 				// If the user hasn’t secured their lockscreen with a PIN password or pattern, then display the following text//
 				longToast(getString(R.string.error_lock_screen_not_configure))
-				mBinding.activeFingerprint.switchCompat.isChecked = false
+				mBinding?.apply{activeFingerprint.switchCompat.isChecked = false}
 			} else {
 				try {
 					generateKey()
@@ -324,13 +335,13 @@ class SettingsFragment : BaseFragment<SettingViewModel>() {
 				) {
 					super.onAuthenticationError(errorCode, errString)
 					longToast(getString(R.string.error_msg_auth_error, errString))
-					mBinding.activeFingerprint.switchCompat.isChecked = false
+					mBinding?.apply{activeFingerprint.switchCompat.isChecked = false}
 				}
 
 				override fun onAuthenticationFailed() {
 					super.onAuthenticationFailed()
 					longToast(getString(R.string.error_msg_auth_failed))
-					mBinding.activeFingerprint.switchCompat.isChecked = false
+					mBinding?.apply{activeFingerprint.switchCompat.isChecked = false}
 				}
 			})
 
@@ -368,14 +379,13 @@ class SettingsFragment : BaseFragment<SettingViewModel>() {
 	}
 
 	private fun ready(resource: Resource<ProfileRepoModel>) {
-		when (resource.status) {
-			Status.SUCCESS -> mViewModel.mobile.set(resource.data?.mobile)
-			else -> return
-			
-		}
-		
 	}
-	
+	private fun readyMobile(mobile: String) {
+		mBinding?.phoneTxt?.apply {
+			text = mobile
+		}
+	}
+
 	override val baseViewModel: BaseViewModel
 		get() = mViewModel
 	

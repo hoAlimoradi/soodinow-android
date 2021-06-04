@@ -57,7 +57,10 @@ class AppropriateInvestmentFragment : Fragment() {
 		setupPieChart()
 		setupChartLabelRecyclerView()
 	}
-	
+	override fun onDestroy() {
+		super.onDestroy()
+		mBinding.unbind()
+	}
 	private fun setupChartLabelRecyclerView() {
 		val cl = mutableListOf<ChartLabelModel>()
 		if (pieChartDataList.isNotEmpty()) {

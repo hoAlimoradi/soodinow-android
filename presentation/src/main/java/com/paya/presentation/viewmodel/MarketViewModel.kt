@@ -1,6 +1,6 @@
 package com.paya.presentation.viewmodel
 
-import androidx.hilt.lifecycle.ViewModelInject
+import javax.inject.Inject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,10 +10,11 @@ import com.paya.domain.tools.Resource
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.utils.callResource
 import com.paya.presentation.utils.shared.Point
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-
-class MarketViewModel @ViewModelInject constructor(
+@HiltViewModel
+class MarketViewModel @Inject constructor(
 	private val currencyRepository: CurrencyPriceRepository
 ) : BaseViewModel() {
 	
@@ -31,7 +32,7 @@ class MarketViewModel @ViewModelInject constructor(
 	
 	fun getCurrencyPrices() {
 		currencyPrice.value = Resource.loading(null)
-		viewModelScope.launch(Dispatchers.IO) {
+		viewModelScope.launch {
 			currencyPrice.postValue(callResource(this@MarketViewModel,currencyRepository.getCurrencyPrice()))
 		}
 	}

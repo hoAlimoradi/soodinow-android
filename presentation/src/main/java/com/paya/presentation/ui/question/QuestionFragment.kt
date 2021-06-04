@@ -99,7 +99,10 @@ class QuestionFragment : BaseFragment<QuestionViewModel>() {
             mBinding.questionRecycler.adapter = adapter
         }
     }
-
+    override fun onDestroy() {
+        super.onDestroy()
+        mBinding.unbind()
+    }
     override val baseViewModel: BaseViewModel
         get() = mViewModel
 

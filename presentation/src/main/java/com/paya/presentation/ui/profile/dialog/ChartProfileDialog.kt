@@ -72,7 +72,10 @@ class ChartProfileDialog : BaseDialogFragment<ChartProfileViewModel>() {
             dismissAllowingStateLoss()
         }
     }
-
+    override fun onDestroy() {
+        super.onDestroy()
+        mBinding.unbind()
+    }
     private fun readyProfile(resource: Resource<BoxHistoryRepoModel>) {
         if (resource.status == Status.SUCCESS) {
             setCurrentBoxData()

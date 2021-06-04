@@ -53,5 +53,9 @@ class InvestmentScoreDialog : DialogFragment() {
 		}
 		BindingAdapters.setLineChartData(mBinding.chart,points)
 	}
+	override fun onDestroy() {
+		super.onDestroy()
+		mBinding.unbind()
+	}
 	
 }

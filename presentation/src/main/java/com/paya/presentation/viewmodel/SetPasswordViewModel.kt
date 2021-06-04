@@ -2,7 +2,7 @@ package com.paya.presentation.viewmodel
 
 import android.util.Log
 import androidx.databinding.ObservableField
-import androidx.hilt.lifecycle.ViewModelInject
+import javax.inject.Inject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,12 +11,13 @@ import com.paya.domain.models.repo.SetPasswordRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.UseCase
 import com.paya.presentation.base.BaseViewModel
-import com.paya.presentation.utils.VolatileLiveData
+
 import com.paya.presentation.utils.callResource
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-
-class SetPasswordViewModel @ViewModelInject constructor(
+@HiltViewModel
+class SetPasswordViewModel @Inject constructor(
 	private val getUserInfoUseCase: UseCase<Unit,UserInfoRepoModel>,
 	private val setPasswordUseCase: UseCase<String,SetPasswordRepoModel>
 ) : BaseViewModel() {
@@ -32,10 +33,10 @@ class SetPasswordViewModel @ViewModelInject constructor(
 	val password = ObservableField<String>()
 	val repeatPassword = ObservableField<String>()
 	
-	val setPasswordResource = VolatileLiveData<Resource<SetPasswordRepoModel>>()
+	val setPasswordResource = MutableLiveData<Resource<SetPasswordRepoModel>>()
 	
 	private fun getAccessToken() {
-		viewModelScope.launch(Dispatchers.IO) {
+		viewModelScope.launch{
 			val accessTokenResource = callResource(this@SetPasswordViewModel,getUserInfoUseCase.action(Unit))
 			accessToken = accessTokenResource.data?.accessToken
 			Log.d("SetPasswordViewModel", accessToken ?: "null")
@@ -74,7 +75,7 @@ class SetPasswordViewModel @ViewModelInject constructor(
 			)
 			return
 		}
-		viewModelScope.launch(Dispatchers.IO) {
+		viewModelScope.launch {
 			setPasswordResource.postValue(Resource.loading(null))
 			val resource = callResource(this@SetPasswordViewModel,setPasswordUseCase.action(password))
 			setPasswordResource.postValue(resource)

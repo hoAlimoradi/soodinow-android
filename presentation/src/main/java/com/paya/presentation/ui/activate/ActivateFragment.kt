@@ -72,7 +72,10 @@ class ActivateFragment : BaseFragment<ActivateViewModel>() {
 			)
 		}
 	}
-	
+	override fun onDestroy() {
+		super.onDestroy()
+		mBinding.unbind()
+	}
 	override val baseViewModel: BaseViewModel
 		get() = mViewModel
 

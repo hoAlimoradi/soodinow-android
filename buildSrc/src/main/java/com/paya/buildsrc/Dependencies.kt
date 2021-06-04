@@ -16,7 +16,7 @@ object Dependencies{
 		const val COROUTINES_VER = "1.4.0-M1"
 		const val KOTSHI_VER = "2.3.0"
 		const val GSON_CONVERTER_VER = "2.9.0"
-		const val HILT_VER = "2.29.1-alpha"
+		const val HILT_VER = "2.36"
 		const val ANDROIDX_HILT_VER = "1.0.0-alpha02"
 		const val RETROFIT_VER = "2.9.0"
 		const val OK_HTTP_VER = "4.10.0-RC1"

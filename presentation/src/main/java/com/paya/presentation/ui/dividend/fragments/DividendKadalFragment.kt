@@ -43,7 +43,10 @@ class DividendKadalFragment : Fragment() {
 		super.onViewCreated(view,savedInstanceState)
 		setupKadalAdapter()
 	}
-	
+	override fun onDestroy() {
+		super.onDestroy()
+		mBinding.unbind()
+	}
 	private fun setupKadalAdapter() {
 		val manager = LinearLayoutManager(context,RecyclerView.VERTICAL,false)
 		mBinding.kadalRecyclerView.layoutManager = manager

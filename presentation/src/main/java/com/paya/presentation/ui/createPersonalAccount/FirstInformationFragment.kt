@@ -292,7 +292,10 @@ class FirstInformationFragment : BaseFragment<FirstInformationViewModel>() {
 		mBinding.birthDate.inputContentEditText.setText(persianCalendar.persianShortDate)
 
 	}
-
+	override fun onDestroy() {
+		super.onDestroy()
+		mBinding.unbind()
+	}
 	override val baseViewModel: BaseViewModel
 		get() = mViewModel
 

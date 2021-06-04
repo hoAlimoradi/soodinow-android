@@ -43,7 +43,10 @@ class CompletePasswordFragment : BaseFragment<CompletePasswordViewModel>() {
             )
         }
     }
-
+    override fun onDestroy() {
+        super.onDestroy()
+        mBinding.unbind()
+    }
     override val baseViewModel: BaseViewModel
         get() = mViewModel
 }

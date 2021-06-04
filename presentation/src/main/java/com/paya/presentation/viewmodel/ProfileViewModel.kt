@@ -2,7 +2,7 @@ package com.paya.presentation.viewmodel
 
 import android.graphics.Color
 import android.util.Log
-import androidx.hilt.lifecycle.ViewModelInject
+import javax.inject.Inject
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -17,10 +17,12 @@ import com.paya.presentation.ui.hint.fragments.CardAccount
 import com.paya.presentation.ui.model.PieChartModel
 import com.paya.presentation.ui.profile.enum.FilterProfile
 import com.paya.presentation.utils.callResource
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class ProfileViewModel @ViewModelInject constructor(
+@HiltViewModel
+class ProfileViewModel @Inject constructor(
 	private val getBoxHistoryUseCase: UseCase<BoxHistoryRequestModel, BoxHistoryRepoModel>,
 	private val existAccountUseCase: UseCase<Unit, ExitAccountRepoModel>
 ) : BaseViewModel() {
@@ -63,7 +65,7 @@ class ProfileViewModel @ViewModelInject constructor(
 
 	fun getExistAccount() {
 		existAccount.value = Resource.loading(null)
-		viewModelScope.launch(Dispatchers.IO) {
+		viewModelScope.launch {
 			existAccount.postValue(
 				callResource(
 					this@ProfileViewModel,
@@ -95,7 +97,7 @@ class ProfileViewModel @ViewModelInject constructor(
 	private fun getProfileWeek(
 		boxId: Long
 	) {
-		viewModelScope.launch(Dispatchers.IO) {
+		viewModelScope.launch {
 			val response = callResource(
 				this@ProfileViewModel, getBoxHistoryUseCase.action(
 					BoxHistoryRequestModel(boxId, FilterProfile.week.name, 1)
@@ -117,7 +119,7 @@ class ProfileViewModel @ViewModelInject constructor(
 	private fun getProfileDay(
 		boxId: Long
 	) {
-		viewModelScope.launch(Dispatchers.IO) {
+		viewModelScope.launch {
 			val response = callResource(
 				this@ProfileViewModel, getBoxHistoryUseCase.action(
 					BoxHistoryRequestModel(boxId, FilterProfile.day.name, 3)
@@ -139,7 +141,7 @@ class ProfileViewModel @ViewModelInject constructor(
 	private fun getProfileMonth(
 		boxId: Long
 	) {
-		viewModelScope.launch(Dispatchers.IO) {
+		viewModelScope.launch {
 			val response = callResource(
 				this@ProfileViewModel, getBoxHistoryUseCase.action(
 					BoxHistoryRequestModel(boxId, FilterProfile.month.name, 3)

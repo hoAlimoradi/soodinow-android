@@ -40,7 +40,10 @@ class DividendSummeryFragment : Fragment() {
 		mBinding.priceRecyclerView.adapter = SummeryPriceAdapter()
 		mBinding.priceRecyclerView.isNestedScrollingEnabled = false
 	}
-	
+	override fun onDestroy() {
+		super.onDestroy()
+		mBinding.unbind()
+	}
 	private fun setupExchangeAdapter() {
 		val manager = LinearLayoutManager(context,RecyclerView.VERTICAL,false)
 		mBinding.exchangeRecyclerView.layoutManager = manager

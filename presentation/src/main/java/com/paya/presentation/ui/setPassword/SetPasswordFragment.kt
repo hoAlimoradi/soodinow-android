@@ -66,7 +66,10 @@ class SetPasswordFragment : BaseFragment<SetPasswordViewModel>() {
 				resource.message?.let { mBinding.repeatPassword.errorLayout.setError(it) }
 		}
 	}
-	
+	override fun onDestroy() {
+		super.onDestroy()
+		mBinding.unbind()
+	}
 	override val baseViewModel: BaseViewModel
 		get() = mViewModel
 	

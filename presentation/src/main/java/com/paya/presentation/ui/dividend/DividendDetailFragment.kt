@@ -63,7 +63,10 @@ class DividendDetailFragment : Fragment() {
 		mBinding.tabLayout.getTabAt(2)?.text = getString(R.string.information)
 		mBinding.pager.setCurrentItem(2,false)
 	}
-	
+	override fun onDestroy() {
+		super.onDestroy()
+		mBinding.unbind()
+	}
 	private fun setupDaysRecyclerView() {
 		val layoutManager = LinearLayoutManager(context,RecyclerView.HORIZONTAL,true)
 		val adapter = DayAdapter()
@@ -82,8 +85,6 @@ class DividendDetailFragment : Fragment() {
 			fragments.add(DividendSummeryFragment())
 			fragments.add(DividendInformationFragment())
 		}
-		
-		
 		
 		override fun getCount(): Int = fragments.size
 		

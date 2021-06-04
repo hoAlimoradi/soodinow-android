@@ -120,7 +120,10 @@ class ConnectBrokerageFragment : BaseFragment<ConnectBrokerageViewModel>() {
 			BindingAdapters.showHide(mBinding.investRecyclerView,false)
 		}
 	}
-	
+	override fun onDestroy() {
+		super.onDestroy()
+		mBinding.unbind()
+	}
 	override val baseViewModel: BaseViewModel
 		get() = mViewModel
 }
