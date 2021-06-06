@@ -1,30 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.farabi.FarabiAuthActivity">
-
-    <data>
-
-        <import type="com.paya.domain.tools.Resource" />
-
-        <import type="com.paya.presentation.viewmodel.FarabiAuthViewModel" />
-
-        <variable
-            name="viewModel"
-            type="FarabiAuthViewModel" />
-    </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context=".ui.farabi.FarabiAuthActivity"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include
+        <com.paya.presentation.utils.toolbar.ToolbarPublic
             android:id="@+id/toolbar"
-            layout="@layout/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            label= "@{@string/farabi_title}"/>
+            app:toolbarTitle= "@string/farabi_title"
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <WebView
             android:id="@+id/webView"
@@ -40,10 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            app:resource="@{(Resource) viewModel.status}"
             tools:visibility="gone"
            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-</layout>

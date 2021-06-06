@@ -1,29 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.cashManager.CashManagerFragment">
-
-    <data>
-
-        <import type="com.paya.domain.tools.Resource" />
-
-        <import type="com.paya.presentation.viewmodel.CashManagerViewModel.PriceType" />
-
-        <variable
-            name="viewModel"
-            type="com.paya.presentation.viewmodel.CashManagerViewModel" />
-    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context=".ui.cashManager.CashManagerFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/bg">
 
-        <include
+        <com.paya.presentation.utils.toolbar.ToolbarPublic
             android:id="@+id/toolbar"
-            label="@{@string/inventory_management}"
-            layout="@layout/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
@@ -113,13 +102,11 @@
                     app:tabSelectedTextColor="@color/brokerage_tab_color">
 
                     <com.google.android.material.tabs.TabItem
-                        android:id="@+id/withdrawalTab"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/withdrawal_cash" />
 
                     <com.google.android.material.tabs.TabItem
-                        android:id="@+id/depositTab"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/deposit_cash" />
@@ -133,7 +120,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_xl"
                     android:gravity="center"
-                    android:text="@{viewModel.priceType ==PriceType.deposit ? @string/deposit_price : @string/withdrawal_price}"
                     android:textColor="@color/emperor"
                     android:textSize="@dimen/text_size_xs"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -246,7 +232,5 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            app:resource="@{(Resource) viewModel.loading}"
             tools:visibility="gone" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>

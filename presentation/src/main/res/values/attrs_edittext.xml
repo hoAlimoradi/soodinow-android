@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="labelText" format="string"/>
+    <attr name="hintTextColor" format="color"/>
+    <declare-styleable name="LabelEditText">
+        <attr name="labelText" />
+        <attr name="hintTextColor" />
+        <attr name="android:inputType"/>
+        <attr name="android:hint"/>
+        <attr name="visiblelabel">
+            <flag name="enable" value="1"/>
+            <flag name="disable" value="0"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="InputEditText">
+        <attr name="labelText" />
+        <attr name="hintTextColor" />
+        <attr name="android:inputType"/>
+        <attr name="android:hint"/>
+    </declare-styleable>
+
+    <declare-styleable name="MobileEditText">
+        <attr name="labelText" />
+        <attr name="hintTextColor"/>
+        <attr name="android:inputType"/>
+        <attr name="android:hint"/>
+    </declare-styleable>
+</resources>

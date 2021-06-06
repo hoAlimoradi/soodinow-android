@@ -6,22 +6,17 @@ import android.content.pm.PackageManager
 import android.hardware.fingerprint.FingerprintManager
 import android.os.Build
 import android.os.Bundle
-import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyPermanentlyInvalidatedException
 import android.security.keystore.KeyProperties
 import android.util.Base64
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricPrompt
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.paya.domain.tools.Resource
@@ -44,11 +39,12 @@ import javax.crypto.NoSuchPaddingException
 import javax.crypto.SecretKey
 import javax.crypto.spec.IvParameterSpec
 import javax.security.cert.CertificateException
+import kotlin.jvm.Throws
 
 @AndroidEntryPoint
 class LoginFragment : BaseFragment<LoginViewModel>() {
-	
-	private lateinit var mBinding: FragmentLoginBinding
+
+	private var mBinding: FragmentLoginBinding? = null
 	private val mViewModel: LoginViewModel by viewModels()
 
 	private val KEY_NAME = "SOODINOW_KEY"
@@ -65,60 +61,81 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
 		savedInstanceState: Bundle?
 	): View? {
 		// Inflate the layout for this fragment
-		mBinding = DataBindingUtil.inflate(
+		mBinding = FragmentLoginBinding.inflate(
 			inflater,
-			R.layout.fragment_login,
 			container,
 			false
 		)
-		
-		mBinding.viewModel = mViewModel
-		mBinding.lifecycleOwner = this
-		
-		return mBinding.root
+		return mBinding?.root
 	}
 	
 	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
-		super.onViewCreated(view,savedInstanceState)
+		super.onViewCreated(view, savedInstanceState)
 		observe(mViewModel.loginResource, ::checkLoginStatus)
-		mBinding.fingerprint.setOnClickListener {
-			initFingerprint()
+		observe(mViewModel.mobile, ::setMobile)
+		mBinding?.apply {
+			fingerprint.setOnClickListener {
+				initFingerprint()
+			}
+			forgetPassword.setOnClickListener {
+				findNavController().navigate(
+					LoginFragmentDirections.actionLoginFragmentToForgotPasswordFragment()
+				)
+			}
+
+			submitButton.setOnClickListener {
+				login()
+			}
 		}
-		mBinding.forgetPassword.setOnClickListener {
-			findNavController().navigate(
-				LoginFragmentDirections.actionLoginFragmentToForgotPasswordFragment()
-			)
+
+	}
+
+	private fun login() {
+		mBinding?.apply {
+			if (phoneNumber.getText().isEmpty()) {
+				phoneNumber.setError("لطفا شماره موبایل را وارد کنید")
+				return
+			}
+			if (phoneNumber.getText().length != 9) {
+				phoneNumber.setError("شماره موبایل وارد شده اشتباه است")
+				return
+			}
+			if (passwordLayout.getText().isEmpty()) {
+				passwordLayout.setError("لطفا رمز عبور را وارد کنید")
+				return
+			}
+			mViewModel.login(phoneNumber.getText(), passwordLayout.getText())
+		}
+	}
+	private fun setMobile(mobile: String) {
+		mBinding?.apply {
+			phoneNumber.setText(mobile)
 		}
 	}
 
-	
-	private fun checkLoginStatus(resource: Resource<Any>){
-		if (resource.status == Status.SUCCESS){
+	private fun checkLoginStatus(resource: Resource<Any>) {
+		if (resource.status == Status.SUCCESS) {
 			findNavController().navigate(
 				R.id.navigateToHomeFragment
 			)
-		}else if (resource.status == Status.ERROR){
-			mBinding.phoneNumber.errorLayout.setError("")
-			mBinding.passwordLayout.errorLayout.setError("")
-			if (mViewModel.isUserNameError)
-				resource.message?.let { mBinding.phoneNumber.errorLayout.setError(it) }
-			else if(mViewModel.isPasswordError)
-				resource.message?.let { mBinding.passwordLayout.errorLayout.setError(it) }
-
 		}
 	}
-	override fun onDestroy() {
-		super.onDestroy()
-		mBinding.unbind()
+
+	override fun onDestroyView() {
+		mBinding = null
+		super.onDestroyView()
 	}
+
 	override val baseViewModel: BaseViewModel
 		get() = mViewModel
 
 	private fun initFingerprint() {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 			//Get an instance of KeyguardManager and FingerprintManager//
-			keyguardManager = requireActivity().getSystemService(AppCompatActivity.KEYGUARD_SERVICE) as KeyguardManager
-			fingerprintManager = requireActivity().getSystemService(AppCompatActivity.FINGERPRINT_SERVICE) as FingerprintManager
+			keyguardManager =
+				requireActivity().getSystemService(AppCompatActivity.KEYGUARD_SERVICE) as KeyguardManager
+			fingerprintManager =
+				requireActivity().getSystemService(AppCompatActivity.FINGERPRINT_SERVICE) as FingerprintManager
 
 			//Check whether the device has a fingerprint sensor//
 			if (!fingerprintManager.isHardwareDetected) {
@@ -258,8 +275,10 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
 					val p = mViewModel.getPassword()
 					val decrypted = p?.let { decrypt(p) }
  					decrypted?.let {
- 						mViewModel.password.set(it)
-						mViewModel.login()
+						mBinding?.apply {
+							passwordLayout.setText(it)
+							login()
+						}
 					}
 				}
 

@@ -1,24 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/emptyLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:elevation="30dp"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:visibility="gone">
 
-    <data>
-        <variable
-            name="title"
-            type="String" />
-    </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:elevation="30dp"
-        visibleGone="@{title != null}"
-        android:background="@color/bg">
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:src="@drawable/bg_empty_invesment"
             android:scaleType="fitXY"
@@ -41,7 +36,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_small"
             android:paddingHorizontal="@dimen/margin_40dp"
-            android:text="@{title}"
             android:textSize="@dimen/text_size_xl"
             android:textColor="@color/emperor"
             android:textStyle="bold"
@@ -52,5 +46,3 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintVertical_chainStyle="packed"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-</layout>

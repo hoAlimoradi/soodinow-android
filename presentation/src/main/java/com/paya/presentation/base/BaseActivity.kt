@@ -7,23 +7,23 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import com.paya.presentation.MainActivity
 import com.paya.presentation.R
 import com.paya.presentation.ui.errorDoalog.ErrorDialog
 import com.paya.presentation.ui.farabi.FarabiAuthActivity
+import com.paya.presentation.ui.loading.LoadingDialog
 import com.paya.presentation.utils.observe
 import io.github.inflationx.viewpump.ViewPumpContextWrapper
 
 
 abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
     abstract val baseViewModel: BaseViewModel
-    private val errorDialog = ErrorDialog()
+    private var errorDialog: ErrorDialog? = null
+    private var loadingDialog: LoadingDialog? = null
     inline fun <reified VM : BaseViewModel> viewModelProvider(
         mode: LazyThreadSafetyMode = LazyThreadSafetyMode.NONE,
         crossinline provider: () -> VM
@@ -39,6 +39,7 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
         observe(baseViewModel.unAuthorizeLiveData, ::unAuthorized)
         observe(baseViewModel.unFarabiAuth, ::farabiAuth)
         observe(baseViewModel.errorLiveData, ::readyError)
+        observe(baseViewModel.unLoading, ::readyLoading)
     }
 
     private fun unAuthorized(message: String) {
@@ -59,12 +60,18 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
     }
 
     private fun readyError(error: String) {
-        errorDialog.dialog?.let {
-            if (it.isShowing)
-                return
+        if (errorDialog == null)
+            errorDialog = ErrorDialog()
+        errorDialog?.apply {
+            if (!isShowing()) {
+                setMessage(error)
+                show(supportFragmentManager, "errorTag")
+            }
+            onDismiss = {
+                if (!isShowing())
+                    errorDialog = null
+            }
         }
-        errorDialog.setMessage(error)
-        errorDialog.show(supportFragmentManager,"errorTag")
     }
 
     var resultLauncher =
@@ -78,7 +85,41 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
 
     }
 
+    private fun readyLoading(isLoading: Boolean) {
+        if (loadingDialog == null)
+            loadingDialog = LoadingDialog()
+        loadingDialog?.let {
+            it.onDismiss = {
+                if (!it.isShowing())
+                    loadingDialog = null
+            }
+            if (isLoading) {
+                it.show(supportFragmentManager, "loading dialog")
+            } else {
+                if (it.isShowing())
+                    it.dismissAllowingStateLoss()
+            }
+        }
+
+    }
+
     override fun attachBaseContext(newBase: Context?) {
         super.attachBaseContext(newBase?.let { ViewPumpContextWrapper.wrap(it) })
+    }
+
+    override fun onDestroy() {
+        errorDialog?.apply {
+            dialog?.let {
+                if (it.isShowing)
+                    dismissAllowingStateLoss()
+            }
+        }
+        errorDialog = null
+        loadingDialog?.let {
+            if (it.isShowing())
+                it.dismissAllowingStateLoss()
+        }
+        loadingDialog = null
+        super.onDestroy()
     }
 }

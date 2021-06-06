@@ -1,27 +1,19 @@
 package com.paya.presentation.viewmodel
 
-import android.graphics.Color
-import android.util.Log
 import javax.inject.Inject
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.github.mikephil.charting.data.PieEntry
 import com.paya.domain.models.repo.*
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.domain.tools.UseCase
 import com.paya.presentation.base.BaseViewModel
-import com.paya.presentation.ui.adapter.chartLablel.ChartLabelAdapter
-import com.paya.presentation.ui.hint.fragments.CardAccount
 import com.paya.presentation.ui.profile.enum.FilterProfile
 import com.paya.presentation.utils.*
 import com.paya.presentation.utils.shared.Point
 import dagger.hilt.android.lifecycle.HiltViewModel
-import ir.hamsaa.persiandatepicker.util.PersianCalendar
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.util.*
+
 @HiltViewModel
 class ChartProfileViewModel @Inject constructor(
 	private val getBoxHistoryUseCase: UseCase<BoxHistoryRequestModel, BoxHistoryRepoModel>
@@ -41,7 +33,7 @@ class ChartProfileViewModel @Inject constructor(
 			if (it.status == Status.LOADING)
 				return
 		}
-		profile.value = Resource.loading(null)
+		showLoading()
 		viewModelScope.launch {
 			val response = callResource(
 				this@ChartProfileViewModel, getBoxHistoryUseCase.action(
@@ -53,6 +45,7 @@ class ChartProfileViewModel @Inject constructor(
 					setCurrentBoxData(it)
 				}
 			profile.postValue(response)
+			hideLoading()
 		}
 	}
 

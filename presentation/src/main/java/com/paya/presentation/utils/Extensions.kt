@@ -10,8 +10,12 @@ import android.net.Uri
 import android.text.TextUtils
 import android.util.Patterns
 import android.util.TypedValue
+import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.webkit.URLUtil
+import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
@@ -242,6 +246,29 @@ fun roundOffDecimal(number: Float): Float? {
     val df = DecimalFormat("#.##")
     df.roundingMode = RoundingMode.CEILING
     return df.format(number).toFloat()
+}
+
+
+fun TextView.setArrayStringText(
+    stringArray: Array<String>,
+    colorArrayText: Int
+) {
+    text = BulletTextUtil.makeBulletListFromStringArrayResource(
+        context.resources.getDimension(R.dimen.margin_s).toInt(),
+        context,
+        colorArrayText,
+        stringArray
+    )
+}
+
+fun View.setFocusTarget(target: EditText?) {
+    target ?: return
+    setOnClickListener {
+        target.requestFocus()
+        val imm: InputMethodManager? =
+            target.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+        imm?.showSoftInput(target, InputMethodManager.SHOW_IMPLICIT)
+    }
 }
 
 

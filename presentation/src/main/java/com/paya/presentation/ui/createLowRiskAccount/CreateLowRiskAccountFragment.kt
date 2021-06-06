@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.databinding.DataBindingUtil
+
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -44,18 +44,11 @@ class CreateLowRiskAccountFragment : BaseFragment<CreateLowRiskAccountViewModel>
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        mBinding = DataBindingUtil.inflate(
+        mBinding = FragmentCreateLowRiskAccountBinding.inflate(
             inflater,
-            R.layout.fragment_create_low_risk_account,
             container,
             false
         )
-
-        mBinding?.apply {
-            lifecycleOwner = this@CreateLowRiskAccountFragment
-            viewModel = mViewModel
-        }
-
         return mBinding?.root
     }
 
@@ -67,7 +60,7 @@ class CreateLowRiskAccountFragment : BaseFragment<CreateLowRiskAccountViewModel>
         observe(mViewModel.pieChartStatus, ::setData)
         setupInputPrice()
         mBinding?.apply {
-            toolbar.backButton.setOnClickListener {
+            toolbar.backClick = {
                 findNavController().popBackStack()
             }
 

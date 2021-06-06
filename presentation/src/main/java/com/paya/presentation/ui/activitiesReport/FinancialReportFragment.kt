@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
@@ -33,7 +32,7 @@ private const val KEY_DATE = "date_key"
 @AndroidEntryPoint
 class FinancialReportFragment : BaseFragment<FinancialReportViewModel>() {
     private val mViewModel: FinancialReportViewModel by viewModels()
-    private lateinit var mBinding: FragmentFinancialReportBinding
+    private  var mBinding: FragmentFinancialReportBinding? = null
     private lateinit var adapter: FinancialReportAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,24 +44,26 @@ class FinancialReportFragment : BaseFragment<FinancialReportViewModel>() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        mBinding = DataBindingUtil.inflate(
+        mBinding = FragmentFinancialReportBinding.inflate(
             inflater,
-            R.layout.fragment_financial_report,
             container,
             false
         )
-
-        mBinding.viewModel = mViewModel
-        mBinding.lifecycleOwner = this
-
-        return mBinding.root
+        return mBinding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        mBinding.toolbar.backButton.setOnClickListener {
-            findNavController().popBackStack()
+        mBinding?.apply {
+            toolbar.backClick = {
+                findNavController().popBackStack()
+            }
+            calenderbtn.setOnClickListener {
+                getFindViewController()?.navigate(
+                    R.id.selectDateFilterFragment,
+                    SelectDateFilterFragment.newBundle(mViewModel.dateFrom, mViewModel.dateTo)
+                )
+            }
         }
         adapter = FinancialReportAdapter {
             val dialog = FinancialLogDetailDialog()
@@ -100,42 +101,40 @@ class FinancialReportFragment : BaseFragment<FinancialReportViewModel>() {
             }
         }
         initFilterTab()
-        mBinding.calenderbtn.setOnClickListener {
-            getFindViewController()?.navigate(
-                R.id.selectDateFilterFragment,
-                SelectDateFilterFragment.newBundle(mViewModel.dateFrom,mViewModel.dateTo)
-            )
-        }
+
 
     }
 
     private fun initFilterTab() {
-        mBinding.tabLayout.getTabAt(2)?.let { it.select() }
-        mBinding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabReselected(tab: TabLayout.Tab?) {
+        mBinding?.apply {
+            tabLayout.getTabAt(2)?.let { it.select() }
+            tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+                override fun onTabReselected(tab: TabLayout.Tab?) {
 
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-
-            }
-
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                when (mBinding.tabLayout.selectedTabPosition) {
-                    0 -> mViewModel.type = TypeInvestment.Reduction.name
-
-                    1 -> mViewModel.type = TypeInvestment.Increase.name
-
-                    2 -> mViewModel.type = ""
                 }
-                adapter.refresh()
-            }
 
-        })
+                override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+                }
+
+                override fun onTabSelected(tab: TabLayout.Tab?) {
+                    when (tabLayout.selectedTabPosition) {
+                        0 -> mViewModel.type = TypeInvestment.Reduction.name
+
+                        1 -> mViewModel.type = TypeInvestment.Increase.name
+
+                        2 -> mViewModel.type = ""
+                    }
+                    adapter.refresh()
+                }
+
+            })
+        }
     }
-    override fun onDestroy() {
-        super.onDestroy()
-        mBinding.unbind()
+
+    override fun onDestroyView() {
+        mBinding = null
+        super.onDestroyView()
     }
     companion object {
         @JvmStatic

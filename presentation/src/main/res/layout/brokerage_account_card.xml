@@ -1,72 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/accountCardLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.home.fragments.CardAccount"
-        android:background="@drawable/ic_cards">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/accountCardLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_cards">
 
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/logoImage"
-            android:layout_width="38dp"
-            android:layout_height="38dp"
-            android:layout_marginTop="@dimen/margin_m"
-            android:layout_marginEnd="@dimen/margin_l"
-            android:scaleType="center"
-            android:src="@drawable/ic_logo_white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/logoImage"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="@dimen/margin_m"
+        android:layout_marginEnd="@dimen/margin_l"
+        android:scaleType="center"
+        android:src="@drawable/ic_logo_white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_xxxl"
-            android:gravity="center"
-            android:text="@string/you_size_invest"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size_xxs"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_xxxl"
+        android:gravity="center"
+        android:text="@string/you_size_invest"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_xxs"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/wealthValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:textSize="32sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title"
-            tools:text="10.856.000" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/wealthValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="32sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        tools:text="10.856.000" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/wealthTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/wealth_toman"
-            android:textColor="@color/white"
-            android:textSize="10sp"
-            app:layout_constraintEnd_toStartOf="@+id/wealthBarrier"
-            app:layout_constraintTop_toBottomOf="@id/wealthValue" />
-
-
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/wealthBarrier"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:barrierDirection="end"
-            app:constraint_referenced_ids="wealthTitle,wealthValue"
-            tools:layout_editor_absoluteX="16dp" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/wealthTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/wealth_toman"
+        android:textColor="@color/white"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toStartOf="@+id/wealthBarrier"
+        app:layout_constraintTop_toBottomOf="@id/wealthValue" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/wealthBarrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="end"
+        app:constraint_referenced_ids="wealthTitle,wealthValue"
+        tools:layout_editor_absoluteX="16dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

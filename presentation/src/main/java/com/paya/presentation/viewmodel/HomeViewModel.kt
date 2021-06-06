@@ -23,9 +23,10 @@ class HomeViewModel @Inject constructor(
 
 	fun getProfile() {
 		viewModelScope.launch {
-			statusProfile.value = Resource.loading(null)
+			showLoading()
 			val response  = callResource(this@HomeViewModel,useCaseProfile.action(Unit))
 			statusProfile.value = response
+			hideLoading()
 		}
 
 	}

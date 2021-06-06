@@ -1,23 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <data>
-
-        <import type="com.paya.domain.tools.Resource" />
-
-        <import type="com.paya.presentation.viewmodel.ActivateForgotPasswordViewModel" />
-
-        <variable
-            name="viewModel"
-            type="ActivateForgotPasswordViewModel" />
-    </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_height="match_parent"
         android:background="@color/japanese_laurel_green"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
         tools:context=".ui.activate.ActivateFragment">
 
         <androidx.constraintlayout.widget.Guideline
@@ -105,7 +92,6 @@
             android:gravity="center"
             android:inputType="number"
             android:maxLength="5"
-            android:text="@={viewModel.activationCode}"
             android:textIsSelectable="false"
             android:textSize="@dimen/text_size_large"
             app:layout_constraintEnd_toStartOf="@id/verification_img"
@@ -119,7 +105,6 @@
             app:pinLineStrokeSelected="4dp"
             app:pinCharacterMask="*"
             android:layout_marginEnd="@dimen/margin_m"
-            verificationPinImage="@{@id/verification_img}"
             app:layout_constraintVertical_chainStyle="packed"
             app:layout_constraintBottom_toTopOf="@id/resend_code"/>
 
@@ -136,12 +121,10 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/resend_code"
-            enableDisable="@{viewModel.remainingTime}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/margin_medium"
             android:layout_marginTop="@dimen/margin_medium"
-            android:onClick="@{() -> viewModel.register()}"
             android:text="@string/resend_code"
             android:textColor="@color/japanese_laurel_green"
             android:textSize="@dimen/text_size_m"
@@ -169,7 +152,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_medium"
-            android:text="@{viewModel.remainingTimeText}"
             android:textColor="@color/green"
             android:textSize="@dimen/text_size_m"
             android:textStyle="bold"
@@ -184,7 +166,6 @@
             android:layout_height="@dimen/height_medium"
             android:layout_marginTop="@dimen/margin_large"
             app:layout_constraintVertical_bias="1"
-            android:onClick="@{() -> viewModel.activate()}"
             android:text="@string/submit_and_continue"
             app:layout_constraintBottom_toBottomOf="@id/guideline_bottom"
             />
@@ -195,9 +176,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            app:resource="@{(Resource) viewModel.status}"
             tools:visibility="gone" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-</layout>

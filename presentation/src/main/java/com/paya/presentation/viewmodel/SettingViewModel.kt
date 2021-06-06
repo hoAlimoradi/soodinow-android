@@ -41,10 +41,11 @@ class SettingViewModel @Inject constructor(
 
     fun getProfile() {
         /*viewModelScope.launch {
-            loading.postValue(Resource.loading(null))
+           showLoading()
             val response  = callResource(this@SettingViewModel,useCaseProfile.action(Unit))
             status.postValue(response)
             loading.postValue(response)
+            hideLoading()
         }*/
 
     }
@@ -74,7 +75,7 @@ class SettingViewModel @Inject constructor(
         }
 
         viewModelScope.launch {
-            loading.postValue(Resource.loading(null))
+            showLoading()
             val loginModel = LoginRepoModel(
                 username = "+98${username.substring(1, username.length)}",
                 password = password.md5()!!
@@ -82,6 +83,7 @@ class SettingViewModel @Inject constructor(
             val response = callResource(this@SettingViewModel, loginUseCase.action(loginModel))
             loginResource.postValue(response)
             loading.postValue(response)
+            hideLoading()
         }
     }
 

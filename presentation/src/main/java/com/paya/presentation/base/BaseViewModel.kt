@@ -7,10 +7,11 @@ open class BaseViewModel : ViewModel() {
 	val unAuthorizeLiveData = MutableLiveData<String>()
 	val errorLiveData = MutableLiveData<String>()
 	val unFarabiAuth = MutableLiveData<Unit>()
+	val unLoading = MutableLiveData<Boolean>()
 	override fun onCleared() {
 		super.onCleared()
 	}
-	
+
 	fun unAuthorized(
 		message: String,
 		block: () -> Unit
@@ -23,9 +24,21 @@ open class BaseViewModel : ViewModel() {
 		unFarabiAuth.postValue(Unit)
 	}
 
-	fun showError(error:String,isShowError: Boolean = true) {
+	fun showError(error: String, isShowError: Boolean = true) {
 		if (!isShowError)
 			return
 		errorLiveData.postValue(error)
+	}
+
+	fun showLoading() {
+		unLoading?.value?.let {
+			if (it)
+				return
+		}
+		unLoading.value = true
+	}
+
+	fun hideLoading() {
+		unLoading.value = false
 	}
 }

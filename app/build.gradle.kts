@@ -42,9 +42,9 @@ android {
     }
 
 
-    
+
     buildFeatures {
-        dataBinding = true
+        android.buildFeatures.viewBinding = true
     }
     
 }

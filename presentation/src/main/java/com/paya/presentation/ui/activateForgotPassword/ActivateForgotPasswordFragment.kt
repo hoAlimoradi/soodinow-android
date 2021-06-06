@@ -6,8 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.databinding.DataBindingUtil
+
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -22,6 +21,7 @@ import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentActivateBinding
 import com.paya.presentation.databinding.FragmentActivateForgotBinding
+import com.paya.presentation.utils.Utils
 import com.paya.presentation.utils.observe
 import com.paya.presentation.viewmodel.ActivateForgotPasswordViewModel
 import com.paya.presentation.viewmodel.ActivateViewModel
@@ -32,7 +32,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class ActivateForgotPasswordFragment : BaseFragment<ActivateForgotPasswordViewModel>() {
 	
 	private val mViewModel: ActivateForgotPasswordViewModel by viewModels()
-	private lateinit var mBinding: FragmentActivateForgotBinding
+	private  var mBinding: FragmentActivateForgotBinding? = null
 	private val args by navArgs<ActivateForgotPasswordFragmentArgs>()
 	
 	override fun onCreateView(
@@ -40,31 +40,46 @@ class ActivateForgotPasswordFragment : BaseFragment<ActivateForgotPasswordViewMo
 		savedInstanceState: Bundle?
 	): View? {
 		// Inflate the layout for this fragment
-		mBinding = DataBindingUtil.inflate(
+		mBinding = FragmentActivateForgotBinding.inflate(
 			inflater,
-			R.layout.fragment_activate_forgot,
 			container,
 			false
 		)
 		
 		mViewModel.phoneNumber = args.phoneNumber
-		mBinding.viewModel = mViewModel
-		mBinding.lifecycleOwner = this
-		
-		return mBinding.root
+		return mBinding?.root
 	}
 	
 	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
 		super.onViewCreated(view,savedInstanceState)
 		observe(mViewModel.status, ::checkActivateStatus)
-		mBinding.changeNumber.setOnClickListener {
-			findNavController().popBackStack()
+		observe(mViewModel.remainingTime, ::readyRemainingTime)
+		mBinding?.apply {
+			changeNumber.setOnClickListener {
+				findNavController().popBackStack()
+			}
+			submitButton.setOnClickListener {
+				txtPinEntry.text?.let {
+					mViewModel.activate(it.toString())
+				}
+			}
+			resendCode.setOnClickListener {
+				mViewModel.register()
+			}
+			Utils.setVerificationPinImage(txtPinEntry, verificationImg)
 		}
 		requestHint()
 	}
-	override fun onDestroy() {
-		super.onDestroy()
-		mBinding.unbind()
+	private fun readyRemainingTime(time: Int) {
+		mBinding?.apply {
+			Utils.enableDisable(resendCode, time)
+			resendCodeTime.text = "00:$time"
+		}
+
+	}
+	override fun onDestroyView() {
+		mBinding = null
+		super.onDestroyView()
 	}
 	private fun checkActivateStatus(activateResource: Resource<Any>){
 		if (activateResource.status == Status.SUCCESS){

@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.paya.presentation.R
@@ -18,7 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class CompletePasswordFragment : BaseFragment<CompletePasswordViewModel>() {
 
-    private lateinit var mBinding: FragmentCompletePasswordBinding
+    private  var mBinding: FragmentCompletePasswordBinding? = null
     private val mViewModel: CompletePasswordViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,21 +30,24 @@ class CompletePasswordFragment : BaseFragment<CompletePasswordViewModel>() {
     ): View? {
         // Inflate the layout for this fragment
         mBinding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_complete_password, container, false)
-        return mBinding.root
+            FragmentCompletePasswordBinding.inflate(inflater, container, false)
+        return mBinding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mBinding.submitButton.setOnClickListener {
-            findNavController().navigate(
-                R.id.navigateToLoginFragment
-            )
+        mBinding?.apply {
+            submitButton.setOnClickListener {
+                findNavController().navigate(
+                    R.id.navigateToLoginFragment
+                )
+            }
         }
     }
-    override fun onDestroy() {
-        super.onDestroy()
-        mBinding.unbind()
+
+    override fun onDestroyView() {
+        mBinding = null
+        super.onDestroyView()
     }
     override val baseViewModel: BaseViewModel
         get() = mViewModel

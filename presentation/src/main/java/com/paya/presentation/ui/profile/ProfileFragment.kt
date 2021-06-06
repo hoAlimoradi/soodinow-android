@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
@@ -26,7 +25,6 @@ import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentProfileBinding
 import com.paya.presentation.ui.adapter.chartLablel.ChartLabelAdapter
-import com.paya.presentation.ui.hint.fragments.CardAccount
 import com.paya.presentation.ui.model.PieChartModel
 import com.paya.presentation.ui.profile.adapter.EfficiencyAdapter
 import com.paya.presentation.ui.profile.dialog.ChartProfileDialog
@@ -48,18 +46,11 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        mBinding = DataBindingUtil.inflate(
+        mBinding = FragmentProfileBinding.inflate(
             inflater,
-            R.layout.fragment_profile,
             container,
             false
         )
-
-        mBinding?.apply {
-            lifecycleOwner = this@ProfileFragment
-            viewModel = viewModel
-        }
-
         return mBinding?.root
     }
 
@@ -71,6 +62,7 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
         observe(viewModel.existAccount, ::onExistAccountReady)
         observe(viewModel.profile, ::onProfileReady)
         observe(viewModel.pieChartStatus, ::setData)
+        observe(viewModel.errorMessage, ::setError)
 
         mBinding?.apply {
             historyLogBtn.setOnClickListener {
@@ -85,6 +77,13 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
         }
         viewModel.getExistAccount()
 
+    }
+
+    private fun setError(error: String) {
+        mBinding?.apply {
+            emptyLayout.emptyLayout.visibility = if (error.isEmpty()) View.GONE else View.VISIBLE
+            emptyLayout.titleTextView.text = error
+        }
     }
 
     private fun openChart() {
@@ -127,25 +126,7 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
 
     private fun onExistAccountReady(resource: Resource<ExitAccountRepoModel>) {
         if (resource.status == Status.SUCCESS) {
-            viewModel.cardAccounts.clear()
-            resource.data?.activeBox?.let {
-
-                it.forEach { activeBox ->
-                    viewModel.cardAccounts.add(CardAccount.newInstance(activeBox))
-                }
-                adapterSlide?.apply { notifyDataSetChanged() }
-                if (it.isEmpty()) {
-                    viewModel.setErrorMessage("شما حساب فعال ندارید \n" +
-                            "ابتدا پیمان خود را با ما ببندید")
-                    return@let
-                }
-                viewModel.currentBoxId = it.first().id
-                viewModel.getProfile(
-                    it.first().id
-                )
-            }
-        } else  {
-            resource.message?.let { viewModel.setErrorMessage(it) }
+            adapterSlide?.apply { notifyDataSetChanged() }
         }
 
     }
@@ -301,7 +282,7 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
             }
         }
 
-        mBinding?.chartLabelRecyclerView?.apply{adapter = adapterChart}
+        mBinding?.chartLabelRecyclerView?.apply { adapter = adapterChart }
 
     }
 

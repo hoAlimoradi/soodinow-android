@@ -20,9 +20,10 @@ class NewCardAccountViewModel @Inject constructor(
 	
 	fun getProfile() {
 		viewModelScope.launch {
-			statusProfile.postValue(Resource.loading(null))
+			showLoading()
 			val response  = callResource(this@NewCardAccountViewModel,useCaseProfile.action(Unit))
 			statusProfile.postValue(response)
+			hideLoading()
 		}
 		
 	}

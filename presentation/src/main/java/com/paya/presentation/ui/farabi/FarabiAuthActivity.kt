@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.webkit.CookieManager
 import android.webkit.CookieSyncManager
 import androidx.activity.viewModels
-import androidx.databinding.DataBindingUtil
 import com.hadiidbouk.appauthwebview.AppAuthWebView
 import com.hadiidbouk.appauthwebview.AppAuthWebViewData
 import com.hadiidbouk.appauthwebview.IAppAuthWebViewListener
@@ -18,7 +17,6 @@ import com.paya.domain.models.repo.FarabiTokenRepoModel
 import com.paya.domain.models.repo.UserFarabiRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
-import com.paya.presentation.R
 import com.paya.presentation.base.BaseActivity
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.ActivityFarabiAuthBinding
@@ -35,29 +33,31 @@ import net.openid.appauth.AuthState
 @AndroidEntryPoint
 class FarabiAuthActivity : BaseActivity<FarabiAuthViewModel>() {
     private var appAuthWebView: AppAuthWebView? = null
-    private lateinit var mBinding: ActivityFarabiAuthBinding
-    private lateinit var mData: AppAuthWebViewData
+    private var mBinding: ActivityFarabiAuthBinding? = null
+    private var mData: AppAuthWebViewData? = null
     private val mViewModel: FarabiAuthViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_farabi_auth)
-        setContentView(mBinding.root)
+        mBinding = ActivityFarabiAuthBinding.inflate(layoutInflater)
+        setContentView(mBinding?.root)
         observe(mViewModel.status, ::readyFarabiAuth)
         observe(mViewModel.statusGetUserFarabi, ::readyUserFarabi)
         observe(mViewModel.statusFarabiInfo, ::readyFarabiInfo)
         createAppAuth()
         toolbar.backButton.setOnClickListener {
-            finish()
+           onBackPressed()
         }
 
     }
 
     private fun createAppAuth() {
-        mBinding.webView.clearCache(true)
-        mBinding.webView.clearFormData()
+        mBinding?.apply {
+            webView.clearCache(true)
+            webView.clearFormData()
+        }
         clearCookies(this)
         mData = AppAuthWebViewData()
-        with(mData) {
+        mData?.apply {
             clientId = "soodinow.mobile"
             discoveryUri = "https://auth.farabixo.com/.well-known/openid-configuration"
             scope = "tse_api base_api"
@@ -150,9 +150,12 @@ class FarabiAuthActivity : BaseActivity<FarabiAuthViewModel>() {
             else -> return
         }
     }
+
     override fun onDestroy() {
+        mData = null
+        appAuthWebView = null
+        mBinding = null
         super.onDestroy()
-        mBinding.unbind()
     }
     override val baseViewModel: BaseViewModel
         get() = mViewModel

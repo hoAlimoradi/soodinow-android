@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.paya.domain.models.repo.ProfileRepoModel
@@ -26,13 +25,12 @@ import dagger.hilt.android.AndroidEntryPoint
 import ir.hamsaa.persiandatepicker.Listener
 import ir.hamsaa.persiandatepicker.PersianDatePickerDialog
 import ir.hamsaa.persiandatepicker.util.PersianCalendar
-import kotlinx.android.synthetic.main.fragment_first_information.*
 
 private const val ARG_IS_NEXT_PAGE: String = "next_page"
 @AndroidEntryPoint
 class FirstInformationFragment : BaseFragment<FirstInformationViewModel>() {
 	private val mViewModel: FirstInformationViewModel by viewModels()
-	private lateinit var mBinding: FragmentFirstInformationBinding
+	private var mBinding: FragmentFirstInformationBinding? = null
 	private var picker: PersianDatePickerDialog? = null
 	private var isNextPage: Boolean = false
 	override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,163 +46,171 @@ class FirstInformationFragment : BaseFragment<FirstInformationViewModel>() {
 	): View? {
 		// Inflate the layout for this fragment
 		mBinding =
-			DataBindingUtil.inflate(inflater, R.layout.fragment_first_information, container, false)
-		mBinding.viewModel = mViewModel
-		mBinding.lifecycleOwner = this
-		return mBinding.root
+			FragmentFirstInformationBinding.inflate(inflater, container, false)
+
+		return mBinding?.root
 	}
 	
 	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
-		mBinding.toolbar.backButton.setOnClickListener {
-			findNavController().popBackStack()
+		mBinding?.apply {
+			toolbar.backClick = {
+				findNavController().popBackStack()
+			}
+			birthDate.setOnClickListener {
+				showDatePicker()
+			}
+
+			gender.setOnClickListener {
+				fragmentManager?.let { it1 ->
+					PickerViewDialog()
+						.selectionIndex(
+							if (gender.getText() == "مرد" || gender.getText()
+									.isNullOrEmpty()
+							) 0 else 1
+						)
+						.setItems(mutableListOf("مرد", "زن"))
+						.setTitle(getString(R.string.gender))
+						.setListenerSelection { item, index ->
+							gender.setText(item)
+						}.show(it1, "gender")
+				}
+			}
+
+			city.setOnClickListener {
+				if (mViewModel.cityList.size > 0)
+					fragmentManager?.let { it1 ->
+						PickerViewDialog()
+							.selectionIndex(mViewModel.citySelection)
+							.setItems(mViewModel.cityList[mViewModel.provinceSelection].cities.map { it.name })
+							.setTitle(getString(R.string.city))
+							.setListenerSelection { item, index ->
+								mViewModel.citySelection = index
+								city.setText(item)
+							}.show(it1, "city")
+					}
+			}
+
+			province.setOnClickListener {
+				if (mViewModel.cityList.size > 0)
+					fragmentManager?.let { it1 ->
+						PickerViewDialog()
+							.selectionIndex(mViewModel.provinceSelection)
+							.setItems(mViewModel.cityList.map { it.name })
+							.setTitle(getString(R.string.province))
+							.setListenerSelection { item, index ->
+								mViewModel.provinceSelection = index
+								province.setText(item)
+							}.show(it1, "province")
+					}
+			}
+			insertBtn.setOnClickListener {
+				updateProfile()
+			}
 		}
 		observe(mViewModel.statusUpdate, ::onReadyUpdateProfile)
 		observe(mViewModel.statusCity, ::onReadyCity)
 		observe(mViewModel.statusProfile, ::onReadyProfile)
 		setDate(PersianCalendar())
-		mBinding.birthDate.clickLayout.setOnClickListener {
-			showDatePicker()
-		}
-		mBinding.gender.clickLayout.setOnClickListener {
-			fragmentManager?.let { it1 ->
-				PickerViewDialog()
-					.selectionIndex(
-						if (mViewModel.gender.get() == "m" || mViewModel.gender.get()
-								.isNullOrEmpty()
-						) 0 else 1
-					)
-					.setItems(mutableListOf("مرد", "زن"))
-					.setTitle(getString(R.string.gender))
-					.setListenerSelection { item, index ->
-						mBinding.gender.inputContentEditText.setText(item)
-						mViewModel.gender.set(if (index == 0) "m" else "f")
-					}.show(it1, "gender")
-			}
-		}
-		mBinding.city.clickLayout.setOnClickListener {
-			if (mViewModel.cityList.size > 0)
-				fragmentManager?.let { it1 ->
-					PickerViewDialog()
-						.selectionIndex(mViewModel.citySelection)
-						.setItems(mViewModel.cityList[mViewModel.provinceSelection].cities.map { it.name })
-						.setTitle(getString(R.string.city))
-						.setListenerSelection { item, index ->
-							mViewModel.citySelection = index
-							mViewModel.city.set(item)
-						}.show(it1, "city")
-				}
-		}
-		mBinding.province.clickLayout.setOnClickListener {
-			if (mViewModel.cityList.size > 0)
-				fragmentManager?.let { it1 ->
-					PickerViewDialog()
-						.selectionIndex(mViewModel.provinceSelection)
-						.setItems(mViewModel.cityList.map { it.name })
-						.setTitle(getString(R.string.province))
-						.setListenerSelection { item, index ->
-							mViewModel.provinceSelection = index
-							mViewModel.province.set(item)
-						}.show(it1, "province")
-				}
-		}
-		mBinding.insertBtn.setOnClickListener {
-			updateProfile()
-		}
 	}
 
 	private fun updateProfile() {
-		var isError = false
-		val firstName = mViewModel.firstName.get()
-		val lastName= mViewModel.lastName.get()
-		val phone= mViewModel.phone.get()
-		val email= mViewModel.email.get()
-		val nationalCode = mViewModel.nationalCode.get()
-		val birthDay = mViewModel.birthDay.get()?.let { Utils.convertToDate(it) }
-		val bban = mViewModel.bban.get()
-		val gender = mViewModel.gender.get()
-		val city = mViewModel.city.get()
-		val province = mViewModel.province.get()
-		val address = mViewModel.address.get()
+		mBinding?.let { mBinding ->
+			var isError = false
+			val firstName = mBinding.firstName.getText()
+			val lastName = mBinding.lastName.getText()
+			val phone = mBinding.phone.getText()
+			val email = mBinding.email.getText()
+			val nationalCode = mBinding.national.getText()
+			val birthDay = mViewModel.birthDay.let { Utils.convertToDate(it) }
+			val bban = mBinding.shaba.getText()
+			val gender =
+				if (mBinding.gender.getText() == "مرد" || mBinding.gender.getText()
+						.isEmpty()
+				) "m" else "f"
+			val city = mBinding.city.getText()
+			val province = mBinding.province.getText()
+			val address = mBinding.address.getText()
 
-		if (firstName.isNullOrBlank()) {
-			mBinding.firstName.layout.setError("لطفا نام را وارد کنید")
-			isError = true
+			if (firstName.isEmpty()) {
+				mBinding.firstName.setError("لطفا نام را وارد کنید")
+				isError = true
 
-		}
-		if (lastName.isNullOrBlank()) {
-			mBinding.lastName.layout.setError("لطفا نام‌ و خانوادگی را وارد کنید")
-			isError = true
+			}
+			if (lastName.isEmpty()) {
+				mBinding.lastName.setError("لطفا نام‌ و خانوادگی را وارد کنید")
+				isError = true
 
-		}
-		if (phone.isNullOrBlank()) {
-			mBinding.phone.layout.setError("لطفا تلفن را وارد کنید")
-			isError = true
+			}
+			if (phone.isEmpty()) {
+				mBinding.phone.setError("لطفا تلفن را وارد کنید")
+				isError = true
 
-		}
-		if (email.isNullOrBlank()) {
-			mBinding.email.layout.setError("لطفا ایمیل را وارد کنید")
-			isError = true
+			}
+			if (email.isEmpty()) {
+				mBinding.email.setError("لطفا ایمیل را وارد کنید")
+				isError = true
 
-		}
-		if (!isValidEmail(email)) {
-			mBinding.email.layout.setError("ایمیل وارد شده اشتباه است")
-			isError = true
+			}
+			if (!isValidEmail(email)) {
+				mBinding.email.setError("ایمیل وارد شده اشتباه است")
+				isError = true
 
-		}
+			}
 
-		if (nationalCode.isNullOrBlank()) {
-			mBinding.national.layout.setError("لطفا کد ملی را وارد کنید")
-			isError = true
-		}
+			if (nationalCode.isEmpty()) {
+				mBinding.national.setError("لطفا کد ملی را وارد کنید")
+				isError = true
+			}
 
-		if (nationalCode?.length != 10) {
-			mBinding.national.layout.setError("کد ملی وارد شده اشتباه است")
-			isError = true
-		}
+			if (nationalCode?.length != 10) {
+				mBinding.national.setError("کد ملی وارد شده اشتباه است")
+				isError = true
+			}
 
-		if (birthDay.isNullOrBlank()) {
-			mBinding.birthDate.layout.setError("لطفا تاربخ تولد را وارد کنید")
-			isError = true
-		}
+			if (birthDay.isEmpty()) {
+				mBinding.birthDate.setError("لطفا تاربخ تولد را وارد کنید")
+				isError = true
+			}
 
-		if (bban.isNullOrBlank()) {
-			mBinding.shaba.layout.setError("لطفا شماره شبا را وارد کنید")
-			isError = true
+			if (bban.isEmpty()) {
+				mBinding.shaba.setError("لطفا شماره شبا را وارد کنید")
+				isError = true
 
-		}
-		if (gender.isNullOrBlank()) {
-			mBinding.gender.layout.setError("لطفا جنسیت را انتخاب کنید")
-			isError = true
-		}
-		if (city.isNullOrBlank()) {
-			mBinding.city.layout.setError("لطفا شهر را انتخاب کنید")
-			isError = true
+			}
+			if (gender.isEmpty()) {
+				mBinding.gender.setError("لطفا جنسیت را انتخاب کنید")
+				isError = true
+			}
+			if (city.isEmpty()) {
+				mBinding.city.setError("لطفا شهر را انتخاب کنید")
+				isError = true
 
+			}
+			if (province.isEmpty()) {
+				mBinding.province.setError("لطفا استان را انتخاب کنید")
+				isError = true
+			}
+			if (address.isEmpty()) {
+				mBinding.address.setError("لطفا آدرس را وارد کنید")
+				isError = true
+			}
+			if (isError)
+				return
+			mViewModel.updateProfile(
+				firstName,
+				lastName,
+				phone,
+				email,
+				nationalCode,
+				birthDay,
+				bban,
+				gender,
+				city,
+				province,
+				address
+			)
 		}
-		if (province.isNullOrBlank()) {
-			mBinding.province.layout.setError("لطفا استان را انتخاب کنید")
-			isError = true
-		}
-		if (address.isNullOrBlank()) {
-			mBinding.address.layout.setError("لطفا آدرس را وارد کنید")
-			isError = true
-		}
-		if (isError)
-			return
-		mViewModel.updateProfile(
-			firstName!!,
-			lastName!!,
-			phone!!,
-			email!!,
-			nationalCode!!,
-			birthDay!!,
-			bban!!,
-			gender!!,
-			city!!,
-			province!!,
-			address!!
-		)
 	}
 
 	private fun showDatePicker() {
@@ -213,7 +219,7 @@ class FirstInformationFragment : BaseFragment<FirstInformationViewModel>() {
 			.setNegativeButton("بیخیال")
 			.setTodayButton("امروز")
 			.setTodayButtonVisible(true)
-			.setInitDate(if (mViewModel.birthDay.get() == null) PersianCalendar() else mViewModel.birthDay.get())
+			.setInitDate(if (mViewModel.birthDay == null) PersianCalendar() else mViewModel.birthDay)
 			.setMaxYear(PersianDatePickerDialog.THIS_YEAR)
 			.setMinYear(1300)
 			.setActionTextColor(Color.GRAY)
@@ -259,43 +265,58 @@ class FirstInformationFragment : BaseFragment<FirstInformationViewModel>() {
 	}
 
 	private fun onReadyProfile(resource: Resource<ProfileRepoModel>) {
-		if (resource.status == Status.SUCCESS) {
-			if (resource.data?.complete!!) {
-				citySelection()
-				mBinding.gender.inputContentEditText.setText(if (mViewModel.gender.get() == "m") "مرد" else if (mViewModel.gender.get() == "f") "زن" else "")
-				val date = mViewModel.birthDay.get()
-				if (date != null) {
-					mBinding.birthDate.inputContentEditText.setText(" ${date.persianYear}/${date.persianMonth}/${date.persianDay} ")
+		mBinding?.apply {
+			if (resource.status == Status.SUCCESS) {
+				resource.data?.let { data ->
+					if (data.complete) {
+						firstName.setText(data.firstName)
+						lastName.setText(data.lastName)
+						phone.setText(data.phone)
+						email.setText(data.email)
+						shaba.setText(data.bban?.replace("IR",""))
+						national.setText(data.personalCode)
+						province.setText(data.state)
+						city.setText(data.city)
+						address.setText(data.address)
+						citySelection()
+						gender.setText(if (data.gender == "m") "مرد" else if (data.gender == "f") "زن" else "")
+						val date = mViewModel.birthDay
+						birthDate.setText(" ${date.persianYear}/${date.persianMonth}/${date.persianDay} ")
+					}
 				}
 			}
 		}
 	}
 
 	private fun citySelection() {
-		if (!mViewModel.province.get().isNullOrEmpty() && mViewModel.cityList.isNotEmpty())
-			mViewModel.cityList.forEachIndexed { index, provinceRepoModel ->
-				if (mViewModel.province.get() == provinceRepoModel.name) {
-					mViewModel.provinceSelection = index
-					provinceRepoModel.cities.forEachIndexed { index, city ->
-						if (mViewModel.city.get() == city.name) {
-							mViewModel.citySelection = index
-							return@forEachIndexed
+		mBinding?.apply {
+			if (province.getText().isNotEmpty() && mViewModel.cityList.isNotEmpty())
+				mViewModel.cityList.forEachIndexed { index, provinceRepoModel ->
+					if (province.getText() == provinceRepoModel.name) {
+						mViewModel.provinceSelection = index
+						provinceRepoModel.cities.forEachIndexed { index, city ->
+							if (this.city.getText() == city.name) {
+								mViewModel.citySelection = index
+								return@forEachIndexed
+							}
 						}
+						return@forEachIndexed
 					}
-					return@forEachIndexed
 				}
-			}
+		}
 	}
 
 	private fun setDate(persianCalendar: PersianCalendar) {
-		mViewModel.birthDay.set(persianCalendar)
-		mBinding.birthDate.inputContentEditText.setText(persianCalendar.persianShortDate)
+		mViewModel.birthDay = persianCalendar
+		mBinding?.apply { birthDate.setText(persianCalendar.persianShortDate) }
 
 	}
-	override fun onDestroy() {
-		super.onDestroy()
-		mBinding.unbind()
+
+	override fun onDestroyView() {
+		mBinding = null
+		super.onDestroyView()
 	}
+
 	override val baseViewModel: BaseViewModel
 		get() = mViewModel
 

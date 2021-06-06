@@ -1,10 +1,9 @@
-package com.paya.presentation.ui.hint.fragments
+package com.paya.presentation.ui.home.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.paya.domain.models.repo.ActiveBoxRepo
@@ -46,8 +45,7 @@ class CardAccount : BaseFragment<BaseViewModel>() {
     ): View? {
 
         // Inflate the layout for this fragment
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.account_card, container, false)
-        mBinding?.apply { lifecycleOwner = this@CardAccount }
+        mBinding = AccountCardBinding.inflate(inflater,  container, false)
         return mBinding?.root
     }
 

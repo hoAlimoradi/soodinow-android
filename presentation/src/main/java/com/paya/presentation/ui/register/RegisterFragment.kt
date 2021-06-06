@@ -5,7 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -16,6 +16,7 @@ import com.paya.presentation.R
 import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentRegisterBinding
+import com.paya.presentation.utils.Utils
 import com.paya.presentation.utils.observe
 import com.paya.presentation.viewmodel.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,7 +26,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class RegisterFragment : BaseFragment<RegisterViewModel>() {
 
     private val mViewModel: RegisterViewModel by viewModels()
-    private lateinit var mBinding: FragmentRegisterBinding
+    private  var mBinding: FragmentRegisterBinding? = null
     private val args by navArgs<RegisterFragmentArgs>()
 
     override fun onCreateView(
@@ -33,29 +34,39 @@ class RegisterFragment : BaseFragment<RegisterViewModel>() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        mBinding = DataBindingUtil.inflate(
+        mBinding = FragmentRegisterBinding.inflate(
             inflater,
-            R.layout.fragment_register,
             container,
             false
         )
 
         args.title?.let { mViewModel.setTitle(it) }
-        mBinding.viewModel = mViewModel
-        mBinding.lifecycleOwner = this
-
-        return mBinding.root
+        return mBinding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observe(mViewModel.registerStatus, ::checkRegisterStatus)
-        mBinding.submitButton.setOnClickListener {
-            if (!mBinding.rulesCheckBox.isChecked) {
-				mViewModel.showError(getString(R.string.rule_error))
-				return@setOnClickListener
-			}
-			mViewModel.register()
+        mBinding?.apply {
+            context?.let {context->
+                Utils.setSpannableRules( rulesCheckBox,getString(R.string.rules_spannable_description),ContextCompat.getColor(context,R.color.governor_bay_blue),)
+            }
+
+            submitButton.setOnClickListener {
+                if (!rulesCheckBox.isChecked) {
+                    mViewModel.showError(getString(R.string.rule_error))
+                    return@setOnClickListener
+                }
+                if (phoneNumberLayout.getText().isEmpty()) {
+                    phoneNumberLayout.setError("لطفا شماره موبایل را وارد کنید")
+                    return@setOnClickListener
+                }
+                if(phoneNumberLayout.getText().length != 9){
+                    phoneNumberLayout.setError("شماره موبایل وارد شده اشتباه است")
+                    return@setOnClickListener
+                }
+                mViewModel.register(phoneNumberLayout.getText())
+            }
         }
     }
 
@@ -71,9 +82,10 @@ class RegisterFragment : BaseFragment<RegisterViewModel>() {
             )
         }
     }
-    override fun onDestroy() {
-        super.onDestroy()
-        mBinding.unbind()
+
+    override fun onDestroyView() {
+        mBinding = null
+        super.onDestroyView()
     }
     override val baseViewModel: BaseViewModel
         get() = mViewModel

@@ -1,238 +1,220 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg">
 
-    <data>
 
-        <import type="com.paya.domain.tools.Resource" />
-
-        <import type="com.paya.presentation.viewmodel.ProfileViewModel" />
-
-        <variable
-            name="viewModel"
-            type="ProfileViewModel" />
-    </data>
-
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/parentView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bg">
+        android:background="@color/blue_light_11"
+        android:visibility="invisible">
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/start_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.04" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/parentView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/blue_light_11"
-            android:visibility="invisible">
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/end_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.96" />
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/start_guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.04" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/alarm"
+            android:layout_width="@dimen/height"
+            android:layout_height="0dp"
+            android:adjustViewBounds="true"
+            android:scaleType="center"
+            android:src="@drawable/ic_alarm"
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/end_guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.96" />
+            app:layout_constraintStart_toEndOf="@+id/start_guideline"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="@dimen/margin_m"/>
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/alarm"
-                android:layout_width="@dimen/height"
-                android:layout_height="0dp"
-                android:adjustViewBounds="true"
-                android:scaleType="center"
-                android:src="@drawable/ic_alarm"
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/bg"
+            android:elevation="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/alarm">
 
-                app:layout_constraintStart_toEndOf="@+id/start_guideline"
-                app:layout_constraintTop_toBottomOf="@+id/top_guideline" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <ScrollView
-                android:id="@+id/scrollView"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:elevation="2dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/alarm"
-                android:background="@color/bg">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <View
+                    android:id="@+id/bg_card"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="0dp"
+                    android:background="@drawable/bg_card"
+                    app:layout_constraintBottom_toTopOf="@id/viewGuidLineBgCard"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                    <View
-                        android:id="@+id/bg_card"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:background="@drawable/bg_card"
-                        app:layout_constraintBottom_toTopOf="@id/viewGuidLineBgCard"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <View
-                        android:id="@+id/viewGuidLineBgCard"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="36dp"
-                        app:layout_constraintTop_toTopOf="@id/card" />
+                <View
+                    android:id="@+id/viewGuidLineBgCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="36dp"
+                    app:layout_constraintTop_toTopOf="@id/card" />
 
 
-                    <androidx.viewpager2.widget.ViewPager2
-                        android:id="@+id/pager"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_marginTop="@dimen/margin_very_small"
-                        app:layout_constraintDimensionRatio="H,2:1"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/pager"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="@dimen/margin_very_small"
+                    app:layout_constraintDimensionRatio="H,2:1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
-                    <View
-                        android:id="@+id/card"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_marginHorizontal="@dimen/margin_l"
-                        android:layout_marginTop="@dimen/margin_xl"
-                        android:background="@drawable/shadow_medium"
-                        app:cardBackgroundColor="@color/white"
-                        app:layout_constraintBottom_toBottomOf="@id/expandableBtn"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/pager" />
+                <View
+                    android:id="@+id/card"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginHorizontal="@dimen/margin_l"
+                    android:layout_marginTop="@dimen/margin_xl"
+                    android:background="@drawable/shadow_medium"
+                    app:layout_constraintBottom_toBottomOf="@id/expandableBtn"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/pager" />
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/efficiencyRecyclerView"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="12dp"
-                        android:layout_marginTop="12dp"
-                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                        app:layout_constraintBottom_toTopOf="@id/expandableBtn"
-                        app:layout_constraintEnd_toEndOf="@id/card"
-                        app:layout_constraintStart_toStartOf="@id/card"
-                        app:layout_constraintTop_toTopOf="@id/card"
-                        app:spanCount="3"
-                        tools:itemCount="6"
-                        tools:listitem="@layout/row_efficiency" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/efficiencyRecyclerView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginTop="12dp"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:layout_constraintBottom_toTopOf="@id/expandableBtn"
+                    app:layout_constraintEnd_toEndOf="@id/card"
+                    app:layout_constraintStart_toStartOf="@id/card"
+                    app:layout_constraintTop_toTopOf="@id/card"
+                    app:spanCount="3"
+                    tools:itemCount="6"
+                    tools:listitem="@layout/row_efficiency" />
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/expandableBtn"
-                        android:layout_width="0dp"
-                        android:layout_height="24dp"
-                        android:scaleType="center"
-                        android:src="@drawable/ic_arrow_bottom_gray"
-                        app:layout_constraintBottom_toBottomOf="@id/card"
-                        app:layout_constraintEnd_toEndOf="@id/card"
-                        app:layout_constraintStart_toStartOf="@id/card"
-                        app:layout_constraintTop_toBottomOf="@id/efficiencyRecyclerView"
-                        android:visibility="invisible"/>
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/expandableBtn"
+                    android:layout_width="0dp"
+                    android:layout_height="24dp"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_arrow_bottom_gray"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="@id/card"
+                    app:layout_constraintEnd_toEndOf="@id/card"
+                    app:layout_constraintStart_toStartOf="@id/card"
+                    app:layout_constraintTop_toBottomOf="@id/efficiencyRecyclerView" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/historyLogBtn"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/height_medium"
-                        android:layout_marginTop="@dimen/margin_l"
-                        android:background="@drawable/round_corner_border_oslo_gray_6"
-                        android:gravity="center"
-                        android:text="سوابق سبد سرمایه گذاری"
-                        android:textColor="@color/emperor"
-                        android:textSize="@dimen/text_size_s"
-                        app:layout_constraintEnd_toStartOf="@id/chartEfficiencyBtn"
-                        app:layout_constraintStart_toStartOf="@id/card"
-                        app:layout_constraintTop_toBottomOf="@id/card"
-                        />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/historyLogBtn"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/height_medium"
+                    android:layout_marginTop="@dimen/margin_l"
+                    android:background="@drawable/round_corner_border_oslo_gray_6"
+                    android:gravity="center"
+                    android:text="سوابق سبد سرمایه گذاری"
+                    android:textColor="@color/emperor"
+                    android:textSize="@dimen/text_size_s"
+                    app:layout_constraintEnd_toStartOf="@id/chartEfficiencyBtn"
+                    app:layout_constraintStart_toStartOf="@id/card"
+                    app:layout_constraintTop_toBottomOf="@id/card" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/chartEfficiencyBtn"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/height_medium"
-                        android:layout_marginStart="@dimen/margin_l"
-                        android:background="@drawable/round_corner_border_oslo_gray_6"
-                        android:gravity="center"
-                        android:text="نمودار بازدهی"
-                        android:textColor="@color/emperor"
-                        android:textSize="@dimen/text_size_s"
-                        app:layout_constraintBottom_toBottomOf="@id/historyLogBtn"
-                        app:layout_constraintEnd_toEndOf="@id/card"
-                        app:layout_constraintStart_toEndOf="@id/historyLogBtn"
-                        app:layout_constraintTop_toTopOf="@id/historyLogBtn" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/chartEfficiencyBtn"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/height_medium"
+                    android:layout_marginStart="@dimen/margin_l"
+                    android:background="@drawable/round_corner_border_oslo_gray_6"
+                    android:gravity="center"
+                    android:text="نمودار بازدهی"
+                    android:textColor="@color/emperor"
+                    android:textSize="@dimen/text_size_s"
+                    app:layout_constraintBottom_toBottomOf="@id/historyLogBtn"
+                    app:layout_constraintEnd_toEndOf="@id/card"
+                    app:layout_constraintStart_toEndOf="@id/historyLogBtn"
+                    app:layout_constraintTop_toTopOf="@id/historyLogBtn" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/titleBasket"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_l"
-                        android:layout_marginEnd="@dimen/margin_very_small"
-                        android:text="سبد سرمایه گذاری بدون ریسک شما"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_s"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="@id/card"
-                        app:layout_constraintHorizontal_bias="1"
-                        app:layout_constraintStart_toStartOf="@id/card"
-                        app:layout_constraintTop_toBottomOf="@id/historyLogBtn" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/titleBasket"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_l"
+                    android:layout_marginEnd="@dimen/margin_very_small"
+                    android:text="سبد سرمایه گذاری بدون ریسک شما"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_s"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@id/card"
+                    app:layout_constraintHorizontal_bias="1"
+                    app:layout_constraintStart_toStartOf="@id/card"
+                    app:layout_constraintTop_toBottomOf="@id/historyLogBtn" />
 
 
-                    <com.github.mikephil.charting.charts.PieChart
-                        android:id="@+id/pieChart"
-                        android:layout_width="0dp"
-                        android:layout_height="190dp"
-                        android:layout_marginTop="@dimen/margin_l"
-                        app:layout_constraintEnd_toEndOf="@id/card"
-                        app:layout_constraintStart_toStartOf="@id/card"
-                        app:layout_constraintTop_toBottomOf="@id/titleBasket" />
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/pieChart"
+                    android:layout_width="0dp"
+                    android:layout_height="190dp"
+                    android:layout_marginTop="@dimen/margin_l"
+                    app:layout_constraintEnd_toEndOf="@id/card"
+                    app:layout_constraintStart_toStartOf="@id/card"
+                    app:layout_constraintTop_toBottomOf="@id/titleBasket" />
 
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/chartLabelRecyclerView"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_m"
-                        android:layout_marginBottom="@dimen/space_bottom_navigation"
-                        android:foregroundGravity="right"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@id/card"
-                        app:layout_constraintStart_toStartOf="@id/card"
-                        app:layout_constraintTop_toBottomOf="@id/pieChart"
-                        app:layout_constraintVertical_bias="0.1"
-                        tools:itemCount="10"
-                        tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        tools:listitem="@layout/item_chart_label"
-                        tools:orientation="horizontal"
-                        tools:scrollbars="horizontal" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/chartLabelRecyclerView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_m"
+                    android:layout_marginBottom="@dimen/space_bottom_navigation"
+                    android:foregroundGravity="right"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/card"
+                    app:layout_constraintStart_toStartOf="@id/card"
+                    app:layout_constraintTop_toBottomOf="@id/pieChart"
+                    app:layout_constraintVertical_bias="0.1"
+                    tools:itemCount="10"
+                    tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_chart_label"
+                    tools:orientation="horizontal"
+                    tools:scrollbars="horizontal" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </ScrollView>
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
 
 
-        <include
-            android:id="@+id/empty"
-            layout="@layout/empty_card_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            app:title="@{viewModel.errorMessage}"
-            tools:visibility="gone" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        <include
-            layout="@layout/loading_state"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            app:resource="@{(Resource) viewModel.loading}"
-            tools:visibility="gone" />
+    <include
+        android:id="@+id/emptyLayout"
+        layout="@layout/empty_card_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        tools:visibility="gone" />
 
-    </FrameLayout>
 
-</layout>
+    <include
+        layout="@layout/loading_state"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        tools:visibility="gone" />
+
+</FrameLayout>

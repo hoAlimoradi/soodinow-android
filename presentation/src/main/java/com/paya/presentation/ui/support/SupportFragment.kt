@@ -1,15 +1,14 @@
 package com.paya.presentation.ui.support
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.paya.presentation.R
 import com.paya.presentation.databinding.FragmentSupportBinding
-import kotlinx.android.synthetic.main.fragment_support.*
+import com.paya.presentation.utils.Utils
 
 class SupportFragment : Fragment() {
 	
@@ -19,15 +18,14 @@ class SupportFragment : Fragment() {
 		savedInstanceState: Bundle?
 	): View? {
 		// Inflate the layout for this fragment
-		mBinding =  DataBindingUtil.inflate(inflater,R.layout.fragment_support,container,false)
-		mBinding?.apply{lifecycleOwner = this@SupportFragment}
-		return mBinding?.let{it.root}
+		mBinding = FragmentSupportBinding.inflate(inflater, container, false)
+		return mBinding?.root
 	}
 	
 	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
 		super.onViewCreated(view,savedInstanceState)
 		mBinding?.apply {
-			toolbar.backButton.setOnClickListener {
+			toolbar.backClick = {
 				findNavController().popBackStack()
 			}
 			onlineChatLayout.setOnClickListener {
@@ -36,6 +34,14 @@ class SupportFragment : Fragment() {
 				)
 			}
 			pulsator.start()
+			context?.let { context ->
+				buttonLayout.setOnClickListener {
+					Utils.calling(context, getString(R.string.call_support_number))
+				}
+				callButton.setOnClickListener {
+					Utils.calling(context, getString(R.string.call_support_number))
+				}
+			}
 		}
 
 	}

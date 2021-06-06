@@ -4,12 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.paya.presentation.R
 import com.paya.presentation.databinding.FragmentChatBinding
 import com.paya.presentation.ui.chat.adapter.ChatAdapter
 
@@ -18,18 +16,14 @@ class ChatFragment : Fragment() {
 
 	private var adapterChat: ChatAdapter = ChatAdapter(mutableListOf())
 	private var mBinding: FragmentChatBinding? = null
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
 
-	}
 
 	override fun onCreateView(
 		inflater: LayoutInflater, container: ViewGroup?,
 		savedInstanceState: Bundle?
 	): View? {
 		// Inflate the layout for this fragment
-		mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_chat, container, false)
-		mBinding?.apply { lifecycleOwner = this@ChatFragment }
+		mBinding = FragmentChatBinding.inflate(inflater,  container, false)
 		return mBinding?.root
 	}
 	
@@ -37,7 +31,7 @@ class ChatFragment : Fragment() {
 		super.onViewCreated(view, savedInstanceState)
 		mBinding?.apply {
 			pulsator.start()
-			toolbar.backButton.setOnClickListener {
+			toolbar.backClick = {
 				findNavController().popBackStack()
 			}
 		}

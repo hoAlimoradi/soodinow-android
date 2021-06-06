@@ -23,7 +23,7 @@ object Dependencies{
 		const val COROUTINES_ADAPTER_VER = "0.9.2"
 		const val CHUCK_VER = "3.3.0"
 		const val OK_HTTP_INTERCEPTOR_VER = "4.10.0-RC1"
-		const val NAVIGATION_COMPONENT_VER = "2.3.1"
+		const val NAVIGATION_COMPONENT_VER = "2.3.5"
 		const val LIFECYCLE_VER = "2.3.0-beta01"
 		const val DATA_BINDING_VER = "3.1.4"
 		const val MATERIAL_VER = "1.2.1"

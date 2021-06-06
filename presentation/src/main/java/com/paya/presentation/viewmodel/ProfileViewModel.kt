@@ -13,7 +13,7 @@ import com.paya.domain.tools.Status
 import com.paya.domain.tools.UseCase
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.ui.adapter.chartLablel.ChartLabelAdapter
-import com.paya.presentation.ui.hint.fragments.CardAccount
+import com.paya.presentation.ui.home.fragments.CardAccount
 import com.paya.presentation.ui.model.PieChartModel
 import com.paya.presentation.ui.profile.enum.FilterProfile
 import com.paya.presentation.utils.callResource
@@ -35,43 +35,43 @@ class ProfileViewModel @Inject constructor(
 	private var profileWeek: Resource<BoxHistoryRepoModel>? = null
 	private val efficiencyList: MutableList<EfficiencyRepoModel> = mutableListOf()
 	val existAccount = MutableLiveData<Resource<ExitAccountRepoModel>>()
-	val loading = MediatorLiveData<Resource<Nothing>>()
-	val errorMessage = MutableLiveData<String?>(null)
+	val errorMessage = MutableLiveData<String>()
 	val cardAccounts = mutableListOf<CardAccount>()
 
 	var currentBoxId: Long = 0
 
-
-	init {
-		loading.addSource(profile) {
-			if (profile.value?.status == Status.LOADING || existAccount.value?.status == Status.LOADING) {
-				loading.value = Resource.loading(null)
-			} else {
-				loading.value = Resource.idle(null)
-			}
-		}
-		loading.addSource(existAccount) {
-			if (profile.value?.status == Status.LOADING || existAccount.value?.status == Status.LOADING) {
-				loading.value = Resource.loading(null)
-			} else {
-				loading.value = Resource.idle(null)
-			}
-		}
-	}
 
 	fun setErrorMessage(message: String) {
 		errorMessage.value = message
 	}
 
 	fun getExistAccount() {
-		existAccount.value = Resource.loading(null)
+		showLoading()
 		viewModelScope.launch {
-			existAccount.postValue(
-				callResource(
-					this@ProfileViewModel,
-					existAccountUseCase.action(Unit)
-				)
-			)
+val resource = callResource(this@ProfileViewModel, existAccountUseCase.action(Unit))
+			if (resource.status == Status.SUCCESS) {
+				cardAccounts.clear()
+				resource.data?.activeBox?.let {
+					it.forEach { activeBox ->
+						cardAccounts.add(CardAccount.newInstance(activeBox))
+					}
+
+					if (it.isEmpty()) {
+						setErrorMessage("شما حساب فعال ندارید \n" +
+								"ابتدا پیمان خود را با ما ببندید")
+						hideLoading()
+					} else {
+						currentBoxId = it.first().id
+						getProfile(
+							it.first().id
+						)
+					}
+				}
+			} else  {
+				resource.message?.let { setErrorMessage(it) }
+				hideLoading()
+			}
+			existAccount.postValue(resource)
 		}
 	}
 
@@ -88,6 +88,7 @@ class ProfileViewModel @Inject constructor(
 				return
 		}
 		profile.value = Resource.loading(null)
+		showLoading()
 		getProfileWeek(boxId)
 		getProfileDay(boxId)
 		getProfileMonth(boxId)
@@ -179,6 +180,7 @@ class ProfileViewModel @Inject constructor(
 				}
 				Log.d("endProfile", efficiencyList.size.toString())
 				profile.postValue(Resource.success(efficiencyList))
+				hideLoading()
 			}
 		}
 	}

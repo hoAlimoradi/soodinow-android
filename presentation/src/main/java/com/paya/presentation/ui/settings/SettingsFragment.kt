@@ -20,7 +20,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricPrompt
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.paya.domain.models.repo.ProfileRepoModel
@@ -37,8 +36,6 @@ import com.paya.presentation.utils.observe
 import com.paya.presentation.utils.shortToast
 import com.paya.presentation.viewmodel.SettingViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_settings.*
-import kotlinx.android.synthetic.main.item_profile_menu_fingerprint.*
 import java.io.IOException
 import java.security.*
 import java.util.concurrent.Executor
@@ -72,11 +69,7 @@ class SettingsFragment : BaseFragment<SettingViewModel>() {
 		savedInstanceState: Bundle?
 	): View? {
 		// Inflate the layout for this fragment
-		mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_settings, container, false)
-		mBinding?.apply {
-			lifecycleOwner = this@SettingsFragment
-			viewModel = mViewModel
-		}
+		mBinding = FragmentSettingsBinding.inflate(inflater,  container, false)
 		return mBinding?.root
 	}
 	
@@ -94,11 +87,12 @@ class SettingsFragment : BaseFragment<SettingViewModel>() {
 		super.onDestroyView()
 	}
 	private fun initViews() {
-		if (mViewModel.getPassword() != null){
-			switchCompat.isChecked = true
-		}
+
 		mBinding?.apply {
-			activeFingerprint.switchCompat.setOnCheckedChangeListener { _, isChecked ->
+			if (mViewModel.getPassword() != null){
+				switchCompat.isChecked = true
+			}
+			switchCompat.setOnCheckedChangeListener { _, isChecked ->
 				if (!isChecked) {
 					mViewModel.setPassword(null)
 					return@setOnCheckedChangeListener
@@ -120,40 +114,40 @@ class SettingsFragment : BaseFragment<SettingViewModel>() {
 						}
 
 						override fun cancel() {
-							activeFingerprint.switchCompat.isChecked = false
+							switchCompat.isChecked = false
 						}
 
 					}
 				)
 				dialog.show(parentFragmentManager, "login")
 			}
-			changePassword.layout.setOnClickListener {
+			changePassword.setOnClickListener {
 				getFindViewController()?.navigate(
 					R.id.changePasswordFragment
 				)
 			}
-			myProfile.layout.setOnClickListener {
+			myProfile.setOnClickListener {
 				getFindViewController()?.navigate(
 					R.id.firstInformation, FirstInformationFragment.newBundle(false)
 				)
 			}
-			share.layout.setOnClickListener {
+			share.setOnClickListener {
 				getFindViewController()?.navigate(
 					R.id.introduceFriendsFragment
 				)
 			}
-			support.layout.setOnClickListener {
+			support.setOnClickListener {
 				getFindViewController()?.navigate(
 					R.id.support
 				)
 			}
-			financialLayout.setOnClickListener {
+			financial.setOnClickListener {
 				getFindViewController()?.navigate(
 					R.id.financialReportFragment
 				)
 			}
 
-			exitApp.layout.setOnClickListener {
+			exitApp.setOnClickListener {
 				exitProcess(-1)
 			}
 		}
@@ -175,7 +169,7 @@ class SettingsFragment : BaseFragment<SettingViewModel>() {
 			if (!fingerprintManager.isHardwareDetected) {
 				// If a fingerprint sensor isn’t available, then inform the user that they’ll be unable to use your app’s fingerprint functionality//
 				shortToast(getString(R.string.error_device_does_not_support_fingerprint))
-				mBinding?.apply{activeFingerprint.switchCompat.isChecked = false}
+				mBinding?.apply{switchCompat.isChecked = false}
 			}
 			//Check whether the user has granted your app the USE_FINGERPRINT permission//
 			if (ActivityCompat.checkSelfPermission(
@@ -185,21 +179,21 @@ class SettingsFragment : BaseFragment<SettingViewModel>() {
 			) {
 				// If your app doesn't have this permission, then display the following text//
 				shortToast(getString(R.string.error_fingerprint_permission))
-				mBinding?.apply{activeFingerprint.switchCompat.isChecked = false}
+				mBinding?.apply{switchCompat.isChecked = false}
 			}
 
 			//Check that the user has registered at least one fingerprint//
 			if (!fingerprintManager.hasEnrolledFingerprints()) {
 				// If the user hasn’t configured any fingerprints, then display the following message//
 				longToast(getString(R.string.error_fingerprint_not_configure))
-				mBinding?.apply{activeFingerprint.switchCompat.isChecked = false}
+				mBinding?.apply{switchCompat.isChecked = false}
 			}
 
 			//Check that the lockscreen is secured//
 			if (!keyguardManager.isKeyguardSecure) {
 				// If the user hasn’t secured their lockscreen with a PIN password or pattern, then display the following text//
 				longToast(getString(R.string.error_lock_screen_not_configure))
-				mBinding?.apply{activeFingerprint.switchCompat.isChecked = false}
+				mBinding?.apply{switchCompat.isChecked = false}
 			} else {
 				try {
 					generateKey()
@@ -335,13 +329,13 @@ class SettingsFragment : BaseFragment<SettingViewModel>() {
 				) {
 					super.onAuthenticationError(errorCode, errString)
 					longToast(getString(R.string.error_msg_auth_error, errString))
-					mBinding?.apply{activeFingerprint.switchCompat.isChecked = false}
+					mBinding?.apply{switchCompat.isChecked = false}
 				}
 
 				override fun onAuthenticationFailed() {
 					super.onAuthenticationFailed()
 					longToast(getString(R.string.error_msg_auth_failed))
-					mBinding?.apply{activeFingerprint.switchCompat.isChecked = false}
+					mBinding?.apply{switchCompat.isChecked = false}
 				}
 			})
 

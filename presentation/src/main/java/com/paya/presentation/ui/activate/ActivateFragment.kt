@@ -6,8 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.databinding.DataBindingUtil
+
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -21,6 +20,7 @@ import com.paya.presentation.R
 import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentActivateBinding
+import com.paya.presentation.utils.Utils
 import com.paya.presentation.utils.observe
 import com.paya.presentation.viewmodel.ActivateViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,42 +28,59 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ActivateFragment : BaseFragment<ActivateViewModel>() {
-	
+
 	private val mViewModel: ActivateViewModel by viewModels()
-	private lateinit var mBinding: FragmentActivateBinding
+	private var mBinding: FragmentActivateBinding? = null
 	private val args by navArgs<ActivateFragmentArgs>()
-	
+
 	override fun onCreateView(
-		inflater: LayoutInflater,container: ViewGroup?,
+		inflater: LayoutInflater, container: ViewGroup?,
 		savedInstanceState: Bundle?
 	): View? {
 		// Inflate the layout for this fragment
-		mBinding = DataBindingUtil.inflate(
+		mBinding = FragmentActivateBinding.inflate(
 			inflater,
-			R.layout.fragment_activate,
 			container,
 			false
 		)
-		
+
 		mViewModel.phoneNumber = args.phoneNumber
-		args.title?.let{mViewModel.setTitle(it)}
-		mBinding.viewModel = mViewModel
-		mBinding.lifecycleOwner = this
-		
-		return mBinding.root
+		args.title?.let { mViewModel.setTitle(it) }
+		return mBinding?.root
 	}
 	
 	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
-		super.onViewCreated(view,savedInstanceState)
+		super.onViewCreated(view, savedInstanceState)
 		observe(mViewModel.status, ::checkActivateStatus)
-		mBinding.changeNumber.setOnClickListener {
-			findNavController().popBackStack()
+		observe(mViewModel.remainingTime, ::readyRemainingTime)
+		mBinding?.apply {
+			changeNumber.setOnClickListener {
+				findNavController().popBackStack()
+			}
+			submitButton.setOnClickListener {
+				txtPinEntry.text?.let {
+					mViewModel.activate(it.toString())
+				}
+			}
+			resendCode.setOnClickListener {
+				mViewModel.register()
+			}
+			Utils.setVerificationPinImage(txtPinEntry, verificationImg)
 		}
+
 		requestHint()
 	}
-	
-	private fun checkActivateStatus(activateResource: Resource<Any>){
-		if (activateResource.status == Status.SUCCESS){
+
+	private fun readyRemainingTime(time: Int) {
+		mBinding?.apply {
+			Utils.enableDisable(resendCode, time)
+			resendCodeTime.text = "00:$time"
+		}
+
+	}
+
+	private fun checkActivateStatus(activateResource: Resource<Any>) {
+		if (activateResource.status == Status.SUCCESS) {
 			val bundle = Bundle()
 			bundle.putString("title", args.title)
 			findNavController().navigate(
@@ -72,9 +89,10 @@ class ActivateFragment : BaseFragment<ActivateViewModel>() {
 			)
 		}
 	}
-	override fun onDestroy() {
-		super.onDestroy()
-		mBinding.unbind()
+
+	override fun onDestroyView() {
+		mBinding = null
+		super.onDestroyView()
 	}
 	override val baseViewModel: BaseViewModel
 		get() = mViewModel

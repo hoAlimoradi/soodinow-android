@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<androidx.appcompat.widget.AppCompatTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/percent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:gravity="center"
+    android:padding="@dimen/margin_l"
+    android:textColor="@color/black"
+    android:textSize="@dimen/text_size_l"
+    android:textStyle="bold"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toEndOf="@id/toman"
+    app:layout_constraintTop_toTopOf="parent"
+    tools:text="44 %" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/percent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text_size_l"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/toman"
-        app:layout_constraintTop_toTopOf="parent"
-
-        tools:text="44 %"
-       android:padding="@dimen/margin_l"
-        android:gravity="center"
-        android:clipChildren="false"
-        android:clipToPadding="false"/>
-
-</layout>

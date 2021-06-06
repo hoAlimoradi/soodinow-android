@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -21,13 +20,12 @@ class MainFragment : Fragment() {
 	): View? {
 		// Inflate the layout for this fragment
 		// Inflate the layout for this fragment
-		mBinding = DataBindingUtil.inflate(
+		mBinding = FragmentMainBinding.inflate(
 			inflater,
-			R.layout.fragment_main,
 			container,
 			false
 		)
-		return mBinding?.let { it.root }
+		return mBinding?.root
 	}
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

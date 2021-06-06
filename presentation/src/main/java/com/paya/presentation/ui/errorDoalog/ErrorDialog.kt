@@ -7,13 +7,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import com.paya.presentation.R
+import com.paya.presentation.databinding.DialogErrorBinding
 import com.paya.presentation.utils.setWidthPercent
 import kotlinx.android.synthetic.main.dialog_error.*
 
+const val TAG = "errorDialog"
 class ErrorDialog : DialogFragment() {
 
     private var message = "عملیات شما با خطا مواجه شد"
+    private var mBinding: DialogErrorBinding? = null
+    var onDismiss: () -> Unit = {}
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -21,7 +24,8 @@ class ErrorDialog : DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
-        return inflater.inflate(R.layout.dialog_error, container, false)
+        mBinding = DialogErrorBinding.inflate(inflater, container, false)
+        return mBinding?.root
     }
 
     override fun onResume() {
@@ -34,11 +38,26 @@ class ErrorDialog : DialogFragment() {
         errorTextView.text = message
     }
 
-    fun setMessage(error:String) : ErrorDialog{
+    fun setMessage(error: String): ErrorDialog {
         message = error
         errorTextView?.let {
             it.text = message
         }
         return this
+    }
+
+    fun isShowing(): Boolean {
+        return dialog?.isShowing ?: false
+    }
+
+    override fun dismiss() {
+        super.dismiss()
+        onDismiss.invoke()
+    }
+
+    override fun onDestroyView() {
+        onDismiss.invoke()
+        mBinding = null
+        super.onDestroyView()
     }
 }

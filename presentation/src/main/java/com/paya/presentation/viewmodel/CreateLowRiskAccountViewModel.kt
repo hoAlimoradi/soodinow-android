@@ -28,7 +28,7 @@ class CreateLowRiskAccountViewModel @Inject constructor(
 	private var pieChartModel: PieChartModel? = null
 
 	fun getLowRiskStocks(type: String, price: Long) {
-		lowRiskResource.value = Resource.loading(null)
+		showLoading()
 		viewModelScope.launch {
 			val response = callResource(
 				this@CreateLowRiskAccountViewModel, lowRiskInvestmentRepository.getLowRiskStocks(
@@ -40,6 +40,7 @@ class CreateLowRiskAccountViewModel @Inject constructor(
 				response.data?.let { fillEntries(it.basket) }
 			}
 			lowRiskResource.postValue(response)
+			hideLoading()
 		}
 
 	}

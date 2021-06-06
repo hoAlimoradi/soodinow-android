@@ -12,11 +12,13 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.paya.presentation.R
 import com.paya.presentation.ui.errorDoalog.ErrorDialog
+import com.paya.presentation.ui.loading.LoadingDialog
 import com.paya.presentation.utils.observe
 
 abstract class BaseDialogFragment<VM : BaseViewModel> : DialogFragment() {
     abstract val baseViewModel: BaseViewModel
-    var errorDialog = ErrorDialog()
+    private var errorDialog: ErrorDialog? = null
+    private var loadingDialog: LoadingDialog? = null
     inline fun <reified VM : BaseViewModel> viewModelProvider(
         mode: LazyThreadSafetyMode = LazyThreadSafetyMode.NONE,
         crossinline provider: () -> VM
@@ -30,12 +32,12 @@ abstract class BaseDialogFragment<VM : BaseViewModel> : DialogFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         observe(baseViewModel.unAuthorizeLiveData, ::unAuthorized)
-
         observe(baseViewModel.errorLiveData, ::readyError)
+        observe(baseViewModel.unLoading, ::readyLoading)
     }
 
     private fun unAuthorized(message: String) {
-        Toast.makeText(requireContext(),message, Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
         activity?.findNavController(R.id.nav_host_fragment)?.navigate(
             R.id.actionUnAuthorized
         )
@@ -47,12 +49,35 @@ abstract class BaseDialogFragment<VM : BaseViewModel> : DialogFragment() {
 
 
     private fun readyError(error: String) {
-        errorDialog.dialog?.let {
-            if (it.isShowing)
-                return
+        if (errorDialog == null)
+            errorDialog = ErrorDialog()
+        errorDialog?.apply {
+            if (!isShowing()) {
+                setMessage(error)
+                show(this@BaseDialogFragment.childFragmentManager, "errorTag")
+            }
+            onDismiss = {
+                if (!isShowing())
+                    errorDialog = null
+            }
         }
-        errorDialog.setMessage(error)
-        errorDialog.show(parentFragmentManager,"errorTag")
+    }
+
+    private fun readyLoading(isLoading: Boolean) {
+        if (loadingDialog == null)
+            loadingDialog = LoadingDialog()
+        loadingDialog?.let {
+            it.onDismiss = {
+                if (!it.isShowing())
+                    loadingDialog = null
+            }
+            if (isLoading) {
+                it.show(this@BaseDialogFragment.childFragmentManager, "loading dialog")
+            } else {
+                if (it.isShowing())
+                    it.dismissAllowingStateLoss()
+            }
+        }
     }
 
     var resultLauncher =
@@ -66,11 +91,20 @@ abstract class BaseDialogFragment<VM : BaseViewModel> : DialogFragment() {
 
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        errorDialog.dialog?.let {
-            if (it.isShowing)
-                it.dismiss()
+    override fun onDestroyView() {
+        errorDialog?.apply {
+            dialog?.let {
+                if (it.isShowing)
+                    dismissAllowingStateLoss()
+            }
         }
+        errorDialog = null
+        loadingDialog?.let {
+            if (it.isShowing())
+                it.dismissAllowingStateLoss()
+        }
+        loadingDialog = null
+        super.onDestroyView()
+
     }
 }

@@ -1,31 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <data>
-
-        <import type="com.paya.domain.tools.Resource" />
-
-        <import type="com.paya.presentation.viewmodel.FinancialReportViewModel" />
-
-        <variable
-            name="viewModel"
-            type="FinancialReportViewModel" />
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/bg"
         tools:context=".ui.activitiesReport.FinancialReportFragment">
 
-        <include
+        <com.paya.presentation.utils.toolbar.ToolbarPublic
             android:id="@+id/toolbar"
             layout="@layout/toolbar"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            app:label="@{@string/transaction}"
+            app:toolbarTitle="@string/transaction"
             app:layout_constraintTop_toTopOf="parent" />
 
         <View
@@ -78,19 +66,16 @@
             app:tabBackground="@drawable/selector_tab_brokerage">
 
             <com.google.android.material.tabs.TabItem
-                android:id="@+id/withdrawalTab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/withdrawal_cash" />
 
             <com.google.android.material.tabs.TabItem
-                android:id="@+id/depositTab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/deposit_cash" />
 
             <com.google.android.material.tabs.TabItem
-                android:id="@+id/allTab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/all" />
@@ -115,7 +100,5 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             tools:visibility="gone"
-            app:resource="@{(Resource) viewModel.loading}"
             android:id="@+id/loadingView"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>

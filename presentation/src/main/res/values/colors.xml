@@ -61,4 +61,5 @@
     <color name="oslo_gray">#989a9b</color>
     <color name="charade">#2c2e38</color>
     <color name="yellow_solid">#ffff00</color>
+    <color name="loading_dialog_bg">#0AFFFFFF</color>
 </resources>

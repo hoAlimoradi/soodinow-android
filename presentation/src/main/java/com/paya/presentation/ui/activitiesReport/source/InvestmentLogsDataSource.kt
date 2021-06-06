@@ -26,10 +26,10 @@ class InvestmentLogsDataSource(
                 dateTo = viewModel.dateTo
             )
             if (nextPage == 1) {
-                viewModel.loading.setValue(Resource.loading(null))
+                viewModel.showLoading()
             }
             val response = callResource(viewModel, investmentUseCase.action(body))
-            viewModel.loading.setValue(Resource.idle(null))
+            viewModel.hideLoading()
             if (response.status == Status.SUCCESS) {
                 response.data?.let {
                     LoadResult.Page(

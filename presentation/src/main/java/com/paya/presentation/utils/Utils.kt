@@ -3,12 +3,27 @@ package com.paya.presentation.utils
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
+import android.graphics.PorterDuff
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.util.DisplayMetrics
 import android.view.Gravity
+import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.core.content.ContextCompat
+import androidx.core.widget.doAfterTextChanged
+import com.alimuzaffar.lib.pin.PinEntryEditText
+import com.paya.presentation.R
 import ir.hamsaa.persiandatepicker.Listener
 import ir.hamsaa.persiandatepicker.PersianDatePickerDialog
 import ir.hamsaa.persiandatepicker.util.PersianCalendar
@@ -108,6 +123,12 @@ object Utils {
         return sdf.format(pDate.time)
     }
 
+    @SuppressLint("SimpleDateFormat")
+    @JvmStatic
+    fun convertToDate(pDate: Date): String {
+        val sdf = SimpleDateFormat("yyyy-MM-dd")
+        return sdf.format(pDate.time)
+    }
 
     @JvmStatic
     fun convertStringToDate(date: String): Date? {
@@ -186,6 +207,69 @@ object Utils {
     const val stepPrice = 1000
 
 
+    @JvmStatic
+    fun enableDisable(textView: TextView, value: Int?) {
+        value ?: return
+        if (value != 0)
+            textView.setTextColor(ContextCompat.getColor(textView.context, R.color.gray))
+        else
+            textView.setTextColor(ContextCompat.getColor(textView.context, R.color.green))
+    }
 
+    @JvmStatic
+    fun setVerificationPinImage(editText: PinEntryEditText, imageView: ImageView) {
+        setTintColor(imageView, editText.context, R.color.gray)
 
+        editText.doAfterTextChanged {
+            val text = it.toString()
+            val colorId = if (text.length != 5) R.color.gray else R.color.green
+            setTintColor(imageView, editText.context, colorId)
+        }
+    }
+
+    @JvmStatic
+    fun setVerificationImage(editText: EditText, imageView: ImageView) {
+        setTintColor(imageView, editText.context, R.color.gray)
+
+        editText.doAfterTextChanged {
+            val text = it.toString()
+            val colorId = if (text.length != 9) R.color.gray else R.color.green
+            setTintColor(imageView, editText.context, colorId)
+        }
+    }
+
+    private fun setTintColor(
+        imageView: ImageView,
+        context: Context,
+        colorId: Int
+    ) {
+        imageView.setColorFilter(
+            ContextCompat.getColor(context, colorId),
+            PorterDuff.Mode.SRC_IN
+        )
+    }
+
+    @JvmStatic
+    fun setSpannableRules(textView: TextView, value: String?, color: Int = Color.BLUE) {
+        val spannable = SpannableString(textView.text)
+        val start = value?.let { textView.text.indexOf(it) }
+        val end = value?.let { it.length }
+        if (start != null && end != null) {
+            spannable.setSpan(
+                ForegroundColorSpan(color),
+                start,
+                end,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+        }
+        textView.setText(spannable, TextView.BufferType.SPANNABLE);
+    }
+
+    @JvmStatic
+    fun calling(context: Context, phone: String) {
+        val uri: Uri = Uri.parse("tel:" + phone.trim())
+        val intent = Intent(Intent.ACTION_DIAL, uri)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        context.startActivity(intent)
+    }
 }

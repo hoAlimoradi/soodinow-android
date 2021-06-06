@@ -31,9 +31,10 @@ class MarketViewModel @Inject constructor(
 	}
 	
 	fun getCurrencyPrices() {
-		currencyPrice.value = Resource.loading(null)
+		showLoading()
 		viewModelScope.launch {
 			currencyPrice.postValue(callResource(this@MarketViewModel,currencyRepository.getCurrencyPrice()))
+			hideLoading()
 		}
 	}
 	

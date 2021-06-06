@@ -151,25 +151,7 @@
         android:name="com.paya.presentation.ui.main.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" />
-    <fragment
-        android:id="@+id/questionFragment"
-        android:name="com.paya.presentation.ui.question.QuestionFragment"
-        android:label="QuestionFragment" />
-    <fragment
-        android:id="@+id/appropriateInvestmentFragment"
-        android:name="com.paya.presentation.ui.investment.AppropriateInvestmentFragment"
-        android:label="fragment_appropriate_investment"
-        tools:layout="@layout/fragment_appropriate_investment" />
-    <fragment
-        android:id="@+id/investmentScoreFragment"
-        android:name="com.paya.presentation.ui.investment.InvestmentScoreFragment"
-        android:label="fragment_investment_score"
-        tools:layout="@layout/fragment_investment_score" />
-    <fragment
-        android:id="@+id/investmentFragment"
-        android:name="com.paya.presentation.ui.investment.InvestmentFragment"
-        android:label="fragment_investment"
-        tools:layout="@layout/fragment_investment" />
+
     <fragment
         android:id="@+id/createLowRiskAccountFragment"
         android:name="com.paya.presentation.ui.createLowRiskAccount.CreateLowRiskAccountFragment"
@@ -185,19 +167,8 @@
         android:id="@+id/cashManager"
         android:name="com.paya.presentation.ui.cashManager.CashManagerFragment"
         android:label="fragment_cash_manager"
-        tools:layout="@layout/fragment_cash_manager">
+        tools:layout="@layout/fragment_cash_manager"/>
 
-        <action
-            android:id="@+id/navigateCashHistory"
-            app:destination="@id/historyPriceManagerFragment" />
-
-    </fragment>
-
-    <fragment
-        android:id="@+id/historyPriceManagerFragment"
-        android:name="com.paya.presentation.ui.cashManager.CashHistoryFragment"
-        android:label="fragment_cash_history"
-        tools:layout="@layout/fragment_cash_history" />
 
     <fragment
         android:id="@+id/firstInformation"
@@ -263,17 +234,6 @@
 
     </fragment>
 
-    <!--    report-->
-
-    <fragment
-        android:id="@+id/activitiesReportFragment"
-        android:name="com.paya.presentation.ui.activitiesReport.ActivitiesReportFragment"
-        android:label="ActivitiesReportFragment"
-        tools:layout="@layout/fragment_activities_report">
-
-    </fragment>
-
-    <!--    report-->
 
 
     <!--    setting-->
@@ -303,13 +263,7 @@
             app:popUpToInclusive="true" />
     </fragment>
 
-    <fragment
-        android:id="@+id/userUpdateProfile"
-        android:name="com.paya.presentation.ui.userUpdateProfile.UserUpdateProfileFragment"
-        android:label="fragment_user_update_profile"
-        tools:layout="@layout/fragment_user_update_profile">
 
-    </fragment>
     <fragment
         android:id="@+id/introduceFriendsFragment"
         android:name="com.paya.presentation.ui.introduceFriends.IntroduceFriendsFragment"

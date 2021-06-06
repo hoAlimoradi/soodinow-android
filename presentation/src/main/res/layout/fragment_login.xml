@@ -1,20 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <data>
-
-        <import type="com.paya.domain.tools.Resource" />
-
-        <import type="com.paya.presentation.viewmodel.LoginViewModel" />
-
-        <variable
-            name="viewModel"
-            type="LoginViewModel" />
-    </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+ <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/bg_green"
@@ -72,28 +60,23 @@
             app:layout_constraintVertical_chainStyle="packed" />
 
 
-        <include
+        <com.paya.presentation.utils.editText.MobileEditText
             android:id="@+id/phoneNumber"
-            layout="@layout/input_phone_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:content="@{viewModel.username}"
-            app:label="@{@string/username_or_phone}"
-            app:layout_constraintBottom_toTopOf="@id/password_layout"
-
+            app:labelText="@string/username_or_phone"
+            app:layout_constraintBottom_toTopOf="@id/passwordLayout"
             app:layout_constraintTop_toBottomOf="@id/title_txt"
             app:layout_constraintVertical_chainStyle="packed" />
 
-        <include
-            android:id="@+id/password_layout"
+        <com.paya.presentation.utils.editText.InputEditText
+            android:id="@+id/passwordLayout"
             layout="@layout/input_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/margin_40dp"
-            app:content="@{viewModel.password}"
-            app:label="@{@string/password}"
+            app:labelText="@string/password"
+            android:inputType="textPassword"
             app:layout_constraintBottom_toTopOf="@id/forget_password"
-
             app:layout_constraintTop_toBottomOf="@id/phoneNumber"
             app:layout_constraintVertical_chainStyle="packed" />
 
@@ -109,7 +92,7 @@
             app:layout_constraintBottom_toTopOf="@id/description_layout"
             app:layout_constraintStart_toStartOf="parent"
 
-            app:layout_constraintTop_toBottomOf="@id/password_layout"
+            app:layout_constraintTop_toBottomOf="@id/passwordLayout"
             app:layout_constraintVertical_chainStyle="packed" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -149,7 +132,6 @@
             style="@style/SignInButton"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_medium"
-            android:onClick="@{() -> viewModel.login()}"
             android:text="@string/login"
             app:layout_constraintBottom_toBottomOf="@id/guideline_bottom"
             app:layout_constraintVertical_bias="1" />
@@ -160,9 +142,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            app:resource="@{(Resource) viewModel.loginResource}"
             tools:visibility="gone" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-</layout>

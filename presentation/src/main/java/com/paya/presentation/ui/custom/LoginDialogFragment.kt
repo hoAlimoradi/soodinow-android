@@ -4,11 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ObservableField
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
-import com.paya.presentation.R
 import com.paya.presentation.databinding.FragmentLoginDialogBinding
 import com.paya.presentation.utils.Utils
 import com.paya.presentation.utils.setWidthPercent
@@ -34,10 +31,10 @@ class LoginDialogFragment : DialogFragment() {
 	private var hintPassword: String? = null
 	private var submitTitle: String? = null
 	private var cancelTitle: String? = null
-	private  var username = ObservableField<String?>()
-	private  var password = ObservableField<String?>()
-	
-	private lateinit var mBinding: FragmentLoginDialogBinding
+	private var username: String? = null
+	private var password: String? = null
+
+	private var mBinding: FragmentLoginDialogBinding? = null
 	var callBack: CallBack? = null
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -63,56 +60,64 @@ class LoginDialogFragment : DialogFragment() {
 		savedInstanceState: Bundle?
 	): View? {
 		// Inflate the layout for this fragment
-		mBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_login_dialog,container,false)
-		mBinding.titleDialog = title
-		mBinding.hintUsername = hintUsername
-		mBinding.hintPassword = hintPassword
-		mBinding.submitTitle = submitTitle
-		mBinding.cancelTitle = cancelTitle
-		mBinding.username = username
-		mBinding.password = password
-		mBinding.lifecycleOwner = this
-		return mBinding.root
+		mBinding = FragmentLoginDialogBinding.inflate(inflater, container, false)
+		return mBinding?.root
 	}
 	
 	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
-		super.onViewCreated(view,savedInstanceState)
-		mBinding.submitBtn.setOnClickListener {
-			if (username.get().isNullOrBlank()){
-				return@setOnClickListener
+		super.onViewCreated(view, savedInstanceState)
+		mBinding?.let { mBinding ->
+			title?.let { mBinding.toolbar.setTitle(it) }
+			hintUsername?.let {
+				mBinding.usernameEditText.setLabelText(it)
 			}
-			if (password.get().isNullOrBlank()){
-				return@setOnClickListener
+			hintPassword?.let {
+				mBinding.passwordEdiText.setLabelText(it)
 			}
-			if (username.get().toString().length != 11 ||
-				!username.get().toString().startsWith("09")){
-				shortToast("شماره تلفن صحیح نمیباشد")
-				return@setOnClickListener
-			}
-			username.get().toString().forEach {
-				if (!it.isDigit()){
-					shortToast("شماره تلفن صحیح نمیباشد")
-					return@setOnClickListener
+			submitTitle?.let { mBinding.submitBtn.text = it }
+			cancelTitle?.let { mBinding.cancelBtn.text = it }
+			username?.let { mBinding.usernameEditText.setText(it) }
+			password?.let { mBinding.passwordEdiText.setText(it) }
+			mBinding.submitBtn.setOnClickListener {
+				username?.let { username ->
+					password?.let { password ->
+						if (username.length != 11 ||
+							!username.startsWith("09")
+						) {
+							shortToast("شماره تلفن صحیح نمیباشد")
+							return@setOnClickListener
+						}
+						username.forEach {
+							if (!it.isDigit()) {
+								shortToast("شماره تلفن صحیح نمیباشد")
+								return@setOnClickListener
+							}
+						}
+
+						callBack?.success(username, password)
+					}
 				}
+
 			}
-			callBack?.success(username.get().toString(),password.get().toString())
-			
-		}
-		mBinding.cancelBtn.setOnClickListener {
-			callBack?.cancel()
-		}
-		mBinding.toolbar.closeBtn.setOnClickListener {
-			dismissAllowingStateLoss()
+			mBinding.cancelBtn.setOnClickListener {
+				callBack?.cancel()
+				dismissAllowingStateLoss()
+			}
+			mBinding.toolbar.backClick = {
+				dismissAllowingStateLoss()
+			}
 		}
 	}
 
-	fun onActionsListener(callback: CallBack){
+	fun onActionsListener(callback: CallBack) {
 		this.callBack = callback
 	}
-	override fun onDestroy() {
-		super.onDestroy()
-		mBinding.unbind()
+
+	override fun onDestroyView() {
+		mBinding = null
+		super.onDestroyView()
 	}
+
 	companion object {
 		/**
 		 * Use this factory method to create a new instance of

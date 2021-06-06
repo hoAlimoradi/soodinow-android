@@ -1,7 +1,6 @@
 package com.paya.presentation.viewmodel
 
 import android.util.Log
-import androidx.databinding.ObservableField
 import javax.inject.Inject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,6 +12,7 @@ import com.paya.domain.tools.UseCase
 import com.paya.presentation.base.BaseViewModel
 
 import com.paya.presentation.utils.callResource
+import com.paya.presentation.utils.md5
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -29,9 +29,7 @@ class SetPasswordViewModel @Inject constructor(
 	init {
 		getAccessToken()
 	}
-	
-	val password = ObservableField<String>()
-	val repeatPassword = ObservableField<String>()
+
 	
 	val setPasswordResource = MutableLiveData<Resource<SetPasswordRepoModel>>()
 	
@@ -47,38 +45,12 @@ class SetPasswordViewModel @Inject constructor(
 		this.title.value = title
 	}
 	
-	fun submit(){
-		isNewPassword = false
-		isRepeatPassword = false
-		val password = password.get()
-		val repeatPassword = repeatPassword.get()
-		
-		if (password.isNullOrBlank() ){
-			isNewPassword=true
-			setPasswordResource.setValue(
-				Resource.error("لطفا رمز عبور را وارد کنید", null)
-			)
-			return
-		}
-		if ( repeatPassword.isNullOrBlank()){
-			isRepeatPassword = true
-			setPasswordResource.setValue(
-				Resource.error("لطفا تکرار رمز عبور را وارد کنید", null)
-			)
-			return
-		}
-		
-		if (password != repeatPassword){
-			isRepeatPassword = true
-			setPasswordResource.setValue(
-				Resource.error("رمز عبور با تکرار آن یکسان نیست", null)
-			)
-			return
-		}
+	fun submit(password:String){
 		viewModelScope.launch {
-			setPasswordResource.postValue(Resource.loading(null))
-			val resource = callResource(this@SetPasswordViewModel,setPasswordUseCase.action(password))
+			showLoading()
+			val resource = callResource(this@SetPasswordViewModel,setPasswordUseCase.action(password.md5()!!))
 			setPasswordResource.postValue(resource)
+			hideLoading()
 		}
 		
 	}

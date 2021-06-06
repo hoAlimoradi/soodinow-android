@@ -1,6 +1,5 @@
 package com.paya.presentation.viewmodel
 
-import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.paya.domain.models.repo.ActivateRepoModel
@@ -23,7 +22,6 @@ class ActivateViewModel @Inject constructor(
 ) : BaseViewModel() {
 	
 	val title = MutableLiveData<String>()
-	val remainingTimeText = MutableLiveData<String>()
 	val remainingTime = MutableLiveData(59)
 	
 	init {
@@ -31,7 +29,7 @@ class ActivateViewModel @Inject constructor(
 	}
 	
 	lateinit var phoneNumber: String
-	val activationCode = ObservableField<String>()
+
 	
 	val status = MutableLiveData<Resource<Any>>()
 	
@@ -39,20 +37,20 @@ class ActivateViewModel @Inject constructor(
 		this.title.value = title
 	}
 	
-	fun activate() {
-		val activationCode = activationCode.get()
-		if (activationCode.isNullOrBlank() || activationCode.length != 5) {
+	fun activate(activationCode : String) {
+		if (activationCode.isEmpty() || activationCode.length != 5) {
 			status.setValue(Resource.error("کد وارد شده اشتباه است",null))
 			return
 		}
 		viewModelScope.launch {
-			status.postValue(Resource.loading(null))
+			showLoading()
 			val activateModel = ActivateRepoModel(
 				phoneNumber,
 				activationCode
 			)
 			val response = callResource(this@ActivateViewModel,activateUseCase.action(activateModel))
 			status.postValue(response)
+			hideLoading()
 		}
 	}
 	
@@ -60,7 +58,7 @@ class ActivateViewModel @Inject constructor(
 		if (remainingTime.value != 0)
 			return
 		viewModelScope.launch {
-			status.postValue(Resource.loading(null))
+			showLoading()
 			val response = callResource(this@ActivateViewModel,registerUseCase.action(phoneNumber))
 			
 			if (response.status == Status.SUCCESS) {
@@ -69,6 +67,7 @@ class ActivateViewModel @Inject constructor(
 				setRemainingTime()
 			} else
 				status.postValue(response)
+			hideLoading()
 		}
 	}
 	
@@ -78,8 +77,6 @@ class ActivateViewModel @Inject constructor(
 			val formattedRemainingTime =
 				if (remainingTime.value!! >= 10) remainingTime.value.toString()
 				else "0${remainingTime.value}"
-			remainingTimeText.value = "00:$formattedRemainingTime"
-			
 			if (remainingTime.value == 0)
 				return@launch
 			

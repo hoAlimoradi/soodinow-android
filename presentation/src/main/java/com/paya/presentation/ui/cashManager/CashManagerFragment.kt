@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -21,7 +20,7 @@ import com.paya.presentation.R
 import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentCashManagerBinding
-import com.paya.presentation.ui.hint.fragments.CardAccount
+import com.paya.presentation.ui.home.fragments.CardAccount
 import com.paya.presentation.utils.Utils
 import com.paya.presentation.utils.ViewPagerUtil
 import com.paya.presentation.utils.observe
@@ -29,14 +28,15 @@ import com.paya.presentation.viewmodel.CashManagerViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 private const val ARG_ACCOUNT_ID = "account_id"
+
 @AndroidEntryPoint
 class CashManagerFragment : BaseFragment<CashManagerViewModel>() {
 
     private val mViewModel: CashManagerViewModel by viewModels()
-    private  var mBinding: FragmentCashManagerBinding?=null
+    private var mBinding: FragmentCashManagerBinding? = null
     private val cardAccounts = mutableListOf<CardAccount>()
     private var accountId: Long = 0
-    private  var adapterSlide: SlidePagerAdapter?=null
+    private var adapterSlide: SlidePagerAdapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -50,11 +50,7 @@ class CashManagerFragment : BaseFragment<CashManagerViewModel>() {
     ): View? {
         // Inflate the layout for this fragment
         mBinding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_cash_manager, container, false)
-        mBinding?.apply {
-            lifecycleOwner = this@CashManagerFragment
-            viewModel = mViewModel
-        }
+            FragmentCashManagerBinding.inflate(inflater, container, false)
         return mBinding?.root
     }
 
@@ -66,7 +62,7 @@ class CashManagerFragment : BaseFragment<CashManagerViewModel>() {
         observe(mViewModel.sellPriceStatus, ::readySellPrice)
         observe(mViewModel.pullPriceStatus, ::readyPullPrice)
         mBinding?.apply {
-            toolbar.backButton.setOnClickListener {
+            toolbar.backClick = {
                 findNavController().popBackStack()
             }
             inputPrice.setupWatcherPrice(lifecycleScope = lifecycleScope) {}
@@ -78,7 +74,7 @@ class CashManagerFragment : BaseFragment<CashManagerViewModel>() {
 
 
             submitBtn.setOnClickListener {
-                mViewModel.price.set(inputPrice.getPriceLong())
+                mViewModel.price = inputPrice.getPriceLong()
                 mViewModel.setPullPrice()
             }
 
@@ -94,26 +90,26 @@ class CashManagerFragment : BaseFragment<CashManagerViewModel>() {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     when (tabLayout.selectedTabPosition) {
                         0 -> {
-                            mViewModel.priceType.set(CashManagerViewModel.PriceType.withdrawal)
-                            inputPrice.maxPrice = mViewModel.maxSeek.get()!!
-                            inputPrice.minPrice = mViewModel.minSeek.get()!!
+                            mViewModel.priceType = CashManagerViewModel.PriceType.withdrawal
+                            inputPrice.maxPrice = mViewModel.maxSeek
+                            inputPrice.minPrice = mViewModel.minSeek
+                            titlePrice.text = getString(R.string.withdrawal_price)
                             inputPrice.setMessage(
                                 "مبلغ وارد شده باید بین ${Utils.separatorAmount(
-                                    mViewModel.minSeek.get()!!
-                                )} تا ${Utils.separatorAmount(mViewModel.maxSeek.get()!!)} ریال باشد"
+                                    mViewModel.minSeek
+                                )} تا ${Utils.separatorAmount(mViewModel.maxSeek)} ریال باشد"
                             )
-                            mViewModel.type.set("Fixed")
                         }
                         1 -> {
-                            mViewModel.priceType.set(CashManagerViewModel.PriceType.deposit)
+                            mViewModel.priceType = CashManagerViewModel.PriceType.deposit
                             inputPrice.maxPrice = 0L
                             inputPrice.minPrice = 0L
                             inputPrice.setMessage("")
-                            mViewModel.type.set("no_risk")
+                            titlePrice.text = getString(R.string.deposit_price)
                         }
                     }
                     percentGroup.visibility =
-                        if (mViewModel.priceType.get() == CashManagerViewModel.PriceType.deposit) View.GONE else View.VISIBLE
+                        if (mViewModel.priceType == CashManagerViewModel.PriceType.deposit) View.GONE else View.VISIBLE
                 }
 
             })
@@ -179,8 +175,9 @@ class CashManagerFragment : BaseFragment<CashManagerViewModel>() {
                         super.onPageSelected(position)
                         cardAccounts[position].activeBoxRepo?.let {
                             mViewModel.getSellPrice(it.type!!)
-                            mViewModel.type.set(it.subType)
-                            mBinding?.apply{inputPrice.setPrice(it.price.toString())}
+                            mViewModel.type = it.type
+                            mViewModel.subType = it.subType
+                            mBinding?.apply { inputPrice.setPrice(it.price.toString()) }
                         }
                     }
                 }
@@ -198,15 +195,16 @@ class CashManagerFragment : BaseFragment<CashManagerViewModel>() {
                     if (accountId == activeBox.id) {
                         selectionPager = cardAccounts.size - 1
 //                        mViewModel.getSellPrice(activeBox.type)
-                        mViewModel.type.set(activeBox.subType)
-                        mBinding?.apply{inputPrice.setPrice(activeBox.price.toString())}
+                        mViewModel.type = activeBox.type
+                        mViewModel.subType = activeBox.subType
+                        mBinding?.apply { inputPrice.setPrice(activeBox.price.toString()) }
                     }
                 }
-                mBinding?.pager?.apply{currentItem = selectionPager}
+                mBinding?.pager?.apply { currentItem = selectionPager }
                 if (it.isEmpty()) {
                     return@let
                 }
-                adapterSlide?.apply{notifyDataSetChanged()}
+                adapterSlide?.apply { notifyDataSetChanged() }
                 // TODO: 4/11/21 add type and price
             }
         }
@@ -228,6 +226,7 @@ class CashManagerFragment : BaseFragment<CashManagerViewModel>() {
         mBinding = null
         super.onDestroyView()
     }
+
     companion object {
         @JvmStatic
         fun newBundle(accountId: Long) =

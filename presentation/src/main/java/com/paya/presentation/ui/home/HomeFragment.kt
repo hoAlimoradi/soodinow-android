@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.NonNull
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
@@ -42,17 +40,12 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 		savedInstanceState: Bundle?
 	): View? {
 		// Inflate the layout for this fragment
-		mBinding = DataBindingUtil.inflate(
+		mBinding = FragmentHomeBinding.inflate(
 			inflater,
-			R.layout.fragment_home,
 			container,
 			false
 		)
-		mBinding?.apply{
-			viewModel = mViewModel
-			lifecycleOwner = this@HomeFragment
-		}
-		return mBinding?.let{it.root}
+		return mBinding?.root
 	}
 	
 	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {

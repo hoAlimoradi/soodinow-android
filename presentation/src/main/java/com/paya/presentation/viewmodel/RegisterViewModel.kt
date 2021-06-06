@@ -1,6 +1,5 @@
 package com.paya.presentation.viewmodel
 
-import androidx.databinding.ObservableField
 import javax.inject.Inject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,29 +18,18 @@ class RegisterViewModel @Inject constructor(
 ): BaseViewModel(){
 	
 	val title = MutableLiveData<String>()
-	
-	val phoneNumber = ObservableField<String>()
-	
 	val registerStatus = MutableLiveData<Resource<RegisterRepoModel>>()
 	
 	fun setTitle(title: String) {
 		this.title.value = title
 	}
 	
-	fun register(){
-		val phoneNumber = phoneNumber.get()
-		if (phoneNumber == null) {
-			registerStatus.setValue(Resource.error("لطفا شماره موبایل را وارد کنید", null))
-			return
-		}
-		if(phoneNumber.length != 9){
-			registerStatus.setValue(Resource.error("شماره موبایل وارد شده اشتباه است", null))
-			return
-		}
+	fun register(phoneNumber:String){
 		viewModelScope.launch {
-			registerStatus.postValue(Resource.loading(null))
+			showLoading()
 			val response = callResource(this@RegisterViewModel,registerUseCase.action("+989$phoneNumber"))
 			registerStatus.postValue(response)
+			hideLoading()
 		}
 	}
 	

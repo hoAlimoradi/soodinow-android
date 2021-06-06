@@ -11,15 +11,16 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import com.paya.presentation.R
 import com.paya.presentation.ui.errorDoalog.ErrorDialog
 import com.paya.presentation.ui.farabi.FarabiAuthActivity
+import com.paya.presentation.ui.loading.LoadingDialog
 import com.paya.presentation.utils.observe
 
-abstract class BaseFragment<VM : BaseViewModel> : Fragment(){
+abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
 	abstract val baseViewModel: BaseViewModel
-	var errorDialog = ErrorDialog()
+	private var errorDialog: ErrorDialog? = null
+	private var loadingDialog: LoadingDialog? = null
 	inline fun <reified VM : BaseViewModel> viewModelProvider(
 		mode: LazyThreadSafetyMode = LazyThreadSafetyMode.NONE,
 		crossinline provider: () -> VM
@@ -29,16 +30,17 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment(){
 				provider() as T1
 		}).get(VM::class.java)
 	}
-	
+
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		observe(baseViewModel.unAuthorizeLiveData,::unAuthorized)
+		observe(baseViewModel.unAuthorizeLiveData, ::unAuthorized)
 		observe(baseViewModel.unFarabiAuth, ::farabiAuth)
 		observe(baseViewModel.errorLiveData, ::readyError)
+		observe(baseViewModel.unLoading, ::readyLoading)
 	}
-	
-	private fun unAuthorized(message : String) {
-		Toast.makeText(requireContext(),message,Toast.LENGTH_SHORT).show()
+
+	private fun unAuthorized(message: String) {
+		Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
 		activity?.findNavController(R.id.nav_host_fragment)?.navigate(
 			R.id.actionUnAuthorized
 		)
@@ -53,15 +55,39 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment(){
 		resultLauncher.launch(intent)
 	}
 
-	fun readyError(error:String) {
-		errorDialog.dialog?.let {
-			if (it.isShowing)
-				return
+	fun readyError(error: String) {
+		if (errorDialog == null)
+			errorDialog = ErrorDialog()
+		errorDialog?.apply {
+			if (!isShowing()) {
+				setMessage(error)
+				show(this@BaseFragment.childFragmentManager, "errorTag")
+			}
+			onDismiss = {
+				if (!isShowing())
+					errorDialog = null
+			}
 		}
-		errorDialog.setMessage(error)
-		errorDialog.show(parentFragmentManager,"errorTag")
 
 	}
+
+	private fun readyLoading(isLoading: Boolean) {
+		if (loadingDialog == null)
+			loadingDialog = LoadingDialog()
+		loadingDialog?.let {
+			it.onDismiss = {
+				if (!it.isShowing() && !isLoading)
+					loadingDialog = null
+			}
+			if (isLoading) {
+				it.show(childFragmentManager, "loading dialog")
+			} else {
+				if (it.isShowing())
+					it.dismissAllowingStateLoss()
+			}
+		}
+	}
+
 	var resultLauncher =
 		registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
 			if (result.resultCode === Activity.RESULT_OK) {
@@ -73,11 +99,20 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment(){
 
 	}
 
-	override fun onDestroy() {
-		super.onDestroy()
-		errorDialog.dialog?.let {
-			if (it.isShowing)
-				it.dismiss()
+	override fun onDestroyView() {
+		errorDialog?.apply {
+			dialog?.let {
+				if (it.isShowing)
+					dismissAllowingStateLoss()
+			}
 		}
+		errorDialog = null
+		loadingDialog?.let {
+			if (it.isShowing())
+				it.dismissAllowingStateLoss()
+		}
+		loadingDialog = null
+		super.onDestroyView()
 	}
+
 }
