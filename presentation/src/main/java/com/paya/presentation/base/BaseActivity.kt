@@ -86,7 +86,7 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
     }
 
     private fun readyLoading(isLoading: Boolean) {
-        if (loadingDialog == null)
+        if (loadingDialog == null&&isLoading)
             loadingDialog = LoadingDialog()
         loadingDialog?.let {
             it.onDismiss = {

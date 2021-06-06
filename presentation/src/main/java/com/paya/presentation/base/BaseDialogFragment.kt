@@ -64,7 +64,7 @@ abstract class BaseDialogFragment<VM : BaseViewModel> : DialogFragment() {
     }
 
     private fun readyLoading(isLoading: Boolean) {
-        if (loadingDialog == null)
+        if (loadingDialog == null&&isLoading)
             loadingDialog = LoadingDialog()
         loadingDialog?.let {
             it.onDismiss = {
