@@ -10,6 +10,7 @@ import com.paya.presentation.databinding.FragmentLoginDialogBinding
 import com.paya.presentation.utils.Utils
 import com.paya.presentation.utils.setWidthPercent
 import com.paya.presentation.utils.shortToast
+import kotlinx.android.synthetic.main.fragment_login_dialog.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -79,17 +80,19 @@ class LoginDialogFragment : DialogFragment() {
 			username?.let { mBinding.usernameEditText.setText(it) }
 			password?.let { mBinding.passwordEdiText.setText(it) }
 			mBinding.submitBtn.setOnClickListener {
+				username = mBinding.usernameEditText.getText()
+				password = mBinding.passwordEdiText.getText()
 				username?.let { username ->
 					password?.let { password ->
 						if (username.length != 11 ||
 							!username.startsWith("09")
 						) {
-							shortToast("شماره تلفن صحیح نمیباشد")
+							usernameEditText.setError("شماره تلفن صحیح نمیباشد")
 							return@setOnClickListener
 						}
 						username.forEach {
 							if (!it.isDigit()) {
-								shortToast("شماره تلفن صحیح نمیباشد")
+								usernameEditText.setError("شماره تلفن صحیح نمیباشد")
 								return@setOnClickListener
 							}
 						}

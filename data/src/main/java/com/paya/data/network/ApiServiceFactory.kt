@@ -29,7 +29,7 @@ class ApiServiceFactory @Inject constructor(
 	fun <T> create(serviceClass: Class<T>): T = retrofit().create(serviceClass)
 	
 	private fun retrofit(): Retrofit = Retrofit.Builder()
-		.baseUrl(if (!BuildConfig.DEBUG) BaseUrlDev else BaseUrl)
+		.baseUrl(if (BuildConfig.DEBUG) BaseUrl else BaseUrl)
 		.addConverterFactory(GsonConverterFactory.create())
 		.addCallAdapterFactory(ApiResponseCallAdapterFactory())
 		.client(okHttpClientBuilder().build())
