@@ -152,7 +152,7 @@ class FirstInformationFragment : BaseFragment<FirstInformationViewModel>() {
 				isError = true
 
 			}
-			if (!isValidEmail(email)) {
+			if (email.isNotEmpty() && !isValidEmail(email)) {
 				mBinding.email.setError("ایمیل وارد شده اشتباه است")
 				isError = true
 
@@ -163,7 +163,7 @@ class FirstInformationFragment : BaseFragment<FirstInformationViewModel>() {
 				isError = true
 			}
 
-			if (nationalCode?.length != 10) {
+			if (nationalCode.isNotEmpty() && nationalCode?.length != 10) {
 				mBinding.national.setError("کد ملی وارد شده اشتباه است")
 				isError = true
 			}
