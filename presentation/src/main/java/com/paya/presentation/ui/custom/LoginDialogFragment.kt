@@ -6,10 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
+import com.paya.presentation.R
 import com.paya.presentation.databinding.FragmentLoginDialogBinding
 import com.paya.presentation.utils.Utils
+import com.paya.presentation.utils.isSecretPassword
 import com.paya.presentation.utils.setWidthPercent
-import com.paya.presentation.utils.shortToast
 import kotlinx.android.synthetic.main.fragment_login_dialog.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -80,19 +81,31 @@ class LoginDialogFragment : DialogFragment() {
 			username?.let { mBinding.usernameEditText.setText(it) }
 			password?.let { mBinding.passwordEdiText.setText(it) }
 			mBinding.submitBtn.setOnClickListener {
+				mBinding.passwordEdiText.setError("")
+				mBinding.usernameEditText.setError("")
 				username = mBinding.usernameEditText.getText()
 				password = mBinding.passwordEdiText.getText()
+				if (mBinding.usernameEditText.getText().isEmpty()) {
+					mBinding.usernameEditText.setError(getString(R.string.empty_mobile))
+					return@setOnClickListener
+				}
+				if (mBinding.usernameEditText.getText().length != 11||!mBinding.usernameEditText.getText().startsWith("09")) {
+					mBinding.usernameEditText.setError(getString(R.string.error_mobile))
+					return@setOnClickListener
+				}
+				if ( mBinding.passwordEdiText.getText().isEmpty()) {
+					mBinding.passwordEdiText.setError(getString(R.string.empty_password))
+					return@setOnClickListener
+				}
+				if (! mBinding.passwordEdiText.getText().isSecretPassword()) {
+					mBinding.passwordEdiText.setError(getString(R.string.secret_password_error))
+					return@setOnClickListener
+				}
 				username?.let { username ->
 					password?.let { password ->
-						if (username.length != 11 ||
-							!username.startsWith("09")
-						) {
-							usernameEditText.setError("شماره تلفن صحیح نمیباشد")
-							return@setOnClickListener
-						}
 						username.forEach {
 							if (!it.isDigit()) {
-								usernameEditText.setError("شماره تلفن صحیح نمیباشد")
+								usernameEditText.setError(getString(R.string.error_phone))
 								return@setOnClickListener
 							}
 						}

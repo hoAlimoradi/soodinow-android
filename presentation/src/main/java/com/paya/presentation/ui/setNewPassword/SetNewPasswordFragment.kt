@@ -46,21 +46,21 @@ class SetNewPasswordFragment : BaseFragment<SetNewPasswordViewModel>() {
 				newPassword.setError("")
 				repeatPassword.setError("")
 				if (newPassword.getText().isEmpty()) {
-					newPassword.setError("لطفا رمز عبور را وارد کنید")
+					newPassword.setError(getString(R.string.empty_password))
 					return@setOnClickListener
 				}
 
 				if (!newPassword.getText().isSecretPassword()) {
-					newPassword.setError("پسورد باید از ۸ کارکتر بیشتر باشد و از حروف بزرگ و کوچک و نماد استفاده شود")
+					newPassword.setError(getString(R.string.secret_password_error))
 					return@setOnClickListener
 				}
 				if (repeatPassword.getText().isEmpty()) {
-					repeatPassword.setError("لطفا تکرار رمز عبور را وارد کنید")
+					repeatPassword.setError(getString(R.string.empty_repeat_password))
 					return@setOnClickListener
 				}
 
 				if (newPassword.getText() != repeatPassword.getText()){
-					repeatPassword.setError("رمز عبور با تکرار آن یکسان نیست")
+					repeatPassword.setError(getString(R.string.error_repeat_password))
 					return@setOnClickListener
 				}
 				mViewModel.submit(newPassword.getText())

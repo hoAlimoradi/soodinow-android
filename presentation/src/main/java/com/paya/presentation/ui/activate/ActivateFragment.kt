@@ -63,6 +63,7 @@ class ActivateFragment : BaseFragment<ActivateViewModel>() {
 				}
 			}
 			resendCode.setOnClickListener {
+				txtPinEntry.setText("")
 				mViewModel.register()
 			}
 			Utils.setVerificationPinImage(txtPinEntry, verificationImg)

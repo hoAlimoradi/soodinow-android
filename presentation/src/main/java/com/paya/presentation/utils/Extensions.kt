@@ -65,13 +65,15 @@ fun DialogFragment.openUrl(url: String) {
 }
 
 fun String.isSecretPassword(): Boolean {
-    val passwordPattern = "^(?=.*?[0-9])(?=.*?[a-z])(?=.*?[A-Z]).{8,}\$"
+    val passwordPattern = "^(?=.*?[0-9])(?=.*?[a-z])(?=.*?[A-Z]).{8,21}\$"
     val pattern = Pattern.compile(passwordPattern)
     val matcher = pattern.matcher(this)
     return matcher.matches()
 }
 
 fun String.md5(): String? {
+    if (this.isEmpty())
+        return ""
     try {
         val md = MessageDigest.getInstance("MD5")
         val array = md.digest(this.toByteArray())

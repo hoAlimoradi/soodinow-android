@@ -25,6 +25,7 @@ import com.paya.presentation.R
 import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentLoginBinding
+import com.paya.presentation.utils.isSecretPassword
 import com.paya.presentation.utils.longToast
 import com.paya.presentation.utils.observe
 import com.paya.presentation.utils.shortToast
@@ -92,16 +93,22 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
 
 	private fun login() {
 		mBinding?.apply {
+			phoneNumber.setError("")
+			passwordLayout.setError("")
 			if (phoneNumber.getText().isEmpty()) {
-				phoneNumber.setError("لطفا شماره موبایل را وارد کنید")
+				phoneNumber.setError(getString(R.string.empty_mobile))
 				return
 			}
 			if (phoneNumber.getText().length != 9) {
-				phoneNumber.setError("شماره موبایل وارد شده اشتباه است")
+				phoneNumber.setError(getString(R.string.error_mobile))
 				return
 			}
 			if (passwordLayout.getText().isEmpty()) {
-				passwordLayout.setError("لطفا رمز عبور را وارد کنید")
+				passwordLayout.setError(getString(R.string.empty_password))
+				return
+			}
+			if (!passwordLayout.getText().isSecretPassword()) {
+				passwordLayout.setError(getString(R.string.secret_password_error))
 				return
 			}
 			mViewModel.login(phoneNumber.getText(), passwordLayout.getText())

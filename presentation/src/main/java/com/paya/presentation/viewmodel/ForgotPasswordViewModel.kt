@@ -6,6 +6,7 @@ import com.paya.domain.models.repo.ResetPasswordRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.UseCase
 import com.paya.presentation.base.BaseViewModel
+import com.paya.presentation.utils.SingleLiveEvent
 import com.paya.presentation.utils.callResource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -18,7 +19,7 @@ class ForgotPasswordViewModel @Inject constructor(
 
 	val title = MutableLiveData<String>()
 
-	val resetPasswordStatus = MutableLiveData<Resource<ResetPasswordRepoModel>>()
+	val resetPasswordStatus = SingleLiveEvent<Resource<ResetPasswordRepoModel>>()
 
 	fun setTitle(title: String) {
 		this.title.value = title

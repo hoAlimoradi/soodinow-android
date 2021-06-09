@@ -16,6 +16,7 @@ import com.paya.presentation.R
 import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentChangePasswordBinding
+import com.paya.presentation.utils.isSecretPassword
 import com.paya.presentation.utils.observe
 import com.paya.presentation.viewmodel.ChangePasswordViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -44,7 +45,49 @@ class ChangePasswordFragment : BaseFragment<ChangePasswordViewModel>() {
 				findNavController().popBackStack()
 			}
 			changeBtn.setOnClickListener {
-				mViewModel.changePassword(oldPassword.getText(),newPassword.getText(),repeatPassword.getText())
+				var isError = false
+				oldPassword.setError("")
+				newPassword.setError("")
+				repeatPassword.setError("")
+				if (oldPassword.getText().isEmpty()) {
+					oldPassword.setError(getString(R.string.empty_password))
+					isError = true
+				}
+				if (oldPassword.getText().isNotEmpty() && !oldPassword.getText()
+						.isSecretPassword()
+				) {
+					oldPassword.setError(getString(R.string.secret_password_error))
+					isError = true
+				}
+
+				if (newPassword.getText().isEmpty()) {
+					newPassword.setError(getString(R.string.empty_new_password))
+					isError = true
+				}
+
+				if (newPassword.getText().isNotEmpty() && !newPassword.getText()
+						.isSecretPassword()
+				) {
+					newPassword.setError(getString(R.string.secret_password_error))
+					isError = true
+				}
+
+				if (repeatPassword.getText().isEmpty()) {
+					repeatPassword.setError(getString(R.string.empty_repeat__new_password))
+					isError = true
+				}
+
+				if (newPassword.getText().isNotEmpty() &&
+					repeatPassword.getText().isNotEmpty() &&
+					newPassword.getText() != repeatPassword.getText()
+				) {
+					repeatPassword.setError(getString(R.string.error_repeat_equal_new_password))
+					newPassword.setError(getString(R.string.error_repeat_equal_new_password))
+					isError = true
+				}
+				if (isError)
+					return@setOnClickListener
+				mViewModel.changePassword(oldPassword.getText(), newPassword.getText())
 			}
 		}
 		

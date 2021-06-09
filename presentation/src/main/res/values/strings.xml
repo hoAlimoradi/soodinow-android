@@ -234,6 +234,16 @@
     <string name="welcome_soodinow">به سودینو خوش آمدید</string>
     <string name="no_data_chart">داده‌ای برای نمایش چارت وجود ندارد</string>
     <string name="rule_error">شما هنوز قوانین ما را نپذیرفته اید</string>
+    <string name="empty_password">لطفا رمز عبور را وارد کنید</string>
+    <string name="secret_password_error">پسورد باید از ۸ کارکتر بیشتر و از ۲۱ کارکتر کمتر باشد و از حروف بزرگ و کوچک و اعداد استفاده شود</string>
+    <string name="empty_repeat_password">لطفا تکرار رمز عبور را وارد کنید</string>
+    <string name="error_repeat_password">رمز عبور با تکرار آن یکسان نیست</string>
+    <string name="error_phone">شماره تلفن صحیح نمیباشد</string>
+    <string name="empty_mobile">لطفا شماره موبایل را وارد کنید</string>
+    <string name="error_mobile">شماره موبایل وارد شده اشتباه است</string>
+    <string name="empty_new_password">لطفا پسورد جدید خود را وارد کنید</string>
+    <string name="empty_repeat__new_password">لطفا تکرار پسورد جدید خود را وارد کنید</string>
+    <string name="error_repeat_equal_new_password">پسورد جدید با تکرار آن بکسان نیست</string>
 
     <string-array name="brokerage_list">
         <item>کارگزاری فارابی</item>

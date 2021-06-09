@@ -105,9 +105,7 @@
         tools:layout="@layout/fragment_forgot_password">
         <action
             android:id="@+id/navigateToActivateForgotFragment"
-            app:destination="@id/activateForgotFragment"
-            app:popUpTo="@id/forget_password"
-            app:popUpToInclusive="false" />
+            app:destination="@id/activateForgotFragment" />
     </fragment>
 
     <fragment

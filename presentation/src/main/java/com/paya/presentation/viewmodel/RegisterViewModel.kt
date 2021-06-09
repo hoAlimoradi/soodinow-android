@@ -8,6 +8,7 @@ import com.paya.domain.models.repo.RegisterRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.UseCase
 import com.paya.presentation.base.BaseViewModel
+import com.paya.presentation.utils.SingleLiveEvent
 import com.paya.presentation.utils.callResource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -18,7 +19,7 @@ class RegisterViewModel @Inject constructor(
 ): BaseViewModel(){
 	
 	val title = MutableLiveData<String>()
-	val registerStatus = MutableLiveData<Resource<RegisterRepoModel>>()
+	val registerStatus = SingleLiveEvent<Resource<RegisterRepoModel>>()
 	
 	fun setTitle(title: String) {
 		this.title.value = title

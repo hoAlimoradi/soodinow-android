@@ -23,36 +23,9 @@ class ChangePasswordViewModel @Inject constructor(
 	var status = MutableLiveData<Resource<ChangePasswordRepoModel>>()
 
 	fun changePassword(
-		oldPassword: String?,
-		newPassword: String?,
-		repeatPassword: String?
+		oldPassword: String,
+		newPassword: String
 	) {
-
-		if (oldPassword.isNullOrEmpty()) {
-			showError("لطفا پسورد خود را وارد کنید")
-			return
-		}
-
-		if (newPassword.isNullOrEmpty()) {
-			showError("لطفا پسورد جدید خود را وارد کنید")
-			return
-		}
-
-		if (!newPassword.isSecretPassword()) {
-			showError("پسورد باید از ۸ کارکتر بیشتر باشد و از حروف بزرگ و کوچک استفاده شود")
-			return
-		}
-		
-		if(repeatPassword.isNullOrEmpty()) {
-			showError("لطفا تکرار پسورد جدید خود را وارد کنید")
-			return
-		}
-		
-		if (newPassword != repeatPassword) {
-			showError("پسورد حدید با تکرار آن بکسان نیست")
-			return
-		}
-		
 		viewModelScope.launch {
 			showLoading()
 			val body = ChangePasswordRepoBodyModel(

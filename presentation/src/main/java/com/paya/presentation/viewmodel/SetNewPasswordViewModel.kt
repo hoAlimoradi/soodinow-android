@@ -10,6 +10,7 @@ import com.paya.domain.models.repo.UserInfoRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.UseCase
 import com.paya.presentation.base.BaseViewModel
+import com.paya.presentation.utils.SingleLiveEvent
 import com.paya.presentation.utils.callResource
 import com.paya.presentation.utils.isSecretPassword
 import com.paya.presentation.utils.md5
@@ -24,7 +25,7 @@ class SetNewPasswordViewModel @Inject constructor(
 
 	val title = MutableLiveData<String>()
 	private var accessToken: String? = null
-	val setPasswordResource = MutableLiveData<Resource<SetResetPasswordRepoModel>>()
+	val setPasswordResource = SingleLiveEvent<Resource<SetResetPasswordRepoModel>>()
 
 	init {
 		getAccessToken()

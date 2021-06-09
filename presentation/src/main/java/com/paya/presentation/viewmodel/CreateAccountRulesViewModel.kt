@@ -7,6 +7,7 @@ import com.paya.domain.models.repo.AddRiskOrderRepoBodyModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.UseCase
 import com.paya.presentation.base.BaseViewModel
+import com.paya.presentation.utils.SingleLiveEvent
 import com.paya.presentation.utils.callResource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -14,7 +15,7 @@ import kotlinx.coroutines.launch
 class CreateAccountRulesViewModel @Inject constructor(
 	private val addRiskOrderUseCase: UseCase<AddRiskOrderRepoBodyModel,String>
 ) : BaseViewModel() {
-	val status = MutableLiveData<Resource<String>>()
+	val status = SingleLiveEvent<Resource<String>>()
 	fun exitAccount(riskType: String,price: Long) {
 		viewModelScope.launch {
 			showLoading()

@@ -45,6 +45,7 @@ class ForgotPasswordFragment : BaseFragment<ForgotPasswordViewModel>() {
 		observe(mViewModel.resetPasswordStatus, ::checkRegisterStatus)
 		mBinding?.apply {
 			submitButton.setOnClickListener {
+				phoneNumberLayout.setError("")
 				if (phoneNumberLayout.getText().isEmpty()) {
 					phoneNumberLayout.setError("لطفا شماره موبایل را وارد کنید")
 					return@setOnClickListener

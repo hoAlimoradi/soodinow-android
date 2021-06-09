@@ -64,6 +64,7 @@ class ActivateForgotPasswordFragment : BaseFragment<ActivateForgotPasswordViewMo
 				}
 			}
 			resendCode.setOnClickListener {
+				txtPinEntry.setText("")
 				mViewModel.register()
 			}
 			Utils.setVerificationPinImage(txtPinEntry, verificationImg)

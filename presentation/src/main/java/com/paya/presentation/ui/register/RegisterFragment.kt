@@ -53,6 +53,7 @@ class RegisterFragment : BaseFragment<RegisterViewModel>() {
             }
 
             submitButton.setOnClickListener {
+                phoneNumberLayout.setError("")
                 if (!rulesCheckBox.isChecked) {
                     mViewModel.showError(getString(R.string.rule_error))
                     return@setOnClickListener

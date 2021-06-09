@@ -8,6 +8,7 @@ import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.domain.tools.UseCase
 import com.paya.presentation.base.BaseViewModel
+import com.paya.presentation.utils.SingleLiveEvent
 import com.paya.presentation.utils.callResource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -31,7 +32,7 @@ class ActivateViewModel @Inject constructor(
 	lateinit var phoneNumber: String
 
 	
-	val status = MutableLiveData<Resource<Any>>()
+	val status = SingleLiveEvent<Resource<Any>>()
 	
 	fun setTitle(title: String) {
 		this.title.value = title
@@ -39,7 +40,7 @@ class ActivateViewModel @Inject constructor(
 	
 	fun activate(activationCode : String) {
 		if (activationCode.isEmpty() || activationCode.length != 5) {
-			status.setValue(Resource.error("کد وارد شده اشتباه است",null))
+			showError("کد وارد شده اشتباه است",)
 			return
 		}
 		viewModelScope.launch {
@@ -63,7 +64,7 @@ class ActivateViewModel @Inject constructor(
 			
 			if (response.status == Status.SUCCESS) {
 				status.postValue(Resource.idle(null))
-				remainingTime.postValue(59)
+				remainingTime.value = 59
 				setRemainingTime()
 			} else
 				status.postValue(response)
