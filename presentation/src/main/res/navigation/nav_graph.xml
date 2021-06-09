@@ -142,6 +142,7 @@
             android:id="@+id/navigateToLoginFragment"
             app:destination="@id/loginFragment"
             app:launchSingleTop="true"
+            app:popUpTo="@id/navGraph"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
