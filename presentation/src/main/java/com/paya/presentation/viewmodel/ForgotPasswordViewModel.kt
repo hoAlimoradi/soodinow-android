@@ -8,6 +8,7 @@ import com.paya.domain.tools.UseCase
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.utils.SingleLiveEvent
 import com.paya.presentation.utils.callResource
+import com.paya.presentation.utils.startWithCountryCodeMobile
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -30,7 +31,7 @@ class ForgotPasswordViewModel @Inject constructor(
 			showLoading()
 			val response = callResource(
 				this@ForgotPasswordViewModel,
-				resetPasswordUseCase.action("+989$phoneNumber")
+				resetPasswordUseCase.action(phoneNumber.startWithCountryCodeMobile())
 			)
 			resetPasswordStatus.postValue(response)
 			hideLoading()

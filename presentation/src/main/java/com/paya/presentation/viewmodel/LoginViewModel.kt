@@ -9,6 +9,7 @@ import com.paya.domain.tools.UseCase
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.utils.callResource
 import com.paya.presentation.utils.md5
+import com.paya.presentation.utils.startWithCountryCodeMobile
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -28,7 +29,9 @@ class LoginViewModel @Inject constructor(
 
 	private fun getMobile() {
 		viewModelScope.launch {
-			mobile.value = getMobileUseCase.action(Unit).data?.replace("+989", "")
+			getMobileUseCase.action(Unit).data?.let {
+				mobile.value = it.replaceFirst("+98","0")
+			}
 		}
 	}
 
@@ -37,7 +40,7 @@ class LoginViewModel @Inject constructor(
 		viewModelScope.launch {
 			showLoading()
 			val loginModel = LoginRepoModel(
-				username = "+989$username",
+				username = username.startWithCountryCodeMobile(),
 				password = password.md5()!!
 			)
 			val response = callResource(this@LoginViewModel,loginUseCase.action(loginModel))

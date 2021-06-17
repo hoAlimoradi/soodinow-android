@@ -7,6 +7,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
 import com.paya.presentation.R
+import com.paya.presentation.utils.Utils
 import kotlinx.android.synthetic.main.input_text_without_background.view.*
 
 
@@ -31,9 +32,21 @@ class LabelEditText @JvmOverloads constructor(
             if (inputType != EditorInfo.TYPE_NULL) {
                 inputContentEditText.inputType = inputType
             }
-            inputContentEditText.isFocusable = styles.getInt(R.styleable.LabelEditText_visiblelabel, -1) != 0
-            inputContentEditText.isFocusableInTouchMode = styles.getInt(R.styleable.LabelEditText_visiblelabel, -1) != 0
-            if(styles.getInt(R.styleable.LabelEditText_visiblelabel, -1) == 0) {
+            if (Utils.isPasswordInputType(inputType)) {
+                val drawables =
+                    inputContentEditText.compoundDrawablesRelative
+                inputContentEditText.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                    drawables[0],
+                    drawables[1],
+                    ContextCompat.getDrawable(context, R.drawable.ic_eye_disable),
+                    drawables[3]
+                )
+            }
+            inputContentEditText.isFocusable =
+                styles.getInt(R.styleable.LabelEditText_visiblelabel, -1) != 0
+            inputContentEditText.isFocusableInTouchMode =
+                styles.getInt(R.styleable.LabelEditText_visiblelabel, -1) != 0
+            if (styles.getInt(R.styleable.LabelEditText_visiblelabel, -1) == 0) {
                 inputContentEditText.setOnTouchListener(null)
                 inputContentEditText.setOnClickListener {
                     this.performClick()

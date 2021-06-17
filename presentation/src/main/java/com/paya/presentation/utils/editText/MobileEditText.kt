@@ -8,7 +8,6 @@ import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
 import com.paya.presentation.R
 import com.paya.presentation.utils.Utils
-import com.paya.presentation.utils.setFocusTarget
 import kotlinx.android.synthetic.main.input_phone_number.view.*
 
 
@@ -21,11 +20,12 @@ class MobileEditText @JvmOverloads constructor(
         val styles = context.obtainStyledAttributes(attrs, R.styleable.MobileEditText)
         try {
             labelText.text = styles.getString(R.styleable.MobileEditText_labelText)
-            phoneNumberEditText.hint = styles.getString(R.styleable.MobileEditText_android_hint)
+            if (styles.getString(R.styleable.MobileEditText_android_hint).isNullOrEmpty())
+                phoneNumberEditText.hint = styles.getString(R.styleable.MobileEditText_android_hint)
             phoneNumberEditText.setHintTextColor(
                 styles.getColor(
                     R.styleable.MobileEditText_hintTextColor,
-                    ContextCompat.getColor(context, R.color.blue_light)
+                    ContextCompat.getColor(context, R.color.alto_light)
                 )
             )
             val inputType: Int =
@@ -34,7 +34,6 @@ class MobileEditText @JvmOverloads constructor(
                 phoneNumberEditText.inputType = inputType
             }
             Utils.setVerificationImage(phoneNumberEditText,verification_img)
-            txtPrefix.setFocusTarget(phoneNumberEditText)
 
         } finally {
             styles.recycle()

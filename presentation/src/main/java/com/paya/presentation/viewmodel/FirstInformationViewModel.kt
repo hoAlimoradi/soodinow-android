@@ -12,6 +12,7 @@ import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.domain.tools.UseCase
 import com.paya.presentation.base.BaseViewModel
+import com.paya.presentation.utils.SingleLiveEvent
 import com.paya.presentation.utils.Utils
 import com.paya.presentation.utils.callResource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -29,7 +30,7 @@ class FirstInformationViewModel @Inject constructor(
 	var citySelection = 0
 	var provinceSelection = 0
 	var birthDay: PersianCalendar = PersianCalendar()
-	val statusUpdate = MutableLiveData<Resource<ProfileRepoModel>>()
+	val statusUpdate = SingleLiveEvent<Resource<ProfileRepoModel>>()
 	val statusCity = MutableLiveData<Resource<List<ProvinceRepoModel>>>()
 	val statusProfile = MutableLiveData<Resource<ProfileRepoModel>>()
 

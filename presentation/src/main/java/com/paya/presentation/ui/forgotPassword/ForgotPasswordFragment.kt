@@ -15,6 +15,7 @@ import com.paya.presentation.R
 import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentForgotPasswordBinding
+import com.paya.presentation.utils.isMobile
 import com.paya.presentation.utils.observe
 import com.paya.presentation.viewmodel.ForgotPasswordViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -50,7 +51,7 @@ class ForgotPasswordFragment : BaseFragment<ForgotPasswordViewModel>() {
 					phoneNumberLayout.setError("لطفا شماره موبایل را وارد کنید")
 					return@setOnClickListener
 				}
-				if (phoneNumberLayout.getText().length != 9) {
+				if (!phoneNumberLayout.getText().isMobile()) {
 					phoneNumberLayout.setError("شماره موبایل وارد شده شده اشتباه است")
 					return@setOnClickListener
 				}

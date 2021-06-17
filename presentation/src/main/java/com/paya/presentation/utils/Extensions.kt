@@ -88,6 +88,13 @@ fun String.md5(): String? {
     return null
 }
 
+fun String.isMobile() : Boolean {
+    return length == 11 && startsWith("09")
+}
+
+fun String.startWithCountryCodeMobile() : String {
+    return replaceFirst("0","+98")
+}
 fun Activity.longToast(text: String) {
     Toast.makeText(
         this,

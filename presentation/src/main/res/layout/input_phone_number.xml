@@ -31,17 +31,6 @@
             android:orientation="horizontal"
             android:padding="@dimen/margin_s">
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/txtPrefix"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="09"
-                android:textSize="@dimen/text_size_l"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/phoneNumberEditText"
@@ -53,8 +42,9 @@
                 android:inputType="phone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/verification_img"
-                app:layout_constraintStart_toEndOf="@id/txtPrefix"
-                app:layout_constraintTop_toTopOf="parent" />
+               app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:hint="@string/mobile_hint"/>
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/verification_img"

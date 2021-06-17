@@ -25,10 +25,7 @@ import com.paya.presentation.R
 import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentLoginBinding
-import com.paya.presentation.utils.isSecretPassword
-import com.paya.presentation.utils.longToast
-import com.paya.presentation.utils.observe
-import com.paya.presentation.utils.shortToast
+import com.paya.presentation.utils.*
 import com.paya.presentation.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.IOException
@@ -99,7 +96,7 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
 				phoneNumber.setError(getString(R.string.empty_mobile))
 				return
 			}
-			if (phoneNumber.getText().length != 9) {
+			if (!phoneNumber.getText().isMobile()) {
 				phoneNumber.setError(getString(R.string.error_mobile))
 				return
 			}

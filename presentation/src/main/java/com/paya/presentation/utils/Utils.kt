@@ -8,15 +8,14 @@ import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
+import android.text.InputType
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.util.DisplayMetrics
 import android.view.Gravity
-import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
@@ -233,7 +232,7 @@ object Utils {
 
         editText.doAfterTextChanged {
             val text = it.toString()
-            val colorId = if (text.length != 9) R.color.gray else R.color.green
+            val colorId = if (text.length != 11) R.color.gray else R.color.green
             setTintColor(imageView, editText.context, colorId)
         }
     }
@@ -271,5 +270,15 @@ object Utils {
         val intent = Intent(Intent.ACTION_DIAL, uri)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         context.startActivity(intent)
+    }
+
+    @JvmStatic
+    fun isPasswordInputType(inputType: Int): Boolean {
+        val variation =
+            inputType and (InputType.TYPE_MASK_CLASS or InputType.TYPE_MASK_VARIATION)
+        return (variation
+                == InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD) || (variation
+                == InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_WEB_PASSWORD) || (variation
+                == InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_VARIATION_PASSWORD)
     }
 }

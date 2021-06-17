@@ -244,6 +244,7 @@
     <string name="empty_new_password">لطفا پسورد جدید خود را وارد کنید</string>
     <string name="empty_repeat__new_password">لطفا تکرار پسورد جدید خود را وارد کنید</string>
     <string name="error_repeat_equal_new_password">پسورد جدید با تکرار آن بکسان نیست</string>
+    <string name="mobile_hint">۰۹*********</string>
 
     <string-array name="brokerage_list">
         <item>کارگزاری فارابی</item>

@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.paya.presentation.R
 import com.paya.presentation.databinding.FragmentLoginDialogBinding
 import com.paya.presentation.utils.Utils
+import com.paya.presentation.utils.isMobile
 import com.paya.presentation.utils.isSecretPassword
 import com.paya.presentation.utils.setWidthPercent
 import kotlinx.android.synthetic.main.fragment_login_dialog.*
@@ -89,7 +90,7 @@ class LoginDialogFragment : DialogFragment() {
 					mBinding.usernameEditText.setError(getString(R.string.empty_mobile))
 					return@setOnClickListener
 				}
-				if (mBinding.usernameEditText.getText().length != 11||!mBinding.usernameEditText.getText().startsWith("09")) {
+				if (!mBinding.usernameEditText.getText().isMobile()) {
 					mBinding.usernameEditText.setError(getString(R.string.error_mobile))
 					return@setOnClickListener
 				}

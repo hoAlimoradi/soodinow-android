@@ -10,6 +10,7 @@ import com.paya.domain.tools.UseCase
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.utils.SingleLiveEvent
 import com.paya.presentation.utils.callResource
+import com.paya.presentation.utils.startWithCountryCodeMobile
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -46,7 +47,7 @@ class ActivateViewModel @Inject constructor(
 		viewModelScope.launch {
 			showLoading()
 			val activateModel = ActivateRepoModel(
-				phoneNumber,
+				phoneNumber.startWithCountryCodeMobile(),
 				activationCode
 			)
 			val response = callResource(this@ActivateViewModel,activateUseCase.action(activateModel))

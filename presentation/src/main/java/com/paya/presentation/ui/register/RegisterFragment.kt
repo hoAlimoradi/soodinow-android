@@ -17,6 +17,7 @@ import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentRegisterBinding
 import com.paya.presentation.utils.Utils
+import com.paya.presentation.utils.isMobile
 import com.paya.presentation.utils.observe
 import com.paya.presentation.viewmodel.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -62,7 +63,7 @@ class RegisterFragment : BaseFragment<RegisterViewModel>() {
                     phoneNumberLayout.setError("لطفا شماره موبایل را وارد کنید")
                     return@setOnClickListener
                 }
-                if(phoneNumberLayout.getText().length != 9){
+                if(!phoneNumberLayout.getText().isMobile()){
                     phoneNumberLayout.setError("شماره موبایل وارد شده اشتباه است")
                     return@setOnClickListener
                 }

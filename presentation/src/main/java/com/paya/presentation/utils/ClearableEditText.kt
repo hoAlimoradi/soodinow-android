@@ -11,8 +11,8 @@ import android.os.Parcelable
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
+import android.text.method.PasswordTransformationMethod
 import android.util.AttributeSet
-import android.view.Gravity
 import android.view.MotionEvent
 import androidx.annotation.DrawableRes
 import androidx.appcompat.widget.AppCompatEditText
@@ -25,8 +25,10 @@ class ClearableEditText(context: Context, attrs: AttributeSet?, defStyleAttr: In
     private var mClearIconDrawable: Drawable? = null
     private var mClearEmptyIconDrawable: Drawable? = null
     private var mIsClearIconShown = false
+    private var isShowPassword = false
     private var mClearIconDrawWhenFocused = true
     private var textClearedListener: OnTextClearedListener? = null
+
 
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : this(
@@ -55,6 +57,16 @@ class ClearableEditText(context: Context, attrs: AttributeSet?, defStyleAttr: In
         compoundDrawablePadding = resources.getDimension(R.dimen.margin_m).toInt()
         mClearIconDrawWhenFocused =
             a.getBoolean(R.styleable.ClearableEditText_clearIconDrawWhenFocused, true)
+        if (Utils.isPasswordInputType(inputType)) {
+            val drawables =
+                compoundDrawablesRelative
+            setCompoundDrawablesRelativeWithIntrinsicBounds(
+                drawables[0],
+                drawables[1],
+                ContextCompat.getDrawable(context, R.drawable.ic_eye_disable),
+                drawables[3]
+            )
+        }
         showClearIcon(!text.isNullOrEmpty())
         a.recycle()
     }
@@ -116,6 +128,11 @@ class ClearableEditText(context: Context, attrs: AttributeSet?, defStyleAttr: In
             textClearedListener?.onTextCleared()
             return false
         }
+        if (isShowPasswordIconTouched(event)) {
+            event.action = MotionEvent.ACTION_CANCEL
+            showPassword()
+            return false
+        }
         return super.onTouchEvent(event)
     }
 
@@ -128,6 +145,16 @@ class ClearableEditText(context: Context, attrs: AttributeSet?, defStyleAttr: In
         val compoundPadding =
             compoundPaddingStart
         return touchPointX <= compoundPadding
+    }
+
+    private fun isShowPasswordIconTouched(event: MotionEvent): Boolean {
+        if (!Utils.isPasswordInputType(inputType)) {
+            return false
+        }
+        val touchPointX = event.x.toInt()
+        val widthOfView = width
+        val compoundPadding = compoundPaddingEnd
+        return touchPointX >= widthOfView - compoundPadding
     }
 
     private fun showClearIcon(show: Boolean) {
@@ -148,6 +175,29 @@ class ClearableEditText(context: Context, attrs: AttributeSet?, defStyleAttr: In
             )
         }
         mIsClearIconShown = show
+    }
+
+    private fun showPassword() {
+        if (!Utils.isPasswordInputType(inputType))
+            return
+        val drawables =
+            compoundDrawablesRelative
+        if (isShowPassword) {
+            transformationMethod = null
+            setCompoundDrawablesRelativeWithIntrinsicBounds(
+                drawables[0], drawables[1], ContextCompat.getDrawable(context,R.drawable.ic_eye), drawables[3]
+            )
+            isShowPassword = false
+        } else {
+            transformationMethod =
+                PasswordTransformationMethod()
+            setCompoundDrawablesRelativeWithIntrinsicBounds(
+                drawables[0], drawables[1], ContextCompat.getDrawable(context,R.drawable.ic_eye_disable), drawables[3]
+            )
+            isShowPassword = true
+        }
+        setSelection(text.toString().length)
+
     }
 
     private class ClearIconSavedState : BaseSavedState {

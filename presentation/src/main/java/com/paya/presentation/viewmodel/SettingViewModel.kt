@@ -10,7 +10,9 @@ import com.paya.domain.tools.Status
 import com.paya.domain.tools.UseCase
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.utils.callResource
+import com.paya.presentation.utils.isMobile
 import com.paya.presentation.utils.md5
+import com.paya.presentation.utils.startWithCountryCodeMobile
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -65,7 +67,7 @@ class SettingViewModel @Inject constructor(
             showError("لطفا نام کاربری را وارد کنید")
             return
         }
-        if (username.length != 11) {
+        if (!username.isMobile()) {
             showError("نام کاربری وارد شده اشتباه است")
             return
         }
@@ -77,7 +79,7 @@ class SettingViewModel @Inject constructor(
         viewModelScope.launch {
             showLoading()
             val loginModel = LoginRepoModel(
-                username = "+98${username.substring(1, username.length)}",
+                username = username.startWithCountryCodeMobile(),
                 password = password.md5()!!
             )
             val response = callResource(this@SettingViewModel, loginUseCase.action(loginModel))

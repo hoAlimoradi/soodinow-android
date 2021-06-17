@@ -11,6 +11,7 @@ import com.paya.domain.tools.UseCase
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.utils.SingleLiveEvent
 import com.paya.presentation.utils.callResource
+import com.paya.presentation.utils.startWithCountryCodeMobile
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -45,7 +46,7 @@ class ActivateForgotPasswordViewModel @Inject constructor(
 		viewModelScope.launch {
 			showLoading()
 			val activateModel = ActivateResetPasswordRepoModel(
-				phoneNumber,
+				phoneNumber.startWithCountryCodeMobile(),
 				activationCode
 			)
 			val response = callResource(

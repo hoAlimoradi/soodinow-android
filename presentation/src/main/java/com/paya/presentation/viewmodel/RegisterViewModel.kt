@@ -10,6 +10,7 @@ import com.paya.domain.tools.UseCase
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.utils.SingleLiveEvent
 import com.paya.presentation.utils.callResource
+import com.paya.presentation.utils.startWithCountryCodeMobile
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -28,7 +29,7 @@ class RegisterViewModel @Inject constructor(
 	fun register(phoneNumber:String){
 		viewModelScope.launch {
 			showLoading()
-			val response = callResource(this@RegisterViewModel,registerUseCase.action("+989$phoneNumber"))
+			val response = callResource(this@RegisterViewModel,registerUseCase.action(phoneNumber.startWithCountryCodeMobile()))
 			registerStatus.postValue(response)
 			hideLoading()
 		}
