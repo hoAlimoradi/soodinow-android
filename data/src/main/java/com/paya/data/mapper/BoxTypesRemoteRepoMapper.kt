@@ -1,9 +1,9 @@
 package com.paya.data.mapper
 
 import com.paya.common.Mapper
-import com.paya.domain.models.remote.BoxHistoryRemoteModel
 import com.paya.domain.models.remote.BoxTypeRemoteModel
-import com.paya.domain.models.repo.*
+import com.paya.domain.models.repo.BoxTypeParam
+import com.paya.domain.models.repo.BoxTypeRepoModel
 import javax.inject.Inject
 
 class BoxTypesRemoteRepoMapper @Inject constructor() : Mapper<
@@ -11,11 +11,9 @@ class BoxTypesRemoteRepoMapper @Inject constructor() : Mapper<
         BoxTypeRepoModel> {
 
     override fun map(param: BoxTypeRemoteModel): BoxTypeRepoModel {
-        var list = mutableListOf<BoxTypeParam>()
-        param.types.forEach() {
-            list.add(BoxTypeParam(it.type, it.name))
-        }
-        return BoxTypeRepoModel(list)
+        return BoxTypeRepoModel(param.types?.map {
+            BoxTypeParam(it.type, it.name)
+        } ?: emptyList())
     }
 
 }

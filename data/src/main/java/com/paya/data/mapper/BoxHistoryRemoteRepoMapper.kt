@@ -16,7 +16,15 @@ class BoxHistoryRemoteRepoMapper @Inject constructor(): Mapper<
 			cardChart = LinearChartRepoModel(
 				data = cardChartRemote.data?.let { data ->
 					data.map {
-						LineChart(it[0] as Double, it[1] as String)
+						var price: Double = -1.0
+						var date = ""
+						if (it.isNotEmpty() && it[0] != null && it[0] is Double) {
+							price = it[0] as Double
+						}
+						if (it.isNotEmpty() && it.size > 1 && it[1] != null && it[1] is String) {
+							date = it[1] as String
+						}
+						LineChart(price, date)
 					}
 				} ?: emptyList(),
 				startDate = cardChartRemote.startDate ?: "",
@@ -28,7 +36,15 @@ class BoxHistoryRemoteRepoMapper @Inject constructor(): Mapper<
 			mainChart = LinearChartRepoModel(
 				data = mainChartRemote.data?.let { data ->
 					data.map {
-						LineChart(it[0] as Double, it[1] as String)
+						var price: Double = -1.0
+						var date = ""
+						if (it.isNotEmpty() && it[0] != null && it[0] is Double) {
+							price = it[0] as Double
+						}
+						if (it.isNotEmpty() && it.size > 1 && it[1] != null && it[1] is String) {
+							date = it[1] as String
+						}
+						LineChart(price, date)
 					}
 				} ?: emptyList(),
 				startDate = mainChartRemote.startDate ?: "",

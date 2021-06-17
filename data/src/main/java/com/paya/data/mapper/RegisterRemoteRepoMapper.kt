@@ -11,6 +11,6 @@ class RegisterRemoteRepoMapper @Inject constructor() : Mapper<
 		> {
 	override fun map(param: RegisterRemoteModel): RegisterRepoModel =
 		RegisterRepoModel(
-			username = param.username
+			username = param.username ?: ""
 		)
 }

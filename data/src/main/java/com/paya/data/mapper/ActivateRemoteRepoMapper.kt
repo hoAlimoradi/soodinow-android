@@ -13,7 +13,7 @@ class ActivateRemoteRepoMapper @Inject constructor() : Mapper<
 		> {
 	override fun map(param: ActivateRemoteModel): ActivateRepoModel =
 		ActivateRepoModel(
-			username = param.username,
-			code = param.code
+			username = param.username ?: "",
+			code = param.code ?: ""
 		)
 }

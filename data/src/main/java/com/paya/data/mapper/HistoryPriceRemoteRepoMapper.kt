@@ -14,9 +14,9 @@ class HistoryPriceRemoteRepoMapper @Inject constructor(): Mapper<
 
 		return HistoryPriceRepoModel(
 			1,
-			param.priceHistory.map {
+			param.priceHistory?.map {
 				PriceModel(it.title)
-			}
+			}?: emptyList()
 		)
 	}
 	

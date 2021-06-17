@@ -10,7 +10,7 @@ class AddRiskOrderRemoteRepoMapper @Inject constructor(): Mapper<
 		AddRiskOrderRepoItem>{
 	
 	override fun map(param: String): AddRiskOrderRepoItem {
-		return AddRiskOrderRepoItem(param)
+		return AddRiskOrderRepoItem("")
 	}
 	
 }

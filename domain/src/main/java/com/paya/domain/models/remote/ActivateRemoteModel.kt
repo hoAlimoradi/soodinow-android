@@ -5,7 +5,7 @@ import com.paya.domain.tools.NoObfuscate
 
 data class ActivateRemoteModel(
 	@SerializedName("username")
-	val username: String,
+	val username: String?,
 	@SerializedName("code")
-	val code: String
+	val code: String?
 ): NoObfuscate
