@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
@@ -54,9 +55,15 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
         }
     }
 
+    var resultLauncher : ActivityResultLauncher<Intent>? =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode === Activity.RESULT_OK) {
+                farabiAccessToken()
+            }
+        }
     private fun farabiAuth(param: Unit) {
         val intent = Intent(this, FarabiAuthActivity::class.java)
-        resultLauncher.launch(intent)
+        resultLauncher?.apply{launch(intent)}
     }
 
     private fun readyError(error: String) {
@@ -74,12 +81,6 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
         }
     }
 
-    var resultLauncher =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode === Activity.RESULT_OK) {
-                farabiAccessToken()
-            }
-        }
 
     fun farabiAccessToken() {
 
@@ -120,6 +121,8 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
                 it.dismissAllowingStateLoss()
         }
         loadingDialog = null
+        resultLauncher?.apply{unregister()}
+        resultLauncher = null
         super.onDestroy()
     }
 }
