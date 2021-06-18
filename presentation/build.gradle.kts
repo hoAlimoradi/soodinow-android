@@ -105,7 +105,7 @@ dependencies {
 	implementation ("com.github.jakob-grabner:Circle-Progress-View:1.4")
 	implementation ("com.google.android:flexbox:2.0.1")
 
-	implementation ("androidx.biometric:biometric:1.0.1")
+	implementation ("androidx.biometric:biometric:${Dependencies.Versions.BIOMETRIC}")
 	
 	implementation(project(Dependencies.Modules.DOMAIN))
 }

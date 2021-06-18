@@ -49,6 +49,7 @@ object Dependencies{
 		const val APP_AUTH_WEB_VIEW = "1.2.7"
 		const val SENTRY = "4.3.0"
 		const val SENTRY_PLUGIN = "1.7.36"
+		const val BIOMETRIC = "1.2.0-alpha03"
 	}
 	
 	object Modules{

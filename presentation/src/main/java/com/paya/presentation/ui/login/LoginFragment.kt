@@ -42,6 +42,7 @@ import kotlin.jvm.Throws
 @AndroidEntryPoint
 class LoginFragment : BaseFragment<LoginViewModel>() {
 
+	private var biometricPrompt: BiometricPrompt? = null
 	private var mBinding: FragmentLoginBinding? = null
 	private val mViewModel: LoginViewModel by viewModels()
 
@@ -127,6 +128,7 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
 
 	override fun onDestroyView() {
 		mBinding = null
+		biometricPrompt = null
 		super.onDestroyView()
 	}
 
@@ -175,7 +177,7 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
 				if (initCipher()) {
 					//If the cipher is initialized successfully, then create a CryptoObject instance//
 					cryptoObject = BiometricPrompt.CryptoObject(cipher)
-					val executor = ContextCompat.getMainExecutor(requireContext())
+					val executor = ContextCompat.getMainExecutor(requireActivity().applicationContext)
 					authUser(executor, cryptoObject)
 				}
 			}
@@ -267,13 +269,14 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
 			.setNegativeButtonText(getString(R.string.cancel))
 			.build()
 
-		val biometricPrompt = BiometricPrompt(this, executor,
+		 biometricPrompt = BiometricPrompt(this, executor,
 			object : BiometricPrompt.AuthenticationCallback() {
 				@RequiresApi(Build.VERSION_CODES.M)
 				override fun onAuthenticationSucceeded(
 					result: BiometricPrompt.AuthenticationResult
 				) {
 					super.onAuthenticationSucceeded(result)
+					biometricPrompt?.apply { cancelAuthentication()}
 					shortToast(getString(R.string.authentication_successful))
 					cipher = result.cryptoObject!!.cipher!!
 					val p = mViewModel.getPassword()
@@ -284,22 +287,25 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
 							login()
 						}
 					}
+
 				}
 
 				override fun onAuthenticationError(
 					errorCode: Int, errString: CharSequence
 				) {
 					super.onAuthenticationError(errorCode, errString)
+					biometricPrompt?.apply { cancelAuthentication()}
 					longToast(getString(R.string.error_msg_auth_error, errString))
 				}
 
 				override fun onAuthenticationFailed() {
 					super.onAuthenticationFailed()
+					biometricPrompt?.apply { cancelAuthentication()}
 					longToast(getString(R.string.error_msg_auth_failed))
 				}
 			})
 
-		biometricPrompt.authenticate(promptInfo, cryptoObject)
+		biometricPrompt?.apply{authenticate(promptInfo, cryptoObject)}
 	}
 
 	private class FingerprintException(e: Exception?) : Exception(e)

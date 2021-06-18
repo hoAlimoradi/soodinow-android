@@ -8,6 +8,7 @@ import android.os.Build
 import android.os.Bundle
 import android.webkit.CookieManager
 import android.webkit.CookieSyncManager
+import android.webkit.WebView
 import androidx.activity.viewModels
 import com.hadiidbouk.appauthwebview.AppAuthWebView
 import com.hadiidbouk.appauthwebview.AppAuthWebViewData
@@ -36,10 +37,13 @@ class FarabiAuthActivity : BaseActivity<FarabiAuthViewModel>() {
     private var mBinding: ActivityFarabiAuthBinding? = null
     private var mData: AppAuthWebViewData? = null
     private val mViewModel: FarabiAuthViewModel by viewModels()
+    private var webView: WebView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = ActivityFarabiAuthBinding.inflate(layoutInflater)
         setContentView(mBinding?.root)
+        webView = WebView(applicationContext)
+        webViewFrameLayout.addView(webView)
         observe(mViewModel.status, ::readyFarabiAuth)
         observe(mViewModel.statusGetUserFarabi, ::readyUserFarabi)
         observe(mViewModel.statusFarabiInfo, ::readyFarabiInfo)
@@ -52,8 +56,10 @@ class FarabiAuthActivity : BaseActivity<FarabiAuthViewModel>() {
 
     private fun createAppAuth() {
         mBinding?.apply {
-            webView.clearCache(true)
-            webView.clearFormData()
+            webView?.apply {
+                clearCache(true)
+                clearFormData()
+            }
         }
         clearCookies(this)
         mData = AppAuthWebViewData()
@@ -72,48 +78,46 @@ class FarabiAuthActivity : BaseActivity<FarabiAuthViewModel>() {
             registrationEndpointUri = ""
             redirectLogoutUri = "http://api.soodinow.com:5000/callback.html"
             clientSecret = ""
-
-            appAuthWebView = AppAuthWebView.Builder()
-                .webView(webView)
-                .authData(this)
-                .listener(object : IAppAuthWebViewListener {
-                    override fun onUserAuthorize(p0: AuthState?) {
-                        p0?.accessToken?.let {
-                            // mViewModel.setToken(it)
-                            mViewModel.getUserFarabi("Bearer $it")
-                            val clipboard: ClipboardManager =
-                                getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                            val clip = ClipData.newPlainText("token", it)
-                            clipboard.setPrimaryClip(clip)
+            webView?.let { webView ->
+                appAuthWebView = AppAuthWebView.Builder()
+                    .webView(webView)
+                    .authData(this)
+                    .listener(object : IAppAuthWebViewListener {
+                        override fun onUserAuthorize(p0: AuthState?) {
+                            p0?.accessToken?.let {
+                                // mViewModel.setToken(it)
+                                mViewModel.getUserFarabi("Bearer $it")
+                                val clipboard: ClipboardManager =
+                                    getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                                val clip = ClipData.newPlainText("token", it)
+                                clipboard.setPrimaryClip(clip)
+                            }
                         }
-                    }
 
-                    override fun onLogoutFinish() {
-                        setResult(Activity.RESULT_OK)
-                        finish()
-                    }
+                        override fun onLogoutFinish() {
+                            setResult(Activity.RESULT_OK)
+                            finish()
+                        }
 
-                    override fun showLoadingLayout() {
+                        override fun showLoadingLayout() {
 //                        includeLoading.loading.visibility = View.VISIBLE
-                    }
+                        }
 
-                    override fun hideLoadingLayout() {
-                        //    includeLoading.loading.visibility = View.GONE
-                    }
+                        override fun hideLoadingLayout() {
+                            //    includeLoading.loading.visibility = View.GONE
+                        }
 
-                    override fun hideConnectionErrorLayout() {
+                        override fun hideConnectionErrorLayout() {
 
-                    }
+                        }
 
-                    override fun showConnectionErrorLayout() {
-                        shortToast("Error")
+                        override fun showConnectionErrorLayout() {
+                            shortToast("مشکلی پیش آمده دوباره تلاش کنید")
 
-                    }
+                        }
 
-                }).build()
-            appAuthWebView?.let {
-                it.performLoginRequest()
-
+                    }).build()
+                appAuthWebView?.performLoginRequest()
             }
         }
     }
@@ -153,6 +157,9 @@ class FarabiAuthActivity : BaseActivity<FarabiAuthViewModel>() {
 
     override fun onDestroy() {
         mData = null
+        webViewFrameLayout.removeAllViews()
+        webView?.apply{destroy()}
+        webView = null
         appAuthWebView = null
         mBinding = null
         super.onDestroy()

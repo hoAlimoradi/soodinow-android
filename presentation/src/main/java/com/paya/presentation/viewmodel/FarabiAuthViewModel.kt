@@ -44,16 +44,17 @@ private val getUserFarabiUseCase : UseCase<String, UserFarabiRepoModel>
         viewModelScope.launch {
             showLoading()
             val response = callResource(this@FarabiAuthViewModel,getUserFarabiUseCase.action(token))
-            statusGetUserFarabi.postValue(response)
             hideLoading()
+            statusGetUserFarabi.postValue(response)
         }
     }
 	fun setFarabiInfo(userFarabiRepoModel: UserFarabiRepoModel) {
         viewModelScope.launch {
             showLoading()
             val response = callResource(this@FarabiAuthViewModel,farabiInfoUseCase.action(userFarabiRepoModel))
-            statusFarabiInfo.postValue(response)
             hideLoading()
+            statusFarabiInfo.postValue(response)
+
         }
     }
 }
