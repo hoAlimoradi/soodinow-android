@@ -24,7 +24,7 @@ class AppPreferencesHelper @Inject constructor(
     }
     
     override fun getMobile(): Resource<String> {
-        return Resource.success(mPrefs.getString(PREF_KEY_MOBILE,null) ?: "")
+        return Resource.success(mPrefs.getString(PREF_KEY_MOBILE,null) ?: "",200)
     }
     
     override fun setMobile(mobile: String) {

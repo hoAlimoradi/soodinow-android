@@ -5,30 +5,22 @@ package com.paya.domain.tools
  * A generic class that holds a value with its loading status.
  * @param <T>
 </T> */
-data class Resource<out T>(val status: Status, val data: T?, val message: String?) {
+data class Resource<out T>(val status: Status, val data: T?, val message: String?,val code:Int) {
     companion object {
-        fun <T> success(data: T?): Resource<T> {
-            return Resource(Status.SUCCESS, data, null)
+        fun <T> success(data: T?,code:Int): Resource<T> {
+            return Resource(Status.SUCCESS, data, null,code)
         }
 
-        fun <T> error(msg: String, data: T?): Resource<T> {
-            return Resource(Status.ERROR, data, msg)
+        fun <T> error(msg: String, data: T?, code: Int): Resource<T> {
+            return Resource(Status.ERROR, data, msg,code)
         }
 
         fun <T> loading(data: T?): Resource<T> {
-            return Resource(Status.LOADING, data, null)
-        }
-
-        fun <T> unAuthorized(msg: String, data: T?): Resource<T> {
-            return Resource(Status.UNAUTHORIZED, data, msg)
-        }
-
-        fun <T> fatabiToken(msg: String, data: T?): Resource<T> {
-            return Resource(Status.FARABITOKEN, data, msg)
+            return Resource(Status.LOADING, data, null,-1)
         }
 
         fun <T> idle(data: T?): Resource<T> {
-            return Resource(Status.IDLE, data, null)
+            return Resource(Status.IDLE, data, null,-1)
         }
 
     }

@@ -35,6 +35,7 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
 		super.onCreate(savedInstanceState)
 		observe(baseViewModel.unAuthorizeLiveData, ::unAuthorized)
 		observe(baseViewModel.unFarabiAuth, ::farabiAuth)
+		observe(baseViewModel.unExistProfileUser, ::existProfile)
 		observe(baseViewModel.errorLiveData, ::readyError)
 		observe(baseViewModel.unLoading, ::readyLoading)
 	}
@@ -46,6 +47,11 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
 		)
 	}
 
+	private fun existProfile(param: Unit) {
+		activity?.findNavController(R.id.nav_host_fragment)?.navigate(
+			R.id.firstInformation
+		)
+	}
 	fun getFindViewController(): NavController? {
 		return activity?.findNavController(R.id.nav_host_fragment)
 	}

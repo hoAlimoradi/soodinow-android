@@ -8,11 +8,9 @@ fun <ApiType, ResourceType> getResourceFromApiResponse(
     mapApiTypeToResourceType: (ApiType) -> ResourceType
 ): Resource<ResourceType> {
     return when (apiResponse) {
-        is ApiEmptyResponse -> Resource.success(null)
+        is ApiEmptyResponse -> Resource.success(null,apiResponse.code)
         is ApiSuccessResponse ->
-            Resource.success(mapApiTypeToResourceType(apiResponse.body))
-        is ApiFarabiTokenResponse -> Resource.fatabiToken(apiResponse.errorMessage,null)
-        is ApiErrorResponse -> Resource.error(apiResponse.errorMessage, null)
-        is ApiUnAuthorizedResponse -> Resource.unAuthorized(apiResponse.errorMessage, null)
+            Resource.success(mapApiTypeToResourceType(apiResponse.body),apiResponse.code)
+        is ApiErrorResponse -> Resource.error(apiResponse.errorMessage, null,apiResponse.code)
     }
 }

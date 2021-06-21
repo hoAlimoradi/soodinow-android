@@ -60,7 +60,7 @@ class FirstInformationViewModel @Inject constructor(
 			val body = ProfileBodyRepoModel(
 				firstName,
 				lastName,
-				phone,
+				phone.replaceFirst("0","+98"),
 				email,
 				nationalCode,
 				birthDay,

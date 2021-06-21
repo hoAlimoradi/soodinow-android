@@ -92,11 +92,12 @@ class AuthRepositoryImpl @Inject constructor(
     override suspend fun getUserInfo(): Resource<UserInfoRepoModel> {
         return try {
             val userInfo = userInfoDbApi.getSingle()
-            Resource.success(userInfoMapperEntityRepo.map(userInfo))
+            Resource.success(userInfoMapperEntityRepo.map(userInfo),200)
         } catch (e: Exception) {
             Resource.error(
                 e.message ?: "unknown error",
-                null
+                null,
+                -1
             )
         }
     }

@@ -5,6 +5,7 @@ import com.paya.data.database.developer_name.DeveloperNameDbApi
 import com.paya.data.datasource.developer.DeveloperDataSource
 import com.paya.data.network.apiresponse.*
 import com.paya.data.network.remote_api.DeveloperNameService
+import com.paya.data.utils.getResourceFromApiResponse
 import com.paya.domain.models.local.DeveloperNameDbModel
 import com.paya.domain.models.remote.DeveloperNameServerModel
 import com.paya.domain.models.repo.DeveloperNameRepoModel
@@ -22,13 +23,11 @@ class DeveloperRepositoryImpl @Inject constructor(
 ) : DeveloperRepository {
 	
 	override suspend fun getDeveloperNameFromNet(): Resource<DeveloperNameRepoModel> {
-		return when(val developerName = developerNet.getName()){
-			is ApiEmptyResponse -> Resource.success(null)
-			is ApiFarabiTokenResponse -> Resource.fatabiToken("",null)
-			is ApiSuccessResponse -> Resource.success(mapperNet.map(developerName.body))
-			is ApiErrorResponse -> Resource.error(developerName.errorMessage, null)
-			is ApiUnAuthorizedResponse -> Resource.unAuthorized(developerName.errorMessage,null)
+		val developerName = developerNet.getName()
+		return getResourceFromApiResponse(developerName) {
+			mapperNet.map(it)
 		}
+
 	}
 	
 	override suspend fun deleteDeveloperNameDb() {
@@ -38,11 +37,12 @@ class DeveloperRepositoryImpl @Inject constructor(
 	override suspend fun getDeveloperNameDb(): Resource<DeveloperNameRepoModel> {
 		return try {
 			val developerName = developerApiDb.get()
-			Resource.success(mapperEntityRepo.map(developerName))
+			Resource.success(mapperEntityRepo.map(developerName),200)
 		} catch (e: Exception) {
 			Resource.error(
 				e.message ?: "unknown error",
-				null
+				null,
+				-1
 			)
 		}
 	}

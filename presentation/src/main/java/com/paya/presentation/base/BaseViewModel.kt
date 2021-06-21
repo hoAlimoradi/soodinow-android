@@ -7,6 +7,7 @@ open class BaseViewModel : ViewModel() {
 	val unAuthorizeLiveData = MutableLiveData<String>()
 	val errorLiveData = MutableLiveData<String>()
 	val unFarabiAuth = MutableLiveData<Unit>()
+	val unExistProfileUser = MutableLiveData<Unit>()
 	val unLoading = MutableLiveData<Boolean>()
 	override fun onCleared() {
 		super.onCleared()
@@ -22,6 +23,10 @@ open class BaseViewModel : ViewModel() {
 
 	fun farabiAuth() {
 		unFarabiAuth.postValue(Unit)
+	}
+
+	fun existProfileUser() {
+		unExistProfileUser.postValue(Unit)
 	}
 
 	fun showError(error: String, isShowError: Boolean = true) {

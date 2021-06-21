@@ -171,7 +171,7 @@ val resource = callResource(this@ProfileViewModel, existAccountUseCase.action(Un
 
 			}
 			if (resource.status == Status.ERROR)
-				profile.postValue(resource.message?.let { Resource.error(it, null) })
+				profile.postValue(resource.message?.let { Resource.error(it, null,-1) })
 			if (profileDay != null && profileMonth != null && profileWeek != null && efficiencyList.size == 3) {
 				efficiencyList.sortedBy { it.position }
 				profile.value?.let {
@@ -179,7 +179,7 @@ val resource = callResource(this@ProfileViewModel, existAccountUseCase.action(Un
 						return@launch
 				}
 				Log.d("endProfile", efficiencyList.size.toString())
-				profile.postValue(Resource.success(efficiencyList))
+				profile.postValue(Resource.success(efficiencyList,200))
 				hideLoading()
 			}
 		}

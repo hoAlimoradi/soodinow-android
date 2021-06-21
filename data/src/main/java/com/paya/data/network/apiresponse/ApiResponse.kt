@@ -1,6 +1,5 @@
 package com.paya.data.network.apiresponse
 
-import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.paya.domain.models.remote.BaseModel
@@ -26,43 +25,47 @@ sealed class ApiResponse<T> {
 
         }
 
-        private fun  getErrorMessage(response: String): String {
+        private fun  getErrorMessage(response: String?): String {
+            if (response == null)
+                return  "عملیات شما با خطا مواجه شد"
             val baseModel = parseBaseModel(response)
             val msg = baseModel?.error?.message ?: "عملیات شما با خطا مواجه شد"
 
-            return if (msg.isNullOrEmpty()) {
-                "خطای ناشنخته"
+            return if (msg.isEmpty()) {
+                "عملیات شما با خطا مواجه شد"
             } else {
                 msg
             }
         }
 
-        private fun getErrorCode(response: String): Int? {
+        private fun getErrorCode(response: String?,responseCode: Int): Int {
+            if (response == null)
+                return responseCode
             val baseModel = parseBaseModel(response)
-            return baseModel?.error?.code ?: 0
+            return baseModel?.error?.code ?: responseCode
 
 
         }
 
         fun <T> create(error: Throwable): ApiErrorResponse<T> {
-            return ApiErrorResponse("عملیات شما با خطا مواجه شد")
+            return ApiErrorResponse("عملیات شما با خطا مواجه شد",-1)
         }
 
         fun <T> create(response: Response<T>): ApiResponse<T> {
-            var errorBody = response.errorBody()?.string()
+            val errorBody = response.errorBody()?.string()
+            val responseCode = response.code()
             return if (response.isSuccessful) {
                 val body = response.body()
-                if (body == null || response.code() == 204) {
-                    ApiEmptyResponse()
+                if (body == null || responseCode == 204) {
+                    ApiEmptyResponse(responseCode)
                 } else {
-                    ApiSuccessResponse(body)
+                    ApiSuccessResponse(body, responseCode)
                 }
-            } else if (response.code() == 401) {
-                ApiUnAuthorizedResponse(getErrorMessage(errorBody!!) ?: "UnAuthorized")
-            } else if (getErrorCode(errorBody!!) == 1009) {
-                ApiFarabiTokenResponse(getErrorMessage(errorBody!!))
-            } else {
-                ApiErrorResponse(getErrorMessage(errorBody!!) ?: "unknown error")
+            }   else {
+                ApiErrorResponse(
+                    getErrorMessage(errorBody) ?: "unknown error",
+                    getErrorCode(errorBody,responseCode)
+                )
             }
         }
     }
@@ -71,12 +74,8 @@ sealed class ApiResponse<T> {
 /**
  * separate class for HTTP 204 responses so that we can make ApiSuccessResponse's body non-null.
  */
-class ApiEmptyResponse<T> : ApiResponse<T>()
+class ApiEmptyResponse<T>(val code: Int) : ApiResponse<T>()
 
-class ApiFarabiTokenResponse<T>(val errorMessage: String) : ApiResponse<T>()
+data class ApiSuccessResponse<T>(val body: T, val code: Int) : ApiResponse<T>()
 
-class ApiUnAuthorizedResponse<T>(val errorMessage: String) : ApiResponse<T>()
-
-data class ApiSuccessResponse<T>(val body: T) : ApiResponse<T>()
-
-data class ApiErrorResponse<T>(val errorMessage: String) : ApiResponse<T>()
+data class ApiErrorResponse<T>(val errorMessage: String, val code: Int) : ApiResponse<T>()

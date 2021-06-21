@@ -236,15 +236,11 @@ class FirstInformationFragment : BaseFragment<FirstInformationViewModel>() {
 	private fun onReadyUpdateProfile(resource: Resource<ProfileRepoModel>) {
 		when (resource.status) {
 			Status.SUCCESS -> {
-				if (isNextPage)
-					findNavController().navigate(
-						FirstInformationFragmentDirections.navigateToCreateWithoutRiskAccountFragment()
-					)
-				else
 					context.let {
 						Toast.makeText(it, "پروفایل با موفقیت آپدیت شد", Toast.LENGTH_SHORT)
 							.show()
 					}
+				findNavController().popBackStack()
 
 			}
 
@@ -271,7 +267,7 @@ class FirstInformationFragment : BaseFragment<FirstInformationViewModel>() {
 					if (data.complete) {
 						firstName.setText(data.firstName)
 						lastName.setText(data.lastName)
-						phone.setText(data.phone)
+						phone.setText(data.phone.replaceFirst("+98","0"))
 						email.setText(data.email)
 						shaba.setText(data.bban?.replace("IR",""))
 						national.setText(data.personalCode)

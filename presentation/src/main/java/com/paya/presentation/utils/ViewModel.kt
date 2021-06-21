@@ -12,9 +12,11 @@ fun <T> LifecycleOwner.observe(liveData: LiveData<T>?,action: (t: T) -> Unit) {
 }
 
 fun <T> callResource(viewModel: BaseViewModel,resource: Resource<T>,isShowError: Boolean = true) : Resource<T> {
-	if (resource.status == Status.UNAUTHORIZED) {
+	if (resource.code == 401) {
 		viewModel.unAuthorized(resource.message!!) {  }
-	} else if (resource.status == Status.FARABITOKEN) {
+	} else if(resource.code == 1032){
+		viewModel.existProfileUser()
+	} else if (resource.code == 1009) {
 		viewModel.farabiAuth()
 	} else if (resource.status == Status.ERROR) {
 		viewModel.showError(resource.message ?: "عملیات شما با خطا مواجه شد",isShowError)

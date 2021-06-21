@@ -39,10 +39,20 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         observe(baseViewModel.unAuthorizeLiveData, ::unAuthorized)
         observe(baseViewModel.unFarabiAuth, ::farabiAuth)
+        observe(baseViewModel.unExistProfileUser, ::profileExist)
         observe(baseViewModel.errorLiveData, ::readyError)
         observe(baseViewModel.unLoading, ::readyLoading)
     }
-
+    private fun profileExist(param: Unit) {
+        try {
+            findNavController(R.id.nav_host_fragment).navigate(
+                R.id.firstInformation
+            )
+        } catch (e: Exception) {
+           /* startActivity(Intent(this@BaseActivity, MainActivity::class.java))
+            finish()*/
+        }
+    }
     private fun unAuthorized(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
         try {

@@ -79,7 +79,9 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 	
 	private fun setupViewPager() {
 		adapter = SlidePagerAdapter(childFragmentManager,viewLifecycleOwner.lifecycle) {
-			mViewModel.getProfile()
+			getFindViewController()?.navigate(
+				R.id.createLowRiskAccount
+			)
 		}
 		mBinding?.apply {
 			pager.offscreenPageLimit = 1

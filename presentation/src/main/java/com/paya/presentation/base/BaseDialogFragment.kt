@@ -14,6 +14,7 @@ import com.paya.presentation.R
 import com.paya.presentation.ui.errorDoalog.ErrorDialog
 import com.paya.presentation.ui.loading.LoadingDialog
 import com.paya.presentation.utils.observe
+import kotlin.system.exitProcess
 
 abstract class BaseDialogFragment<VM : BaseViewModel> : DialogFragment() {
     abstract val baseViewModel: BaseViewModel
@@ -33,6 +34,7 @@ abstract class BaseDialogFragment<VM : BaseViewModel> : DialogFragment() {
         super.onCreate(savedInstanceState)
         observe(baseViewModel.unAuthorizeLiveData, ::unAuthorized)
         observe(baseViewModel.errorLiveData, ::readyError)
+        observe(baseViewModel.unExistProfileUser, ::existProfile)
         observe(baseViewModel.unLoading, ::readyLoading)
     }
 
@@ -42,7 +44,11 @@ abstract class BaseDialogFragment<VM : BaseViewModel> : DialogFragment() {
             R.id.actionUnAuthorized
         )
     }
-
+    private fun existProfile(param: Unit) {
+        activity?.findNavController(R.id.nav_host_fragment)?.navigate(
+            R.id.firstInformation
+        )
+    }
     fun getFindViewController(): NavController? {
         return activity?.findNavController(R.id.nav_host_fragment)
     }
