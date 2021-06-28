@@ -22,6 +22,7 @@ data class LowRiskInvestmentRepositoryImpl @Inject constructor(
     private val totalBoxValueRemoteRepoMapper: Mapper<TotalBoxValueRemoteModel, TotalBoxValueRepoModel>,
     private val historyPriceRemoteRepoMapper: Mapper<HistoryPriceRemoteModel, HistoryPriceRepoModel>,
     private val investmentLogsRemoteRepoMapper: Mapper<InvestmentLogsRemoteModel, InvestmentLogsRepoModel>,
+    private val chartProfitRemoteRepo : Mapper<@JvmSuppressWildcards List<ChartProfitRemoteModel>, @JvmSuppressWildcards List<ChartProfitRepoModel>>,
     private val preferenceHelper: PreferenceHelper,
 ) : LowRiskInvestmentRepository {
 
@@ -113,6 +114,17 @@ data class LowRiskInvestmentRepositoryImpl @Inject constructor(
             )
         ) {
             investmentLogsRemoteRepoMapper.map(it.data)
+        }
+    }
+
+    override suspend fun getChartProfit(boxType: Long): Resource<List<ChartProfitRepoModel>> {
+        return getResourceFromApiResponse(
+            lowRiskInvestmentService.getChartProfit(
+                preferenceHelper.getAccessToken(),
+                boxType
+            )
+        ) {
+            chartProfitRemoteRepo.map(it.data)
         }
     }
 

@@ -25,4 +25,6 @@ interface LowRiskInvestmentRepository {
     suspend fun getHistoryPrice(page: Int, filter: String): Resource<HistoryPriceRepoModel>
     suspend fun getInvestmentLogs(page: Int, pageSize: Int,filters:Map<String,String>): Resource<InvestmentLogsRepoModel>
 
+    suspend fun getChartProfit(boxType:Long) : Resource<List<ChartProfitRepoModel>>
+
 }

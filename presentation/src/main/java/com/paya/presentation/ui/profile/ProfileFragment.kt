@@ -60,7 +60,6 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
         setupPieChart()
         initChartLabelRecyclerView()
         observe(viewModel.existAccount, ::onExistAccountReady)
-        observe(viewModel.profile, ::onProfileReady)
         observe(viewModel.pieChartStatus, ::setData)
         observe(viewModel.errorMessage, ::setError)
 
@@ -92,15 +91,15 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
         dialog.show(parentFragmentManager, "chartDialog")
     }
 
-    private fun setupEfficiencyAdapter(list: MutableList<EfficiencyRepoModel>) {
+    private fun setupEfficiencyAdapter(list: List<EfficiencyRepoModel>) {
         context?.let { context ->
-            /*  val verticalDivider = WithoutLastDividerItemDecorator(context, RecyclerView.VERTICAL)
+              val verticalDivider = WithoutLastDividerItemDecorator(context, RecyclerView.VERTICAL)
               ContextCompat.getDrawable(context, R.drawable.divider_efficiency_vertical)
                   ?.let { divider ->
                       verticalDivider.setDrawable(
                           divider
                       )
-                  }*/
+                  }
             val horizontalDivider =
                 WithoutLastDividerItemDecorator(context, RecyclerView.HORIZONTAL)
             ContextCompat.getDrawable(context, R.drawable.divider_efficiency_horizontal)
@@ -111,12 +110,13 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
                 }
 
 
-//            mBinding.efficiencyRecyclerView.addItemDecoration(verticalDivider)
             mBinding?.apply {
                 efficiencyRecyclerView.apply {
+                    layoutManager = RtlGridLayoutManager(context,3)
+                    addItemDecoration(verticalDivider)
                     addItemDecoration(horizontalDivider)
                     adapter =
-                        EfficiencyAdapter(list.sortedBy { it.position })
+                        EfficiencyAdapter(list)
                 }
             }
 
@@ -127,21 +127,15 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
     private fun onExistAccountReady(resource: Resource<ExitAccountRepoModel>) {
         if (resource.status == Status.SUCCESS) {
             adapterSlide?.apply { notifyDataSetChanged() }
-        }
-
-    }
-
-    private fun onProfileReady(resource: Resource<MutableList<EfficiencyRepoModel>>) {
-
-        if (resource.status == Status.SUCCESS) {
-            resource.data?.let { list ->
-                mBinding?.apply { parentView.visibility = View.VISIBLE }
-                setupEfficiencyAdapter(list)
+            mBinding?.apply { parentView.visibility = View.VISIBLE }
+            resource.data?.let {
+               if (it.activeBox.isEmpty())
+                   return@let
+                setupEfficiencyAdapter(it.activeBox[0].efficiencyRepoModel)
             }
 
-        } else {
-            resource.message?.let { viewModel.setErrorMessage(it) }
         }
+
     }
 
     private fun setupViewPager() {
@@ -165,6 +159,7 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
                             viewModel.getProfile(
                                 it.id
                             )
+                            setupEfficiencyAdapter(it.efficiencyRepoModel)
                             super.onPageSelected(position)
                         }
                     }

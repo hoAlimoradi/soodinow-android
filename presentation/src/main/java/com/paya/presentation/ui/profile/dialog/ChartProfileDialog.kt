@@ -1,8 +1,10 @@
 package com.paya.presentation.ui.profile.dialog
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.LayoutDirection
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +18,7 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IFillFormatter
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.google.android.material.tabs.TabLayout
-import com.paya.domain.models.repo.BoxHistoryRepoModel
+import com.paya.domain.models.repo.ChartProfitRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.presentation.R
@@ -24,7 +26,6 @@ import com.paya.presentation.base.BaseDialogFragment
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.DialogChartProfileBinding
 import com.paya.presentation.ui.custom.MyMarkerViewSmall
-import com.paya.presentation.ui.profile.enum.FilterProfile
 import com.paya.presentation.utils.observe
 import com.paya.presentation.utils.setWidthPercent
 import com.paya.presentation.utils.shared.EntryPoint
@@ -38,10 +39,6 @@ class ChartProfileDialog : BaseDialogFragment<ChartProfileViewModel>() {
     private val viewModel: ChartProfileViewModel by viewModels()
     private  var mBinding: DialogChartProfileBinding? =null
     var boxId: Long = 0
-        get() = field
-        set(value) {
-            field = value
-        }
     override val baseViewModel: BaseViewModel
         get() = viewModel
 
@@ -68,30 +65,38 @@ class ChartProfileDialog : BaseDialogFragment<ChartProfileViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        observe(viewModel.profile, ::readyProfile)
-        initTab()
-        viewModel.getProfile(boxId)
+        observe(viewModel.chartProfit, ::readyProfile)
+        viewModel.getChartProfit(boxId)
         mBinding?.apply {
             closeBtn.setOnClickListener {
                 dismissAllowingStateLoss()
             }
         }
     }
+
     override fun onDestroy() {
         mBinding = null
         super.onDestroy()
     }
-    private fun readyProfile(resource: Resource<BoxHistoryRepoModel>) {
+
+    private fun readyProfile(resource: Resource<List<ChartProfitRepoModel>>) {
         if (resource.status == Status.SUCCESS) {
-            setCurrentBoxData()
+            resource.data?.let {
+                if (it.isNotEmpty()) {
+                    initTab(it)
+                    setCurrentBoxData(it.size - 1)
+                }
+            }
+
         }
     }
 
-    private fun setCurrentBoxData() {
-        if (viewModel.mainChartPoints.size > 0)
+
+    private fun setCurrentBoxData(index: Int) {
+        if (viewModel.chartListModels.size > 0)
             setLineAccountChartData(
                 chart,
-                viewModel.mainChartPoints,
+                viewModel.chartListModels[index].mainChartPoints,
                 chartColor = ContextCompat.getColor(
                     requireContext(),
                     R.color.japanese_laurel_green
@@ -101,13 +106,19 @@ class ChartProfileDialog : BaseDialogFragment<ChartProfileViewModel>() {
                 chartAlpha = 0,
                 markerType = 0,
                 touchEnabled = true,
-                xList = viewModel.xListChart
+                xList = viewModel.chartListModels[index].xListChart
             )
 
     }
 
-    private fun initTab() {
-        chartTabLayout.getTabAt(2)?.select()
+    @SuppressLint("WrongConstant")
+    private fun initTab(tabs: List<ChartProfitRepoModel>) {
+        tabs.forEach {
+            val tab = chartTabLayout.newTab()
+            tab.text = it.name
+            chartTabLayout.addTab(tab)
+        }
+        chartTabLayout.getTabAt(tabs.size - 1)?.select()
         chartTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(tab: TabLayout.Tab?) {
 
@@ -119,35 +130,7 @@ class ChartProfileDialog : BaseDialogFragment<ChartProfileViewModel>() {
 
             // TODO: 4/2/21 box history Number what?
             override fun onTabSelected(tab: TabLayout.Tab?) {
-
-                when (chartTabLayout.selectedTabPosition) {
-                    // day
-                    2 -> {
-                        viewModel.filterProfile = FilterProfile.day
-                        viewModel.number = 3
-                    }
-                    //week
-                    1 -> {
-                        viewModel.filterProfile = FilterProfile.week
-                        viewModel.number = 1
-                    }
-                    //month
-                    0 -> {
-                        viewModel.filterProfile = FilterProfile.month
-                        viewModel.number = 1
-                    }
-                    //years
-                    // TODO: 4/26/21 change to years
-                    -1 -> {
-                        viewModel.filterProfile = FilterProfile.month
-                        viewModel.number = 3
-                    }
-                    else -> {
-                        viewModel.filterProfile = FilterProfile.day
-                        viewModel.number = 3
-                    }
-                }
-                viewModel.getProfile(boxId)
+                setCurrentBoxData(chartTabLayout.selectedTabPosition)
             }
 
         })

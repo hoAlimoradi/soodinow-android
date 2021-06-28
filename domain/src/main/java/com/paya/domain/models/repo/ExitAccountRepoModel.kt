@@ -15,4 +15,5 @@ data class ActiveBoxRepo(
 	val createAt:String,
 	val userName:String,
 	val price:Long,
+	val efficiencyRepoModel: List<EfficiencyRepoModel>
 ) : Serializable

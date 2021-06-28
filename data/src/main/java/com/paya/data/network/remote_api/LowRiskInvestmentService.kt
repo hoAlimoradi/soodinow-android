@@ -62,4 +62,10 @@ interface LowRiskInvestmentService {
         @Query("page_size") pageSize: Int,
         @QueryMap filters:Map<String,String>
     ): ApiResponse<BaseModel<InvestmentLogsRemoteModel>>
+
+    @GET("order/profit_chart/{type}/")
+    suspend fun getChartProfit(
+        @Header("Authorization") auth: String,
+        @Path("type") type: Long
+    ): ApiResponse<BaseModel<List<ChartProfitRemoteModel>>>
 }

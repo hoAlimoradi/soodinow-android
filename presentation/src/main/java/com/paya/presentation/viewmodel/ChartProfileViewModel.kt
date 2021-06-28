@@ -1,68 +1,77 @@
 package com.paya.presentation.viewmodel
 
-import javax.inject.Inject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.paya.domain.models.repo.*
+import com.paya.domain.models.repo.ChartProfitRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.domain.tools.UseCase
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.ui.profile.enum.FilterProfile
-import com.paya.presentation.utils.*
+import com.paya.presentation.utils.callResource
+import com.paya.presentation.utils.convertToPersianDate
 import com.paya.presentation.utils.shared.Point
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
 class ChartProfileViewModel @Inject constructor(
-	private val getBoxHistoryUseCase: UseCase<BoxHistoryRequestModel, BoxHistoryRepoModel>
+	private val getChartProfitUseCase: UseCase<Long, List<ChartProfitRepoModel>>
 ) : BaseViewModel() {
 
-	val profile = MutableLiveData<Resource<BoxHistoryRepoModel>>()
-	var number = 3
-	var filterProfile = FilterProfile.day
-	var xListChart = mutableListOf<String>()
-	val mainChartPoints = mutableListOf<Point>()
+	val chartProfit = MutableLiveData<Resource<List<ChartProfitRepoModel>>>()
+
+	val chartListModels = mutableListOf<ChartListModel>()
 
 
-	fun getProfile(
+	fun getChartProfit(
 		boxId: Long
 	) {
-		profile.value?.let {
+		chartProfit.value?.let {
 			if (it.status == Status.LOADING)
 				return
 		}
 		showLoading()
 		viewModelScope.launch {
 			val response = callResource(
-				this@ChartProfileViewModel, getBoxHistoryUseCase.action(
-					BoxHistoryRequestModel(boxId, filterProfile.name, number)
+				this@ChartProfileViewModel, getChartProfitUseCase.action(
+					boxId
 				)
 			)
 			if (response.status == Status.SUCCESS)
 				response.data?.let {
 					setCurrentBoxData(it)
 				}
-			profile.postValue(response)
+			chartProfit.postValue(response)
 			hideLoading()
 		}
 	}
 
-	private fun setCurrentBoxData(boxModel: BoxHistoryRepoModel) {
-		xListChart.clear()
-		mainChartPoints.clear()
-		boxModel.mainChart.data.forEachIndexed { index, value ->
-			val date = convertToPersianDate(value.date)
-			xListChart.add("${date.persianMonth} / ${date.persianDay}")
-			mainChartPoints.add(
-				Point(
-					index.toFloat(),
-					value.price.toFloat(),
-					boxModel.percent,
-					value.price.toLong()
+	private fun setCurrentBoxData(model: List<ChartProfitRepoModel>) {
+		chartListModels.clear()
+
+		model.forEach { chart ->
+			val xListChart = mutableListOf<String>()
+			val mainChartPoints = mutableListOf<Point>()
+			chart.points.forEachIndexed { index, value ->
+				val date = convertToPersianDate(value.date)
+				xListChart.add("${date.persianMonth} / ${date.persianDay}")
+				mainChartPoints.add(
+					Point(
+						index.toFloat(),
+						value.price.toFloat(),
+						0f,
+						value.price.toLong()
+					)
 				)
-			)
+			}
+			chartListModels.add(ChartListModel(xListChart, mainChartPoints))
 		}
 	}
 }
+
+data class ChartListModel(
+	val xListChart: MutableList<String>,
+	val mainChartPoints: MutableList<Point>
+)

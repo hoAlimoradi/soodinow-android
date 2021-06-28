@@ -63,37 +63,8 @@ class BoxHistoryRemoteRepoMapper @Inject constructor(): Mapper<
 			}
 		}
 
-
-		val isProfitable: Boolean =
-			if (mainChart.data.isEmpty()) {
-				true
-			} else mainChart.data[0].price <= mainChart.data[mainChart.data.size - 1].price
-
-
-		val priceEfficiency: Double = when {
-			mainChart.data.isEmpty() -> {
-				0.0
-			}
-			isProfitable -> mainChart.data[mainChart.data.size - 1].price - mainChart.data[0].price
-			else -> mainChart.data[0].price - mainChart.data[mainChart.data.size - 1].price
-		}
-
-		val percentEfficiency: Double = when {
-			mainChart.data.isEmpty() -> {
-				0.0
-			}
-			else -> priceEfficiency / mainChart.data[0].price
-		}
-		val efficiencyRepoModel = EfficiencyRepoModel(
-			"",
-			(percentEfficiency * 100).toFloat(),
-			priceEfficiency,
-			isProfitable
-		)
-
 		return BoxHistoryRepoModel(
 			cardChart = cardChart,
-			efficiency = efficiencyRepoModel,
 			mainChart = mainChart,
 			circleChart = circleChart,
 			percent = param.percent ?: 0f,

@@ -12,36 +12,8 @@ class IsInRiskListRemoteRepoMapper @Inject constructor(): Mapper<
 		IsInRiskListRepoModel>{
 	
 	override fun map(param: IsInRiskListRemoteModel): IsInRiskListRepoModel {
-		val percentEfficiencyList = mutableListOf<PercentEfficiency>()
-		param.percent?.let { percent ->
-			percent.threeMonth?.let { threeMonth ->
-				percentEfficiencyList.add(
-					PercentEfficiency(
-						"بازدهی 3 ماهه",
-						threeMonth.percent?.let { it * 100 } ?: 0f,
-						threeMonth.price ?: 0f
-					)
-				)
-			}
-			percent.oneMonth?.let { oneMonth ->
-				percentEfficiencyList.add(
-					PercentEfficiency(
-						"بازدهی ماهانه",
-						oneMonth.percent?.let { it * 100 } ?: 0f,
-						oneMonth.price ?: 0f
-					)
-				)
-			}
-			percent.oneWeek?.let { oneWeek ->
-				percentEfficiencyList.add(
-					PercentEfficiency(
-						"بازدهی هفتگی",
-						oneWeek.percent?.let { it * 100 } ?: 0f,
-						oneWeek.price ?: 0f
-					)
-				)
-			}
-		}
+
+
 		return IsInRiskListRepoModel(
 			param.basket?.let {
 				it.map { item ->
@@ -59,7 +31,9 @@ class IsInRiskListRemoteRepoMapper @Inject constructor(): Mapper<
 					)
 				}
 			} ?: emptyList(),
-			percentEfficiencyList
+			param.soodinowProfit?.map {
+				PercentEfficiency(it.name, it.profit)
+			} ?: emptyList()
 		)
 	}
 	

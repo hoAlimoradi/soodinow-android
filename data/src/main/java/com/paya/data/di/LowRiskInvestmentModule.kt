@@ -67,6 +67,9 @@ abstract class LowRiskInvestmentModule {
     abstract fun bindBoxTypesRemoteRepoMapper(mapper: BoxTypesRemoteRepoMapper): Mapper<BoxTypeRemoteModel, BoxTypeRepoModel>
 
     @Binds
+    abstract fun bindChartProfitRemoteRepoMapper(mapper: ChartProfitRemoteRepoMapper): Mapper<@JvmSuppressWildcards List<ChartProfitRemoteModel>, @JvmSuppressWildcards List<ChartProfitRepoModel>>
+
+    @Binds
     abstract fun bindRepo(repo: LowRiskInvestmentRepositoryImpl): LowRiskInvestmentRepository
 
     @Binds
@@ -92,5 +95,8 @@ abstract class LowRiskInvestmentModule {
 
     @Binds
     abstract fun bindInvestmentLogsUseCase(useCase: InvestmentLogsUseCase): UseCase<InvestmentLogsRepoBodyModel, @JvmSuppressWildcards InvestmentLogsRepoModel>
+
+    @Binds
+    abstract fun bindChartProfitUseCase(useCase: ChartProfitUseCase): UseCase<Long, @JvmSuppressWildcards List<ChartProfitRepoModel>>
 
 }

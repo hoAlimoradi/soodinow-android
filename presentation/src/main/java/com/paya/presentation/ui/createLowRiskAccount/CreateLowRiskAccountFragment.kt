@@ -123,13 +123,13 @@ class CreateLowRiskAccountFragment : BaseFragment<CreateLowRiskAccountViewModel>
 
     private fun setupEfficiencyAdapter(list: List<PercentEfficiency>) {
         context?.let { context ->
-            /*  val verticalDivider = WithoutLastDividerItemDecorator(context, RecyclerView.VERTICAL)
+              val verticalDivider = WithoutLastDividerItemDecorator(context, RecyclerView.VERTICAL)
               ContextCompat.getDrawable(context, R.drawable.divider_efficiency_vertical)
                   ?.let { divider ->
                       verticalDivider.setDrawable(
                           divider
                       )
-                  }*/
+                  }
             val horizontalDivider =
                 WithoutLastDividerItemDecorator(context, RecyclerView.HORIZONTAL)
             ContextCompat.getDrawable(context, R.drawable.divider_efficiency_horizontal)
@@ -139,9 +139,10 @@ class CreateLowRiskAccountFragment : BaseFragment<CreateLowRiskAccountViewModel>
                     )
                 }
 
-//            mBinding.efficiencyRecyclerView.addItemDecoration(verticalDivider)
             mBinding?.efficiencyRecyclerView?.apply {
+                layoutManager = RtlGridLayoutManager(context, 3)
                 addItemDecoration(horizontalDivider)
+                //addItemDecoration(verticalDivider)
                 adapter = PercentEfficiencyAdapter(list)
             }
 

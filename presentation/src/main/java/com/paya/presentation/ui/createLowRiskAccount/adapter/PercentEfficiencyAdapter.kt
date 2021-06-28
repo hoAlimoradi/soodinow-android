@@ -28,7 +28,6 @@ class PercentEfficiencyAdapter(val list: List<PercentEfficiency>) :
         with(holder.itemView) {
             titleEfficiency.text = item.title
             percentEfficiency.text = "${roundOffDecimal(item.percent)}%"
-           // priceEfficiency.text = Utils.separatorAmount(item.price.toLong())
             with(percentIconEfficiency) {
                 setImageResource( R.drawable.ic_arrow_dposit)
                 setBackgroundResource( R.drawable.bg_icon_15_size_corner_3_green )

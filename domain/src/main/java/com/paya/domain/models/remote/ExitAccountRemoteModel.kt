@@ -20,5 +20,26 @@ data class ActiveBoxRemote(
 	val userName:String?,
 	@SerializedName("total_price")
 	val price:Float?,
+	@SerializedName("user_profit")
+	val userProfit:List<UserProfit>?,
 ): NoObfuscate
 
+
+data class UserProfit(
+	@SerializedName("days")
+	val days: Int?,
+	@SerializedName("pre_box_value")
+	val preBoxValue: Float?,
+	@SerializedName("now_box_value")
+	val nowBoxValue: Float?,
+	@SerializedName("pure_profit")
+	val pureProfit: Float?,
+	@SerializedName("total_profit")
+	val totalProfit: Double?,
+	@SerializedName("name")
+	val name: String?,
+	@SerializedName("soodinow_profit")
+	val soodinowProfit: Float?
+
+
+) : NoObfuscate
