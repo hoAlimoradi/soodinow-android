@@ -15,12 +15,13 @@ class ApiServiceFactoryModule{
 	@Reusable
 	fun developerNameService(apiService: ApiServiceFactory) =
 		apiService.create(DeveloperNameService::class.java)
-	
+
+
 	@Provides
 	@Reusable
-	fun registerService(apiService: ApiServiceFactory) =
-		apiService.create(AuthService::class.java)
-	
+	fun registerService(apiService: ApiServiceFactory)  =
+		 apiService.create(AuthService::class.java)
+
 	@Provides
 	@Reusable
 	fun accountService(apiService: ApiServiceFactory) =
@@ -59,4 +60,5 @@ class ApiServiceFactoryModule{
 	@Reusable
 	fun commonService(apiService: ApiServiceFactory) =
 		apiService.create(CommonService::class.java)
+
 }

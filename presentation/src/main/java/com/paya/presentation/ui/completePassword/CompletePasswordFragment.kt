@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.paya.presentation.R
 import com.paya.presentation.base.BaseFragment
@@ -13,6 +14,8 @@ import com.paya.presentation.databinding.FragmentCompletePasswordBinding
 import com.paya.presentation.viewmodel.CompletePasswordViewModel
 import com.paya.presentation.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class CompletePasswordFragment : BaseFragment<CompletePasswordViewModel>() {
@@ -36,10 +39,16 @@ class CompletePasswordFragment : BaseFragment<CompletePasswordViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        lifecycleScope.launch {
+            delay(3000)
+            findNavController().navigate(
+                R.id.navigateToHomeFragment
+            )
+        }
         mBinding?.apply {
             submitButton.setOnClickListener {
                 findNavController().navigate(
-                    R.id.navigateToLoginFragment
+                    R.id.navigateToHomeFragment
                 )
             }
         }

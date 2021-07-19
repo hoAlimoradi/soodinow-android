@@ -12,7 +12,7 @@
     <string name="recover_password">بازیابی رمز عبور</string>
     <string name="login">ورود</string>
     <string name="register_description">برای ورود لطفا شماره موبایل خود را وارد کنید</string>
-    <string name="activation_description">لطفا عدد پیامک شده را در کادر زیر وارد کنید</string>
+    <string name="activation_description">کد پیامک شده را وارد کنید</string>
     <string name="fingerprint_description">از دفعات بعدی می توانید با اثر انگشت وارد شوید </string>
     <string name="fingerprint_description_2">یا کلیک روی تصویر زیر</string>
     <string name="submit_and_continue">ثبت و ادامه</string>
@@ -245,6 +245,10 @@
     <string name="empty_repeat__new_password">لطفا تکرار پسورد جدید خود را وارد کنید</string>
     <string name="error_repeat_equal_new_password">پسورد جدید با تکرار آن بکسان نیست</string>
     <string name="mobile_hint">۰۹*********</string>
+    <string name="insert_national_code">کدملی خود را وارد کنید</string>
+    <string name="new_mobile_number">شماره جدید را وارد کنید</string>
+    <string name="send_code_new_phone">بعد از بررسی کد به شماره جدید شما ارسال خواهد شد</string>
+    <string name="change_phone">تغییر شماره همراه</string>
 
     <string-array name="brokerage_list">
         <item>کارگزاری فارابی</item>

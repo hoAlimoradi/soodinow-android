@@ -20,6 +20,7 @@ class LoginUseCase @Inject constructor(
 			authRepository.setMobile(param.username)
 			if (resource.status == Status.SUCCESS){
 				resource.data?.accessToken?.let { authRepository.updateAccessToken(it) }
+				resource.data?.refreshToken?.let { authRepository.updateRefreshToken(it) }
 			}
 		}
 		return resource

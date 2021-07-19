@@ -50,7 +50,7 @@ class RegisterFragment : BaseFragment<RegisterViewModel>() {
         observe(mViewModel.registerStatus, ::checkRegisterStatus)
         mBinding?.apply {
             context?.let {context->
-                Utils.setSpannableRules( rulesCheckBox,getString(R.string.rules_spannable_description),ContextCompat.getColor(context,R.color.governor_bay_blue),)
+                Utils.setSpannableRules( rulesCheckBox,getString(R.string.rules_spannable_description),ContextCompat.getColor(context,R.color.governor_bay_blue))
             }
 
             submitButton.setOnClickListener {

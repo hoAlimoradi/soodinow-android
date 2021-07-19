@@ -19,11 +19,11 @@ class CommonRepositoryImpl @Inject constructor(
 	private val commonService: CommonService,
 	private val cityRemoteRepoMapper: Mapper<List<ProvinceRemoteModel>, List<ProvinceRepoModel>>,
 	private val checkVersionRemoteRepoMapper: Mapper<CheckVersionRemoteModel, CheckVersionRepoModel>,
-
+	private val preferenceHelper: PreferenceHelper,
 ): CommonRepository{
 	
 	override suspend fun getCity(): Resource<List<ProvinceRepoModel>> {
-		val response = commonService.getCity()
+		val response = commonService.getCity(preferenceHelper.getAccessToken())
 		return getResourceFromApiResponse(response){
 			cityRemoteRepoMapper.map(it.data)
 		}

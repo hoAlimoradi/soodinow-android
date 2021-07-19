@@ -9,10 +9,7 @@ import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.domain.tools.UseCase
 import com.paya.presentation.base.BaseViewModel
-import com.paya.presentation.utils.callResource
-import com.paya.presentation.utils.isMobile
-import com.paya.presentation.utils.md5
-import com.paya.presentation.utils.startWithCountryCodeMobile
+import com.paya.presentation.utils.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -22,22 +19,30 @@ class SettingViewModel @Inject constructor(
     private val loginUseCase: UseCase<LoginRepoModel, Any>,
     private val useCaseProfile: UseCase<Unit, ProfileRepoModel>,
     private val getMobileUseCase: UseCase<Unit, String>,
+    private val logoutUseCase: UseCase<Unit, Unit>,
     private val authRepository: AuthRepository
 ) : BaseViewModel() {
 
 
     val loading = MutableLiveData<Resource<Any>>()
     val status = MutableLiveData<Resource<ProfileRepoModel>>()
+    val statusLogout = SingleLiveEvent<Unit>()
     val mobile = MutableLiveData<String>()
     val loginResource = MutableLiveData<Resource<Any>>()
     fun getMobile() {
         viewModelScope.launch {
-            val response = getMobileUseCase.action(Unit)
+            val response = useCaseProfile.action(Unit)
             if (response.status == Status.SUCCESS) {
                 response.data?.let {
-                    mobile.value = it
+                    it.mobile?.let { value -> mobile.value = value }
                 }
             }
+        }
+    }
+
+    fun logout() {
+        viewModelScope.launch {
+            logoutUseCase.action(Unit).data?.let{statusLogout.postValue(it)}
         }
     }
 

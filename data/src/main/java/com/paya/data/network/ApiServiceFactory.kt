@@ -6,6 +6,7 @@ import com.paya.data.network.apiresponse.ApiResponseCallAdapterFactory
 import com.paya.data.network.interceptor.AuthenticatorInterceptor
 import com.paya.data.network.interceptor.ChuckIntercept
 import com.paya.data.network.interceptor.HttpLogIntercept
+import com.paya.data.network.remote_api.AuthService
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -28,12 +29,17 @@ class ApiServiceFactory @Inject constructor(
 	
 	fun <T> create(serviceClass: Class<T>): T = retrofit().create(serviceClass)
 	
-	private fun retrofit(): Retrofit = Retrofit.Builder()
-		.baseUrl(if (BuildConfig.DEBUG) BaseUrlDev else BaseUrl)
-		.addConverterFactory(GsonConverterFactory.create())
-		.addCallAdapterFactory(ApiResponseCallAdapterFactory())
-		.client(okHttpClientBuilder().build())
-		.build()
+	private fun retrofit(): Retrofit  {
+
+		val retrofit = Retrofit.Builder()
+			.baseUrl(if (BuildConfig.DEBUG) BaseUrlDev else BaseUrl)
+			.addConverterFactory(GsonConverterFactory.create())
+			.addCallAdapterFactory(ApiResponseCallAdapterFactory())
+			.client(okHttpClientBuilder().build())
+			.build()
+		authenticatorInterceptor.authService = retrofit.create(AuthService::class.java)
+		return retrofit
+	}
 	
 	private fun okHttpClientBuilder() : OkHttpClient.Builder {
 		val builder = OkHttpClient.Builder()
@@ -42,6 +48,7 @@ class ApiServiceFactory @Inject constructor(
 			.readTimeout(TIME_OUT, TimeUnit.SECONDS)
 			.retryOnConnectionFailure(true)
 			.addInterceptor(httpLogIntercept.getIntercept())
+			.addInterceptor(authenticatorInterceptor)
 		if (BuildConfig.DEBUG) {
 			builder.addInterceptor(chuckIntercept.getIntercept())
 		}

@@ -13,11 +13,13 @@ class ActivateUseCase @Inject constructor(
 	override suspend fun action(param: ActivateRepoModel): Resource<Any> {
 		val resource =  authRepository.activate(
 			param.username,
+			param.phoneNumber,
 			param.code
 		)
 		authRepository.setMobile(param.username)
 		if (resource.status == Status.SUCCESS){
 			resource.data?.accessToken?.let { authRepository.updateAccessToken(it) }
+			resource.data?.refreshToken?.let { authRepository.updateRefreshToken(it) }
 		}
 		return resource
 	}

@@ -11,11 +11,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import com.paya.domain.models.repo.GetAuthLinkRepoModel
+import com.paya.domain.tools.Resource
+import com.paya.domain.tools.Status
 import com.paya.presentation.R
 import com.paya.presentation.ui.errorDoalog.ErrorDialog
 import com.paya.presentation.ui.farabi.FarabiAuthActivity
 import com.paya.presentation.ui.loading.LoadingDialog
 import com.paya.presentation.utils.observe
+import com.paya.presentation.utils.openUrl
 
 abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
 	abstract val baseViewModel: BaseViewModel
@@ -41,7 +45,6 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
 	}
 
 	private fun unAuthorized(message: String) {
-		Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
 		activity?.findNavController(R.id.nav_host_fragment)?.navigate(
 			R.id.actionUnAuthorized
 		)
@@ -56,9 +59,10 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
 		return activity?.findNavController(R.id.nav_host_fragment)
 	}
 
-	private fun farabiAuth(param: Unit) {
-		val intent = Intent(context, FarabiAuthActivity::class.java)
-		resultLauncher.launch(intent)
+	private fun farabiAuth(resource: Resource<GetAuthLinkRepoModel>) {
+		if (resource.status == Status.SUCCESS) {
+			resource.data?.let { openUrl(it.link) }
+		}
 	}
 
 	fun readyError(error: String) {

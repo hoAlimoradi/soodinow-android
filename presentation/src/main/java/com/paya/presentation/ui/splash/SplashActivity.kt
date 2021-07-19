@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.paya.domain.models.repo.CheckVersionRepoModel
+import com.paya.domain.models.repo.ValidTokenRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.presentation.MainActivity
@@ -27,17 +28,23 @@ class SplashActivity : BaseActivity<SplashActivityViewModel>() {
         setContentView(R.layout.activity_splash)
         versionTxt.text = getVersionName(this)
         observe(mViewModel.status, ::readyCheckVersion)
+        observe(mViewModel.statusValidToken, ::readyValidToken)
         mViewModel.checkVersion(getVersionName(this))
 
     }
 
+    private fun readyValidToken(resource: Resource<ValidTokenRepoModel>) {
+        if (resource.status == Status.SUCCESS) {
+            startActivity(MainActivity.createIntent(this,true))
+            finish()
+        }
+    }
     private fun readyCheckVersion(resource: Resource<CheckVersionRepoModel>) {
         if (resource.status == Status.SUCCESS) {
             if (resource.data?.isUpdate == true) {
                 val updateAppDialog = UpdateAppDialog()
                 updateAppDialog.cancelDialog = {
-                    startActivity(Intent(this@SplashActivity, MainActivity::class.java))
-                    finish()
+                 mViewModel.validToken()
                 }
 
                 resource.data?.let {
@@ -46,11 +53,7 @@ class SplashActivity : BaseActivity<SplashActivityViewModel>() {
                 }
                 updateAppDialog.show(supportFragmentManager, "updateDialog")
             } else {
-                lifecycleScope.launchWhenStarted {
-                    delay(1000)
-                    startActivity(Intent(this@SplashActivity, MainActivity::class.java))
-                    finish()
-                }
+                mViewModel.validToken()
             }
         }
     }

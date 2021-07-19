@@ -27,6 +27,17 @@ abstract class AuthModule {
 			RegisterRepoModel
 			>
 	@Binds
+	abstract fun bindActivateRemoteRepoMapper(mapper: ActivateRemoteRepoMapper): Mapper<
+			String,
+			ActivateRepoModel
+			>
+
+	@Binds
+	abstract fun bindPerLoginRemoteRepoMapper(mapper: PerLoginRemoteRepoMapper): Mapper<
+			PerLoginRemoteModel,
+			PerLoginRepoModel
+			>
+	@Binds
 	abstract fun bindResetPasswordMapperRemoteRepo(mapper:RestPasswordRemoteRepoMapper): Mapper<
 			ResetPasswordRemoteModel,
 			ResetPasswordRepoModel
@@ -84,7 +95,33 @@ abstract class AuthModule {
 			ChangePasswordRemoteModel,
 			ChangePasswordRepoModel
 			>
-	
+
+	@Binds
+	abstract fun bindResetPhoneRemoteRepoMapper(mapper: ResetPhoneRemoteRepoMapper): Mapper<
+			String,
+			ResetPhoneRepoModel
+			>
+
+	@Binds
+	abstract fun bindResetPhoneVerifyRemoteRepoMapper(mapper: ResetPhoneVerifyRemoteRepoMapper): Mapper<
+			ResetPhoneVerifyRemoteModel,
+			ResetPhoneVerifyRepoModel
+			>
+
+	@Binds
+	abstract fun bindActivateResetPhoneRemoteRepoMapper(mapper: ActivateResetPhoneRemoteRepoMapper): Mapper<
+			String,
+			ActivateResetPhoneRepoModel
+			>
+
+	@Binds
+	abstract fun bindGetAuthLinkRemoteRepoMapper(mapper: GetAuthLinkRemoteRepoMapper): Mapper<
+			GetAuthLinkRemoteModel,
+			GetAuthLinkRepoModel
+			>
+	@Binds
+	abstract fun bindValidTokenRemoteRepoMapper(mapper: ValidTokenRemoteRepoMapper): Mapper<String,ValidTokenRepoModel>
+
 	@Binds
 	abstract fun registerRepo(dev: AuthRepositoryImpl): AuthRepository
 
@@ -96,6 +133,7 @@ abstract class AuthModule {
 
 	@Binds
 	abstract fun bindResetPasswordUseCase(useCase: ResetPasswordUseCase): UseCase<String,ResetPasswordRepoModel>
+
 
 	@Binds
 	abstract fun bindActivateUseCase(useCase: ActivateUseCase):
@@ -136,4 +174,31 @@ abstract class AuthModule {
 	@Binds
 	abstract fun bindGetMobileUseCase(useCase: GetMobileUseCase):
 			UseCase<Unit,String>
+
+	@Binds
+	abstract fun bindPerLoginUseCase(useCase: PerLoginUseCase):
+			UseCase<String,PerLoginRepoModel>
+
+	@Binds
+	abstract fun bindResetPhoneUseCase(useCase: ResetPhoneUseCase):
+			UseCase<Unit,ResetPhoneRepoModel>
+	@Binds
+	abstract fun bindResetPhoneVerifyUseCase(useCase: ResetPhoneVerifyUseCase):
+			UseCase<ResetPhoneVerifyBodyRepoModel,ResetPhoneVerifyRepoModel>
+	@Binds
+	abstract fun bindActivateResetPhoneUseCase(useCase: ActivateResetPhoneUseCase):
+			UseCase<ActivateResetPhoneBodyRepoModel, ActivateResetPhoneRepoModel>
+	@Binds
+	abstract fun bindIsLoginUseCase(useCase: IsLoginUseCase):
+			UseCase<Unit,Boolean>
+	@Binds
+	abstract fun bindLogoutUseCase(useCase: LogoutUseCase):
+			UseCase<Unit,Unit>
+	@Binds
+	abstract fun bindValidTokenUseCase(useCase: ValidTokenUseCase):
+			UseCase<Unit,ValidTokenRepoModel>
+
+	@Binds
+	abstract fun bindGetAuthLinkUseCase(useCase: GetAuthLinkUseCase):
+			UseCase<String,GetAuthLinkRepoModel>
 }

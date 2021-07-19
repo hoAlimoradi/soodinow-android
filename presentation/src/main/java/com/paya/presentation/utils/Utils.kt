@@ -237,7 +237,7 @@ object Utils {
         }
     }
 
-    private fun setTintColor(
+    fun setTintColor(
         imageView: ImageView,
         context: Context,
         colorId: Int

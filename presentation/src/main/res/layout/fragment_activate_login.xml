@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.activate.ActivateFragment">
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/logoImage"
+        android:layout_width="@dimen/sign_logo_size"
+        android:layout_height="@dimen/sign_logo_size"
+        android:layout_marginTop="@dimen/margin_l"
+        android:src="@drawable/ic_icon_activate"
+        app:layout_constraintBottom_toTopOf="@id/titleTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/titleTextView"
+        style="@style/TitleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_45dp"
+        android:text="@string/login"
+        app:layout_constraintBottom_toTopOf="@id/description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/logoImage"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/description"
+        style="@style/SubtitleTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:text="@string/activation_description"
+        app:layout_constraintBottom_toTopOf="@id/txt_pin_entry"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleTextView"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/change_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_medium"
+        android:text="@string/change_phone_number"
+        android:textColor="@color/dark_blue"
+        app:layout_constraintBaseline_toBaselineOf="@id/description"
+        app:layout_constraintBottom_toBottomOf="@id/description"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/description"
+        android:visibility="gone"/>
+
+    <com.alimuzaffar.lib.pin.PinEntryEditText
+        android:id="@+id/txt_pin_entry"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/margin_small"
+        android:layout_marginEnd="@dimen/margin_m"
+        android:cursorVisible="false"
+        android:digits="1234567890"
+        android:gravity="center"
+        android:inputType="number"
+        android:maxLength="5"
+        android:textIsSelectable="false"
+        android:textSize="@dimen/text_size_large"
+        app:layout_constraintBottom_toTopOf="@id/resend_code"
+        app:layout_constraintEnd_toStartOf="@id/verification_img"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/description"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:pinAnimationType="popIn"
+        app:pinBackgroundDrawable="@drawable/round_corner_layout"
+        app:pinBackgroundIsSquare="true"
+        app:pinCharacterMask="*"
+        app:pinLineColors="@android:color/transparent"
+        app:pinLineStroke="2dp"
+        app:pinLineStrokeSelected="4dp" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/verification_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginEnd="@dimen/margin_medium"
+        app:layout_constraintBottom_toBottomOf="@id/txt_pin_entry"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/txt_pin_entry"
+        app:srcCompat="@drawable/ic_verification" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/resend_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:layout_marginBottom="@dimen/margin_xl"
+        android:text="@string/resend_code"
+        android:textColor="@color/japanese_laurel_green"
+        android:textSize="@dimen/text_size_m"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/submitButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_pin_entry"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/resend_code_after"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_small"
+        android:text="@string/resend_code_after"
+        android:textColor="@color/japanese_laurel_green"
+        android:textSize="@dimen/text_size_s"
+        app:layout_constraintBottom_toBottomOf="@id/resend_code"
+        app:layout_constraintStart_toEndOf="@id/resend_code_time"
+        app:layout_constraintTop_toTopOf="@id/resend_code" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/resend_code_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_medium"
+        android:textColor="@color/green"
+        android:textSize="@dimen/text_size_m"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/resend_code_after"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/resend_code_after" />
+
+    <Button
+        android:id="@+id/submitButton"
+        style="@style/SignInButton"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_medium"
+        android:layout_marginTop="@dimen/margin_l"
+        android:text="@string/login"
+        app:layout_constraintBottom_toTopOf="@id/text_bottom"
+        app:layout_constraintVertical_bias="1"
+        android:layout_marginBottom="@dimen/margin_l"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_bottom"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_l"
+        android:gravity="center"
+        android:text="کد به شماه تلفن ثبت شده شما ارسال می شود"
+        android:textColor="@color/blue_gray"
+        android:textSize="@dimen/text_size_m"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <include
+        layout="@layout/loading_state"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        tools:visibility="gone" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

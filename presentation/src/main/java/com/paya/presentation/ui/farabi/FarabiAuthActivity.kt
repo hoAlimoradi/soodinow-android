@@ -64,19 +64,19 @@ class FarabiAuthActivity : BaseActivity<FarabiAuthViewModel>() {
         clearCookies(this)
         mData = AppAuthWebViewData()
         mData?.apply {
-            clientId = "soodinow.mobile"
-            discoveryUri = "https://auth.farabixo.com/.well-known/openid-configuration"
-            scope = "tse_api base_api"
-            authorizationEndpointUri = "https://auth.farabixo.com/connect/authorize"
-            redirectLoginUri = "http://api.soodinow.com:5000/callback.html"
-            tokenEndpointUri = "https://auth.farabixo.com/connect/token"
-            responseType = "code"
+            clientId = ""
+            discoveryUri = ""
+            scope = ""
+            authorizationEndpointUri = ""
+            redirectLoginUri = ""
+            tokenEndpointUri = ""
+            responseType = ""
             isGenerateCodeVerifier = true
 
 
             //Todo: delete after refactoring the code
             registrationEndpointUri = ""
-            redirectLogoutUri = "http://api.soodinow.com:5000/callback.html"
+            redirectLogoutUri = ""
             clientSecret = ""
             webView?.let { webView ->
                 appAuthWebView = AppAuthWebView.Builder()

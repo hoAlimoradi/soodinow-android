@@ -2,11 +2,21 @@ package com.paya.presentation.base
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.paya.domain.models.repo.GetAuthLinkRepoModel
+import com.paya.domain.tools.Resource
+import com.paya.domain.tools.UseCase
+import com.paya.domain.usecase.auth.GetAuthLinkUseCase
+import com.paya.presentation.utils.callResource
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-open class BaseViewModel : ViewModel() {
+abstract class BaseViewModel : ViewModel() {
+	@Inject
+	protected lateinit var getAuthLinkUseCase: UseCase<String,GetAuthLinkRepoModel>
 	val unAuthorizeLiveData = MutableLiveData<String>()
 	val errorLiveData = MutableLiveData<String>()
-	val unFarabiAuth = MutableLiveData<Unit>()
+	val unFarabiAuth = MutableLiveData<Resource<GetAuthLinkRepoModel>>()
 	val unExistProfileUser = MutableLiveData<Unit>()
 	val unLoading = MutableLiveData<Boolean>()
 	override fun onCleared() {
@@ -22,7 +32,13 @@ open class BaseViewModel : ViewModel() {
 	}
 
 	fun farabiAuth() {
-		unFarabiAuth.postValue(Unit)
+		viewModelScope.launch {
+			showLoading()
+			val response = callResource(this@BaseViewModel,getAuthLinkUseCase.action("app://soodinow.com"))
+			unFarabiAuth.postValue(response)
+			hideLoading()
+		}
+
 	}
 
 	fun existProfileUser() {

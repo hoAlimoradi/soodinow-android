@@ -93,6 +93,32 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
+                  <entry key="ActivateChangePhoneNumberFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="12" />
+                            <option name="y" value="12" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="navigateToCompleteResetPhoneFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="navigateToSettings">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="actionUnAuthorized">
                     <value>
                       <LayoutPositions />
@@ -103,8 +129,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="7" />
-                            <option name="y" value="17" />
+                            <option name="x" value="12" />
+                            <option name="y" value="12" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -130,7 +156,33 @@
                         </option>
                         <option name="myPositions">
                           <map>
+                            <entry key="navigateCompletePasswordFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="navigateToSetPasswordFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="activateLoginFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="12" />
+                            <option name="y" value="12" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="navigateToHomeFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -173,6 +225,27 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="changePhoneNumberFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="12" />
+                            <option name="y" value="12" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="navigateToActivateChangePhoneNumberFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="chat">
                     <value>
                       <LayoutPositions>
@@ -196,7 +269,28 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="navigateToLoginFragment">
+                            <entry key="navigateToHomeFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="completeResetPhoneFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="12" />
+                            <option name="y" value="12" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="navigateToSettings">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -346,12 +440,12 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="navigateFromHintToHomeFragment">
+                            <entry key="navigateFromHintToLoginFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="navigateFromHintToLoginFragment">
+                            <entry key="navigateToHomeFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -389,12 +483,7 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_loginFragment_to_forgotPasswordFragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                            <entry key="navigateToHomeFragment">
+                            <entry key="navigateToActivateLoginFragment">
                               <value>
                                 <LayoutPositions />
                               </value>

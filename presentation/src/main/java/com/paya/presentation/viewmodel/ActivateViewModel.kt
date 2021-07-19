@@ -39,15 +39,16 @@ class ActivateViewModel @Inject constructor(
 		this.title.value = title
 	}
 	
-	fun activate(activationCode : String) {
+	fun activate(nationalCode: String,activationCode : String) {
 		if (activationCode.isEmpty() || activationCode.length != 5) {
-			showError("کد وارد شده اشتباه است",)
+			showError("کد وارد شده اشتباه است")
 			return
 		}
 		viewModelScope.launch {
 			showLoading()
 			val activateModel = ActivateRepoModel(
-				phoneNumber.startWithCountryCodeMobile(),
+				nationalCode,
+				phoneNumber,
 				activationCode
 			)
 			val response = callResource(this@ActivateViewModel,activateUseCase.action(activateModel))

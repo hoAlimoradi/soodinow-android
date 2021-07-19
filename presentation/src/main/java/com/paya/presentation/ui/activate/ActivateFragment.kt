@@ -58,8 +58,16 @@ class ActivateFragment : BaseFragment<ActivateViewModel>() {
 				findNavController().popBackStack()
 			}
 			submitButton.setOnClickListener {
+				if (nationalCodeInput.getText().isEmpty()) {
+					nationalCodeInput.setError("کد ملی خود را وارد کنید")
+					return@setOnClickListener
+				}
+				if (nationalCodeInput.getText().length != 10) {
+					nationalCodeInput.setError("کد ملی وارد شده اشتباه است")
+					return@setOnClickListener
+				}
 				txtPinEntry.text?.let {
-					mViewModel.activate(it.toString())
+					mViewModel.activate(nationalCodeInput.getText(),it.toString())
 				}
 			}
 			resendCode.setOnClickListener {
@@ -85,7 +93,7 @@ class ActivateFragment : BaseFragment<ActivateViewModel>() {
 			val bundle = Bundle()
 			bundle.putString("title", args.title)
 			findNavController().navigate(
-				R.id.navigateToSetPasswordFragment,
+				R.id.navigateCompletePasswordFragment,
 				bundle
 			)
 		}

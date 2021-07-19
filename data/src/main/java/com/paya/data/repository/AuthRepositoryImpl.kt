@@ -27,10 +27,16 @@ class AuthRepositoryImpl @Inject constructor(
     private val profileRepoRemoteMapper: Mapper<ProfileBodyRepoModel, ProfileBodyRemoteModel>,
     private val changePasswordRepoRemoteMapper: Mapper<ChangePasswordRepoBodyModel, ChangePasswordRemoteBodyModel>,
     private val changePasswordRemoteRepoMapper: Mapper<ChangePasswordRemoteModel, ChangePasswordRepoModel>,
+    private val perLoginRemoteRepoMapper: Mapper<PerLoginRemoteModel, PerLoginRepoModel>,
+    private val resetPhoneRemoteRepoMapper: Mapper<String, ResetPhoneRepoModel>,
+    private val resetPhoneVerifyRemoteRepoMapper: Mapper<ResetPhoneVerifyRemoteModel, ResetPhoneVerifyRepoModel>,
+    private val activateResetPhoneRemoteRepoMapper: Mapper<String, ActivateResetPhoneRepoModel>,
+    private val validTokenRemoteRepoMapper: Mapper<String, ValidTokenRepoModel>,
+    private val getAuthLinkRemoteRepoMapper: Mapper<GetAuthLinkRemoteModel, GetAuthLinkRepoModel>,
 ) : AuthRepository {
 
     override suspend fun register(phoneNumber: String): Resource<RegisterRepoModel> {
-        val registerApiResponse = authNet.register(preferenceHelper.getAccessToken(), phoneNumber)
+        val registerApiResponse = authNet.register(phoneNumber)
         return getResourceFromApiResponse(registerApiResponse) {
             registerMapperRemoteRepo.map(it.data)
         }
@@ -43,9 +49,17 @@ class AuthRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun activate(phoneNumber: String, code: String): Resource<UserInfoRepoModel> {
+    override suspend fun activate(
+        username: String,
+        phoneNumber: String,
+        code: String
+    ): Resource<UserInfoRepoModel> {
         val activateApiResponse =
-            authNet.activate(preferenceHelper.getAccessToken(), phoneNumber, code)
+            authNet.activate(
+                username = username,
+                phoneNumber = phoneNumber,
+                code = code
+            )
         return getResourceFromApiResponse(activateApiResponse) {
             userInfoMapperRemoteRepo.map(it.data)
         }
@@ -63,14 +77,43 @@ class AuthRepositoryImpl @Inject constructor(
     }
 
     override suspend fun login(username: String, password: String): Resource<UserInfoRepoModel> {
-        val loginApiResponse = authNet.login(preferenceHelper.getAccessToken(), username, password)
+        val loginApiResponse = authNet.login(username, password)
         return getResourceFromApiResponse(loginApiResponse) {
             userInfoMapperRemoteRepo.map(it.data)
         }
     }
 
+    override suspend fun perLogin(username: String): Resource<PerLoginRepoModel> {
+        val loginApiResponse = authNet.perLogin(username)
+        return getResourceFromApiResponse(loginApiResponse) {
+            perLoginRemoteRepoMapper.map(it.data)
+        }
+    }
+
+    override suspend fun isLogin(): Resource<Boolean> {
+        return Resource.success(preferenceHelper.isLogin(), -1)
+    }
+
+    override suspend fun validToken(): Resource<ValidTokenRepoModel> {
+        val response = authNet.validToken(preferenceHelper.getAccessToken())
+        return getResourceFromApiResponse(response) {
+            validTokenRemoteRepoMapper.map(it.data)
+        }
+    }
+
+    override suspend fun getAuthLink(callBackLink: String): Resource<GetAuthLinkRepoModel> {
+        val response = authNet.getAutLink(preferenceHelper.getAccessToken(), callBackLink)
+        return getResourceFromApiResponse(response) {
+            getAuthLinkRemoteRepoMapper.map(it.data)
+        }
+    }
+
     override suspend fun updateAccessToken(accessToken: String) {
         preferenceHelper.setAccessToken(accessToken)
+    }
+
+    override suspend fun updateRefreshToken(token: String) {
+        preferenceHelper.setRefreshToken(token)
     }
 
     override suspend fun getMobile(): Resource<String> {
@@ -159,6 +202,46 @@ class AuthRepositoryImpl @Inject constructor(
 
     override fun setIV(iv: String) {
         preferenceHelper.setEncodedCipherIv(iv)
+    }
+
+    override suspend fun resetPhone(): Resource<ResetPhoneRepoModel> {
+        val response = authNet.resetPhone(preferenceHelper.getAccessToken())
+        return getResourceFromApiResponse(response) {
+            resetPhoneRemoteRepoMapper.map(it.data)
+        }
+    }
+
+    override suspend fun resetPhoneVerify(
+        phone: String,
+        code: String
+    ): Resource<ResetPhoneVerifyRepoModel> {
+        val response = authNet.resetPhoneVerify(
+            preferenceHelper.getAccessToken(),
+            phoneNumber = phone,
+            code = code
+        )
+        return getResourceFromApiResponse(response) {
+            resetPhoneVerifyRemoteRepoMapper.map(it.data)
+        }
+    }
+
+    override suspend fun resetPhoneActivate(
+        phone: String,
+        code: String
+    ): Resource<ActivateResetPhoneRepoModel> {
+        val response = authNet.resetPhoneActivate(
+            preferenceHelper.getAccessToken(),
+            phoneNumber = phone,
+            code = code
+        )
+        return getResourceFromApiResponse(response) {
+            activateResetPhoneRemoteRepoMapper.map(it.data)
+        }
+    }
+
+    override suspend fun clearToken(): Resource<Unit> {
+        preferenceHelper.clearToken()
+        return Resource.success(Unit, 200)
     }
 
 }

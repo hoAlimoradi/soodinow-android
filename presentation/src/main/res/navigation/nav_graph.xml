@@ -29,9 +29,10 @@
             app:popUpTo="@id/hintFragment"
             app:popUpToInclusive="true" />
         <action
-            android:id="@+id/navigateFromHintToHomeFragment"
+            android:id="@+id/navigateToHomeFragment"
             app:destination="@id/mainFragment"
-            app:popUpTo="@id/hintFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/navGraph"
             app:popUpToInclusive="true" />
     </fragment>
 
@@ -65,6 +66,11 @@
             android:defaultValue="@null"
             app:argType="string"
             app:nullable="true" />
+        <action
+            android:id="@+id/navigateCompletePasswordFragment"
+            app:destination="@id/completePasswordFragment"
+            app:launchSingleTop="true"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/setPasswordFragment"
@@ -86,15 +92,22 @@
         android:name="com.paya.presentation.ui.login.LoginFragment"
         android:label="LoginFragment">
         <action
+            android:id="@+id/navigateToActivateLoginFragment"
+            app:destination="@id/activateLoginFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/activateLoginFragment"
+        android:name="com.paya.presentation.ui.login.ActivateLoginFragment"
+        android:label="ActivateLoginFragment">
+        <argument
+            android:name="username"
+            app:argType="string" />
+        <action
             android:id="@+id/navigateToHomeFragment"
             app:destination="@id/mainFragment"
             app:launchSingleTop="true"
-            app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_loginFragment_to_forgotPasswordFragment"
-            app:destination="@id/forget_password"
-            app:popUpTo="@id/loginFragment"
+            app:popUpTo="@id/navGraph"
             app:popUpToInclusive="true" />
     </fragment>
 
@@ -138,9 +151,10 @@
         android:id="@+id/completePasswordFragment"
         android:name="com.paya.presentation.ui.completePassword.CompletePasswordFragment"
         android:label="CompletePasswordFragment">
+
         <action
-            android:id="@+id/navigateToLoginFragment"
-            app:destination="@id/loginFragment"
+            android:id="@+id/navigateToHomeFragment"
+            app:destination="@id/mainFragment"
             app:launchSingleTop="true"
             app:popUpTo="@id/navGraph"
             app:popUpToInclusive="true" />
@@ -283,4 +297,48 @@
         android:label="fragment_select_date_filter"
         tools:layout="@layout/fragment_select_date_filter"/>
 
+    <fragment
+        android:id="@+id/changePhoneNumberFragment"
+        android:name="com.paya.presentation.ui.changePhoneNumber.ChangePhoneNumberFragment"
+        android:label="ChangePhoneNumberFragment">
+        <action
+            android:id="@+id/navigateToActivateChangePhoneNumberFragment"
+            app:destination="@id/ActivateChangePhoneNumberFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ActivateChangePhoneNumberFragment"
+        android:name="com.paya.presentation.ui.changePhoneNumber.ActivateChangePhoneNumberFragment"
+        android:label="ActivateChangePhoneNumberFragment">
+        <argument
+            android:name="phoneNumber"
+            app:argType="string" />
+        <argument
+            android:name="oldCode"
+            app:argType="string" />
+        <action
+            android:id="@+id/navigateToSettings"
+            app:destination="@id/settings"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/settings" />
+        <action
+            android:id="@+id/navigateToCompleteResetPhoneFragment"
+            app:destination="@id/completeResetPhoneFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/settings"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/completeResetPhoneFragment"
+        android:name="com.paya.presentation.ui.changePhoneNumber.CompleteResetPhoneFragment"
+        android:label="CompleteResetPhoneFragment">
+
+        <action
+            android:id="@+id/navigateToSettings"
+            app:destination="@id/settings"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/settings"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

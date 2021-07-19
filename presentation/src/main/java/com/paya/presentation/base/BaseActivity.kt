@@ -12,12 +12,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import com.paya.domain.models.repo.GetAuthLinkRepoModel
+import com.paya.domain.tools.Resource
+import com.paya.domain.tools.Status
 import com.paya.presentation.MainActivity
 import com.paya.presentation.R
 import com.paya.presentation.ui.errorDoalog.ErrorDialog
 import com.paya.presentation.ui.farabi.FarabiAuthActivity
 import com.paya.presentation.ui.loading.LoadingDialog
 import com.paya.presentation.utils.observe
+import com.paya.presentation.utils.openUrl
 import io.github.inflationx.viewpump.ViewPumpContextWrapper
 
 
@@ -54,15 +58,9 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
         }
     }
     private fun unAuthorized(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-        try {
-            findNavController(R.id.nav_host_fragment).navigate(
-                R.id.actionUnAuthorized
-            )
-        } catch (e: Exception) {
-            startActivity(Intent(this@BaseActivity, MainActivity::class.java))
+            startActivity(MainActivity.createIntent(this,false))
             finish()
-        }
+
     }
 
     var resultLauncher : ActivityResultLauncher<Intent>? =
@@ -71,9 +69,10 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
                 farabiAccessToken()
             }
         }
-    private fun farabiAuth(param: Unit) {
-        val intent = Intent(this, FarabiAuthActivity::class.java)
-        resultLauncher?.apply{launch(intent)}
+    private fun farabiAuth(resource: Resource<GetAuthLinkRepoModel>) {
+        if (resource.status == Status.SUCCESS) {
+            resource.data?.let { openUrl(it.link) }
+        }
     }
 
     private fun readyError(error: String) {

@@ -6,10 +6,16 @@ interface PreferenceHelper {
 
     fun getAccessToken(): String
 
+    fun isLogin(): Boolean
+
+    fun getRefreshToken(): String
+
     fun setAccessToken(accessToken: String)
-    
-    fun getMobile() : Resource<String>
-    
+
+    fun setRefreshToken(token: String)
+
+    fun getMobile(): Resource<String>
+
     fun setMobile(mobile: String)
 
     fun getPassword(): String?
@@ -19,4 +25,6 @@ interface PreferenceHelper {
     fun setEncodedCipherIv(iv: String)
 
     fun getEncodedCipherIv(): String?
+
+    fun clearToken(): Boolean
 }

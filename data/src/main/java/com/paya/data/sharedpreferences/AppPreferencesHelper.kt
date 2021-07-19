@@ -14,7 +14,15 @@ class AppPreferencesHelper @Inject constructor(
 
     override fun getAccessToken(): String {
         val token = mPrefs.getString(PREF_KEY_ACCESS_TOKEN,null) ?: ""
-        return "Bearer $token"
+        return if(token.isEmpty()) "" else "Bearer $token"
+    }
+
+    override fun isLogin(): Boolean {
+        return getRefreshToken().isNotEmpty()
+    }
+
+    override fun getRefreshToken(): String {
+        return mPrefs.getString(PREF_KEY_REFRESH_TOKEN,null) ?: ""
     }
 
     override fun setAccessToken(accessToken: String) {
@@ -22,7 +30,13 @@ class AppPreferencesHelper @Inject constructor(
             .putString(PREF_KEY_ACCESS_TOKEN, accessToken)
             .apply()
     }
-    
+
+    override fun setRefreshToken(token: String) {
+        mPrefs.edit()
+            .putString(PREF_KEY_REFRESH_TOKEN, token)
+            .apply()
+    }
+
     override fun getMobile(): Resource<String> {
         return Resource.success(mPrefs.getString(PREF_KEY_MOBILE,null) ?: "",200)
     }
@@ -53,8 +67,13 @@ class AppPreferencesHelper @Inject constructor(
         return mPrefs.getString(PREF_KEY_IV,null)
     }
 
+    override fun clearToken() : Boolean {
+       return mPrefs.edit().clear().commit()
+    }
+
     companion object {
         private const val PREF_KEY_ACCESS_TOKEN: String = "PREF_KEY_ACCESS_TOKEN"
+        private const val PREF_KEY_REFRESH_TOKEN: String = "PREF_KEY_REFRESH_TOKEN"
         private const val PREF_KEY_MOBILE: String = "PREF_KEY_MOBILE"
         private const val PREF_KEY_PASSWORD: String = "PREF_KEY_PASSWORD"
         private const val PREF_KEY_IV: String = "PREF_KEY_IV"

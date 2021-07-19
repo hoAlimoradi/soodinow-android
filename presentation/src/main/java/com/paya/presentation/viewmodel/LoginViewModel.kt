@@ -3,6 +3,7 @@ package com.paya.presentation.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.paya.domain.models.repo.LoginRepoModel
+import com.paya.domain.models.repo.PerLoginRepoModel
 import com.paya.domain.repository.AuthRepository
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.UseCase
@@ -16,34 +17,20 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-	private val loginUseCase: UseCase<LoginRepoModel, Any>,
-	private val getMobileUseCase: UseCase<Unit, String>,
+	private val loginUseCase: UseCase<String, PerLoginRepoModel>,
 	private val authRepository: AuthRepository
 ) : BaseViewModel() {
-	val loginResource = MutableLiveData<Resource<Any>>()
+	val loginResource = MutableLiveData<Resource<PerLoginRepoModel>>()
 	val mobile = MutableLiveData<String>()
 
-	init {
-		getMobile()
-	}
 
-	private fun getMobile() {
-		viewModelScope.launch {
-			getMobileUseCase.action(Unit).data?.let {
-				mobile.value = it.replaceFirst("+98","0")
-			}
-		}
-	}
 
-	fun login(username: String,password:String) {
+	fun login(username: String) {
 
 		viewModelScope.launch {
 			showLoading()
-			val loginModel = LoginRepoModel(
-				username = username.startWithCountryCodeMobile(),
-				password = password.md5()!!
-			)
-			val response = callResource(this@LoginViewModel,loginUseCase.action(loginModel))
+
+			val response = callResource(this@LoginViewModel,loginUseCase.action(username),false)
 			loginResource.postValue(response)
 			hideLoading()
 		}

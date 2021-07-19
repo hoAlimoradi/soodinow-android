@@ -77,11 +77,15 @@ class SettingsFragment : BaseFragment<SettingViewModel>() {
 		super.onViewCreated(view, savedInstanceState)
 		observe(mViewModel.status, ::ready)
 		observe(mViewModel.loginResource, ::checkLoginStatus)
+		observe(mViewModel.statusLogout, ::logout)
 		observe(mViewModel.mobile, ::readyMobile)
 		initViews()
 		mViewModel.getMobile()
 	}
 
+	private fun logout(param:Unit) {
+		exitProcess(-1)
+	}
 	override fun onDestroyView() {
 		mBinding = null
 		super.onDestroyView()
@@ -123,7 +127,7 @@ class SettingsFragment : BaseFragment<SettingViewModel>() {
 			}
 			changePassword.setOnClickListener {
 				getFindViewController()?.navigate(
-					R.id.changePasswordFragment
+					R.id.changePhoneNumberFragment
 				)
 			}
 			myProfile.setOnClickListener {
@@ -148,7 +152,7 @@ class SettingsFragment : BaseFragment<SettingViewModel>() {
 			}
 
 			exitApp.setOnClickListener {
-				exitProcess(-1)
+				mViewModel.logout()
 			}
 		}
 	}

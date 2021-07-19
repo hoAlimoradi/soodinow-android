@@ -55,7 +55,13 @@ fun Fragment.openUrl(url: String) {
     intent.data = Uri.parse(url)
     startActivity(intent)
 }
-
+fun Activity.openUrl(url: String) {
+    if (url.isEmpty() || !URLUtil.isValidUrl(url))
+        return
+    val intent = Intent(Intent.ACTION_VIEW)
+    intent.data = Uri.parse(url)
+    startActivity(intent)
+}
 fun DialogFragment.openUrl(url: String) {
     if (url.isEmpty() || !URLUtil.isValidUrl(url))
         return
@@ -93,7 +99,11 @@ fun String.isMobile() : Boolean {
 }
 
 fun String.startWithCountryCodeMobile() : String {
-    return replaceFirst("0","+98")
+    if (startsWith("0",false)) {
+        val newMobile = substring(1,length)
+        return "+98$newMobile"
+    }
+    return this
 }
 fun Activity.longToast(text: String) {
     Toast.makeText(

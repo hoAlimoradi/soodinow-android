@@ -39,7 +39,6 @@ abstract class BaseDialogFragment<VM : BaseViewModel> : DialogFragment() {
     }
 
     private fun unAuthorized(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
         activity?.findNavController(R.id.nav_host_fragment)?.navigate(
             R.id.actionUnAuthorized
         )

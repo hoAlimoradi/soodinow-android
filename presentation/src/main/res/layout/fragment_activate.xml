@@ -4,33 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/japanese_laurel_green"
+    android:background="@color/white"
     tools:context=".ui.activate.ActivateFragment">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_top"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.09" />
 
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_bottom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.95" />
 
-
-    <View
-        android:id="@+id/container"
-        style="@style/TopRoundedCornerLayout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@drawable/top_round_corner"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="@id/guideline_top" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/logoImage"
@@ -41,7 +20,7 @@
         app:layout_constraintBottom_toTopOf="@id/titleTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/container"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -51,10 +30,21 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_45dp"
         android:text="@string/register"
-        app:layout_constraintBottom_toTopOf="@id/description"
+        app:layout_constraintBottom_toTopOf="@id/nationalCodeInput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/logoImage"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <com.paya.presentation.utils.editText.InputEditText
+        android:id="@+id/nationalCodeInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_xl"
+        android:inputType="number"
+        app:labelText="@string/insert_national_code"
+        app:layout_constraintBottom_toTopOf="@id/description"
+        app:layout_constraintTop_toBottomOf="@id/titleTextView"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -66,7 +56,7 @@
         android:text="@string/activation_description"
         app:layout_constraintBottom_toTopOf="@id/txt_pin_entry"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titleTextView"
+        app:layout_constraintTop_toBottomOf="@id/nationalCodeInput"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -79,6 +69,7 @@
         app:layout_constraintBaseline_toBaselineOf="@id/description"
         app:layout_constraintBottom_toBottomOf="@id/description"
         app:layout_constraintStart_toStartOf="parent"
+        android:visibility="gone"
         app:layout_constraintTop_toTopOf="@id/description" />
 
     <com.alimuzaffar.lib.pin.PinEntryEditText
@@ -162,12 +153,15 @@
     <Button
         android:id="@+id/submitButton"
         style="@style/SignInButton"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
+        android:layout_marginBottom="@dimen/margin_xxxl"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_height="@dimen/height_medium"
         android:layout_marginTop="@dimen/margin_large"
         android:text="@string/submit_and_continue"
-        app:layout_constraintBottom_toBottomOf="@id/guideline_bottom"
-        app:layout_constraintVertical_bias="1" />
+        app:layout_constraintStart_toStartOf="parent"
+        />
 
 
     <include

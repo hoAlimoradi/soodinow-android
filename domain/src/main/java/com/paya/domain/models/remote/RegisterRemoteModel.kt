@@ -4,6 +4,6 @@ import com.google.gson.annotations.SerializedName
 import com.paya.domain.tools.NoObfuscate
 
 data class RegisterRemoteModel(
-	@SerializedName("username")
+	@SerializedName("phone_number")
 	val username: String?
 ): NoObfuscate

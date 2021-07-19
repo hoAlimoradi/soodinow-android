@@ -83,4 +83,15 @@ class InputEditText @JvmOverloads constructor(
             this.hint = hint
         }
     }
+
+    override fun setEnabled(enabled: Boolean) {
+        super.setEnabled(enabled)
+        labelText?.apply {
+            setTextColor(ContextCompat.getColor(context,if(enabled) R.color.black else R.color.black_27))
+        }
+
+        inputContentEditText?.apply {
+            isEnabled = enabled
+        }
+    }
 }

@@ -14,7 +14,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_4_dp"
         android:textSize="@dimen/text_size_s"
-        tools:text="نام کاربری" />
+        tools:text="نام کاربری"
+        android:textColor="@color/blue_gray"/>
 
 
     <com.paya.presentation.utils.ErrorEditTextLayout

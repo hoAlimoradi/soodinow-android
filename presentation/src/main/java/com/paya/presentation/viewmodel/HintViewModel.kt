@@ -1,49 +1,31 @@
 package com.paya.presentation.viewmodel
 
-import javax.inject.Inject
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.paya.domain.models.repo.UserInfoRepoModel
-import com.paya.domain.tools.Status
 import com.paya.domain.tools.UseCase
 import com.paya.presentation.base.BaseViewModel
-import com.paya.presentation.utils.callResource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
+
 @HiltViewModel
 class HintViewModel @Inject constructor(
-	private val getUserInfoUseCase: UseCase<Unit, UserInfoRepoModel>
-): BaseViewModel(){
-	
-	enum class UserState{IS_HINT_SHOWED, IS_PASSWORD_SET, NONE}
-	val userState = MutableLiveData<UserState>()
-	
-	init {
-		checkUserInfo()
-	}
-	
-	private fun checkUserInfo() = viewModelScope.launch{
-		val userInfoResource = callResource(this@HintViewModel,getUserInfoUseCase.action(Unit))
-		if (userInfoResource.status != Status.SUCCESS)
-			return@launch
-		
-		val userInfo = userInfoResource.data ?: return@launch
-		userState.postValue(getUserInfoStatus(userInfo))
-	}
-	
-	private fun getUserInfoStatus(userInfo: UserInfoRepoModel): UserState {
-		return when {
-			userInfo.isPasswordSet -> {
-				UserState.IS_PASSWORD_SET
-			}
-			userInfo.isHintShowed -> {
-				UserState.IS_HINT_SHOWED
-			}
-			else -> {
-				UserState.NONE
-			}
-		}
-	}
-	
+    private val isLoginUseCase: UseCase<Unit, Boolean>
+) : BaseViewModel() {
+
+    enum class UserState { IS_HINT_SHOWED, IS_PASSWORD_SET, NONE }
+
+    var isLogin = false
+
+    init {
+        isLogin()
+    }
+
+    private fun isLogin() {
+        viewModelScope.launch {
+            isLoginUseCase.action(Unit).data?.let {
+                isLogin = it
+            }
+        }
+    }
+
 }

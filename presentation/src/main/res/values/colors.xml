@@ -19,6 +19,7 @@
     <color name="black">#000</color>
     <color name="red">#E1261D</color>
     <color name="black_16">#29000000</color>
+    <color name="black_27">#45000000</color>
     <color name="white_50">#80FFFFFF</color>
     <color name="dark_blue">#035058</color>
     <color name="purple">#7D4181</color>
@@ -43,6 +44,7 @@
     <color name="green">#3bb400</color>
     <color name="cinnabar_red">#E53935</color>
     <color name="japanese_laurel_green">#2b7607</color>
+    <color name="japanese_laurel_green_43">#6E2B7607</color>
     <color name="pea_green">#17502f</color>
     <color name="deep_fir_green">#002e0c</color>
     <color name="conifer_green">#85db48</color>
