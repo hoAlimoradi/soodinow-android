@@ -21,7 +21,9 @@ import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentActivateBinding
 import com.paya.presentation.utils.Utils
+import com.paya.presentation.utils.isNationalCode
 import com.paya.presentation.utils.observe
+import com.paya.presentation.utils.remainingTime
 import com.paya.presentation.viewmodel.ActivateViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -62,7 +64,7 @@ class ActivateFragment : BaseFragment<ActivateViewModel>() {
 					nationalCodeInput.setError("کد ملی خود را وارد کنید")
 					return@setOnClickListener
 				}
-				if (nationalCodeInput.getText().length != 10) {
+				if (!nationalCodeInput.getText().isNationalCode()) {
 					nationalCodeInput.setError("کد ملی وارد شده اشتباه است")
 					return@setOnClickListener
 				}
@@ -83,7 +85,7 @@ class ActivateFragment : BaseFragment<ActivateViewModel>() {
 	private fun readyRemainingTime(time: Int) {
 		mBinding?.apply {
 			Utils.enableDisable(resendCode, time)
-			resendCodeTime.text = "00:$time"
+			resendCodeTime.text = time.remainingTime()
 		}
 
 	}

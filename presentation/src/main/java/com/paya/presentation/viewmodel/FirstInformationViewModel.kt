@@ -15,6 +15,7 @@ import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.utils.SingleLiveEvent
 import com.paya.presentation.utils.Utils
 import com.paya.presentation.utils.callResource
+import com.paya.presentation.utils.startWithCountryCodeMobile
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.hamsaa.persiandatepicker.util.PersianCalendar
 import kotlinx.coroutines.Dispatchers
@@ -60,7 +61,7 @@ class FirstInformationViewModel @Inject constructor(
 			val body = ProfileBodyRepoModel(
 				firstName,
 				lastName,
-				phone.replaceFirst("0","+98"),
+				phone.startWithCountryCodeMobile(),
 				email,
 				nationalCode,
 				birthDay,

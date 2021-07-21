@@ -11,6 +11,7 @@ import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.domain.tools.UseCase
 import com.paya.presentation.base.BaseViewModel
+import com.paya.presentation.base.REMAINING_TIME
 import com.paya.presentation.utils.SingleLiveEvent
 import com.paya.presentation.utils.callResource
 import com.paya.presentation.utils.startWithCountryCodeMobile
@@ -26,7 +27,7 @@ class ActivateLoginViewModel @Inject constructor(
 ) : BaseViewModel() {
 	
 	val title = MutableLiveData<String>()
-	val remainingTime = MutableLiveData(59)
+	val remainingTime = MutableLiveData(REMAINING_TIME)
 	
 	init {
 		setRemainingTime()
@@ -69,7 +70,7 @@ class ActivateLoginViewModel @Inject constructor(
 			
 			if (response.status == Status.SUCCESS) {
 				status.postValue(Resource.idle(null))
-				remainingTime.value = 59
+				remainingTime.value = REMAINING_TIME
 				setRemainingTime()
 			} else
 				status.postValue(response)

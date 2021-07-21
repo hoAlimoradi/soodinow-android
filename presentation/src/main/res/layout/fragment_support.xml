@@ -28,7 +28,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar"
-            app:layout_constraintVertical_bias="1" />
+            app:layout_constraintVertical_bias="1"
+            app:layout_constraintBottom_toTopOf="@id/desc"
+            app:layout_constraintVertical_chainStyle="packed"/>
 
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -46,7 +48,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/image"
-            app:layout_constraintVertical_bias="0" />
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintBottom_toTopOf="@id/buttonLayout"
+            app:layout_constraintVertical_chainStyle="packed"/>
 
         <RelativeLayout
             android:id="@+id/buttonLayout"
@@ -57,7 +61,9 @@
             android:elevation="2dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/desc">
+            app:layout_constraintTop_toBottomOf="@id/desc"
+            app:layout_constraintBottom_toTopOf="@id/descChat"
+            app:layout_constraintVertical_chainStyle="packed">
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/callButton"
@@ -88,7 +94,9 @@
             android:textSize="@dimen/text_size_m"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/buttonLayout" />
+            app:layout_constraintTop_toBottomOf="@id/buttonLayout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"/>
 
         <pl.bclogic.pulsator4droid.library.PulsatorLayout
             android:id="@+id/pulsator"
@@ -105,7 +113,8 @@
             app:pulse_duration="3000"
             app:pulse_interpolator="Decelerate"
             app:pulse_repeat="0"
-            app:pulse_startFromScratch="true">
+            app:pulse_startFromScratch="true"
+            android:visibility="gone">
 
             <LinearLayout
                 android:id="@+id/onlineChatLayout"

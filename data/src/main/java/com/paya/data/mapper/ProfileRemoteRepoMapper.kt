@@ -25,7 +25,8 @@ class ProfileRemoteRepoMapper @Inject constructor() : Mapper<
 			param.gender ?: "",
 			param.state ?: "",
 			param.city ?: "",
-			param.address ?: ""
+			param.address ?: "",
+			param.company ?: "",
 		)
 	}
 	

@@ -22,6 +22,7 @@ import com.paya.presentation.databinding.FragmentChangePhoneNumberBinding
 import com.paya.presentation.utils.Utils
 import com.paya.presentation.utils.isMobile
 import com.paya.presentation.utils.observe
+import com.paya.presentation.utils.remainingTime
 import com.paya.presentation.viewmodel.ChangePhoneNumberViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -71,22 +72,16 @@ class ChangePhoneNumberFragment : BaseFragment<ChangePhoneNumberViewModel>() {
                 mViewModel.resetPhone()
             }
             Utils.setTintColor(verificationImg, resendCode.context, R.color.gray)
-            newMobileInput.isEnabled = false
-            descriptionNewPhone.visibility = View.GONE
             submitButton.setBackgroundResource(R.drawable.bg_btn_japanese_laurel_green_corner5_size48_alpha_43)
             submitButton.isEnabled = false
             txtPinEntry.doAfterTextChanged {
                 val text = it.toString()
                 if (text.length != 5) {
                     Utils.setTintColor(verificationImg, resendCode.context, R.color.gray)
-                    newMobileInput.isEnabled = false
-                    descriptionNewPhone.visibility = View.GONE
                     submitButton.setBackgroundResource(R.drawable.bg_btn_japanese_laurel_green_corner5_size48_alpha_43)
                     submitButton.isEnabled = false
                 } else {
                     Utils.setTintColor(verificationImg, resendCode.context, R.color.green)
-                    newMobileInput.isEnabled = true
-                    descriptionNewPhone.visibility = View.VISIBLE
                     submitButton.setBackgroundResource(R.drawable.bg_btn_japanese_laurel_green_corner5_size48)
                     submitButton.isEnabled = true
                 }
@@ -99,7 +94,7 @@ class ChangePhoneNumberFragment : BaseFragment<ChangePhoneNumberViewModel>() {
     private fun readyRemainingTime(time: Int) {
         mBinding?.apply {
             Utils.enableDisable(resendCode, time)
-            resendCodeTime.text = "00:$time"
+            resendCodeTime.text = time.remainingTime()
         }
 
     }

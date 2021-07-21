@@ -26,6 +26,7 @@ import com.paya.presentation.R
 import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentLoginBinding
+import com.paya.presentation.utils.isNationalCode
 import com.paya.presentation.utils.longToast
 import com.paya.presentation.utils.observe
 import com.paya.presentation.utils.shortToast
@@ -96,7 +97,7 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
                 nationalCodeInput.setError("کد ملی خود را وارد کنید")
                 return@login
             }
-            if (nationalCodeInput.getText().length != 10) {
+            if (!nationalCodeInput.getText().isNationalCode()) {
                 nationalCodeInput.setError("کد ملی وارد شده اشتباه است")
                 return@login
             }

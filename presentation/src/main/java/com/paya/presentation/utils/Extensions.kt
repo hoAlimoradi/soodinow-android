@@ -17,6 +17,7 @@ import android.webkit.URLUtil
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.text.isDigitsOnly
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
@@ -55,6 +56,7 @@ fun Fragment.openUrl(url: String) {
     intent.data = Uri.parse(url)
     startActivity(intent)
 }
+
 fun Activity.openUrl(url: String) {
     if (url.isEmpty() || !URLUtil.isValidUrl(url))
         return
@@ -62,6 +64,7 @@ fun Activity.openUrl(url: String) {
     intent.data = Uri.parse(url)
     startActivity(intent)
 }
+
 fun DialogFragment.openUrl(url: String) {
     if (url.isEmpty() || !URLUtil.isValidUrl(url))
         return
@@ -75,6 +78,40 @@ fun String.isSecretPassword(): Boolean {
     val pattern = Pattern.compile(passwordPattern)
     val matcher = pattern.matcher(this)
     return matcher.matches()
+}
+
+fun Int.remainingTime(): String {
+    return when {
+        this == 120 -> {
+            "02:00"
+        }
+        this >= 60 -> {
+            "01:${this - 60}"
+        }
+        else -> "00:${this}"
+    }
+}
+
+fun String.isNationalCode(): Boolean {
+    if (this.length != 10) {
+        return false
+    }
+    if (!this.isDigitsOnly()) {
+        return false
+    }
+    var sum = 0
+    var controlNumber = this[9].toString().toInt()
+    for (index in 10 downTo 2) {
+        sum += this[10 - index].toString().toInt() * index
+    }
+    val remaining = (sum % 11)
+    if (remaining < 2 && remaining == controlNumber) {
+        return true
+    }
+    if (remaining >= 2 && (11 - remaining) == controlNumber) {
+        return true
+    }
+    return false
 }
 
 fun String.md5(): String? {
@@ -94,17 +131,18 @@ fun String.md5(): String? {
     return null
 }
 
-fun String.isMobile() : Boolean {
+fun String.isMobile(): Boolean {
     return length == 11 && startsWith("09")
 }
 
-fun String.startWithCountryCodeMobile() : String {
-    if (startsWith("0",false)) {
-        val newMobile = substring(1,length)
+fun String.startWithCountryCodeMobile(): String {
+    if (startsWith("0", false)) {
+        val newMobile = substring(1, length)
         return "+98$newMobile"
     }
     return this
 }
+
 fun Activity.longToast(text: String) {
     Toast.makeText(
         this,

@@ -23,6 +23,7 @@ import com.paya.presentation.databinding.FragmentActivateBinding
 import com.paya.presentation.databinding.FragmentActivateForgotBinding
 import com.paya.presentation.utils.Utils
 import com.paya.presentation.utils.observe
+import com.paya.presentation.utils.remainingTime
 import com.paya.presentation.viewmodel.ActivateForgotPasswordViewModel
 import com.paya.presentation.viewmodel.ActivateViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -74,7 +75,7 @@ class ActivateForgotPasswordFragment : BaseFragment<ActivateForgotPasswordViewMo
 	private fun readyRemainingTime(time: Int) {
 		mBinding?.apply {
 			Utils.enableDisable(resendCode, time)
-			resendCodeTime.text = "00:$time"
+			resendCodeTime.text = time.remainingTime()
 		}
 
 	}

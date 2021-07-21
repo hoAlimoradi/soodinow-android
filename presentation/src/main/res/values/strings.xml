@@ -87,7 +87,7 @@
     <string name="insert_next">ثبت و ادامه</string>
     <string name="insert">ثبت</string>
 
-    <string name="first_name">نام و نام خانوادگی</string>
+    <string name="first_name">نام</string>
     <string name="name_family"> نام خانوادگی</string>
     <string name="sub_title_name_family">نام و نام خانوادگی خود را بصورت کامل بنویسید</string>
     <string name="hint_first_name">نام  خود را بصورت کامل بنویسید</string>
@@ -245,6 +245,7 @@
     <string name="empty_repeat__new_password">لطفا تکرار پسورد جدید خود را وارد کنید</string>
     <string name="error_repeat_equal_new_password">پسورد جدید با تکرار آن بکسان نیست</string>
     <string name="mobile_hint">۰۹*********</string>
+    <string name="national_hint">مثال: ۴۳۵۶۷۴۳۶۵۱</string>
     <string name="insert_national_code">کدملی خود را وارد کنید</string>
     <string name="new_mobile_number">شماره جدید را وارد کنید</string>
     <string name="send_code_new_phone">بعد از بررسی کد به شماره جدید شما ارسال خواهد شد</string>

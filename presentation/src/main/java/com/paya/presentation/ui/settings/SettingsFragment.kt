@@ -380,7 +380,7 @@ class SettingsFragment : BaseFragment<SettingViewModel>() {
 	}
 	private fun readyMobile(mobile: String) {
 		mBinding?.phoneTxt?.apply {
-			text = mobile
+			text = mobile.replaceFirst("+98","0")
 		}
 	}
 

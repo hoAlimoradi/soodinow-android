@@ -28,15 +28,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/companyTextView"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="نماینده‌ای شرکت "
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="@dimen/margin_m"
+                android:layout_marginHorizontal="@dimen/margin_l"
+                android:drawableEnd="@drawable/circle_gray_9"
+                android:textSize="@dimen/text_size_m"
+                android:drawablePadding="@dimen/margin_m"/>
+
             <com.paya.presentation.utils.editText.LabelEditText
                 android:id="@+id/firstName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/margin_l"
-                android:layout_marginTop="@dimen/margin_s"
+                android:layout_marginTop="@dimen/margin_m"
                 android:hint="@string/hint_first_name"
                 app:labelText="@string/first_name"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/companyTextView" />
 
             <com.paya.presentation.utils.editText.LabelEditText
                 android:id="@+id/lastName"

@@ -10,7 +10,7 @@ import com.paya.domain.usecase.auth.GetAuthLinkUseCase
 import com.paya.presentation.utils.callResource
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
+const val REMAINING_TIME = 120
 abstract class BaseViewModel : ViewModel() {
 	@Inject
 	protected lateinit var getAuthLinkUseCase: UseCase<String,GetAuthLinkRepoModel>

@@ -264,7 +264,6 @@ class FirstInformationFragment : BaseFragment<FirstInformationViewModel>() {
 		mBinding?.apply {
 			if (resource.status == Status.SUCCESS) {
 				resource.data?.let { data ->
-					if (data.complete) {
 						firstName.setText(data.firstName)
 						lastName.setText(data.lastName)
 						phone.setText(data.phone.replaceFirst("+98","0"))
@@ -274,11 +273,12 @@ class FirstInformationFragment : BaseFragment<FirstInformationViewModel>() {
 						province.setText(data.state)
 						city.setText(data.city)
 						address.setText(data.address)
+						companyTextView.visibility = if (data.company.isEmpty()) View.GONE else View.VISIBLE
+						companyTextView.text = "نماینده‌ای شرکت ${data.company}"
 						citySelection()
 						gender.setText(if (data.gender == "m") "مرد" else if (data.gender == "f") "زن" else "")
 						val date = mViewModel.birthDay
 						birthDate.setText(" ${date.persianYear}/${date.persianMonth}/${date.persianDay} ")
-					}
 				}
 			}
 		}

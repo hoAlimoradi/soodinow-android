@@ -17,6 +17,7 @@ data class ProfileRemoteModel(
 	val gender: String?,
 	val state: String?,
 	val city: String?,
-	val address: String?
-	
+	val address: String?,
+	val company: String?,
+
 ): NoObfuscate
