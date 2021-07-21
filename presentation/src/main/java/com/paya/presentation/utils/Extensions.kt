@@ -143,6 +143,19 @@ fun String.startWithCountryCodeMobile(): String {
     return this
 }
 
+fun View.requestKeyBoard() {
+    requestFocus()
+    (context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).toggleSoftInput(
+        InputMethodManager.SHOW_FORCED,
+        InputMethodManager.HIDE_IMPLICIT_ONLY)
+}
+
+fun View.hideKeyBoard() {
+    val imm =
+        context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.hideSoftInputFromWindow(windowToken, 0)
+}
+
 fun Activity.longToast(text: String) {
     Toast.makeText(
         this,

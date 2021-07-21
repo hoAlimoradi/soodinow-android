@@ -3,6 +3,7 @@ package com.paya.presentation.ui.changePhoneNumber
 
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,10 +20,7 @@ import com.paya.presentation.R
 import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentChangePhoneNumberBinding
-import com.paya.presentation.utils.Utils
-import com.paya.presentation.utils.isMobile
-import com.paya.presentation.utils.observe
-import com.paya.presentation.utils.remainingTime
+import com.paya.presentation.utils.*
 import com.paya.presentation.viewmodel.ChangePhoneNumberViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -53,7 +51,14 @@ class ChangePhoneNumberFragment : BaseFragment<ChangePhoneNumberViewModel>() {
         observe(mViewModel.status, ::checkActivateStatus)
         observe(mViewModel.remainingTime, ::readyRemainingTime)
         mBinding?.apply {
-
+            txtPinEntry.requestKeyBoard()
+            txtPinEntry.setOnEditorActionListener { v, actionId, event ->
+				if ((event.action == KeyEvent.ACTION_DOWN) && (event.keyCode == KeyEvent.KEYCODE_ENTER)) {
+					newMobileInput.requestKeyBoard()
+					return@setOnEditorActionListener true
+				}
+				return@setOnEditorActionListener false
+			}
             submitButton.setOnClickListener {
                 if (newMobileInput.getText().isEmpty()) {
                     newMobileInput.setError("لطفا شماره موبایل را وارد کنید")

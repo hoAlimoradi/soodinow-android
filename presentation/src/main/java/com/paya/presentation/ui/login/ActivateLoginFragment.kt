@@ -3,6 +3,7 @@ package com.paya.presentation.ui.login
 
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,9 +23,7 @@ import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentActivateBinding
 import com.paya.presentation.databinding.FragmentActivateForgotBinding
 import com.paya.presentation.databinding.FragmentActivateLoginBinding
-import com.paya.presentation.utils.Utils
-import com.paya.presentation.utils.observe
-import com.paya.presentation.utils.remainingTime
+import com.paya.presentation.utils.*
 import com.paya.presentation.viewmodel.ActivateLoginViewModel
 import com.paya.presentation.viewmodel.ActivateViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -57,6 +56,14 @@ class ActivateLoginFragment : BaseFragment<ActivateLoginViewModel>() {
 		observe(mViewModel.status, ::checkActivateStatus)
 		observe(mViewModel.remainingTime, ::readyRemainingTime)
 		mBinding?.apply {
+			txtPinEntry.requestKeyBoard()
+			txtPinEntry.setOnEditorActionListener { v, actionId, event ->
+				if ((event.action == KeyEvent.ACTION_DOWN) && (event.keyCode == KeyEvent.KEYCODE_ENTER)) {
+					txtPinEntry.hideKeyBoard()
+					return@setOnEditorActionListener true
+				}
+				return@setOnEditorActionListener false
+			}
 			changeNumber.setOnClickListener {
 				findNavController().popBackStack()
 			}
