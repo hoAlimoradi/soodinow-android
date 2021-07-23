@@ -94,7 +94,9 @@
                 android:inputType="number"
                 android:hint="@string/hint_national_code"
                 app:labelText="@string/national_code"
-                app:layout_constraintTop_toBottomOf="@id/email" />
+                app:layout_constraintTop_toBottomOf="@id/email"
+                app:visiblelabel="disable"
+                />
 
 
             <com.paya.presentation.utils.editText.LabelEditText

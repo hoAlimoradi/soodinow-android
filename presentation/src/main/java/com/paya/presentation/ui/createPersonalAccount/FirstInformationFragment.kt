@@ -121,7 +121,6 @@ class FirstInformationFragment : BaseFragment<FirstInformationViewModel>() {
 			mBinding.lastName.setError("")
 			mBinding.phone.setError("")
 			mBinding.email.setError("")
-			mBinding.national.setError("")
 			mBinding.birthDate.setError("")
 			mBinding.shaba.setError("")
 			mBinding.gender.setError("")
@@ -134,7 +133,6 @@ class FirstInformationFragment : BaseFragment<FirstInformationViewModel>() {
 			val lastName = mBinding.lastName.getText()
 			val phone = mBinding.phone.getText()
 			val email = mBinding.email.getText()
-			val nationalCode = mBinding.national.getText()
 			val birthDay = mViewModel.birthDay.let { Utils.convertToDate(it) }
 			val bban = mBinding.shaba.getText()
 			val gender =
@@ -171,16 +169,6 @@ class FirstInformationFragment : BaseFragment<FirstInformationViewModel>() {
 
 			}
 
-			if (nationalCode.isEmpty()) {
-				mBinding.national.setError("لطفا کد ملی را وارد کنید")
-				isError = true
-			}
-
-			if (nationalCode.isNotEmpty() && nationalCode?.length != 10) {
-				mBinding.national.setError("کد ملی وارد شده اشتباه است")
-				isError = true
-			}
-
 			if (birthDay.isEmpty()) {
 				mBinding.birthDate.setError("لطفا تاربخ تولد را وارد کنید")
 				isError = true
@@ -215,7 +203,6 @@ class FirstInformationFragment : BaseFragment<FirstInformationViewModel>() {
 				lastName,
 				phone,
 				email,
-				nationalCode,
 				birthDay,
 				bban,
 				gender,
