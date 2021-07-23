@@ -22,6 +22,7 @@ import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentActivateBinding
 import com.paya.presentation.databinding.FragmentActivateForgotBinding
 import com.paya.presentation.utils.Utils
+import com.paya.presentation.utils.hideKeyBoard
 import com.paya.presentation.utils.observe
 import com.paya.presentation.utils.remainingTime
 import com.paya.presentation.viewmodel.ActivateForgotPasswordViewModel
@@ -66,11 +67,11 @@ class ActivateForgotPasswordFragment : BaseFragment<ActivateForgotPasswordViewMo
 			}
 			resendCode.setOnClickListener {
 				txtPinEntry.setText("")
+				requestHint()
 				mViewModel.register()
 			}
 			Utils.setVerificationPinImage(txtPinEntry, verificationImg)
 		}
-		requestHint()
 	}
 	private fun readyRemainingTime(time: Int) {
 		mBinding?.apply {
@@ -95,25 +96,17 @@ class ActivateForgotPasswordFragment : BaseFragment<ActivateForgotPasswordViewMo
 	override val baseViewModel: BaseViewModel
 		get() = mViewModel
 
-	private fun requestHint() {
+	override fun onResume() {
+		super.onResume()
+		requestHint()
+	}
 
-		val client = context?.let {
-			SmsRetriever.getClient(it /* context */) }
-
-		val task: Task<Void> = client!!.startSmsRetriever()
-
-		task.addOnSuccessListener(OnSuccessListener<Void?> {
-			Log.d("","")
-			// Successfully started retriever, expect broadcast intent
-			// ...
-		})
-
-		task.addOnFailureListener(OnFailureListener {
-			Log.d("","")
-			// Failed to start retriever, inspect Exception for more details
-			// ...
-		})
-
+	override fun onOTPReceived(otp: String) {
+		super.onOTPReceived(otp)
+		mBinding?.apply {
+			txtPinEntry.setText(otp)
+			txtPinEntry.hideKeyBoard()
+		}
 	}
 
 

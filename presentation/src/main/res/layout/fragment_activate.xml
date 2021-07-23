@@ -87,6 +87,7 @@
         android:maxLength="5"
         android:textIsSelectable="false"
         android:textSize="@dimen/text_size_large"
+        tools:text = "12345"
         app:layout_constraintBottom_toTopOf="@id/resend_code"
         app:layout_constraintEnd_toStartOf="@id/verification_img"
         app:layout_constraintStart_toStartOf="parent"
@@ -94,11 +95,11 @@
         app:layout_constraintVertical_chainStyle="packed"
         app:pinAnimationType="popIn"
         app:pinBackgroundDrawable="@drawable/round_corner_layout"
-        app:pinBackgroundIsSquare="true"
+        app:pinLineColors="@color/conifer_green"
+        app:pinLineStroke="0dp"
         app:pinCharacterMask="*"
-        app:pinLineColors="@android:color/transparent"
-        app:pinLineStroke="2dp"
-        app:pinLineStrokeSelected="4dp" />
+        app:pinBackgroundIsSquare="true"
+        app:pinLineStrokeSelected="1dp" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/verification_img"

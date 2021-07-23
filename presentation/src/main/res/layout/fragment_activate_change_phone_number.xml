@@ -77,14 +77,14 @@
             app:layout_constraintTop_toBottomOf="@id/description"
             app:pinAnimationType="popIn"
             app:pinBackgroundDrawable="@drawable/round_corner_layout"
-            app:pinBackgroundIsSquare="true"
-            app:pinLineColors="@android:color/transparent"
-            app:pinLineStroke="2dp"
-            app:pinLineStrokeSelected="4dp"
+            app:layout_constraintBottom_toTopOf="@id/resend_code"
             app:pinCharacterMask="*"
+            app:pinLineStrokeSelected="1dp"
+            app:pinLineColors="@color/conifer_green"
+            app:pinBackgroundIsSquare="true"
             android:layout_marginEnd="@dimen/margin_m"
             app:layout_constraintVertical_chainStyle="packed"
-            app:layout_constraintBottom_toTopOf="@id/resend_code"/>
+            app:pinLineStroke="0dp" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/verification_img"

@@ -2,30 +2,21 @@ package com.paya.presentation.ui.login
 
 
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.google.android.gms.auth.api.phone.SmsRetriever
-import com.google.android.gms.tasks.OnFailureListener
-import com.google.android.gms.tasks.OnSuccessListener
-import com.google.android.gms.tasks.Task
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.presentation.R
 import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
-import com.paya.presentation.databinding.FragmentActivateBinding
-import com.paya.presentation.databinding.FragmentActivateForgotBinding
 import com.paya.presentation.databinding.FragmentActivateLoginBinding
 import com.paya.presentation.utils.*
 import com.paya.presentation.viewmodel.ActivateLoginViewModel
-import com.paya.presentation.viewmodel.ActivateViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -74,11 +65,11 @@ class ActivateLoginFragment : BaseFragment<ActivateLoginViewModel>() {
 			}
 			resendCode.setOnClickListener {
 				txtPinEntry.setText("")
+				requestHint()
 				mViewModel.register()
 			}
 			Utils.setVerificationPinImage(txtPinEntry, verificationImg)
 		}
-		requestHint()
 	}
 	private fun readyRemainingTime(time: Int) {
 		mBinding?.apply {
@@ -99,32 +90,22 @@ class ActivateLoginFragment : BaseFragment<ActivateLoginViewModel>() {
 			)
 		}
 	}
-	
+
 	override val baseViewModel: BaseViewModel
 		get() = mViewModel
 
-	private fun requestHint() {
-
-		val client = context?.let {
-			SmsRetriever.getClient(it /* context */) }
-
-		val task: Task<Void> = client!!.startSmsRetriever()
-
-		task.addOnSuccessListener(OnSuccessListener<Void?> {
-			Log.d("","")
-			// Successfully started retriever, expect broadcast intent
-			// ...
-		})
-
-		task.addOnFailureListener(OnFailureListener {
-			Log.d("","")
-			// Failed to start retriever, inspect Exception for more details
-			// ...
-		})
-
+	override fun onResume() {
+		super.onResume()
+		requestHint()
 	}
 
-
+	override fun onOTPReceived(otp: String) {
+		super.onOTPReceived(otp)
+		mBinding?.apply {
+			txtPinEntry.setText(otp)
+			txtPinEntry.hideKeyBoard()
+		}
+	}
 
 
 }
