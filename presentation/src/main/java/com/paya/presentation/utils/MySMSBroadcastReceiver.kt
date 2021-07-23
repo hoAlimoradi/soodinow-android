@@ -34,7 +34,7 @@ class MySMSBroadcastReceiver : BroadcastReceiver() {
                         }
                     }
                     CommonStatusCodes.TIMEOUT -> {
-                        otpReceiver!!.onOTPTimeOut()
+                            otpReceiver?.let {it.onOTPTimeOut()}
                     }
                 }
             }

@@ -32,8 +32,8 @@ private const val KEY_DATE = "date_key"
 @AndroidEntryPoint
 class FinancialReportFragment : BaseFragment<FinancialReportViewModel>() {
     private val mViewModel: FinancialReportViewModel by viewModels()
-    private  var mBinding: FragmentFinancialReportBinding? = null
-    private lateinit var adapter: FinancialReportAdapter
+    private var mBinding: FragmentFinancialReportBinding? = null
+    private var adapter: FinancialReportAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,33 +70,35 @@ class FinancialReportFragment : BaseFragment<FinancialReportViewModel>() {
             dialog.item = it
             dialog.show(parentFragmentManager, "financial dialog")
         }
-        financialRecyclerView.layoutManager = LinearLayoutManager(context)
-        financialRecyclerView.adapter =
-            adapter.withLoadStateHeaderAndFooter(ListLoadStateAdapter(), ListLoadStateAdapter())
-        findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<SelectDateFilterFragment.DateFilter>(
-            KEY_DATE
-        )
-            ?.let {
-                it.observe(viewLifecycleOwner) { dateItem ->
-                    mViewModel.dateFrom = dateItem.dateFrom
-                    mViewModel.dateTo = dateItem.dateTo
-                    adapter.refresh()
+        adapter?.apply {
+            financialRecyclerView.layoutManager = LinearLayoutManager(context)
+            financialRecyclerView.adapter =
+                withLoadStateHeaderAndFooter(ListLoadStateAdapter(), ListLoadStateAdapter())
+            findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<SelectDateFilterFragment.DateFilter>(
+                KEY_DATE
+            )
+                ?.let {
+                    it.observe(viewLifecycleOwner) { dateItem ->
+                        mViewModel.dateFrom = dateItem.dateFrom
+                        mViewModel.dateTo = dateItem.dateTo
+                        refresh()
+                    }
+                }
+
+            viewLifecycleOwner.lifecycleScope.launch {
+                mViewModel.status.collectLatest {
+                    submitData(it)
                 }
             }
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            mViewModel.status.collectLatest {
-                adapter.submitData(it)
-            }
-        }
-        viewLifecycleOwner.lifecycleScope.launch {
-            adapter.loadStateFlow.collectLatest {
-                when (it.refresh) {
-                    is LoadState.Error -> Toast.makeText(
-                        context,
-                        (it.refresh as LoadState.Error).error.message, Toast.LENGTH_SHORT
-                    ).show()
-                    else -> return@collectLatest
+            viewLifecycleOwner.lifecycleScope.launch {
+                loadStateFlow.collectLatest {
+                    when (it.refresh) {
+                        is LoadState.Error -> Toast.makeText(
+                            context,
+                            (it.refresh as LoadState.Error).error.message, Toast.LENGTH_SHORT
+                        ).show()
+                        else -> return@collectLatest
+                    }
                 }
             }
         }
@@ -125,7 +127,7 @@ class FinancialReportFragment : BaseFragment<FinancialReportViewModel>() {
 
                         2 -> mViewModel.type = ""
                     }
-                    adapter.refresh()
+                    adapter?.apply{refresh()}
                 }
 
             })
@@ -134,6 +136,7 @@ class FinancialReportFragment : BaseFragment<FinancialReportViewModel>() {
 
     override fun onDestroyView() {
         mBinding = null
+        adapter = null
         super.onDestroyView()
     }
     companion object {

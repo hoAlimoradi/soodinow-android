@@ -6,6 +6,7 @@ import com.paya.domain.models.repo.InvestmentHeaderDate
 import com.paya.domain.models.repo.InvestmentLogsModel
 import com.paya.domain.models.repo.InvestmentLogsRepoModel
 import javax.inject.Inject
+import kotlin.random.Random
 
 class InvestmentLogsRemoteRepoMapper @Inject constructor() : Mapper<
         @kotlin.jvm.JvmSuppressWildcards InvestmentLogsRemoteModel,
@@ -50,4 +51,34 @@ class InvestmentLogsRemoteRepoMapper @Inject constructor() : Mapper<
         )
     }
 
+   /* fun mockData(): InvestmentLogsRemoteModel {
+        val list = mutableListOf<com.paya.domain.models.remote.InvestmentLogsModel>()
+
+        for (index in 1..25) {
+            list.add( com.paya.domain.models.remote.InvestmentLogsModel(
+                Random(1000).nextLong(),
+                Random(1000000).nextLong(),
+                Random(1000000).nextLong(),
+                "Open",
+                "Fixed",
+                "no-risk",
+                "",
+                "Pending",
+                "12321432",
+                false,
+                "",
+                "2021-07-17T11:59:28.655028+04:30",
+                "2021-07-17T11:59:28.655028+04:30",
+                ""
+
+                )
+            )
+        }
+        return InvestmentLogsRemoteModel(
+            100,
+            "10",
+            "10",
+            list
+        )
+    }*/
 }

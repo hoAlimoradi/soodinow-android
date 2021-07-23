@@ -14,6 +14,7 @@ import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.utils.Utils
 import com.paya.presentation.utils.convertDateWithoutHour
+import com.paya.presentation.viewmodel.SelectDateFilterViewModel
 import ir.hamsaa.persiandatepicker.Listener
 import ir.hamsaa.persiandatepicker.PersianDatePickerDialog
 import ir.hamsaa.persiandatepicker.util.PersianCalendar
@@ -23,9 +24,9 @@ import java.io.Serializable
 private const val PARAM_DATE_FROM = "date_from"
 private const val PARAM_DATE_TO = "date_to"
 
-class SelectDateFilterFragment : BaseFragment<BaseViewModel>() {
+class SelectDateFilterFragment : BaseFragment<SelectDateFilterViewModel>() {
 
-    private val mViewModel: BaseViewModel by viewModels()
+    private val mViewModel: SelectDateFilterViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {

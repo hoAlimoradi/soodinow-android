@@ -3,7 +3,6 @@ package com.paya.presentation.ui.activitiesReport.source
 import androidx.paging.PagingSource
 import com.paya.domain.models.repo.InvestmentLogsRepoBodyModel
 import com.paya.domain.models.repo.InvestmentLogsRepoModel
-import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.domain.tools.UseCase
 import com.paya.presentation.utils.callResource
@@ -11,7 +10,7 @@ import com.paya.presentation.viewmodel.FinancialReportViewModel
 
 class InvestmentLogsDataSource(
     private val investmentUseCase: UseCase<InvestmentLogsRepoBodyModel, InvestmentLogsRepoModel>,
-    private val viewModel: FinancialReportViewModel,
+    private val viewModel: FinancialReportViewModel
 ) : PagingSource<Int, Any>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Any> {
