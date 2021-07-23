@@ -27,9 +27,11 @@ class EfficiencyAdapter(val list: List<EfficiencyRepoModel>) :
         val item = list[position]
         with(holder.itemView) {
             titleEfficiency.text = item.title
-            percentEfficiency.text = "${roundOffDecimal(item.percent)}%"
+            percentEfficiency.text =
+                if (item.percent > 0) "${roundOffDecimal(item.percent)}%" else ""
             percentEfficiency.setTextColor(if(item.isProfitable) ContextCompat.getColor(context,R.color.green) else ContextCompat.getColor(context,R.color.red))
-            priceEfficiency.text = Utils.separatorAmount(item.price.toLong())
+            priceEfficiency.text =
+                if (item.price > 0.0) Utils.separatorAmount(item.price.toLong()) else ""
             with(percentIconEfficiency) {
                 setImageResource(if(item.isProfitable) R.drawable.ic_arrow_dposit else R.drawable.ic_arrow_withdrawal)
                 setBackgroundResource(if(item.isProfitable) R.drawable.bg_icon_15_size_corner_3_green else R.drawable.bg_icon_15_size_corner_3_red)
