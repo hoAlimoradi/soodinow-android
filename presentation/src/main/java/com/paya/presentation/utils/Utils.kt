@@ -68,19 +68,19 @@ object Utils {
 
     @JvmStatic
     fun separatorAmount(amount: CharSequence?): String? {
-        return separatorAmount(amount.toString().replace(",", "").toInt())
+        return separatorAmount(amount.toString().stringLocalizer().replace(",", "").toInt())
     }
 
     @JvmStatic
     fun separatorAmount(amount: String?): String? {
-        return separatorAmount(amount.toString().replace(",", "").toInt())
+        return separatorAmount(amount.toString().stringLocalizer().replace(",", "").toInt())
     }
 
     @JvmStatic
     fun getAmount(amount: String?): Long? {
         if (amount.isNullOrEmpty())
             return 0
-        return amount.toString().replace(",", "").toLong()
+        return amount.toString().stringLocalizer().replace(",", "").toLong()
     }
 
     @JvmStatic
@@ -90,7 +90,7 @@ object Utils {
     @JvmStatic
     fun separatorAmount(amount: Long): String? {
         return try {
-            val value = amount.toString()
+            val value = amount.toString().stringLocalizer()
             val reverseValue = StringBuilder(value).reverse().toString()
             val finalValue = StringBuilder()
             for (i in 1..reverseValue.length) {
@@ -111,7 +111,7 @@ object Utils {
     fun convertToFloatAmount(s: String): Float {
         if(s.isNullOrEmpty())
             return 0f;
-        return s.replace(",", "").toFloat()
+        return s.stringLocalizer().replace(",", "").toFloat()
     }
 
 
@@ -119,14 +119,14 @@ object Utils {
     @JvmStatic
     fun convertToDate(pDate: PersianCalendar): String {
         val sdf = SimpleDateFormat("yyyy-MM-dd")
-        return sdf.format(pDate.time)
+        return sdf.format(pDate.time).stringLocalizer()
     }
 
     @SuppressLint("SimpleDateFormat")
     @JvmStatic
     fun convertToDate(pDate: Date): String {
         val sdf = SimpleDateFormat("yyyy-MM-dd")
-        return sdf.format(pDate.time)
+        return sdf.format(pDate.time).stringLocalizer()
     }
 
     @JvmStatic

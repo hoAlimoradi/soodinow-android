@@ -106,6 +106,9 @@ class ChangePhoneNumberFragment : BaseFragment<ChangePhoneNumberViewModel>() {
     }
 
     override fun onDestroyView() {
+        mBinding?.apply {
+            txtPinEntry.removeTextChangedListener(null)
+        }
         mBinding = null
         super.onDestroyView()
     }

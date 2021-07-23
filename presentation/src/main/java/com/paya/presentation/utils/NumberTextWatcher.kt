@@ -38,10 +38,10 @@ class NumberTextWatcher(
 		if (s == null || s.isEmpty())
 			return
 		et.removeTextChangedListener(this)
-		val number = s.toString().filter {
+		val number = s.toString().stringLocalizer().filter {
 			it.isDigit()
 		}.toLongOrNull()
-		et.setText(df.format(number).toString().replace(".", ""))
+		et.setText(df.format(number).toString().replace(".", "") .replace("٫", ""))
 		et.setSelection(et.text.length)
 		et.addTextChangedListener(this)
 	}

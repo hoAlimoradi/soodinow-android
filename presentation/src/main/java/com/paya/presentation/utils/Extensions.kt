@@ -33,6 +33,42 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 import java.util.regex.Pattern
 
+private val ENGLISH_NUMBERS = charArrayOf(
+    '\u0030',
+    '\u0031',
+    '\u0032',
+    '\u0033',
+    '\u0034',
+    '\u0035',
+    '\u0036',
+    '\u0037',
+    '\u0038',
+    '\u0039'
+)
+private val PERSIAN_NUMBERS = charArrayOf(
+    '\u06f0',
+    '\u06f1',
+    '\u06f2',
+    '\u06f3',
+    '\u06f4',
+    '\u06f5',
+    '\u06f6',
+    '\u06f7',
+    '\u06f8',
+    '\u06f9'
+)
+private val ARABIC_NUMBERS = charArrayOf(
+    '\u0660',
+    '\u0661',
+    '\u0662',
+    '\u0663',
+    '\u0664',
+    '\u0665',
+    '\u0666',
+    '\u0667',
+    '\u0668',
+    '\u0669'
+)
 fun Fragment.longToast(text: String) {
     Toast.makeText(
         requireContext(),
@@ -72,7 +108,31 @@ fun DialogFragment.openUrl(url: String) {
     intent.data = Uri.parse(url)
     startActivity(intent)
 }
-
+fun String.stringLocalizer() : String{
+    return this
+        .replace(PERSIAN_NUMBERS[0], ENGLISH_NUMBERS[0])
+        .replace(PERSIAN_NUMBERS[1], ENGLISH_NUMBERS[1])
+        .replace(PERSIAN_NUMBERS[2], ENGLISH_NUMBERS[2])
+        .replace(PERSIAN_NUMBERS[3], ENGLISH_NUMBERS[3])
+        .replace(PERSIAN_NUMBERS[4], ENGLISH_NUMBERS[4])
+        .replace(PERSIAN_NUMBERS[5], ENGLISH_NUMBERS[5])
+        .replace(PERSIAN_NUMBERS[6], ENGLISH_NUMBERS[6])
+        .replace(PERSIAN_NUMBERS[7], ENGLISH_NUMBERS[7])
+        .replace(PERSIAN_NUMBERS[8], ENGLISH_NUMBERS[8])
+        .replace(PERSIAN_NUMBERS[9], ENGLISH_NUMBERS[9])
+        .replace(ARABIC_NUMBERS[0], ENGLISH_NUMBERS[0])
+        .replace(ARABIC_NUMBERS[1], ENGLISH_NUMBERS[1])
+        .replace(ARABIC_NUMBERS[2], ENGLISH_NUMBERS[2])
+        .replace(ARABIC_NUMBERS[3], ENGLISH_NUMBERS[3])
+        .replace(ARABIC_NUMBERS[4], ENGLISH_NUMBERS[4])
+        .replace(ARABIC_NUMBERS[5], ENGLISH_NUMBERS[5])
+        .replace(ARABIC_NUMBERS[6], ENGLISH_NUMBERS[6])
+        .replace(ARABIC_NUMBERS[7], ENGLISH_NUMBERS[7])
+        .replace(ARABIC_NUMBERS[8], ENGLISH_NUMBERS[8])
+        .replace(ARABIC_NUMBERS[9], ENGLISH_NUMBERS[9])
+        .replace("٫", ",")
+        .replace("٬", ",")
+}
 fun String.isSecretPassword(): Boolean {
     val passwordPattern = "^(?=.*?[0-9])(?=.*?[a-z])(?=.*?[A-Z]).{8,21}\$"
     val pattern = Pattern.compile(passwordPattern)
@@ -192,7 +252,7 @@ fun Date.getTimeHoursAndMinute(): String {
     cal.time = this
     val hours = cal.get(Calendar.HOUR_OF_DAY)
     val minute = cal.get(Calendar.MINUTE)
-    return "$hours : $minute"
+    return "$hours : $minute".stringLocalizer()
 }
 
 fun RecyclerView.removeAllDecoration() {
@@ -315,7 +375,7 @@ fun convertDpToPixels(dp: Float, resources: Resources): Float {
 fun roundOffDecimal(number: Float): Float? {
     val df = DecimalFormat("#.##")
     df.roundingMode = RoundingMode.CEILING
-    return df.format(number).toFloat()
+    return df.format(number).stringLocalizer().toFloat()
 }
 
 

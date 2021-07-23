@@ -117,6 +117,19 @@ class FirstInformationFragment : BaseFragment<FirstInformationViewModel>() {
 	private fun updateProfile() {
 		mBinding?.let { mBinding ->
 			var isError = false
+			mBinding.firstName.setError("")
+			mBinding.lastName.setError("")
+			mBinding.phone.setError("")
+			mBinding.email.setError("")
+			mBinding.national.setError("")
+			mBinding.birthDate.setError("")
+			mBinding.shaba.setError("")
+			mBinding.gender.setError("")
+			mBinding.city.setError("")
+			mBinding.province.setError("")
+			mBinding.address.setError("")
+
+
 			val firstName = mBinding.firstName.getText()
 			val lastName = mBinding.lastName.getText()
 			val phone = mBinding.phone.getText()
