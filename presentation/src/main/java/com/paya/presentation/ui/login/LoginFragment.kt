@@ -19,6 +19,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.paya.domain.models.local.NationalCodeModel
 import com.paya.domain.models.repo.PerLoginRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
@@ -74,6 +75,7 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observe(mViewModel.loginResource, ::checkLoginStatus)
+        observe(mViewModel.nationalCodeStatus, ::readyNationalCode)
         mBinding?.apply {
             fingerprint.setOnClickListener {
                 initFingerprint()
@@ -105,6 +107,13 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
         }
     }
 
+    private fun readyNationalCode(resource: Resource<NationalCodeModel>) {
+        resource.data?.nationalCode?.let {
+            mBinding?.apply {
+                nationalCodeInput.setText(it)
+            }
+        }
+    }
 
     private fun checkLoginStatus(resource: Resource<PerLoginRepoModel>) {
         if (resource.status == Status.SUCCESS) {

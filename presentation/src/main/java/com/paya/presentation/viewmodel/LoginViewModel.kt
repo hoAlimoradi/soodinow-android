@@ -2,11 +2,13 @@ package com.paya.presentation.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.paya.domain.models.local.NationalCodeModel
 import com.paya.domain.models.repo.LoginRepoModel
 import com.paya.domain.models.repo.PerLoginRepoModel
 import com.paya.domain.repository.AuthRepository
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.UseCase
+import com.paya.domain.usecase.auth.GetNationalUseCase
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.utils.callResource
 import com.paya.presentation.utils.md5
@@ -18,12 +20,17 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(
 	private val loginUseCase: UseCase<String, PerLoginRepoModel>,
+	private val getNationalUseCase: UseCase<Unit, NationalCodeModel>,
 	private val authRepository: AuthRepository
 ) : BaseViewModel() {
 	val loginResource = MutableLiveData<Resource<PerLoginRepoModel>>()
 	val mobile = MutableLiveData<String>()
+	val nationalCodeStatus = MutableLiveData<Resource<NationalCodeModel>>()
 
 
+	init {
+	    getNationalCode()
+	}
 
 	fun login(username: String) {
 
@@ -32,6 +39,13 @@ class LoginViewModel @Inject constructor(
 
 			val response = callResource(this@LoginViewModel,loginUseCase.action(username),false)
 			loginResource.postValue(response)
+			hideLoading()
+		}
+	}
+	private fun getNationalCode() {
+		viewModelScope.launch {
+			val response = callResource(this@LoginViewModel,getNationalUseCase.action(Unit),false)
+			nationalCodeStatus.postValue(response)
 			hideLoading()
 		}
 	}

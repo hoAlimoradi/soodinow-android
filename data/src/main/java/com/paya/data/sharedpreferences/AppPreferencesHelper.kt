@@ -68,13 +68,24 @@ class AppPreferencesHelper @Inject constructor(
     }
 
     override fun clearToken() : Boolean {
-       return mPrefs.edit().clear().commit()
+        return mPrefs.edit().remove(PREF_KEY_ACCESS_TOKEN).remove(PREF_KEY_REFRESH_TOKEN).commit()
+    }
+
+    override fun setNationalCode(code: String) {
+        mPrefs.edit()
+            .putString(PREF_KEY_NATIONAL_CODE, code)
+            .apply()
+    }
+
+    override fun getNationalCode(): String {
+        return mPrefs.getString(PREF_KEY_NATIONAL_CODE,null) ?: ""
     }
 
     companion object {
         private const val PREF_KEY_ACCESS_TOKEN: String = "PREF_KEY_ACCESS_TOKEN"
         private const val PREF_KEY_REFRESH_TOKEN: String = "PREF_KEY_REFRESH_TOKEN"
         private const val PREF_KEY_MOBILE: String = "PREF_KEY_MOBILE"
+        private const val PREF_KEY_NATIONAL_CODE: String = "PREF_KEY_NATIONAL_CODE"
         private const val PREF_KEY_PASSWORD: String = "PREF_KEY_PASSWORD"
         private const val PREF_KEY_IV: String = "PREF_KEY_IV"
     }

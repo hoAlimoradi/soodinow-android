@@ -5,6 +5,7 @@ import com.paya.data.database.userInfo.UserInfoDbApi
 import com.paya.data.network.remote_api.AuthService
 import com.paya.data.sharedpreferences.PreferenceHelper
 import com.paya.data.utils.getResourceFromApiResponse
+import com.paya.domain.models.local.NationalCodeModel
 import com.paya.domain.models.local.UserInfoDbModel
 import com.paya.domain.models.remote.*
 import com.paya.domain.models.repo.*
@@ -122,6 +123,14 @@ class AuthRepositoryImpl @Inject constructor(
 
     override suspend fun setMobile(mobile: String) {
         preferenceHelper.setMobile(mobile)
+    }
+
+    override fun setNationalCode(code: String) {
+        preferenceHelper.setNationalCode(code)
+    }
+
+    override fun getNationalCode(): Resource<NationalCodeModel> {
+       return  Resource.success(NationalCodeModel(preferenceHelper.getNationalCode()),200)
     }
 
     override suspend fun updateIsPasswordSet(isPasswordSet: Boolean) {

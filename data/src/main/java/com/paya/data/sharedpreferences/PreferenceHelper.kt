@@ -27,4 +27,8 @@ interface PreferenceHelper {
     fun getEncodedCipherIv(): String?
 
     fun clearToken(): Boolean
+
+    fun setNationalCode(code: String)
+
+    fun getNationalCode(): String
 }

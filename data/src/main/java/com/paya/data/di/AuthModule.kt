@@ -5,6 +5,7 @@ import com.paya.data.database.userInfo.UserInfoDbApi
 import com.paya.data.database.userInfo.UserInfoDbApiImpl
 import com.paya.data.mapper.*
 import com.paya.data.repository.AuthRepositoryImpl
+import com.paya.domain.models.local.NationalCodeModel
 import com.paya.domain.models.local.UserInfoDbModel
 import com.paya.domain.models.remote.*
 import com.paya.domain.models.repo.*
@@ -201,4 +202,7 @@ abstract class AuthModule {
 	@Binds
 	abstract fun bindGetAuthLinkUseCase(useCase: GetAuthLinkUseCase):
 			UseCase<String,GetAuthLinkRepoModel>
+	@Binds
+	abstract fun bindGetNationalUseCase(useCase: GetNationalUseCase):
+			UseCase<Unit, NationalCodeModel>
 }

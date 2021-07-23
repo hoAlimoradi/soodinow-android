@@ -1,5 +1,6 @@
 package com.paya.domain.repository
 
+import com.paya.domain.models.local.NationalCodeModel
 import com.paya.domain.models.repo.*
 import com.paya.domain.tools.Resource
 
@@ -37,6 +38,8 @@ interface AuthRepository {
 	suspend fun updateRefreshToken(token: String)
 	suspend fun getMobile(): Resource<String>
 	suspend fun setMobile(mobile: String)
+	fun setNationalCode(code: String)
+	fun getNationalCode(): Resource<NationalCodeModel>
 	suspend fun updateIsPasswordSet(isPasswordSet: Boolean)
 	suspend fun updateIsHintShowed(isHintShowed: Boolean)
 	suspend fun getUserInfo(): Resource<UserInfoRepoModel>

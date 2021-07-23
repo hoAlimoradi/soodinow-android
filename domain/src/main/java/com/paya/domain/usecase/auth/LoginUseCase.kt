@@ -19,6 +19,7 @@ class LoginUseCase @Inject constructor(
 		if (resource.status == Status.SUCCESS){
 			authRepository.setMobile(param.username)
 			if (resource.status == Status.SUCCESS){
+				authRepository.setNationalCode(param.username)
 				resource.data?.accessToken?.let { authRepository.updateAccessToken(it) }
 				resource.data?.refreshToken?.let { authRepository.updateRefreshToken(it) }
 			}
