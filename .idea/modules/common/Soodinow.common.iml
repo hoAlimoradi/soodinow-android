@@ -32,10 +32,11 @@
         </compilerSettings>
         <compilerArguments>
           <option name="destination" value="$MODULE_DIR$/../../../common/build/tmp/kotlin-classes/debug" />
-          <option name="classpath" value="$MODULE_DIR$/../../../common/build/intermediates/compile_r_class_jar/debug/R.jar:/Users/arsalan/.gradle/caches/transforms-2/files-2.1/5da28397733692c2115d8172fd270b97/jetified-kotlin-android-extensions-runtime-1.4.31.jar:/Users/arsalan/.gradle/caches/transforms-2/files-2.1/6c676e8dbd7771a9d071e19fa748298a/jetified-kotlin-stdlib-jdk7-1.3.72.jar:/Users/arsalan/.gradle/caches/transforms-2/files-2.1/41a8df940f570ed2260ab1d93593416a/jetified-core-ktx-1.5.0-alpha04-api.jar:/Users/arsalan/.gradle/caches/transforms-2/files-2.1/0d7c85886df727c42eb687b584b591e8/jetified-kotlin-stdlib-1.4.31.jar:/Users/arsalan/.gradle/caches/transforms-2/files-2.1/108cdcc582f741cb75d03aeb7e755a9f/jetified-kotlin-stdlib-common-1.4.31.jar:/Users/arsalan/.gradle/caches/transforms-2/files-2.1/e39622b1ed55c7df794927ea5671e07e/jetified-annotations-13.0.jar:/Users/arsalan/.gradle/caches/transforms-2/files-2.1/59c2314db7c255991782dd9c50f9328a/core-1.5.0-alpha04-api.jar:/Users/arsalan/.gradle/caches/transforms-2/files-2.1/796a9c93d2dd7e4a3c954510dfe11048/lifecycle-runtime-2.0.0-api.jar:/Users/arsalan/.gradle/caches/transforms-2/files-2.1/eef518bb41b410e3c00976a72e871c5a/versionedparcelable-1.1.0-api.jar:/Users/arsalan/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-common/2.0.0/e070ffae07452331bc5684734fce6831d531785c/lifecycle-common-2.0.0.jar:/Users/arsalan/.gradle/caches/modules-2/files-2.1/androidx.arch.core/core-common/2.0.0/bb21b9a11761451b51624ac428d1f1bb5deeac38/core-common-2.0.0.jar:/Users/arsalan/.gradle/caches/modules-2/files-2.1/androidx.collection/collection/1.0.0/42858b26cafdaa69b6149f45dfc2894007bc2c7a/collection-1.0.0.jar:/Users/arsalan/.gradle/caches/modules-2/files-2.1/androidx.annotation/annotation/1.2.0-alpha01/cf0f760ea00702c040b3f8c9ccbe615ae26356dc/annotation-1.2.0-alpha01.jar:/Users/arsalan/Library/Android/sdk/platforms/android-30/android.jar:/Users/arsalan/Library/Android/sdk/build-tools/30.0.1/core-lambda-stubs.jar" />
+          <option name="classpath" value="$MODULE_DIR$/../../../common/build/intermediates/compile_r_class_jar/debug/R.jar:/home/ho/.gradle/caches/transforms-2/files-2.1/5da28397733692c2115d8172fd270b97/jetified-kotlin-android-extensions-runtime-1.4.31.jar:/home/ho/.gradle/caches/transforms-2/files-2.1/6c676e8dbd7771a9d071e19fa748298a/jetified-kotlin-stdlib-jdk7-1.3.72.jar:/home/ho/.gradle/caches/transforms-2/files-2.1/41a8df940f570ed2260ab1d93593416a/jetified-core-ktx-1.5.0-alpha04-api.jar:/home/ho/.gradle/caches/transforms-2/files-2.1/0d7c85886df727c42eb687b584b591e8/jetified-kotlin-stdlib-1.4.31.jar:/home/ho/.gradle/caches/transforms-2/files-2.1/108cdcc582f741cb75d03aeb7e755a9f/jetified-kotlin-stdlib-common-1.4.31.jar:/home/ho/.gradle/caches/transforms-2/files-2.1/e39622b1ed55c7df794927ea5671e07e/jetified-annotations-13.0.jar:/home/ho/.gradle/caches/transforms-2/files-2.1/59c2314db7c255991782dd9c50f9328a/core-1.5.0-alpha04-api.jar:/home/ho/.gradle/caches/transforms-2/files-2.1/796a9c93d2dd7e4a3c954510dfe11048/lifecycle-runtime-2.0.0-api.jar:/home/ho/.gradle/caches/transforms-2/files-2.1/eef518bb41b410e3c00976a72e871c5a/versionedparcelable-1.1.0-api.jar:/home/ho/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-common/2.0.0/e070ffae07452331bc5684734fce6831d531785c/lifecycle-common-2.0.0.jar:/home/ho/.gradle/caches/modules-2/files-2.1/androidx.arch.core/core-common/2.0.0/bb21b9a11761451b51624ac428d1f1bb5deeac38/core-common-2.0.0.jar:/home/ho/.gradle/caches/modules-2/files-2.1/androidx.collection/collection/1.0.0/42858b26cafdaa69b6149f45dfc2894007bc2c7a/collection-1.0.0.jar:/home/ho/.gradle/caches/modules-2/files-2.1/androidx.annotation/annotation/1.2.0-alpha01/cf0f760ea00702c040b3f8c9ccbe615ae26356dc/annotation-1.2.0-alpha01.jar:/home/ho/Android/Sdk/platforms/android-30/android.jar:/home/ho/Android/Sdk/build-tools/30.0.1/core-lambda-stubs.jar" />
           <option name="noStdlib" value="true" />
           <option name="noReflect" value="true" />
           <option name="moduleName" value="common_debug" />
+          <option name="jvmTarget" value="1.6" />
           <option name="languageVersion" value="1.4" />
           <option name="apiVersion" value="1.4" />
           <option name="pluginOptions">
@@ -74,13 +75,13 @@
       <sourceFolder url="file://$MODULE_DIR$/../../../common/build/generated/ap_generated_sources/debug/out" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../common/build/generated/source/buildConfig/debug" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../common/build/generated/source/kapt/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../common/build/generated/res/resValues/debug" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../common/build/generated/source/kaptKotlin/debug" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../common/build/generated/source/kaptKotlin/debug" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../common/build/generated/source/kaptKotlin/debugAndroidTest" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../common/build/generated/source/kaptKotlin/debugAndroidTest" isTestSource="true" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../common/build/generated/source/kaptKotlin/debugUnitTest" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/../../../common/build/generated/res/resValues/debug" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/../../../common/build/generated/source/kaptKotlin/debug" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../../common/build/generated/source/kaptKotlin/debugAndroidTest" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/../../../common/build/generated/source/kaptKotlin/debugUnitTest" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../common/build/generated/source/kaptKotlin/debugUnitTest" isTestSource="true" generated="true" />
       <excludeFolder url="file://$MODULE_DIR$/../../../common/.gradle" />
       <excludeFolder url="file://$MODULE_DIR$/../../../common/build" />
     </content>
@@ -93,6 +94,16 @@
           <root url="file://$MODULE_DIR$/../../../common/build/tmp/kapt3/classes/releaseUnitTest" />
           <root url="file://$MODULE_DIR$/../../../common/build/tmp/kapt3/classes/debug" />
           <root url="file://$MODULE_DIR$/../../../common/build/tmp/kapt3/classes/release" />
+          <root url="file://$MODULE_DIR$/../../../common/build/tmp/kapt3/classes/debugUnitTest" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="TEST">
+      <library name="Gradle: kaptGeneratedTestClasses">
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../../../common/build/tmp/kapt3/classes/debugAndroidTest" />
           <root url="file://$MODULE_DIR$/../../../common/build/tmp/kapt3/classes/debugUnitTest" />
         </CLASSES>
         <JAVADOC />

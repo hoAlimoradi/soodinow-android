@@ -2,9 +2,11 @@ package com.paya.presentation.ui.splash
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.paya.domain.models.repo.CheckVersionRepoModel
+import com.paya.domain.models.repo.ConfigRepoModel
 import com.paya.domain.models.repo.ValidTokenRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
@@ -29,6 +31,7 @@ class SplashActivity : BaseActivity<SplashActivityViewModel>() {
         versionTxt.text = getVersionName(this)
         observe(mViewModel.status, ::readyCheckVersion)
         observe(mViewModel.statusValidToken, ::readyValidToken)
+        observe(mViewModel.statusConfig, ::getConfig)
         mViewModel.checkVersion(getVersionName(this))
 
     }
@@ -58,6 +61,15 @@ class SplashActivity : BaseActivity<SplashActivityViewModel>() {
         }
     }
 
+
+    private fun getConfig(resource: Resource<ConfigRepoModel>) {
+        if (resource.status == Status.SUCCESS) {
+            resource.data?.let {
+                Log.e(" getConfig it.appLink",it.appLink)
+                //updateAppDialog.setLink(it.appLink)
+            }
+        }
+    }
 
     override val baseViewModel: BaseViewModel
         get() = mViewModel
