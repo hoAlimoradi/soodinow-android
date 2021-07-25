@@ -29,7 +29,7 @@ class MySMSBroadcastReceiver : BroadcastReceiver() {
                         // by sending the code back to your server for SMS authenticity.
                         // But here we are just passing it to MainActivity
                         if (otpReceiver != null) {
-                            otp = otp.replace("<#> کد فعال سازی سودینو: ", "").split("\n".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0]
+                            otp = otp.replace(otp.substring(0,otp.indexOf(":")+2),"").split("\n".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0]
                             otpReceiver!!.onOTPReceived(otp)
                         }
                     }

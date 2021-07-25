@@ -13,6 +13,8 @@ data class BaseModel<T>(
 data class ErrorModel(
 	@SerializedName("message")
 	val message: String,
+	@SerializedName("extra")
+	val extra: Any?,
 	@SerializedName("code")
 	val code: Int
 ): NoObfuscate

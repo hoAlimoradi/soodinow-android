@@ -48,7 +48,7 @@ sealed class ApiResponse<T> {
         }
 
         fun <T> create(error: Throwable): ApiErrorResponse<T> {
-            return ApiErrorResponse("عملیات شما با خطا مواجه شد",-1)
+            return ApiErrorResponse("عملیات شما با خطا مواجه شد",null,-1)
         }
 
         fun <T> create(response: Response<T>): ApiResponse<T> {
@@ -64,6 +64,7 @@ sealed class ApiResponse<T> {
             }   else {
                 ApiErrorResponse(
                     getErrorMessage(errorBody) ?: "unknown error",
+                    parseBaseModel(errorBody)?.error?.extra,
                     getErrorCode(errorBody,responseCode)
                 )
             }
@@ -78,4 +79,4 @@ class ApiEmptyResponse<T>(val code: Int) : ApiResponse<T>()
 
 data class ApiSuccessResponse<T>(val body: T, val code: Int) : ApiResponse<T>()
 
-data class ApiErrorResponse<T>(val errorMessage: String, val code: Int) : ApiResponse<T>()
+data class ApiErrorResponse<T>(val errorMessage: String,val extra:Any? , val code: Int) : ApiResponse<T>()
