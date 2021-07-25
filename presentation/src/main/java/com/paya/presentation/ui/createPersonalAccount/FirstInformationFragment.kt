@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.paya.domain.models.repo.ProfileExtraRepoModel
 import com.paya.domain.models.repo.ProfileRepoModel
 import com.paya.domain.models.repo.ProvinceRepoModel
 import com.paya.domain.tools.Resource
@@ -236,13 +237,32 @@ class FirstInformationFragment : BaseFragment<FirstInformationViewModel>() {
 	private fun onReadyUpdateProfile(resource: Resource<ProfileRepoModel>) {
 		when (resource.status) {
 			Status.SUCCESS -> {
-					context.let {
-						Toast.makeText(it, "پروفایل با موفقیت آپدیت شد", Toast.LENGTH_SHORT)
-							.show()
-					}
+				context.let {
+					Toast.makeText(it, "پروفایل با موفقیت آپدیت شد", Toast.LENGTH_SHORT)
+						.show()
+				}
 				findNavController().popBackStack()
 
 			}
+			Status.ERROR -> {
+				mBinding?.let { mBinding ->
+				resource.extra?.let {
+					if (it is ProfileExtraRepoModel) {
+						mBinding.firstName.setError(it.firstName)
+						mBinding.lastName.setError(it.lastName)
+						mBinding.phone.setError(it.phone)
+						mBinding.email.setError(it.email)
+						mBinding.birthDate.setError(it.birthDay)
+						mBinding.shaba.setError(it.bban)
+						mBinding.gender.setError(it.gender)
+						mBinding.city.setError(it.city)
+						mBinding.province.setError(it.state)
+						mBinding.address.setError(it.address)
+					}
+				}
+
+			}
+		}
 
 			else -> return
 		}

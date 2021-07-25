@@ -78,6 +78,11 @@ abstract class AuthModule {
 			ProfileRemoteModel,
 			ProfileRepoModel
 			>
+	@Binds
+	abstract fun bindProfileExtraRemoteRepoMapper(mapper: ProfileExtraRemoteRepoMapper): Mapper<
+			ProfileExtraRemoteModel,
+			ProfileExtraRepoModel
+			>
 	
 	@Binds
 	abstract fun bindUpdateProfileRepoRemoteMapper(mapper: ProfileRepoRemoteMapper): Mapper<

@@ -2,9 +2,12 @@ package com.paya.data.repository
 
 import com.paya.common.Mapper
 import com.paya.data.database.userInfo.UserInfoDbApi
+import com.paya.data.network.apiresponse.ApiErrorResponse
+import com.paya.data.network.apiresponse.ApiResponse
 import com.paya.data.network.remote_api.AuthService
 import com.paya.data.sharedpreferences.PreferenceHelper
 import com.paya.data.utils.getResourceFromApiResponse
+import com.paya.data.utils.parseExtraModel
 import com.paya.domain.models.local.NationalCodeModel
 import com.paya.domain.models.local.UserInfoDbModel
 import com.paya.domain.models.remote.*
@@ -26,6 +29,7 @@ class AuthRepositoryImpl @Inject constructor(
     private val preferenceHelper: PreferenceHelper,
     private val profileRemoteRepoMapper: Mapper<ProfileRemoteModel, ProfileRepoModel>,
     private val profileRepoRemoteMapper: Mapper<ProfileBodyRepoModel, ProfileBodyRemoteModel>,
+    private val profileExtraRemoteRepoMapper: Mapper<ProfileExtraRemoteModel, ProfileExtraRepoModel>,
     private val changePasswordRepoRemoteMapper: Mapper<ChangePasswordRepoBodyModel, ChangePasswordRemoteBodyModel>,
     private val changePasswordRemoteRepoMapper: Mapper<ChangePasswordRemoteModel, ChangePasswordRepoModel>,
     private val perLoginRemoteRepoMapper: Mapper<PerLoginRemoteModel, PerLoginRepoModel>,
@@ -175,7 +179,15 @@ class AuthRepositoryImpl @Inject constructor(
             preferenceHelper.getAccessToken(),
             profileRepoRemoteMapper.map(body)
         )
-        return getResourceFromApiResponse(updateProfileApi) {
+        var extra:ProfileExtraRepoModel? = null
+        if (updateProfileApi is ApiErrorResponse) {
+            val extraRemote = parseExtraModel<ProfileExtraRemoteModel>(updateProfileApi.extra)
+            extraRemote?.let {
+                extra = profileExtraRemoteRepoMapper.map(it)
+            }
+        }
+
+        return getResourceFromApiResponse(updateProfileApi,extra ) {
             profileRemoteRepoMapper.map(it.data)
         }
     }
