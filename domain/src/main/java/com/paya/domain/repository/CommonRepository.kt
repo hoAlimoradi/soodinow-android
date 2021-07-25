@@ -10,4 +10,8 @@ interface CommonRepository {
 	suspend fun checkVersion(version: String): Resource<CheckVersionRepoModel>
 
 	suspend fun getConfig(): Resource<ConfigRepoModel>
+
+	suspend fun saveAppLink(appLink: String): Resource<Unit>
+
+	suspend fun getAppLink(): Resource<String>
 }

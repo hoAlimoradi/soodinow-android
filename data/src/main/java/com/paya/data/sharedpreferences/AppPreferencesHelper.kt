@@ -81,6 +81,16 @@ class AppPreferencesHelper @Inject constructor(
         return mPrefs.getString(PREF_KEY_NATIONAL_CODE,null) ?: ""
     }
 
+    override fun setAppLink(appLink: String) {
+        mPrefs.edit()
+            .putString(PREF_KEY_APP_LINK, appLink)
+            .apply()
+    }
+
+    override fun getAppLink(): Resource<String> {
+        return Resource.success(mPrefs.getString(PREF_KEY_APP_LINK,null) ?: "",200)
+
+    }
     companion object {
         private const val PREF_KEY_ACCESS_TOKEN: String = "PREF_KEY_ACCESS_TOKEN"
         private const val PREF_KEY_REFRESH_TOKEN: String = "PREF_KEY_REFRESH_TOKEN"
@@ -88,6 +98,7 @@ class AppPreferencesHelper @Inject constructor(
         private const val PREF_KEY_NATIONAL_CODE: String = "PREF_KEY_NATIONAL_CODE"
         private const val PREF_KEY_PASSWORD: String = "PREF_KEY_PASSWORD"
         private const val PREF_KEY_IV: String = "PREF_KEY_IV"
+        private const val PREF_KEY_APP_LINK: String = "PREF_KEY_APP_LINK"
     }
 
 }

@@ -31,4 +31,8 @@ interface PreferenceHelper {
     fun setNationalCode(code: String)
 
     fun getNationalCode(): String
+
+    fun setAppLink(appLink: String)
+
+    fun getAppLink(): Resource<String>
 }

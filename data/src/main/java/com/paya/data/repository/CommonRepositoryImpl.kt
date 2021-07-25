@@ -43,5 +43,14 @@ class CommonRepositoryImpl @Inject constructor(
 		}
 	}
 
+	override suspend fun saveAppLink(appLink: String): Resource<Unit> {
+		preferenceHelper.setAppLink(appLink)
+		return Resource.success(Unit, 200)
+	}
+
+	override suspend fun getAppLink(): Resource<String> {
+		return preferenceHelper.getAppLink()
+	}
+
 
 }
