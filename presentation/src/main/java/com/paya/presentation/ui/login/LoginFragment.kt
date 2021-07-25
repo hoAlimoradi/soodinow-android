@@ -132,6 +132,7 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
         }
     }
 
+
     override fun onDestroyView() {
         mBinding = null
         biometricPrompt = null
