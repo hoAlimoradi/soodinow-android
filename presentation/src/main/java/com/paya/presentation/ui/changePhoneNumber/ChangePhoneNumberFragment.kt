@@ -96,6 +96,15 @@ class ChangePhoneNumberFragment : BaseFragment<ChangePhoneNumberViewModel>() {
         }
 
     }
+    override fun onPause() {
+        super.onPause()
+        activity?.let { activity ->
+            if (registerSms != null) {
+                activity.unregisterReceiver(registerSms)
+                registerSms = null
+            }
+        }
+    }
 
     private fun readyRemainingTime(time: Int) {
         mBinding?.apply {

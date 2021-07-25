@@ -119,7 +119,15 @@ class ActivateFragment : BaseFragment<ActivateViewModel>() {
 		super.onResume()
 		requestHint()
 	}
-
+	override fun onPause() {
+		super.onPause()
+		activity?.let { activity ->
+			if (registerSms != null) {
+				activity.unregisterReceiver(registerSms)
+				registerSms = null
+			}
+		}
+	}
 	override fun onOTPReceived(otp: String) {
 		super.onOTPReceived(otp)
 		mBinding?.apply {

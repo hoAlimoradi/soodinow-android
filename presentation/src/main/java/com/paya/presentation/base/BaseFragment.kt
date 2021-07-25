@@ -70,15 +70,7 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment(), MySMSBroadcastRece
 			resource.data?.let { openUrl(it.link) }
 		}
 	}
-	override fun onPause() {
-		super.onPause()
-		activity?.let { activity ->
-			if (registerSms != null) {
-				activity.unregisterReceiver(registerSms)
-				registerSms = null
-			}
-		}
-	}
+
 	fun readyError(error: String) {
 		if (errorDialog == null)
 			errorDialog = ErrorDialog()

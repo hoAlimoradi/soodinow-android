@@ -10,6 +10,7 @@ import com.paya.domain.tools.Resource
 import com.paya.domain.tools.UseCase
 import com.paya.domain.usecase.auth.GetNationalUseCase
 import com.paya.presentation.base.BaseViewModel
+import com.paya.presentation.utils.SingleLiveEvent
 import com.paya.presentation.utils.callResource
 import com.paya.presentation.utils.md5
 import com.paya.presentation.utils.startWithCountryCodeMobile
@@ -23,7 +24,7 @@ class LoginViewModel @Inject constructor(
 	private val getNationalUseCase: UseCase<Unit, NationalCodeModel>,
 	private val authRepository: AuthRepository
 ) : BaseViewModel() {
-	val loginResource = MutableLiveData<Resource<PerLoginRepoModel>>()
+	val loginResource = SingleLiveEvent<Resource<PerLoginRepoModel>>()
 	val mobile = MutableLiveData<String>()
 	val nationalCodeStatus = MutableLiveData<Resource<NationalCodeModel>>()
 
