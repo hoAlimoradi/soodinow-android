@@ -68,6 +68,7 @@ val resource = callResource(this@ProfileViewModel, existAccountUseCase.action(Un
 				resource.message?.let { setErrorMessage(it) }
 				hideLoading()
 			}
+			hideLoading()
 			existAccount.postValue(resource)
 		}
 	}

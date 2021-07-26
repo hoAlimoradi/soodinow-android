@@ -26,7 +26,7 @@ class ProfileExtraRemoteRepoMapper @Inject constructor() : Mapper<
 			param.state ?.let { if (it.isEmpty()) "" else it[0] }?:"",
 			param.city ?.let { if (it.isEmpty()) "" else it[0] }?:"",
 			param.address ?.let { if (it.isEmpty()) "" else it[0] }?:"",
-			param.company ?.let { if (it.isEmpty()) "" else it[0] }?:"",
+			param.company ?.let { if (it.isEmpty()) "" else it[0] }?:""
 		)
 	}
 	

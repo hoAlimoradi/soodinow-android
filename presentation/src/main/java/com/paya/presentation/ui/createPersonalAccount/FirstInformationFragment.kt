@@ -21,6 +21,7 @@ import com.paya.presentation.utils.Utils
 import com.paya.presentation.utils.isValidEmail
 import com.paya.presentation.utils.observe
 import com.paya.presentation.utils.picker.PickerViewDialog
+import com.paya.presentation.utils.stringLocalizer
 import com.paya.presentation.viewmodel.FirstInformationViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import ir.hamsaa.persiandatepicker.Listener
@@ -132,10 +133,10 @@ class FirstInformationFragment : BaseFragment<FirstInformationViewModel>() {
 
 			val firstName = mBinding.firstName.getText()
 			val lastName = mBinding.lastName.getText()
-			val phone = mBinding.phone.getText()
-			val email = mBinding.email.getText()
+			val phone = mBinding.phone.getText().stringLocalizer()
+			val email = mBinding.email.getText().stringLocalizer()
 			val birthDay = mViewModel.birthDay.let { Utils.convertToDate(it) }
-			val bban = mBinding.shaba.getText()
+			val bban = mBinding.shaba.getText().stringLocalizer()
 			val gender =
 				if (mBinding.gender.getText() == "مرد" || mBinding.gender.getText()
 						.isEmpty()

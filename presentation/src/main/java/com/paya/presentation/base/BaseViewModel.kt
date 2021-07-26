@@ -34,7 +34,7 @@ abstract class BaseViewModel : ViewModel() {
 	fun farabiAuth() {
 		viewModelScope.launch {
 			showLoading()
-			val response = callResource(this@BaseViewModel,getAuthLinkUseCase.action("app://soodinow.com"))
+			val response = callResource(this@BaseViewModel,getAuthLinkUseCase.action("app://com.paya.soodinow.splash"))
 			unFarabiAuth.postValue(response)
 			hideLoading()
 		}

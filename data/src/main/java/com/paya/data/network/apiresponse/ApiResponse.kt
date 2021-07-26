@@ -49,7 +49,8 @@ sealed class ApiResponse<T> {
         }
 
         fun <T> create(error: Throwable): ApiErrorResponse<T> {
-            return ApiErrorResponse("عملیات شما با خطا مواجه شد",-1)
+            Sentry.captureException(error)
+            return ApiErrorResponse("عملیات شما با خطا مواجه شد",null,-1)
         }
 
         fun <T> create(response: Response<T>): ApiResponse<T> {
