@@ -1,13 +1,17 @@
 package com.paya.domain.repository
 
 import com.paya.domain.models.remote.UserTestBody
-import com.paya.domain.models.repo.CheckVersionRepoModel
-import com.paya.domain.models.repo.ProvinceRepoModel
-import com.paya.domain.models.repo.QuestionsRepoModel
-import com.paya.domain.models.repo.UserTestRepoModel
+import com.paya.domain.models.repo.*
 import com.paya.domain.tools.Resource
 
 interface CommonRepository {
 	suspend fun getCity(): Resource<List<ProvinceRepoModel>>
+
 	suspend fun checkVersion(version: String): Resource<CheckVersionRepoModel>
+
+	suspend fun getConfig(): Resource<ConfigRepoModel>
+
+	suspend fun saveAppLink(appLink: String): Resource<Unit>
+
+	suspend fun getAppLink(): Resource<GetAppLinkRepoModel>
 }

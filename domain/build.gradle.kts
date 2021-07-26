@@ -40,7 +40,7 @@ dependencies {
     
     implementation ("io.objectbox:objectbox-kotlin:${Dependencies.Versions.OBJECT_BOX_VER}")
 
-    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Dependencies.Versions.COROUTINES_VER}")
+   // implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Dependencies.Versions.COROUTINES_VER}")
     
     implementation("com.squareup.retrofit2:retrofit:${Dependencies.Versions.RETROFIT_VER}")
     implementation ("com.squareup.retrofit2:converter-gson:${Dependencies.Versions.GSON_CONVERTER_VER}")

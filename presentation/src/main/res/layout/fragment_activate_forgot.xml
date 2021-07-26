@@ -101,7 +101,6 @@
             app:pinBackgroundDrawable="@drawable/round_corner_layout"
             app:pinLineColors="@color/conifer_green"
             app:pinLineStroke="0dp"
-            app:pinCharacterMask="*"
             app:pinBackgroundIsSquare="true"
             app:pinLineStrokeSelected="1dp"
             android:layout_marginEnd="@dimen/margin_m"

@@ -225,16 +225,18 @@ class ChartProfileDialog : BaseDialogFragment<ChartProfileViewModel>() {
         chart.invalidate()
 
         val index = chart.data.dataSets[0].entryCount - 1
+        if (index > -1) {
+            val x = chart.data.dataSets[0].getEntryForIndex(index).x
 
-        val x = chart.data.dataSets[0].getEntryForIndex(index).x
+            val y = chart.data.dataSets[0].getEntryForIndex(index).y
 
-        val y = chart.data.dataSets[0].getEntryForIndex(index).y
+            chart.highlightValue(x, y, 0)
 
-        chart.highlightValue(x, y, 0)
-        chart.marker.refreshContent(
-            chart.data.dataSets[0].getEntryForIndex(index),
-            chart.getHighlightByTouchPoint(x, y)
-        )
+            chart.marker.refreshContent(
+                chart.data.dataSets[0].getEntryForIndex(index),
+                chart.getHighlightByTouchPoint(x, y)
+            )
+        }
     }
 
     private fun setAccountData(

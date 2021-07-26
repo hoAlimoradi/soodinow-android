@@ -38,7 +38,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Dependencies.Versions.KOTLIN_VERSION}")
     implementation("androidx.core:core-ktx:${Dependencies.Versions.KTX_VER}")
 
-    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Dependencies.Versions.COROUTINES_VER}")
+    //implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Dependencies.Versions.COROUTINES_VER}")
     
     implementation ("se.ansman.kotshi:api:${Dependencies.Versions.KOTSHI_VER}")
     kapt("se.ansman.kotshi:compiler:${Dependencies.Versions.KOTSHI_VER}")
@@ -56,7 +56,7 @@ dependencies {
     
     implementation(project(Dependencies.Modules.DOMAIN))
     implementation(project(Dependencies.Modules.COMMON))
-    
+    implementation ("io.sentry:sentry-android:${Dependencies.Versions.SENTRY}")
     debugImplementation("com.github.ChuckerTeam.Chucker:library:${Dependencies.Versions.CHUCK_VER}")
     releaseImplementation("com.github.ChuckerTeam.Chucker:library-no-op:${Dependencies.Versions.CHUCK_VER}")
 

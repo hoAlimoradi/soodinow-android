@@ -78,7 +78,6 @@
             app:pinAnimationType="popIn"
             app:pinBackgroundDrawable="@drawable/round_corner_layout"
             app:layout_constraintBottom_toTopOf="@id/resend_code"
-            app:pinCharacterMask="*"
             app:pinLineStrokeSelected="1dp"
             app:pinLineColors="@color/conifer_green"
             app:pinBackgroundIsSquare="true"

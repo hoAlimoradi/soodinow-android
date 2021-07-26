@@ -1,8 +1,11 @@
 package com.paya.presentation.utils
 
 import android.app.Activity
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.graphics.Rect
 import android.graphics.Typeface
@@ -139,7 +142,12 @@ fun String.isSecretPassword(): Boolean {
     val matcher = pattern.matcher(this)
     return matcher.matches()
 }
-
+fun String.copy(context: Context) {
+    val clipboard: ClipboardManager =
+        context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    val clip: ClipData = ClipData.newPlainText("link", this)
+    clipboard.setPrimaryClip(clip)
+}
 fun Int.remainingTime(): String {
     return when {
         this == 120 -> {
@@ -398,6 +406,55 @@ fun View.setFocusTarget(target: EditText?) {
         val imm: InputMethodManager? =
             target.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
         imm?.showSoftInput(target, InputMethodManager.SHOW_IMPLICIT)
+    }
+}
+
+fun Activity.intentMessageTelegram(msg: String) {
+    val appName = "org.telegram.messenger"
+    val isAppInstalled: Boolean =
+        isAppAvailable(applicationContext, appName)
+    if (isAppInstalled) {
+        val myIntent = Intent(Intent.ACTION_SEND)
+        myIntent.type = "text/plain"
+        myIntent.setPackage(appName)
+        myIntent.putExtra(Intent.EXTRA_TEXT, msg) //
+        startActivity(Intent.createChooser(myIntent, "Share with"))
+    }
+}
+
+fun Activity.intentMessageWhatsApp(msg: String) {
+    val appName = "com.whatsapp"
+    val isAppInstalled: Boolean =
+        isAppAvailable(applicationContext, appName)
+    if (isAppInstalled) {
+        val myIntent = Intent(Intent.ACTION_SEND)
+        myIntent.type = "text/plain"
+        myIntent.setPackage(appName)
+        myIntent.putExtra(Intent.EXTRA_TEXT, msg) //
+        startActivity(Intent.createChooser(myIntent, "Share with"))
+    }
+}
+
+fun Activity.intentMessageInstagram(msg: String) {
+    val appName = "com.instagram.android"
+    val isAppInstalled: Boolean =
+        isAppAvailable(applicationContext, appName)
+    if (isAppInstalled) {
+        val myIntent = Intent(Intent.ACTION_SEND)
+        myIntent.type = "text/plain"
+        myIntent.setPackage(appName)
+        myIntent.putExtra(Intent.EXTRA_TEXT, msg) //
+        startActivity(Intent.createChooser(myIntent, "Share with"))
+    }
+}
+
+fun isAppAvailable(context: Context, appName: String): Boolean {
+    val pm: PackageManager = context.packageManager
+    return try {
+        pm.getPackageInfo(appName, PackageManager.GET_ACTIVITIES)
+        true
+    } catch (e: PackageManager.NameNotFoundException) {
+        false
     }
 }
 

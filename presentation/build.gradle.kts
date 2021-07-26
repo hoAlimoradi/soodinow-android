@@ -104,7 +104,7 @@ dependencies {
 	implementation ("com.github.hadiidbouk:AppAuthWebView-Android:${Dependencies.Versions.APP_AUTH_WEB_VIEW}")
 	implementation ("com.github.jakob-grabner:Circle-Progress-View:1.4")
 	implementation ("com.google.android:flexbox:2.0.1")
-
+	implementation ("io.sentry:sentry-android:${Dependencies.Versions.SENTRY}")
 	implementation ("androidx.biometric:biometric:${Dependencies.Versions.BIOMETRIC}")
 	
 	implementation(project(Dependencies.Modules.DOMAIN))
