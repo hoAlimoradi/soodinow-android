@@ -2,6 +2,7 @@ package com.paya.data.sharedpreferences
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.paya.domain.models.repo.GetAppLinkRepoModel
 import com.paya.domain.tools.Resource
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
@@ -87,8 +88,8 @@ class AppPreferencesHelper @Inject constructor(
             .apply()
     }
 
-    override fun getAppLink(): Resource<String> {
-        return Resource.success(mPrefs.getString(PREF_KEY_APP_LINK,null) ?: "",200)
+    override fun getAppLink(): Resource<GetAppLinkRepoModel> {
+        return Resource.success(GetAppLinkRepoModel(mPrefs.getString(PREF_KEY_APP_LINK,null) ?: ""),200)
 
     }
     companion object {

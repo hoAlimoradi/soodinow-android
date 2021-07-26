@@ -10,11 +10,13 @@ import com.paya.domain.models.remote.ConfigRemoteModel
 import com.paya.domain.models.remote.ProvinceRemoteModel
 import com.paya.domain.models.repo.CheckVersionRepoModel
 import com.paya.domain.models.repo.ConfigRepoModel
+import com.paya.domain.models.repo.GetAppLinkRepoModel
 import com.paya.domain.models.repo.ProvinceRepoModel
 import com.paya.domain.repository.CommonRepository
 import com.paya.domain.tools.UseCase
 import com.paya.domain.usecase.common.CheckVersionUseCase
 import com.paya.domain.usecase.common.CityUseCase
+import com.paya.domain.usecase.common.GetAppLinkUseCase
 import com.paya.domain.usecase.common.GetConfigUseCase
 import com.paya.domain.usecase.farabi.FarabiAuthUseCase
 import dagger.Binds
@@ -56,4 +58,7 @@ abstract class CommonModule {
 
     @Binds
     abstract fun bindGetConfigUseCase(useCase: GetConfigUseCase): UseCase<Unit, ConfigRepoModel>
+
+    @Binds
+    abstract fun bindGetAppLinkUseCase(useCase: GetAppLinkUseCase): UseCase<Unit, GetAppLinkRepoModel>
 }

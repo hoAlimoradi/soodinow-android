@@ -32,7 +32,9 @@ class SplashActivity : BaseActivity<SplashActivityViewModel>() {
         observe(mViewModel.status, ::readyCheckVersion)
         observe(mViewModel.statusValidToken, ::readyValidToken)
         observe(mViewModel.statusConfig, ::getConfig)
+        observe(mViewModel.retryLiveData, ::readyRetryApi)
         mViewModel.checkVersion(getVersionName(this))
+        mViewModel.getConfig()
 
     }
 
@@ -65,10 +67,12 @@ class SplashActivity : BaseActivity<SplashActivityViewModel>() {
     private fun getConfig(resource: Resource<ConfigRepoModel>) {
         if (resource.status == Status.SUCCESS) {
             resource.data?.let {
-                Log.e(" getConfig it.appLink",it.appLink)
-                //updateAppDialog.setLink(it.appLink)
+
             }
         }
+    }
+    private fun readyRetryApi(resource: Int) {
+        mViewModel.checkVersion(getVersionName(this))
     }
 
     override val baseViewModel: BaseViewModel

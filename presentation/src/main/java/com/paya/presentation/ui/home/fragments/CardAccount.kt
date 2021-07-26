@@ -13,6 +13,7 @@ import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.AccountCardBinding
 import com.paya.presentation.ui.cashManager.CashManagerFragment
 import com.paya.presentation.utils.Utils
+import com.paya.presentation.viewmodel.CardAccountViewModel
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,11 +26,11 @@ private const val ARG_HAVE_BUTTON = "have_button"
  * Use the [OpenAccount.newInstance] factory method to
  * create an instance of this fragment.
  */
-class CardAccount : BaseFragment<BaseViewModel>() {
+class CardAccount : BaseFragment<CardAccountViewModel>() {
     private var mBinding: AccountCardBinding? = null
     var activeBoxRepo: ActiveBoxRepo? = null
     var haveButton: Boolean = true
-    private val viewModel: BaseViewModel by viewModels()
+    private val viewModel: CardAccountViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {

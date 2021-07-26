@@ -3,6 +3,7 @@ package com.paya.data.network.apiresponse
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.paya.domain.models.remote.BaseModel
+import io.sentry.Sentry
 import retrofit2.Response
 import java.lang.reflect.Type
 
@@ -48,6 +49,7 @@ sealed class ApiResponse<T> {
         }
 
         fun <T> create(error: Throwable): ApiErrorResponse<T> {
+            Sentry.captureException(error)
             return ApiErrorResponse("عملیات شما با خطا مواجه شد",null,-1)
         }
 

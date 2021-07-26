@@ -81,7 +81,6 @@
         app:pinBackgroundDrawable="@drawable/round_corner_layout"
         app:pinLineColors="@color/conifer_green"
         app:pinLineStroke="0dp"
-        app:pinCharacterMask="*"
         app:pinBackgroundIsSquare="true"
         app:pinLineStrokeSelected="1dp" />
 

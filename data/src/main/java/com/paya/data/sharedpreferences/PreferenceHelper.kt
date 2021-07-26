@@ -1,5 +1,6 @@
 package com.paya.data.sharedpreferences
 
+import com.paya.domain.models.repo.GetAppLinkRepoModel
 import com.paya.domain.tools.Resource
 
 interface PreferenceHelper {
@@ -34,5 +35,5 @@ interface PreferenceHelper {
 
     fun setAppLink(appLink: String)
 
-    fun getAppLink(): Resource<String>
+    fun getAppLink(): Resource<GetAppLinkRepoModel>
 }

@@ -48,7 +48,7 @@ class CommonRepositoryImpl @Inject constructor(
 		return Resource.success(Unit, 200)
 	}
 
-	override suspend fun getAppLink(): Resource<String> {
+	override suspend fun getAppLink(): Resource<GetAppLinkRepoModel> {
 		return preferenceHelper.getAppLink()
 	}
 

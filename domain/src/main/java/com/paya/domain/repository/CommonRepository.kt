@@ -13,5 +13,5 @@ interface CommonRepository {
 
 	suspend fun saveAppLink(appLink: String): Resource<Unit>
 
-	suspend fun getAppLink(): Resource<String>
+	suspend fun getAppLink(): Resource<GetAppLinkRepoModel>
 }
