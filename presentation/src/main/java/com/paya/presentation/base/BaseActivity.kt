@@ -58,7 +58,7 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
         }
     }
     private fun unAuthorized(message: String) {
-            startActivity(MainActivity.createIntent(this,false))
+            startActivity(MainActivity.createIntent(this, MainActivity.PageEnum.LOGIN))
             finish()
 
     }

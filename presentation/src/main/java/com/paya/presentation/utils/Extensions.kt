@@ -383,7 +383,7 @@ fun convertDpToPixels(dp: Float, resources: Resources): Float {
 fun roundOffDecimal(number: Float): Float? {
     val df = DecimalFormat("#.##")
     df.roundingMode = RoundingMode.CEILING
-    return df.format(number).stringLocalizer().toFloat()
+    return df.format(number).stringLocalizer().replace(",",".").toFloat()
 }
 
 

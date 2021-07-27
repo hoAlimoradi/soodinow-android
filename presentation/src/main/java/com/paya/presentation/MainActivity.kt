@@ -1,5 +1,6 @@
 package com.paya.presentation
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -13,8 +14,9 @@ import com.paya.presentation.base.BaseActivity
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.viewmodel.MainActivityViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.Serializable
 
-const val IS_LOGIN: String = "is_login"
+const val PAGE: String = "PAGE"
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<MainActivityViewModel>() {
@@ -28,7 +30,7 @@ class MainActivity : BaseActivity<MainActivityViewModel>() {
             (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment)
         val inflater = navHostFragment.navController.navInflater
         val graph = inflater.inflate(R.navigation.nav_graph)
-        if (intent==null || !intent.getBooleanExtra(IS_LOGIN,false)) {
+        if (intent?.getSerializableExtra(PAGE) != null && (intent.getSerializableExtra(PAGE)as PageEnum) == PageEnum.LOGIN) {
             graph.startDestination = R.id.hintFragment
         } else {
             graph.startDestination = R.id.mainFragment
@@ -48,13 +50,9 @@ class MainActivity : BaseActivity<MainActivityViewModel>() {
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
-        if (intent==null || !intent.getBooleanExtra(IS_LOGIN,false)) {
+        if (intent?.getSerializableExtra(PAGE) != null && (intent.getSerializableExtra(PAGE)as PageEnum) == PageEnum.LOGIN) {
             findNavController(R.id.nav_host_fragment).navigate(
                 R.id.hintFragment
-            )
-        } else {
-            findNavController(R.id.nav_host_fragment).navigate(
-                R.id.mainFragment
             )
         }
     }
@@ -62,11 +60,15 @@ class MainActivity : BaseActivity<MainActivityViewModel>() {
     override val baseViewModel: BaseViewModel
         get() = mViewModel
 
+     enum class PageEnum : Serializable{
+         LOGIN,
+         UNKNONW
+     }
     companion object {
 
         @JvmStatic
-        fun createIntent(context: Context, isLogin: Boolean): Intent {
-            return Intent(context, MainActivity::class.java).putExtra(IS_LOGIN, isLogin)
+        fun createIntent(context: Context, page: PageEnum): Intent {
+            return Intent(context, MainActivity::class.java).putExtra(PAGE, page).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         }
 
     }

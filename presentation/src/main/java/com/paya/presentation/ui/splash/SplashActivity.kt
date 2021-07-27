@@ -40,7 +40,7 @@ class SplashActivity : BaseActivity<SplashActivityViewModel>() {
 
     private fun readyValidToken(resource: Resource<ValidTokenRepoModel>) {
         if (resource.status == Status.SUCCESS) {
-            startActivity(MainActivity.createIntent(this,true))
+            startActivity(MainActivity.createIntent(this, MainActivity.PageEnum.UNKNONW))
             finish()
         }
     }
