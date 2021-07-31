@@ -23,7 +23,7 @@ class ErrorDialog : DialogFragment() {
     //private var tryAgainMessageDefualtValue2 = "هنگام دریافت مجوز، شما را با پیامک مطلع خواهیم ساخت."
     //هنگام دریافت مجوز، شما را با پیامک مطلع خواهیم ساخت.
     private var mBinding: DialogErrorBinding? = null
-    lateinit var rootView: View
+    //lateinit var rootView: View
     var onDismiss: () -> Unit = {}
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,7 +56,7 @@ class ErrorDialog : DialogFragment() {
     fun setMessage(error: ErrorDialogModel): ErrorDialog {
 
         message = error.error
-        rootView.errorTextView?.let {
+        errorTextView?.let {
             it.text = message
         }
 
