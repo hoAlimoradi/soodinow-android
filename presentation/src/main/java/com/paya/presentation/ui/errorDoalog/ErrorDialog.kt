@@ -80,7 +80,7 @@ class ErrorDialog : DialogFragment() {
 
     override fun onDestroyView() {
         onDismiss.invoke()
-        //mBinding = null
+        mBinding = null
         super.onDestroyView()
     }
 }
