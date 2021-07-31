@@ -2,26 +2,25 @@ package com.paya.presentation.ui.settings
 
 import android.Manifest
 import android.app.KeyguardManager
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.hardware.fingerprint.FingerprintManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyPermanentlyInvalidatedException
 import android.security.keystore.KeyProperties
 import android.util.Base64
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricPrompt
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.paya.domain.models.repo.ProfileRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
@@ -31,6 +30,8 @@ import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentSettingsBinding
 import com.paya.presentation.ui.createPersonalAccount.FirstInformationFragment
 import com.paya.presentation.ui.custom.LoginDialogFragment
+import com.paya.presentation.utils.UrlLinks.frequentlyAskedQuestionsUrl
+import com.paya.presentation.utils.UrlLinks.regulationUrl
 import com.paya.presentation.utils.longToast
 import com.paya.presentation.utils.observe
 import com.paya.presentation.utils.shortToast
@@ -45,8 +46,8 @@ import javax.crypto.NoSuchPaddingException
 import javax.crypto.SecretKey
 import javax.crypto.spec.IvParameterSpec
 import javax.security.cert.CertificateException
-import kotlin.jvm.Throws
 import kotlin.system.exitProcess
+
 
 @AndroidEntryPoint
 class SettingsFragment : BaseFragment<SettingViewModel>() {
@@ -153,6 +154,14 @@ class SettingsFragment : BaseFragment<SettingViewModel>() {
 
 			exitApp.setOnClickListener {
 				mViewModel.logout()
+			}
+
+			termsConditions.setOnClickListener {
+				startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(regulationUrl)))
+			}
+
+			askedQuestion.setOnClickListener {
+				startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(frequentlyAskedQuestionsUrl)))
 			}
 		}
 	}

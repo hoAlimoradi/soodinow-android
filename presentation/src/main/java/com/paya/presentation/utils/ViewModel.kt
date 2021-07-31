@@ -18,8 +18,11 @@ fun <T> callResource(viewModel: BaseViewModel,resource: Resource<T>,isShowError:
 		viewModel.existProfileUser()
 	} else if (resource.code == 1009) {
 		viewModel.farabiAuth()
-	} else if (resource.status == Status.ERROR) {
-		viewModel.showError(resource.message ?: "عملیات شما با خطا مواجه شد",isShowError)
+	} else if(resource.code == 1051){
+		viewModel.showError(resource.message ?: "عملیات شما با خطا مواجه شد","هنگام دریافت مجوز، شما را با پیامک مطلع خواهیم ساخت.",isShowError)
+	}
+	else if (resource.status == Status.ERROR) {
+		viewModel.showError(resource.message ?: "عملیات شما با خطا مواجه شد",null,isShowError)
 	}
 	return resource
 }

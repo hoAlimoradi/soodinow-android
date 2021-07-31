@@ -1,5 +1,7 @@
 package com.paya.presentation.ui.createAccountRules
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,10 +17,12 @@ import com.paya.presentation.R
 import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentCreateAccountRulesBinding
+import com.paya.presentation.utils.UrlLinks.ruleUrl
 import com.paya.presentation.utils.observe
 import com.paya.presentation.utils.setArrayStringText
 import com.paya.presentation.viewmodel.CreateAccountRulesViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_register.*
 
 @AndroidEntryPoint
 class CreateAccountRulesFragment : BaseFragment<CreateAccountRulesViewModel>() {
@@ -41,6 +45,8 @@ class CreateAccountRulesFragment : BaseFragment<CreateAccountRulesViewModel>() {
 
         observe(mViewModel.status, ::readyAddRiskOrder)
         mBinding?.apply {
+
+
             context?.let { context ->
                 ruleDesc1.setArrayStringText(context.resources.getStringArray(R.array.soodinow_rules),ContextCompat.getColor(context,R.color.green))
                 ruleDesc.setArrayStringText(context.resources.getStringArray(R.array.soodinow_rules),ContextCompat.getColor(context,R.color.green))
@@ -55,6 +61,8 @@ class CreateAccountRulesFragment : BaseFragment<CreateAccountRulesViewModel>() {
                 }
                 mViewModel.exitAccount(args.riskState, args.SelectedPrice)
             }
+
+
         }
     }
 

@@ -1,5 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="presentation/src/main/res/layout/dialog_chart_profile.xml" value="0.5140625" />
+        <entry key="presentation/src/main/res/layout/dialog_error.xml" value="0.5140625" />
+        <entry key="presentation/src/main/res/layout/dialog_financial_log_detail.xml" value="0.5140625" />
+        <entry key="presentation/src/main/res/layout/fragment_activate.xml" value="0.5140625" />
+        <entry key="presentation/src/main/res/layout/fragment_activate_change_phone_number.xml" value="0.27760416666666665" />
+        <entry key="presentation/src/main/res/layout/fragment_activate_forgot.xml" value="0.5140625" />
+        <entry key="presentation/src/main/res/layout/fragment_activate_login.xml" value="0.27760416666666665" />
+        <entry key="presentation/src/main/res/layout/fragment_cash_manager.xml" value="0.27760416666666665" />
+        <entry key="presentation/src/main/res/layout/fragment_change_password.xml" value="0.5140625" />
+        <entry key="presentation/src/main/res/layout/fragment_change_phone_number.xml" value="0.5140625" />
+        <entry key="presentation/src/main/res/layout/fragment_connect_low_risk_brokerage.xml" value="0.3967391304347826" />
+        <entry key="presentation/src/main/res/layout/fragment_create_account_rules.xml" value="0.452445652173913" />
+        <entry key="presentation/src/main/res/layout/fragment_create_low_risk_account.xml" value="0.27760416666666665" />
+        <entry key="presentation/src/main/res/layout/fragment_developer_name.xml" value="0.5140625" />
+        <entry key="presentation/src/main/res/layout/fragment_financial_report.xml" value="0.5140625" />
+        <entry key="presentation/src/main/res/layout/fragment_first_information.xml" value="0.27760416666666665" />
+        <entry key="presentation/src/main/res/layout/fragment_forgot_password.xml" value="0.5140625" />
+        <entry key="presentation/src/main/res/layout/fragment_home.xml" value="0.5140625" />
+        <entry key="presentation/src/main/res/layout/fragment_login.xml" value="0.5140625" />
+        <entry key="presentation/src/main/res/layout/fragment_login_dialog.xml" value="0.5140625" />
+        <entry key="presentation/src/main/res/layout/fragment_login_exit_report.xml" value="0.5140625" />
+        <entry key="presentation/src/main/res/layout/fragment_profile.xml" value="0.5140625" />
+        <entry key="presentation/src/main/res/layout/fragment_register.xml" value="0.5" />
+        <entry key="presentation/src/main/res/layout/fragment_settings.xml" value="0.27760416666666665" />
+        <entry key="presentation/src/main/res/layout/fragment_support.xml" value="0.27760416666666665" />
+        <entry key="presentation/src/main/res/layout/row_percent_efficiency.xml" value="0.5140625" />
+      </map>
+    </option>
+  </component>
   <component name="EntryPointsManager">
     <list size="2">
       <item index="0" class="java.lang.String" itemvalue="dagger.Binds" />

@@ -20,6 +20,7 @@ import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.presentation.R
 import com.paya.presentation.ui.errorDoalog.ErrorDialog
+import com.paya.presentation.ui.errorDoalog.ErrorDialogModel
 import com.paya.presentation.ui.farabi.FarabiAuthActivity
 import com.paya.presentation.ui.loading.LoadingDialog
 import com.paya.presentation.utils.MySMSBroadcastReceiver
@@ -71,7 +72,7 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment(), MySMSBroadcastRece
 		}
 	}
 
-	fun readyError(error: String) {
+	fun readyError(error: ErrorDialogModel) {
 		if (errorDialog == null)
 			errorDialog = ErrorDialog()
 		errorDialog?.apply {

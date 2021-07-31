@@ -1,5 +1,7 @@
 package com.paya.presentation.ui.register
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,11 +18,13 @@ import com.paya.presentation.R
 import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentRegisterBinding
+import com.paya.presentation.utils.UrlLinks
 import com.paya.presentation.utils.Utils
 import com.paya.presentation.utils.isMobile
 import com.paya.presentation.utils.observe
 import com.paya.presentation.viewmodel.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_register.*
 
 
 @AndroidEntryPoint
@@ -49,8 +53,13 @@ class RegisterFragment : BaseFragment<RegisterViewModel>() {
         super.onViewCreated(view, savedInstanceState)
         observe(mViewModel.registerStatus, ::checkRegisterStatus)
         mBinding?.apply {
+
+            txtRulesCheckBoxTitle.setOnClickListener {
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(UrlLinks.ruleUrl)))
+            }
+
             context?.let {context->
-                Utils.setSpannableRules( rulesCheckBox,getString(R.string.rules_spannable_description),ContextCompat.getColor(context,R.color.governor_bay_blue))
+                //Utils.setSpannableRules( rulesCheckBox,getString(R.string.rules_spannable_description),ContextCompat.getColor(context,R.color.governor_bay_blue))
             }
 
             submitButton.setOnClickListener {

@@ -69,8 +69,10 @@ class CashManagerViewModel @Inject constructor(
             if (response.status == Status.SUCCESS) {
                 response.data?.size?.let {
                     if (it > 0) {
-                        response.data?.get(0)?.let { seek -> minSeek = seek }
-                        response.data?.get(it - 1)?.let { seek -> maxSeek = seek }
+                        response.data?.get(0)?.let {
+                                seek -> minSeek = seek }
+                        response.data?.get(it - 1)?.let {
+                                seek -> maxSeek = seek }
                     }
                 }
             }

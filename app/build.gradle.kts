@@ -16,12 +16,40 @@ android {
     compileSdkVersion(30)
     buildToolsVersion = "30.0.1"
 
+    /*applicationVariants.all {
+        val variant = this
+        variant.outputs
+            .map { it as com.android.build.gradle.internal.api.BaseVariantOutputImpl }
+            .forEach { output ->
+                val outputFileName = "Soodinow - ${variant.versionName}.apk"
+                println("OutputFileName: $outputFileName")
+                output.outputFileName = outputFileName
+            }
+    }*/
+
+    applicationVariants.all(object : Action<com.android.build.gradle.api.ApplicationVariant> {
+        override fun execute(variant: com.android.build.gradle.api.ApplicationVariant) {
+            println("variant: ${variant}")
+            variant.outputs.all(object : Action<com.android.build.gradle.api.BaseVariantOutput> {
+                override fun execute(output: com.android.build.gradle.api.BaseVariantOutput) {
+
+                    val outputImpl = output as com.android.build.gradle.internal.api.BaseVariantOutputImpl
+                    val fileName = output.outputFileName
+                        .replace("-release", "Soodinow-r${variant.versionName}")
+                        .replace("-debug", "Soodinow-debug${variant.versionName}")
+                    println("output file name: ${fileName}")
+                    outputImpl.outputFileName = fileName
+                }
+            })
+        }
+    })
+
     defaultConfig {
         applicationId = "com.paya.soodinow"
         minSdkVersion(21)
         targetSdkVersion(30)
-        versionCode = 2
-        versionName = "1.0.1"
+        versionCode = 3
+        versionName = "1.1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders["appAuthRedirectScheme"] = "hadiidbouk-appAuthWebView"

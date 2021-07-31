@@ -12,6 +12,7 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.paya.presentation.R
 import com.paya.presentation.ui.errorDoalog.ErrorDialog
+import com.paya.presentation.ui.errorDoalog.ErrorDialogModel
 import com.paya.presentation.ui.loading.LoadingDialog
 import com.paya.presentation.utils.observe
 import kotlin.system.exitProcess
@@ -53,12 +54,12 @@ abstract class BaseDialogFragment<VM : BaseViewModel> : DialogFragment() {
     }
 
 
-    private fun readyError(error: String) {
+    private fun readyError(error: ErrorDialogModel) {
         if (errorDialog == null)
             errorDialog = ErrorDialog()
         errorDialog?.apply {
             if (!isShowing()) {
-                setMessage(error)
+                setMessage(error = error)
                 show(this@BaseDialogFragment.childFragmentManager, "errorTag")
             }
             onDismiss = {

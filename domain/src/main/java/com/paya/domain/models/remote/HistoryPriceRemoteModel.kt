@@ -7,3 +7,4 @@ data class HistoryPriceRemoteModel(
 ): NoObfuscate
 
 data class PriceModel(val title:String): NoObfuscate
+

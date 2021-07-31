@@ -18,6 +18,7 @@ import com.paya.domain.tools.Status
 import com.paya.presentation.MainActivity
 import com.paya.presentation.R
 import com.paya.presentation.ui.errorDoalog.ErrorDialog
+import com.paya.presentation.ui.errorDoalog.ErrorDialogModel
 import com.paya.presentation.ui.farabi.FarabiAuthActivity
 import com.paya.presentation.ui.loading.LoadingDialog
 import com.paya.presentation.utils.observe
@@ -75,7 +76,7 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
         }
     }
 
-    private fun readyError(error: String) {
+    private fun readyError(error: ErrorDialogModel) {
         if (errorDialog == null)
             errorDialog = ErrorDialog()
         errorDialog?.apply {

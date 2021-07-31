@@ -56,6 +56,8 @@ class FirstInformationFragment : BaseFragment<FirstInformationViewModel>() {
 	override fun onViewCreated(view: View,savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 		mBinding?.apply {
+
+			phone.disable()
 			toolbar.backClick = {
 				findNavController().popBackStack()
 			}

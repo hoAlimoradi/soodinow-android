@@ -7,6 +7,7 @@ import com.paya.domain.models.repo.GetAuthLinkRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.UseCase
 import com.paya.domain.usecase.auth.GetAuthLinkUseCase
+import com.paya.presentation.ui.errorDoalog.ErrorDialogModel
 import com.paya.presentation.utils.callResource
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -15,7 +16,7 @@ abstract class BaseViewModel : ViewModel() {
 	@Inject
 	protected lateinit var getAuthLinkUseCase: UseCase<String,GetAuthLinkRepoModel>
 	val unAuthorizeLiveData = MutableLiveData<String>()
-	val errorLiveData = MutableLiveData<String>()
+	val errorLiveData = MutableLiveData<ErrorDialogModel>()
 	val unFarabiAuth = MutableLiveData<Resource<GetAuthLinkRepoModel>>()
 	val unExistProfileUser = MutableLiveData<Unit>()
 	val unLoading = MutableLiveData<Boolean>()
@@ -45,10 +46,10 @@ abstract class BaseViewModel : ViewModel() {
 		unExistProfileUser.postValue(Unit)
 	}
 
-	fun showError(error: String, isShowError: Boolean = true) {
+	fun showError(error: String, tryAgain: String? = null, isShowError: Boolean = true) {
 		if (!isShowError)
 			return
-		errorLiveData.postValue(error)
+		errorLiveData.postValue(ErrorDialogModel(error = error, tryAgain = tryAgain))
 	}
 
 	fun showLoading() {

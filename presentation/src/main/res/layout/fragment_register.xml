@@ -50,7 +50,6 @@
             android:id="@+id/rulesCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/rules_description"
             android:drawableEnd="@drawable/check_box_selector"
             android:drawablePadding="@dimen/margin_m"
             app:layout_constraintTop_toBottomOf="@id/phone_number_layout"
@@ -65,6 +64,20 @@
             android:layout_marginBottom="@dimen/margin_l"
             app:layout_constraintBottom_toTopOf="@id/submitButton"
             app:layout_constraintVertical_chainStyle="packed" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtRulesCheckBoxTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_l"
+            android:lineSpacingExtra="@dimen/margin_m"
+            android:textColor="@color/deep_fir_green"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_size_s"
+            android:text="@string/rules_description"
+            app:layout_constraintEnd_toStartOf="@+id/rulesCheckBox"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/phone_number_layout" />
 
 
         <androidx.appcompat.widget.AppCompatButton

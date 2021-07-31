@@ -84,4 +84,16 @@ class LabelEditText @JvmOverloads constructor(
             this.hint = hint
         }
     }
+
+    fun enable() {
+        inputContentEditText?.apply {
+             this.isEnabled = true
+        }
+    }
+
+    fun disable() {
+        inputContentEditText?.apply {
+            this.isEnabled = false
+        }
+    }
 }

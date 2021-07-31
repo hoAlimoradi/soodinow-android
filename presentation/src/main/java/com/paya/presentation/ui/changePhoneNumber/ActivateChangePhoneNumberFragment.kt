@@ -128,10 +128,10 @@ class ActivateChangePhoneNumberFragment : BaseFragment<ActivateChangePhoneNumber
 	}
 	override fun onOTPReceived(otp: String) {
 		super.onOTPReceived(otp)
-		mBinding?.apply {
+		/*mBinding?.apply {
 			txtPinEntry.setText(otp)
 			txtPinEntry.hideKeyBoard()
-		}
+		}*/
 	}
 
 
