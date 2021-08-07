@@ -27,6 +27,7 @@ class IsInRiskListRemoteRepoMapper @Inject constructor(): Mapper<
 						item.namad ?: "",
 						item.percent?.let { percent -> percent * 100 } ?: 0f,
 						item.quantity ?: 0f,
+						item.price ?: 0F,
 						item.color ?: "#3bb400"
 					)
 				}

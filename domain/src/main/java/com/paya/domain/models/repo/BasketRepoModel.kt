@@ -5,5 +5,6 @@ data class BasketRepoModel (
 	val namad: String,
 	val percent: Float,
 	val quantity: Float,
+	val price: Float,
 	val color : String
 )
