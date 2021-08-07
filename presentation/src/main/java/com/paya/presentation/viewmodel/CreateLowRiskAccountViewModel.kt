@@ -54,12 +54,19 @@ class CreateLowRiskAccountViewModel @Inject constructor(
 			pieChartModel?.let { pieChartModel ->
 				if (basket.isNotEmpty() && pieChartModel.chartLabels.isEmpty() && pieChartModel.entries.isEmpty()) {
 					var allSize: Float = 0f
+					var totalAmount: Float = 0f
 					basket.forEach {
 						allSize += it.quantity
 					}
+
+					basket.forEach {
+						totalAmount += (it.quantity * it.price)
+					}
 					basket.forEachIndexed { _, pieChartData ->
-						if (pieChartModel.entries.size <= basket.size)
-							pieChartModel.entries.add(PieEntry(((pieChartData.quantity * 100) / allSize).toFloat()))
+						if (pieChartModel.entries.size <= basket.size) {
+							pieChartModel.entries.add(PieEntry(((pieChartData.quantity * pieChartData.price) / totalAmount).toFloat()))
+						}
+
 						if (pieChartModel.chartColor.size <= basket.size && pieChartData.color.isNotEmpty())
 							pieChartModel.chartColor.add(Color.parseColor(pieChartData.color))
 						if (pieChartModel.chartLabels.size <= basket.size)

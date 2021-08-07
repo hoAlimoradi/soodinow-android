@@ -80,6 +80,10 @@ class CreateLowRiskAccountFragment : BaseFragment<CreateLowRiskAccountViewModel>
                 )
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
         callFirstItem()
     }
 

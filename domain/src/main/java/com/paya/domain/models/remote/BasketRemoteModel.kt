@@ -7,5 +7,6 @@ data class BasketRemoteModel (
 	val namad: String?,
 	val percent: Float?,
 	val quantity: Float?,
+	val price: Float?,
 	val color : String?
 ): NoObfuscate

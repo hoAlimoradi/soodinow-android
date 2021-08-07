@@ -74,8 +74,11 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
                 NotificationEmptyDialog().show(parentFragmentManager, "notification dialog")
             }
         }
-        viewModel.getExistAccount()
 
+    }
+    override fun onResume() {
+        super.onResume()
+        viewModel.getExistAccount()
     }
 
     private fun setError(error: String) {
