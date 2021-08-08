@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/green">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="223dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="@dimen/margin_l"
+        android:paddingStart="24dp"
+        android:background="@drawable/bg_btn_japanese_laurel_green_corner_just_left_5_size48"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/whySoodinowTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="24dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_xl"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="سودینو چگونه کار می کند ؟" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="200dp"
+        android:layout_height="8dp"
+        android:background="@drawable/bg_btn_japanese_laurel_green_corner_just_bottom_left_5_size48"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/whySoodinowDesc"
+        android:padding="@dimen/margin_m"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAlignment="viewStart"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_m"
+        android:layout_margin="@dimen/margin_4_dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
+        tools:text="مدیریت ثروت یکی از پیشرفته ترین انواع  سرویس های مشاوره و
+مدیریت امور مربوط به دارایی افراد است. این سرویس برای مشتریان
+خود با تدوین برنامه و استراتژی های دقیق و مشخص این خدمات را
+ارائه می دهد
+هدف مدیریت ثروت کمک به فرد  برای حفظ دارایی، کاهش ریسک
+های مالی و افزایش سرمایه و پس انداز در زمان مشخص است. این
+نوع مشاوره مالی فراتر از انتخاب سرمایه گذاری است. این یک
+سرویس برتر است که برای پاسخگویی به نیازهای منحصر به فرد افراد
+طراحی شده است.در مدل های جدید مدیریت ثروت در سطح دنیا ،از
+تکنولوژی های هوشمند زیادی همچون هوش مصنوعی ، علم داده ،
+الگوریتم ها و برای ارائه خدمات به مشتریان استفاده می شود که این
+امر سبب آن شده تا هزینه خدمات مدیریت ثروت که پیش از این
+بسیار بالا بوده ، کاهش یافته و امکان استفاده از این خدمات برای
+همگان بوجود آید
+" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

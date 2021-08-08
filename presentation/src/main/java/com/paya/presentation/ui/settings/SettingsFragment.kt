@@ -163,6 +163,11 @@ class SettingsFragment : BaseFragment<SettingViewModel>() {
 			askedQuestion.setOnClickListener {
 				startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(frequentlyAskedQuestionsUrl)))
 			}
+
+			aboutUs.setOnClickListener {
+				getFindViewController()?.navigate(R.id.aboutUs)
+			}
+
 		}
 	}
 

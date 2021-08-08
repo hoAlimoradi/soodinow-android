@@ -2,7 +2,6 @@ package com.paya.presentation.ui.activateForgotPassword
 
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,23 +9,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.google.android.gms.auth.api.phone.SmsRetriever
-import com.google.android.gms.tasks.OnFailureListener
-import com.google.android.gms.tasks.OnSuccessListener
-import com.google.android.gms.tasks.Task
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.presentation.R
 import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
-import com.paya.presentation.databinding.FragmentActivateBinding
 import com.paya.presentation.databinding.FragmentActivateForgotBinding
 import com.paya.presentation.utils.Utils
 import com.paya.presentation.utils.hideKeyBoard
 import com.paya.presentation.utils.observe
 import com.paya.presentation.utils.remainingTime
 import com.paya.presentation.viewmodel.ActivateForgotPasswordViewModel
-import com.paya.presentation.viewmodel.ActivateViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 

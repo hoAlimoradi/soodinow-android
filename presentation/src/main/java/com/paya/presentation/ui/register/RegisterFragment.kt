@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -19,12 +18,10 @@ import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentRegisterBinding
 import com.paya.presentation.utils.UrlLinks
-import com.paya.presentation.utils.Utils
 import com.paya.presentation.utils.isMobile
 import com.paya.presentation.utils.observe
 import com.paya.presentation.viewmodel.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_register.*
 
 
 @AndroidEntryPoint

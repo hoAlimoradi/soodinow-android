@@ -82,7 +82,7 @@
                 android:id="@+id/whyGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:constraint_referenced_ids="whySoodinowCard,whySoodinowTitle,whySoodinowSubTitle,whySoodinowMoreButton,whySoodinowImage" />
+                app:constraint_referenced_ids="whySoodinowCard,aboutUSTitle,whySoodinowSubTitle,whySoodinowMoreButton,whySoodinowImage" />
 
             <View
                 android:id="@+id/whySoodinowCard"
@@ -96,7 +96,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/whySoodinowTitle"
+                android:id="@+id/aboutUSTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_l"
@@ -121,7 +121,7 @@
                 android:textSize="@dimen/text_size_xs"
                 app:layout_constraintEnd_toEndOf="@id/whySoodinowCard"
                 app:layout_constraintStart_toStartOf="@+id/whySoodinowCard"
-                app:layout_constraintTop_toBottomOf="@id/whySoodinowTitle" />
+                app:layout_constraintTop_toBottomOf="@id/aboutUSTitle" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/whySoodinowMoreButton"

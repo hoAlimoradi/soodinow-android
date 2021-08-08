@@ -177,6 +177,12 @@
         tools:layout="@layout/fragment_why_soodinow" />
 
     <fragment
+        android:id="@+id/aboutUs"
+        android:name="com.paya.presentation.ui.aboutUs.AboutUsFragment"
+        android:label="fragment_about_us"
+        tools:layout="@layout/fragment_why_soodinow" />
+
+    <fragment
         android:id="@+id/cashManager"
         android:name="com.paya.presentation.ui.cashManager.CashManagerFragment"
         android:label="fragment_cash_manager"

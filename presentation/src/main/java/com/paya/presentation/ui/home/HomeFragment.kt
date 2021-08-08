@@ -33,7 +33,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 
 	private var adapter: SlidePagerAdapter? = null
 	private var adapterCurrency: MarketAdapter? = null
-	private  var mBinding: FragmentHomeBinding? = null
+	private var mBinding: FragmentHomeBinding? = null
 	private val mViewModel: HomeViewModel by viewModels()
 	override fun onCreateView(
 		inflater: LayoutInflater, container: ViewGroup?,

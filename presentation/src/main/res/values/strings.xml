@@ -41,7 +41,7 @@
     <string name="create_account">انجام سرمایه گذاری </string>
     <string name="why_soodinow">با سودینو بیشترآشنا شوید ...</string>
     <string name="why_soodinow_description">مسیر های متنوع سرمایه گذاری در بازار های مالی</string>
-    <string name="why_soodinow_in_page">چرا سودینو</string>
+    <string name="why_soodinow_in_page">درباره سودینو</string>
     <string name="why_soodinow_description_in_page">ارائه ابزار های هوشمند مدیریت ثروت برای  تجربه بکر و جدید یک سرمایه گذاری خودکار و شخصی سازی شده برای تمام سرمایه گذاران</string>
     <string name="more_description">توضیحات بیشتر</string>
     <string name="market_view">مشاهده بازار</string>
@@ -253,6 +253,10 @@
 
     <string name="update_app_to_last_version">"بروزرسانی "</string>
     <string name="cancel_update_app_to_last_version">مایل نیستم</string>
+
+
+
+
 
     <string-array name="brokerage_list">
         <item>کارگزاری فارابی</item>

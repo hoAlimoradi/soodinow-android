@@ -3,42 +3,24 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="presentation/src/main/res/layout/dialog_chart_profile.xml" value="0.5140625" />
-        <entry key="presentation/src/main/res/layout/dialog_error.xml" value="0.5140625" />
-        <entry key="presentation/src/main/res/layout/dialog_financial_log_detail.xml" value="0.5140625" />
-        <entry key="presentation/src/main/res/layout/fragment_activate.xml" value="0.5140625" />
-        <entry key="presentation/src/main/res/layout/fragment_activate_change_phone_number.xml" value="0.27760416666666665" />
-        <entry key="presentation/src/main/res/layout/fragment_activate_forgot.xml" value="0.5140625" />
-        <entry key="presentation/src/main/res/layout/fragment_activate_login.xml" value="0.27760416666666665" />
-        <entry key="presentation/src/main/res/layout/fragment_cash_manager.xml" value="0.27760416666666665" />
-        <entry key="presentation/src/main/res/layout/fragment_change_password.xml" value="0.5140625" />
-        <entry key="presentation/src/main/res/layout/fragment_change_phone_number.xml" value="0.5140625" />
-        <entry key="presentation/src/main/res/layout/fragment_connect_low_risk_brokerage.xml" value="0.3967391304347826" />
-        <entry key="presentation/src/main/res/layout/fragment_create_account_rules.xml" value="0.452445652173913" />
-        <entry key="presentation/src/main/res/layout/fragment_create_low_risk_account.xml" value="0.27760416666666665" />
-        <entry key="presentation/src/main/res/layout/fragment_developer_name.xml" value="0.5140625" />
-        <entry key="presentation/src/main/res/layout/fragment_financial_report.xml" value="0.5140625" />
-        <entry key="presentation/src/main/res/layout/fragment_first_information.xml" value="0.27760416666666665" />
-        <entry key="presentation/src/main/res/layout/fragment_forgot_password.xml" value="0.5140625" />
-        <entry key="presentation/src/main/res/layout/fragment_home.xml" value="0.5140625" />
-        <entry key="presentation/src/main/res/layout/fragment_login.xml" value="0.5140625" />
-        <entry key="presentation/src/main/res/layout/fragment_login_dialog.xml" value="0.5140625" />
-        <entry key="presentation/src/main/res/layout/fragment_login_exit_report.xml" value="0.5140625" />
-        <entry key="presentation/src/main/res/layout/fragment_profile.xml" value="0.5140625" />
-        <entry key="presentation/src/main/res/layout/fragment_register.xml" value="0.5" />
-        <entry key="presentation/src/main/res/layout/fragment_settings.xml" value="0.27760416666666665" />
-        <entry key="presentation/src/main/res/layout/fragment_support.xml" value="0.27760416666666665" />
-        <entry key="presentation/src/main/res/layout/row_percent_efficiency.xml" value="0.5140625" />
+        <entry key="presentation/src/main/res/drawable/bg_btn_japanese_laurel_green_corner5_size48.xml" value="0.5005" />
+        <entry key="presentation/src/main/res/drawable/bg_btn_japanese_laurel_green_corner_just_bottom_left_5_size48.xml" value="0.5005" />
+        <entry key="presentation/src/main/res/drawable/bg_btn_japanese_laurel_green_corner_just_left_5_size48.xml" value="0.5005" />
+        <entry key="presentation/src/main/res/drawable/circle_white.xml" value="0.494" />
+        <entry key="presentation/src/main/res/drawable/circle_white_with_gray_shadow.xml" value="0.494" />
+        <entry key="presentation/src/main/res/layout/dialog_update_app.xml" value="0.2740036231884058" />
+        <entry key="presentation/src/main/res/layout/fragment_about_us.xml" value="0.5140625" />
+        <entry key="presentation/src/main/res/layout/fragment_home.xml" value="0.40443840579710144" />
+        <entry key="presentation/src/main/res/layout/fragment_new_card_account.xml" value="0.2740036231884058" />
+        <entry key="presentation/src/main/res/layout/fragment_settings.xml" value="0.278125" />
+        <entry key="presentation/src/main/res/layout/fragment_why_soodinow.xml" value="0.5140625" />
+        <entry key="presentation/src/main/res/layout/row_about_us.xml" value="0.5" />
+        <entry key="presentation/src/main/res/layout/row_market_currency.xml" value="0.24798183652875883" />
+        <entry key="presentation/src/main/res/layout/row_why_soodinow.xml" value="0.5" />
       </map>
     </option>
   </component>
-  <component name="EntryPointsManager">
-    <list size="2">
-      <item index="0" class="java.lang.String" itemvalue="dagger.Binds" />
-      <item index="1" class="java.lang.String" itemvalue="dagger.Provides" />
-    </list>
-  </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

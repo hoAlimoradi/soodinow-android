@@ -13,3 +13,4 @@ enum class Currency(val persianTitle:String) {
 	Dollar("دلار"),
 	Bourse("ریال")
 }
+

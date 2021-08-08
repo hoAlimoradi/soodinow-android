@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -19,7 +18,6 @@ import com.paya.presentation.MainActivity
 import com.paya.presentation.R
 import com.paya.presentation.ui.errorDoalog.ErrorDialog
 import com.paya.presentation.ui.errorDoalog.ErrorDialogModel
-import com.paya.presentation.ui.farabi.FarabiAuthActivity
 import com.paya.presentation.ui.loading.LoadingDialog
 import com.paya.presentation.utils.observe
 import com.paya.presentation.utils.openUrl

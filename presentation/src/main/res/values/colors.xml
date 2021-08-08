@@ -10,6 +10,7 @@
     <color name="light_gray">#f5f5f5</color>
     <color name="light">#EEEEEE</color>
     <color name="gray">#B6BEC1</color>
+    <color name="green_dark">#076022</color>
     <color name="dark_gray">#8e8e8e</color>
     <color name="dark_gray_2">#5e5e5e</color>
     <color name="dark_gray_3">#aeaeae</color>
@@ -42,6 +43,7 @@
     <color name="alabaster">#F7F7F7</color>
     <color name="white">#FFFFFF</color>
     <color name="green">#3bb400</color>
+    <color name="green_46a118">#46a118</color>
     <color name="cinnabar_red">#E53935</color>
     <color name="japanese_laurel_green">#2b7607</color>
     <color name="japanese_laurel_green_43">#6E2B7607</color>
