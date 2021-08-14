@@ -253,9 +253,8 @@
 
     <string name="update_app_to_last_version">"بروزرسانی "</string>
     <string name="cancel_update_app_to_last_version">مایل نیستم</string>
-
-
-
+    <string name="try_again">لطفا مجدد تلاش کنید</string>
+    <string name="error_functionality">عملیات شما با خطا مواجهه شد</string>
 
 
     <string-array name="brokerage_list">

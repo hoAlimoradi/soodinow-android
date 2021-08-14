@@ -8,6 +8,7 @@ import com.paya.domain.tools.Resource
 import com.paya.domain.tools.UseCase
 import com.paya.domain.usecase.auth.GetAuthLinkUseCase
 import com.paya.presentation.ui.errorDoalog.ErrorDialogModel
+import com.paya.presentation.ui.errorDoalog.TypeIconInErrorDialog
 import com.paya.presentation.utils.callResource
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -46,10 +47,10 @@ abstract class BaseViewModel : ViewModel() {
 		unExistProfileUser.postValue(Unit)
 	}
 
-	fun showError(error: String, tryAgain: String? = null, isShowError: Boolean = true) {
+	fun showError(error: String, tryAgain: String? = null, typeIcon: TypeIconInErrorDialog? = TypeIconInErrorDialog.ERROR, isShowError: Boolean = true) {
 		if (!isShowError)
 			return
-		errorLiveData.postValue(ErrorDialogModel(error = error, tryAgain = tryAgain))
+		errorLiveData.postValue(ErrorDialogModel(error = error, tryAgain = tryAgain, typeIcon = typeIcon))
 	}
 
 	fun showLoading() {

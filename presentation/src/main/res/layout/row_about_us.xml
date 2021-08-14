@@ -7,7 +7,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
 
-        android:visibility="gone"
+        android:visibility="visible"
         android:id="@+id/constraintLayoutWithBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayoutWithoutBox"
-        android:visibility="visible"
+        android:visibility="gone"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/green_46a118"

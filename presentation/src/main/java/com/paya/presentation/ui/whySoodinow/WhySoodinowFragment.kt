@@ -1,10 +1,13 @@
 package com.paya.presentation.ui.whySoodinow
 
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -37,13 +40,17 @@ class WhySoodinowFragment : BaseFragment<WhySoodinowViewModel>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        activity?.let {
-            it.window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-            it.window.statusBarColor = resources.getColor(R.color.green)
+        changeStatusBarColorToGreen()
+
+        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                backPressed()
+            }
+        })
+
+        backButton.setOnClickListener {
+            backPressed()
         }
-
-
-        backButton.setOnClickListener { findNavController().popBackStack() }
         observe(viewModel.whySoodinowListMutableLiveData, ::onDataReady)
 
         val manager = LinearLayoutManager(context)
@@ -77,10 +84,7 @@ class WhySoodinowFragment : BaseFragment<WhySoodinowViewModel>() {
     }
 
     override fun onDestroyView() {
-        activity?.let {
-            it.window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-            it.window.statusBarColor = resources.getColor(R.color.white)
-        }
+
         adapter = null
         super.onDestroyView()
     }
@@ -88,6 +92,33 @@ class WhySoodinowFragment : BaseFragment<WhySoodinowViewModel>() {
     override fun onDestroy() {
         super.onDestroy()
     }
+
+    private fun backPressed() {
+        activity?.let {
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                it.window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+            }
+            it.window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            it.window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            it.window.statusBarColor = ContextCompat.getColor(it.baseContext, R.color.white)
+        }
+
+        findNavController().popBackStack()
+    }
+
+    private fun changeStatusBarColorToGreen() {
+        activity?.let {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                it.window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE
+            }
+            it.window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+            it.window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            it.window.statusBarColor = ContextCompat.getColor(it.baseContext, R.color.green)
+        }
+    }
+
+
 
     override val baseViewModel: BaseViewModel
         get() = viewModel

@@ -7,6 +7,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import com.paya.domain.tools.NoObfuscate
 import com.paya.presentation.R
@@ -17,13 +19,14 @@ import kotlinx.android.synthetic.main.dialog_error.view.*
 
 const val TAG = "errorDialog"
 class ErrorDialog : DialogFragment() {
-
-    private var message = "عملیات شما با خطا مواجه شد"
+   /* lateinit var tryAgainText: AppCompatTextView
+    lateinit var errorText: AppCompatTextView
+    lateinit var rootView: View
+*/
+    private var message = "عملیات شما با خطا مواجهه شد"
     private var tryAgainMessageDefualtValue = "لطفا مجدد تلاش کنید"
-    //private var tryAgainMessageDefualtValue2 = "هنگام دریافت مجوز، شما را با پیامک مطلع خواهیم ساخت."
-    //هنگام دریافت مجوز، شما را با پیامک مطلع خواهیم ساخت.
-    private var mBinding: DialogErrorBinding? = null
-    //lateinit var rootView: View
+    private var typeIconInErrorDialog: TypeIconInErrorDialog = TypeIconInErrorDialog.ERROR
+
     var onDismiss: () -> Unit = {}
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,11 +38,9 @@ class ErrorDialog : DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
-/*        rootView = inflater.inflate(R.layout.dialog_error, container, false)
-        return rootView*/
-        mBinding = DialogErrorBinding.inflate(inflater, container, false)
-        return mBinding?.root
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        return inflater.inflate(R.layout.dialog_error, container, false)
+
     }
 
     override fun onResume() {
@@ -49,23 +50,43 @@ class ErrorDialog : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         errorTextView.text = message
         tryAgainTextView.text = tryAgainMessageDefualtValue
+
+        icon.apply {
+            background = if (typeIconInErrorDialog == TypeIconInErrorDialog.ERROR) {
+                ContextCompat.getDrawable(this.context, R.drawable.dialog_error_circle)
+            } else {
+                ContextCompat.getDrawable(this.context, R.drawable.dialog_warning_circle)
+            }
+
+        }
+        //errorTextView.text = message
+        //tryAgainTextView.text = tryAgainMessageDefualtValue
     }
 
     fun setMessage(error: ErrorDialogModel): ErrorDialog {
-
         message = error.error
+        error.tryAgain?.let {
+            tryAgainMessageDefualtValue = it
+        }
+        error.typeIcon?.let {
+            typeIconInErrorDialog = it
+        }
+        /*message = error.error
+
         errorTextView?.let {
             it.text = message
         }
 
         error.tryAgain?.let {
             Log.e("تسسست" , it)
+            tryAgainTextView.text = it
             //rootView.tryAgainTextView.text = it
             //ُtodo
             //mBinding!!.tryAgainTextView.text = tryAgainMessageDefualtValue2
-        }
+        }*/
         return this
     }
 
@@ -80,12 +101,15 @@ class ErrorDialog : DialogFragment() {
 
     override fun onDestroyView() {
         onDismiss.invoke()
-        mBinding = null
+        //mBinding = null
         super.onDestroyView()
     }
 }
 
 data class ErrorDialogModel (
     val error: String,
-    val tryAgain: String?
+    val tryAgain: String?,
+    val typeIcon: TypeIconInErrorDialog?
 )
+
+enum class TypeIconInErrorDialog { ERROR, WARNING }
