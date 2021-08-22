@@ -51,9 +51,11 @@ class CreateAccountRulesFragment : BaseFragment<CreateAccountRulesViewModel>() {
                 ruleDesc1.setArrayStringText(context.resources.getStringArray(R.array.soodinow_rules),ContextCompat.getColor(context,R.color.green))
                 ruleDesc.setArrayStringText(context.resources.getStringArray(R.array.soodinow_rules),ContextCompat.getColor(context,R.color.green))
             }
+
             toolbar.backClick = {
                 findNavController().popBackStack()
             }
+
             addInvestBtn.setOnClickListener {
                 if (!rulesCheckBox.isChecked) {
                     mViewModel.showError(getString(R.string.rule_error))

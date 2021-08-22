@@ -17,6 +17,8 @@
     <color name="green_3">#A9CFA6</color>
     <color name="green_gray">#A9CFA6</color>
     <color name="black">#000</color>
+    <color name="black353333">#353333</color>
+
     <color name="red">#E1261D</color>
     <color name="black_16">#29000000</color>
     <color name="black_27">#45000000</color>
@@ -64,4 +66,9 @@
     <color name="charade">#2c2e38</color>
     <color name="yellow_solid">#ffff00</color>
     <color name="loading_dialog_bg">#0AFFFFFF</color>
+    <color name="light_purple297d4181">#297d4181</color>
+    <color name="light_purple7d4181">#7d4181</color>
+
+    <color name="gray_f2f2f2">#f2f2f2</color>
+
 </resources>

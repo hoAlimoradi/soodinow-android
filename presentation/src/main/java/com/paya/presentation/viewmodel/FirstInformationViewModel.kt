@@ -2,7 +2,6 @@ package com.paya.presentation.viewmodel
 
 
 import javax.inject.Inject
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.paya.domain.models.repo.ProfileBodyRepoModel
@@ -18,7 +17,6 @@ import com.paya.presentation.utils.callResource
 import com.paya.presentation.utils.startWithCountryCodeMobile
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.hamsaa.persiandatepicker.util.PersianCalendar
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 @HiltViewModel
 class FirstInformationViewModel @Inject constructor(

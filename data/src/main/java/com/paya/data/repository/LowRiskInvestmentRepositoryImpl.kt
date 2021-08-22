@@ -22,7 +22,7 @@ data class LowRiskInvestmentRepositoryImpl @Inject constructor(
     private val totalBoxValueRemoteRepoMapper: Mapper<TotalBoxValueRemoteModel, TotalBoxValueRepoModel>,
     private val historyPriceRemoteRepoMapper: Mapper<HistoryPriceRemoteModel, HistoryPriceRepoModel>,
     private val investmentLogsRemoteRepoMapper: Mapper<InvestmentLogsRemoteModel, InvestmentLogsRepoModel>,
-    private val chartProfitRemoteRepo : Mapper<@JvmSuppressWildcards List<ChartProfitRemoteModel>, @JvmSuppressWildcards List<ChartProfitRepoModel>>,
+    private val chartProfitRemoteRepo: Mapper<@JvmSuppressWildcards List<ChartProfitRemoteModel>, @JvmSuppressWildcards List<ChartProfitRepoModel>>,
     private val preferenceHelper: PreferenceHelper,
 ) : LowRiskInvestmentRepository {
 
@@ -51,7 +51,7 @@ data class LowRiskInvestmentRepositoryImpl @Inject constructor(
                 addRiskOrderRepoRemoteMapper.map(addRiskOrderRepoBodyModel)
             )
         ) {
-             addRiskOrderRemoteRepoMapper.map(it.data)
+            addRiskOrderRemoteRepoMapper.map(it.data)
         }
     }
 
@@ -63,7 +63,7 @@ data class LowRiskInvestmentRepositoryImpl @Inject constructor(
 
     override suspend fun getSellPrice(type: String): Resource<List<Long>> {
         return getResourceFromApiResponse(
-            lowRiskInvestmentService.getSellPrice(preferenceHelper.getAccessToken(),type)
+            lowRiskInvestmentService.getSellPrice(preferenceHelper.getAccessToken(), type)
         ) {
             getSellPriceRemoteRepoMapper.map(it.data)
         }
@@ -71,7 +71,7 @@ data class LowRiskInvestmentRepositoryImpl @Inject constructor(
 
     override suspend fun setPullPrice(type: String, price: Long): Resource<String> {
         return getResourceFromApiResponse(
-            lowRiskInvestmentService.setPullPrice(preferenceHelper.getAccessToken(),type, price)
+            lowRiskInvestmentService.setPullPrice(preferenceHelper.getAccessToken(), type, price)
         ) {
             pullPriceRemoteRepoMapper.map(it.data)
         }
@@ -103,7 +103,7 @@ data class LowRiskInvestmentRepositoryImpl @Inject constructor(
     override suspend fun getInvestmentLogs(
         page: Int,
         pageSize: Int,
-        filters: Map<String,String>
+        filters: Map<String, String>
     ): Resource<InvestmentLogsRepoModel> {
         return getResourceFromApiResponse(
             lowRiskInvestmentService.getInvestmentLogs(
@@ -126,6 +126,51 @@ data class LowRiskInvestmentRepositoryImpl @Inject constructor(
         ) {
             chartProfitRemoteRepo.map(it.data)
         }
+    }
+
+    override suspend fun getSoodinowWalletContractRepoModel(): Resource<List<SoodinowWalletContractRepoModel>> {
+        val soodinowWalletContractRepoModel = SoodinowWalletContractRepoModel(
+            pointTitle = "IRT1AFRN0001",
+            name = "افران",
+            description = "افران",
+            trimesterValue =  25,
+            monthlyValue =  25,
+            weeklyValue =  25
+        )
+        return Resource.success(listOf(soodinowWalletContractRepoModel) , 200)
+    }
+
+    override suspend fun getSoodinowWalletValue(): Resource<SoodinowWalletValueRepoModel> {
+
+        val soodinowWalletValuePercentFirst = SoodinowWalletValuePercent(
+            isin = "IRT1AFRN0001",
+            namad = "افران",
+            percent = 0.25
+        )
+
+        val soodinowWalletValuePercentSecond = SoodinowWalletValuePercent(
+            isin = "IRT3FKOF0001",
+            namad = "اکورد",
+            percent = 0.5
+        )
+
+        val soodinowWalletValuePercentThird = SoodinowWalletValuePercent(
+            isin = "IRT1YGHT0001",
+            namad = "یاقوت",
+            percent = 0.25
+        )
+
+        val soodinowWalletValueRepoModel = SoodinowWalletValueRepoModel(
+            id = 18,
+            value = 961481259240313.0,
+            percent = listOf(
+                soodinowWalletValuePercentFirst,
+                soodinowWalletValuePercentSecond,
+                soodinowWalletValuePercentThird
+            )
+        )
+        return Resource.success(soodinowWalletValueRepoModel , 200)
+
     }
 
 }

@@ -51,7 +51,7 @@
     <dimen name="text_size_s">12sp</dimen>
     <dimen name="text_size_xs">10sp</dimen>
     <dimen name="text_size_xxs">8sp</dimen>
-
+    <dimen name="text_size_xxxs">4sp</dimen>
     <dimen name="text_size_error">5sp</dimen>
 
     <!--      size -->

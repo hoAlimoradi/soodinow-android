@@ -8,6 +8,7 @@ import com.github.mikephil.charting.data.PieEntry
 import com.paya.domain.models.repo.BasketRepoModel
 import com.paya.domain.models.repo.IsInRiskListRepoModel
 import com.paya.domain.models.repo.LowRiskStockRequest
+import com.paya.domain.models.repo.SoodinowWalletContractRepoModel
 import com.paya.domain.repository.LowRiskInvestmentRepository
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
@@ -18,11 +19,13 @@ import com.paya.presentation.utils.callResource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+
 @HiltViewModel
 class CreateLowRiskAccountViewModel @Inject constructor(
 	private val lowRiskInvestmentRepository: LowRiskInvestmentRepository
 ) : BaseViewModel() {
 
+	val soodinowWalletRepoModelResource = MutableLiveData<Resource<List<SoodinowWalletContractRepoModel>>>()
 	val lowRiskResource = MutableLiveData<Resource<IsInRiskListRepoModel>>()
 	val pieChartStatus = MutableLiveData<PieChartModel>()
 	private var pieChartModel: PieChartModel? = null
@@ -80,6 +83,17 @@ class CreateLowRiskAccountViewModel @Inject constructor(
 					pieChartStatus.value = pieChartModel
 				}
 			}
+		}
+	}
+
+
+	fun getSoodinowWalletContracts() {
+
+		viewModelScope.launch {
+			val response = callResource(
+				this@CreateLowRiskAccountViewModel, lowRiskInvestmentRepository.getSoodinowWalletContractRepoModel()
+			)
+			soodinowWalletRepoModelResource.postValue(response)
 		}
 	}
 }

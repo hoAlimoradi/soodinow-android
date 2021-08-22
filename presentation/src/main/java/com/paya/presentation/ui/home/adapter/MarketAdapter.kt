@@ -33,24 +33,25 @@ class MarketAdapter() : BaseAdapter<MarketAdapter.MarketViewHolder,CurrencyPrice
 				marketWealthValue.text = currencyPrice
 			}
 			marketTitle.text = model.name
-			marketWealthCurrencyValue.text = model.currency.persianTitle
+/*			marketWealthCurrencyValue.text = model.currency.persianTitle
 			marketWealthCurrencyValue.visibility =
-				if (model.currency == Currency.Bourse) View.INVISIBLE else View.VISIBLE
+				if (model.currency == Currency.Bourse) View.INVISIBLE else View.VISIBLE*/
+
 			val pathResourceId = when (model.changeStatus) {
 				"+" -> {
-					R.drawable.ic_path_up
+					R.drawable.ic_green_arrow_drop_up
 				}
 				"-" -> {
-					R.drawable.ic_path_down
+					R.drawable.ic_red_arrow_drop_down
 				}
 				else -> {
-					R.drawable.ic_path_up
+					R.drawable.ic_green_arrow_drop_up
 				}
 			}
-			pathResourceId?.let { marketPercentageIcon.setImageResource(it) }
+			pathResourceId.let { marketPercentageIcon.setImageResource(it) }
 			if (model.changeStatus != null && model.changePercent != null) {
 				marketPercentageValue.text =
-					"${model.changeStatus} ${model.changePercent?.let { roundOffDecimal(if (it < 0) it * -1f else it) }} %"
+					" %${model.changeStatus} ${model.changePercent?.let { roundOffDecimal(if (it < 0) it * -1f else it) }}"
 			}
 		}
 	}

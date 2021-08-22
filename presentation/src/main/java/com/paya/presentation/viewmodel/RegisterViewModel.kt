@@ -2,7 +2,6 @@ package com.paya.presentation.viewmodel
 
 import javax.inject.Inject
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.paya.domain.models.repo.RegisterRepoModel
 import com.paya.domain.tools.Resource
@@ -12,7 +11,6 @@ import com.paya.presentation.utils.SingleLiveEvent
 import com.paya.presentation.utils.callResource
 import com.paya.presentation.utils.startWithCountryCodeMobile
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 @HiltViewModel
 class RegisterViewModel @Inject constructor(

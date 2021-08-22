@@ -1,9 +1,7 @@
 package com.paya.presentation.viewmodel
 
 import android.graphics.Color
-import android.util.Log
 import javax.inject.Inject
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.github.mikephil.charting.data.PieEntry

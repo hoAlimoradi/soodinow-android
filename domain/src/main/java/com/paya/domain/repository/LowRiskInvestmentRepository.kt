@@ -27,4 +27,7 @@ interface LowRiskInvestmentRepository {
 
     suspend fun getChartProfit(boxType:Long) : Resource<List<ChartProfitRepoModel>>
 
+    suspend fun getSoodinowWalletContractRepoModel(): Resource<List<SoodinowWalletContractRepoModel>>
+
+    suspend fun getSoodinowWalletValue(): Resource<SoodinowWalletValueRepoModel>
 }

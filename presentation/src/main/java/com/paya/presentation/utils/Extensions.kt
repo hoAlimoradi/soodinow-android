@@ -203,13 +203,6 @@ fun String.isMobile(): Boolean {
     return length == 11 && startsWith("09")
 }
 
-fun String.startWithCountryCodeMobile(): String {
-    if (startsWith("0", false)) {
-        val newMobile = substring(1, length)
-        return "+98$newMobile"
-    }
-    return this
-}
 
 fun View.requestKeyBoard() {
     requestFocus()

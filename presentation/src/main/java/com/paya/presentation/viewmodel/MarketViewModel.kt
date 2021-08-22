@@ -2,7 +2,6 @@ package com.paya.presentation.viewmodel
 
 import javax.inject.Inject
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.paya.domain.models.repo.CurrencyPriceRepoModel
 import com.paya.domain.repository.CurrencyPriceRepository
@@ -11,7 +10,6 @@ import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.utils.callResource
 import com.paya.presentation.utils.shared.Point
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 @HiltViewModel
 class MarketViewModel @Inject constructor(

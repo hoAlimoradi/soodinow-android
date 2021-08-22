@@ -12,12 +12,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.paya.domain.models.repo.CurrencyPriceRepoModel
 import com.paya.domain.models.repo.ProfileRepoModel
+import com.paya.domain.models.repo.SoodinowWalletValueRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.presentation.R
 import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentHomeBinding
+//import com.paya.presentation.databinding.FragmentHomeBinding
 import com.paya.presentation.ui.cardAccount.NewCardAccountFragment
 import com.paya.presentation.ui.createPersonalAccount.FirstInformationFragment
 import com.paya.presentation.ui.home.adapter.MarketAdapter
@@ -25,8 +27,10 @@ import com.paya.presentation.ui.publicDialog.NotificationEmptyDialog
 import com.paya.presentation.utils.ViewPagerUtil
 import com.paya.presentation.utils.observe
 import com.paya.presentation.utils.setAllOnClickListener
+import com.paya.presentation.utils.toPersianSeparatedValue
 import com.paya.presentation.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_wallet.*
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<HomeViewModel>() {
@@ -52,7 +56,12 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 		super.onViewCreated(view, savedInstanceState)
 		observe(mViewModel.currencyPrice, ::onPricesReady)
 		observe(mViewModel.statusProfile, ::checkProfile)
-		val manager = LinearLayoutManager(context)
+		observe(mViewModel.soodinowWalletValueRepoModelResourceMutableLiveData, ::walletValue)
+
+		//val manager = LinearLayoutManager(context)
+		val layoutManager =
+			LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+
 		adapterCurrency = MarketAdapter()
 		adapterCurrency?.let {
 			mBinding?.apply {
@@ -60,8 +69,12 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 			}
 		}
 		mBinding?.apply {
-			marketRecycleView.layoutManager = manager
-			whyGroup.setAllOnClickListener {
+			marketRecycleView.layoutManager = layoutManager
+
+			walletImageViewConstraintLayout.setOnClickListener {
+				getFindViewController()?.navigate(R.id.wallet)
+			}
+			whySoodinowConstraintLayout.setOnClickListener {
 				getFindViewController()?.navigate(R.id.whySoodinow)
 			}
 			alarm.setOnClickListener {
@@ -69,10 +82,8 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 			}
 		}
 		mViewModel.getCurrencyPrices()
-
+		mViewModel.getSoodinowWalletValue()
 		setupViewPager()
-
-
 
 	}
 
@@ -111,6 +122,15 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 
 
 			else -> return
+		}
+	}
+
+	private fun walletValue(resource: Resource<SoodinowWalletValueRepoModel>) {
+		if (resource.status == Status.SUCCESS) {
+			val value: Double =  resource.data?.value ?: 0.0
+			mBinding?.apply {
+				yourWalletValue.text = value.toPersianSeparatedValue()
+			}
 		}
 	}
 

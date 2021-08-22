@@ -3,7 +3,6 @@ package com.paya.presentation.viewmodel
 import android.util.Log
 import javax.inject.Inject
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.paya.domain.models.repo.UserInfoRepoModel
 import com.paya.domain.models.repo.SetPasswordRepoModel
@@ -15,7 +14,6 @@ import com.paya.presentation.utils.SingleLiveEvent
 import com.paya.presentation.utils.callResource
 import com.paya.presentation.utils.md5
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 @HiltViewModel
 class SetPasswordViewModel @Inject constructor(

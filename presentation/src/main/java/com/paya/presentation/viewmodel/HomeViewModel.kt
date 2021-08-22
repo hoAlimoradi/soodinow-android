@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.paya.domain.models.repo.*
 import com.paya.domain.repository.CurrencyPriceRepository
+import com.paya.domain.repository.LowRiskInvestmentRepository
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.UseCase
 import com.paya.presentation.base.BaseViewModel
@@ -15,11 +16,22 @@ import kotlinx.coroutines.launch
 @HiltViewModel
 class HomeViewModel @Inject constructor(
 	private val currencyRepository: CurrencyPriceRepository,
+	private val lowRiskInvestmentRepository: LowRiskInvestmentRepository,
 	private val useCaseProfile: UseCase<Unit, ProfileRepoModel>
 ) : BaseViewModel() {
 
 	val currencyPrice = MutableLiveData<Resource<List<CurrencyPriceRepoModel>>>()
 	val statusProfile = SingleLiveEvent<Resource<ProfileRepoModel>>()
+	val soodinowWalletValueRepoModelResourceMutableLiveData = MutableLiveData<Resource<SoodinowWalletValueRepoModel>>()
+
+	fun getSoodinowWalletValue() {
+		viewModelScope.launch {
+			val response = callResource(
+				this@HomeViewModel, lowRiskInvestmentRepository.getSoodinowWalletValue()
+			)
+			soodinowWalletValueRepoModelResourceMutableLiveData.postValue(response)
+		}
+	}
 
 	fun getProfile() {
 		viewModelScope.launch {

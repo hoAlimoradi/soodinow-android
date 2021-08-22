@@ -11,7 +11,7 @@ fun <T> LifecycleOwner.observe(liveData: LiveData<T>?,action: (t: T) -> Unit) {
 	liveData?.observe(this, Observer { t -> action(t) })
 }
 
-fun <T> callResource(viewModel: BaseViewModel,resource: Resource<T>,isShowError: Boolean = true) : Resource<T> {
+fun <T> callResource(viewModel: BaseViewModel, resource: Resource<T>, isShowError: Boolean = true) : Resource<T> {
 	if (resource.code == 401) {
 		viewModel.unAuthorized(resource.message!!) {  }
 	} else if(resource.code == 1033){

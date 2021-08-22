@@ -8,7 +8,6 @@ import com.paya.domain.tools.Resource
 import com.paya.domain.tools.UseCase
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.utils.callResource
-import com.paya.presentation.utils.isSecretPassword
 import com.paya.presentation.utils.md5
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

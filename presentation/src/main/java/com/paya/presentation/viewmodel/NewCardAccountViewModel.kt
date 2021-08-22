@@ -9,7 +9,6 @@ import com.paya.domain.tools.UseCase
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.utils.callResource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 @HiltViewModel
 class NewCardAccountViewModel @Inject constructor(

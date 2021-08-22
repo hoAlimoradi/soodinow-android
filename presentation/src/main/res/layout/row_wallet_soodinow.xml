@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cardConstraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_s"
+        android:background="@drawable/shadow_8dp"
+        android:layout_margin="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/soodinowPointTitleInCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_xl"
+            android:layout_marginHorizontal="@dimen/margin_xl"
+            android:gravity="center"
+            tools:text="پیمان درآمد ثابت(پر ریسک )"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_m"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="28dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            android:src="@drawable/investment"
+              />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_xl"
+            android:layout_marginTop="@dimen/margin_l"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/soodinowPointTitleInCard">
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/soodinowPointFirst"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="شروع با 10.000 تومان"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_s"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/soodinowPointSecond"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="@dimen/margin_m"
+                android:text="نقد شدن سریع"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_s"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/soodinowPointFirst" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/soodinowPointSecondThird"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_m"
+                android:text="پشتیبانی 24 ساعته"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_s"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/soodinowPointSecond" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/hidableConstraintLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/soodinowPointDescription"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="8dp"
+                android:layout_marginHorizontal="@dimen/margin_xl"
+                tools:text="سودینو متشکل از چندین خدمت گوناگون متناسب با نیاز های مختلف سرمایه گذاران می باشد که تمام تمرکز سودینو انجام این خدمات به بهترین شکل می باشد تا منافع ناشی از آن سبب بهبود زندگی افراد جامعه باشد سودینو متشکل از چندین خدمت گوناگون متناسب با نیاز های مختلف سرمایه گذاران می باشد که تمام تمرکز سودینو انجام این خدمات به بهترین شکل می باشد تا منافع ناشی از آن سبب بهبود زندگی افراد جامعه باشد"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_s"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/soodinowPointName" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/soodinowPointName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="8dp"
+                android:layout_marginHorizontal="@dimen/margin_xl"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_m"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lineView"
+                tools:text="ترکیب صندوق سرمایه گزاری سودینو" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/lineView"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/blue_light"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/trimesterMonthlyWeeklyConstraintLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_m"
+            android:paddingTop="@dimen/margin_l"
+            android:paddingBottom="@dimen/margin_l"
+            android:background="@color/bg_tab_layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/hidableConstraintLayout">
+
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineVertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.33"  />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineVertical1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.67"  />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineVertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/trimesterPercentImage"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/bg_icon_15_size_corner_3_green"
+                    android:padding="4dp"
+                    android:src="@drawable/ic_arrow_dposit"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/trimesterPercentValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/green"
+                    android:textSize="@dimen/text_size_xl"
+                    android:layout_marginStart="@dimen/margin_4_dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/trimesterPercentImage"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="30%" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/trimesterText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginStart="@dimen/margin_4_dp"
+                    android:text="@string/trimester"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_s"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/trimesterPercentValue"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineVertical1"
+                app:layout_constraintStart_toStartOf="@+id/guidelineVertical"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/monthlyPercentImage"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/bg_icon_15_size_corner_3_green"
+                    android:padding="4dp"
+                    android:src="@drawable/ic_arrow_dposit"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/monthlyPercentValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/green"
+                    android:textSize="@dimen/text_size_xl"
+                    android:layout_marginStart="@dimen/margin_4_dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/monthlyPercentImage"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="30%" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/monthlyTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginStart="@dimen/margin_4_dp"
+                    android:text="@string/monthly"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_s"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/monthlyPercentValue"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guidelineVertical1"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/weeklyPercentImage"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/bg_icon_15_size_corner_3_green"
+                    android:padding="4dp"
+                    android:src="@drawable/ic_arrow_dposit"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/weeklyPercentValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/green"
+                    android:textSize="@dimen/text_size_xl"
+                    android:layout_marginStart="@dimen/margin_4_dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/weeklyPercentImage"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="30%" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/weeklyTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginStart="@dimen/margin_4_dp"
+                    android:text="@string/weekly"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_s"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/weeklyPercentValue"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/margin_s"
+            android:background="@color/bg_tab_layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/trimesterMonthlyWeeklyConstraintLayout">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/extendImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_arrow_bottom_gray"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,9 +11,7 @@ import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.base.REMAINING_TIME
 import com.paya.presentation.utils.SingleLiveEvent
 import com.paya.presentation.utils.callResource
-import com.paya.presentation.utils.startWithCountryCodeMobile
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject

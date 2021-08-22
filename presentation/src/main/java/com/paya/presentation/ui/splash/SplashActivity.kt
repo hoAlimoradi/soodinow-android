@@ -16,6 +16,7 @@ import com.paya.presentation.base.BaseActivity
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.ui.updateApp.UpdateAppDialog
 import com.paya.presentation.utils.getVersionName
+import com.paya.presentation.utils.loge
 import com.paya.presentation.utils.observe
 import com.paya.presentation.viewmodel.SplashActivityViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -40,6 +41,7 @@ class SplashActivity : BaseActivity<SplashActivityViewModel>() {
 
     private fun readyValidToken(resource: Resource<ValidTokenRepoModel>) {
         if (resource.status == Status.SUCCESS) {
+            loge(resource.data.toString())
             startActivity(MainActivity.createIntent(this, MainActivity.PageEnum.UNKNONW))
             finish()
         }

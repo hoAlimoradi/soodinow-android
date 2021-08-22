@@ -7,7 +7,6 @@ import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.domain.tools.UseCase
 import com.paya.presentation.base.BaseViewModel
-import com.paya.presentation.ui.profile.enum.FilterProfile
 import com.paya.presentation.utils.callResource
 import com.paya.presentation.utils.convertToPersianDate
 import com.paya.presentation.utils.shared.Point

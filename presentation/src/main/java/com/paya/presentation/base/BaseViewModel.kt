@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import com.paya.domain.models.repo.GetAuthLinkRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.UseCase
-import com.paya.domain.usecase.auth.GetAuthLinkUseCase
 import com.paya.presentation.ui.errorDoalog.ErrorDialogModel
 import com.paya.presentation.utils.callResource
 import kotlinx.coroutines.launch

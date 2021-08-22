@@ -3,10 +3,8 @@ package com.paya.presentation.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.paya.domain.models.repo.ActivateResetPasswordRepoModel
 import com.paya.domain.models.repo.LoginRepoModel
 import com.paya.domain.models.repo.PerLoginRepoModel
-import com.paya.domain.models.repo.ResetPasswordRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.domain.tools.UseCase
@@ -14,7 +12,6 @@ import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.base.REMAINING_TIME
 import com.paya.presentation.utils.SingleLiveEvent
 import com.paya.presentation.utils.callResource
-import com.paya.presentation.utils.startWithCountryCodeMobile
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

@@ -1,200 +1,232 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg"
+    android:background="@color/bg_dividend"
     tools:context=".ui.home.HomeFragment">
 
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/alarm"
-        android:layout_width="@dimen/height"
-        android:layout_height="0dp"
-        android:layout_marginStart="@dimen/margin_l"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/sliderConstraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_s"
-        android:adjustViewBounds="true"
-
-        android:scaleType="center"
-        android:src="@drawable/ic_alarm"
+        android:background="@color/bg_dividend"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <View
-        android:id="@+id/bg_card"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/alarm"
+            android:layout_width="@dimen/height"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/margin_l"
+            android:layout_marginTop="@dimen/margin_s"
+            android:adjustViewBounds="true"
+            android:visibility="invisible"
+
+            android:scaleType="center"
+            android:src="@drawable/ic_alarm"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <View
+            android:id="@+id/bg_card"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/bottom_white_round_corner_background"
+            app:layout_constraintBottom_toBottomOf="@id/tabAccountCard"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/viewPagerGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:constraint_referenced_ids="pager,tabAccountCard" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/pager"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="H,2:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/alarm" />
+
+        <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+            android:id="@+id/tabAccountCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_l"
+            android:paddingBottom="@dimen/margin_m"
+            app:dotsColor="@color/purple_gray"
+            app:dotsCornerRadius="8dp"
+            app:dotsSize="8dp"
+            app:dotsSpacing="2dp"
+            app:dotsWidthFactor="2.5"
+            app:layout_constraintBottom_toBottomOf="@+id/bg_card"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pager"
+            app:progressMode="false"
+            app:selectedDotColor="@color/green" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/walletValueImage"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@drawable/bg_card"
-        app:layout_constraintBottom_toBottomOf="@id/tabAccountCard"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/viewPagerGroup"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="visible"
-        app:constraint_referenced_ids="pager,tabAccountCard" />
+        android:gravity="center"
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/pager"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="H,2:1"
+        android:layout_marginTop="@dimen/margin_s"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/alarm" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
-        android:id="@+id/tabAccountCard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_l"
-        android:paddingBottom="@dimen/margin_m"
-        app:dotsColor="@color/purple_gray"
-        app:dotsCornerRadius="8dp"
-        app:dotsSize="8dp"
-        app:dotsSpacing="2dp"
-        app:dotsWidthFactor="2.5"
-        app:layout_constraintBottom_toBottomOf="@+id/bg_card"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/pager"
-        app:progressMode="false"
-        app:selectedDotColor="@color/green" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/alarm_new"
+            android:layout_width="@dimen/height"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:layout_marginHorizontal="@dimen/margin_l"
 
-    <ScrollView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@color/bg"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bg_card">
+            android:scaleType="center"
+            android:src="@drawable/ic_alarm"
+            app:layout_constraintStart_toStartOf="@+id/walletValueImage"
+            app:layout_constraintTop_toTopOf="@+id/walletValueImage"
+            app:layout_constraintBottom_toBottomOf="@+id/walletValueImage"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/bg">
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:background="@drawable/shadow_wallet"
+            android:layout_marginEnd="@dimen/margin_4_dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/walletImageViewConstraintLayout"
+            app:layout_constraintStart_toEndOf="@+id/alarm_new">
 
-
-            <androidx.constraintlayout.widget.Group
-                android:id="@+id/whyGroup"
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/yourWalletTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:constraint_referenced_ids="whySoodinowCard,whySoodinowTitle,whySoodinowSubTitle,whySoodinowMoreButton,whySoodinowImage" />
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="2dp"
+                android:textStyle="bold"
+                android:text="@string/yourWallet"
+                android:textColor="@color/light_purple7d4181"
+                android:textSize="@dimen/text_size_s"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <View
-                android:id="@+id/whySoodinowCard"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="0dp"
-                android:layout_height="130dp"
-                android:layout_marginHorizontal="@dimen/margin_l"
-                android:layout_marginTop="@dimen/margin_l"
-                android:background="@drawable/bg_why_soodinow_in_home"
+                android:layout_height="0dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginBottom="@dimen/margin_4_dp"
+                android:layout_marginTop="@dimen/margin_4_dp"
+                android:background="@drawable/shadow_medium"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/yourWalletTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/yourWalletValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:gravity="center"
+
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginStart="4dp"
+                    android:text="10,000,000,000تومان"
+                    android:textColor="@color/light_purple7d4181"
+
+                    android:maxLines="1"
+                    app:autoSizeTextType="uniform"
+                    app:autoSizeMaxTextSize ="@dimen/text_size_s"
+                    app:autoSizeMinTextSize="@dimen/text_size_xxxs"
+                    app:autoSizeStepGranularity="1sp"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/walletImageViewConstraintLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shadow_wallet"
+            android:layout_marginHorizontal="@dimen/margin_xl"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:padding="@dimen/margin_4_dp"
+            android:gravity="center">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="center"
+                android:src="@drawable/ic_wallet_plus"
+                android:layout_marginBottom="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/whySoodinowTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_l"
-                android:elevation="2dp"
-                android:text="@string/why_soodinow"
-                android:textColor="@color/japanese_laurel_green"
-                android:textSize="@dimen/text_size_m"
-                app:layout_constraintEnd_toEndOf="@id/whySoodinowCard"
-                app:layout_constraintStart_toStartOf="@+id/whySoodinowCard"
-                app:layout_constraintTop_toTopOf="@id/whySoodinowCard" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/whySoodinowSubTitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_m"
-                android:elevation="2dp"
-                android:gravity="center"
-                android:maxLines="1"
-                android:text="@string/why_soodinow_description"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_xs"
-                app:layout_constraintEnd_toEndOf="@id/whySoodinowCard"
-                app:layout_constraintStart_toStartOf="@+id/whySoodinowCard"
-                app:layout_constraintTop_toBottomOf="@id/whySoodinowTitle" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/whySoodinowMoreButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_l"
-                android:layout_marginBottom="@dimen/margin_l"
-                android:drawableStart="@drawable/ic_arrow_bg_white"
-                android:drawablePadding="@dimen/margin_very_small"
-                android:elevation="2dp"
-                android:gravity="top"
-                android:text="@string/more_description"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_8sp"
-                app:layout_constraintBottom_toBottomOf="@id/whySoodinowCard"
-                app:layout_constraintStart_toStartOf="@id/whySoodinowCard" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/walletImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/whySoodinowImage"
-                android:layout_width="wrap_content"
-                android:layout_height="55dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/icon_home_why_soodinow"
-                app:layout_constraintBottom_toBottomOf="@id/whySoodinowCard"
-                app:layout_constraintEnd_toEndOf="@id/whySoodinowCard"
-                app:layout_constraintStart_toStartOf="@+id/whySoodinowCard"
-                app:layout_constraintTop_toBottomOf="@id/whySoodinowSubTitle"
-                app:layout_constraintVertical_bias="1" />
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/margin_l"
+        android:layout_marginEnd="@dimen/margin_l"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
+        <androidx.appcompat.widget.AppCompatImageView
 
-            <View
-                android:id="@+id/marketCardView"
-                android:layout_width="0dp"
-                android:layout_height="38dp"
-                android:layout_marginHorizontal="@dimen/margin_l"
-                android:layout_marginTop="@dimen/margin_l"
-                android:background="@drawable/shadow_medium"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/whySoodinowCard" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="center"
+            android:src="@drawable/ic_wallet_plus"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/bg_dividend"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sliderConstraintLayout">
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/marketViewTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/margin_l"
-                android:drawableEnd="@drawable/ic_menu_market"
-                android:drawablePadding="@dimen/margin_very_small"
-                android:elevation="2dp"
-                android:gravity="center"
-                android:text="@string/market_view"
-                android:textColor="@color/purple_gray"
-                android:textSize="@dimen/text_size_m"
-                app:layout_constraintBottom_toBottomOf="@+id/marketCardView"
-                app:layout_constraintEnd_toEndOf="@id/marketCardView"
-                app:layout_constraintHorizontal_bias="1"
-                app:layout_constraintStart_toEndOf="@id/marketAllCurrencyBtn"
-                app:layout_constraintTop_toTopOf="@+id/marketCardView" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/marketAllCurrencyBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_l"
-                android:elevation="2dp"
-                android:gravity="bottom"
-                android:text="@string/all_currency"
-                android:textColor="@color/gray"
-                android:textSize="@dimen/text_size_10sp"
-                app:layout_constraintBottom_toBottomOf="@+id/marketCardView"
-                app:layout_constraintStart_toStartOf="@id/marketCardView"
-                app:layout_constraintTop_toTopOf="@+id/marketCardView" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:background="@color/bg_dividend">
 
 
             <androidx.recyclerview.widget.RecyclerView
@@ -202,15 +234,157 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/margin_l"
-                android:layout_marginTop="@dimen/margin_m"
-                android:layout_marginBottom="@dimen/space_bottom_navigation"
                 android:nestedScrollingEnabled="false"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/marketCardView"
-                tools:itemCount="10"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:itemCount="1"
                 tools:listitem="@layout/row_market_currency" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/whySoodinowConstraintLayout"
+                android:layout_width="0dp"
+                android:layout_height="102dp"
+                android:background="@drawable/bg_why_soodinow_shape"
+                android:layout_marginHorizontal="34dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/marketRecycleView">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/whySoodinowTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:elevation="2dp"
+                    android:text="@string/why_soodinow"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_m"
+                    android:layout_marginEnd="24dp"
+                    app:layout_constraintBottom_toTopOf="@+id/guidelineHorizontal"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/whySoodinowSubTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:elevation="2dp"
+                    android:gravity="right"
+                    android:maxLines="1"
+                    android:text="@string/why_soodinow_description"
+                    android:textSize="@dimen/text_size_s"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="24dp"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/whySoodinowTitle" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/whySoodinowSubTitleSecond"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:elevation="2dp"
+                    android:gravity="right"
+                    android:maxLines="1"
+                    android:text="@string/why_soodinow_description_second"
+                    android:textSize="@dimen/text_size_s"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="24dp"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/whySoodinowSubTitle" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guidelineHorizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.4"
+                    />
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="invisible"
+                    android:src="@drawable/icon_why_soodinow"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/farabiConstraintLayout"
+                android:layout_width="0dp"
+                android:layout_height="102dp"
+                android:background="@drawable/bg_farabi_blue_green"
+                android:layout_marginHorizontal="34dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/whySoodinowConstraintLayout">
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/farabiTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:elevation="2dp"
+                    android:text="@string/first_rank_brokerage"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_m"
+                    android:layout_marginEnd="24dp"
+                    app:layout_constraintBottom_toTopOf="@+id/farabiGuidelineHorizontal"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/farabiSubTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:elevation="2dp"
+                    android:gravity="right"
+                    android:maxLines="1"
+                    android:text="@string/farabi_ranks_first_among_the_market_earned_capital"
+                    android:textSize="@dimen/text_size_s"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="24dp"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/farabiTitle" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/farabiSubTitleSecond"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:elevation="2dp"
+                    android:gravity="right"
+                    android:maxLines="1"
+                    android:text="@string/farabi_ranks_first_among_the_market_earned_capital_second"
+                    android:textSize="@dimen/text_size_s"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="24dp"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/farabiSubTitle" />
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/farabiGuidelineHorizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.4"
+                    />
+
+                <ImageView
+                    android:id="@+id/farabiImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="invisible"
+                    android:src="@drawable/icon_why_soodinow"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
