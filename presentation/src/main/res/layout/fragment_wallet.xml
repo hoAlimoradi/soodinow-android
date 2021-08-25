@@ -260,28 +260,52 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:visibility="gone"
+        android:id="@+id/constraintLayout5"
         android:layout_width="342dp"
-        android:layout_height="219dp"
+        android:layout_height="19dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
 
         <com.paya.presentation.utils.customSeekbar.CustomSeekbar
             android:id="@+id/customSeekbar"
-            android:layout_margin="20dp"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
+            android:layout_margin="20dp"
 
-            app:textTop_visible="false"
-            app:regions="true"
-            app:region_leftColor="@color/red"
-            app:region_rightColor="@color/green"
-            app:regions_centerText="true"
             app:draw_bubble="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"  />
+            app:layout_constraintTop_toTopOf="parent"
+            app:region_leftColor="@color/red"
+            app:region_rightColor="@color/green"
+            app:regions="true"
+            app:regions_centerText="true"
+            app:textTop_visible="true" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:visibility="gone"
+        android:layout_width="336dp"
+        android:layout_height="213dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout5">
+
+        <com.paya.presentation.utils.mosaiclayout.RectangleView
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

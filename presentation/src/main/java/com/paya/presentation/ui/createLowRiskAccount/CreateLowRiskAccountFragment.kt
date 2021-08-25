@@ -25,6 +25,7 @@ import com.paya.presentation.R
 import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentCreateLowRiskAccountBinding
+//import com.paya.presentation.databinding.FragmentCreateLowRiskAccountBinding
 import com.paya.presentation.ui.adapter.chartLablel.ChartLabelAdapter
 import com.paya.presentation.ui.model.PieChartModel
 import com.paya.presentation.ui.profile.adapter.PercentEfficiencyAdapter
@@ -63,7 +64,6 @@ class CreateLowRiskAccountFragment : BaseFragment<CreateLowRiskAccountViewModel>
             toolbar.backClick = {
                 findNavController().popBackStack()
             }
-
             submitBtn.setOnClickListener {
                 val price = inputPrice.getPriceLong()
                 if (price <= 0) {
@@ -72,12 +72,13 @@ class CreateLowRiskAccountFragment : BaseFragment<CreateLowRiskAccountViewModel>
                     ).show()
                     return@setOnClickListener
                 }
-                findNavController().navigate(
+                //TODO
+                /*findNavController().navigate(
                     CreateLowRiskAccountFragmentDirections.navigationToConnectLowRiskBrokerage(
                         inputPrice.getPriceLong(),
                         ("no_risk")
                     )
-                )
+                )*/
             }
         }
     }

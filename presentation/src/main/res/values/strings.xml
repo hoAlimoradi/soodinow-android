@@ -265,12 +265,18 @@
 
     <string name="update_app_to_last_version">"بروزرسانی "</string>
     <string name="cancel_update_app_to_last_version">مایل نیستم</string>
-    <string name="yourWallet">کیف سرمایه شما</string>
+    <string name="yourWallet">کیف سرمایه</string>
     <string name="soodinow_point_description_first">نقد شدن راحت و در کمترین زمان ممکن </string>
     <string name="soodinow_point_title">شما با هر میزان سرمایه می توانید پیمان ببندید</string>
     <string name="soodinow_point_description_second">پشتیبانی 24 ساعته</string>
     <string name="trimester">سه ماهه</string>
     <string name="monthly">ماهانه</string>
+    <string name="start">شروع کن</string>
+    <string name="marketSummaryTitle">خلاصه بازار</string>
+    <string name="select_contract">"انتخاب پیمان "</string>
+    <string name="automatic_investment">انجام خودکار سرمایه گذاری</string>
+    <string name="automatic_withdrawal_of_investment">برداشت خودکار از سرمایه گذاری</string>
+    <string name="risk_investment">میزان ریسک شما</string>
 
     <string-array name="brokerage_list">
         <item>کارگزاری فارابی</item>

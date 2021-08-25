@@ -45,10 +45,12 @@ class HomeViewModel @Inject constructor(
 
 	
 	fun getCurrencyPrices() {
+		showLoading()
 		viewModelScope.launch {
 			val response= callResource(this@HomeViewModel,currencyRepository.getCurrencyPrice(),false)
 			currencyPrice.postValue(response)
 		}
+		hideLoading()
 	}
 	
 }

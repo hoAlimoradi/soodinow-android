@@ -6,13 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.createLowRiskAccount.ConnectLowRiskBrokerageFragment"
-    android:background="@color/bg">
+    android:background="@color/gray_f2f2f2">
 
     <View
         android:id="@+id/bg_card"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@drawable/bg_card"
+
         app:layout_constraintBottom_toTopOf="@id/viewGuidLineBgCard"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,13 +28,14 @@
         layout="@layout/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:toolbarTitle="@string/connect_brokerage"
+        app:toolbarTitle="@string/select_contract"
         app:layout_constraintTop_toTopOf="parent"/>
 
 
     <include
         android:id="@+id/accountCardLayout"
         layout="@layout/brokerage_account_card"
+        android:visibility="gone"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginHorizontal="@dimen/margin_xl"
@@ -46,10 +47,9 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/bgCardView"
-        style="@style/GeneralCardView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_margin="@dimen/margin_small"
+        android:background="@color/gray_f2f2f2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,7 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingBottom="@dimen/margin_small"
-
+            android:background="@color/gray_f2f2f2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

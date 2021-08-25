@@ -211,6 +211,16 @@
             app:popUpToInclusive="true" />
     </fragment>
 
+
+
+    <fragment
+        android:id="@+id/openSoodinowAutomaticInvestmentAccountFragment"
+        android:name="com.paya.presentation.ui.createLowRiskAccount.OpenSoodinowAutomaticInvestmentAccountFragment"
+        android:label="fragment_wallet_soodinow_open_automatic_investment_account"
+        tools:layout="@layout/fragment_wallet_soodinow_open_automatic_investment_account">
+
+    </fragment>
+
     <fragment
         android:id="@+id/connectLowRiskBrokerage"
         android:name="com.paya.presentation.ui.createLowRiskAccount.ConnectLowRiskBrokerageFragment"
@@ -282,7 +292,7 @@
             app:popUpToInclusive="true" />
     </fragment>
 
-
+    fragment_wallet_soodinow_open_automatic_investment_account
     <fragment
         android:id="@+id/introduceFriendsFragment"
         android:name="com.paya.presentation.ui.introduceFriends.IntroduceFriendsFragment"

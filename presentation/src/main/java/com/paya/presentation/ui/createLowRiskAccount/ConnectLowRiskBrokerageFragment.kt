@@ -46,17 +46,25 @@ class ConnectLowRiskBrokerageFragment : BaseFragment<ConnectLowRiskBrokerageView
         }
         addInvestBtn.setOnClickListener {
             if (mViewModel.tabCheckedIsSoodinow)
-                return@setOnClickListener
-            findNavController().navigate(
+                getFindViewController()?.navigate(
+                    R.id.openSoodinowAutomaticInvestmentAccountFragment
+                )
+
+            else {
+                getFindViewController()?.navigate(
+                    R.id.createLowRiskAccount
+                )
+            }
+            /*findNavController().navigate(
                 ConnectLowRiskBrokerageFragmentDirections.navigateToCreateAccountRulesFragment(
                     args.SelectedPrice,
                     args.riskState
                 )
-            )
+            )*/
         }
-        accountCardLayout.wealthValue.text = Utils.separatorAmount(args.SelectedPrice)
+       //TODO  accountCardLayout.wealthValue.text = Utils.separatorAmount(args.SelectedPrice)
 
-
+        accountCardLayout.wealthValue.text = "10.856.000"
 
 		val adapter = CreateLowRiskAccountFragmentAdapter(requireContext(), requireActivity().supportFragmentManager, tabLayout.tabCount)
 		lowRiskBrokerageViewPager.adapter = adapter

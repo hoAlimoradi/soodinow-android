@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/green"
+    >
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/height_medium"
+        android:layout_marginStart="@dimen/margin_l"
+        android:layout_marginTop="@dimen/margin_xl"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_back"
+        android:tint="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/whySoodinowTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+
+        android:layout_marginTop="@dimen/margin_sub_cards"
+        android:text="@string/create_low_risk_account"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_l"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        android:id="@+id/accountCardLayout"
+        layout="@layout/brokerage_account_card"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="@dimen/margin_xl"
+        app:layout_constraintDimensionRatio="H,2:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/whySoodinowTitle" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        android:background="@drawable/shadow_gray_194a4a4a"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/accountCardLayout"
+         >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/investmentConstraintLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large"
+            android:paddingTop="@dimen/margin_l"
+
+            android:paddingBottom="@dimen/margin_l"
+            android:layout_marginHorizontal="@dimen/margin_l"
+            android:background="@drawable/shadow_medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/investmentConstraintLayoutGuideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_4_dp"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/AutomaticInvestment"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:layout_marginBottom="@dimen/margin_s"
+                android:layout_marginHorizontal="@dimen/margin_l"
+                android:gravity="center"
+                android:text="@string/automatic_investment"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_m"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/investmentConstraintLayoutGuideline"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_l"
+                android:layout_marginBottom="@dimen/margin_s"
+
+                android:background="@drawable/bg_price_button"
+                android:paddingHorizontal="@dimen/margin_m"
+                android:paddingTop="@dimen/margin_4_dp"
+                android:paddingBottom="@dimen/margin_4_dp"
+                app:layout_constraintBottom_toTopOf="@+id/investmentConstraintLayoutGuideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/margin_m"
+                    android:gravity="center"
+                    android:text="25 هرماه"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_s"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/automaticWithdrawalInvestment"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="@dimen/margin_s"
+                android:layout_marginHorizontal="@dimen/margin_m"
+                android:layout_marginEnd="36dp"
+                android:gravity="center"
+                android:text="@string/automatic_withdrawal_of_investment"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_m"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/investmentConstraintLayoutGuideline" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/margin_m"
+
+                android:layout_marginTop="@dimen/margin_s"
+                android:layout_marginHorizontal="@dimen/margin_l"
+                android:paddingBottom="@dimen/margin_4_dp"
+                android:paddingTop="@dimen/margin_4_dp"
+                android:background="@drawable/shadow_gray_dark"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/investmentConstraintLayoutGuideline">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/margin_m"
+                    android:gravity="center"
+                    android:text=" غیر فعال  "
+                    android:textSize="@dimen/text_size_s"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/efficiencyBtn"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/height_medium"
+            android:layout_margin="@dimen/margin_l"
+            android:gravity="center"
+            android:text="نمودار بازدهی"
+
+            android:background="@drawable/shadow_medium"
+            android:textColor="@color/emperor"
+            android:textSize="@dimen/text_size_s"
+            app:layout_constraintTop_toBottomOf="@id/investmentConstraintLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/riskInvestment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="@dimen/margin_l"
+            android:layout_marginHorizontal="@dimen/margin_l"
+            android:layout_marginEnd="40dp"
+            android:gravity="center"
+            android:text="@string/risk_investment"
+            android:textSize="@dimen/text_size_m"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/efficiencyBtn" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+
+            android:id="@+id/constraintLayout5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/riskInvestment">
+
+            <com.paya.presentation.utils.customSeekbar.CustomSeekbar
+                android:id="@+id/riskInvestmentCustomSeekbar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+
+                app:draw_bubble="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:region_leftColor="@color/red"
+                app:region_rightColor="@color/green"
+                app:regions="true"
+                app:regions_centerText="true"
+                app:textTop_visible="true" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/submit_btn"
+            android:layout_width="0dp"
+            android:layout_marginHorizontal="@dimen/margin_40dp"
+            android:layout_height="@dimen/height_medium"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginBottom="@dimen/margin_l"
+            android:text="@string/submit_and_continue"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintVertical_bias="1"
+            android:textSize="@dimen/text_size_m"
+            android:textColor="@color/white"
+            android:background="@drawable/bg_button_green"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

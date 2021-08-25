@@ -1,5 +1,7 @@
 package com.paya.presentation.ui.home
 
+//import com.paya.presentation.databinding.FragmentHomeBinding
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.paya.domain.models.repo.CurrencyPriceRepoModel
@@ -19,25 +22,25 @@ import com.paya.presentation.R
 import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentHomeBinding
-//import com.paya.presentation.databinding.FragmentHomeBinding
 import com.paya.presentation.ui.cardAccount.NewCardAccountFragment
+import com.paya.presentation.ui.createLowRiskAccount.CreateLowRiskAccountFragmentDirections
 import com.paya.presentation.ui.createPersonalAccount.FirstInformationFragment
 import com.paya.presentation.ui.home.adapter.MarketAdapter
 import com.paya.presentation.ui.publicDialog.NotificationEmptyDialog
 import com.paya.presentation.utils.ViewPagerUtil
 import com.paya.presentation.utils.observe
-import com.paya.presentation.utils.setAllOnClickListener
 import com.paya.presentation.utils.toPersianSeparatedValue
 import com.paya.presentation.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_wallet.*
+
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<HomeViewModel>() {
 
+	private var marketRecycleViewIsExpanded: Boolean  = false
 	private var adapter: SlidePagerAdapter? = null
 	private var adapterCurrency: MarketAdapter? = null
-	private  var mBinding: FragmentHomeBinding? = null
+	private var mBinding: FragmentHomeBinding? = null
 	private val mViewModel: HomeViewModel by viewModels()
 	override fun onCreateView(
 		inflater: LayoutInflater, container: ViewGroup?,
@@ -57,10 +60,16 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 		observe(mViewModel.currencyPrice, ::onPricesReady)
 		observe(mViewModel.statusProfile, ::checkProfile)
 		observe(mViewModel.soodinowWalletValueRepoModelResourceMutableLiveData, ::walletValue)
-
-		//val manager = LinearLayoutManager(context)
 		val layoutManager =
 			LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+
+
+		/*val layoutManager = GridLayoutManager(
+			requireContext(),
+			3,
+			LinearLayoutManager.VERTICAL,
+			false
+		)*/
 
 		adapterCurrency = MarketAdapter()
 		adapterCurrency?.let {
@@ -80,6 +89,23 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 			alarm.setOnClickListener {
 				NotificationEmptyDialog().show(parentFragmentManager, "notification dialog")
 			}
+
+			/*val params: ViewGroup.LayoutParams = marketRecycleView.layoutParams
+
+
+			expandAllRowOfMarketRecycleImageView.setOnClickListener {
+				marketRecycleViewIsExpanded = !marketRecycleViewIsExpanded
+				if (marketRecycleViewIsExpanded) {
+					expandAllRowOfMarketRecycleImageView.setImageDrawable(it.context.resources.getDrawable(R.drawable.ic_arrow_left))
+					params.height = ViewGroup.LayoutParams.MATCH_PARENT
+					marketRecycleView.layoutParams = params
+				} else {
+					expandAllRowOfMarketRecycleImageView.setImageDrawable(it.context.resources.getDrawable(R.drawable.ic_baseline_keyboard_arrow_down_24))
+					params.height = 100
+					marketRecycleView.layoutParams = params
+				}
+
+			}*/
 		}
 		mViewModel.getCurrencyPrices()
 		mViewModel.getSoodinowWalletValue()
@@ -87,12 +113,27 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 
 	}
 
-	
+	/*private fun showAllRowsOfMarketRecycleImageView() {
+
+	}
+
+	private fun showFirstRowOfMarketRecycleImageView() {
+
+	}*/
 	private fun setupViewPager() {
 		adapter = SlidePagerAdapter(childFragmentManager,viewLifecycleOwner.lifecycle) {
 			getFindViewController()?.navigate(
-				R.id.createLowRiskAccount
+				//R.id.createLowRiskAccount
+				R.id.connectLowRiskBrokerage
+
 			)
+
+			/*findNavController().navigate(
+				CreateLowRiskAccountFragmentDirections.navigationToConnectLowRiskBrokerage(
+					inputPrice.getPriceLong(),
+					("no_risk")
+				)
+			)*/
 		}
 		mBinding?.apply {
 			pager.offscreenPageLimit = 1
@@ -168,10 +209,6 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 		adapterCurrency = null
 		mBinding = null
 		super.onDestroyView()
-	}
-	override fun onDestroy() {
-		super.onDestroy()
-
 	}
 
 	override val baseViewModel: BaseViewModel

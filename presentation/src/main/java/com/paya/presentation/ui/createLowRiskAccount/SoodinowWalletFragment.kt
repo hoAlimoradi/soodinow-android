@@ -38,7 +38,7 @@ class SoodinowWalletFragment : BaseFragment<CreateLowRiskAccountViewModel>() {
 
     private fun onReady(resource: Resource<List<SoodinowWalletContractRepoModel>>) {
 
-        var list: List<SoodinowWalletRecyclerViewItem> = listOf(SectionItem(title = "firstItem"))
+        /*var list: List<SoodinowWalletRecyclerViewItem> = listOf(SectionItem(title = "firstItem"))
 
         if (!resource.data.isNullOrEmpty()) {
             resource.data?.forEach {
@@ -55,18 +55,19 @@ class SoodinowWalletFragment : BaseFragment<CreateLowRiskAccountViewModel>() {
                 )
             }
             setupSoodinowWalletAdapter(list)
-        }
-/*
-        when (resource.status) {
-
-            Status.SUCCESS -> {
-                val response = resource.data?.percent ?: return
-                setupSoodinowWalletAdapter(response)
-
-            }
-
-            else -> return
         }*/
+
+        val soodinowWalletContractRepoModel = SoodinowWalletItem(
+            pointTitle = "IRT1AFRN0001",
+            name = "ترکیب صندوق سرمایه گزاری سودینو",
+            description = "سودینو متشکل از چندین خدمت گوناگون متناسب با نیاز های مختلف سرمایه گذاران می باشد که تمام تمرکز سودینو انجام این خدمات به بهترین شکل می باشد تا منافع ناشی از آن سبب بهبود زندگی افراد جامعه باشد",
+            trimesterValue =  25,
+            monthlyValue =  25,
+            weeklyValue =  25
+        )
+        var list: List<SoodinowWalletRecyclerViewItem> = listOf(SectionItem(title = "firstItem"), soodinowWalletContractRepoModel)
+
+        setupSoodinowWalletAdapter(list)
     }
 
 

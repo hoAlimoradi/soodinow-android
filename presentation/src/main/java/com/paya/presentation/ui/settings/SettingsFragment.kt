@@ -53,7 +53,7 @@ import kotlin.system.exitProcess
 class SettingsFragment : BaseFragment<SettingViewModel>() {
 	
 	private val mViewModel: SettingViewModel by viewModels()
-	private  var mBinding: FragmentSettingsBinding? = null
+	private var mBinding: FragmentSettingsBinding? = null
 	private var password: String? = null
 
 	private val KEY_NAME = "SOODINOW_KEY"

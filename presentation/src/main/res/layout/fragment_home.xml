@@ -225,21 +225,73 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="0dp"
             android:background="@color/bg_dividend">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/marketRecycleViewConstraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:nestedScrollingEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            android:background="@drawable/shadow_medium"
+            android:layout_margin="4dp" >
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/appCompatImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_l"
+                android:layout_marginTop="@dimen/margin_l"
+                android:src="@drawable/ic_profits"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/marketSummaryTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_4_dp"
+                android:layout_marginTop="@dimen/margin_l"
+                android:text="@string/marketSummaryTitle"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_s"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/appCompatImageView"
+                app:layout_constraintStart_toEndOf="@+id/expandAllRowOfMarketRecycleImageView"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/expandAllRowOfMarketRecycleImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_l"
+                android:layout_marginTop="@dimen/margin_l"
+                android:src="@drawable/ic_arrow_left"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/marketRecycleView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/margin_l"
+                android:layout_marginTop="14dp"
                 android:nestedScrollingEnabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/marketSummaryTitle"
+
+                android:layout_marginHorizontal="@dimen/margin_m"
                 tools:itemCount="1"
                 tools:listitem="@layout/row_market_currency" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/whySoodinowConstraintLayout"
@@ -249,7 +301,7 @@
                 android:layout_marginHorizontal="34dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/marketRecycleView">
+                app:layout_constraintTop_toBottomOf="@+id/marketRecycleViewConstraintLayout">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/whySoodinowTitle"
@@ -394,4 +446,5 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         tools:visibility="gone" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
