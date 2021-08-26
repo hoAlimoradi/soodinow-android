@@ -1,10 +1,7 @@
 package com.paya.presentation.ui.splash
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
-import androidx.lifecycle.lifecycleScope
 import com.paya.domain.models.repo.CheckVersionRepoModel
 import com.paya.domain.models.repo.ConfigRepoModel
 import com.paya.domain.models.repo.ValidTokenRepoModel
@@ -21,7 +18,6 @@ import com.paya.presentation.utils.observe
 import com.paya.presentation.viewmodel.SplashActivityViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_splash.*
-import kotlinx.coroutines.delay
 
 @AndroidEntryPoint
 class SplashActivity : BaseActivity<SplashActivityViewModel>() {

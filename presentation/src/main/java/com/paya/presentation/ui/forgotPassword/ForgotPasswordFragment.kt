@@ -1,7 +1,5 @@
 package com.paya.presentation.ui.forgotPassword
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,12 +15,10 @@ import com.paya.presentation.R
 import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentForgotPasswordBinding
-import com.paya.presentation.utils.UrlLinks
 import com.paya.presentation.utils.isMobile
 import com.paya.presentation.utils.observe
 import com.paya.presentation.viewmodel.ForgotPasswordViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_register.*
 
 
 @AndroidEntryPoint

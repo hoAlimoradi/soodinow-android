@@ -36,6 +36,15 @@ class NewCardAccountFragment : BaseFragment<NewCardAccountViewModel>() {
         }
     }
 
+    override fun onDestroyView() {
+        onItemClick = null
+        position = null
+        super.onDestroyView()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+    }
     fun setClickListener(onItemClick: (Int) -> Unit, position: Int) {
         this.onItemClick = onItemClick
         this.position = position

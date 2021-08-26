@@ -177,6 +177,12 @@
         tools:layout="@layout/fragment_why_soodinow" />
 
     <fragment
+        android:id="@+id/aboutUs"
+        android:name="com.paya.presentation.ui.aboutUs.AboutUsFragment"
+        android:label="fragment_about_us"
+        tools:layout="@layout/fragment_why_soodinow" />
+
+    <fragment
         android:id="@+id/wallet"
         android:name="com.paya.presentation.ui.wallet.WalletFragment"
         android:label="fragment_wallet"
@@ -292,7 +298,7 @@
             app:popUpToInclusive="true" />
     </fragment>
 
-    fragment_wallet_soodinow_open_automatic_investment_account
+
     <fragment
         android:id="@+id/introduceFriendsFragment"
         android:name="com.paya.presentation.ui.introduceFriends.IntroduceFriendsFragment"

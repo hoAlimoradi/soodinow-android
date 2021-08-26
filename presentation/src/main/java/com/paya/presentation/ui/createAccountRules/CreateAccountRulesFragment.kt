@@ -1,7 +1,5 @@
 package com.paya.presentation.ui.createAccountRules
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +15,6 @@ import com.paya.presentation.R
 import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentCreateAccountRulesBinding
-import com.paya.presentation.utils.UrlLinks.ruleUrl
 import com.paya.presentation.utils.observe
 import com.paya.presentation.utils.setArrayStringText
 import com.paya.presentation.viewmodel.CreateAccountRulesViewModel

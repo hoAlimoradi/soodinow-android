@@ -2,7 +2,6 @@ package com.paya.presentation.base
 
 import android.app.Activity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModel
@@ -15,7 +14,6 @@ import com.paya.presentation.ui.errorDoalog.ErrorDialog
 import com.paya.presentation.ui.errorDoalog.ErrorDialogModel
 import com.paya.presentation.ui.loading.LoadingDialog
 import com.paya.presentation.utils.observe
-import kotlin.system.exitProcess
 
 abstract class BaseDialogFragment<VM : BaseViewModel> : DialogFragment() {
     abstract val baseViewModel: BaseViewModel

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@color/green"
+tools:context=".ui.aboutUs.AboutUsFragment">
+
+<androidx.appcompat.widget.AppCompatTextView
+    android:id="@+id/aboutUsTitle"
+    android:layout_width="wrap_content"
+
+    android:layout_height="@dimen/height_medium"
+    android:text="@string/about_us"
+    android:textColor="@color/white"
+    android:textSize="@dimen/text_size_xl"
+    android:gravity="center_vertical"
+
+    android:layout_marginHorizontal="@dimen/margin_xl"
+    android:layout_marginTop="@dimen/margin_xl"
+    android:textStyle="bold"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/aboutUsTitle">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/aboutUsRecycleView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/margin_m"
+        android:nestedScrollingEnabled="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:itemCount="10"
+        tools:listitem="@layout/row_why_soodinow" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatImageButton
+    android:id="@+id/backButton"
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/height_medium"
+
+    android:layout_marginHorizontal="@dimen/margin_xl"
+    android:layout_marginTop="@dimen/margin_xl"
+    android:background="@android:color/transparent"
+    android:src="@drawable/ic_back"
+    android:tint="@color/white"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

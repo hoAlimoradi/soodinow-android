@@ -1,9 +1,8 @@
-package com.paya.presentation.ui.whySoodinow
+package com.paya.presentation.ui.aboutUs
 
-import android.graphics.Color
 import android.os.Build
+import android.os.Build.VERSION
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
@@ -11,32 +10,33 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.paya.domain.models.repo.WhySoodinowModel
+import com.paya.domain.models.repo.AboutUsModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.presentation.R
 import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.utils.observe
-import com.paya.presentation.viewmodel.WhySoodinowViewModel
+import com.paya.presentation.viewmodel.AboutUsViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_why_soodinow.*
+import kotlinx.android.synthetic.main.fragment_about_us.*
+import kotlinx.android.synthetic.main.fragment_why_soodinow.backButton
+
 
 @AndroidEntryPoint
-class WhySoodinowFragment : BaseFragment<WhySoodinowViewModel>() {
+class AboutUsFragment : BaseFragment<AboutUsViewModel>() {
 
-    private var adapter: WhySoodinowAdapter? = null
-    private val viewModel: WhySoodinowViewModel by viewModels()
+    private var adapter: AboutUsAdapter? = null
+    private val viewModel: AboutUsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_why_soodinow, container, false)
+        return inflater.inflate(R.layout.fragment_about_us, container, false)
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -51,13 +51,14 @@ class WhySoodinowFragment : BaseFragment<WhySoodinowViewModel>() {
         backButton.setOnClickListener {
             backPressed()
         }
-        observe(viewModel.whySoodinowListMutableLiveData, ::onDataReady)
+
+        observe(viewModel.aboutUSListMutableLiveData, ::onDataReady)
 
         val manager = LinearLayoutManager(context)
-        adapter = WhySoodinowAdapter()
+        adapter = AboutUsAdapter()
         adapter?.let {
-            whySoodinowsRecycleView.adapter = it
-            whySoodinowsRecycleView.layoutManager = manager
+            aboutUsRecycleView.adapter = it
+            aboutUsRecycleView.layoutManager = manager
         }
     }
 
@@ -66,17 +67,16 @@ class WhySoodinowFragment : BaseFragment<WhySoodinowViewModel>() {
         viewModel.getWhySoodinows()
     }
 
-    private fun onDataReady(resource: Resource<List<WhySoodinowModel>>){
+    private fun onDataReady(resource: Resource<List<AboutUsModel>>){
         when (resource.status) {
-            Status.SUCCESS -> resource.data?.let { whySoodinows ->
-                val whySoodinowModelArrayList  = ArrayList<WhySoodinowModel>()
-                whySoodinows.forEach {
-                    whySoodinowModelArrayList.add(it)
+            Status.SUCCESS -> resource.data?.let { aboutUsModelList ->
+                val aboutUsModelArrayList  = ArrayList<AboutUsModel>()
+                aboutUsModelList.forEach {
+                    aboutUsModelArrayList.add(it)
                 }
                 adapter?.let {
                     it.clear()
-                    Log.e("", whySoodinows.toString())
-                    it.addAllData(whySoodinowModelArrayList)
+                    it.addAllData(aboutUsModelArrayList)
                 }
             }
             else -> return
@@ -84,7 +84,6 @@ class WhySoodinowFragment : BaseFragment<WhySoodinowViewModel>() {
     }
 
     override fun onDestroyView() {
-
         adapter = null
         super.onDestroyView()
     }
@@ -93,14 +92,19 @@ class WhySoodinowFragment : BaseFragment<WhySoodinowViewModel>() {
         super.onDestroy()
     }
 
+    override fun onDetach() {
+        super.onDetach()
+        activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+    }
+
     private fun backPressed() {
         activity?.let {
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 it.window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
             }
-            it.window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            it.window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            it.window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            it.window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
             it.window.statusBarColor = ContextCompat.getColor(it.baseContext, R.color.white)
         }
 
@@ -118,10 +122,7 @@ class WhySoodinowFragment : BaseFragment<WhySoodinowViewModel>() {
         }
     }
 
-
-
     override val baseViewModel: BaseViewModel
         get() = viewModel
-
 
 }

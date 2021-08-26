@@ -1,11 +1,9 @@
 package com.paya.presentation.base
 
 import android.app.Activity
-import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
@@ -21,7 +19,6 @@ import com.paya.domain.tools.Status
 import com.paya.presentation.R
 import com.paya.presentation.ui.errorDoalog.ErrorDialog
 import com.paya.presentation.ui.errorDoalog.ErrorDialogModel
-import com.paya.presentation.ui.farabi.FarabiAuthActivity
 import com.paya.presentation.ui.loading.LoadingDialog
 import com.paya.presentation.utils.MySMSBroadcastReceiver
 import com.paya.presentation.utils.observe

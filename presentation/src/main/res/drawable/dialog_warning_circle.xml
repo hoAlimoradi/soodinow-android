@@ -5,7 +5,7 @@
         android:width="96dp"
         android:height="96dp" />
     <gradient
-        android:centerColor="#c7221a"
-        android:endColor="#c7221a"
-        android:startColor="#ff0000" />
+        android:centerColor="#ff8811"
+        android:endColor="#ff952b"
+        android:startColor="#ff952b" />
 </shape>
