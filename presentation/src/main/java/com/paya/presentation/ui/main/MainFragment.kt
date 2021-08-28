@@ -10,6 +10,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.paya.presentation.R
 import com.paya.presentation.databinding.FragmentMainBinding
 
+
 class MainFragment : Fragment() {
 
 	private var mBinding: FragmentMainBinding? = null

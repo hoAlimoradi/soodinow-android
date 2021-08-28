@@ -17,9 +17,9 @@
         android:textColor="@color/white"
         android:textSize="@dimen/text_size_xl"
         android:gravity="center_vertical"
+        android:layout_marginTop="@dimen/margin_l"
 
         android:layout_marginHorizontal="@dimen/margin_xl"
-        android:layout_marginTop="@dimen/margin_xl"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -65,8 +65,8 @@
         android:layout_width="wrap_content"
         android:layout_height="@dimen/height_medium"
 
+        android:layout_marginTop="@dimen/margin_m"
         android:layout_marginHorizontal="@dimen/margin_xl"
-        android:layout_marginTop="@dimen/margin_xl"
         android:background="@android:color/transparent"
         android:src="@drawable/ic_back"
         android:tint="@color/white"

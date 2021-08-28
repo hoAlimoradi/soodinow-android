@@ -227,6 +227,16 @@
 
     </fragment>
 
+
+    <fragment
+        android:id="@+id/depositSoodinowWalletFragment"
+        android:name="com.paya.presentation.ui.createLowRiskAccount.DepositSoodinowWalletFragment"
+        android:label="fragment_wallet_soodinow_deposit"
+        tools:layout="@layout/fragment_wallet_soodinow_deposit">
+
+    </fragment>
+
+
     <fragment
         android:id="@+id/connectLowRiskBrokerage"
         android:name="com.paya.presentation.ui.createLowRiskAccount.ConnectLowRiskBrokerageFragment"

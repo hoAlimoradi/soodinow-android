@@ -784,6 +784,7 @@ public class CustomSeekbar extends FrameLayout {
                         drawIndicatorsTextAbove(canvas, formatValue(max), settings.paintTextTop, canvas.getWidth(), textY, Layout.Alignment.ALIGN_CENTER);
                     }
                 }
+
             }
 
 
@@ -824,8 +825,14 @@ public class CustomSeekbar extends FrameLayout {
 
             {
                 final int color = settings.paintIndicator.getColor();
-                canvas.drawLine(indicatorCenterX , barY - settings.barHeight / 4f, indicatorCenterX , barY + settings.barHeight + settings.barHeight / 4f, settings.paintStep);
-                //canvas.drawLine(indicatorCenterX, this.barCenterY, indicatorRadius * 0.85f, settings.paintIndicator);
+                if (settings.drawTextOnTop) {
+                    canvas.drawLine(indicatorCenterX , barY - settings.barHeight / 4f, indicatorCenterX , barY + settings.barHeight + settings.barHeight / 4f, settings.paintStep);
+                } else {
+                    /*canvas.drawLine(indicatorCenterX , barY - (4*settings.barHeight)  / 4f, indicatorCenterX , barY + (5*settings.barHeight) / 4f, settings.paintStep);
+                    canvas.drawLine(indicatorCenterX , barY + (4*settings.barHeight)  / 4f, indicatorCenterX , barY + (5*settings.barHeight) / 4f, settings.paintStep);*/
+                }
+               // canvas.drawLine(indicatorCenterX , barY - settings.barHeight / 4f, indicatorCenterX , barY + settings.barHeight + settings.barHeight / 4f, settings.paintStep);
+
                 settings.paintIndicator.setColor(color);
             }
 

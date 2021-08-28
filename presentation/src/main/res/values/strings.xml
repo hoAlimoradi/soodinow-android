@@ -35,12 +35,13 @@
     <string name="profile">پروفایل</string>
     <string name="invest">سرمایه</string>
     <string name="market">بازار</string>
+    <string name="invest_basket">سبد</string>
     <string name="create_account_investment">افتتاح حساب سرمایه گذاری</string>
     <string name="create_without_risk_account">افتتاح حساب بدون ریسک</string>
     <string name="create_personal_account">افتتاح حساب شخصی</string>
     <string name="create_account">انجام سرمایه گذاری </string>
     <string name="why_soodinow">با سودینو بیشترآشنا شوید ...</string>
-    <string name="why_soodinow_description">مسیر های متنوع سرمایه گذاری در بازار های مالی</string>
+    <string name="why_soodinow_description">مسیر های متنوع سرمایه گذاری</string>
     <string name="why_soodinow_in_page">درباره سودینو</string>
     <string name="why_soodinow_description_in_page">ارائه ابزار های هوشمند مدیریت ثروت برای  تجربه بکر و جدید یک سرمایه گذاری خودکار و شخصی سازی شده برای تمام سرمایه گذاران</string>
     <string name="more_description">توضیحات بیشتر</string>
@@ -51,6 +52,8 @@
     <string name="rial">ریال</string>
     <string name="create_date">تاریخ افتتاح</string>
     <string name="wealth_toman">دارایی (ریال)</string>
+    <string name="toman_unit">تومان</string>
+
     <string name="wealth_increase">رشد دارایی</string>
     <string name="last_version_update">Last version update</string>
     <string name="write_here">اینجا بنویسید</string>
@@ -272,7 +275,19 @@
     <string name="automatic_investment">انجام خودکار سرمایه گذاری</string>
     <string name="automatic_withdrawal_of_investment">برداشت خودکار از سرمایه گذاری</string>
     <string name="risk_investment">میزان ریسک شما</string>
-
+    <string name="why_soodinow_description_second">" در بازار های مالی"</string>
+    <string name="first_rank_brokerage">"رتبه اول کارگزاری "</string>
+    <string name="farabi_ranks_first_among_the_market_earned_capital">فارابی رتبه اول را در بین بازار</string>
+    <string name="farabi_ranks_first_among_the_market_earned_capital_second">سرمایه کسب کرد</string>
+    <string name="risk_investment_change">تغییر ریسک</string>
+    <string name="min_requirment_invest">حداقل سرمایه گذاری در این پیمان 100.000 هزار تومان می باشد</string>
+    <string name="your_risk_free_investment_portfolio">سبد سرمایه گذاری بدون ریسک شما</string>
+    <string name="usable_assets">دارایی قابل استفاده</string>
+    <string name="investment_amount">مبلغ سرمایه گذاری</string>
+    <string name="amount_required">مبلغ مورد نیاز</string>
+    <string name="choose_your_banking_gateway">درگاه بانکی خود را انتخاب کنید</string>
+    <string name="credits">اعتبارات</string>
+    <string name="payment">پرداخت</string>
     <string-array name="brokerage_list">
         <item>کارگزاری فارابی</item>
     </string-array>

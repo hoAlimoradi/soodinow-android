@@ -38,7 +38,7 @@ class SoodinowWalletFragment : BaseFragment<CreateLowRiskAccountViewModel>() {
 
     private fun onReady(resource: Resource<List<SoodinowWalletContractRepoModel>>) {
 
-        /*var list: List<SoodinowWalletRecyclerViewItem> = listOf(SectionItem(title = "firstItem"))
+        /*todo var list: List<SoodinowWalletRecyclerViewItem> = listOf(SectionItem(title = "firstItem"))
 
         if (!resource.data.isNullOrEmpty()) {
             resource.data?.forEach {
@@ -76,6 +76,7 @@ class SoodinowWalletFragment : BaseFragment<CreateLowRiskAccountViewModel>() {
             soodinowWalletRecycleView?.apply {
                 layoutManager = LinearLayoutManager(context)
                 adapter = SoodinowWalletAdapter(list)
+                //this.addItemDecoration(SoodinowWalletAdapterItemDecoration())
             }
         }
     }

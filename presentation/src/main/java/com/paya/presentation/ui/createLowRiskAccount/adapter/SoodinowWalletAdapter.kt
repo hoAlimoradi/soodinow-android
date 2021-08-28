@@ -15,16 +15,7 @@ const val VIEW_TYPE_ITEM = 2
 
 class SoodinowWalletAdapter(val data: List<SoodinowWalletRecyclerViewItem>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-   /* override fun getItemViewType(position: Int): Int {
-        if (data[position] is SectionItem) {
-            return VIEW_TYPE_SECTION
-        }
-        return VIEW_TYPE_ITEM
-    }*/
-
     override fun getItemViewType(position: Int): Int {
-        // Just as an example, return 0 or 2 depending on position
-        // Note that unlike in ListView adapters, types don't have to be contiguous
         if (position == 0) {
             return VIEW_TYPE_SECTION
         }
@@ -36,14 +27,6 @@ class SoodinowWalletAdapter(val data: List<SoodinowWalletRecyclerViewItem>) : Re
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        /*if (viewType == VIEW_TYPE_SECTION) {
-            return FirstSectionSoodinowWalletAdapterViewHolder(
-                LayoutInflater.from(parent.context).inflate(R.layout.row_wallet_soodinow_title, parent, false)
-            )
-        }
-        return SecondSectionSoodinowWalletAdapterViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.row_wallet_soodinow, parent, false)
-        )*/
 
         if (viewType == VIEW_TYPE_SECTION) {
             return FirstSectionSoodinowWalletAdapterViewHolder(
@@ -78,6 +61,7 @@ class SoodinowWalletAdapter(val data: List<SoodinowWalletRecyclerViewItem>) : Re
             itemView.soodinowPointName.text = item.name
             itemView.soodinowPointDescription.text = item.description
 
+            itemView.customSeekbar.currentValue = 43f
             /**
             weekly
             */

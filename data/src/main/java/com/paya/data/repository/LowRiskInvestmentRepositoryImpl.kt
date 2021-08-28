@@ -131,8 +131,8 @@ data class LowRiskInvestmentRepositoryImpl @Inject constructor(
     override suspend fun getSoodinowWalletContractRepoModel(): Resource<List<SoodinowWalletContractRepoModel>> {
         val soodinowWalletContractRepoModel = SoodinowWalletContractRepoModel(
             pointTitle = "IRT1AFRN0001",
-            name = "افران",
-            description = "افران",
+            name = "ترکیب صندوق سرمایه گزاری سودینو",
+            description = "سودینو متشکل از چندین خدمت گوناگون متناسب با نیاز های مختلف سرمایه گذاران می باشد که تمام تمرکز سودینو انجام این خدمات به بهترین شکل می باشد تا منافع ناشی از آن سبب بهبود زندگی افراد جامعه باشد",
             trimesterValue =  25,
             monthlyValue =  25,
             weeklyValue =  25

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/openAutomaticInvestmentAccountCardLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_cards_open_account">
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/plusPriceImage"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:scaleType="center"
+        android:src="@drawable/ic_plus"
+        android:tint="@color/white"
+        android:background="@drawable/dot_green"
+        android:layout_marginHorizontal="@dimen/margin_l"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/wealthValueEditText"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/minusPriceImage"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:scaleType="center"
+
+        android:layout_marginHorizontal="@dimen/margin_m"
+        android:src="@drawable/ic_minus"
+        android:background="@drawable/dot_green"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/wealthTitle"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/min_requirment_invest"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_xs"
+        android:textStyle="bold"
+        android:layout_marginBottom="@dimen/margin_l"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"  />
+
+
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/wealthValueEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="32sp"
+        android:background="@android:color/transparent"
+        android:inputType="number"
+        android:layout_marginHorizontal="@dimen/margin_l"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="1000" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/wealthTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/toman_unit"
+        android:textColor="@color/white"
+
+        android:layout_marginHorizontal="@dimen/margin_m"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/wealthValueEditText"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

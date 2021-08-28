@@ -7,18 +7,27 @@
         android:icon="@drawable/ic_menu_settings"/>
 
     <item
+        android:id="@+id/market"
+        android:enabled="true"
+        android:title="@string/market"
+        android:icon="@drawable/ic_menu_market"/>
+
+
+    <item
+        android:id="@+id/profile"
+        android:enabled="true"
+        android:title="@string/credits"
+        android:icon="@drawable/ic_loan"/>
+
+    <item
+        android:id="@+id/investBasket"
+        android:enabled="true"
+        android:title="@string/invest_basket"
+        android:icon="@drawable/ic_menu_profile"/>
+
+    <item
         android:id="@+id/home"
         android:enabled="true"
         android:title="@string/home"
         android:icon="@drawable/ic_menu_home"/>
-    <item
-        android:id="@+id/profile"
-        android:enabled="true"
-        android:title="@string/invest"
-        android:icon="@drawable/ic_menu_profile"/>
-    <item
-        android:id="@+id/market"
-        android:enabled="true"
-        android:title="@string/market"
-        android:icon="@drawable/ic_menu_wrench"/>
 </menu>

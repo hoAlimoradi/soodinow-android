@@ -16,19 +16,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/startButton"
-            android:layout_width="84dp"
-            android:layout_height="28dp"
-            android:background="@drawable/bg_tab_selected_mini"
-
-            android:layout_marginTop="@dimen/margin_xl"
-            android:layout_marginHorizontal="@dimen/margin_xl"
-            android:text="@string/start"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size_m"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/soodinowPointTitleInCard"
@@ -42,7 +29,7 @@
             android:textSize="@dimen/text_size_m"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/startButton" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/imageView4"
@@ -151,9 +138,9 @@
                 android:id="@+id/lineView"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
+                android:layout_marginTop="8dp"
                 android:background="@color/blue_light"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.497"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -182,8 +169,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:region_leftColor="@color/red"
-                app:region_rightColor="@color/green"
+                app:region_leftColor="@color/conifer_green"
+                app:region_rightColor="@color/japanese_laurel_green"
                 app:regions="true"
                 app:regions_centerText="true"
                 app:textTop_visible="true" />
