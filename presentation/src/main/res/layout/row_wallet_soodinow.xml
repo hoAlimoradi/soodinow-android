@@ -9,6 +9,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_s"
+        android:layout_marginBottom="50dp"
         android:background="@drawable/shadow_8dp"
         android:layout_margin="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -362,6 +363,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/extendImageConstraintLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingBottom="@dimen/margin_s"
@@ -381,6 +383,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

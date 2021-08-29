@@ -15,6 +15,7 @@ import com.paya.domain.tools.Resource
 import com.paya.presentation.R
 import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
+import com.paya.presentation.ui.profile.dialog.ChartProfileDialog
 import com.paya.presentation.utils.hideKeyBoard
 import com.paya.presentation.utils.observe
 import com.paya.presentation.utils.requestKeyBoard
@@ -52,7 +53,6 @@ class OpenSoodinowAutomaticInvestmentAccountFragment : BaseFragment<CreateLowRis
         }
 
         observe(mViewModel.soodinowWalletRepoModelResource, ::onReady)
-        mViewModel.getSoodinowWalletContracts()
         riskInvestmentCustomSeekbar.currentValue = 30f
 
         navigateToDepositSoodinowWalletFragmentButton.setOnClickListener {
@@ -60,29 +60,7 @@ class OpenSoodinowAutomaticInvestmentAccountFragment : BaseFragment<CreateLowRis
                 R.id.depositSoodinowWalletFragment
             )
         }
-       // wealthValue.text = currentWealthValue.toString()
 
-        /*wealthValue.setOnClickListener {
-           *//* wealthValue.requestKeyBoard()
-            wealthValue.setOnEditorActionListener { v, actionId, event ->
-                if ((event.action == KeyEvent.ACTION_DOWN) && (event.keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    wealthValue.hideKeyBoard()
-                    return@setOnEditorActionListener true
-                }
-                return@setOnEditorActionListener false
-            }*//*
-
-
-        }*/
-
-        /*wealthValueEditText.requestKeyBoard()
-        wealthValueEditText.setOnEditorActionListener { v, actionId, event ->
-            if ((event.action == KeyEvent.ACTION_DOWN) && (event.keyCode == KeyEvent.KEYCODE_ENTER)) {
-                wealthValueEditText.hideKeyBoard()
-                return@setOnEditorActionListener true
-            }
-            return@setOnEditorActionListener false
-        }*/
         wealthValueEditText.requestKeyBoard()
         wealthValueEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
@@ -94,55 +72,43 @@ class OpenSoodinowAutomaticInvestmentAccountFragment : BaseFragment<CreateLowRis
             }
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                //wealthValue.text = wealthValueEditText.text.toString()
+
                 if(wealthValueEditText.text.toString().isNotBlank() && wealthValueEditText.text.toString().isNotEmpty()) {
                     currentWealthValue = wealthValueEditText.text.toString().toInt()
                 }
-
-
             }
 
             override fun afterTextChanged(s: Editable) {}
         })
 
         plusPriceImage.setOnClickListener {
-            //currentWealthValue += unitValue
-            //wealthValue.text = currentWealthValue.toString()
-            /*when {
-                wealthValueEditText.text.toString().isNotBlank() && wealthValueEditText.text.toString().isNotEmpty() -> {
-                    if (wealthValueEditText.text.toString().toDouble() > unitValue ) {
-                        currentWealthValue += unitValue
-                        wealthValueEditText.setText(currentWealthValue.toInt())
-                    }
-                }
-            }*/
             currentWealthValue += unitValue
             wealthValueEditText.text = Editable.Factory.getInstance().newEditable(currentWealthValue.toString())
-            //wealthValueEditText.setText(currentWealthValue)
-
         }
-
+        efficiencyButton.setOnClickListener {
+            openChart()
+        }
         minusPriceImage.setOnClickListener {
             if (wealthValueEditText.text.toString().toInt()> unitValue ) {
                 currentWealthValue  -= unitValue
                 wealthValueEditText.text = Editable.Factory.getInstance().newEditable(currentWealthValue.toString())
-                //wealthValueEditText.setText(currentWealthValue)
             }
 
-
-            /*when {
-                wealthValueEditText.text.toString().isNotBlank() && wealthValueEditText.text.toString().isNotEmpty() -> {
-                    if (wealthValueEditText.text.toString().toDouble() > unitValue ) {
-                        currentWealthValue  -= unitValue
-                        wealthValueEditText.setText(currentWealthValue.toInt())
-                    }
-                }
-            }*/
         }
     }
 
     private fun onReady(resource: Resource<List<SoodinowWalletContractRepoModel>>) {
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mViewModel.getSoodinowWalletContracts()
+    }
+
+    private fun openChart() {
+        val dialog = ChartProfileDialog()
+        dialog.show(parentFragmentManager, "chartDialog")
     }
 
     private fun backPressed() {
@@ -170,6 +136,9 @@ class OpenSoodinowAutomaticInvestmentAccountFragment : BaseFragment<CreateLowRis
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+    }
 
     override val baseViewModel: BaseViewModel
         get() = mViewModel

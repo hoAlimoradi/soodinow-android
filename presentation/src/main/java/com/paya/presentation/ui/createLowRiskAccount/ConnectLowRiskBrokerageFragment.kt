@@ -1,10 +1,12 @@
 package com.paya.presentation.ui.createLowRiskAccount
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -24,8 +26,10 @@ import kotlinx.android.synthetic.main.fragment_connect_low_risk_brokerage.*
 
 @AndroidEntryPoint
 class ConnectLowRiskBrokerageFragment : BaseFragment<ConnectLowRiskBrokerageViewModel>() {
+    private lateinit var adapter : CreateLowRiskAccountFragmentAdapter
+    private lateinit var fm: FragmentManager
     private val mViewModel: ConnectLowRiskBrokerageViewModel by viewModels()
-    private val args: ConnectLowRiskBrokerageFragmentArgs by navArgs()
+    //private val args: ConnectLowRiskBrokerageFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,10 +40,13 @@ class ConnectLowRiskBrokerageFragment : BaseFragment<ConnectLowRiskBrokerageView
 
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        //fm = context. supportFragmentManager
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
 
         toolbar.backClick = {
             findNavController().popBackStack()
@@ -55,36 +62,13 @@ class ConnectLowRiskBrokerageFragment : BaseFragment<ConnectLowRiskBrokerageView
                     R.id.createLowRiskAccount
                 )
             }
-            /*findNavController().navigate(
-                ConnectLowRiskBrokerageFragmentDirections.navigateToCreateAccountRulesFragment(
-                    args.SelectedPrice,
-                    args.riskState
-                )
-            )*/
         }
-       //TODO  accountCardLayout.wealthValue.text = Utils.separatorAmount(args.SelectedPrice)
-
         accountCardLayout.wealthValue.text = "10.856.000"
 
-		val adapter = CreateLowRiskAccountFragmentAdapter(requireContext(), requireActivity().supportFragmentManager, tabLayout.tabCount)
-		lowRiskBrokerageViewPager.adapter = adapter
-
-		lowRiskBrokerageViewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
-
-       /* txtDescBrokerage.setOnClickListener {
-            openUrl("https://reg.irfarabi.com/reg/?j=1&is=1&ref=10112")
-        }
-        context?.let { context ->
-
-            txtDescBrokerage.setArrayStringText(
-                context.resources.getStringArray(R.array.brokerage_desc_bottom),
-                ContextCompat.getColor(context, R.color.green)
-            )
-            txtDescBrokerageSoodinow.setArrayStringText(
-                context.resources.getStringArray(R.array.brokerage_desc_bottom_soodinow),
-                ContextCompat.getColor(context, R.color.green)
-            )
-        }*/
+        adapter = CreateLowRiskAccountFragmentAdapter(requireContext(), requireActivity().supportFragmentManager, tabLayout.tabCount)
+        lowRiskBrokerageViewPager.adapter = adapter
+        lowRiskBrokerageViewPager.offscreenPageLimit = 2
+        lowRiskBrokerageViewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(tab: TabLayout.Tab?) {
 
@@ -96,7 +80,7 @@ class ConnectLowRiskBrokerageFragment : BaseFragment<ConnectLowRiskBrokerageView
 
             override fun onTabSelected(tab: TabLayout.Tab?) {
 
-				mViewModel.tabCheckedIsSoodinow = tabLayout.selectedTabPosition == 0
+                mViewModel.tabCheckedIsSoodinow = tabLayout.selectedTabPosition == 0
                 //todo addInvestBtn.isEnabled = !mViewModel.tabCheckedIsSoodinow
                 addInvestBtn.setBackgroundResource(if (mViewModel.tabCheckedIsSoodinow) R.drawable.bg_button_gray else R.drawable.bg_button_green)
                 /*image.setImageResource(if (mViewModel.tabCheckedIsSoodinow) R.drawable.ic_logo_soodinow else R.drawable.ic_farabi)
@@ -117,19 +101,95 @@ class ConnectLowRiskBrokerageFragment : BaseFragment<ConnectLowRiskBrokerageView
                     )
 
                 }*/
-				//
-				lowRiskBrokerageViewPager.currentItem = tabLayout.selectedTabPosition
+                //
+                lowRiskBrokerageViewPager.currentItem = tabLayout.selectedTabPosition
 
             }
 
         })
         tabLayout.getTabAt(1)?.select()
+/*
+        accountCardLayout.wealthValue.text = "10.856.000"
+
+        val adapter = CreateLowRiskAccountFragmentAdapter(requireContext(), requireActivity().supportFragmentManager, tabLayout.tabCount)
+        lowRiskBrokerageViewPager.adapter = adapter
+        lowRiskBrokerageViewPager.offscreenPageLimit = 2
+        lowRiskBrokerageViewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+
+                mViewModel.tabCheckedIsSoodinow = tabLayout.selectedTabPosition == 0
+                //todo addInvestBtn.isEnabled = !mViewModel.tabCheckedIsSoodinow
+                addInvestBtn.setBackgroundResource(if (mViewModel.tabCheckedIsSoodinow) R.drawable.bg_button_gray else R.drawable.bg_button_green)
+                *//*image.setImageResource(if (mViewModel.tabCheckedIsSoodinow) R.drawable.ic_logo_soodinow else R.drawable.ic_farabi)
+                txtDescBrokerage.visibility =
+                    if (mViewModel.tabCheckedIsSoodinow) View.GONE else View.VISIBLE
+                txtDescBrokerageSoodinow.visibility =
+                    if (mViewModel.tabCheckedIsSoodinow) View.VISIBLE else View.GONE
+
+                context?.let { context ->
+                    txtDesc.setArrayStringText(
+                        context.resources.getStringArray(
+                            if (mViewModel.tabCheckedIsSoodinow)
+                                R.array.brokerage_desc_soodinow
+                            else
+                                R.array.brokerage_desc
+                        ),
+                        ContextCompat.getColor(context, R.color.green)
+                    )
+
+                }*//*
+                //
+                lowRiskBrokerageViewPager.currentItem = tabLayout.selectedTabPosition
+
+            }
+
+        })
+        tabLayout.getTabAt(1)?.select()*/
+       //TODO  accountCardLayout.wealthValue.text = Utils.separatorAmount(args.SelectedPrice)
+
+
+
+       /* txtDescBrokerage.setOnClickListener {
+            openUrl("https://reg.irfarabi.com/reg/?j=1&is=1&ref=10112")
+        }
+        context?.let { context ->
+
+            txtDescBrokerage.setArrayStringText(
+                context.resources.getStringArray(R.array.brokerage_desc_bottom),
+                ContextCompat.getColor(context, R.color.green)
+            )
+            txtDescBrokerageSoodinow.setArrayStringText(
+                context.resources.getStringArray(R.array.brokerage_desc_bottom_soodinow),
+                ContextCompat.getColor(context, R.color.green)
+            )
+        }*/
+
 
     }
 
-    override fun onDestroyView() {
+    override fun onResume() {
+        super.onResume()
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+    }
+    override fun onDestroyView() {
         super.onDestroyView()
+    }
+
+    override fun onDetach() {
+        super.onDetach()
     }
 
     override val baseViewModel: BaseViewModel

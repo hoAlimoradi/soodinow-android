@@ -34,18 +34,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <include
-        android:id="@+id/accountCardLayout"
-        layout="@layout/open_automatic_investment_account_card"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/margin_4_dp"
-        app:layout_constraintDimensionRatio="H,2:1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
 
-        app:layout_constraintTop_toBottomOf="@+id/backButtonOpenSoodinowAutomaticInvestmentAccountFragment"
-       />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
@@ -53,7 +42,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/accountCardLayout"
+        app:layout_constraintTop_toBottomOf="@+id/backButtonOpenSoodinowAutomaticInvestmentAccountFragment"
          >
 
         <ScrollView
@@ -74,15 +63,25 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="parent">
 
+                <include
+                    android:id="@+id/accountCardLayout"
+                    layout="@layout/open_automatic_investment_account_card"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="@dimen/margin_4_dp"
+                    app:layout_constraintDimensionRatio="H,2:1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
 
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+               <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/accountCardLayout"
                 android:background="@drawable/shadow_gray_194a4a4a"
                 >
 
@@ -295,7 +294,7 @@
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toEndOf="@+id/trimesterPercentImage"
                                 app:layout_constraintTop_toTopOf="parent"
-                                tools:text="30%" />
+                                android:text="30%" />
 
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -444,17 +443,16 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/efficiencyBtn"
+                    android:id="@+id/efficiencyButton"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/height_medium"
                     android:gravity="center"
-                    android:text="نمودار بازدهی"
+                    android:text="@string/efficiencyChart"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_m"
                     android:textStyle="bold"
                     android:layout_margin="@dimen/margin_l"
                     android:background="@drawable/shadow_medium"
-
                     app:layout_constraintTop_toBottomOf="@id/trimesterMonthlyWeeklyConstraintLayout"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -474,22 +472,35 @@
                     android:textSize="@dimen/text_size_m"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/efficiencyBtn" />
+                    app:layout_constraintTop_toBottomOf="@+id/efficiencyButton" />
+
+                   <androidx.appcompat.widget.AppCompatTextView
+                       android:id="@+id/riskInvestmentValue"
+                       android:layout_width="0dp"
+                       android:layout_height="wrap_content"
+
+                       android:layout_marginTop="@dimen/margin_l"
+                       android:layout_marginHorizontal="@dimen/margin_s"
+                       android:gravity="center"
+                       android:textColor="@color/black"
+                       android:text="20%"
+                       android:textSize="@dimen/text_size_m"
+                       android:textStyle="bold"
+                       app:layout_constraintEnd_toStartOf="@+id/riskInvestment"
+                       app:layout_constraintTop_toBottomOf="@+id/efficiencyBtn" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/margin_l"
                     android:layout_marginBottom="@dimen/margin_s"
-
                     android:layout_marginTop="12dp"
                     android:background="@drawable/bg_orange"
                     android:paddingHorizontal="@dimen/margin_m"
                     android:paddingTop="@dimen/margin_4_dp"
                     android:paddingBottom="@dimen/margin_4_dp"
-
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/efficiencyBtn" >
+                    app:layout_constraintTop_toBottomOf="@+id/efficiencyButton" >
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/riskInvestmentButton"

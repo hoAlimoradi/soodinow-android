@@ -1,5 +1,6 @@
 package com.paya.presentation.ui.createLowRiskAccount.adapter
 
+import android.animation.ObjectAnimator
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -121,6 +122,21 @@ class SoodinowWalletAdapter(val data: List<SoodinowWalletRecyclerViewItem>) : Re
 
 
         }
+
+        /*fun collapseExpandTextView() {
+            if (mItemDescription.getVisibility() === View.GONE) {
+                // it's collapsed - expand it
+                mItemDescription.setVisibility(View.VISIBLE)
+                mDescriptionImg.setImageResource(R.drawable.ic_expand_less_black_24dp)
+            } else {
+                // it's expanded - collapse it
+                mItemDescription.setVisibility(View.GONE)
+                mDescriptionImg.setImageResource(R.drawable.ic_expand_more_black_24dp)
+            }
+            val animation =
+                ObjectAnimator.ofInt(mItemDescription, "maxLines", mItemDescription.getMaxLines())
+            animation.setDuration(200).start()
+        }*/
     }
 }
 

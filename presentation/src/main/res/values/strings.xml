@@ -274,7 +274,7 @@
     <string name="select_contract">"انتخاب پیمان "</string>
     <string name="automatic_investment">انجام خودکار سرمایه گذاری</string>
     <string name="automatic_withdrawal_of_investment">برداشت خودکار از سرمایه گذاری</string>
-    <string name="risk_investment">میزان ریسک شما</string>
+    <string name="risk_investment">میزان ریسک شما </string>
     <string name="why_soodinow_description_second">" در بازار های مالی"</string>
     <string name="first_rank_brokerage">"رتبه اول کارگزاری "</string>
     <string name="farabi_ranks_first_among_the_market_earned_capital">فارابی رتبه اول را در بین بازار</string>
@@ -288,6 +288,7 @@
     <string name="choose_your_banking_gateway">درگاه بانکی خود را انتخاب کنید</string>
     <string name="credits">اعتبارات</string>
     <string name="payment">پرداخت</string>
+    <string name="efficiencyChart">نمودار بازدهی</string>
     <string-array name="brokerage_list">
         <item>کارگزاری فارابی</item>
     </string-array>

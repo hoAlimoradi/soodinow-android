@@ -75,5 +75,8 @@
 
     <color name="gray_f2f2f2">#f2f2f2</color>
     <color name="gray_194a4a4a">#194a4a4a</color>
+    <color name="green_54C31E">#54C31E</color>
+    <color name="blue_5588e7">#5588e7</color>
+    <color name="gray_5588e7">#dbe4f5</color>
 
 </resources>
