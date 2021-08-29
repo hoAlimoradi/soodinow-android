@@ -58,16 +58,15 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 		observe(mViewModel.currencyPrice, ::onPricesReady)
 		observe(mViewModel.statusProfile, ::checkProfile)
 		observe(mViewModel.soodinowWalletValueRepoModelResourceMutableLiveData, ::walletValue)
-		/*val layoutManager =
+		val layoutManager =
 			LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-*/
 
-		val layoutManager = GridLayoutManager(
+		/*val layoutManager = GridLayoutManager(
 			requireContext(),
 			3,
 			LinearLayoutManager.VERTICAL,
 			false
-		)
+		)*/
 
 		adapterCurrency = MarketAdapter()
 		adapterCurrency?.let {

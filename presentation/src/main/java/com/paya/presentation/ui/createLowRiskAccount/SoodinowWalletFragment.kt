@@ -61,9 +61,9 @@ class SoodinowWalletFragment : BaseFragment<CreateLowRiskAccountViewModel>() {
             pointTitle = "IRT1AFRN0001",
             name = "ترکیب صندوق سرمایه گزاری سودینو",
             description = "سودینو متشکل از چندین خدمت گوناگون متناسب با نیاز های مختلف سرمایه گذاران می باشد که تمام تمرکز سودینو انجام این خدمات به بهترین شکل می باشد تا منافع ناشی از آن سبب بهبود زندگی افراد جامعه باشد",
-            trimesterValue =  5,
+            trimesterValue =  62 ,
             monthlyValue =  21,
-            weeklyValue =  62
+            weeklyValue =  5
         )
         var list: List<SoodinowWalletRecyclerViewItem> = listOf(SectionItem(title = "firstItem"), soodinowWalletContractRepoModel)
 
