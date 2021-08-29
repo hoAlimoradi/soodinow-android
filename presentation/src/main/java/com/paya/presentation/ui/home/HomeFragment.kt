@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.paya.domain.models.repo.CurrencyPriceRepoModel
@@ -57,16 +58,16 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 		observe(mViewModel.currencyPrice, ::onPricesReady)
 		observe(mViewModel.statusProfile, ::checkProfile)
 		observe(mViewModel.soodinowWalletValueRepoModelResourceMutableLiveData, ::walletValue)
-		val layoutManager =
+		/*val layoutManager =
 			LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+*/
 
-
-		/*val layoutManager = GridLayoutManager(
+		val layoutManager = GridLayoutManager(
 			requireContext(),
 			3,
 			LinearLayoutManager.VERTICAL,
 			false
-		)*/
+		)
 
 		adapterCurrency = MarketAdapter()
 		adapterCurrency?.let {
