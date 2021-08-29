@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -195,7 +195,6 @@
             android:layout_marginTop="@dimen/margin_m"
             android:paddingTop="@dimen/margin_l"
             android:paddingBottom="@dimen/margin_l"
-            android:background="@color/bg_tab_layout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/customSeekbarConstraintLayout">
@@ -247,7 +246,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/trimesterPercentImage"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="30%" />
+                    android:text="30%" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/trimesterText"
@@ -378,6 +377,8 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_arrow_bottom_gray"
 
+                android:layout_marginTop="@dimen/margin_4_dp"
+                android:layout_marginBottom="@dimen/margin_4_dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

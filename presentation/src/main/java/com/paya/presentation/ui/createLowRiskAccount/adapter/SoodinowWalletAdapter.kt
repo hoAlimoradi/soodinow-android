@@ -104,7 +104,7 @@ class SoodinowWalletAdapter(val data: List<SoodinowWalletRecyclerViewItem>) : Re
             /**
             trimester
              */
-            itemView.trimesterText.run {
+            itemView.trimesterPercentValue.run {
                 if (item.trimesterValue < 0 ) {
                     this.setTextColor(this.context.getColorByResId(R.color.red))
                 } else {
@@ -112,7 +112,7 @@ class SoodinowWalletAdapter(val data: List<SoodinowWalletRecyclerViewItem>) : Re
                 }
                 this.text = item.trimesterValue.toString()
             }
-            itemView.trimesterPercentValue.run {
+            itemView.trimesterPercentImage.run {
                 if (item.trimesterValue < 0 ) {
                     this.background = this.context.getDrawableByResId(R.drawable.bg_icon_15_size_corner_3_red)
                 } else {

@@ -65,7 +65,8 @@ class ConnectLowRiskBrokerageFragment : BaseFragment<ConnectLowRiskBrokerageView
         }
         accountCardLayout.wealthValue.text = "10.856.000"
 
-        adapter = CreateLowRiskAccountFragmentAdapter(requireContext(), requireActivity().supportFragmentManager, tabLayout.tabCount)
+
+        adapter = CreateLowRiskAccountFragmentAdapter(requireContext(),childFragmentManager, tabLayout.tabCount)
         lowRiskBrokerageViewPager.adapter = adapter
         lowRiskBrokerageViewPager.offscreenPageLimit = 2
         lowRiskBrokerageViewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))

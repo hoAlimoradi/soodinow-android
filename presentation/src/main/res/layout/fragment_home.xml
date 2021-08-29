@@ -147,7 +147,7 @@
 
                     android:layout_marginEnd="4dp"
                     android:layout_marginStart="4dp"
-                    android:text="10,000,000,000تومان"
+                    tools:text="10,000,000,000تومان"
                     android:textColor="@color/light_purple7d4181"
 
                     android:maxLines="1"
@@ -298,7 +298,8 @@
                 android:layout_width="0dp"
                 android:layout_height="102dp"
                 android:background="@drawable/bg_why_soodinow_shape"
-                android:layout_marginHorizontal="34dp"
+                android:layout_marginHorizontal="@dimen/margin_l"
+                android:layout_marginTop="@dimen/margin_l"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/marketRecycleViewConstraintLayout">
@@ -372,7 +373,7 @@
                 android:layout_width="0dp"
                 android:layout_height="102dp"
                 android:background="@drawable/bg_farabi_blue_green"
-                android:layout_marginHorizontal="34dp"
+                android:layout_marginHorizontal="@dimen/margin_l"
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

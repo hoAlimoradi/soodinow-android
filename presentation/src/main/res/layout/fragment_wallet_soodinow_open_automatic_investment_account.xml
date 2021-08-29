@@ -294,7 +294,7 @@
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toEndOf="@+id/trimesterPercentImage"
                                 app:layout_constraintTop_toTopOf="parent"
-                                android:text="30%" />
+                                android:text="62%" />
 
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -335,7 +335,7 @@
                                 app:layout_constraintStart_toEndOf="@+id/monthlyPercentImage"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintVertical_bias="0.0"
-                                android:text="30%" />
+                                android:text="21%" />
 
                             <androidx.appcompat.widget.AppCompatImageView
                                 android:id="@+id/monthlyPercentImage"
@@ -405,7 +405,7 @@
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toEndOf="@+id/weeklyPercentImage"
                                 app:layout_constraintTop_toTopOf="parent"
-                                android:text="30%" />
+                                android:text="5%" />
 
                             <androidx.appcompat.widget.AppCompatImageView
                                 android:id="@+id/weeklyPercentImage"
@@ -479,17 +479,17 @@
                        android:layout_width="0dp"
                        android:layout_height="wrap_content"
 
-                       android:layout_marginTop="@dimen/margin_l"
                        android:layout_marginHorizontal="@dimen/margin_s"
+                       android:layout_marginEnd="28dp"
                        android:gravity="center"
-                       android:textColor="@color/black"
                        android:text="20%"
+                       android:textColor="@color/black"
                        android:textSize="@dimen/text_size_m"
                        android:textStyle="bold"
-                       app:layout_constraintEnd_toStartOf="@+id/riskInvestment"
-                       app:layout_constraintTop_toBottomOf="@+id/efficiencyBtn" />
+                       app:layout_constraintBottom_toBottomOf="@+id/riskInvestment"
+                       app:layout_constraintEnd_toStartOf="@+id/riskInvestment" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                   <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/margin_l"
@@ -567,9 +567,8 @@
                     android:id="@+id/mosaicConstraintLayout"
 
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin_l"
-                    app:layout_constraintDimensionRatio="H,4:1"
 
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

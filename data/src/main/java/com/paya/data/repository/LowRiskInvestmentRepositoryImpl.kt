@@ -162,7 +162,7 @@ data class LowRiskInvestmentRepositoryImpl @Inject constructor(
 
         val soodinowWalletValueRepoModel = SoodinowWalletValueRepoModel(
             id = 18,
-            value = 961481259240313.0,
+            value = 96148880.0,
             percent = listOf(
                 soodinowWalletValuePercentFirst,
                 soodinowWalletValuePercentSecond,
