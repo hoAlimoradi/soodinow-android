@@ -18,6 +18,7 @@ import dagger.hilt.android.components.ActivityRetainedComponent
 		QuestionModule::class,
 		LowRiskInvestmentModule::class,
 		CurrencyPriceModule::class,
+		WalletModule::class,
 		CommonModule::class
 	]
 )

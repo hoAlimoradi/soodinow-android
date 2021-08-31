@@ -1,0 +1,19 @@
+package com.paya.domain.usecase.wallet
+
+import com.paya.domain.models.repo.*
+import com.paya.domain.repository.LowRiskInvestmentRepository
+import com.paya.domain.repository.MarketRepository
+import com.paya.domain.repository.WalletRepository
+import com.paya.domain.tools.Resource
+import com.paya.domain.tools.UseCase
+import javax.inject.Inject
+
+class WalletChargeUseCase @Inject constructor(
+    private val walletRepository: WalletRepository
+) : UseCase<WalletChargeRepoBodyModel, WalletChargeRepoModel> {
+    override suspend fun action(param: WalletChargeRepoBodyModel): Resource<WalletChargeRepoModel> {
+        return walletRepository.walletCharge(param.charge,param.callbackUrl,param.bankingPortal)
+
+    }
+
+}

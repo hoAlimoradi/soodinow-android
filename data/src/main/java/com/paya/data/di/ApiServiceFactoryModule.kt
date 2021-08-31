@@ -60,5 +60,9 @@ class ApiServiceFactoryModule{
 	@Reusable
 	fun commonService(apiService: ApiServiceFactory) =
 		apiService.create(CommonService::class.java)
+	@Provides
+	@Reusable
+	fun walletService(apiService: ApiServiceFactory) =
+		apiService.create(WalletService::class.java)
 
 }

@@ -119,7 +119,7 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="ab">
+                  <entry key="aboutUs">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
@@ -387,6 +387,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="depositSoodinowWalletFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="256" />
+                            <option name="y" value="368" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="financialReportFragment">
                     <value>
                       <LayoutPositions>
@@ -517,6 +529,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="openSoodinowAutomaticInvestmentAccountFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="12" />
+                            <option name="y" value="368" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="registerFragment">
                     <value>
                       <LayoutPositions>
@@ -609,6 +633,18 @@
                               </value>
                             </entry>
                           </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="wallet">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="256" />
+                            <option name="y" value="12" />
+                          </Point>
                         </option>
                       </LayoutPositions>
                     </value>
