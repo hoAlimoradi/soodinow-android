@@ -52,6 +52,11 @@ abstract class WalletModule {
             WalletValueRemoteModel,
             WalletValueRepoModel
             >
+    @Binds
+    abstract fun bindWalletHostListRemoteRepoMapper(mapper: WalletHostListRemoteRepoMapper): Mapper<
+            @JvmSuppressWildcards List<WalletHostListRemoteModel>,
+            @JvmSuppressWildcards List<WalletHostListRepoModel>
+            >
 
     @Binds
     abstract fun walletRepo(dev: WalletRepositoryImpl): WalletRepository
@@ -73,6 +78,8 @@ abstract class WalletModule {
 
     @Binds
     abstract fun bindWalletValueUseCase(useCase: WalletValueUseCase): UseCase<Unit, WalletValueRepoModel>
+    @Binds
+    abstract fun bindWalletHostListUseCase(useCase: WalletHostListUseCase): UseCase<Unit, @JvmSuppressWildcards List<WalletHostListRepoModel>>
 
 
 }

@@ -38,4 +38,7 @@ interface WalletService {
 
     @GET("investment/wallet")
     suspend fun wallet(): ApiResponse<BaseModel<WalletValueRemoteModel>>
+
+    @GET("investment/hosts_list")
+    suspend fun hostList(): ApiResponse<BaseModel<List<WalletHostListRemoteModel>>>
 }
