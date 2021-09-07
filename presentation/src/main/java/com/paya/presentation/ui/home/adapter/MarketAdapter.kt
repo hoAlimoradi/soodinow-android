@@ -10,6 +10,7 @@ import com.paya.domain.models.repo.CurrencyPriceRepoModel
 import com.paya.presentation.R
 import com.paya.presentation.utils.BaseAdapter
 import com.paya.presentation.utils.Utils
+import com.paya.presentation.utils.getColorByResId
 import com.paya.presentation.utils.roundOffDecimal
 import kotlinx.android.synthetic.main.row_market_currency.view.*
 
@@ -26,12 +27,7 @@ class MarketAdapter() : BaseAdapter<MarketAdapter.MarketViewHolder,CurrencyPrice
 		params.bottomMargin = if (data.lastIndex == position) holder.itemView.resources.getDimension(R.dimen.space_bottom_navigation).toInt() else 0
 		holder.itemView.layoutParams = params
 		with(holder.itemView) {
-			model.price?.let {
-				val currencyPrice =
-					if (model.currency == Currency.Rial) Utils.separatorAmount(it.toLong())
-						.toString() else it.toString()
-				marketWealthValue.text = currencyPrice
-			}
+
 			marketTitle.text = model.name
 /*			marketWealthCurrencyValue.text = model.currency.persianTitle
 			marketWealthCurrencyValue.visibility =
@@ -40,6 +36,7 @@ class MarketAdapter() : BaseAdapter<MarketAdapter.MarketViewHolder,CurrencyPrice
 			val pathResourceId = when (model.changeStatus) {
 				"+" -> {
 					R.drawable.ic_green_arrow_drop_up
+
 				}
 				"-" -> {
 					R.drawable.ic_red_arrow_drop_down
@@ -49,10 +46,52 @@ class MarketAdapter() : BaseAdapter<MarketAdapter.MarketViewHolder,CurrencyPrice
 				}
 			}
 			pathResourceId.let { marketPercentageIcon.setImageResource(it) }
+
+
 			if (model.changeStatus != null && model.changePercent != null) {
-				marketPercentageValue.text =
-					" %${model.changeStatus} ${model.changePercent?.let { roundOffDecimal(if (it < 0) it * -1f else it) }}"
+				marketPercentageValue.run {
+					this.text =
+						" %${model.changeStatus} ${model.changePercent?.let { roundOffDecimal(if (it < 0) it * -1f else it) }}"
+					when (model.changeStatus) {
+
+						"-" -> {
+							this.setTextColor(this.context.getColorByResId(R.color.red))
+						}
+
+						else -> {
+							this.setTextColor(this.context.getColorByResId(R.color.bg_green))
+						}
+
+					}
+				}
+
 			}
+
+
+			if (model.changeStatus != null && model.price != null) {
+				marketWealthValue.run {
+					model.price?.let {
+						val currencyPrice =
+							if (model.currency == Currency.Rial) Utils.separatorAmount(it.toLong()).toString() else it.toString()
+						this.text = currencyPrice
+					}
+
+					when (model.changeStatus) {
+
+						"-" -> {
+							this.setTextColor(this.context.getColorByResId(R.color.red))
+						}
+
+						else -> {
+							this.setTextColor(this.context.getColorByResId(R.color.bg_green))
+						}
+
+					}
+				}
+
+			}
+
+
 		}
 	}
 	

@@ -40,7 +40,7 @@
                 app:srcCompat="@drawable/dot_green_white" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/soodinowPointDescriptionFirst"
+                android:id="@+id/firstSectionSelectContractWalletPointDescription"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="4dp"
@@ -67,7 +67,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/soodinowPointTitleInCard"
+                android:id="@+id/firstSectionSelectContractWalletTitleInCard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
@@ -105,7 +105,7 @@
 
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/firstSectionSelectContractWalletTitleImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/margin_xl"

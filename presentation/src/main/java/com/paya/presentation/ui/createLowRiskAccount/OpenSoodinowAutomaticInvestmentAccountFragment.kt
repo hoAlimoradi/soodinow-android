@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.*
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.core.text.isDigitsOnly
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.paya.domain.models.repo.SoodinowWalletContractRepoModel
 import com.paya.domain.tools.Resource
@@ -51,17 +53,28 @@ class OpenSoodinowAutomaticInvestmentAccountFragment : BaseFragment<CreateLowRis
         backButtonOpenSoodinowAutomaticInvestmentAccountFragment.setOnClickListener {
             backPressed()
         }
-
+        setupWalletInputPrice()
         observe(mViewModel.soodinowWalletRepoModelResource, ::onReady)
         riskInvestmentCustomSeekbar.currentValue = 30f
 
         navigateToDepositSoodinowWalletFragmentButton.setOnClickListener {
-            getFindViewController()?.navigate(
-                R.id.depositSoodinowWalletFragment
-            )
+
+            val price: Long = walletInputPrice.getPriceLong()?.let { it } ?: 0
+            if (price <= 0) {
+                Toast.makeText(
+                    requireContext(), getString(R.string.price_error), Toast.LENGTH_SHORT
+                ).show()
+
+            } else {
+                getFindViewController()?.navigate(
+                    R.id.depositSoodinowWalletFragment
+                )
+            }
+
+
         }
 
-        wealthValueEditText.requestKeyBoard()
+       /* wealthValueEditText.requestKeyBoard()
         wealthValueEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
                 s: CharSequence,
@@ -85,9 +98,7 @@ class OpenSoodinowAutomaticInvestmentAccountFragment : BaseFragment<CreateLowRis
             currentWealthValue += unitValue
             wealthValueEditText.text = Editable.Factory.getInstance().newEditable(currentWealthValue.toString())
         }
-        efficiencyButton.setOnClickListener {
-            openChart()
-        }
+
         minusPriceImage.setOnClickListener {
             if (wealthValueEditText.text.toString().toInt()> unitValue ) {
                 currentWealthValue  -= unitValue
@@ -95,8 +106,19 @@ class OpenSoodinowAutomaticInvestmentAccountFragment : BaseFragment<CreateLowRis
             }
 
         }
-    }
+*/
 
+        efficiencyButton.setOnClickListener {
+            openChart()
+        }
+    }
+    private fun setupWalletInputPrice() {
+        walletInputPrice?.apply {
+            setupWatcherPrice(lifecycleScope) {
+                //TODO api call
+            }
+        }
+    }
     private fun onReady(resource: Resource<List<SoodinowWalletContractRepoModel>>) {
 
     }

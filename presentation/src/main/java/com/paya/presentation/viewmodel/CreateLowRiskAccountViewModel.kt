@@ -24,7 +24,7 @@ import kotlinx.coroutines.launch
 class CreateLowRiskAccountViewModel @Inject constructor(
 	private val lowRiskInvestmentRepository: LowRiskInvestmentRepository
 ) : BaseViewModel() {
-
+	val farabiWalletRepoModelResource = MutableLiveData<Resource<List<SoodinowWalletContractRepoModel>>>()
 	val soodinowWalletRepoModelResource = MutableLiveData<Resource<List<SoodinowWalletContractRepoModel>>>()
 	val lowRiskResource = MutableLiveData<Resource<IsInRiskListRepoModel>>()
 	val pieChartStatus = MutableLiveData<PieChartModel>()
@@ -94,6 +94,16 @@ class CreateLowRiskAccountViewModel @Inject constructor(
 				this@CreateLowRiskAccountViewModel, lowRiskInvestmentRepository.getSoodinowWalletContractRepoModel()
 			)
 			soodinowWalletRepoModelResource.postValue(response)
+		}
+	}
+
+	fun getFarabiWalletContracts() {
+
+		viewModelScope.launch {
+			val response = callResource(
+				this@CreateLowRiskAccountViewModel, lowRiskInvestmentRepository.getSoodinowWalletContractRepoModel()
+			)
+			farabiWalletRepoModelResource.postValue(response)
 		}
 	}
 }

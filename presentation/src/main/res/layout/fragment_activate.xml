@@ -73,7 +73,7 @@
         android:visibility="gone"
         app:layout_constraintTop_toTopOf="@id/description" />
 
-    <com.alimuzaffar.lib.pin.PinEntryEditText
+    <com.paya.presentation.utils.PinEntryEditText
         android:id="@+id/txt_pin_entry"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
