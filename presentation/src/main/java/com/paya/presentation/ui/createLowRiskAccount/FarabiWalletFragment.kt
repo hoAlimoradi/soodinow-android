@@ -6,13 +6,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.paya.domain.models.repo.SoodinowWalletContractRepoModel
+import com.paya.domain.tools.Resource
 import com.paya.presentation.R
+import com.paya.presentation.base.BaseFragment
+import com.paya.presentation.base.BaseViewModel
+import com.paya.presentation.ui.createLowRiskAccount.adapter.*
+import com.paya.presentation.utils.observe
 import com.paya.presentation.utils.openUrl
 import com.paya.presentation.utils.setArrayStringText
+import com.paya.presentation.viewmodel.CreateLowRiskAccountViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_wallet_farabi.*
+import kotlinx.android.synthetic.main.fragment_wallet_soodinow.*
 
-class FarabiWalletFragment: Fragment() {
+@AndroidEntryPoint
+class FarabiWalletFragment: BaseFragment<CreateLowRiskAccountViewModel>(),
+    StartInvestClickListener {
 
+    private val mViewModel: CreateLowRiskAccountViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -22,30 +36,40 @@ class FarabiWalletFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        observe(mViewModel.farabiWalletRepoModelResource, ::onReady)
+        mViewModel.getFarabiWalletContracts()
+    }
 
-        image.setImageResource(R.drawable.ic_farabi)
+    private fun onReady(resource: Resource<List<SoodinowWalletContractRepoModel>>) {
 
-        txtDescBrokerage.setOnClickListener {
-            openUrl("https://reg.irfarabi.com/reg/?j=1&is=1&ref=10112")
-        }
+        val soodinowWalletContractRepoModel = SelectContractWalletItem(
+            pointTitle = "پیمان درآمد ثابت(پر ریسک )",
+            name = "ترکیب صندوق سرمایه گزاری فارابی",
+            description = "فارابی متشکل از چندین خدمت گوناگون متناسب با نیاز های مختلف سرمایه گذاران می باشد که تمام تمرکز فارابی انجام این خدمات به بهترین شکل می باشد تا منافع ناشی از آن سبب بهبود زندگی افراد جامعه باشد",
+            trimesterValue =  62 ,
+            monthlyValue =  21,
+            weeklyValue =  5
+        )
+        var list: List<SelectContractWalletRecyclerViewItem> = listOf(SectionItem(isFarabi = true, title = "ویژگی فارابی", description = "استفاده از سرمایه گذاری در کارگزاری"), soodinowWalletContractRepoModel)
+        setupSoodinowWalletAdapter(list)
+    }
+
+
+    private fun setupSoodinowWalletAdapter(list: List<SelectContractWalletRecyclerViewItem>) {
         context?.let { context ->
-
-            txtDescBrokerage.setArrayStringText(
-                context.resources.getStringArray(R.array.brokerage_desc_bottom),
-                ContextCompat.getColor(context, R.color.green)
-            )
-
+            farabiWalletRecycleView?.apply {
+                layoutManager = LinearLayoutManager(context)
+                adapter = SelectContractWalletAdapter(this@FarabiWalletFragment, list)
+            }
         }
-        txtDescBrokerage.visibility = View.VISIBLE
+    }
 
-        context?.let { context ->
-            txtDesc.setArrayStringText(
-                context.resources.getStringArray(
-                    R.array.brokerage_desc
-                ),
-                ContextCompat.getColor(context, R.color.green)
-            )
+    override val baseViewModel: BaseViewModel
+        get() = mViewModel
 
-        }
+    override fun onPositionClicked(position: Int, isFarabi: Boolean) {
+        getFindViewController()?.navigate(
+            R.id.openSoodinowAutomaticInvestmentAccountFragment
+        )
     }
 }

@@ -50,9 +50,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.paya.presentation.R;
 
-/**
- * Created by florentchampigny on 20/04/2017.
- */
+
 
 public class CustomSeekbar extends FrameLayout {
 

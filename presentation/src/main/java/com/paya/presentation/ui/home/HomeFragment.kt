@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.paya.domain.models.repo.CurrencyPriceRepoModel
@@ -21,13 +20,10 @@ import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentHomeBinding
 import com.paya.presentation.ui.cardAccount.NewCardAccountFragment
-import com.paya.presentation.ui.createLowRiskAccount.CreateLowRiskAccountFragmentDirections
 import com.paya.presentation.ui.createPersonalAccount.FirstInformationFragment
 import com.paya.presentation.ui.home.adapter.MarketAdapter
 import com.paya.presentation.ui.publicDialog.NotificationEmptyDialog
-import com.paya.presentation.utils.ViewPagerUtil
-import com.paya.presentation.utils.observe
-import com.paya.presentation.utils.toPersianSeparatedValue
+import com.paya.presentation.utils.*
 import com.paya.presentation.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -60,7 +56,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 		observe(mViewModel.soodinowWalletValueRepoModelResourceMutableLiveData, ::walletValue)
 		val layoutManager =
 			LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-
+		layoutManager.reverseLayout = true
 		/*val layoutManager = GridLayoutManager(
 			requireContext(),
 			3,
@@ -125,12 +121,6 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 
 			)
 
-			/*findNavController().navigate(
-				CreateLowRiskAccountFragmentDirections.navigationToConnectLowRiskBrokerage(
-					inputPrice.getPriceLong(),
-					("no_risk")
-				)
-			)*/
 		}
 		mBinding?.apply {
 			pager.offscreenPageLimit = 1
@@ -144,7 +134,15 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 			)
 			pager.setPageTransformer(ViewPagerUtil.getTransformer(requireContext().resources))
 			pager.addItemDecoration(ViewPagerUtil.getItemDecoration(requireContext()))
-			tabAccountCard.setViewPager2(pager)
+
+			adapter?.let {
+				if( it.itemCount > 1 ) {
+					tabAccountCard.setViewPager2(pager)
+					tabAccountCard.visible()
+				} else {
+					tabAccountCard.gone()
+				}
+			}
 		}
 
 	}

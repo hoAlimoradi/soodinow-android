@@ -78,7 +78,7 @@ dependencies {
 	
 	kapt("com.android.databinding:compiler:${Dependencies.Versions.DATA_BINDING_VER}")
 	
-	implementation("com.alimuzaffar.lib:pinentryedittext:${Dependencies.Versions.PIN_ENTRY_EDIT_TEXT}")
+	//implementation("com.alimuzaffar.lib:pinentryedittext:${Dependencies.Versions.PIN_ENTRY_EDIT_TEXT}")
 	
 	implementation("androidx.viewpager2:viewpager2:${Dependencies.Versions.VIEW_PAGER_VERSION}")
 	implementation("com.google.android.material:material:${Dependencies.Versions.MATERIAL_VER}")

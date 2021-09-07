@@ -10,12 +10,13 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/plusPriceImage"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:id="@+id/plusPriceConstraintLayout"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:scaleType="center"
         android:background="@drawable/circle_green_9"
         android:layout_marginHorizontal="@dimen/margin_l"
+        android:layout_marginTop="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/wealthValueEditText"
         app:layout_constraintTop_toTopOf="parent" >
@@ -35,13 +36,14 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/minusPriceImage"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:id="@+id/minusPriceConstraintLayout"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:scaleType="center"
         android:background="@drawable/circle_green_9"
         android:layout_marginHorizontal="@dimen/margin_l"
 
+        android:layout_marginTop="@dimen/margin_4_dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/wealthTitle"
         app:layout_constraintTop_toTopOf="parent">
@@ -63,7 +65,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:textSize="32sp"
+        android:textSize="@dimen/height_medium"
         android:cursorVisible="false"
         android:background="@android:color/transparent"
         android:inputType="number"
@@ -90,7 +92,7 @@
 
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/title"
+        android:id="@+id/walletInputPriceDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"

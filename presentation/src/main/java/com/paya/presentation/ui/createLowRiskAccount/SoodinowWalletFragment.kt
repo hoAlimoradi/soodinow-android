@@ -11,17 +11,14 @@ import com.paya.domain.tools.Resource
 import com.paya.presentation.R
 import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
-import com.paya.presentation.ui.createLowRiskAccount.adapter.SectionItem
-import com.paya.presentation.ui.createLowRiskAccount.adapter.SoodinowWalletAdapter
-import com.paya.presentation.ui.createLowRiskAccount.adapter.SoodinowWalletItem
-import com.paya.presentation.ui.createLowRiskAccount.adapter.SoodinowWalletRecyclerViewItem
+import com.paya.presentation.ui.createLowRiskAccount.adapter.*
 import com.paya.presentation.utils.observe
 import com.paya.presentation.viewmodel.CreateLowRiskAccountViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_wallet_soodinow.*
 
 @AndroidEntryPoint
-class SoodinowWalletFragment : BaseFragment<CreateLowRiskAccountViewModel>() {
+class SoodinowWalletFragment : BaseFragment<CreateLowRiskAccountViewModel>(), StartInvestClickListener {
     private val mViewModel: CreateLowRiskAccountViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,30 +54,34 @@ class SoodinowWalletFragment : BaseFragment<CreateLowRiskAccountViewModel>() {
             setupSoodinowWalletAdapter(list)
         }*/
 
-        val soodinowWalletContractRepoModel = SoodinowWalletItem(
-            pointTitle = "IRT1AFRN0001",
+        val soodinowWalletContractRepoModel = SelectContractWalletItem(
+            pointTitle = "پیمان درآمد ثابت(پر ریسک )",
             name = "ترکیب صندوق سرمایه گزاری سودینو",
             description = "سودینو متشکل از چندین خدمت گوناگون متناسب با نیاز های مختلف سرمایه گذاران می باشد که تمام تمرکز سودینو انجام این خدمات به بهترین شکل می باشد تا منافع ناشی از آن سبب بهبود زندگی افراد جامعه باشد",
             trimesterValue =  62 ,
             monthlyValue =  21,
             weeklyValue =  5
         )
-        var list: List<SoodinowWalletRecyclerViewItem> = listOf(SectionItem(title = "firstItem"), soodinowWalletContractRepoModel)
-
+        var list: List<SelectContractWalletRecyclerViewItem> = listOf(SectionItem(isFarabi = false, title = "ویژگی سودینو", description = "نقد شدن راحت و در کمترین زمان ممکن"), soodinowWalletContractRepoModel)
         setupSoodinowWalletAdapter(list)
     }
 
 
-    private fun setupSoodinowWalletAdapter(list: List<SoodinowWalletRecyclerViewItem>) {
+    private fun setupSoodinowWalletAdapter(list: List<SelectContractWalletRecyclerViewItem>) {
         context?.let { context ->
             soodinowWalletRecycleView?.apply {
                 layoutManager = LinearLayoutManager(context)
-                adapter = SoodinowWalletAdapter(list)
-                //this.addItemDecoration(SoodinowWalletAdapterItemDecoration())
+                adapter = SelectContractWalletAdapter(this@SoodinowWalletFragment, list)
             }
         }
     }
 
     override val baseViewModel: BaseViewModel
         get() = mViewModel
+
+    override fun onPositionClicked(position: Int, isFarabi: Boolean) {
+        getFindViewController()?.navigate(
+            R.id.openSoodinowAutomaticInvestmentAccountFragment
+        )
+    }
 }

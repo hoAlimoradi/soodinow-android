@@ -57,6 +57,8 @@
     <color name="governor_bay_blue">#3e2cad</color>
     <color name="java_green">#1DE9B6</color>
     <color name="bg_green">#28CB40</color>
+    <color name="green_13c83f">#13c83f</color>
+
     <color name="alto_light">#dedede</color>
     <color name="orange">#ff8800</color>
     <color name="blue_light_11">#5E989A9B</color>
@@ -78,5 +80,7 @@
     <color name="green_54C31E">#54C31E</color>
     <color name="blue_5588e7">#5588e7</color>
     <color name="gray_5588e7">#dbe4f5</color>
+    <color name="pin_normal">#6B767E</color>
+    <color name="white_fefefe">#fefefe</color>
 
 </resources>

@@ -202,6 +202,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/chooseYourBankingGatewayTitle">
 
+
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/ayandehPaymentConstraintLayout"
                     android:layout_width="0dp"
@@ -273,7 +275,7 @@
         android:layout_marginHorizontal="@dimen/margin_40dp"
         android:layout_height="@dimen/height_medium"
         android:layout_marginTop="@dimen/margin_medium"
-        android:layout_marginBottom="@dimen/margin_4_dp"
+        android:layout_marginBottom="@dimen/margin_l"
         android:text="@string/payment"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

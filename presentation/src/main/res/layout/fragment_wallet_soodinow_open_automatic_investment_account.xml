@@ -63,17 +63,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="parent">
 
-                <include
-                    android:id="@+id/accountCardLayout"
-                    layout="@layout/open_automatic_investment_account_card"
+                <com.paya.presentation.utils.WalletInputPrice
+                    android:id="@+id/walletInputPrice"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_marginTop="@dimen/margin_4_dp"
                     app:layout_constraintDimensionRatio="H,2:1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    />
+                    app:layout_constraintTop_toTopOf="parent" />
+
 
                <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -81,7 +79,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/accountCardLayout"
+                app:layout_constraintTop_toBottomOf="@+id/walletInputPrice"
                 android:background="@drawable/shadow_gray_194a4a4a"
                 >
 
@@ -563,13 +561,12 @@
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/mosaicConstraintLayout"
-
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin_l"
-
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/yourRiskFreeInvestmentPortfolio">
@@ -587,20 +584,13 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="0dp"
                     android:layout_height="50dp"
-
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/mosaicConstraintLayout">
 
-
-
-
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -612,7 +602,7 @@
             android:layout_marginHorizontal="@dimen/margin_40dp"
             android:layout_height="@dimen/height_medium"
             android:layout_marginTop="@dimen/margin_medium"
-            android:layout_marginBottom="@dimen/margin_4_dp"
+            android:layout_marginBottom="@dimen/margin_l"
             android:text="@string/submit_and_continue"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
