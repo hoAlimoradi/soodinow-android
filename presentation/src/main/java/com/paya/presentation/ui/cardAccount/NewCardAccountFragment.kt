@@ -37,8 +37,6 @@ class NewCardAccountFragment : BaseFragment<NewCardAccountViewModel>() {
     }
 
     override fun onDestroyView() {
-        onItemClick = null
-        position = null
         super.onDestroyView()
     }
 

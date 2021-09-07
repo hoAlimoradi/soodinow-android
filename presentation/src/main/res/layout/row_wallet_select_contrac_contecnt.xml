@@ -217,207 +217,207 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/trimesterMonthlyWeeklyConstraintLayout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_m"
-                android:paddingTop="@dimen/margin_l"
-                android:paddingBottom="@dimen/margin_l"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/customSeekbarConstraintLayout">
 
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guidelineVertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.33"  />
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guidelineVertical1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.67"  />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/guidelineVertical"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/trimesterPercentImage"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:background="@drawable/bg_icon_15_size_corner_3_green"
-                        android:padding="4dp"
-                        android:src="@drawable/ic_arrow_dposit"
-
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintHorizontal_chainStyle="packed"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/trimesterPercentValue"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:textColor="@color/green"
-                        android:textSize="@dimen/text_size_xl"
-                        android:layout_marginStart="@dimen/margin_4_dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/trimesterPercentImage"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:text="30%" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/trimesterText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:layout_marginStart="@dimen/margin_4_dp"
-                        android:text="@string/trimester"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_s"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/trimesterPercentValue"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/guidelineVertical1"
-                    app:layout_constraintStart_toStartOf="@+id/guidelineVertical"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/monthlyPercentImage"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:background="@drawable/bg_icon_15_size_corner_3_green"
-                        android:padding="4dp"
-                        android:src="@drawable/ic_arrow_dposit"
-
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintHorizontal_chainStyle="packed"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/monthlyPercentValue"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:textColor="@color/green"
-                        android:textSize="@dimen/text_size_xl"
-                        android:layout_marginStart="@dimen/margin_4_dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/monthlyPercentImage"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:text="30%" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/monthlyTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:layout_marginStart="@dimen/margin_4_dp"
-                        android:text="@string/monthly"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_s"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/monthlyPercentValue"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/guidelineVertical1"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/weeklyPercentImage"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:background="@drawable/bg_icon_15_size_corner_3_green"
-                        android:padding="4dp"
-                        android:src="@drawable/ic_arrow_dposit"
-
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintHorizontal_chainStyle="packed"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/weeklyPercentValue"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:textColor="@color/green"
-                        android:textSize="@dimen/text_size_xl"
-                        android:layout_marginStart="@dimen/margin_4_dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/weeklyPercentImage"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:text="30%" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/weeklyTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:layout_marginStart="@dimen/margin_4_dp"
-                        android:text="@string/weekly"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_s"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/weeklyPercentValue"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/extendImageConstraintLayout"
+            android:id="@+id/trimesterMonthlyWeeklyConstraintLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_4_dp"
-            android:paddingBottom="@dimen/margin_s"
-            android:background="@color/bg_tab_layout"
+            android:layout_marginTop="@dimen/margin_m"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/bg_gray_bottom_8dp"
             app:layout_constraintTop_toBottomOf="@+id/hidableConstraintLayout">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/extendImage"
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineVertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_arrow_bottom_gray"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.33"  />
 
-                android:layout_marginTop="@dimen/margin_4_dp"
-                android:layout_marginBottom="@dimen/margin_4_dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineVertical1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.67"  />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/trimesterLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@id/extendImageConstraintLayout"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineVertical"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="@dimen/margin_m"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/trimesterPercentImage"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/bg_icon_15_size_corner_3_green"
+                    android:padding="4dp"
+                    android:src="@drawable/ic_arrow_dposit"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/trimesterPercentValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/green"
+                    android:textSize="@dimen/text_size_xl"
+                    android:layout_marginStart="@dimen/margin_4_dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/trimesterPercentImage"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="30%" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/trimesterText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginStart="@dimen/margin_4_dp"
+                    android:text="@string/trimester"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_s"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/trimesterPercentValue"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@id/trimesterLayout"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineVertical1"
+                app:layout_constraintStart_toStartOf="@+id/guidelineVertical"
+                app:layout_constraintTop_toTopOf="@id/trimesterLayout">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/monthlyPercentImage"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/bg_icon_15_size_corner_3_green"
+                    android:padding="4dp"
+                    android:src="@drawable/ic_arrow_dposit"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/monthlyPercentValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/green"
+                    android:textSize="@dimen/text_size_xl"
+                    android:layout_marginStart="@dimen/margin_4_dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/monthlyPercentImage"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="30%" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/monthlyTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginStart="@dimen/margin_4_dp"
+                    android:text="@string/monthly"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_s"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/monthlyPercentValue"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@id/trimesterLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guidelineVertical1"
+                app:layout_constraintTop_toTopOf="@id/trimesterLayout">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/weeklyPercentImage"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/bg_icon_15_size_corner_3_green"
+                    android:padding="4dp"
+                    android:src="@drawable/ic_arrow_dposit"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/weeklyPercentValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/green"
+                    android:textSize="@dimen/text_size_xl"
+                    android:layout_marginStart="@dimen/margin_4_dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/weeklyPercentImage"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="30%" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/weeklyTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginStart="@dimen/margin_4_dp"
+                    android:text="@string/weekly"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_s"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/weeklyPercentValue"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/extendImageConstraintLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/margin_s"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/trimesterLayout">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/extendImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_arrow_bottom_gray"
+
+                    android:layout_marginTop="@dimen/margin_4_dp"
+                    android:layout_marginBottom="@dimen/margin_4_dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

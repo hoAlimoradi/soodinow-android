@@ -14,13 +14,13 @@
 
 
     <item
-        android:id="@+id/profile"
+        android:id="@+id/credits"
         android:enabled="true"
         android:title="@string/credits"
         android:icon="@drawable/ic_loan"/>
 
     <item
-        android:id="@+id/investBasket"
+        android:id="@+id/profile"
         android:enabled="true"
         android:title="@string/invest_basket"
         android:icon="@drawable/ic_menu_profile"/>

@@ -1,9 +1,11 @@
 package com.paya.presentation.ui.createLowRiskAccount.adapter
 
-import android.animation.*
+import android.animation.ObjectAnimator
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.paya.presentation.R
 import com.paya.presentation.utils.getColorByResId
@@ -75,7 +77,12 @@ class SelectContractWalletAdapter(val startInvestClickListener: StartInvestClick
             itemView.addInvestButton.setOnClickListener {
                 startInvestClickListener.onPositionClicked(position = 0, isFarabi = false)
             }
-
+            itemView.imageView4.setImageDrawable(
+                item.image ?: ContextCompat.getDrawable(
+                    itemView.context,
+                    R.drawable.ic_image_wallet
+                )
+            )
 
             itemView.soodinowPointTitleInCard.text = item.pointTitle
             itemView.soodinowPointName.text = item.name
@@ -183,16 +190,22 @@ class SelectContractWalletAdapter(val startInvestClickListener: StartInvestClick
         }
     }
 }
+
 interface StartInvestClickListener {
     fun onPositionClicked(position: Int, isFarabi: Boolean)
 
 }
 
 open class SelectContractWalletRecyclerViewItem
-class SectionItem(val isFarabi: Boolean, val title: String, val description: String) : SelectContractWalletRecyclerViewItem()
-class SelectContractWalletItem(val pointTitle: String,
-                               val name: String,
-                               val description: String,
-                               val trimesterValue: Int,
-                               val monthlyValue: Int,
-                               val weeklyValue: Int) : SelectContractWalletRecyclerViewItem()
+class SectionItem(val isFarabi: Boolean, val title: String, val description: String) :
+    SelectContractWalletRecyclerViewItem()
+
+class SelectContractWalletItem(
+    val pointTitle: String,
+    val name: String,
+    val description: String,
+    val trimesterValue: Int,
+    val monthlyValue: Int,
+    val weeklyValue: Int,
+    val image: Drawable?
+) : SelectContractWalletRecyclerViewItem()

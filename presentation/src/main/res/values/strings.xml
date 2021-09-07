@@ -313,7 +313,7 @@
     <string-array name="brokerage_desc_bottom">
         <item>افتتاح حساب کارگزاری فارابی در کمتر از 5 دقیقه </item>
     </string-array>
-  <string-array name="brokerage_desc_bottom_soodinow">
+    <string-array name="brokerage_desc_bottom_soodinow">
         <item>ایجاد کیف سرمایه گذاری سودینو، بزودی</item>
     </string-array>
 

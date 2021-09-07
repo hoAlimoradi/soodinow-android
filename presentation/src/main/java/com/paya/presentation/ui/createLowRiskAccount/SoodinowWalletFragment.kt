@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.paya.domain.models.repo.SoodinowWalletContractRepoModel
@@ -60,7 +61,8 @@ class SoodinowWalletFragment : BaseFragment<CreateLowRiskAccountViewModel>(), St
             description = "سودینو متشکل از چندین خدمت گوناگون متناسب با نیاز های مختلف سرمایه گذاران می باشد که تمام تمرکز سودینو انجام این خدمات به بهترین شکل می باشد تا منافع ناشی از آن سبب بهبود زندگی افراد جامعه باشد",
             trimesterValue =  62 ,
             monthlyValue =  21,
-            weeklyValue =  5
+            weeklyValue =  5,
+            image = context?.let { context -> ContextCompat.getDrawable(context,R.drawable.ic_image_wallet) }?:null
         )
         var list: List<SelectContractWalletRecyclerViewItem> = listOf(SectionItem(isFarabi = false, title = "ویژگی سودینو", description = "نقد شدن راحت و در کمترین زمان ممکن"), soodinowWalletContractRepoModel)
         setupSoodinowWalletAdapter(list)

@@ -10,36 +10,8 @@
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings">
         <action
-            android:id="@+id/navigateToHomeFragment"
-            app:destination="@id/home" />
-
-
-
-    </fragment>
-
-
-    <fragment
-        android:id="@+id/home"
-        android:name="com.paya.presentation.ui.home.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home">
-        <action
-            android:id="@+id/navigateToProfileFragment"
-            app:destination="@id/profile" />
-
-
-    </fragment>
-
-
-    <fragment
-        android:id="@+id/profile"
-        android:name="com.paya.presentation.ui.profile.ProfileFragment"
-        android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile">
-        <action
-            android:id="@+id/navigateToMarketFragment"
+            android:id="@+id/navigateToMarket"
             app:destination="@id/market" />
-
     </fragment>
 
 
@@ -48,6 +20,41 @@
         android:name="com.paya.presentation.ui.market.MarketFragment"
         android:label="fragment_market"
         tools:layout="@layout/fragment_market">
+        <action
+            android:id="@+id/navigateToCredits"
+            app:destination="@id/credits" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/credits"
+        android:name="com.paya.presentation.ui.credits.CreditsFragment"
+        android:label="fragment_credits"
+        tools:layout="@layout/fragment_credits">
+        <action
+            android:id="@+id/navigateToProfile"
+            app:destination="@id/profile" />
+    </fragment>
+
+
+
+    <fragment
+        android:id="@+id/profile"
+        android:name="com.paya.presentation.ui.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/navigateToHome"
+            app:destination="@id/home" />
+    </fragment>
+
+
+
+    <fragment
+        android:id="@+id/home"
+        android:name="com.paya.presentation.ui.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home">
 
     </fragment>
 
