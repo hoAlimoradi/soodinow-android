@@ -9,3 +9,4 @@ data class AccessTokenRemoteModel(
 	@SerializedName("refresh_token")
 	val refreshToken: String?
 ): NoObfuscate
+

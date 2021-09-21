@@ -19,7 +19,8 @@ import dagger.hilt.android.components.ActivityRetainedComponent
 		LowRiskInvestmentModule::class,
 		CurrencyPriceModule::class,
 		WalletModule::class,
-		CommonModule::class
+		CommonModule::class,
+		RiskAssessmentModule::class
 	]
 )
 @InstallIn(ActivityRetainedComponent::class)

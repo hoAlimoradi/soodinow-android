@@ -75,6 +75,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 
 			walletImageViewConstraintLayout.setOnClickListener {
 				getFindViewController()?.navigate(R.id.wallet)
+				//TODO  test getFindViewController()?.navigate(R.id.riskAssessment)
 			}
 			whySoodinowConstraintLayout.setOnClickListener {
 				getFindViewController()?.navigate(R.id.whySoodinow)

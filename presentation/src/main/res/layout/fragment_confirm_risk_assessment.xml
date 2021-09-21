@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/bg_tab_layout" >
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayoutParent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/margin_l"
+            android:background="@drawable/shadow_8dp"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/assessYourRiskConstraintLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_tab_layout_mini"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/margin_sub_cards"
+                android:layout_marginHorizontal="@dimen/margin_l"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/assess_your_risk"
+                    android:textColor="@color/emperor"
+                    android:textSize="@dimen/text_size_xl"
+                    android:textStyle="bold"
+                    android:layout_margin="@dimen/margin_very_small"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/assessYourRiskProgressView"
+                android:layout_width="171dp"
+                android:layout_height="186dp"
+                android:layout_marginHorizontal="@dimen/margin_l"
+                android:layout_marginTop="@dimen/margin_l"
+                android:background="@drawable/dot_red"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/assessYourRiskConstraintLayout">
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/assessYourRiskDescriptionsConstraintLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_l"
+                android:layout_marginTop="@dimen/margin_l"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/assessYourRiskProgressView">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/assessYourRiskSecondDescription"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_very_small"
+                    android:text="@string/assess_risk"
+                    android:textColor="@color/emperor"
+                    android:textSize="@dimen/text_size_xl"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/assessYourRiskThirdDescription"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/assess_your_risk_third_description"
+                    android:textColor="@color/emperor"
+                    android:textSize="@dimen/text_size_l"
+                    android:layout_margin="@dimen/margin_very_small"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/assessYourRiskSecondDescription" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/assessYourRiskStartNow"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_tab_layout_governor_bay_blue"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/margin_sub_cards"
+                android:layout_marginHorizontal="@dimen/margin_l"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/assessYourRiskDescriptionsConstraintLayout">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/start_investing_at_my_own_risk"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_xl"
+                    android:layout_marginHorizontal="@dimen/margin_l"
+                    android:layout_marginTop="@dimen/margin_very_small"
+                    android:layout_marginBottom="@dimen/margin_very_small"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/assessYourRiskIWillTryAgain"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/round_corner_border_oslo_gray_6"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/margin_l"
+                android:layout_marginHorizontal="@dimen/margin_l"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/assessYourRiskStartNow">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/i_will_try_again"
+                    android:textColor="@color/emperor"
+                    android:textSize="@dimen/text_size_xl"
+                    android:layout_margin="@dimen/margin_very_small"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/emperor"
+                android:textSize="@dimen/text_size_xl"
+                android:layout_margin="@dimen/margin_very_small"
+                app:layout_constraintTop_toBottomOf="@+id/assessYourRiskIWillTryAgain"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"  />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

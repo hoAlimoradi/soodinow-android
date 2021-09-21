@@ -289,6 +289,18 @@
     <string name="credits">اعتبارات</string>
     <string name="payment">پرداخت</string>
     <string name="efficiencyChart">نمودار بازدهی</string>
+    <string name="assess_your_risk">سنجش ریسک شما</string>
+    <string name="assess_your_risk_first_description">اگر زمان کافی یا دانش کافی سرمایه گذاری ندارید و یا از هزینه های بالا رویکرد های سنتی مدیریت سرمایه گذاری ناراضی هستید و سرمایه گذاری را برای رسیدن به اهداف خود و خانواده امری ضروری می دانید</string>
+    <string name="assess_risk">تحلیل ریسک</string>
+    <string name="assess_your_risk_third_description">می توانید از سرویس پیشرفته سرمایه گذاری هوشمند سودینو استفاده کنید که با اتصال الگوریتم های هوشمند به حساب کارگزاری شما امکان سرمایه گذاری و مدیریت سرمایه به شکل های مختلف و هوشمند را فراهم می آورد</string>
+    <string name="start_you">شروع کنید</string>
+    <string name="at_another_time">در وقت دیگر</string>
+    <string name="start_investing_at_my_own_risk">شروع سرمایه گذاری با ریسک من</string>
+    <string name="i_will_try_again">دوباره امتحان می کنم</string>
+    <string name="assess_risk_percent_title">ما در حال بررسی ریسک شما برای ساختن آینده ای بهتر هستیم</string>
+    <string name="assess_risk_percent_description">"درصد تکمیل شده "</string>
+    <string name="next">بعدی</string>
+    <string name="previous">قبلی</string>
     <string-array name="brokerage_list">
         <item>کارگزاری فارابی</item>
     </string-array>
