@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.paya.domain.models.repo.CurrencyPriceRepoModel
@@ -70,36 +71,25 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 				marketRecycleView.adapter = it
 			}
 		}
+
 		mBinding?.apply {
 			marketRecycleView.layoutManager = layoutManager
 
 			walletImageViewConstraintLayout.setOnClickListener {
-				getFindViewController()?.navigate(R.id.wallet)
+				getFindViewController()?.navigateUp()
+				//getFindViewController()?.navigate(R.id.wallet)
 				//TODO  test getFindViewController()?.navigate(R.id.riskAssessment)
+				getFindViewController()?.navigate(R.id.riskAssessmentStart)
 			}
 			whySoodinowConstraintLayout.setOnClickListener {
+				getFindViewController()?.navigateUp()
 				getFindViewController()?.navigate(R.id.whySoodinow)
 			}
 			alarm.setOnClickListener {
 				NotificationEmptyDialog().show(parentFragmentManager, "notification dialog")
 			}
 
-			/*val params: ViewGroup.LayoutParams = marketRecycleView.layoutParams
 
-
-			expandAllRowOfMarketRecycleImageView.setOnClickListener {
-				marketRecycleViewIsExpanded = !marketRecycleViewIsExpanded
-				if (marketRecycleViewIsExpanded) {
-					expandAllRowOfMarketRecycleImageView.setImageDrawable(it.context.resources.getDrawable(R.drawable.ic_arrow_left))
-					params.height = ViewGroup.LayoutParams.MATCH_PARENT
-					marketRecycleView.layoutParams = params
-				} else {
-					expandAllRowOfMarketRecycleImageView.setImageDrawable(it.context.resources.getDrawable(R.drawable.ic_baseline_keyboard_arrow_down_24))
-					params.height = 100
-					marketRecycleView.layoutParams = params
-				}
-
-			}*/
 		}
 		mViewModel.getCurrencyPrices()
 		mViewModel.getSoodinowWalletValue()
@@ -107,15 +97,11 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 
 	}
 
-	/*private fun showAllRowsOfMarketRecycleImageView() {
 
-	}
-
-	private fun showFirstRowOfMarketRecycleImageView() {
-
-	}*/
 	private fun setupViewPager() {
 		adapter = SlidePagerAdapter(childFragmentManager,viewLifecycleOwner.lifecycle) {
+			getFindViewController()?.navigateUp()
+			findNavController()?.navigateUp()
 			getFindViewController()?.navigate(
 				//R.id.createLowRiskAccount
 				R.id.connectLowRiskBrokerage
@@ -186,10 +172,12 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 	private fun checkProfile(resource: Resource<ProfileRepoModel>) {
 		if (resource.status == Status.SUCCESS) {
 			if (!resource.data!!.complete) {
+				getFindViewController()?.navigateUp()
 				getFindViewController()?.navigate(
 					R.id.firstInformation, FirstInformationFragment.newBundle(true)
 				)
 			} else {
+				getFindViewController()?.navigateUp()
 				getFindViewController()?.navigate(
 					R.id.createLowRiskAccount
 				)

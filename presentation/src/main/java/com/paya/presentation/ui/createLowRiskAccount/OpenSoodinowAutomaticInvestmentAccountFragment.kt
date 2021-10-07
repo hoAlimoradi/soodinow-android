@@ -12,8 +12,10 @@ import androidx.core.text.isDigitsOnly
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.paya.domain.models.repo.ChartProfitRepoModel
 import com.paya.domain.models.repo.SoodinowWalletContractRepoModel
 import com.paya.domain.tools.Resource
+import com.paya.domain.tools.Status
 import com.paya.presentation.R
 import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
@@ -29,8 +31,8 @@ import kotlinx.android.synthetic.main.open_automatic_investment_account_card.*
 
 @AndroidEntryPoint
 class OpenSoodinowAutomaticInvestmentAccountFragment : BaseFragment<CreateLowRiskAccountViewModel>() {
-    val unitValue = 500
-    var currentWealthValue: Int = 0
+
+    var boxId: Long = 0
     private val mViewModel: CreateLowRiskAccountViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,6 +57,7 @@ class OpenSoodinowAutomaticInvestmentAccountFragment : BaseFragment<CreateLowRis
         }
         setupWalletInputPrice()
         observe(mViewModel.soodinowWalletRepoModelResource, ::onReady)
+        observe(mViewModel.chartProfit, ::readyProfile)
         riskInvestmentCustomSeekbar.currentValue = 30f
 
         navigateToDepositSoodinowWalletFragmentButton.setOnClickListener {
@@ -73,41 +76,6 @@ class OpenSoodinowAutomaticInvestmentAccountFragment : BaseFragment<CreateLowRis
 
 
         }
-
-       /* wealthValueEditText.requestKeyBoard()
-        wealthValueEditText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(
-                s: CharSequence,
-                start: Int,
-                count: Int,
-                after: Int
-            ) {
-            }
-
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-
-                if(wealthValueEditText.text.toString().isNotBlank() && wealthValueEditText.text.toString().isNotEmpty()) {
-                    currentWealthValue = wealthValueEditText.text.toString().toInt()
-                }
-            }
-
-            override fun afterTextChanged(s: Editable) {}
-        })
-
-        plusPriceImage.setOnClickListener {
-            currentWealthValue += unitValue
-            wealthValueEditText.text = Editable.Factory.getInstance().newEditable(currentWealthValue.toString())
-        }
-
-        minusPriceImage.setOnClickListener {
-            if (wealthValueEditText.text.toString().toInt()> unitValue ) {
-                currentWealthValue  -= unitValue
-                wealthValueEditText.text = Editable.Factory.getInstance().newEditable(currentWealthValue.toString())
-            }
-
-        }
-*/
-
         efficiencyButton.setOnClickListener {
             openChart()
         }
@@ -123,14 +91,26 @@ class OpenSoodinowAutomaticInvestmentAccountFragment : BaseFragment<CreateLowRis
 
     }
 
+    private fun readyProfile(resource: Resource<List<ChartProfitRepoModel>>) {
+        if (resource.status == Status.SUCCESS) {
+            resource.data?.let {
+                if (it.isNotEmpty()) {
+                   /* initTab(it)
+                    setCurrentBoxData(it.size - 1)*/
+                    val dialog = ChartProfileDialog()
+                    dialog.show(parentFragmentManager, "chartDialog")
+                }
+            }
+
+        }
+    }
     override fun onResume() {
         super.onResume()
         mViewModel.getSoodinowWalletContracts()
     }
 
     private fun openChart() {
-        val dialog = ChartProfileDialog()
-        dialog.show(parentFragmentManager, "chartDialog")
+        mViewModel.getChartProfit(boxId)
     }
 
     private fun backPressed() {

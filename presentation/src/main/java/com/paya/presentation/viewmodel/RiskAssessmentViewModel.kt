@@ -18,6 +18,7 @@ class RiskAssessmentViewModel @Inject constructor(
     private val getRiskAssessmentQuestionsUseCase: UseCase<Unit, RiskAssessmentResponseRemoteModel>
 ) : BaseViewModel() {
     val riskAssessmentPagesLiveData = MutableLiveData<Resource<RiskAssessmentResponseRemoteModel>>()
+    var assessYourRiskQuestionsViewPagerCurrentPageLiveData = MutableLiveData<Int>()
 
     fun getRiskAssessmentQuestions() {
         viewModelScope.launch {
@@ -27,5 +28,25 @@ class RiskAssessmentViewModel @Inject constructor(
             //hideLoading()
         }
     }
+
+/*    fun plusAssessYourRiskQuestionsViewPagerCurrentPage() {
+        viewModelScope.launch {
+            //showLoading()
+            val response = callResource(this@RiskAssessmentViewModel,getRiskAssessmentQuestionsUseCase.action(Unit))
+            riskAssessmentPagesLiveData.postValue(response)
+            //hideLoading()
+        }
+    }
+
+    fun minusAssessYourRiskQuestionsViewPagerCurrentPage() {
+        viewModelScope.launch {
+            assessYourRiskQuestionsViewPagerCurrentPageLiveData.value =
+                assessYourRiskQuestionsViewPagerCurrentPageLiveData.value?.plus(1)
+
+
+            riskAssessmentPagesLiveData.postValue(response)
+            //hideLoading()
+        }
+    }*/
 
 }

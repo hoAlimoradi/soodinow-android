@@ -8,7 +8,7 @@ import com.paya.presentation.ui.createLowRiskAccount.FarabiWalletFragment
 import com.paya.presentation.ui.createLowRiskAccount.SoodinowWalletFragment
 import com.paya.presentation.ui.riskAssessment.RiskAssessmentQuestionFragment
 
-class RiskAssessmentQuestionsFragmentAdapter(private val myContext: Context, fm: FragmentManager, var riskAssessmentQuestionFragments: List<RiskAssessmentQuestionFragment>) : FragmentPagerAdapter(fm) {
+class RiskAssessmentQuestionsFragmentViewPagerAdapter(private val myContext: Context, fm: FragmentManager, var riskAssessmentQuestionFragments: List<RiskAssessmentQuestionFragment>) : FragmentPagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment {
         return riskAssessmentQuestionFragments[position]
@@ -18,3 +18,4 @@ class RiskAssessmentQuestionsFragmentAdapter(private val myContext: Context, fm:
         return riskAssessmentQuestionFragments.size
     }
 }
+

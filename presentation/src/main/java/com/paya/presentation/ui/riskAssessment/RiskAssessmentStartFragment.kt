@@ -35,6 +35,12 @@ class RiskAssessmentStartFragment : BaseFragment<RiskAssessmentViewModel>() {
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        assessYourRiskStartNow.setOnClickListener {
+            getFindViewController()?.navigateUp()
+            getFindViewController()?.navigate(R.id.riskAssessmentQuestions)
+        }
+
         assessYourRiskStartAtAnotherTime.setOnClickListener {
             findNavController().popBackStack()
         }

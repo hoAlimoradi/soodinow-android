@@ -87,4 +87,18 @@
     <color name="stpi_default_primary_color">#00b47c</color>
     <color name="stpi_default_line_color">#b3bdc2</color>
     <color name="stpi_default_text_color">#000</color>
+
+
+    <color name="green_69d4ffbf">#69d4ffbf</color>
+    <color name="default_thumb_color">#27e06c</color>
+    <color name="default_track_color">#c3a9a9a9</color>
+
+    <array name="default_index_gradient">
+        <item>@color/default_thumb_color</item>
+        <item>@color/default_thumb_color</item>
+    </array>
+
+    <array name="default_track_gradient">
+        <item>@color/default_track_color</item>
+    </array>
 </resources>

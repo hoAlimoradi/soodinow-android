@@ -5,13 +5,11 @@ import javax.inject.Inject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.github.mikephil.charting.data.PieEntry
-import com.paya.domain.models.repo.BasketRepoModel
-import com.paya.domain.models.repo.IsInRiskListRepoModel
-import com.paya.domain.models.repo.LowRiskStockRequest
-import com.paya.domain.models.repo.SoodinowWalletContractRepoModel
+import com.paya.domain.models.repo.*
 import com.paya.domain.repository.LowRiskInvestmentRepository
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
+import com.paya.domain.tools.UseCase
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.ui.adapter.chartLablel.ChartLabelAdapter
 import com.paya.presentation.ui.model.PieChartModel
@@ -22,13 +20,39 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 class CreateLowRiskAccountViewModel @Inject constructor(
-	private val lowRiskInvestmentRepository: LowRiskInvestmentRepository
+	private val lowRiskInvestmentRepository: LowRiskInvestmentRepository,
+	private val getChartProfitUseCase: UseCase<Long, List<ChartProfitRepoModel>>
 ) : BaseViewModel() {
+
+	val chartProfit = MutableLiveData<Resource<List<ChartProfitRepoModel>>>()
 	val farabiWalletRepoModelResource = MutableLiveData<Resource<List<SoodinowWalletContractRepoModel>>>()
 	val soodinowWalletRepoModelResource = MutableLiveData<Resource<List<SoodinowWalletContractRepoModel>>>()
 	val lowRiskResource = MutableLiveData<Resource<IsInRiskListRepoModel>>()
 	val pieChartStatus = MutableLiveData<PieChartModel>()
 	private var pieChartModel: PieChartModel? = null
+
+	fun getChartProfit(
+		boxId: Long
+	) {
+		chartProfit.value?.let {
+			if (it.status == Status.LOADING)
+				return
+		}
+		showLoading()
+		viewModelScope.launch {
+			val response = callResource(
+				this@CreateLowRiskAccountViewModel, getChartProfitUseCase.action(
+					boxId
+				)
+			)
+			if (response.status == Status.SUCCESS)
+				/*response.data?.let {
+					setCurrentBoxData(it)
+				}*/
+			chartProfit.postValue(response)
+			hideLoading()
+		}
+	}
 
 	fun getLowRiskStocks(type: String, price: Long) {
 		showLoading()

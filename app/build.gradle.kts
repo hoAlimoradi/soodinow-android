@@ -48,8 +48,8 @@ android {
         applicationId = "com.paya.soodinow"
         minSdkVersion(21)
         targetSdkVersion(30)
-        versionCode = 3
-        versionName = "1.1.0"
+        versionCode = 5
+        versionName = "1.1.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders["appAuthRedirectScheme"] = "hadiidbouk-appAuthWebView"

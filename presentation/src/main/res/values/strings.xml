@@ -267,7 +267,7 @@
     <string name="soodinow_point_description_first">نقد شدن راحت و در کمترین زمان ممکن </string>
     <string name="soodinow_point_title">شما با هر میزان سرمایه می توانید پیمان ببندید</string>
     <string name="soodinow_point_description_second">پشتیبانی 24 ساعته</string>
-    <string name="trimester">سه ماهه</string>
+    <string name="trimester">سه ماهه  </string>
     <string name="monthly">ماهانه</string>
     <string name="start">شروع کن</string>
     <string name="marketSummaryTitle">خلاصه بازار</string>
@@ -301,6 +301,7 @@
     <string name="assess_risk_percent_description">"درصد تکمیل شده "</string>
     <string name="next">بعدی</string>
     <string name="previous">قبلی</string>
+    <string name="add_inventory">"افزودن موجودی "</string>
     <string-array name="brokerage_list">
         <item>کارگزاری فارابی</item>
     </string-array>

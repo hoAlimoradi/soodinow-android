@@ -64,8 +64,6 @@ class ConnectLowRiskBrokerageFragment : BaseFragment<ConnectLowRiskBrokerageView
             }
         }
         accountCardLayout.wealthValue.text = "10.856.000"
-
-
         adapter = CreateLowRiskAccountFragmentAdapter(requireContext(),childFragmentManager, tabLayout.tabCount)
         lowRiskBrokerageViewPager.adapter = adapter
         lowRiskBrokerageViewPager.offscreenPageLimit = 2
@@ -84,97 +82,12 @@ class ConnectLowRiskBrokerageFragment : BaseFragment<ConnectLowRiskBrokerageView
                 mViewModel.tabCheckedIsSoodinow = tabLayout.selectedTabPosition == 0
                 //todo addInvestBtn.isEnabled = !mViewModel.tabCheckedIsSoodinow
                 addInvestBtn.setBackgroundResource(if (mViewModel.tabCheckedIsSoodinow) R.drawable.bg_button_gray else R.drawable.bg_button_green)
-                /*image.setImageResource(if (mViewModel.tabCheckedIsSoodinow) R.drawable.ic_logo_soodinow else R.drawable.ic_farabi)
-                txtDescBrokerage.visibility =
-                    if (mViewModel.tabCheckedIsSoodinow) View.GONE else View.VISIBLE
-                txtDescBrokerageSoodinow.visibility =
-                    if (mViewModel.tabCheckedIsSoodinow) View.VISIBLE else View.GONE
-
-                context?.let { context ->
-                    txtDesc.setArrayStringText(
-                        context.resources.getStringArray(
-                            if (mViewModel.tabCheckedIsSoodinow)
-                                R.array.brokerage_desc_soodinow
-                            else
-                                R.array.brokerage_desc
-                        ),
-                        ContextCompat.getColor(context, R.color.green)
-                    )
-
-                }*/
-                //
                 lowRiskBrokerageViewPager.currentItem = tabLayout.selectedTabPosition
 
             }
 
         })
         tabLayout.getTabAt(1)?.select()
-/*
-        accountCardLayout.wealthValue.text = "10.856.000"
-
-        val adapter = CreateLowRiskAccountFragmentAdapter(requireContext(), requireActivity().supportFragmentManager, tabLayout.tabCount)
-        lowRiskBrokerageViewPager.adapter = adapter
-        lowRiskBrokerageViewPager.offscreenPageLimit = 2
-        lowRiskBrokerageViewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
-        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-
-            }
-
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-
-                mViewModel.tabCheckedIsSoodinow = tabLayout.selectedTabPosition == 0
-                //todo addInvestBtn.isEnabled = !mViewModel.tabCheckedIsSoodinow
-                addInvestBtn.setBackgroundResource(if (mViewModel.tabCheckedIsSoodinow) R.drawable.bg_button_gray else R.drawable.bg_button_green)
-                *//*image.setImageResource(if (mViewModel.tabCheckedIsSoodinow) R.drawable.ic_logo_soodinow else R.drawable.ic_farabi)
-                txtDescBrokerage.visibility =
-                    if (mViewModel.tabCheckedIsSoodinow) View.GONE else View.VISIBLE
-                txtDescBrokerageSoodinow.visibility =
-                    if (mViewModel.tabCheckedIsSoodinow) View.VISIBLE else View.GONE
-
-                context?.let { context ->
-                    txtDesc.setArrayStringText(
-                        context.resources.getStringArray(
-                            if (mViewModel.tabCheckedIsSoodinow)
-                                R.array.brokerage_desc_soodinow
-                            else
-                                R.array.brokerage_desc
-                        ),
-                        ContextCompat.getColor(context, R.color.green)
-                    )
-
-                }*//*
-                //
-                lowRiskBrokerageViewPager.currentItem = tabLayout.selectedTabPosition
-
-            }
-
-        })
-        tabLayout.getTabAt(1)?.select()*/
-       //TODO  accountCardLayout.wealthValue.text = Utils.separatorAmount(args.SelectedPrice)
-
-
-
-       /* txtDescBrokerage.setOnClickListener {
-            openUrl("https://reg.irfarabi.com/reg/?j=1&is=1&ref=10112")
-        }
-        context?.let { context ->
-
-            txtDescBrokerage.setArrayStringText(
-                context.resources.getStringArray(R.array.brokerage_desc_bottom),
-                ContextCompat.getColor(context, R.color.green)
-            )
-            txtDescBrokerageSoodinow.setArrayStringText(
-                context.resources.getStringArray(R.array.brokerage_desc_bottom_soodinow),
-                ContextCompat.getColor(context, R.color.green)
-            )
-        }*/
-
-
     }
 
     override fun onResume() {

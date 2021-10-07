@@ -96,9 +96,8 @@
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             android:layout_marginHorizontal="@dimen/margin_l"
-
             android:scaleType="center"
-            android:src="@drawable/ic_alarm"
+            android:src="@drawable/ic_notifications"
             app:layout_constraintStart_toStartOf="@+id/walletValueImage"
             app:layout_constraintTop_toTopOf="@+id/walletValueImage"
             app:layout_constraintBottom_toBottomOf="@+id/walletValueImage"/>

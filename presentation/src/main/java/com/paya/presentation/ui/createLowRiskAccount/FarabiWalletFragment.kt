@@ -42,10 +42,10 @@ class FarabiWalletFragment: BaseFragment<CreateLowRiskAccountViewModel>(),
             pointTitle = "پیمان درآمد ثابت(پر ریسک )",
             name = "ترکیب صندوق سرمایه گزاری فارابی",
             description = "فارابی متشکل از چندین خدمت گوناگون متناسب با نیاز های مختلف سرمایه گذاران می باشد که تمام تمرکز فارابی انجام این خدمات به بهترین شکل می باشد تا منافع ناشی از آن سبب بهبود زندگی افراد جامعه باشد",
-            trimesterValue = 62,
-            monthlyValue = 21,
-            weeklyValue = 5,
-            image = context?.let { context -> ContextCompat.getDrawable(context,R.drawable.investment) }?:null
+            trimesterValue = null,
+            monthlyValue = 1.61,
+            weeklyValue = 0.32,
+            image = context?.let { context -> ContextCompat.getDrawable(context,R.drawable.investment) }
         )
         var list: List<SelectContractWalletRecyclerViewItem> = listOf(SectionItem(isFarabi = true, title = "ویژگی فارابی", description = "استفاده از سرمایه گذاری در کارگزاری"), soodinowWalletContractRepoModel)
         setupSoodinowWalletAdapter(list)

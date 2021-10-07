@@ -59,9 +59,9 @@ class SoodinowWalletFragment : BaseFragment<CreateLowRiskAccountViewModel>(), St
             pointTitle = "پیمان درآمد ثابت(پر ریسک )",
             name = "ترکیب صندوق سرمایه گزاری سودینو",
             description = "سودینو متشکل از چندین خدمت گوناگون متناسب با نیاز های مختلف سرمایه گذاران می باشد که تمام تمرکز سودینو انجام این خدمات به بهترین شکل می باشد تا منافع ناشی از آن سبب بهبود زندگی افراد جامعه باشد",
-            trimesterValue =  62 ,
-            monthlyValue =  21,
-            weeklyValue =  5,
+            trimesterValue =  6.0 ,
+            monthlyValue =  2.1,
+            weeklyValue =  0.5,
             image = context?.let { context -> ContextCompat.getDrawable(context,R.drawable.ic_image_wallet) }?:null
         )
         var list: List<SelectContractWalletRecyclerViewItem> = listOf(SectionItem(isFarabi = false, title = "ویژگی سودینو", description = "نقد شدن راحت و در کمترین زمان ممکن"), soodinowWalletContractRepoModel)
@@ -82,6 +82,7 @@ class SoodinowWalletFragment : BaseFragment<CreateLowRiskAccountViewModel>(), St
         get() = mViewModel
 
     override fun onPositionClicked(position: Int, isFarabi: Boolean) {
+        getFindViewController()?.navigateUp()
         getFindViewController()?.navigate(
             R.id.openSoodinowAutomaticInvestmentAccountFragment
         )

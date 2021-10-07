@@ -77,12 +77,12 @@ class SelectContractWalletAdapter(val startInvestClickListener: StartInvestClick
             itemView.addInvestButton.setOnClickListener {
                 startInvestClickListener.onPositionClicked(position = 0, isFarabi = false)
             }
-            itemView.imageView4.setImageDrawable(
+            /*itemView.imageView4.setImageDrawable(
                 item.image ?: ContextCompat.getDrawable(
                     itemView.context,
                     R.drawable.ic_image_wallet
                 )
-            )
+            )*/
 
             itemView.soodinowPointTitleInCard.text = item.pointTitle
             itemView.soodinowPointName.text = item.name
@@ -93,66 +93,86 @@ class SelectContractWalletAdapter(val startInvestClickListener: StartInvestClick
             weekly
             */
             itemView.weeklyPercentValue.run {
-                if (item.weeklyValue < 0 ) {
-                    this.setTextColor(this.context.getColorByResId(R.color.red))
-                } else {
-                    this.setTextColor(this.context.getColorByResId(R.color.green))
+                item.weeklyValue?.let {value ->
+                    /*if (value < 0 ) {
+                        this.setTextColor(this.context.getColorByResId(R.color.red))
+                    } else {
+                        this.setTextColor(this.context.getColorByResId(R.color.green))
+                    }*/
+                    this.text = "% $value"
                 }
-                this.text = item.weeklyValue.toString()
+
             }
-            itemView.weeklyPercentImage.run {
-                if (item.weeklyValue < 0 ) {
+            /*itemView.weeklyPercentImage.run {
+                item.weeklyValue?.let { value ->
+                    if (value< 0 ) {
                     this.background = this.context.getDrawableByResId(R.drawable.bg_icon_15_size_corner_3_red)
+                    this.setImageDrawable(this.context.getDrawableByResId(R.drawable.ic_arrow_withdrawal))
                 } else {
                     this.background = this.context.getDrawableByResId(R.drawable.bg_icon_15_size_corner_3_green)
+                    this.setImageDrawable(this.context.getDrawableByResId(R.drawable.ic_arrow_dposit))
                 }
-            }
+                }
+
+            }*/
 
             /**
             monthly
              */
             itemView.monthlyPercentValue.run {
-                if (item.monthlyValue < 0 ) {
-                    this.setTextColor(this.context.getColorByResId(R.color.red))
-                } else {
-                    this.setTextColor(this.context.getColorByResId(R.color.green))
+                item.monthlyValue?.let { value ->
+                    /*if (value < 0) {
+                        this.setTextColor(this.context.getColorByResId(R.color.red))
+                    } else {
+                        this.setTextColor(this.context.getColorByResId(R.color.green))
+                    }*/
+                    this.text = "% $value"
                 }
-                this.text = item.monthlyValue.toString()
+
             }
-            itemView.monthlyPercentImage.run {
-                if (item.monthlyValue < 0 ) {
-                    this.background = this.context.getDrawableByResId(R.drawable.bg_icon_15_size_corner_3_red)
-                } else {
-                    this.background = this.context.getDrawableByResId(R.drawable.bg_icon_15_size_corner_3_green)
+            /*itemView.monthlyPercentImage.run {
+                item.monthlyValue?.let { value ->
+                    if ( value < 0 ) {
+                        this.background = this.context.getDrawableByResId(R.drawable.bg_icon_15_size_corner_3_red)
+                        this.setImageDrawable(this.context.getDrawableByResId(R.drawable.ic_arrow_withdrawal))
+                    } else {
+                        this.background = this.context.getDrawableByResId(R.drawable.bg_icon_15_size_corner_3_green)
+                        this.setImageDrawable(this.context.getDrawableByResId(R.drawable.ic_arrow_dposit))
+                    }
                 }
-            }
+            }*/
 
             /**
             trimester
              */
             itemView.trimesterPercentValue.run {
-                if (item.trimesterValue < 0 ) {
-                    this.setTextColor(this.context.getColorByResId(R.color.red))
-                } else {
-                    this.setTextColor(this.context.getColorByResId(R.color.green))
+                item.trimesterValue?.let{ value ->
+                    /*if ( value < 0 ) {
+                        this.setTextColor(this.context.getColorByResId(R.color.red))
+                    } else {
+                        this.setTextColor(this.context.getColorByResId(R.color.green))
+                    }*/
+                    this.text = "% $value"
                 }
-                this.text = item.trimesterValue.toString()
+
             }
-            itemView.trimesterPercentImage.run {
-                if (item.trimesterValue < 0 ) {
-                    this.background = this.context.getDrawableByResId(R.drawable.bg_icon_15_size_corner_3_red)
-                } else {
-                    this.background = this.context.getDrawableByResId(R.drawable.bg_icon_15_size_corner_3_green)
+
+            /*itemView.trimesterPercentImage.run {
+                item.trimesterValue?.let { value ->
+                    if ( value < 0 ) {
+                        this.background = this.context.getDrawableByResId(R.drawable.bg_icon_15_size_corner_3_red)
+                        this.setImageDrawable(this.context.getDrawableByResId(R.drawable.ic_arrow_withdrawal))
+                    } else {
+                        this.background = this.context.getDrawableByResId(R.drawable.bg_icon_15_size_corner_3_green)
+                        this.setImageDrawable(this.context.getDrawableByResId(R.drawable.ic_arrow_dposit))
+                    }
                 }
-            }
+
+            }*/
 
             itemView.extendImageConstraintLayout.setOnClickListener {
-
                 collapseExpandTextView()
-
             }
-
-
         }
 
         private fun slideDown(view: View) {
@@ -204,8 +224,8 @@ class SelectContractWalletItem(
     val pointTitle: String,
     val name: String,
     val description: String,
-    val trimesterValue: Int,
-    val monthlyValue: Int,
-    val weeklyValue: Int,
+    val trimesterValue: Double?,
+    val monthlyValue: Double?,
+    val weeklyValue: Double?,
     val image: Drawable?
 ) : SelectContractWalletRecyclerViewItem()

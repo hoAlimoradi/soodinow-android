@@ -207,10 +207,23 @@
     </fragment>
 
     <fragment
-        android:id="@+id/riskAssessment"
+        android:id="@+id/riskAssessmentStart"
         android:name="com.paya.presentation.ui.riskAssessment.RiskAssessmentStartFragment"
         android:label="fragment_risk_assessment"
         tools:layout="@layout/fragment_start_risk_assessment" />
+
+    <fragment
+        android:id="@+id/riskAssessmentQuestions"
+        android:name="com.paya.presentation.ui.riskAssessment.RiskAssessmentQuestionsFragment"
+        android:label="fragment_questions_risk_assessment"
+        tools:layout="@layout/fragment_questions_risk_assessment" />
+
+
+    <fragment
+        android:id="@+id/riskAssessmentConfirm"
+        android:name="com.paya.presentation.ui.riskAssessment.RiskAssessmentConfirmFragment"
+        android:label="fragment_confirm_risk_assessment"
+        tools:layout="@layout/fragment_confirm_risk_assessment" />
 
     <fragment
         android:id="@+id/createLowRiskAccount"

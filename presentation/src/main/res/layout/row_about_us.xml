@@ -46,7 +46,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout2"
+            android:id="@+id/soodinowPointConstraintLayout"
             android:layout_width="200dp"
             android:layout_height="8dp"
             android:background="@drawable/bg_btn_japanese_laurel_green_corner_just_bottom_left_5_size48"
@@ -66,7 +66,7 @@
             android:layout_margin="@dimen/margin_4_dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
+            app:layout_constraintTop_toBottomOf="@+id/soodinowPointConstraintLayout"
             tools:text="مدیریت ثروت یکی از پیشرفته ترین انواع  سرویس های مشاوره و
 مدیریت امور مربوط به دارایی افراد است. این سرویس برای مشتریان
 خود با تدوین برنامه و استراتژی های دقیق و مشخص این خدمات را
