@@ -30,5 +30,6 @@ interface WalletRepository {
     suspend fun wallet(): Resource<WalletValueRepoModel>
 
     suspend fun hostList(): Resource<List<WalletHostListRepoModel>>
+    suspend fun investingInfo(): Resource<InvestingInfoRepoModel>
 
 }
