@@ -59,6 +59,12 @@ abstract class WalletModule {
             >
 
     @Binds
+    abstract fun bindInvestingInfoRemoteRepoMapper(mapper: InvestingInfoRemoteRepoMapper): Mapper<
+            InvestingInfoRemoteModel,
+            InvestingInfoRepoModel
+            >
+
+    @Binds
     abstract fun walletRepo(dev: WalletRepositoryImpl): WalletRepository
 
     @Binds

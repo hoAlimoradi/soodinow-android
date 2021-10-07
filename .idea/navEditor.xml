@@ -8,6 +8,27 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
+                  <entry key="credits">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="12" />
+                            <option name="y" value="12" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="navigateToProfile">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="home">
                     <value>
                       <LayoutPositions>
@@ -16,15 +37,6 @@
                             <option name="x" value="1476" />
                             <option name="y" value="749" />
                           </Point>
-                        </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="navigateToProfileFragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -37,6 +49,15 @@
                             <option name="x" value="1964" />
                             <option name="y" value="775" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="navigateToCredits">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -52,7 +73,7 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="navigateToMarketFragment">
+                            <entry key="navigateToHome">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -73,7 +94,7 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="navigateToHomeFragment">
+                            <entry key="navigateToMarket">
                               <value>
                                 <LayoutPositions />
                               </value>

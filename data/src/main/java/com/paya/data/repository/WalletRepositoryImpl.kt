@@ -17,6 +17,7 @@ class WalletRepositoryImpl @Inject constructor(
     private val walletWithdrawRequestRemoteRepoMapper: Mapper<WalletWithdrawRequestRemoteModel, WalletWithdrawRequestRepoModel>,
     private val walletPortfolioRemoteRepoMapper: Mapper<WalletPortfolioRemoteModel, WalletPortfolioRepoModel>,
     private val walletValueRemoteRepoMapper: Mapper<WalletValueRemoteModel, WalletValueRepoModel>,
+    private val investingInfoRemoteRepoMapper: Mapper<InvestingInfoRemoteModel, InvestingInfoRepoModel>,
     private val walletHostListRemoteRepoMapper: Mapper<@JvmSuppressWildcards List<WalletHostListRemoteModel>, @JvmSuppressWildcards List<WalletHostListRepoModel>> ,
 ) : WalletRepository {
     override suspend fun buyWallet(
@@ -79,6 +80,14 @@ class WalletRepositoryImpl @Inject constructor(
             walletService.hostList()
         ) {
             walletHostListRemoteRepoMapper.map(it.data)
+        }
+    }
+
+    override suspend fun investingInfo(): Resource<InvestingInfoRepoModel> {
+        return getResourceFromApiResponse(
+            walletService.investingInfo()
+        ) {
+            investingInfoRemoteRepoMapper.map(it.data)
         }
     }
 }

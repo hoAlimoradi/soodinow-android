@@ -2,6 +2,7 @@ package com.paya.data.mapper
 
 import com.paya.common.Mapper
 import com.paya.domain.models.remote.WalletHostListRemoteModel
+import com.paya.domain.models.repo.BasketHostsRepoModel
 import com.paya.domain.models.repo.EfficiencyHostListRepoModel
 import com.paya.domain.models.repo.EfficiencyModel
 import com.paya.domain.models.repo.WalletHostListRepoModel
@@ -16,8 +17,15 @@ class WalletHostListRemoteRepoMapper @Inject constructor() : Mapper<
         return param.map {
             WalletHostListRepoModel(
                 it.id ?: 0,
-                it.title ?: "",
-                it.description ?: "",
+                it.name ?: "",
+                it.descriptionTitle ?: "",
+                it.descriptionBody ?: "",
+                it.accessLevel ?: "",
+                it.fromRisk ?: 0,
+                it.toRisk ?: 0,
+                it.properties ?: emptyList(),
+                it.basket?.let { basket -> BasketHostsRepoModel(basket.fixIncome ?: 0) }
+                    ?: BasketHostsRepoModel(0),
                 it.efficiency?.let { efficiency ->
                     EfficiencyHostListRepoModel(
                         efficiency.week?.let { week ->
@@ -26,8 +34,9 @@ class WalletHostListRemoteRepoMapper @Inject constructor() : Mapper<
                                 week.negative ?: false
                             )
                         } ?: EfficiencyModel(0.0, false),
-                        efficiency.month?.let { month -> EfficiencyModel(
-                            month.percent ?: 0.0,
+                        efficiency.month?.let { month ->
+                            EfficiencyModel(
+                                month.percent ?: 0.0,
                             month.negative ?: false
                         ) }
                             ?: EfficiencyModel(0.0, false),
