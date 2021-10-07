@@ -27,7 +27,6 @@ interface WalletService {
         @Path("id") id: Int
     ): ApiResponse<BaseModel<WalletWithdrawRequestRemoteModel>>
 
-
     @GET("investment/pre_withdraw/{id}")
     suspend fun preWithdraw(
         @Path("id") id: Int
