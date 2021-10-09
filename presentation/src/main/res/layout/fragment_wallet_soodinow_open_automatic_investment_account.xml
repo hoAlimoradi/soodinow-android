@@ -1,625 +1,629 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/governor_bay_blue"
-    >
-    <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/backButtonOpenSoodinowAutomaticInvestmentAccountFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/height_medium"
-        android:layout_marginStart="@dimen/margin_l"
-        android:layout_marginTop="@dimen/margin_m"
-        android:background="@android:color/transparent"
-        android:src="@drawable/ic_back"
-        android:tint="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/whySoodinowTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/openSoodinowAutomaticInvestmentAccountConstraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/light_purple6112D8">
 
-        android:layout_marginTop="@dimen/margin_l"
-        android:text="@string/create_low_risk_account"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_size_l"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/backButtonOpenSoodinowAutomaticInvestmentAccountFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/height_medium"
+            android:layout_marginStart="@dimen/margin_l"
+            android:layout_marginTop="@dimen/margin_m"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_back"
+            android:tint="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/whySoodinowTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_m"
+
+            android:layout_marginEnd="16dp"
+            android:text="@string/create_low_risk_account"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_l"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/backButtonOpenSoodinowAutomaticInvestmentAccountFragment"
-         >
-
-        <ScrollView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
+
+            android:layout_marginTop="@dimen/margin_l"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            >
+            app:layout_constraintTop_toBottomOf="@+id/whySoodinowTitle">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <ScrollView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="parent">
-
-                <com.paya.presentation.utils.WalletInputPrice
-                    android:id="@+id/walletInputPrice"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    app:layout_constraintDimensionRatio="H,2:1"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-               <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/walletInputPrice"
-                android:background="@drawable/shadow_gray_194a4a4a"
-                >
+                app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/investmentConstraintLayout"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_l"
-                    android:paddingTop="@dimen/margin_l"
-
-                    android:paddingBottom="@dimen/margin_l"
-                    android:layout_marginHorizontal="@dimen/margin_l"
-                    android:background="@drawable/shadow_medium"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="parent">
 
-                    app:layout_constraintTop_toTopOf="parent"
-                    >
-
-                    <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/investmentConstraintLayoutGuideline"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/margin_4_dp"
-                        android:orientation="horizontal"
-                        app:layout_constraintGuide_percent="0.5" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/AutomaticInvestment"
+                    <com.paya.presentation.utils.WalletInputPrice
+                        android:id="@+id/walletInputPrice"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-
-                        android:layout_marginHorizontal="@dimen/margin_m"
-                        android:layout_marginBottom="@dimen/margin_s"
-                        android:gravity="center"
-                        android:text="@string/automatic_investment"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_m"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toTopOf="@+id/investmentConstraintLayoutGuideline"
+                        android:layout_height="0dp"
+                        app:layout_constraintDimensionRatio="H,2:1"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="80dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="@dimen/margin_l"
-                        android:layout_marginBottom="@dimen/margin_s"
-
-                        android:background="@drawable/bg_price_button"
-                        android:paddingHorizontal="@dimen/margin_m"
-                        android:paddingTop="@dimen/margin_4_dp"
-                        android:paddingBottom="@dimen/margin_4_dp"
-                        app:layout_constraintBottom_toTopOf="@+id/investmentConstraintLayoutGuideline"
+                        android:layout_width="0dp"
+                        android:layout_height="100dp"
+                        android:background="@color/light_purpleC69CFF"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="@dimen/margin_m"
-                            android:gravity="center"
-                            android:text="  هرماه 25 "
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/text_size_s"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toBottomOf="@+id/walletInputPrice">
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/automaticWithdrawalInvestment"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-
-                        android:layout_marginTop="@dimen/margin_s"
-                        android:layout_marginHorizontal="@dimen/margin_m"
-                        android:layout_marginEnd="36dp"
-                        android:gravity="center"
-                        android:text="@string/automatic_withdrawal_of_investment"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_m"
-                        android:textStyle="bold"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/shadow_gray_194a4a4a"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/investmentConstraintLayoutGuideline" />
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="80dp"
-                        android:layout_height="wrap_content"
-                        android:paddingHorizontal="@dimen/margin_m"
-
-                        android:layout_marginTop="@dimen/margin_s"
-                        android:layout_marginHorizontal="@dimen/margin_l"
-                        android:paddingBottom="@dimen/margin_4_dp"
-                        android:paddingTop="@dimen/margin_4_dp"
-                        android:background="@drawable/shadow_gray_dark"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/investmentConstraintLayoutGuideline">
+                        app:layout_constraintTop_toBottomOf="@+id/walletInputPrice">
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/investmentConstraintLayout"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="@dimen/margin_m"
-                            android:gravity="center"
-                            android:text=" غیر فعال  "
-                            android:textSize="@dimen/text_size_s"
-                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:layout_marginHorizontal="@dimen/margin_l"
+                            android:layout_marginTop="@dimen/margin_l"
+
+                            android:background="@drawable/shadow_medium"
+                            android:paddingTop="@dimen/margin_l"
+                            android:paddingBottom="@dimen/margin_l"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/trimesterMonthlyWeeklyConstraintLayout"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_m"
-                    android:paddingTop="@dimen/margin_l"
-                    android:paddingBottom="@dimen/margin_l"
+                            app:layout_constraintTop_toTopOf="parent">
 
-                    android:layout_margin="@dimen/margin_l"
-                    android:background="@drawable/shadow_medium"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/investmentConstraintLayout">
+                            <androidx.constraintlayout.widget.Guideline
+                                android:id="@+id/investmentConstraintLayoutGuideline"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/margin_4_dp"
+                                android:orientation="horizontal"
+                                app:layout_constraintGuide_percent="0.5" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/AutomaticInvestment"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+
+                                android:layout_marginHorizontal="@dimen/margin_m"
+                                android:layout_marginBottom="@dimen/margin_s"
+                                android:gravity="center"
+                                android:text="@string/automatic_investment"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_m"
+                                android:textStyle="bold"
+                                app:layout_constraintBottom_toTopOf="@+id/investmentConstraintLayoutGuideline"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="80dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="@dimen/margin_l"
+                                android:layout_marginBottom="@dimen/margin_s"
+
+                                android:background="@drawable/bg_price_button"
+                                android:paddingHorizontal="@dimen/margin_m"
+                                android:paddingTop="@dimen/margin_4_dp"
+                                android:paddingBottom="@dimen/margin_4_dp"
+                                app:layout_constraintBottom_toTopOf="@+id/investmentConstraintLayoutGuideline"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginHorizontal="@dimen/margin_m"
+                                    android:gravity="center"
+                                    android:text="  هرماه 25 "
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/text_size_s"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-                    <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/guidelineVertical"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintGuide_percent="0.33"  />
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/automaticWithdrawalInvestment"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
 
-                    <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/guidelineVertical1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintGuide_percent="0.67"  />
+                                android:layout_marginHorizontal="@dimen/margin_m"
+                                android:layout_marginTop="@dimen/margin_s"
+                                android:layout_marginEnd="36dp"
+                                android:gravity="center"
+                                android:text="@string/automatic_withdrawal_of_investment"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_m"
+                                android:textStyle="bold"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="@+id/investmentConstraintLayoutGuideline" />
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="80dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="@dimen/margin_l"
+
+                                android:layout_marginTop="@dimen/margin_s"
+                                android:background="@drawable/shadow_gray_dark"
+                                android:paddingHorizontal="@dimen/margin_m"
+                                android:paddingTop="@dimen/margin_4_dp"
+                                android:paddingBottom="@dimen/margin_4_dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="@+id/investmentConstraintLayoutGuideline">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginHorizontal="@dimen/margin_m"
+                                    android:gravity="center"
+                                    android:text=" غیر فعال  "
+                                    android:textSize="@dimen/text_size_s"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/trimesterMonthlyWeeklyConstraintLayout"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_l"
+                            android:layout_marginTop="@dimen/margin_m"
+                            android:background="@drawable/shadow_medium"
+
+                            android:paddingTop="@dimen/margin_l"
+                            android:paddingBottom="@dimen/margin_l"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/investmentConstraintLayout">
 
 
+                            <androidx.constraintlayout.widget.Guideline
+                                android:id="@+id/guidelineVertical"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                app:layout_constraintGuide_percent="0.33" />
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="1dp"
-                        android:layout_height="0dp"
-                        android:background="@color/green_d1efbc"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/guidelineVertical"
-                        app:layout_constraintTop_toTopOf="parent"/>
+                            <androidx.constraintlayout.widget.Guideline
+                                android:id="@+id/guidelineVertical1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                app:layout_constraintGuide_percent="0.67" />
 
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/guidelineVertical"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="1dp"
+                                android:layout_height="0dp"
+                                android:background="@color/green_d1efbc"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toStartOf="@+id/guidelineVertical"
+                                app:layout_constraintTop_toTopOf="parent" />
 
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toStartOf="@+id/guidelineVertical"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/trimesterText"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="@string/trimester"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/text_size_m"
+                                    android:textStyle="bold"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/margin_4_dp"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/trimesterText">
+
+                                    <androidx.appcompat.widget.AppCompatImageView
+                                        android:id="@+id/trimesterPercentImage"
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:background="@drawable/bg_icon_15_size_corner_3_green"
+                                        android:padding="4dp"
+                                        android:src="@drawable/ic_arrow_dposit"
+
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintHorizontal_chainStyle="packed"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/trimesterPercentValue"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/margin_4_dp"
+                                        android:gravity="center"
+                                        android:text="62%"
+                                        android:textColor="@color/green"
+                                        android:textSize="@dimen/text_size_xl"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintStart_toEndOf="@+id/trimesterPercentImage"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toStartOf="@+id/guidelineVertical1"
+                                app:layout_constraintStart_toStartOf="@+id/guidelineVertical"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/margin_4_dp"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/monthlyTextView">
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/monthlyPercentValue"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/margin_4_dp"
+                                        android:gravity="center"
+
+                                        android:text="21%"
+                                        android:textColor="@color/green"
+                                        android:textSize="@dimen/text_size_xl"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintStart_toEndOf="@+id/monthlyPercentImage"
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        app:layout_constraintVertical_bias="0.0" />
+
+                                    <androidx.appcompat.widget.AppCompatImageView
+                                        android:id="@+id/monthlyPercentImage"
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:background="@drawable/bg_icon_15_size_corner_3_green"
+                                        android:padding="4dp"
+                                        android:src="@drawable/ic_arrow_dposit"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/monthlyTextView"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="@string/monthly"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/text_size_s"
+                                    android:textStyle="bold"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="1dp"
+                                android:layout_height="0dp"
+                                android:background="@color/green_2"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toStartOf="@+id/guidelineVertical1"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="@+id/guidelineVertical1"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/margin_4_dp"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/weeklyTextView">
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/weeklyPercentValue"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/margin_4_dp"
+                                        android:gravity="center"
+                                        android:text="5%"
+                                        android:textColor="@color/green"
+                                        android:textSize="@dimen/text_size_xl"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintStart_toEndOf="@+id/weeklyPercentImage"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                    <androidx.appcompat.widget.AppCompatImageView
+                                        android:id="@+id/weeklyPercentImage"
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:background="@drawable/bg_icon_15_size_corner_3_green"
+                                        android:padding="4dp"
+                                        android:src="@drawable/ic_arrow_dposit"
+
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintHorizontal_chainStyle="packed"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/weeklyTextView"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="@string/weekly"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/text_size_s"
+                                    android:textStyle="bold"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/trimesterText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:id="@+id/efficiencyButton"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/height_medium"
+                            android:layout_margin="@dimen/margin_l"
+                            android:background="@drawable/shadow_medium"
                             android:gravity="center"
+                            android:text="@string/efficiencyChart"
                             android:textColor="@color/black"
                             android:textSize="@dimen/text_size_m"
                             android:textStyle="bold"
-                            android:text="@string/trimester"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/margin_4_dp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/trimesterText">
-
-                            <androidx.appcompat.widget.AppCompatImageView
-                                android:id="@+id/trimesterPercentImage"
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-                                android:background="@drawable/bg_icon_15_size_corner_3_green"
-                                android:padding="4dp"
-                                android:src="@drawable/ic_arrow_dposit"
-
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintHorizontal_chainStyle="packed"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/trimesterPercentValue"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/margin_4_dp"
-                                android:gravity="center"
-                                android:textColor="@color/green"
-                                android:textSize="@dimen/text_size_xl"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toEndOf="@+id/trimesterPercentImage"
-                                app:layout_constraintTop_toTopOf="parent"
-                                android:text="62%" />
-
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/guidelineVertical1"
-                        app:layout_constraintStart_toStartOf="@+id/guidelineVertical"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/margin_4_dp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/monthlyTextView">
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/monthlyPercentValue"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:textColor="@color/green"
-
-                                android:layout_marginStart="@dimen/margin_4_dp"
-                                android:textSize="@dimen/text_size_xl"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toEndOf="@+id/monthlyPercentImage"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintVertical_bias="0.0"
-                                android:text="21%" />
-
-                            <androidx.appcompat.widget.AppCompatImageView
-                                android:id="@+id/monthlyPercentImage"
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-                                android:background="@drawable/bg_icon_15_size_corner_3_green"
-                                android:padding="4dp"
-                                android:src="@drawable/ic_arrow_dposit"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
+                            app:layout_constraintTop_toBottomOf="@id/trimesterMonthlyWeeklyConstraintLayout" />
 
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/monthlyTextView"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/riskInvestment"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+
+                            android:layout_marginHorizontal="@dimen/margin_l"
+                            android:layout_marginTop="@dimen/margin_l"
+                            android:layout_marginEnd="40dp"
                             android:gravity="center"
-                            android:text="@string/monthly"
-                            android:textStyle="bold"
+                            android:text="@string/risk_investment"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/text_size_s"
+                            android:textSize="@dimen/text_size_m"
+                            android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toBottomOf="@+id/efficiencyButton" />
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/riskInvestmentValue"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="1dp"
-                        android:layout_height="0dp"
-                        android:background="@color/green_2"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/guidelineVertical1"
-                        app:layout_constraintTop_toTopOf="parent"/>
-
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/guidelineVertical1"
-                        app:layout_constraintTop_toTopOf="parent">
+                            android:layout_marginHorizontal="@dimen/margin_s"
+                            android:layout_marginEnd="28dp"
+                            android:gravity="center"
+                            android:text="20%"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_size_m"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@+id/riskInvestment"
+                            app:layout_constraintEnd_toStartOf="@+id/riskInvestment" />
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/margin_4_dp"
-                            app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_marginHorizontal="@dimen/margin_l"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginBottom="@dimen/margin_s"
+                            android:background="@drawable/bg_orange"
+                            android:paddingHorizontal="@dimen/margin_m"
+                            android:paddingTop="@dimen/margin_4_dp"
+                            android:paddingBottom="@dimen/margin_4_dp"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/weeklyTextView">
+                            app:layout_constraintTop_toBottomOf="@+id/efficiencyButton">
 
                             <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/weeklyPercentValue"
+                                android:id="@+id/riskInvestmentButton"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+
+                                android:layout_marginHorizontal="@dimen/margin_s"
                                 android:gravity="center"
-                                android:textColor="@color/green"
-                                android:layout_marginStart="@dimen/margin_4_dp"
-                                android:textSize="@dimen/text_size_xl"
+                                android:text="@string/risk_investment_change"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/text_size_s"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toEndOf="@+id/weeklyPercentImage"
-                                app:layout_constraintTop_toTopOf="parent"
-                                android:text="5%" />
-
-                            <androidx.appcompat.widget.AppCompatImageView
-                                android:id="@+id/weeklyPercentImage"
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-                                android:background="@drawable/bg_icon_15_size_corner_3_green"
-                                android:padding="4dp"
-                                android:src="@drawable/ic_arrow_dposit"
-
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintHorizontal_chainStyle="packed"
+                                app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
+
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
+                        <androidx.constraintlayout.widget.ConstraintLayout
 
-
-
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/weeklyTextView"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/constraintLayout5"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="@string/weekly"
-                            android:textColor="@color/black"
-                            android:textStyle="bold"
-                            android:textSize="@dimen/text_size_s"
+                            android:layout_marginTop="@dimen/margin_l"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                            app:layout_constraintTop_toBottomOf="@+id/riskInvestment">
 
+                            <com.paya.presentation.utils.customSeekbar.CustomSeekbar
+                                android:id="@+id/riskInvestmentCustomSeekbar"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="8dp"
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                                app:draw_bubble="false"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:region_leftColor="@color/governor_bay_blue"
+                                app:region_rightColor="@color/alto_light"
+                                app:regions="true"
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/efficiencyButton"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/height_medium"
-                    android:gravity="center"
-                    android:text="@string/efficiencyChart"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_m"
-                    android:textStyle="bold"
-                    android:layout_margin="@dimen/margin_l"
-                    android:background="@drawable/shadow_medium"
-                    app:layout_constraintTop_toBottomOf="@id/trimesterMonthlyWeeklyConstraintLayout"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    />
+                                app:regions_centerText="true"
+                                app:textTop_visible="false" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/riskInvestment"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    android:layout_marginTop="@dimen/margin_l"
-                    android:layout_marginHorizontal="@dimen/margin_l"
-                    android:layout_marginEnd="40dp"
-                    android:gravity="center"
-                    android:textColor="@color/black"
-                    android:text="@string/risk_investment"
-                    android:textSize="@dimen/text_size_m"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/efficiencyButton" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/yourRiskFreeInvestmentPortfolio"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
 
-                   <androidx.appcompat.widget.AppCompatTextView
-                       android:id="@+id/riskInvestmentValue"
-                       android:layout_width="0dp"
-                       android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/margin_l"
+                            android:layout_marginTop="@dimen/margin_l"
+                            android:gravity="center"
+                            android:text="@string/your_risk_free_investment_portfolio"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_size_m"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
 
-                       android:layout_marginHorizontal="@dimen/margin_s"
-                       android:layout_marginEnd="28dp"
-                       android:gravity="center"
-                       android:text="20%"
-                       android:textColor="@color/black"
-                       android:textSize="@dimen/text_size_m"
-                       android:textStyle="bold"
-                       app:layout_constraintBottom_toBottomOf="@+id/riskInvestment"
-                       app:layout_constraintEnd_toStartOf="@+id/riskInvestment" />
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/mosaicConstraintLayout"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_l"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/yourRiskFreeInvestmentPortfolio">
 
-                   <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/margin_l"
-                    android:layout_marginBottom="@dimen/margin_s"
-                    android:layout_marginTop="12dp"
-                    android:background="@drawable/bg_orange"
-                    android:paddingHorizontal="@dimen/margin_m"
-                    android:paddingTop="@dimen/margin_4_dp"
-                    android:paddingBottom="@dimen/margin_4_dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/efficiencyButton" >
+                            <include
+                                android:id="@+id/mock"
+                                layout="@layout/mock_mosaic_layout"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/riskInvestmentButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="0dp"
+                                android:layout_height="50dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/mock">
 
-                        android:layout_marginHorizontal="@dimen/margin_s"
-                        android:gravity="center"
-                        android:text="@string/risk_investment_change"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/text_size_s"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/mosaicConstraintLayout">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-
-                    android:id="@+id/constraintLayout5"
-                    android:layout_width="0dp"
-                    android:layout_marginTop="@dimen/margin_l"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/riskInvestment">
-
-                    <com.paya.presentation.utils.customSeekbar.CustomSeekbar
-                        android:id="@+id/riskInvestmentCustomSeekbar"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-
-                        app:draw_bubble="false"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:region_leftColor="@color/governor_bay_blue"
-                        app:region_rightColor="@color/alto_light"
-                        app:regions="true"
-
-                        app:regions_centerText="true"
-                        app:textTop_visible="false" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/yourRiskFreeInvestmentPortfolio"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-
-                    android:layout_marginHorizontal="@dimen/margin_l"
-                    android:layout_marginTop="@dimen/margin_l"
-                    android:gravity="center"
-                    android:text="@string/your_risk_free_investment_portfolio"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_m"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/mosaicConstraintLayout"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin_l"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/yourRiskFreeInvestmentPortfolio">
-
-                    <include
-                        android:id="@+id/mock"
-                        layout="@layout/mock_mosaic_layout"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        />
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/mock">
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                   <androidx.constraintlayout.widget.ConstraintLayout
-                       android:layout_width="0dp"
-                       android:layout_height="50dp"
-                       app:layout_constraintEnd_toEndOf="parent"
-                       app:layout_constraintStart_toStartOf="parent"
-                       app:layout_constraintTop_toBottomOf="@+id/mosaicConstraintLayout">
+            </ScrollView>
 
-                   </androidx.constraintlayout.widget.ConstraintLayout>
+            <Button
+                android:id="@+id/navigateToDepositSoodinowWalletFragmentButton"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/height_medium"
+                android:layout_marginHorizontal="@dimen/margin_40dp"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:layout_marginBottom="@dimen/margin_l"
+                android:background="@drawable/bg_button_green"
+                android:text="@string/submit_and_continue"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_m"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintVertical_bias="1" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </ScrollView>
-
-        <Button
-            android:id="@+id/navigateToDepositSoodinowWalletFragmentButton"
-            android:layout_width="0dp"
-            android:layout_marginHorizontal="@dimen/margin_40dp"
-            android:layout_height="@dimen/height_medium"
-            android:layout_marginTop="@dimen/margin_medium"
-            android:layout_marginBottom="@dimen/margin_l"
-            android:text="@string/submit_and_continue"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintVertical_bias="1"
-            android:textSize="@dimen/text_size_m"
-            android:textColor="@color/white"
-            android:background="@drawable/bg_button_green"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -8,63 +8,29 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_purple_card" >
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/AddInventoryTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="  افزودن موجودی  "
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_normal"
+        android:drawableEnd="@drawable/ic_group_pluse_green_circle_background"
+        android:translationX="-8dp"
+        android:layout_marginTop="@dimen/margin_m"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wealthValueEditText" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/plusPriceConstraintLayout"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginHorizontal="@dimen/margin_l"
-        android:background="@drawable/circle_green_9"
-        android:scaleType="center"
-        app:layout_constraintBottom_toBottomOf="@+id/AddInventoryTitle"
-        app:layout_constraintStart_toEndOf="@+id/AddInventoryTitle">
 
-        <androidx.appcompat.widget.AppCompatImageView
-
-            android:layout_width="12dp"
-            android:layout_height="12dp"
-            android:scaleType="center"
-            android:src="@drawable/ic_plus"
-            android:tint="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/minusPriceConstraintLayout"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:visibility="gone"
-        android:scaleType="center"
-        android:background="@drawable/circle_green_9"
-        android:layout_marginHorizontal="@dimen/margin_l"
-
-        android:layout_marginTop="@dimen/margin_4_dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/wealthTitle"
-        app:layout_constraintTop_toTopOf="parent">
-        <androidx.appcompat.widget.AppCompatImageView
-
-            android:layout_width="12dp"
-            android:layout_height="12dp"
-            android:scaleType="center"
-            android:layout_marginHorizontal="@dimen/margin_m"
-            android:src="@drawable/ic_minus"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/wealthValueEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:textSize="@dimen/height_medium"
+        android:textSize="@dimen/text_size_36dp"
         android:cursorVisible="false"
         android:background="@android:color/transparent"
         android:inputType="number"
@@ -90,31 +56,4 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/AddInventoryTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/margin_m"
-        android:gravity="center"
-        android:text="@string/add_inventory"
-
-        android:textColor="@color/white"
-        android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/wealthValueEditText" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/walletInputPriceDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/min_requirment_invest"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_size_xs"
-        android:textStyle="bold"
-        android:layout_marginBottom="@dimen/margin_l"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"  />
 </androidx.constraintlayout.widget.ConstraintLayout>

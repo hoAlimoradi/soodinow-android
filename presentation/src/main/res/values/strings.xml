@@ -16,6 +16,8 @@
     <string name="fingerprint_description">از دفعات بعدی می توانید با اثر انگشت وارد شوید </string>
     <string name="fingerprint_description_2">یا کلیک روی تصویر زیر</string>
     <string name="submit_and_continue">ثبت و ادامه</string>
+
+    <string name="continue_">ادامه</string>
     <string name="change_phone_number">تغییر شماره</string>
     <string name="forget_password">فراموشی رمز</string>
     <string name="resend_code">ارسال مجدد</string>
@@ -301,7 +303,7 @@
     <string name="assess_risk_percent_description">"درصد تکمیل شده "</string>
     <string name="next">بعدی</string>
     <string name="previous">قبلی</string>
-    <string name="add_inventory">"افزودن موجودی "</string>
+    <string name="add_inventory">  افزودن موجودی  </string>
     <string-array name="brokerage_list">
         <item>کارگزاری فارابی</item>
     </string-array>

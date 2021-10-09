@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/addInventoryBottomSheetDialogFragmentConstraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_chart_line_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+
+            android:id="@+id/titleConstraintLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_xl"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/shadow_gray_dark_with_gray_border"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_l"
+                android:layout_marginEnd="@dimen/margin_m"
+                android:layout_marginBottom="@dimen/margin_l"
+                android:text="مبلغ دلخواه"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_m"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+
+            android:id="@+id/amountRequiredValueConstraintLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_xl"
+            android:background="@drawable/shadow_gray_dark_with_gray_border"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/amountRequiredValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_l"
+                android:layout_marginEnd="@dimen/margin_m"
+                android:layout_marginBottom="@dimen/margin_l"
+                android:text="مبلغ دلخواه"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_m"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_m"
+                android:gravity="center"
+                android:text="(به تومان)"
+                android:textColor="@color/emperor"
+                android:textSize="@dimen/text_size_xs"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/amountRequiredValue"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/amountRequiredTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_xl"
+            android:textColor="@color/oslo_gray"
+            android:textSize="@dimen/text_size_s"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/amountRequiredValueConstraintLayout"
+            tools:text="حداقل سرمایه گذاری در این پیمان 100.000 هزار تومان می باشد" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/thirdButton"
+            android:layout_width="243dp"
+            android:layout_height="36dp"
+            android:layout_margin="@dimen/margin_l"
+            android:background="@drawable/bg_button_green"
+            android:text="@string/continue_"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_m"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="333dp"
+            android:layout_height="181dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleConstraintLayout">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -26,15 +26,15 @@ class WalletInputPrice @JvmOverloads constructor(
     //wallet_input_price
     init {
         View.inflate(context, R.layout.wallet_input_price, this)
-        minusPriceConstraintLayout.setOnClickListener {
+        /*minusPriceConstraintLayout.setOnClickListener {
             setPrice(false)
         }
         plusPriceConstraintLayout.setOnClickListener {
             setPrice(true)
-        }
+        }*/
     }
 
-    fun setPrice(plus: Boolean) {
+    /*fun setPrice(plus: Boolean) {
         var price = wealthValueEditText.text.toString()
         if (price.isNullOrEmpty())
             price = "0"
@@ -53,7 +53,7 @@ class WalletInputPrice @JvmOverloads constructor(
         }
         walletInputPriceDescription.text = getStringByResId(R.string.min_requirment_invest)
         setPrice((if (plus) changePrice + PRICE_MINUS_PLUS else changePrice - PRICE_MINUS_PLUS).toString())
-    }
+    }*/
 
     fun setupWatcherPrice(lifecycleScope: CoroutineScope? = null, onTextChanged: (String) -> Unit) {
         if (lifecycleScope==null)
@@ -82,9 +82,9 @@ class WalletInputPrice @JvmOverloads constructor(
         return Utils.getAmount(wealthValueEditText.text.toString()) ?: 0
     }
 
-    fun setMessage(message: String) {
+   /* fun setMessage(message: String) {
         walletInputPriceDescription.text = message
-    }
+    }*/
 
     var showErrorMessage: (message: String) -> Unit = {}
 

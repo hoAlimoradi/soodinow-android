@@ -7,11 +7,13 @@ import android.text.TextWatcher
 import android.view.*
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.text.isDigitsOnly
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.paya.domain.models.repo.ChartProfitRepoModel
 import com.paya.domain.models.repo.SoodinowWalletContractRepoModel
 import com.paya.domain.tools.Resource
@@ -26,6 +28,7 @@ import com.paya.presentation.utils.requestKeyBoard
 import com.paya.presentation.viewmodel.CreateLowRiskAccountViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_wallet_soodinow_open_automatic_investment_account.*
+import kotlinx.android.synthetic.main.layout_add_inventory_modal_bottom_sheet.*
 import kotlinx.android.synthetic.main.open_automatic_investment_account_card.*
 
 
@@ -33,6 +36,8 @@ import kotlinx.android.synthetic.main.open_automatic_investment_account_card.*
 class OpenSoodinowAutomaticInvestmentAccountFragment : BaseFragment<CreateLowRiskAccountViewModel>() {
 
     var boxId: Long = 0
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
+
     private val mViewModel: CreateLowRiskAccountViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,7 +49,7 @@ class OpenSoodinowAutomaticInvestmentAccountFragment : BaseFragment<CreateLowRis
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        changeStatusBarColorToGreen()
+        changeStatusBarColorToLightPurple()
 
         activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
@@ -77,9 +82,47 @@ class OpenSoodinowAutomaticInvestmentAccountFragment : BaseFragment<CreateLowRis
 
         }
         efficiencyButton.setOnClickListener {
-            openChart()
+            val modalbottomSheetFragment = AddInventoryBottomSheetDialogFragment()
+            modalbottomSheetFragment.show(parentFragmentManager,modalbottomSheetFragment.tag)
+            //openChart()
         }
+
+
+       /* bottomSheetBehavior = BottomSheetBehavior.from(addInventoryBottomSheetDialogFragmentConstraintLayout)
+
+        bottomSheetBehavior.addBottomSheetCallback(object :
+            BottomSheetBehavior.BottomSheetCallback() {
+
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                // handle onSlide
+            }
+
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                when (newState) {
+                    BottomSheetBehavior.STATE_COLLAPSED -> Toast.makeText(requireContext(), "STATE_COLLAPSED", Toast.LENGTH_SHORT).show()
+                    BottomSheetBehavior.STATE_EXPANDED -> Toast.makeText(requireContext(), "STATE_EXPANDED", Toast.LENGTH_SHORT).show()
+                    BottomSheetBehavior.STATE_DRAGGING -> Toast.makeText(requireContext(), "STATE_DRAGGING", Toast.LENGTH_SHORT).show()
+                    BottomSheetBehavior.STATE_SETTLING -> Toast.makeText(requireContext(), "STATE_SETTLING", Toast.LENGTH_SHORT).show()
+                    BottomSheetBehavior.STATE_HIDDEN -> Toast.makeText(requireContext(), "STATE_HIDDEN", Toast.LENGTH_SHORT).show()
+                    else -> Toast.makeText(requireContext(), "OTHER_STATE", Toast.LENGTH_SHORT).show()
+                }
+            }
+        })*/
+
+        walletInputPrice.setOnClickListener {
+            AddInventoryBottomSheetDialogFragment().apply {
+                show(parentFragmentManager, AddInventoryBottomSheetDialogFragment.TAG)
+            }
+        }
+
+        /*btnBottomSheetPersistent.setOnClickListener {
+            if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED)
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            else
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        }*/
     }
+
     private fun setupWalletInputPrice() {
         walletInputPrice?.apply {
             setupWatcherPrice(lifecycleScope) {
@@ -127,14 +170,14 @@ class OpenSoodinowAutomaticInvestmentAccountFragment : BaseFragment<CreateLowRis
         findNavController().popBackStack()
     }
 
-    private fun changeStatusBarColorToGreen() {
+    private fun changeStatusBarColorToLightPurple() {
         activity?.let {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 it.window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE
             }
             it.window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
             it.window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-            it.window.statusBarColor = ContextCompat.getColor(it.baseContext, R.color.green)
+            it.window.statusBarColor = ContextCompat.getColor(it.baseContext, R.color.light_purple6112D8)
         }
     }
 
@@ -145,3 +188,6 @@ class OpenSoodinowAutomaticInvestmentAccountFragment : BaseFragment<CreateLowRis
     override val baseViewModel: BaseViewModel
         get() = mViewModel
 }
+
+
+
