@@ -10,9 +10,9 @@ import javax.inject.Inject
 
 class WalletWithdrawRequestUseCase @Inject constructor(
     private val walletRepository: WalletRepository
-) : UseCase<Int, WalletWithdrawRequestRepoModel> {
-    override suspend fun action(param: Int): Resource<WalletWithdrawRequestRepoModel> {
-        return walletRepository.withdrawRequest(param)
+) : UseCase<WalletWithdrawRequestBodyRepoModel, WalletWithdrawRequestRepoModel> {
+    override suspend fun action(param: WalletWithdrawRequestBodyRepoModel): Resource<WalletWithdrawRequestRepoModel> {
+        return walletRepository.withdrawRequest(param.id,param.sell)
 
     }
 

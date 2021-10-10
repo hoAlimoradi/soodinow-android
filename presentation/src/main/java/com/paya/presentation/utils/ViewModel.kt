@@ -30,17 +30,22 @@ fun <T> callResource(viewModel: BaseViewModel,resource: Resource<T>,isShowError:
 }*/
 
 fun <T> callResource(viewModel: BaseViewModel,resource: Resource<T>,isShowError: Boolean = true) : Resource<T> {
-	if (resource.code == 401) {
-		viewModel.unAuthorized(resource.message!!) {  }
-	} else if(resource.code == 1033){
-		viewModel.existProfileUser()
-	} else if (resource.code == 1009) {
-		viewModel.farabiAuth()
-	} else if(resource.code == 1051){
-		viewModel.showError(error = resource.message ?: "عملیات شما با خطا مواجه شد", typeIcon = TypeIconInErrorDialog.WARNING, tryAgain = "هنگام دریافت مجوز، شما را با پیامک مطلع خواهیم ساخت.", isShowError = isShowError)
-	}
-	else if (resource.status == Status.ERROR) {
-		viewModel.showError(resource.message ?: "عملیات شما با خطا مواجه شد",typeIcon = TypeIconInErrorDialog.ERROR, tryAgain ="لطفا مجدد تلاش کنید",isShowError = isShowError)
+	when {
+		resource.code == 401 -> {
+			viewModel.unAuthorized(resource.message!!) {  }
+		}
+		resource.code == 1033 -> {
+			viewModel.existProfileUser()
+		}
+		resource.code == 1009 -> {
+			viewModel.farabiAuth()
+		}
+		resource.code == 1051 -> {
+			viewModel.showError(error = resource.message ?: "عملیات شما با خطا مواجه شد", typeIcon = TypeIconInErrorDialog.WARNING, tryAgain = "هنگام دریافت مجوز، شما را با پیامک مطلع خواهیم ساخت.", isShowError = isShowError)
+		}
+		resource.status == Status.ERROR -> {
+			viewModel.showError(resource.message ?: "عملیات شما با خطا مواجه شد",typeIcon = TypeIconInErrorDialog.ERROR, tryAgain ="لطفا مجدد تلاش کنید",isShowError = isShowError)
+		}
 	}
 	return resource
 }

@@ -21,10 +21,11 @@ interface WalletService {
         @Field("banking_portal") bankingPortal: String
     ): ApiResponse<BaseModel<WalletChargeRemoteModel>>
 
-
+    @FormUrlEncoded
     @POST("investment/withdraw_request/{id}")
     suspend fun withdrawRequest(
-        @Path("id") id: Int
+        @Path("id") id: Int,
+        @Field("value") sell: Long
     ): ApiResponse<BaseModel<WalletWithdrawRequestRemoteModel>>
 
     @GET("investment/pre_withdraw/{id}")
@@ -34,6 +35,9 @@ interface WalletService {
 
     @GET("investment/portfolio")
     suspend fun portfolio(): ApiResponse<BaseModel<WalletPortfolioRemoteModel>>
+
+    @GET("investment/bank_portals")
+    suspend fun bankPortals(): ApiResponse<BaseModel<List<PortalBankRemoteModel>>>
 
     @GET("investment/wallet")
     suspend fun wallet(): ApiResponse<BaseModel<WalletValueRemoteModel>>

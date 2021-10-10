@@ -22,7 +22,8 @@ interface WalletRepository {
     ): Resource<WalletPreWithdrawRepoModel>
 
     suspend fun withdrawRequest(
-        id: Int
+        id: Int,
+        sell: Long
     ): Resource<WalletWithdrawRequestRepoModel>
 
     suspend fun portfolio(): Resource<WalletPortfolioRepoModel>
@@ -31,5 +32,6 @@ interface WalletRepository {
 
     suspend fun hostList(): Resource<List<WalletHostListRepoModel>>
     suspend fun investingInfo(): Resource<InvestingInfoRepoModel>
+    suspend fun bankPortals(): Resource<List<PortalBankRepoModel>>
 
 }

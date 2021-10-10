@@ -50,6 +50,7 @@ object Dependencies{
 		const val SENTRY = "4.3.0"
 		const val SENTRY_PLUGIN = "1.7.36"
 		const val BIOMETRIC = "1.2.0-alpha03"
+		const val GLIDE = "4.12.0"
 	}
 	
 	object Modules{
