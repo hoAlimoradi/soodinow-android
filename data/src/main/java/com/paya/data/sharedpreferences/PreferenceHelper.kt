@@ -36,4 +36,8 @@ interface PreferenceHelper {
     fun setAppLink(appLink: String)
 
     fun getAppLink(): Resource<GetAppLinkRepoModel>
+
+    fun setPreInvoiceId(uuid: String)
+
+    fun getPreInvoiceId(): String
 }

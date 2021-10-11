@@ -392,4 +392,10 @@
             app:popUpTo="@id/settings"
             app:popUpToInclusive="true" />
     </fragment>
+
+    <fragment
+        android:id="@+id/investWallet"
+        android:name="com.paya.presentation.ui.invesmtWallet.InvestWalletFragment"
+        android:label="InvestWalletFragment">
+    </fragment>
 </navigation>

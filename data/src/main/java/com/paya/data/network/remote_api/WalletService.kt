@@ -10,16 +10,22 @@ interface WalletService {
     @POST("investment/low_invest")
     suspend fun buyWallet(
         @Field("investment_value") investmentValue: Long,
-        @Field("host_id") hostId: Int
+        @Field("investment_host_id") hostId: Int
     ): ApiResponse<BaseModel<String>>
 
     @FormUrlEncoded
-    @POST("investment/payment/request")
+    @POST("investment/payment/request/")
     suspend fun walletCharge(
         @Field("charge") charge: Long,
         @Field("callback_url") callbackUrl: String,
         @Field("banking_portal") bankingPortal: String
     ): ApiResponse<BaseModel<WalletChargeRemoteModel>>
+
+    @FormUrlEncoded
+    @POST("investment/payment/cash_withdraw_request/")
+    suspend fun cashWithdrawRequest(
+        @Field("amount") amount: Long
+    ): ApiResponse<BaseModel<String>>
 
     @FormUrlEncoded
     @POST("investment/withdraw_request/{id}")
@@ -45,6 +51,15 @@ interface WalletService {
     @GET("investment/hosts")
     suspend fun hostList(): ApiResponse<BaseModel<List<WalletHostListRemoteModel>>>
 
+    @GET("investment/hosts/{host_id}/")
+    suspend fun hostDetail(@Path("host_id") hostId: Int): ApiResponse<BaseModel<WalletHostDetailRemoteModel>>
+
     @GET("investment/investing_info")
     suspend fun investingInfo(): ApiResponse<BaseModel<InvestingInfoRemoteModel>>
+
+    @GET("investment/pre_invoice/<UUID>/")
+    suspend fun getPreInvoice(@Path("UUID") uuid: String): ApiResponse<BaseModel<PreInvoiceRemoteModel>>
+
+    @GET("investment/pre_invoice/")
+    suspend fun preInvoice(@Field("host_id") hostId: Int,@Field("price") amount: Long): ApiResponse<BaseModel<PreInvoiceRemoteModel>>
 }

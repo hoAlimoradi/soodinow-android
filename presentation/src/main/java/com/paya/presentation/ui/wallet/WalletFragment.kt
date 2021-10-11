@@ -37,7 +37,11 @@ class WalletFragment : BaseFragment<WalletViewModel>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         backButton.setOnClickListener { findNavController().popBackStack() }
-
+        binding?.apply {
+            walletImageViewConstraintLayout.setOnClickListener {
+                getFindViewController()?.navigate(R.id.investWallet)
+            }
+        }
         observe(viewModel.soodinowWalletValueRepoModelResourceMutableLiveData, ::walletValue)
         viewModel.getSoodinowWalletValue()
     }
@@ -49,6 +53,8 @@ class WalletFragment : BaseFragment<WalletViewModel>() {
                     yourWalletValue.text =
                         Utils.separatorAmount(data.totalMoney) + " " + resources.getString(R.string.toman)
                     blockValue.text =
+                        Utils.separatorAmount(data.totalBlockMoney) + " " + resources.getString(R.string.toman)
+                    investValue.text =
                         Utils.separatorAmount(data.totalProfit) + " " + resources.getString(R.string.toman)
                     recyclerView.layoutManager = LinearLayoutManager(context)
                     recyclerView.adapter = WalletInvestAdapter(data.investmentBoxesData)

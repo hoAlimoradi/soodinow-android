@@ -3,8 +3,8 @@ package com.paya.domain.models.repo
 import com.paya.domain.tools.NoObfuscate
 
 data class WalletHostListRepoModel(
-    val id: Int?,
-    val name: String?,
+    val id: Int,
+    val name: String,
     val descriptionTitle: String,
     val descriptionBody: String,
     val accessLevel: String,
@@ -16,7 +16,7 @@ data class WalletHostListRepoModel(
 ) : NoObfuscate
 
 data class BasketHostsRepoModel(
-    val fixIncome: Int
+    val fixIncome: Double
 )
 
 data class EfficiencyHostListRepoModel(

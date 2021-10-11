@@ -5,8 +5,10 @@ import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.paya.presentation.R
+import com.paya.presentation.utils.getColorByResId
 import com.paya.presentation.utils.getDrawableByResId
 import com.paya.presentation.utils.gone
 import com.paya.presentation.utils.visible
@@ -14,37 +16,31 @@ import kotlinx.android.synthetic.main.row_wallet_select_contrac_contecnt.view.*
 import kotlinx.android.synthetic.main.row_wallet_select_contrac_first.view.*
 
 
-const val VIEW_TYPE_SECTION = 1
-const val VIEW_TYPE_ITEM = 2
+const val VIEW_TYPE_SECTION_S = 1
+const val VIEW_TYPE_ITEM_s = 2
 
-class SelectContractWalletAdapter(
-    val startInvestClickListener: StartInvestClickListener,
-    val data: List<SelectContractWalletRecyclerViewItem>
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class SelectContractSoodinowWalletAdapter(val startInvestClickListener: StartInvestClickListener, val data: List<SelectContractWalletRecyclerViewItem>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemViewType(position: Int): Int {
         if (position == 0) {
-            return VIEW_TYPE_SECTION
+            return VIEW_TYPE_SECTION_S
         }
-        return VIEW_TYPE_ITEM
+        return VIEW_TYPE_ITEM_s
 
     }
-
     override fun getItemCount(): Int {
         return data.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-        if (viewType == VIEW_TYPE_SECTION) {
+        if (viewType == VIEW_TYPE_SECTION_S) {
             return FirstSectionSelectContractWalletAdapterViewHolder(
-                LayoutInflater.from(parent.context)
-                    .inflate(R.layout.row_wallet_select_contrac_first, parent, false)
+                LayoutInflater.from(parent.context).inflate(R.layout.row_wallet_select_contrac_first, parent, false)
             )
         }
         return SecondSectionSoodinowWalletAdapterViewHolder(
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.row_wallet_select_contrac_contecnt, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.row_wallet_select_contrac_contecnt, parent, false)
         )
     }
 
@@ -59,13 +55,12 @@ class SelectContractWalletAdapter(
         }
     }
 
-    internal inner class FirstSectionSelectContractWalletAdapterViewHolder(itemView: View) :
-        RecyclerView.ViewHolder(itemView) {
+    internal inner class FirstSectionSelectContractWalletAdapterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: SectionItem) {
             itemView.firstSectionSelectContractWalletTitleInCard.text = item.title
             itemView.firstSectionSelectContractWalletPointDescription.text = item.description
             itemView.firstSectionSelectContractWalletTitleImageView.run {
-                if (item.isFarabi) {
+                if(item.isFarabi) {
                     this.setImageDrawable(this.context.getDrawableByResId(R.drawable.ic_farabi))
                 } else {
                     this.setImageDrawable(this.context.getDrawableByResId(R.drawable.ic_logo_soodinow))
@@ -76,12 +71,11 @@ class SelectContractWalletAdapter(
     }
 
 
-    internal inner class SecondSectionSoodinowWalletAdapterViewHolder(itemView: View) :
-        RecyclerView.ViewHolder(itemView) {
+    internal inner class SecondSectionSoodinowWalletAdapterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: SelectContractWalletItem) {
 
             itemView.addInvestButton.setOnClickListener {
-                startInvestClickListener.onPositionClicked(position = 0, hostId = item.id,isFarabi = false)
+                startInvestClickListener.onPositionClicked(position = 0, hostId = item.id, isFarabi = false)
             }
             /*itemView.imageView4.setImageDrawable(
                 item.image ?: ContextCompat.getDrawable(
@@ -97,10 +91,9 @@ class SelectContractWalletAdapter(
             itemView.customSeekbar.currentValue = 43f
             /**
             weekly
-             */
+            */
             itemView.weeklyPercentValue.run {
-                itemView.weeklyConstraintLayout.visibility = if (item.id==-1) View.GONE else View.VISIBLE
-                item.weeklyValue?.let { value ->
+                item.weeklyValue?.let {value ->
                     /*if (value < 0 ) {
                         this.setTextColor(this.context.getColorByResId(R.color.red))
                     } else {
@@ -127,7 +120,6 @@ class SelectContractWalletAdapter(
             monthly
              */
             itemView.monthlyPercentValue.run {
-                itemView.monthlyConstraintLayout.visibility = if (item.id==-1) View.GONE else View.VISIBLE
                 item.monthlyValue?.let { value ->
                     /*if (value < 0) {
                         this.setTextColor(this.context.getColorByResId(R.color.red))
@@ -154,8 +146,7 @@ class SelectContractWalletAdapter(
             trimester
              */
             itemView.trimesterPercentValue.run {
-                itemView.trimesterConstraintLayout.visibility = if (item.id==-1) View.GONE else View.VISIBLE
-                item.trimesterValue?.let { value ->
+                item.trimesterValue?.let{ value ->
                     /*if ( value < 0 ) {
                         this.setTextColor(this.context.getColorByResId(R.color.red))
                     } else {
@@ -195,7 +186,7 @@ class SelectContractWalletAdapter(
 
         private fun slideUp(view: View) {
             val height = view.height
-            ObjectAnimator.ofFloat(view, "translationY", height.toFloat(), 0.toFloat()).apply {
+            ObjectAnimator.ofFloat(view, "translationY", height.toFloat(),0.toFloat()).apply {
                 duration = 1000
                 start()
             }
@@ -218,24 +209,10 @@ class SelectContractWalletAdapter(
 
         }
     }
+    interface StartInvestSoodinowClickListener {
+        fun onPositionClicked(position: Int, isFarabi: Boolean)
+
+    }
 }
 
-interface StartInvestClickListener {
-    fun onPositionClicked(position: Int,hostId: Int, isFarabi: Boolean)
 
-}
-
-open class SelectContractWalletRecyclerViewItem
-class SectionItem(val isFarabi: Boolean, val title: String, val description: String) :
-    SelectContractWalletRecyclerViewItem()
-
-class SelectContractWalletItem(
-    val id: Int,
-    val pointTitle: String,
-    val name: String,
-    val description: String,
-    val trimesterValue: Double?,
-    val monthlyValue: Double?,
-    val weeklyValue: Double?,
-    val image: Drawable?
-) : SelectContractWalletRecyclerViewItem()

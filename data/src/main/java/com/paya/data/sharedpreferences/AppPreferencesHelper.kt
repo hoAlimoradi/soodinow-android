@@ -92,6 +92,17 @@ class AppPreferencesHelper @Inject constructor(
         return Resource.success(GetAppLinkRepoModel(mPrefs.getString(PREF_KEY_APP_LINK,null) ?: ""),200)
 
     }
+
+    override fun setPreInvoiceId(uuid: String) {
+        mPrefs.edit()
+            .putString(PRE_INVOICE_ID, uuid)
+            .apply()
+    }
+
+    override fun getPreInvoiceId(): String {
+        return mPrefs.getString(PRE_INVOICE_ID,null) ?: ""
+    }
+
     companion object {
         private const val PREF_KEY_ACCESS_TOKEN: String = "PREF_KEY_ACCESS_TOKEN"
         private const val PREF_KEY_REFRESH_TOKEN: String = "PREF_KEY_REFRESH_TOKEN"
@@ -100,6 +111,7 @@ class AppPreferencesHelper @Inject constructor(
         private const val PREF_KEY_PASSWORD: String = "PREF_KEY_PASSWORD"
         private const val PREF_KEY_IV: String = "PREF_KEY_IV"
         private const val PREF_KEY_APP_LINK: String = "PREF_KEY_APP_LINK"
+        private const val PRE_INVOICE_ID: String = "PRE_INVOICE_ID"
     }
 
 }

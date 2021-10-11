@@ -5,11 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.tabs.TabLayout
+import com.paya.domain.models.repo.CashWithdrawRequestRepoModel
 import com.paya.domain.models.repo.InvestingInfoRepoModel
 import com.paya.domain.models.repo.PortalBankRepoModel
 import com.paya.domain.models.repo.WalletChargeRepoModel
@@ -51,7 +53,12 @@ class InvestWalletFragment : BaseFragment<InvestWalletViewModel>() {
         observe(mViewModel.investingInfoResource,::investingInfo)
         observe(mViewModel.bankPortalResource,::bankPortal)
         observe(mViewModel.chargeResource,::chargeReady)
+        observe(mViewModel.cashWithdrawRequestResource,::withdrawReady)
         mBinding?.apply {
+            inputPrice.setPrice("0")
+            toolbar.backClick = {
+                getFindViewController()?.popBackStack()
+            }
             managerAccountHistory.setOnClickListener {
                 findNavController().navigate(
                     R.id.financialReportFragment
@@ -60,10 +67,17 @@ class InvestWalletFragment : BaseFragment<InvestWalletViewModel>() {
 
 
             submitBtn.setOnClickListener {
+                if (inputPrice.getPriceLong() == 0L) {
+                    mViewModel.showError("مبلغ مورد نظر خود را وارد کنید")
+                    return@setOnClickListener
+                }
                 if (tabLayout.selectedTabPosition == 1) {
-                   mViewModel.charge(inputPrice.getPriceLong(),bankPortalAdapter?.selectionItem?:"")
+                    mViewModel.charge(
+                        inputPrice.getPriceLong(),
+                        bankPortalAdapter?.selectionItem ?: ""
+                    )
                 } else {
-
+                    mViewModel.withdraw(inputPrice.getPriceLong())
                 }
             }
             tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -122,6 +136,14 @@ class InvestWalletFragment : BaseFragment<InvestWalletViewModel>() {
             resource.data?.let {
                openUrl(it.link)
             }
+        }
+    }
+    private fun withdrawReady(resource: Resource<CashWithdrawRequestRepoModel>) {
+        if (resource.status == Status.SUCCESS){
+            mViewModel.getInvestingInfo()
+           context?.let {
+               Toast.makeText(it,"برداشت با موفقیت انجام شد",Toast.LENGTH_SHORT).show()
+           }
         }
     }
 

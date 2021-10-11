@@ -23,7 +23,7 @@ data class InvestingInfoDataRemoteModel(
 data class BalancesInfoDataRemoteModel(
     @SerializedName("free_balance") val freeBalance: Long?,
     @SerializedName("block_balance") val blockBalance: Long?,
-    @SerializedName("free_balance") val totalBalance: Long?,
+    @SerializedName("total_balance") val totalBalance: Long?,
 )
 data class HostInfoDataRemoteModel(
     @SerializedName("id") val id: Int?,

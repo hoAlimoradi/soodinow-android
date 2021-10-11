@@ -61,6 +61,12 @@ abstract class WalletModule {
             >
 
     @Binds
+    abstract fun bindWalletHostDetailRemoteRepoMapper(mapper: WalletHostDetailRemoteRepoMapper): Mapper<
+            WalletHostDetailRemoteModel,
+            WalletHostDetailRepoModel
+            >
+
+    @Binds
     abstract fun bindPortalBankRemoteRepoMapper(mapper: PortalBankRemoteRepoMapper): Mapper<
             @JvmSuppressWildcards List<PortalBankRemoteModel>,
             @JvmSuppressWildcards List<PortalBankRepoModel>
@@ -70,6 +76,18 @@ abstract class WalletModule {
     abstract fun bindInvestingInfoRemoteRepoMapper(mapper: InvestingInfoRemoteRepoMapper): Mapper<
             InvestingInfoRemoteModel,
             InvestingInfoRepoModel
+            >
+
+    @Binds
+    abstract fun bindPreInvoiceRemoteRepoMapper(mapper: PreInvoiceRemoteRepoMapper): Mapper<
+            PreInvoiceRemoteModel,
+            PreInvoiceRepoModel
+            >
+
+    @Binds
+    abstract fun bindCashWithdrawRequestRemoteRepoMapper(mapper: CashWithdrawRequestRemoteRepoMapper): Mapper<
+            String,
+            CashWithdrawRequestRepoModel
             >
 
     @Binds
@@ -97,6 +115,9 @@ abstract class WalletModule {
     abstract fun bindWalletHostListUseCase(useCase: WalletHostListUseCase): UseCase<Unit, @JvmSuppressWildcards List<WalletHostListRepoModel>>
 
     @Binds
+    abstract fun bindWalletHostDetailUseCase(useCase: WalletHostDetailUseCase): UseCase<Int, WalletHostDetailRepoModel>
+
+    @Binds
     abstract fun bindWalletChargeAddInventoryPriceListUseCase(useCase: WalletChargeAddInventoryPriceListUseCase): UseCase<Unit, @JvmSuppressWildcards List<AddInventoryPriceRepoModel>>
 
     @Binds
@@ -104,5 +125,15 @@ abstract class WalletModule {
 
     @Binds
     abstract fun bindInvestingInfoUseCase(useCase: InvestingInfoUseCase): UseCase<Unit, InvestingInfoRepoModel>
+
+    @Binds
+    abstract fun bindCashWithdrawRequestUseCase(useCase: CashWithdrawRequestUseCase): UseCase<Long, CashWithdrawRequestRepoModel>
+
+    @Binds
+    abstract fun bindGetPreInvoiceUseCase(useCase: GetPreInvoiceUseCase): UseCase<Unit, PreInvoiceRepoModel>
+
+    @Binds
+    abstract fun bindPreInvoiceUseCase(useCase: PreInvoiceUseCase): UseCase<PreInvoiceBodyRepoModel, PreInvoiceRepoModel>
+
 
 }

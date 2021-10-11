@@ -86,12 +86,12 @@
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/soodinow" />
+                    android:text="@string/farabi" />
 
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/farabi" />
+                    android:text="@string/soodinow" />
 
 
             </com.google.android.material.tabs.TabLayout>
