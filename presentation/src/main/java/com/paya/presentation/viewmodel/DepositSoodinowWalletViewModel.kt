@@ -86,7 +86,7 @@ class DepositSoodinowWalletViewModel @Inject constructor(
 
     private fun viewState() {
         if (getPreInvoiceLiveData.value?.status == Status.SUCCESS && walletValeLiveData.value?.status == Status.SUCCESS) {
-            chargeValue = if (walletValue >= investmentValue) 0 else walletValue - investmentValue
+            chargeValue = if (walletValue >= investmentValue) 0 else   investmentValue - walletValue
             viewState = if (chargeValue == 0L) 1 else 2
             viewStateLiveData.value = viewState
         }

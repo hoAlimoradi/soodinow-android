@@ -5,8 +5,10 @@ import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.paya.presentation.R
+import com.paya.presentation.utils.customSeekbar.CustomSeekbar
 import com.paya.presentation.utils.getDrawableByResId
 import com.paya.presentation.utils.gone
 import com.paya.presentation.utils.visible
@@ -94,12 +96,27 @@ class SelectContractWalletAdapter(
             itemView.soodinowPointName.text = item.name
             itemView.soodinowPointDescription.text = item.description
 
-            itemView.customSeekbar.currentValue = 43f
+            itemView.customSeekbar.currentValue = 100f
+            itemView.customSeekbar.addStep(
+                CustomSeekbar.Step(
+                    "صندوق",
+                    (item.fixIncome ?: 0.0f * 100).toFloat(),
+                    ContextCompat.getColor(itemView.context, R.color.green)
+                )
+            )
+            itemView.customSeekbar.addStep(
+                CustomSeekbar.Step(
+                    "سهام",
+                    (item.shaham ?: 0.0f * 100).toFloat(),
+                    ContextCompat.getColor(itemView.context, R.color.green_dark)
+                )
+            )
             /**
             weekly
              */
             itemView.weeklyPercentValue.run {
-                itemView.weeklyConstraintLayout.visibility = if (item.id==-1) View.GONE else View.VISIBLE
+                itemView.weeklyConstraintLayout.visibility =
+                    if (item.id == -1) View.GONE else View.VISIBLE
                 item.weeklyValue?.let { value ->
                     /*if (value < 0 ) {
                         this.setTextColor(this.context.getColorByResId(R.color.red))
@@ -237,5 +254,7 @@ class SelectContractWalletItem(
     val trimesterValue: Double?,
     val monthlyValue: Double?,
     val weeklyValue: Double?,
+    val fixIncome: Float?,
+    val shaham: Float?,
     val image: Drawable?
 ) : SelectContractWalletRecyclerViewItem()

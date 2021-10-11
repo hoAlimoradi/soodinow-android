@@ -22,10 +22,8 @@ import com.paya.presentation.utils.observe
 import com.paya.presentation.utils.openUrl
 import com.paya.presentation.viewmodel.DepositSoodinowWalletViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_investl_wallet.*
-import kotlinx.android.synthetic.main.popup_linear_chart.view.*
 
-const val HOST_ID = "hostId"
+
 @AndroidEntryPoint
 class DepositSoodinowWalletFragment : BaseFragment<DepositSoodinowWalletViewModel>() {
     private val mViewModel: DepositSoodinowWalletViewModel by viewModels()
@@ -117,10 +115,13 @@ class DepositSoodinowWalletFragment : BaseFragment<DepositSoodinowWalletViewMode
         }
     }
     private fun buyReady(resource: Resource<WalletBuyRepoModel>) {
-        if (resource.status == Status.SUCCESS){
-            resource.message?.let {
-               Toast.makeText(context,it,Toast.LENGTH_SHORT).show()
-            }
+        if (resource.status == Status.SUCCESS) {
+
+            Toast.makeText(context, "سرمایه گذاری شما با موفقیت انجام شد", Toast.LENGTH_SHORT)
+                .show()
+            findNavController().navigate(
+                DepositSoodinowWalletFragmentDirections.navigateToHomeFragment()
+            )
         }
     }
     private fun viewStateReady(state: Int) {

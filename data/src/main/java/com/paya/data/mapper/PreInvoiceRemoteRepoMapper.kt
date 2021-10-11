@@ -13,8 +13,8 @@ class PreInvoiceRemoteRepoMapper @Inject constructor() : Mapper<
     override fun map(param: PreInvoiceRemoteModel): PreInvoiceRepoModel {
         return PreInvoiceRepoModel(
             param.uuid ?: "",
-            param.hostId?:-1,
-            param.price ?: 0L
+            param.hostId?.let { it[0].toInt() } ?: -1,
+            param.price?.let { it[0].toLong() } ?: 0L
         )
     }
 

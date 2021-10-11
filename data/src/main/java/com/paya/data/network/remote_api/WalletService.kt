@@ -7,7 +7,7 @@ import retrofit2.http.*
 interface WalletService {
 
     @FormUrlEncoded
-    @POST("investment/low_invest")
+    @POST("investment/low_invest/")
     suspend fun buyWallet(
         @Field("investment_value") investmentValue: Long,
         @Field("investment_host_id") hostId: Int
@@ -51,15 +51,16 @@ interface WalletService {
     @GET("investment/hosts")
     suspend fun hostList(): ApiResponse<BaseModel<List<WalletHostListRemoteModel>>>
 
-    @GET("investment/hosts/{host_id}/")
+    @GET("investment/host_info/{host_id}/")
     suspend fun hostDetail(@Path("host_id") hostId: Int): ApiResponse<BaseModel<WalletHostDetailRemoteModel>>
 
     @GET("investment/investing_info")
     suspend fun investingInfo(): ApiResponse<BaseModel<InvestingInfoRemoteModel>>
 
-    @GET("investment/pre_invoice/<UUID>/")
+    @GET("investment/pre_invoice/{UUID}/")
     suspend fun getPreInvoice(@Path("UUID") uuid: String): ApiResponse<BaseModel<PreInvoiceRemoteModel>>
 
-    @GET("investment/pre_invoice/")
+    @FormUrlEncoded
+    @POST("investment/pre_invoice/")
     suspend fun preInvoice(@Field("host_id") hostId: Int,@Field("price") amount: Long): ApiResponse<BaseModel<PreInvoiceRemoteModel>>
 }

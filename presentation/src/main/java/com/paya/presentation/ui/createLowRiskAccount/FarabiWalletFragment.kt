@@ -46,6 +46,8 @@ class FarabiWalletFragment: BaseFragment<CreateLowRiskAccountViewModel>(),
             trimesterValue = null,
             monthlyValue = 1.61,
             weeklyValue = 0.32,
+            fixIncome = 0.0F,
+            shaham = 0.0F,
             image = context?.let { context -> ContextCompat.getDrawable(context,R.drawable.investment) }
         )
         var list: List<SelectContractWalletRecyclerViewItem> = listOf(SectionItem(isFarabi = true, title = "ویژگی فارابی", description = "استفاده از سرمایه گذاری در کارگزاری"), soodinowWalletContractRepoModel)

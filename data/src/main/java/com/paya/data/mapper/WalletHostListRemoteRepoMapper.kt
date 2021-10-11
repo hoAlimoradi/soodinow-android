@@ -21,11 +21,11 @@ class WalletHostListRemoteRepoMapper @Inject constructor() : Mapper<
                 it.descriptionTitle ?: "",
                 it.descriptionBody ?: "",
                 it.accessLevel ?: "",
-                it.fromRisk ?: 0,
-                it.toRisk ?: 0,
+                it.fromRisk ?: 0.0,
+                it.toRisk ?: 0.0,
                 it.properties ?: emptyList(),
-                it.basket?.let { basket -> BasketHostsRepoModel(basket.fixIncome ?: 0.0) }
-                    ?: BasketHostsRepoModel(0.0),
+                it.basket?.let { basket -> BasketHostsRepoModel(basket.fixIncome ?: 0.0,basket.gold?:0.0,basket.sahami?:0.0) }
+                    ?: BasketHostsRepoModel(0.0,0.0,0.0),
                 it.efficiency?.let { efficiency ->
                     EfficiencyHostListRepoModel(
                         efficiency.week?.let { week ->

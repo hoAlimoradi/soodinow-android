@@ -13,7 +13,7 @@ plugins {
 }
 
 android {
-	compileSdkVersion(31)
+	compileSdkVersion(30)
 	buildToolsVersion = "30.0.1"
 
 

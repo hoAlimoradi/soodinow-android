@@ -50,6 +50,8 @@ class SoodinowWalletFragment : BaseFragment<SoodinowWalletViewModel>(), StartInv
                         data.efficiency.threeMonth.percent,
                         data.efficiency.month.percent,
                         data.efficiency.week.percent,
+                        data.basket.fixIncome.toFloat(),
+                        data.basket.sahami.toFloat(),
                         context?.let { context -> ContextCompat.getDrawable(context,R.drawable.ic_image_wallet) }?:null
                     )
                 }
@@ -81,8 +83,11 @@ class SoodinowWalletFragment : BaseFragment<SoodinowWalletViewModel>(), StartInv
 
         }else {
             getFindViewController()?.navigateUp()
+            var bundle = Bundle()
+            bundle.putInt(HOST_ID,hostId)
             getFindViewController()?.navigate(
-                R.id.openSoodinowAutomaticInvestmentAccountFragment
+                R.id.openSoodinowAutomaticInvestmentAccountFragment,
+                bundle
             )
         }
     }

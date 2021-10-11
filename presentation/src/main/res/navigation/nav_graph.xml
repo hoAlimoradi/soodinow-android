@@ -252,7 +252,12 @@
         android:name="com.paya.presentation.ui.createLowRiskAccount.DepositSoodinowWalletFragment"
         android:label="fragment_wallet_soodinow_deposit"
         tools:layout="@layout/fragment_wallet_soodinow_deposit">
-
+        <action
+            android:id="@+id/navigateToHomeFragment"
+            app:destination="@id/mainFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/navGraph"
+            app:popUpToInclusive="true" />
     </fragment>
 
 

@@ -65,31 +65,23 @@
             app:layout_constraintHorizontal_bias="0.666"
             app:layout_constraintStart_toStartOf="parent">
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/amountRequiredValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_l"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:background="@android:color/transparent"
                 android:layout_marginEnd="@dimen/margin_m"
-                android:layout_marginBottom="@dimen/margin_l"
-                android:text="مبلغ دلخواه"
+                android:hint="مبلغ دلخواه"
+                android:inputType="number"
                 android:textColor="@color/black"
+                android:paddingHorizontal="@dimen/margin_m"
                 android:textSize="@dimen/text_size_m"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_m"
-                android:gravity="center"
-                android:text="(به تومان)"
-                android:textColor="@color/emperor"
-                android:textSize="@dimen/text_size_xs"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/amountRequiredValue"
-                app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.appcompat.widget.AppCompatTextView

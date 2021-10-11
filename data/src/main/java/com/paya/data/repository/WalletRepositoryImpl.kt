@@ -2,7 +2,6 @@ package com.paya.data.repository
 
 import android.util.Log
 import com.paya.common.Mapper
-import com.paya.data.mapper.CashWithdrawRequestRemoteRepoMapper
 import com.paya.data.network.apiresponse.ApiSuccessResponse
 import com.paya.data.network.remote_api.WalletService
 import com.paya.data.sharedpreferences.PreferenceHelper
@@ -11,6 +10,7 @@ import com.paya.domain.models.remote.*
 import com.paya.domain.models.repo.*
 import com.paya.domain.repository.WalletRepository
 import com.paya.domain.tools.Resource
+import java.lang.Exception
 import javax.inject.Inject
 
 class WalletRepositoryImpl @Inject constructor(
@@ -22,8 +22,8 @@ class WalletRepositoryImpl @Inject constructor(
     private val walletPortfolioRemoteRepoMapper: Mapper<WalletPortfolioRemoteModel, WalletPortfolioRepoModel>,
     private val walletValueRemoteRepoMapper: Mapper<WalletValueRemoteModel, WalletValueRepoModel>,
     private val investingInfoRemoteRepoMapper: Mapper<InvestingInfoRemoteModel, InvestingInfoRepoModel>,
-    private val cashWithdrawRequestRemoteRepoMapper: Mapper<String,CashWithdrawRequestRepoModel>,
-    private val preInvoiceRemoteRepoMapper: Mapper<PreInvoiceRemoteModel,PreInvoiceRepoModel>,
+    private val cashWithdrawRequestRemoteRepoMapper: Mapper<String, CashWithdrawRequestRepoModel>,
+    private val preInvoiceRemoteRepoMapper: Mapper<PreInvoiceRemoteModel, PreInvoiceRepoModel>,
     private val walletHostListRemoteRepoMapper: Mapper<@JvmSuppressWildcards List<WalletHostListRemoteModel>, @JvmSuppressWildcards List<WalletHostListRepoModel>>,
     private val walletHostDetailRemoteRepoMapper: Mapper<WalletHostDetailRemoteModel, WalletHostDetailRepoModel>,
     private val bankPortalRemoteRepoMapper: Mapper<@JvmSuppressWildcards List<PortalBankRemoteModel>, @JvmSuppressWildcards List<PortalBankRepoModel>>,
@@ -60,9 +60,12 @@ class WalletRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun withdrawRequest(id: Int,sell:Long): Resource<WalletWithdrawRequestRepoModel> {
+    override suspend fun withdrawRequest(
+        id: Int,
+        sell: Long
+    ): Resource<WalletWithdrawRequestRepoModel> {
         return getResourceFromApiResponse(
-            walletService.withdrawRequest(id,sell)
+            walletService.withdrawRequest(id, sell)
         ) {
             walletWithdrawRequestRemoteRepoMapper.map(it.data)
         }
@@ -93,11 +96,6 @@ class WalletRepositoryImpl @Inject constructor(
     }
 
     override suspend fun hostList(): Resource<List<WalletHostListRepoModel>> {
-        try{
-            walletService.hostList()
-        } catch (e:Exception) {
-            Log.e("sdklsdjksdksa",e.message,e)
-        }
         return getResourceFromApiResponse(
             walletService.hostList()
         ) {
@@ -122,12 +120,12 @@ class WalletRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getAddInventoryPriceList(): Resource<List<AddInventoryPriceRepoModel>> {
-        val first = AddInventoryPriceRepoModel(name = "100 تومان", price = 100F)
-        val second = AddInventoryPriceRepoModel(name = "250 تومان", price = 100F)
-        val third = AddInventoryPriceRepoModel(name = "500 تومان", price = 100F)
-        val fourth = AddInventoryPriceRepoModel(name = "100 تومان", price = 100F)
-        val fifth = AddInventoryPriceRepoModel(name = "100 تومان", price = 100F)
-        val sixth = AddInventoryPriceRepoModel(name = "100 تومان", price = 100F)
+        val first = AddInventoryPriceRepoModel(name = "100 تومان", price = 100L)
+        val second = AddInventoryPriceRepoModel(name = "250 تومان", price = 100L)
+        val third = AddInventoryPriceRepoModel(name = "500 تومان", price = 100L)
+        val fourth = AddInventoryPriceRepoModel(name = "100 تومان", price = 100L)
+        val fifth = AddInventoryPriceRepoModel(name = "100 تومان", price = 100L)
+        val sixth = AddInventoryPriceRepoModel(name = "100 تومان", price = 100L)
         val list = listOf<AddInventoryPriceRepoModel>(first, second, third, fourth, fifth, sixth)
         return Resource.success(list, 200)
     }
@@ -144,13 +142,15 @@ class WalletRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun preInvoice(hostId:Int,price: Long): Resource<PreInvoiceRepoModel> {
-        val preInvoice = walletService.preInvoice(hostId,price)
+    override suspend fun preInvoice(hostId: Int, price: Long): Resource<PreInvoiceRepoModel> {
+
+        val preInvoice = walletService.preInvoice(hostId, price)
         if (preInvoice is ApiSuccessResponse) {
             preInvoice.body.data.uuid?.let { preferenceHelper.setPreInvoiceId(it) }
         }
         return getResourceFromApiResponse(preInvoice) {
             preInvoiceRemoteRepoMapper.map(it.data)
         }
+
     }
 }
