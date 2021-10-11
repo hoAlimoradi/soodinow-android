@@ -68,13 +68,12 @@ class RiskAssessmentQuestionsFragment : BaseFragment<RiskAssessmentViewModel>() 
         assessYourRiskNext.setOnClickListener {
             getFindViewController()?.navigateUp()
             getFindViewController()?.navigate(R.id.riskAssessmentConfirm)
-
         }
     }
 
     override fun onResume() {
         super.onResume()
-        //viewModel.getRiskAssessmentQuestions()
+        viewModel.getRiskAssessmentQuestions()
     }
 
     private fun onDataReady(resource: Resource<RiskAssessmentResponseRemoteModel>){
@@ -83,12 +82,12 @@ class RiskAssessmentQuestionsFragment : BaseFragment<RiskAssessmentViewModel>() 
             Status.SUCCESS -> resource.data?.let { riskAssessmentResponseRemoteModel ->
 
                 for (i in 1..riskAssessmentResponseRemoteModel.count) {
-                    riskAssessmentQuestionFragments.add(RiskAssessmentQuestionFragment())
+                    riskAssessmentQuestionFragments.add(RiskAssessmentQuestionFragment.newInstance(i))
                 }
 
                 viewPagerAdapter = RiskAssessmentQuestionsFragmentViewPagerAdapter(requireContext(), childFragmentManager,  riskAssessmentQuestionFragments )
                 assessYourRiskQuestionsViewPager.adapter = viewPagerAdapter
-                assessYourRiskQuestionsViewPager.offscreenPageLimit = 2
+                //assessYourRiskQuestionsViewPager.offscreenPageLimit = 2
                 loge( " riskAssessmentQuestionFragments  size " + riskAssessmentQuestionFragments.size   )
                 loge( " riskAssessmentPages.questionCount " + riskAssessmentResponseRemoteModel.count   )
             }
