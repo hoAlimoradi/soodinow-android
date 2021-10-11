@@ -20,6 +20,7 @@ import com.paya.presentation.R
 import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.FragmentHomeBinding
+//import com.paya.presentation.databinding.FragmentHomeBinding
 import com.paya.presentation.ui.cardAccount.NewCardAccountFragment
 import com.paya.presentation.ui.createPersonalAccount.FirstInformationFragment
 import com.paya.presentation.ui.home.adapter.MarketAdapter

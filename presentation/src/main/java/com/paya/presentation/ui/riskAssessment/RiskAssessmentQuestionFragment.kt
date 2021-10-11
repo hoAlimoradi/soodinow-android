@@ -40,14 +40,15 @@ class RiskAssessmentQuestionFragment: BaseFragment<RiskAssessmentViewModel>() {
         observe(viewModel.riskAssessmentPagesLiveData, ::onDataReady)
 
         viewModel.assessYourRiskQuestionsViewPagerCurrentPageLiveData.observe(viewLifecycleOwner, Observer {
-            //testCounter.text = it.toString()
+            loge( "assessYourRiskQuestionsViewPagerCurrentPageLiveData " + it   )
+
         })
 
     }
 
     override fun onResume() {
         super.onResume()
-        viewModel.getRiskAssessmentQuestions()
+        //viewModel.getRiskAssessmentQuestions()
     }
 
     private fun onDataReady(resource: Resource<RiskAssessmentResponseRemoteModel>){
@@ -58,16 +59,23 @@ class RiskAssessmentQuestionFragment: BaseFragment<RiskAssessmentViewModel>() {
                 /*adapter = CreateLowRiskAccountFragmentAdapter(requireContext(),childFragmentManager, riskAssessmentResponseRemoteModel.count )
                 assessYourRiskQuestionsViewPager.adapter = adapter
                 assessYourRiskQuestionsViewPager.offscreenPageLimit = 2*/
+                viewModel.assessYourRiskQuestionsViewPagerCurrentPageLiveData.observe(viewLifecycleOwner, Observer { pageNumber ->
+
+
+                })
+
                 val riskAssessmentQuestionRemotes = riskAssessmentResponseRemoteModel.pages[0].questions
-                val layoutManager =
-                    LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+                /*loge( " riskAssessmentPages. pageNumber " + pageNumber   )
+                loge( " riskAssessmentPages.questionCount " + riskAssessmentQuestionRemotes.size   )*/
+                val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
                 //layoutManager.reverseLayout = true
                 riskAssessmentQuestionFragmentRecycleViewAdapter = RiskAssessmentQuestionFragmentRecycleViewAdapter(riskAssessmentQuestionRemotes)
                 riskAssessmentQuestionFragmentRecycleViewAdapter?.let {
                     riskAssessmentQuestionFragmentRecycleView.adapter = it
                 }
                 riskAssessmentQuestionFragmentRecycleView.layoutManager = layoutManager
-                loge( " riskAssessmentPages.questionCount " + riskAssessmentResponseRemoteModel.count   )
+
+
             }
             else -> return
         }

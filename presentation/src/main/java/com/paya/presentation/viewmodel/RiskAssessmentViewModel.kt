@@ -29,10 +29,16 @@ class RiskAssessmentViewModel @Inject constructor(
         }
     }
 
-/*    fun plusAssessYourRiskQuestionsViewPagerCurrentPage() {
+    fun setAssessYourRiskQuestionsViewPagerCurrentPage(currentPosition: Int) {
         viewModelScope.launch {
-            //showLoading()
-            val response = callResource(this@RiskAssessmentViewModel,getRiskAssessmentQuestionsUseCase.action(Unit))
+            assessYourRiskQuestionsViewPagerCurrentPageLiveData.postValue(currentPosition)
+        }
+    }
+
+    /*fun plusAssessYourRiskQuestionsViewPagerCurrentPage() {
+        viewModelScope.launch {
+
+
             riskAssessmentPagesLiveData.postValue(response)
             //hideLoading()
         }

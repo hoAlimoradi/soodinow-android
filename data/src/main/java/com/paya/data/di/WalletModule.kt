@@ -87,5 +87,7 @@ abstract class WalletModule {
     @Binds
     abstract fun bindWalletHostListUseCase(useCase: WalletHostListUseCase): UseCase<Unit, @JvmSuppressWildcards List<WalletHostListRepoModel>>
 
+    @Binds
+    abstract fun bindWalletChargeAddInventoryPriceListUseCase(useCase: WalletChargeAddInventoryPriceListUseCase): UseCase<Unit, @JvmSuppressWildcards List<AddInventoryPriceRepoModel>>
 
 }

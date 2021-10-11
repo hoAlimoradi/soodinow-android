@@ -17,7 +17,7 @@ class RiskAssessmentRepositoryImpl @Inject constructor(
 ): RiskAssessmentRepository {
     override suspend fun getRiskAssessmentQuestions(): Resource<RiskAssessmentResponseRemoteModel> {
         val jsonFileString = getJsonDataFromAsset(context, "risk_assessment_mock_response.json")
-        Log.e("data", "  $jsonFileString")
+        //Log.e("data", "  $jsonFileString")
 
         val gson = Gson()
         val riskAssessmentPagesType = object : TypeToken<RiskAssessmentResponseRemoteModel>() {}.type

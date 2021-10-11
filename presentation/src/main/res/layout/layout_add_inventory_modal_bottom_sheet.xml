@@ -4,15 +4,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/addInventoryBottomSheetDialogFragmentConstraintLayout"
+    android:background="@android:color/transparent"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+>
 
 
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/bg_chart_line_gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,9 +27,10 @@
             android:id="@+id/titleConstraintLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/margin_xl"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/shadow_gray_dark_with_gray_border"
+
+            android:layout_marginBottom="@dimen/margin_l"
+            android:background="@drawable/shadow_gray_f2f2f2_with_gray_dedede_border"
+            app:layout_constraintBottom_toTopOf="@+id/addInventoryRecyclerView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -37,13 +40,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_l"
-                android:layout_marginEnd="@dimen/margin_m"
                 android:layout_marginBottom="@dimen/margin_l"
                 android:text="مبلغ دلخواه"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_m"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -55,10 +58,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/margin_xl"
+            android:layout_marginBottom="@dimen/margin_l"
             android:background="@drawable/shadow_gray_dark_with_gray_border"
+            app:layout_constraintBottom_toTopOf="@+id/amountRequiredTitle"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+            app:layout_constraintHorizontal_bias="0.666"
+            app:layout_constraintStart_toStartOf="parent">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/amountRequiredValue"
@@ -92,16 +97,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/margin_xl"
+            android:layout_marginBottom="@dimen/margin_l"
             android:textColor="@color/oslo_gray"
             android:textSize="@dimen/text_size_s"
             android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/nextButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/amountRequiredValueConstraintLayout"
-            tools:text="حداقل سرمایه گذاری در این پیمان 100.000 هزار تومان می باشد" />
+            android:text="حداقل سرمایه گذاری در این پیمان 100.000 هزار تومان می باشد" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/thirdButton"
+            android:id="@+id/nextButton"
             android:layout_width="243dp"
             android:layout_height="36dp"
             android:layout_margin="@dimen/margin_l"
@@ -113,15 +119,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout2"
-            android:layout_width="333dp"
-            android:layout_height="181dp"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/addInventoryRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layoutDirection="rtl"
+            tools:itemCount="6"
+            tools:listitem="@layout/row_add_inventory"
+            android:layout_marginBottom="@dimen/margin_l"
+            app:layout_constraintBottom_toTopOf="@+id/amountRequiredValueConstraintLayout"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/titleConstraintLayout">
+            app:layout_constraintStart_toStartOf="parent">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.recyclerview.widget.RecyclerView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,10 +1,11 @@
 package com.paya.presentation.ui.riskAssessment
 
-import com.paya.presentation.viewmodel.RiskAssessmentViewModel
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.paya.domain.models.remote.RiskAssessmentResponseRemoteModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
@@ -14,8 +15,10 @@ import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.ui.riskAssessment.adapter.RiskAssessmentQuestionsFragmentViewPagerAdapter
 import com.paya.presentation.utils.loge
 import com.paya.presentation.utils.observe
+import com.paya.presentation.viewmodel.RiskAssessmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_questions_risk_assessment.*
+
 
 @AndroidEntryPoint
 class RiskAssessmentQuestionsFragment : BaseFragment<RiskAssessmentViewModel>() {
@@ -38,6 +41,22 @@ class RiskAssessmentQuestionsFragment : BaseFragment<RiskAssessmentViewModel>() 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        assessYourRiskQuestionsViewPager.addOnPageChangeListener(object : OnPageChangeListener {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+            }
+
+            override fun onPageSelected(position: Int) {
+                 Log.i(""," log setAssessYourRiskQuestionsViewPagerCurrentPage " + position)
+                 viewModel.setAssessYourRiskQuestionsViewPagerCurrentPage(position)
+            }
+
+            override fun onPageScrollStateChanged(state: Int) {}
+        })
+
         observe(viewModel.riskAssessmentPagesLiveData, ::onDataReady)
         assessYourRiskPrevious.setOnClickListener {
             if (currentPage == 0) {
@@ -55,7 +74,7 @@ class RiskAssessmentQuestionsFragment : BaseFragment<RiskAssessmentViewModel>() 
 
     override fun onResume() {
         super.onResume()
-        viewModel.getRiskAssessmentQuestions()
+        //viewModel.getRiskAssessmentQuestions()
     }
 
     private fun onDataReady(resource: Resource<RiskAssessmentResponseRemoteModel>){

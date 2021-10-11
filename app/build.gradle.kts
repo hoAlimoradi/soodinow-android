@@ -16,6 +16,9 @@ android {
     compileSdkVersion(30)
     buildToolsVersion = "30.0.1"
 
+  /*  compileSdkVersion(31)
+    buildToolsVersion = "31.0.0-rc4"*/
+
     /*applicationVariants.all {
         val variant = this
         variant.outputs
@@ -48,6 +51,7 @@ android {
         applicationId = "com.paya.soodinow"
         minSdkVersion(21)
         targetSdkVersion(30)
+        //targetSdkVersion(31)
         versionCode = 5
         versionName = "1.1.2"
 

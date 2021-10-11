@@ -37,15 +37,15 @@ class RiskAssessmentConfirmFragment : BaseFragment<RiskAssessmentViewModel>() {
         assessYourRiskIWillTryAgain.setOnClickListener {
             findNavController().popBackStack()
         }
-        observe(viewModel.riskAssessmentPagesLiveData, ::onDataReady)
+       // observe(viewModel.riskAssessmentPagesLiveData, ::onDataReady)
     }
 
     override fun onResume() {
         super.onResume()
-        viewModel.getRiskAssessmentQuestions()
+       // viewModel.getRiskAssessmentQuestions()
     }
 
-    private fun onDataReady(resource: Resource<RiskAssessmentResponseRemoteModel>){
+    /*private fun onDataReady(resource: Resource<RiskAssessmentResponseRemoteModel>){
 
         when (resource.status) {
             Status.SUCCESS -> resource.data?.let { riskAssessmentResponseRemoteModel ->
@@ -54,7 +54,7 @@ class RiskAssessmentConfirmFragment : BaseFragment<RiskAssessmentViewModel>() {
             }
             else -> return
         }
-    }
+    }*/
 
     override val baseViewModel: BaseViewModel
         get() = viewModel

@@ -90,4 +90,15 @@ class WalletRepositoryImpl @Inject constructor(
             investingInfoRemoteRepoMapper.map(it.data)
         }
     }
+
+    override suspend fun getAddInventoryPriceList(): Resource<List<AddInventoryPriceRepoModel>> {
+        val first = AddInventoryPriceRepoModel(name = "100 تومان", price = 100F)
+        val second = AddInventoryPriceRepoModel(name = "250 تومان", price = 100F)
+        val third = AddInventoryPriceRepoModel(name = "500 تومان", price = 100F)
+        val fourth = AddInventoryPriceRepoModel(name = "100 تومان", price = 100F)
+        val fifth = AddInventoryPriceRepoModel(name = "100 تومان", price = 100F)
+        val sixth = AddInventoryPriceRepoModel(name = "100 تومان", price = 100F)
+        val list = listOf<AddInventoryPriceRepoModel>(first, second, third, fourth, fifth, sixth)
+        return Resource.success(list, 200)
+    }
 }

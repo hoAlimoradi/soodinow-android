@@ -59,7 +59,7 @@ class RiskAssessmentStartFragment : BaseFragment<RiskAssessmentViewModel>() {
         when (resource.status) {
             Status.SUCCESS -> resource.data?.let { riskAssessmentResponseRemoteModel ->
 
-                loge( " riskAssessmentPages.questionCount " + riskAssessmentResponseRemoteModel.count   )
+                loge( " riskAssessmentPages.questionCount  onDataReady" + riskAssessmentResponseRemoteModel.count   )
             }
             else -> return
         }

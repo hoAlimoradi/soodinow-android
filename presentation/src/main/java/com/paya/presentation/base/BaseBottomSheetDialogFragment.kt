@@ -1,21 +1,15 @@
 package com.paya.presentation.base
-
-import android.app.Activity
 import android.os.Bundle
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.NavController
-import androidx.navigation.findNavController
-import com.paya.presentation.R
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.paya.presentation.ui.errorDoalog.ErrorDialog
 import com.paya.presentation.ui.errorDoalog.ErrorDialogModel
 import com.paya.presentation.ui.loading.LoadingDialog
 import com.paya.presentation.utils.observe
 
-abstract class BaseDialogFragment<VM : BaseViewModel> : DialogFragment() {
+abstract class BaseBottomSheetDialogFragment <VM : BaseViewModel>: BottomSheetDialogFragment(){
     abstract val baseViewModel: BaseViewModel
     private var errorDialog: ErrorDialog? = null
     private var loadingDialog: LoadingDialog? = null
@@ -31,27 +25,9 @@ abstract class BaseDialogFragment<VM : BaseViewModel> : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        observe(baseViewModel.unAuthorizeLiveData, ::unAuthorized)
         observe(baseViewModel.errorLiveData, ::readyError)
         observe(baseViewModel.unLoading, ::readyLoading)
-        observe(baseViewModel.unExistProfileUser, ::existProfile)
-
     }
-
-    private fun unAuthorized(message: String) {
-        activity?.findNavController(R.id.nav_host_fragment)?.navigate(
-            R.id.actionUnAuthorized
-        )
-    }
-    private fun existProfile(param: Unit) {
-        activity?.findNavController(R.id.nav_host_fragment)?.navigate(
-            R.id.firstInformation
-        )
-    }
-    fun getFindViewController(): NavController? {
-        return activity?.findNavController(R.id.nav_host_fragment)
-    }
-
 
     private fun readyError(error: ErrorDialogModel) {
         if (errorDialog == null)
@@ -59,7 +35,7 @@ abstract class BaseDialogFragment<VM : BaseViewModel> : DialogFragment() {
         errorDialog?.apply {
             if (!isShowing()) {
                 setMessage(error = error)
-                show(this@BaseDialogFragment.childFragmentManager, "errorTag")
+                show(this@BaseBottomSheetDialogFragment.childFragmentManager, "errorTag")
             }
             onDismiss = {
                 if (!isShowing())
@@ -77,25 +53,13 @@ abstract class BaseDialogFragment<VM : BaseViewModel> : DialogFragment() {
                     loadingDialog = null
             }
             if (isLoading) {
-                it.show(this@BaseDialogFragment.childFragmentManager, "loading dialog")
+                it.show(this@BaseBottomSheetDialogFragment.childFragmentManager, "loading dialog")
             } else {
                 if (it.isShowing())
                     it.dismissAllowingStateLoss()
             }
         }
     }
-
-    var resultLauncher =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode === Activity.RESULT_OK) {
-                farabiAccessToken()
-            }
-        }
-
-    open fun farabiAccessToken() {
-
-    }
-
     override fun onDestroyView() {
         errorDialog?.apply {
             dialog?.let {
