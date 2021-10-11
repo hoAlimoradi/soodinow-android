@@ -19,6 +19,7 @@ class WalletRepositoryImpl @Inject constructor(
     private val walletValueRemoteRepoMapper: Mapper<WalletValueRemoteModel, WalletValueRepoModel>,
     private val investingInfoRemoteRepoMapper: Mapper<InvestingInfoRemoteModel, InvestingInfoRepoModel>,
     private val walletHostListRemoteRepoMapper: Mapper<@JvmSuppressWildcards List<WalletHostListRemoteModel>, @JvmSuppressWildcards List<WalletHostListRepoModel>> ,
+    private val bankPortalRemoteRepoMapper: Mapper<@JvmSuppressWildcards List<PortalBankRemoteModel>, @JvmSuppressWildcards List<PortalBankRepoModel>> ,
 ) : WalletRepository {
     override suspend fun buyWallet(
         investmentValue: Long,
@@ -51,9 +52,9 @@ class WalletRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun withdrawRequest(id: Int): Resource<WalletWithdrawRequestRepoModel> {
+    override suspend fun withdrawRequest(id: Int,sell:Long): Resource<WalletWithdrawRequestRepoModel> {
         return getResourceFromApiResponse(
-            walletService.withdrawRequest(id)
+            walletService.withdrawRequest(id,sell)
         ) {
             walletWithdrawRequestRemoteRepoMapper.map(it.data)
         }
@@ -100,5 +101,11 @@ class WalletRepositoryImpl @Inject constructor(
         val sixth = AddInventoryPriceRepoModel(name = "100 تومان", price = 100F)
         val list = listOf<AddInventoryPriceRepoModel>(first, second, third, fourth, fifth, sixth)
         return Resource.success(list, 200)
+    }
+
+    override suspend fun bankPortals(): Resource<List<PortalBankRepoModel>> {
+        return getResourceFromApiResponse(walletService.bankPortals()) {
+            bankPortalRemoteRepoMapper.map(it.data)
+        }
     }
 }

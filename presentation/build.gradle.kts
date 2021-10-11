@@ -108,6 +108,7 @@ dependencies {
 	implementation ("com.google.android:flexbox:2.0.1")
 	implementation ("io.sentry:sentry-android:${Dependencies.Versions.SENTRY}")
 	implementation ("androidx.biometric:biometric:${Dependencies.Versions.BIOMETRIC}")
-	
+	implementation ("com.github.bumptech.glide:glide:${Dependencies.Versions.GLIDE}")
+	annotationProcessor ("com.github.bumptech.glide:compiler:${Dependencies.Versions.GLIDE}")
 	implementation(project(Dependencies.Modules.DOMAIN))
 }

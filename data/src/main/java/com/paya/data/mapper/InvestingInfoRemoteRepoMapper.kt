@@ -19,7 +19,11 @@ class InvestingInfoRemoteRepoMapper @Inject constructor() : Mapper<
                     convertData(data)
                 }
             } ?: emptyList(),
-            param.walletData?.let { convertData(it) } ?: emptyData()
+            param.walletData?.let { convertData(it) } ?: emptyData(),
+            param.totalFreeMoney ?: 0L,
+            param.totalBlockMoney ?: 0L,
+            param.totalMoney ?: 0L,
+            param.totalProfit ?: 0L,
         )
     }
 
@@ -45,7 +49,7 @@ class InvestingInfoRemoteRepoMapper @Inject constructor() : Mapper<
             "",
             0,
             "",
-            "",
+            ""
         )
     }
 

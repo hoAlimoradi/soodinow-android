@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    tools:context=".ui.cashManager.CashManagerFragment">
+
+    <com.paya.presentation.utils.toolbar.ToolbarPublic
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/topCard"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="@dimen/margin_l"
+                android:layout_marginTop="@dimen/margin_very_small"
+                android:background="@drawable/ic_cards"
+                android:maxHeight="180dp"
+                app:layout_constraintDimensionRatio="H,2:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/logoImage"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_marginTop="@dimen/margin_m"
+                android:layout_marginEnd="@dimen/margin_l"
+                android:scaleType="center"
+                android:src="@drawable/ic_logo_white"
+                app:layout_constraintEnd_toEndOf="@id/topCard"
+                app:layout_constraintTop_toTopOf="@id/topCard" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="دارایی من"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_s"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/walletValue"
+                app:layout_constraintEnd_toEndOf="@id/walletValue"
+                app:layout_constraintTop_toTopOf="@id/topCard"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/walletValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                app:layout_constraintBottom_toTopOf="@id/walletCurrency"
+                app:layout_constraintEnd_toEndOf="@id/topCard"
+                app:layout_constraintStart_toStartOf="@id/topCard"
+                app:layout_constraintTop_toBottomOf="@id/title"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="10.856.000" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/walletCurrency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/toman"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_s"
+                app:layout_constraintBottom_toBottomOf="@id/topCard"
+                app:layout_constraintStart_toStartOf="@id/walletValue"
+                app:layout_constraintTop_toBottomOf="@id/walletValue"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/managerAccountHistory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_l"
+                android:drawableEnd="@drawable/ic_account_managment"
+                android:drawablePadding="@dimen/margin_very_small"
+                android:elevation="4dp"
+                android:text="تراکنش"
+                android:textColor="@color/purple_gray"
+                android:textSize="@dimen/text_size_12sp"
+                app:layout_constraintBottom_toBottomOf="@id/cardViewHistory"
+                app:layout_constraintEnd_toEndOf="@id/cardViewHistory"
+                app:layout_constraintTop_toTopOf="@id/cardViewHistory" />
+
+            <View
+                android:id="@+id/cardViewHistory"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:layout_margin="@dimen/margin_l"
+                android:background="@drawable/shadow_4dp"
+                app:layout_constraintTop_toBottomOf="@id/topCard" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardAccount"
+                style="@style/GeneralCardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_small"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardViewHistory">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/margin_small">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txt_calculate_profit_capital_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableEnd="@drawable/ic_wallet"
+                        android:drawablePadding="@dimen/margin_m"
+                        android:text="واریز و برداشت از کیف سرمایه"
+                        android:textColor="@color/purple_gray"
+                        android:textSize="@dimen/text_size_11sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/tabLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:layout_marginHorizontal="@dimen/margin_xxxl"
+                        android:layout_marginTop="@dimen/margin_l"
+                        android:background="@drawable/bg_tab_layout_mini"
+                        app:layout_constraintTop_toBottomOf="@id/txt_calculate_profit_capital_title"
+                        app:tabBackground="@drawable/selector_tab_brokerage"
+                        app:tabGravity="fill"
+                        app:tabIndicatorHeight="0dp"
+                        app:tabMode="fixed"
+                        app:tabSelectedTextColor="@color/brokerage_tab_color">
+
+                        <com.google.android.material.tabs.TabItem
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="برداشت وجه" />
+
+                        <com.google.android.material.tabs.TabItem
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="واریز وجه" />
+
+
+                    </com.google.android.material.tabs.TabLayout>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/titlePrice"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_xl"
+                        android:gravity="center"
+                        android:textColor="@color/emperor"
+                        android:textSize="@dimen/text_size_xs"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tabLayout"
+                        tools:text="@string/withdrawal_price" />
+
+                    <com.paya.presentation.utils.InputPrice
+                        android:id="@+id/inputPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/margin_m"
+                        android:layout_marginTop="@dimen/margin_m"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/titlePrice" />
+
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerViewBankPortal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/height_40dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/inputPrice"
+                        tools:itemCount="1"
+                        tools:listitem="@layout/item_portal_bank"
+                        />
+
+                    <Button
+                        android:id="@+id/submit_btn"
+                        style="@style/SubmitButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/height_medium"
+                        android:layout_marginTop="@dimen/margin_medium"
+                        android:layout_marginBottom="@dimen/margin_l"
+                        android:text="@string/submit_and_continue"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/recyclerViewBankPortal"
+                        app:layout_constraintVertical_bias="1" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <include
+        layout="@layout/loading_state"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        tools:visibility="gone" />
+</androidx.constraintlayout.widget.ConstraintLayout>

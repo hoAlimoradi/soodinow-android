@@ -260,53 +260,79 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-
-        android:visibility="gone"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/height"
         android:id="@+id/constraintLayout5"
-        android:layout_width="342dp"
-        android:layout_height="19dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
+        app:layout_constraintStart_toStartOf="@id/constraintLayout4"
+        app:layout_constraintEnd_toEndOf="@id/constraintLayout4"
+        android:layout_marginTop="@dimen/margin_l"
+        android:background="@drawable/bg_line_gray_corner10"
+        app:layout_constraintTop_toBottomOf="@id/constraintLayout4">
 
-        <com.paya.presentation.utils.customSeekbar.CustomSeekbar
-            android:id="@+id/customSeekbar"
-            android:layout_width="250dp"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-
-            app:draw_bubble="false"
+            android:text="مبلغ بلاک شده"
+            android:textSize="@dimen/text_size_s"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginEnd="@dimen/margin_l"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/blockValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="مبلغ بلاک شده"
+            android:textSize="@dimen/text_size_s"
+            android:textColor="@color/black"
             app:layout_constraintTop_toTopOf="parent"
-            app:region_leftColor="@color/red"
-            app:region_rightColor="@color/green"
-            app:regions="true"
-            app:regions_centerText="true"
-            app:textTop_visible="true" />
-
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="@dimen/margin_l"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/constraintLayout5"
+        app:layout_constraintEnd_toEndOf="@id/constraintLayout5"
+        app:layout_constraintTop_toBottomOf="@id/constraintLayout5"
+        tools:itemCount="2"
+        tools:listitem="@layout/item_wallet"
+        android:id="@+id/recyclerView"
+        />
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:visibility="gone"
-        android:layout_width="336dp"
-        android:layout_height="213dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout5">
+        android:layout_width="0dp"
+        android:layout_height="@dimen/height"
+        android:id="@+id/constraintLayout6"
+        app:layout_constraintStart_toStartOf="@id/constraintLayout4"
+        app:layout_constraintEnd_toEndOf="@id/constraintLayout4"
+        android:layout_marginTop="@dimen/margin_l"
+        android:background="@drawable/bg_line_gray_corner10"
+        app:layout_constraintTop_toBottomOf="@id/recyclerView">
 
-        <com.paya.presentation.utils.mosaiclayout.RectangleView
-
-            android:layout_width="0dp"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="میزان سودهی ماهانه"
+            android:textSize="@dimen/text_size_s"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginEnd="@dimen/margin_l"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/investValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="مبلغ بلاک شده"
+            android:textSize="@dimen/text_size_s"
+            android:textColor="@color/black"
             app:layout_constraintTop_toTopOf="parent"
-            />
-
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="@dimen/margin_l"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

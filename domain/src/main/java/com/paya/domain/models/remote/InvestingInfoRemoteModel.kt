@@ -6,6 +6,10 @@ import com.paya.domain.tools.NoObfuscate
 data class InvestingInfoRemoteModel(
     @SerializedName("investment_boxes_data") val investmentBoxesData: List<InvestingInfoDataRemoteModel>?,
     @SerializedName("wallet_data") val walletData: InvestingInfoDataRemoteModel?,
+    @SerializedName("total_free_money") val totalFreeMoney: Long?,
+    @SerializedName("total_block_money") val totalBlockMoney: Long?,
+    @SerializedName("total_money") val totalMoney: Long?,
+    @SerializedName("total_profit") val totalProfit: Long?,
 ) : NoObfuscate
 
 data class InvestingInfoDataRemoteModel(
