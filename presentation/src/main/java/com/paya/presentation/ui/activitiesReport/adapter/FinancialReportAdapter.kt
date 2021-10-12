@@ -65,7 +65,7 @@ class FinancialReportAdapter(private val onItemClicked:(InvestmentLogsModel) -> 
                 setOnClickListener { onItemClicked.invoke(item) }
                 iconImageView.setImageResource(TypeInvestment.getTypeWithString(item.type).icon)
                 txtTitlePrice.text = Utils.separatorAmount(item.startPrice)
-                txtTitleTypeAccount.text = item.description
+                txtTitleTypeAccount.text = if(item.description.isEmpty()) TypeAccount.getTypeWithString(item.investmentType).title else item.description
                 val date = Utils.convertStringToDate(item.createdAt)
                 if (date != null) {
                     txtTitleDate.text = date.getTimeHoursAndMinute()
