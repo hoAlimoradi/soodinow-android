@@ -87,40 +87,15 @@ class OpenSoodinowAutomaticInvestmentAccountFragment : BaseFragment<CreateLowRis
             //openChart()
         }
 
-
-       /* bottomSheetBehavior = BottomSheetBehavior.from(addInventoryBottomSheetDialogFragmentConstraintLayout)
-
-        bottomSheetBehavior.addBottomSheetCallback(object :
-            BottomSheetBehavior.BottomSheetCallback() {
-
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                // handle onSlide
-            }
-
-            override fun onStateChanged(bottomSheet: View, newState: Int) {
-                when (newState) {
-                    BottomSheetBehavior.STATE_COLLAPSED -> Toast.makeText(requireContext(), "STATE_COLLAPSED", Toast.LENGTH_SHORT).show()
-                    BottomSheetBehavior.STATE_EXPANDED -> Toast.makeText(requireContext(), "STATE_EXPANDED", Toast.LENGTH_SHORT).show()
-                    BottomSheetBehavior.STATE_DRAGGING -> Toast.makeText(requireContext(), "STATE_DRAGGING", Toast.LENGTH_SHORT).show()
-                    BottomSheetBehavior.STATE_SETTLING -> Toast.makeText(requireContext(), "STATE_SETTLING", Toast.LENGTH_SHORT).show()
-                    BottomSheetBehavior.STATE_HIDDEN -> Toast.makeText(requireContext(), "STATE_HIDDEN", Toast.LENGTH_SHORT).show()
-                    else -> Toast.makeText(requireContext(), "OTHER_STATE", Toast.LENGTH_SHORT).show()
-                }
-            }
-        })*/
-
         walletInputPrice.setOnClickListener {
             AddInventoryBottomSheetDialogFragment().apply {
                 show(parentFragmentManager, AddInventoryBottomSheetDialogFragment.TAG)
             }
         }
 
-        /*btnBottomSheetPersistent.setOnClickListener {
-            if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED)
-                bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-            else
-                bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-        }*/
+       /* val list: MutableList<Int> = mutableListOf(30,30,20,20,10)
+        mosaicLayout.setPercentList(list)*/
+
     }
 
     private fun setupWalletInputPrice() {

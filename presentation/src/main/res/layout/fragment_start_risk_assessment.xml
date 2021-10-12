@@ -62,11 +62,12 @@
                 android:layout_height="0dp"
                 app:layout_constraintDimensionRatio="H,1:1"
                 android:layout_margin="40dp"
-                app:interactive="true"
+                app:interactive="false"
 
                 app:showProgress="true"
                 app:startAngleDegrees="90"
                 app:thumbColor="@color/default_thumb_color"
+
 
                 app:trackWidth="13dp"
                 app:layout_constraintEnd_toEndOf="parent"

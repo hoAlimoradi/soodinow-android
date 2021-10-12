@@ -55,20 +55,25 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/assessYourRiskProgressView"
-                android:layout_width="171dp"
-                android:layout_height="186dp"
-                android:layout_marginHorizontal="@dimen/margin_l"
-                android:layout_marginTop="@dimen/margin_l"
-                android:background="@drawable/dot_red"
-                android:gravity="center"
+
+            <com.paya.presentation.utils.circularSeekBar.CircularSeekBar
+
+                android:id="@+id/finalAssessYourRiskProgressView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="H,1:1"
+                android:layout_margin="40dp"
+                app:interactive="false"
+
+                app:showProgress="true"
+                app:startAngleDegrees="90"
+                app:thumbColor="@color/default_thumb_color"
+
+
+                app:trackWidth="13dp"  
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/assessYourRiskConstraintLayout">
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                app:layout_constraintTop_toBottomOf="@+id/assessYourRiskConstraintLayout"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/assessYourRiskDescriptionsConstraintLayout"
@@ -79,7 +84,7 @@
                 android:gravity="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/assessYourRiskProgressView">
+                app:layout_constraintTop_toBottomOf="@+id/finalAssessYourRiskProgressView">
 
 
                 <androidx.appcompat.widget.AppCompatTextView

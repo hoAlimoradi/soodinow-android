@@ -26,4 +26,9 @@
         <attr name="android:inputType"/>
         <attr name="android:hint"/>
     </declare-styleable>
+
+    <declare-styleable name="CustomRadioButton">
+        <attr name="labelText" />
+        <attr name="hintTextColor" />
+    </declare-styleable>
 </resources>

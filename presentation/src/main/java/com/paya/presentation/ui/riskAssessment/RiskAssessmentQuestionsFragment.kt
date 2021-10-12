@@ -3,6 +3,7 @@ package com.paya.presentation.ui.riskAssessment
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
@@ -26,7 +27,7 @@ class RiskAssessmentQuestionsFragment : BaseFragment<RiskAssessmentViewModel>() 
     private lateinit var viewPagerAdapter : RiskAssessmentQuestionsFragmentViewPagerAdapter
     private var riskAssessmentQuestionFragments = arrayListOf<RiskAssessmentQuestionFragment>()
 
-    private val viewModel: RiskAssessmentViewModel by viewModels()
+    private val viewModel: RiskAssessmentViewModel by activityViewModels()
     var currentPage = 0
 
     override fun onCreateView(
@@ -66,13 +67,22 @@ class RiskAssessmentQuestionsFragment : BaseFragment<RiskAssessmentViewModel>() 
             }
         }
         assessYourRiskNext.setOnClickListener {
-            getFindViewController()?.navigateUp()
-            getFindViewController()?.navigate(R.id.riskAssessmentConfirm)
+            if (currentPage < riskAssessmentQuestionFragments.size -1) {
+                assessYourRiskQuestionsViewPager.currentItem++
+                currentPage = assessYourRiskQuestionsViewPager.currentItem
+            } else {
+                getFindViewController()?.navigateUp()
+                getFindViewController()?.navigate(R.id.riskAssessmentConfirm)
+            }
+
         }
     }
 
     override fun onResume() {
         super.onResume()
+
+        loge( "  بینمی " + viewModel.toString()   )
+        riskAssessmentQuestionFragments.clear()
         viewModel.getRiskAssessmentQuestions()
     }
 
@@ -81,7 +91,8 @@ class RiskAssessmentQuestionsFragment : BaseFragment<RiskAssessmentViewModel>() 
         when (resource.status) {
             Status.SUCCESS -> resource.data?.let { riskAssessmentResponseRemoteModel ->
 
-                for (i in 1..riskAssessmentResponseRemoteModel.count) {
+                val count = riskAssessmentResponseRemoteModel.pageCount -1
+                for (i in 0..count) {
                     riskAssessmentQuestionFragments.add(RiskAssessmentQuestionFragment.newInstance(i))
                 }
 

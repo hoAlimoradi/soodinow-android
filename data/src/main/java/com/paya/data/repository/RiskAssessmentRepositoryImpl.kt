@@ -2,10 +2,8 @@ package com.paya.data.repository
 
 import android.app.Application
 import android.content.Context
-import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.paya.domain.models.remote.RiskAssessmentPages
 import com.paya.domain.models.remote.RiskAssessmentResponseRemoteModel
 import com.paya.domain.repository.RiskAssessmentRepository
 import com.paya.domain.tools.Resource
@@ -14,8 +12,15 @@ import javax.inject.Inject
 
 class RiskAssessmentRepositoryImpl @Inject constructor(
     private val context: Application
+    //,private val riskAssessmentService: RiskAssessmentService
 ): RiskAssessmentRepository {
     override suspend fun getRiskAssessmentQuestions(): Resource<RiskAssessmentResponseRemoteModel> {
+
+        return getRiskAssessmentQuestionsMock()
+    }
+
+
+    private fun getRiskAssessmentQuestionsMock(): Resource<RiskAssessmentResponseRemoteModel> {
         val jsonFileString = getJsonDataFromAsset(context, "risk_assessment_mock_response.json")
         //Log.e("data", "  $jsonFileString")
 
@@ -35,4 +40,6 @@ class RiskAssessmentRepositoryImpl @Inject constructor(
         }
         return jsonString
     }
+
+
 }

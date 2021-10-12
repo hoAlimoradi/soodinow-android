@@ -5,6 +5,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.*
 import androidx.annotation.RequiresApi
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.paya.domain.models.remote.RiskAssessmentResponseRemoteModel
@@ -21,7 +22,7 @@ import kotlinx.android.synthetic.main.fragment_confirm_risk_assessment.*
 @AndroidEntryPoint
 class RiskAssessmentConfirmFragment : BaseFragment<RiskAssessmentViewModel>() {
 
-    private val viewModel: RiskAssessmentViewModel by viewModels()
+    private val viewModel: RiskAssessmentViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,10 +39,13 @@ class RiskAssessmentConfirmFragment : BaseFragment<RiskAssessmentViewModel>() {
             findNavController().popBackStack()
         }
        // observe(viewModel.riskAssessmentPagesLiveData, ::onDataReady)
+        finalAssessYourRiskProgressView.setProgress(0.5f)
     }
 
     override fun onResume() {
         super.onResume()
+
+        loge( "  بینمی " + viewModel.toString()   )
        // viewModel.getRiskAssessmentQuestions()
     }
 

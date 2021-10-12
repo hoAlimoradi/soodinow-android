@@ -3,6 +3,7 @@ package com.paya.presentation.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.paya.domain.models.remote.RiskAssessmentPages
+import com.paya.domain.models.remote.RiskAssessmentRequestAnswer
 import com.paya.domain.models.remote.RiskAssessmentResponseRemoteModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
@@ -18,13 +19,19 @@ import kotlinx.android.synthetic.main.fragment_questions_risk_assessment.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+
 @HiltViewModel
 class RiskAssessmentViewModel @Inject constructor(
     private val getRiskAssessmentQuestionsUseCase: UseCase<Unit, RiskAssessmentResponseRemoteModel>
 ) : BaseViewModel() {
+
     val riskAssessmentPagesLiveData = MutableLiveData<Resource<RiskAssessmentResponseRemoteModel>>()
+
     var assessYourRiskQuestionsViewPagerCurrentPageLiveData = MutableLiveData<Int>()
+
     var riskAssessmentResponseRemoteModel: RiskAssessmentResponseRemoteModel? = null
+
+    var riskAssessmentRequestAnswerList: ArrayList<RiskAssessmentRequestAnswer> = arrayListOf()
 
     fun getRiskAssessmentQuestions() {
         viewModelScope.launch {
@@ -32,6 +39,8 @@ class RiskAssessmentViewModel @Inject constructor(
             val response = callResource(this@RiskAssessmentViewModel,getRiskAssessmentQuestionsUseCase.action(Unit))
             when (response.status) {
                 Status.SUCCESS -> response.data?.let {
+
+
                     riskAssessmentResponseRemoteModel = it
                     loge( " riskAssessmentPages.questionCount it " + it.count   )
                 }
@@ -51,8 +60,9 @@ class RiskAssessmentViewModel @Inject constructor(
         }
     }
 
-    fun getRiskAssessmentQuestionsByPageNumber(pageNumber: Int): RiskAssessmentPages {
-        return when {
+    fun getRiskAssessmentQuestionsByPageNumber(pageNumber: Int): RiskAssessmentPages? {
+        return riskAssessmentResponseRemoteModel!!.pages[pageNumber - 1]
+        /*return when {
             pageNumber == 0 -> {
                 riskAssessmentResponseRemoteModel!!.pages.first()
             }
@@ -60,7 +70,15 @@ class RiskAssessmentViewModel @Inject constructor(
                 riskAssessmentResponseRemoteModel!!.pages.last()
             }
             else -> riskAssessmentResponseRemoteModel!!.pages[pageNumber - 1]
-        }
+        }*/
+    }
+
+    fun saveRiskAssessmentRequestAnswer(riskAssessmentRequestAnswer: RiskAssessmentRequestAnswer){
+        riskAssessmentRequestAnswerList.add(riskAssessmentRequestAnswer)
+    }
+
+    fun submitRiskAssessmentRequestAnswer(){
+
     }
 
     /*fun plusAssessYourRiskQuestionsViewPagerCurrentPage() {

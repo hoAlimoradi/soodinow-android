@@ -58,7 +58,7 @@ class CircularSeekBar : View {
 
     private var progress: Float = 0f
 
-    var interactive: Boolean = true
+    var interactive: Boolean = false
 
     var progressChangedCallback: (progress: Float) -> Unit = {}
 
@@ -326,7 +326,7 @@ class CircularSeekBar : View {
             paint.textSize = 40f
             paint.textAlign = Paint.Align.CENTER
             //this.drawText("Some Text", 10f, 30f, paint)
-            this.drawText("0" ,   (measuredWidth / 2f ) - 10 ,  measuredHeight / 2f  - 40, paint)
+            this.drawText( progress.toString(),   (measuredWidth / 2f ) - 10 ,  measuredHeight / 2f  - 40, paint)
 
 
             // پراگرس

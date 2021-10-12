@@ -8,3 +8,18 @@ data class RiskAssessmentResponseRemoteModel (
     @SerializedName("page_count") val pageCount : Int
 
 )
+data class RiskAssessmentRequestAnswerRemoteModel (
+    @SerializedName("answers") val answers : List<RiskAssessmentRequestAnswer>
+
+)
+data class RiskAssessmentRequestAnswer (
+    val question : AnswersQuestion,
+    val answers : List<AnswersQuestion>
+)
+
+data class AnswersQuestion (
+    val id : Int,
+    val type : String
+)
+
+

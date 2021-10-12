@@ -58,10 +58,41 @@
                 android:orientation="vertical">
 
 
+                <RadioGroup
+                    android:id="@+id/radioGroup_sample"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                     >
+                    <RadioButton
+                        android:id="@+id/radio_sample_one"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="دریافت کد با ایمیل"
+                        android:button="@null"
+                        android:drawableRight="?android:attr/listChoiceIndicatorSingle"/>
+
+                    <RadioButton
+                        android:id="@+id/radio_sample_tow"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="دریافت کد با پیامک"
+                        android:button="@null"
+                        android:drawableRight="?android:attr/listChoiceIndicatorSingle"/>
+
+                </RadioGroup>
+
+
+
             </LinearLayout>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

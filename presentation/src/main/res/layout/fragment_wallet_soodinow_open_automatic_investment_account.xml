@@ -573,8 +573,18 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/yourRiskFreeInvestmentPortfolio">
 
+                            <com.paya.presentation.utils.mosaiclayout.MosaicLayout
+                                android:id="@+id/mosaicLayout"
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+
+                                app:layout_constraintDimensionRatio="V,2:1"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
                             <include
                                 android:id="@+id/mock"
+                                android:visibility="gone"
                                 layout="@layout/mock_mosaic_layout"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
