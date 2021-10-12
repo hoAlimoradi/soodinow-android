@@ -2,9 +2,7 @@ package com.paya.presentation.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.paya.domain.models.remote.RiskAssessmentPages
-import com.paya.domain.models.remote.RiskAssessmentRequestAnswer
-import com.paya.domain.models.remote.RiskAssessmentResponseRemoteModel
+import com.paya.domain.models.remote.*
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.domain.tools.UseCase
@@ -22,7 +20,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RiskAssessmentViewModel @Inject constructor(
-    private val getRiskAssessmentQuestionsUseCase: UseCase<Unit, RiskAssessmentResponseRemoteModel>
+    private val getRiskAssessmentQuestionsUseCase: UseCase<Unit, RiskAssessmentResponseRemoteModel>,
+    private val submitRiskAssessmentAnswersQuestionsUseCase: UseCase<RiskAssessmentRequestAnswerRepoBodyModel, RiskAssessmentSubmitResponseRepoModel>
+
 ) : BaseViewModel() {
 
     val riskAssessmentPagesLiveData = MutableLiveData<Resource<RiskAssessmentResponseRemoteModel>>()
@@ -78,6 +78,10 @@ class RiskAssessmentViewModel @Inject constructor(
     }
 
     fun submitRiskAssessmentRequestAnswer(){
+        viewModelScope.launch {
+            val riskAssessmentRequestAnswerRepoBodyModel = RiskAssessmentRequestAnswerRepoBodyModel(riskAssessmentRequestAnswerList)
+            submitRiskAssessmentAnswersQuestionsUseCase.action(riskAssessmentRequestAnswerRepoBodyModel)
+        }
 
     }
 
