@@ -19,6 +19,7 @@ import com.paya.presentation.viewmodel.CardAccountViewModel
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_ACTIVE_BOX = "active_box"
 private const val ARG_HAVE_BUTTON = "have_button"
+private const val IS_WALLET = "is_wallet"
 
 
 /**
@@ -30,12 +31,14 @@ class CardAccount : BaseFragment<CardAccountViewModel>() {
     private var mBinding: AccountCardBinding? = null
     var activeBoxRepo: ActiveBoxRepo? = null
     var haveButton: Boolean = true
+    var isWallet: Boolean = true
     private val viewModel: CardAccountViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             activeBoxRepo = it.getSerializable(ARG_ACTIVE_BOX) as ActiveBoxRepo
             haveButton = it.getBoolean(ARG_HAVE_BUTTON, true)
+            isWallet = it.getBoolean(IS_WALLET, false)
         }
 
     }
@@ -90,11 +93,12 @@ class CardAccount : BaseFragment<CardAccountViewModel>() {
 
     companion object {
         @JvmStatic
-        fun newInstance(activeBoxRepo: ActiveBoxRepo, haveButton: Boolean = true) =
+        fun newInstance(activeBoxRepo: ActiveBoxRepo,isWallet : Boolean, haveButton: Boolean = true) =
             CardAccount().apply {
                 arguments = Bundle().apply {
                     putSerializable(ARG_ACTIVE_BOX, activeBoxRepo)
                     putBoolean(ARG_HAVE_BUTTON, haveButton)
+                    putBoolean(IS_WALLET, isWallet)
                 }
             }
     }

@@ -40,4 +40,5 @@ interface WalletRepository {
     suspend fun preInvoice(hostId:Int,price:Long): Resource<PreInvoiceRepoModel>
 
     suspend fun getAddInventoryPriceList(): Resource<List<AddInventoryPriceRepoModel>>
+    suspend fun exitAccount(): Resource<ExitAccountRepoModel>
 }

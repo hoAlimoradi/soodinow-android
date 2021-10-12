@@ -76,9 +76,10 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
         }
 
     }
+
     override fun onResume() {
         super.onResume()
-        viewModel.getExistAccount()
+        viewModel.getFirstExistAccount()
     }
 
     private fun setError(error: String) {
@@ -96,13 +97,13 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
 
     private fun setupEfficiencyAdapter(list: List<EfficiencyRepoModel>) {
         context?.let { context ->
-              val verticalDivider = WithoutLastDividerItemDecorator(context, RecyclerView.VERTICAL)
-              ContextCompat.getDrawable(context, R.drawable.divider_efficiency_vertical)
-                  ?.let { divider ->
-                      verticalDivider.setDrawable(
-                          divider
-                      )
-                  }
+            val verticalDivider = WithoutLastDividerItemDecorator(context, RecyclerView.VERTICAL)
+            ContextCompat.getDrawable(context, R.drawable.divider_efficiency_vertical)
+                ?.let { divider ->
+                    verticalDivider.setDrawable(
+                        divider
+                    )
+                }
             val horizontalDivider =
                 WithoutLastDividerItemDecorator(context, RecyclerView.HORIZONTAL)
             ContextCompat.getDrawable(context, R.drawable.divider_efficiency_horizontal)
@@ -115,7 +116,7 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
 
             mBinding?.apply {
                 efficiencyRecyclerView.apply {
-                    layoutManager = RtlGridLayoutManager(context,3)
+                    layoutManager = RtlGridLayoutManager(context, 3)
                     addItemDecoration(verticalDivider)
                     addItemDecoration(horizontalDivider)
                     adapter =
@@ -127,15 +128,23 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
     }
 
 
-    private fun onExistAccountReady(resource: Resource<ExitAccountRepoModel>) {
-        if (resource.status == Status.SUCCESS) {
+    private fun onExistAccountReady(resource: Boolean) {
+        if (resource) {
             adapterSlide?.apply { notifyDataSetChanged() }
             mBinding?.apply { parentView.visibility = View.VISIBLE }
-            resource.data?.let {
-               if (it.activeBox.isEmpty())
-                   return@let
-                setupEfficiencyAdapter(it.activeBox[0].efficiencyRepoModel)
-            }
+            if (viewModel.cardAccounts.first().activeBoxRepo == null)
+                return
+           /* viewModel.cardAccounts.first().activeBoxRepo?.efficiencyRepoModel?.let {
+                setupEfficiencyAdapter(
+                    it
+                )
+            }*/
+            viewModel.currentBoxId = viewModel.cardAccounts.first().activeBoxRepo?.id ?: 0L
+           /* viewModel.getProfile(
+                viewModel.cardAccounts.first().activeBoxRepo?.id ?: 0L,
+                viewModel.cardAccounts.first().isWallet
+            )*/
+
 
         }
 
@@ -160,7 +169,8 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
                         viewModel.cardAccounts[position].activeBoxRepo?.let {
                             viewModel.currentBoxId = it.id
                             viewModel.getProfile(
-                                it.id
+                                it.id,
+                                viewModel.cardAccounts[position].isWallet
                             )
                             setupEfficiencyAdapter(it.efficiencyRepoModel)
                             super.onPageSelected(position)
@@ -285,7 +295,7 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
     }
 
     override fun farabiAccessToken() {
-        viewModel.getExistAccount()
+        viewModel.getFirstExistAccount()
     }
 
     private inner class SlidePagerAdapter(f: Fragment) : FragmentStateAdapter(f) {

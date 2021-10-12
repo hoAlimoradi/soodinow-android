@@ -23,6 +23,7 @@ class BoxHistoryRepositoryImpl @Inject constructor(
 			preferenceHelper.getAccessToken(),
 			boxId = boxHistoryRequestModel.boxId,
 			type = boxHistoryRequestModel.type,
+			objectType = boxHistoryRequestModel.objectType,
 			number = boxHistoryRequestModel.number
 		)
 		return getResourceFromApiResponse(boxHistoryResponse){

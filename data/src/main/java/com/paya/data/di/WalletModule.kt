@@ -135,5 +135,8 @@ abstract class WalletModule {
     @Binds
     abstract fun bindPreInvoiceUseCase(useCase: PreInvoiceUseCase): UseCase<PreInvoiceBodyRepoModel, PreInvoiceRepoModel>
 
+    @Binds
+    abstract fun bindExitAccountWalletUseCase(useCase: ExitAccountWalletUseCase): UseCase<String, ExitAccountRepoModel>
+
 
 }

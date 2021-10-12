@@ -232,7 +232,7 @@
         tools:layout="@layout/fragment_create_low_risk_account">
         <action
             android:id="@+id/navigationToConnectLowRiskBrokerage"
-            app:destination="@+id/connectLowRiskBrokerage"
+            app:destination="@+id/createAccountRules"
             app:popUpToInclusive="true" />
     </fragment>
 

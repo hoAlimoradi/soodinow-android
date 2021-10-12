@@ -15,6 +15,7 @@ interface BoxHistoryService {
 		@Header("Authorization") auth: String,
 		@Path("boxId") boxId: Long,
 		@Query("type") type: String,
+		@Query("object_type") objectType: String,
 		@Query("number") number: Int
 	): ApiResponse<BaseModel<BoxHistoryRemoteModel>>
 	

@@ -16,6 +16,7 @@ import javax.inject.Inject
 class WalletRepositoryImpl @Inject constructor(
     private val walletService: WalletService,
     private val walletBuyRemoteRepoMapper: Mapper<String, WalletBuyRepoModel>,
+    private val exitAccountRemoteRepoMapper: Mapper<ExitAccountRemoteModel, ExitAccountRepoModel>,
     private val walletChargeRemoteRepoMapper: Mapper<WalletChargeRemoteModel, WalletChargeRepoModel>,
     private val walletPreWithdrawRemoteRepoMapper: Mapper<WalletPreWithdrawRemoteModel, WalletPreWithdrawRepoModel>,
     private val walletWithdrawRequestRemoteRepoMapper: Mapper<WalletWithdrawRequestRemoteModel, WalletWithdrawRequestRepoModel>,
@@ -34,7 +35,7 @@ class WalletRepositoryImpl @Inject constructor(
         hostId: Int
     ): Resource<WalletBuyRepoModel> {
         return getResourceFromApiResponse(
-            walletService.buyWallet(investmentValue, hostId)
+            walletService.buyWallet(preferenceHelper.getAccessToken(),investmentValue, hostId)
         ) {
             walletBuyRemoteRepoMapper.map(it.data)
         }
@@ -46,7 +47,7 @@ class WalletRepositoryImpl @Inject constructor(
         bankingPortal: String
     ): Resource<WalletChargeRepoModel> {
         return getResourceFromApiResponse(
-            walletService.walletCharge(charge, callbackUrl, bankingPortal)
+            walletService.walletCharge(preferenceHelper.getAccessToken(),charge, callbackUrl, bankingPortal)
         ) {
             walletChargeRemoteRepoMapper.map(it.data)
         }
@@ -54,7 +55,7 @@ class WalletRepositoryImpl @Inject constructor(
 
     override suspend fun preWithdraw(id: Int): Resource<WalletPreWithdrawRepoModel> {
         return getResourceFromApiResponse(
-            walletService.preWithdraw(id)
+            walletService.preWithdraw(preferenceHelper.getAccessToken(),id)
         ) {
             walletPreWithdrawRemoteRepoMapper.map(it.data)
         }
@@ -65,7 +66,7 @@ class WalletRepositoryImpl @Inject constructor(
         sell: Long
     ): Resource<WalletWithdrawRequestRepoModel> {
         return getResourceFromApiResponse(
-            walletService.withdrawRequest(id, sell)
+            walletService.withdrawRequest(preferenceHelper.getAccessToken(),id, sell)
         ) {
             walletWithdrawRequestRemoteRepoMapper.map(it.data)
         }
@@ -73,7 +74,7 @@ class WalletRepositoryImpl @Inject constructor(
 
     override suspend fun portfolio(): Resource<WalletPortfolioRepoModel> {
         return getResourceFromApiResponse(
-            walletService.portfolio()
+            walletService.portfolio(preferenceHelper.getAccessToken())
         ) {
             walletPortfolioRemoteRepoMapper.map(it.data)
         }
@@ -81,7 +82,7 @@ class WalletRepositoryImpl @Inject constructor(
 
     override suspend fun wallet(): Resource<WalletValueRepoModel> {
         return getResourceFromApiResponse(
-            walletService.wallet()
+            walletService.wallet(preferenceHelper.getAccessToken())
         ) {
             walletValueRemoteRepoMapper.map(it.data)
         }
@@ -89,7 +90,7 @@ class WalletRepositoryImpl @Inject constructor(
 
     override suspend fun cashWithdrawRequest(amount: Long): Resource<CashWithdrawRequestRepoModel> {
         return getResourceFromApiResponse(
-            walletService.cashWithdrawRequest(amount)
+            walletService.cashWithdrawRequest(preferenceHelper.getAccessToken(),amount)
         ) {
             cashWithdrawRequestRemoteRepoMapper.map(it.data)
         }
@@ -97,7 +98,7 @@ class WalletRepositoryImpl @Inject constructor(
 
     override suspend fun hostList(): Resource<List<WalletHostListRepoModel>> {
         return getResourceFromApiResponse(
-            walletService.hostList()
+            walletService.hostList(preferenceHelper.getAccessToken())
         ) {
             walletHostListRemoteRepoMapper.map(it.data)
         }
@@ -105,7 +106,7 @@ class WalletRepositoryImpl @Inject constructor(
 
     override suspend fun hostDetail(id: Int): Resource<WalletHostDetailRepoModel> {
         return getResourceFromApiResponse(
-            walletService.hostDetail(id)
+            walletService.hostDetail(preferenceHelper.getAccessToken(),id)
         ) {
             walletHostDetailRemoteRepoMapper.map(it.data)
         }
@@ -113,7 +114,7 @@ class WalletRepositoryImpl @Inject constructor(
 
     override suspend fun investingInfo(): Resource<InvestingInfoRepoModel> {
         return getResourceFromApiResponse(
-            walletService.investingInfo()
+            walletService.investingInfo(preferenceHelper.getAccessToken())
         ) {
             investingInfoRemoteRepoMapper.map(it.data)
         }
@@ -131,20 +132,20 @@ class WalletRepositoryImpl @Inject constructor(
     }
 
     override suspend fun bankPortals(): Resource<List<PortalBankRepoModel>> {
-        return getResourceFromApiResponse(walletService.bankPortals()) {
+        return getResourceFromApiResponse(walletService.bankPortals(preferenceHelper.getAccessToken())) {
             bankPortalRemoteRepoMapper.map(it.data)
         }
     }
 
     override suspend fun getPreInvoice(): Resource<PreInvoiceRepoModel> {
-        return getResourceFromApiResponse(walletService.getPreInvoice(preferenceHelper.getPreInvoiceId())) {
+        return getResourceFromApiResponse(walletService.getPreInvoice(preferenceHelper.getAccessToken(),preferenceHelper.getPreInvoiceId())) {
             preInvoiceRemoteRepoMapper.map(it.data)
         }
     }
 
     override suspend fun preInvoice(hostId: Int, price: Long): Resource<PreInvoiceRepoModel> {
 
-        val preInvoice = walletService.preInvoice(hostId, price)
+        val preInvoice = walletService.preInvoice(preferenceHelper.getAccessToken(),hostId, price)
         if (preInvoice is ApiSuccessResponse) {
             preInvoice.body.data.uuid?.let { preferenceHelper.setPreInvoiceId(it) }
         }
@@ -152,5 +153,11 @@ class WalletRepositoryImpl @Inject constructor(
             preInvoiceRemoteRepoMapper.map(it.data)
         }
 
+    }
+
+    override suspend fun exitAccount(): Resource<ExitAccountRepoModel> {
+        return getResourceFromApiResponse(walletService.exitAccount(preferenceHelper.getAccessToken())) {
+            exitAccountRemoteRepoMapper.map(it.data)
+        }
     }
 }

@@ -73,12 +73,12 @@ class CreateLowRiskAccountFragment : BaseFragment<CreateLowRiskAccountViewModel>
                     return@setOnClickListener
                 }
                 //TODO
-                /*findNavController().navigate(
+                findNavController().navigate(
                     CreateLowRiskAccountFragmentDirections.navigationToConnectLowRiskBrokerage(
                         inputPrice.getPriceLong(),
                         ("no_risk")
                     )
-                )*/
+                )
             }
         }
     }
