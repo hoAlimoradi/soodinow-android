@@ -14,6 +14,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.paya.domain.models.repo.CurrencyPriceRepoModel
 import com.paya.domain.models.repo.ProfileRepoModel
 import com.paya.domain.models.repo.SoodinowWalletValueRepoModel
+import com.paya.domain.models.repo.WalletValueRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.presentation.R
@@ -55,7 +56,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 		super.onViewCreated(view, savedInstanceState)
 		observe(mViewModel.currencyPrice, ::onPricesReady)
 		observe(mViewModel.statusProfile, ::checkProfile)
-		observe(mViewModel.soodinowWalletValueRepoModelResourceMutableLiveData, ::walletValue)
+		observe(mViewModel.walletValeLiveData,::walletValueReady)
 		val layoutManager =
 			LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 		layoutManager.reverseLayout = true
@@ -98,7 +99,15 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 
 	}
 
-
+	private fun walletValueReady(resource: Resource<WalletValueRepoModel>) {
+		if (resource.status == Status.SUCCESS){
+			resource.data?.let {
+				mBinding?.apply {
+					yourWalletValue.text = Utils.separatorAmount(it.balance)+ " " + getString(R.string.toman)
+				}
+			}
+		}
+	}
 	private fun setupViewPager() {
 		adapter = SlidePagerAdapter(childFragmentManager,viewLifecycleOwner.lifecycle) {
 			getFindViewController()?.navigateUp()
@@ -149,14 +158,6 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 		}
 	}
 
-	private fun walletValue(resource: Resource<SoodinowWalletValueRepoModel>) {
-		if (resource.status == Status.SUCCESS) {
-			val value: Double =  resource.data?.value ?: 0.0
-			mBinding?.apply {
-				yourWalletValue.text = value.toPersianSeparatedValue()
-			}
-		}
-	}
 
 	private inner class SlidePagerAdapter(val fragmentManager: FragmentManager,
 										  val lifecycle: Lifecycle, val onItemClick: (position: Int) -> Unit) :

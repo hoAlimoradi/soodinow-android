@@ -7,6 +7,7 @@ import com.paya.domain.models.repo.*
 import com.paya.domain.repository.CurrencyPriceRepository
 import com.paya.domain.repository.LowRiskInvestmentRepository
 import com.paya.domain.tools.Resource
+import com.paya.domain.tools.Status
 import com.paya.domain.tools.UseCase
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.utils.SingleLiveEvent
@@ -16,14 +17,18 @@ import kotlinx.coroutines.launch
 @HiltViewModel
 class HomeViewModel @Inject constructor(
 	private val currencyRepository: CurrencyPriceRepository,
+	private val walletValueUseCase: UseCase<Unit, WalletValueRepoModel>,
 	private val lowRiskInvestmentRepository: LowRiskInvestmentRepository,
 	private val useCaseProfile: UseCase<Unit, ProfileRepoModel>
 ) : BaseViewModel() {
 
+	init {
+	    walletValue()
+	}
 	val currencyPrice = MutableLiveData<Resource<List<CurrencyPriceRepoModel>>>()
 	val statusProfile = SingleLiveEvent<Resource<ProfileRepoModel>>()
 	val soodinowWalletValueRepoModelResourceMutableLiveData = MutableLiveData<Resource<SoodinowWalletValueRepoModel>>()
-
+	val walletValeLiveData = MutableLiveData<Resource<WalletValueRepoModel>>()
 	fun getSoodinowWalletValue() {
 		viewModelScope.launch {
 			val response = callResource(
@@ -32,7 +37,15 @@ class HomeViewModel @Inject constructor(
 			soodinowWalletValueRepoModelResourceMutableLiveData.postValue(response)
 		}
 	}
-
+	fun walletValue() {
+		viewModelScope.launch {
+			showLoading()
+			val response =
+				callResource(this@HomeViewModel, walletValueUseCase.action(Unit))
+			walletValeLiveData.value = response
+			hideLoading()
+		}
+	}
 	fun getProfile() {
 		viewModelScope.launch {
 			showLoading()

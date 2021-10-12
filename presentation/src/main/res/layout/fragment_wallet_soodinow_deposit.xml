@@ -1,288 +1,247 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/addInventoryBottomSheetDialogFragmentConstraintLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#3e2cad">
 
-    <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/backButtonDepositSoodinowWalletFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/height_medium"
-        android:layout_marginStart="@dimen/margin_l"
-        android:layout_marginTop="@dimen/margin_m"
-        android:background="@android:color/transparent"
-        android:src="@drawable/ic_back"
-        android:tint="@color/emperor"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <com.paya.presentation.utils.toolbar.ToolbarPublic
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:toolbarColor="@color/white"
+        app:toolbarTitle="مبلغ سرمایه گذاری" />
+
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/createLowRiskAccountTitle"
+        android:id="@+id/priceInvest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-
-        android:layout_marginTop="@dimen/margin_l"
-        android:text="@string/create_low_risk_account"
-        android:textColor="@color/emperor"
-        android:textSize="@dimen/text_size_l"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <include
-        android:id="@+id/accountCardLayout"
-        layout="@layout/deposit_soodinow_wallet_card"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="H,2:1"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="@dimen/margin_xl"
-        app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="@dimen/margin_xl"
-        app:layout_constraintTop_toBottomOf="@+id/backButtonDepositSoodinowWalletFragment"
-        />
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        tools:text="100,000,000" />
 
-    <ScrollView
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/currency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_m"
+        android:layout_marginBottom="@dimen/margin_s"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_s"
+        app:layout_constraintBottom_toBottomOf="@id/priceInvest"
+        app:layout_constraintEnd_toStartOf="@id/priceInvest"
+        tools:text="@string/toman" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/topVerticalGuide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.25" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/chargeLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-
+        android:background="@drawable/bg_chart_line_gray"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topVerticalGuide">
 
-        app:layout_constraintTop_toBottomOf="@+id/accountCardLayout"
-        >
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/innerTopGuidLine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.13" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/priceWalletTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_l"
+            android:text="مبلغ کیف پول"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_m"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/innerTopGuidLine" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/priceWallet"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/height_40dp"
+            android:layout_marginHorizontal="@dimen/margin_l"
+            android:layout_marginTop="@dimen/margin_m"
+            android:background="@drawable/shadow_gray_dark_with_gray_border"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_m"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/priceWalletTitle"
+            tools:text="100,000 تومان" />
 
-            app:layout_constraintTop_toTopOf="parent" >
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/priceTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_l"
+            android:layout_marginEnd="@dimen/margin_l"
+            android:text="مبلغ مورد نیاز "
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_m"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/priceWallet" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/investmentAmountTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_l"
-                android:text="@string/investment_amount"
-                android:textColor="@color/emperor"
-                android:textSize="@dimen/text_size_l"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/price"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/height_40dp"
+            android:layout_marginHorizontal="@dimen/margin_l"
+            android:layout_marginTop="@dimen/margin_m"
+            android:background="@drawable/shadow_gray_dark_with_gray_border"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_m"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/priceTitle"
+            tools:text="100,000 تومان" />
 
-                android:layout_marginHorizontal="@dimen/margin_xl"
-                app:layout_constraintTop_toTopOf="parent"
-                />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/bankTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_l"
+            android:layout_marginEnd="@dimen/margin_l"
+            android:text="درگاه بانکی خود را انتخاب کنید"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_m"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/price" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewBankPortal"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/height_40dp"
+            android:layout_marginTop="@dimen/margin_l"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bankTitle"
+            tools:itemCount="1"
+            tools:listitem="@layout/item_portal_bank" />
 
-                android:id="@+id/investmentAmountValueConstraintLayout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/shadow_gray_dark_without_border"
-                android:layout_marginTop="@dimen/margin_m"
-                android:layout_marginHorizontal="@dimen/margin_xl"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/investmentAmountTitle"
-                >
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/investmentAmountValue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="top"
-                    android:text="50.000"
-                    android:textColor="@color/emperor"
-                    android:layout_marginTop="@dimen/margin_m"
-                    android:layout_marginBottom="@dimen/margin_m"
-                    android:textSize="@dimen/text_size_xxl"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/margin_m"
-                    android:gravity="top"
-                    android:text="تومان"
-                    android:paddingBottom="@dimen/margin_m"
-                    android:textColor="@color/emperor"
-                    android:textSize="@dimen/text_size_xs"
-                    app:layout_constraintBottom_toBottomOf="@+id/investmentAmountValue"
-                    app:layout_constraintEnd_toStartOf="@+id/investmentAmountValue" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/amountRequiredTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/margin_xl"
-                android:layout_marginTop="@dimen/margin_l"
-                android:text="@string/amount_required"
-                android:textColor="@color/emperor"
-                android:textSize="@dimen/text_size_l"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/investmentAmountValueConstraintLayout"
-                />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-
-                android:id="@+id/amountRequiredValueConstraintLayout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/shadow_gray_dark_without_border"
-                android:layout_marginTop="@dimen/margin_m"
-                android:layout_marginHorizontal="@dimen/margin_xl"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/amountRequiredTitle"
-                >
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/amountRequiredValue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="top"
-                    android:text="50.000"
-                    android:textColor="@color/emperor"
-                    android:layout_marginTop="@dimen/margin_m"
-                    android:layout_marginBottom="@dimen/margin_m"
-                    android:textSize="@dimen/text_size_xxl"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/margin_m"
-                    android:gravity="top"
-                    android:text="تومان"
-                    android:paddingBottom="@dimen/margin_m"
-                    android:textColor="@color/emperor"
-                    android:textSize="@dimen/text_size_xs"
-                    app:layout_constraintBottom_toBottomOf="@+id/amountRequiredValue"
-                    app:layout_constraintEnd_toStartOf="@+id/amountRequiredValue" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/chooseYourBankingGatewayTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/margin_xl"
-                android:layout_marginTop="@dimen/margin_l"
-                android:text="@string/choose_your_banking_gateway"
-                android:textColor="@color/emperor"
-                android:textSize="@dimen/text_size_l"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/amountRequiredValueConstraintLayout"
-                />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_m"
-
-                android:layout_marginHorizontal="@dimen/margin_xl"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/chooseYourBankingGatewayTitle">
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/chargeButton"
+            android:layout_width="243dp"
+            android:layout_height="36dp"
+            android:layout_margin="@dimen/margin_l"
+            android:background="@drawable/bg_button_green"
+            android:text="شارژ کیف پول"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_m"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/ayandehPaymentConstraintLayout"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_l"
-                    android:background="@drawable/shadow_green"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/guideline5"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:scaleType="center"
-                        android:src="@drawable/ic_iranzamin_bank_big"
-                        android:layout_marginHorizontal="@dimen/margin_sub_cards"
-                        android:layout_marginTop="@dimen/margin_l"
-                        android:layout_marginBottom="@dimen/margin_l"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/samanPaymentConstraintLayout"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/margin_l"
-                    android:background="@drawable/shadow_gray_dark"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="@dimen/margin_sub_cards"
-                        android:layout_marginTop="@dimen/margin_l"
-                        android:layout_marginBottom="@dimen/margin_l"
-                        android:scaleType="center"
-                        android:src="@drawable/ic_mellat_bank_big"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guideline5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.5" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </ScrollView>
-
-
-
-    <Button
-        android:id="@+id/depositButton"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/walletLayout"
+        android:visibility="gone"
         android:layout_width="0dp"
-        android:layout_marginHorizontal="@dimen/margin_40dp"
-        android:layout_height="@dimen/height_medium"
-        android:layout_marginTop="@dimen/margin_medium"
-        android:layout_marginBottom="@dimen/margin_l"
-        android:text="@string/payment"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_chart_line_gray"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_bias="1"
-        android:textSize="@dimen/text_size_m"
-        android:textColor="@color/white"
-        android:background="@drawable/bg_button_green"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topVerticalGuide">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/innerTopGuidLineWallet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.13" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_l"
+            android:text="برداشت مستقیم"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_m"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/innerTopGuidLineWallet" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/desc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_l"
+            android:layout_marginTop="@dimen/margin_l"
+            android:text="مبلغ کیف پولمقدار مبلغ انتخابی شما برای سرمایه گذاری متناسب با مبغ کیف پول شما می باشد "
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_m"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/priceWalletLayoutTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_xl"
+            android:layout_marginEnd="@dimen/margin_l"
+            android:text="مبلغ کیف پول"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_m"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/desc" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/priceWalletLayout"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/height_40dp"
+            android:layout_marginHorizontal="@dimen/margin_l"
+            android:layout_marginTop="@dimen/margin_m"
+            android:background="@drawable/shadow_gray_dark_with_gray_border"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_m"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/priceWalletLayoutTitle"
+            tools:text="100,000 تومان" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/walletButtonButton"
+            android:layout_width="243dp"
+            android:layout_height="36dp"
+            android:layout_margin="@dimen/margin_l"
+            android:background="@drawable/bg_button_green"
+            android:text="برداشت از کیف پول"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_m"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

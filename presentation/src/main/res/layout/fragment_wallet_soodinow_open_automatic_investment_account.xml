@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#3e2cad">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/openSoodinowAutomaticInvestmentAccountConstraintLayout"
@@ -68,25 +67,54 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="parent">
 
-                    <com.paya.presentation.utils.WalletInputPrice
-                        android:id="@+id/walletInputPrice"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        app:layout_constraintDimensionRatio="H,2:1"
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/priceInvest"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_xl"
+                        android:textColor="@color/white"
+                        android:background="@android:color/transparent"
+                        android:textSize="30sp"
+                        android:inputType="number"
+                        android:gravity="center"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:text="100,000" />
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="0dp"
-                        android:layout_height="100dp"
-                        android:background="@color/light_purpleC69CFF"
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/currency"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/margin_m"
+                        android:layout_marginBottom="@dimen/margin_s"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_s"
+                        app:layout_constraintBottom_toBottomOf="@id/priceInvest"
+                        app:layout_constraintEnd_toStartOf="@id/priceInvest"
+                        tools:text="@string/toman" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/AddInventoryTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="  افزودن موجودی  "
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_normal"
+                        android:drawableEnd="@drawable/ic_group_pluse_green_circle_background"
+                        android:translationX="-8dp"
+                        android:layout_marginTop="@dimen/margin_m"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/walletInputPrice">
+                        app:layout_constraintTop_toBottomOf="@+id/priceInvest" />
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
 
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/topVerticalGuide"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintGuide_percent="0.17" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -95,7 +123,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/walletInputPrice">
+                        app:layout_constraintTop_toBottomOf="@+id/topVerticalGuide">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/investmentConstraintLayout"

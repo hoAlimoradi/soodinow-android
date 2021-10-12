@@ -2,119 +2,161 @@ package com.paya.presentation.ui.createLowRiskAccount
 
 import android.os.Build
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import androidx.core.text.isDigitsOnly
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.paya.domain.models.repo.ChartProfitRepoModel
-import com.paya.domain.models.repo.SoodinowWalletContractRepoModel
+import com.paya.domain.models.repo.PreInvoiceRepoModel
+import com.paya.domain.models.repo.WalletChargeRepoModel
+import com.paya.domain.models.repo.WalletHostDetailRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.presentation.R
 import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
+import com.paya.presentation.databinding.FragmentWalletSoodinowOpenAutomaticInvestmentAccountBinding
 import com.paya.presentation.ui.profile.dialog.ChartProfileDialog
-import com.paya.presentation.utils.hideKeyBoard
+import com.paya.presentation.utils.NumberTextWatcher
+import com.paya.presentation.utils.Utils
 import com.paya.presentation.utils.observe
-import com.paya.presentation.utils.requestKeyBoard
-import com.paya.presentation.viewmodel.CreateLowRiskAccountViewModel
+import com.paya.presentation.utils.openUrl
+import com.paya.presentation.viewmodel.OpenSoodinowAutomaticViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_wallet_soodinow_open_automatic_investment_account.*
-import kotlinx.android.synthetic.main.layout_add_inventory_modal_bottom_sheet.*
-import kotlinx.android.synthetic.main.open_automatic_investment_account_card.*
 
+const val HOST_ID = "host_id"
 
 @AndroidEntryPoint
-class OpenSoodinowAutomaticInvestmentAccountFragment : BaseFragment<CreateLowRiskAccountViewModel>() {
+class OpenSoodinowAutomaticInvestmentAccountFragment :
+    BaseFragment<OpenSoodinowAutomaticViewModel>() {
 
     var boxId: Long = 0
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
+    private var binding: FragmentWalletSoodinowOpenAutomaticInvestmentAccountBinding? = null
 
-    private val mViewModel: CreateLowRiskAccountViewModel by viewModels()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            mViewModel.hostId = it.getInt(HOST_ID, -1)
+        }
+    }
+
+    private val mViewModel: OpenSoodinowAutomaticViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_wallet_soodinow_open_automatic_investment_account, container, false)
+        binding = FragmentWalletSoodinowOpenAutomaticInvestmentAccountBinding.inflate(
+            inflater,
+            container,
+            false
+        )
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val watcher = NumberTextWatcher(
+            priceInvest,
+            ",###",
+            lifecycleScope
+        ) { }
 
+        priceInvest.addTextChangedListener(watcher)
         changeStatusBarColorToLightPurple()
 
-        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                backPressed()
-            }
-        })
+        activity?.onBackPressedDispatcher?.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    backPressed()
+                }
+            })
 
         backButtonOpenSoodinowAutomaticInvestmentAccountFragment.setOnClickListener {
             backPressed()
         }
-        setupWalletInputPrice()
-        observe(mViewModel.soodinowWalletRepoModelResource, ::onReady)
-        observe(mViewModel.chartProfit, ::readyProfile)
+
+        observe(mViewModel.hostLiveData, ::onReady)
+        observe(mViewModel.preInvoiceLiveData, ::onReadyPreInvoice)
+        observe(mViewModel.walletChargeLiveData, ::chargeReady)
         riskInvestmentCustomSeekbar.currentValue = 30f
 
         navigateToDepositSoodinowWalletFragmentButton.setOnClickListener {
 
-            val price: Long = walletInputPrice.getPriceLong()?.let { it } ?: 0
+            val price: Long = Utils.getAmount(priceInvest.text.toString()) ?: 0
             if (price <= 0) {
                 Toast.makeText(
                     requireContext(), getString(R.string.price_error), Toast.LENGTH_SHORT
                 ).show()
 
             } else {
-                getFindViewController()?.navigate(
-                    R.id.depositSoodinowWalletFragment
-                )
+                mViewModel.preInvoice(price)
+
             }
 
 
         }
         efficiencyButton.setOnClickListener {
-            val modalbottomSheetFragment = AddInventoryBottomSheetDialogFragment()
-            modalbottomSheetFragment.show(parentFragmentManager,modalbottomSheetFragment.tag)
+
             //openChart()
         }
 
-        walletInputPrice.setOnClickListener {
-            AddInventoryBottomSheetDialogFragment().apply {
-                show(parentFragmentManager, AddInventoryBottomSheetDialogFragment.TAG)
+        AddInventoryTitle.setOnClickListener {
+            val modalbottomSheetFragment = AddInventoryBottomSheetDialogFragment()
+            modalbottomSheetFragment.onClick = {
+                mViewModel.charge(it)
             }
-        }
+            modalbottomSheetFragment.show(parentFragmentManager, modalbottomSheetFragment.tag)
 
-       /* val list: MutableList<Int> = mutableListOf(30,30,20,20,10)
-        mosaicLayout.setPercentList(list)*/
+        }
 
     }
 
-    private fun setupWalletInputPrice() {
-        walletInputPrice?.apply {
-            setupWatcherPrice(lifecycleScope) {
-                //TODO api call
+    private fun chargeReady(resource: Resource<WalletChargeRepoModel>) {
+        if (resource.status == Status.SUCCESS) {
+            resource.data?.let {
+                openUrl(it.link)
             }
         }
     }
-    private fun onReady(resource: Resource<List<SoodinowWalletContractRepoModel>>) {
 
+    private fun onReady(resource: Resource<WalletHostDetailRepoModel>) {
+        if (resource.status == Status.SUCCESS) {
+            resource.data?.let {
+                binding?.apply {
+                    monthlyPercentValue.text = it.efficiency.month.percent.toString() + "%"
+                    trimesterPercentValue.text = it.efficiency.threeMonth.percent.toString() + "%"
+                    weeklyPercentValue.text = it.efficiency.week.percent.toString() + "%"
+                }
+            }
+        }
+    }
+
+    private fun onReadyPreInvoice(resource: Resource<PreInvoiceRepoModel>) {
+        if (resource.status == Status.SUCCESS) {
+            getFindViewController()?.navigateUp()
+            getFindViewController()?.navigate(
+                R.id.depositSoodinowWalletFragment
+            )
+        }
     }
 
     private fun readyProfile(resource: Resource<List<ChartProfitRepoModel>>) {
         if (resource.status == Status.SUCCESS) {
             resource.data?.let {
                 if (it.isNotEmpty()) {
-                   /* initTab(it)
-                    setCurrentBoxData(it.size - 1)*/
+                    /* initTab(it)
+                     setCurrentBoxData(it.size - 1)*/
                     val dialog = ChartProfileDialog()
                     dialog.show(parentFragmentManager, "chartDialog")
                 }
@@ -122,14 +164,12 @@ class OpenSoodinowAutomaticInvestmentAccountFragment : BaseFragment<CreateLowRis
 
         }
     }
+
     override fun onResume() {
         super.onResume()
-        mViewModel.getSoodinowWalletContracts()
+        mViewModel.hostDetail()
     }
 
-    private fun openChart() {
-        mViewModel.getChartProfit(boxId)
-    }
 
     private fun backPressed() {
         activity?.let {
@@ -152,7 +192,8 @@ class OpenSoodinowAutomaticInvestmentAccountFragment : BaseFragment<CreateLowRis
             }
             it.window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
             it.window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-            it.window.statusBarColor = ContextCompat.getColor(it.baseContext, R.color.light_purple6112D8)
+            it.window.statusBarColor =
+                ContextCompat.getColor(it.baseContext, R.color.light_purple6112D8)
         }
     }
 

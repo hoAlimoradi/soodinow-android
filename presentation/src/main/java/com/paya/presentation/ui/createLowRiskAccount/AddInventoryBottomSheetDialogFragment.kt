@@ -1,18 +1,20 @@
 package com.paya.presentation.ui.createLowRiskAccount
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.paya.domain.models.repo.AddInventoryPriceRepoModel
-import com.paya.domain.tools.Resource
-import com.paya.domain.tools.Status
 import com.paya.presentation.R
 import com.paya.presentation.ui.createLowRiskAccount.adapter.AddInventoryAdapter
+import com.paya.presentation.utils.NumberTextWatcher
+import com.paya.presentation.utils.Utils
 import com.paya.presentation.viewmodel.ConnectLowRiskBrokerageViewModel
 import kotlinx.android.synthetic.main.layout_add_inventory_modal_bottom_sheet.*
 
@@ -26,6 +28,7 @@ class AddInventoryBottomSheetDialogFragment: BottomSheetDialogFragment(){
 
     private var addInventoryAdapter: AddInventoryAdapter? = null
 
+     var onClick: ((Long) -> Unit)? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -41,6 +44,14 @@ class AddInventoryBottomSheetDialogFragment: BottomSheetDialogFragment(){
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        view?.let { (it.parent as View).setBackgroundColor(Color.TRANSPARENT) }
+        val watcher = NumberTextWatcher(
+            amountRequiredValue,
+            ",###",
+            lifecycleScope
+        ) { }
+
+        amountRequiredValue.addTextChangedListener(watcher)
         val layoutManager = GridLayoutManager(
             requireContext(),
             3,
@@ -49,18 +60,21 @@ class AddInventoryBottomSheetDialogFragment: BottomSheetDialogFragment(){
         )
         //layoutManager.reverseLayout = true
         addInventoryRecyclerView.layoutManager = layoutManager
-        addInventoryAdapter = AddInventoryAdapter()
+        addInventoryAdapter = AddInventoryAdapter { price ->
+            amountRequiredValue.setText(price.toString())
+        }
         onAddInventoryPriceReady(getAddInventoryPriceList())
         addInventoryAdapter?.let {
             addInventoryRecyclerView.adapter = it
         }
 
-        amountRequiredValueConstraintLayout.setOnClickListener {
-
-
-        }
         nextButton.setOnClickListener {
-
+            if (amountRequiredValue.text.toString().isEmpty())
+                return@setOnClickListener
+            val price = Utils.getAmount(amountRequiredValue.text.toString()) ?: 0L
+            if (price == 0L)
+                return@setOnClickListener
+            onClick?.let { onClick -> onClick.invoke(price) }
 
         }
 
@@ -75,13 +89,13 @@ class AddInventoryBottomSheetDialogFragment: BottomSheetDialogFragment(){
     }
 
     private fun getAddInventoryPriceList(): ArrayList<AddInventoryPriceRepoModel> {
-        val first = AddInventoryPriceRepoModel(name = "100 تومان", price = 100F)
-        val second = AddInventoryPriceRepoModel(name = "250 تومان", price = 250F)
-        val third = AddInventoryPriceRepoModel(name = "500 تومان", price = 500F)
-        val fourth = AddInventoryPriceRepoModel(name = "100 تومان", price = 100F)
-        val fifth = AddInventoryPriceRepoModel(name = "100 تومان", price = 100F)
-        val sixth = AddInventoryPriceRepoModel(name = "100 تومان", price = 100F)
-        var list  = ArrayList<AddInventoryPriceRepoModel>()
+        val first = AddInventoryPriceRepoModel(name = "100,000 ریال", price = 100000L)
+        val second = AddInventoryPriceRepoModel(name = "500,000 ریال", price = 500000L)
+        val third = AddInventoryPriceRepoModel(name = "1,000,000 ریال", price = 1000000L)
+        val fourth = AddInventoryPriceRepoModel(name = "2,000,000 ریال", price = 2000000L)
+        val fifth = AddInventoryPriceRepoModel(name = "3,000,000 ریال", price = 3000000L)
+        val sixth = AddInventoryPriceRepoModel(name = "5,000,000 ریال", price = 5000000L)
+        var list = ArrayList<AddInventoryPriceRepoModel>()
         list.add(first)
         list.add(second)
         list.add(third)
@@ -91,5 +105,7 @@ class AddInventoryBottomSheetDialogFragment: BottomSheetDialogFragment(){
         list.reverse()
         return list
     }
+
+
 }
 

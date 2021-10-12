@@ -39,12 +39,15 @@ class FarabiWalletFragment: BaseFragment<CreateLowRiskAccountViewModel>(),
     private fun onReady(resource: Resource<List<SoodinowWalletContractRepoModel>>) {
 
         val soodinowWalletContractRepoModel = SelectContractWalletItem(
+            0,
             pointTitle = "پیمان درآمد ثابت(پر ریسک )",
             name = "ترکیب صندوق سرمایه گزاری فارابی",
             description = "فارابی متشکل از چندین خدمت گوناگون متناسب با نیاز های مختلف سرمایه گذاران می باشد که تمام تمرکز فارابی انجام این خدمات به بهترین شکل می باشد تا منافع ناشی از آن سبب بهبود زندگی افراد جامعه باشد",
             trimesterValue = null,
             monthlyValue = 1.61,
             weeklyValue = 0.32,
+            fixIncome = 0.0F,
+            shaham = 0.0F,
             image = context?.let { context -> ContextCompat.getDrawable(context,R.drawable.investment) }
         )
         var list: List<SelectContractWalletRecyclerViewItem> = listOf(SectionItem(isFarabi = true, title = "ویژگی فارابی", description = "استفاده از سرمایه گذاری در کارگزاری"), soodinowWalletContractRepoModel)
@@ -64,7 +67,7 @@ class FarabiWalletFragment: BaseFragment<CreateLowRiskAccountViewModel>(),
     override val baseViewModel: BaseViewModel
         get() = mViewModel
 
-    override fun onPositionClicked(position: Int, isFarabi: Boolean) {
+    override fun onPositionClicked(position: Int,hostId: Int, isFarabi: Boolean) {
         getFindViewController()?.navigate(
             R.id.createLowRiskAccount
         )

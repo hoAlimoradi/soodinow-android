@@ -9,7 +9,7 @@ import com.paya.presentation.R
 import com.paya.presentation.utils.BaseAdapter
 import kotlinx.android.synthetic.main.row_add_inventory.view.*
 
-class AddInventoryAdapter() : BaseAdapter<AddInventoryAdapter.AddInventoryAdapterViewHolder, AddInventoryPriceRepoModel>() {
+class AddInventoryAdapter(private val onItemClicked: (price: Long) -> Unit) : BaseAdapter<AddInventoryAdapter.AddInventoryAdapterViewHolder, AddInventoryPriceRepoModel>() {
 
     override fun onCreateHolder(parent: ViewGroup, viewType: Int): AddInventoryAdapterViewHolder {
         val inflate = LayoutInflater.from(parent.context)
@@ -21,7 +21,15 @@ class AddInventoryAdapter() : BaseAdapter<AddInventoryAdapter.AddInventoryAdapte
 
         with(holder.itemView) {
             addInventoryButton.text = model.name
+            setOnClickListener {
+                onItemClicked.invoke(model.price)
+            }
+            addInventoryButton.setOnClickListener {
+                onItemClicked.invoke(model.price)
+            }
         }
+
+
     }
 
     class AddInventoryAdapterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
