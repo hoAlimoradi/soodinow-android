@@ -19,5 +19,6 @@ data class WalletHostDetailRepoModel(
 
 data class BasketHostsDetailRepoModel(
     val namad: String,
-    val percent: Float
+    val percent: Float,
+    val color: String
 )

@@ -11,6 +11,8 @@ class WalletHostDetailRemoteRepoMapper @Inject constructor() : Mapper<
         > {
 
     override fun map(param: WalletHostDetailRemoteModel, ): WalletHostDetailRepoModel {
+        val color1 = "#076022"
+        val color2 = "#85db48"
         return param.let {
             WalletHostDetailRepoModel(
                 it.id ?: 0,
@@ -53,7 +55,13 @@ class WalletHostDetailRemoteRepoMapper @Inject constructor() : Mapper<
                 ),
                 it.basketDetail?.let { basket ->
                     basket.map { item ->
-                        BasketHostsDetailRepoModel(item.namad ?: "", item.percent ?: 0.0F)
+                        BasketHostsDetailRepoModel(item.namad ?: "", item.percent ?: 0.0F,when(item.namad) {
+                            "آکورد" ->  "#17502f"
+                            "کیان" ->  "#3e2cad"
+                            "افران" ->  "#46a118"
+                            "اعتماد" ->  "#076022"
+                            else -> "#85db48"
+                        })
                     }
                 } ?: emptyList()
             )

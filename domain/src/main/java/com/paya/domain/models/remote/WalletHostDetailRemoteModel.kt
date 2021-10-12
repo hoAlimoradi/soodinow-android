@@ -18,6 +18,7 @@ data class WalletHostDetailRemoteModel(
 ) : NoObfuscate
 
 data class BasketHostsDetailRemoteModel(
+    val isin: String?,
     val namad: String?,
     val percent: Float?
 )
