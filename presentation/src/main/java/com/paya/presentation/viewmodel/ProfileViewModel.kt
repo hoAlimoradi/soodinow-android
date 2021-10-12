@@ -145,8 +145,9 @@ class ProfileViewModel @Inject constructor(
 
     private fun fillEntries(chartData: List<CircleChartDataRepoModel>) {
         viewModelScope.launch(Dispatchers.Main) {
-            if (pieChartModel != null)
-                return@launch
+            if (pieChartModel != null) {
+               pieChartModel == null
+            }
             pieChartModel = PieChartModel()
             pieChartModel?.let { pieChartModel ->
                 if (chartData.isNotEmpty() && pieChartModel.chartLabels.isEmpty() && pieChartModel.entries.isEmpty()) {

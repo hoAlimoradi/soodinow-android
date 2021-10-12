@@ -15,6 +15,7 @@ import com.paya.presentation.ui.cashManager.CashManagerFragment
 import com.paya.presentation.ui.cashManager.CashManagerWalletFragment
 import com.paya.presentation.utils.Utils
 import com.paya.presentation.viewmodel.CardAccountViewModel
+import kotlinx.android.synthetic.main.account_card.view.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -59,6 +60,13 @@ class CardAccount : BaseFragment<CardAccountViewModel>() {
         setData()
         mBinding?.managementAccountBtn?.apply {
             visibility = if (haveButton) View.VISIBLE else View.INVISIBLE
+            activeBoxRepo?.let { repo-> {
+                if (repo.subType.isEmpty()){
+                    accountSubCardNumber.text = "پیمان سرمایه گذاری بدون ریسک سودینو"
+                } else {
+                    accountSubCardNumber.text = repo.subType
+                }
+            } }
             setOnClickListener {
                 if (isWallet) {
                     getFindViewController()?.navigate(R.id.cashManagerWallet,

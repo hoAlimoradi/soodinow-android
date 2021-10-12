@@ -232,6 +232,13 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
     }
 
     private fun setData(pieChartModel: PieChartModel) {
+        mBinding?.pieChart?.apply {
+            this.data = null
+            clear()
+            removeAllViews()
+            highlightValues(null)
+            notifyDataSetChanged()
+        }
         val dataSet = PieDataSet(pieChartModel.entries, "")
         dataSet.setDrawIcons(false)
         dataSet.sliceSpace = 0f
