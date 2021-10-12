@@ -601,7 +601,35 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/yourRiskFreeInvestmentPortfolio">
 
+                            <com.github.mikephil.charting.charts.PieChart
+                                android:id="@+id/pieChart"
+                                android:layout_width="0dp"
+                                android:layout_height="190dp"
+                                android:layout_marginTop="@dimen/margin_l"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/chartLabelRecyclerView"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin_m"
+                                android:layout_marginBottom="@dimen/space_bottom_navigation"
+                                android:foregroundGravity="right"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/pieChart"
+                                app:layout_constraintVertical_bias="0.1"
+                                tools:itemCount="10"
+                                tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                tools:listitem="@layout/item_chart_label"
+                                tools:orientation="horizontal"
+                                tools:scrollbars="horizontal" />
                             <com.paya.presentation.utils.mosaiclayout.MosaicLayout
+                                android:visibility="gone"
                                 android:id="@+id/mosaicLayout"
                                 android:layout_width="0dp"
                                 android:layout_height="0dp"
