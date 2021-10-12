@@ -14,6 +14,7 @@ import com.paya.domain.tools.Status
 import com.paya.presentation.R
 import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
+import com.paya.presentation.ui.createLowRiskAccount.HOST_ID
 import com.paya.presentation.utils.loge
 import com.paya.presentation.utils.observe
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,12 +36,22 @@ class RiskAssessmentConfirmFragment : BaseFragment<RiskAssessmentViewModel>() {
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        assessYourRiskStartNow.setOnClickListener {
+            getFindViewController()?.navigateUp()
+            var bundle = Bundle()
+            bundle.putInt(HOST_ID,9)
+            getFindViewController()?.navigate(
+                R.id.openSoodinowAutomaticInvestmentAccountFragment,
+                bundle
+            )
+        }
         assessYourRiskIWillTryAgain.setOnClickListener {
             findNavController().popBackStack()
         }
        // observe(viewModel.riskAssessmentPagesLiveData, ::onDataReady)
         finalAssessYourRiskProgressView.setProgress(0.5f)
     }
+
 
     override fun onResume() {
         super.onResume()

@@ -194,6 +194,12 @@
         android:label="fragment_cash_manager"
         tools:layout="@layout/fragment_cash_manager"/>
 
+ <fragment
+        android:id="@+id/cashManagerWallet"
+        android:name="com.paya.presentation.ui.cashManager.CashManagerWalletFragment"
+        android:label="fragment_cash_manager"
+        tools:layout="@layout/fragment_cash_manager"/>
+
 
     <fragment
         android:id="@+id/firstInformation"

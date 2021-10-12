@@ -1,5 +1,6 @@
 package com.paya.data.repository
 
+import android.util.Log
 import com.paya.common.Mapper
 import com.paya.data.network.remote_api.LowRiskInvestmentService
 import com.paya.data.sharedpreferences.PreferenceHelper
@@ -105,6 +106,16 @@ data class LowRiskInvestmentRepositoryImpl @Inject constructor(
         pageSize: Int,
         filters: Map<String, String>
     ): Resource<InvestmentLogsRepoModel> {
+        try{
+            lowRiskInvestmentService.getInvestmentLogs(
+                preferenceHelper.getAccessToken(),
+                page,
+                pageSize,
+                filters
+            )
+        } catch (e:Exception) {
+            Log.e("sd;as","sdasd",e)
+        }
         return getResourceFromApiResponse(
             lowRiskInvestmentService.getInvestmentLogs(
                 preferenceHelper.getAccessToken(),

@@ -14,7 +14,7 @@ data class WalletHostDetailRepoModel(
     val properties: List<String>,
     val basket: BasketHostsRepoModel,
     val efficiency: EfficiencyHostListRepoModel,
-    val basketDetail: List<BasketHostsDetailRepoModel>?,
+    val basketDetail: List<BasketHostsDetailRepoModel>,
 ) : NoObfuscate
 
 data class BasketHostsDetailRepoModel(

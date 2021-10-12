@@ -85,7 +85,9 @@ class ProfileViewModel @Inject constructor(
             if (resource.status == Status.SUCCESS) {
                 resource.data?.activeBox?.let {
                     it.forEach { activeBox ->
-                        cardAccounts.add(CardAccount.newInstance(activeBox, true))
+                        val card = CardAccount.newInstance(activeBox, true)
+                        card.activeBoxRepo = activeBox
+                        cardAccounts.add(card)
                     }
 
                 }
@@ -153,7 +155,7 @@ class ProfileViewModel @Inject constructor(
                         allSize += it.quantity
                     }
                     chartData.forEachIndexed { _, pieChartData ->
-                        if (pieChartModel.entries.size <= chartData.size)
+                        if (pieChartModel.entries.size <= chartData.size&&allSize>0 )
                             pieChartModel.entries.add(PieEntry(((pieChartData.quantity * 100) / allSize).toFloat()))
                         if (pieChartModel.chartColor.size <= chartData.size)
                             pieChartModel.chartColor.add(Color.parseColor(pieChartData.color))

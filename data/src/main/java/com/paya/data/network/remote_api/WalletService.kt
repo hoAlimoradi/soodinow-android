@@ -31,14 +31,14 @@ interface WalletService {
     ): ApiResponse<BaseModel<String>>
 
     @FormUrlEncoded
-    @POST("investment/withdraw_request/{id}")
+    @POST("investment/withdraw_request/{id}/")
     suspend fun withdrawRequest(
         @Header("Authorization") auth: String,
         @Path("id") id: Int,
         @Field("value") sell: Long
     ): ApiResponse<BaseModel<WalletWithdrawRequestRemoteModel>>
 
-    @GET("investment/pre_withdraw/{id}")
+    @GET("investment/pre_withdraw/{id}/")
     suspend fun preWithdraw(
         @Header("Authorization") auth: String,
         @Path("id") id: Int

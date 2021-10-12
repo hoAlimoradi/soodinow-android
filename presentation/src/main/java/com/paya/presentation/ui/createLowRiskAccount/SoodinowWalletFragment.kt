@@ -80,7 +80,7 @@ class SoodinowWalletFragment : BaseFragment<SoodinowWalletViewModel>(), StartInv
 
     override fun onPositionClicked(position: Int,hostId: Int, isFarabi: Boolean) {
         if (hostId==-1) {
-
+            getFindViewController()?.navigate(R.id.riskAssessmentStart)
         }else {
             getFindViewController()?.navigateUp()
             var bundle = Bundle()

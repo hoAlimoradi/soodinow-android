@@ -27,6 +27,7 @@ import com.paya.presentation.databinding.FragmentWalletSoodinowOpenAutomaticInve
 import com.paya.presentation.ui.profile.dialog.ChartProfileDialog
 import com.paya.presentation.utils.NumberTextWatcher
 import com.paya.presentation.utils.Utils
+import com.paya.presentation.utils.mosaiclayout.CellView
 import com.paya.presentation.utils.observe
 import com.paya.presentation.utils.openUrl
 import com.paya.presentation.viewmodel.OpenSoodinowAutomaticViewModel
@@ -137,6 +138,9 @@ class OpenSoodinowAutomaticInvestmentAccountFragment :
                     monthlyPercentValue.text = it.efficiency.month.percent.toString() + "%"
                     trimesterPercentValue.text = it.efficiency.threeMonth.percent.toString() + "%"
                     weeklyPercentValue.text = it.efficiency.week.percent.toString() + "%"
+                    mosaicLayout.setPercentList(it.basketDetail.map { basket->
+                        (basket.percent * 100).toInt()
+                    } as MutableList<Int>)
                 }
             }
         }

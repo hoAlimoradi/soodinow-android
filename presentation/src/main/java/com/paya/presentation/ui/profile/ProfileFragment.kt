@@ -132,14 +132,16 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
         if (resource) {
             adapterSlide?.apply { notifyDataSetChanged() }
             mBinding?.apply { parentView.visibility = View.VISIBLE }
+/*
             if (viewModel.cardAccounts.first().activeBoxRepo == null)
                 return
+*/
            /* viewModel.cardAccounts.first().activeBoxRepo?.efficiencyRepoModel?.let {
                 setupEfficiencyAdapter(
                     it
                 )
             }*/
-            viewModel.currentBoxId = viewModel.cardAccounts.first().activeBoxRepo?.id ?: 0L
+//            viewModel.currentBoxId = viewModel.cardAccounts.first().activeBoxRepo?.id ?: 0L
            /* viewModel.getProfile(
                 viewModel.cardAccounts.first().activeBoxRepo?.id ?: 0L,
                 viewModel.cardAccounts.first().isWallet
@@ -172,7 +174,12 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
                                 it.id,
                                 viewModel.cardAccounts[position].isWallet
                             )
-                            setupEfficiencyAdapter(it.efficiencyRepoModel)
+                            mBinding?.pager?.apply {
+                                post {
+                                    setupEfficiencyAdapter(it.efficiencyRepoModel)
+                                }
+                            }
+
                             super.onPageSelected(position)
                         }
                     }

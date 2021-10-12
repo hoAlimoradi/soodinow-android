@@ -12,6 +12,7 @@ import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
 import com.paya.presentation.databinding.AccountCardBinding
 import com.paya.presentation.ui.cashManager.CashManagerFragment
+import com.paya.presentation.ui.cashManager.CashManagerWalletFragment
 import com.paya.presentation.utils.Utils
 import com.paya.presentation.viewmodel.CardAccountViewModel
 
@@ -59,8 +60,13 @@ class CardAccount : BaseFragment<CardAccountViewModel>() {
         mBinding?.managementAccountBtn?.apply {
             visibility = if (haveButton) View.VISIBLE else View.INVISIBLE
             setOnClickListener {
-                getFindViewController()?.navigate(R.id.cashManager,
-                    activeBoxRepo?.id?.let { it1 -> CashManagerFragment.newBundle(it1) })
+                if (isWallet) {
+                    getFindViewController()?.navigate(R.id.cashManagerWallet,
+                        activeBoxRepo?.id?.let { it1 -> CashManagerWalletFragment.newBundle(it1) })
+                } else {
+                    getFindViewController()?.navigate(R.id.cashManager,
+                        activeBoxRepo?.id?.let { it1 -> CashManagerFragment.newBundle(it1) })
+                }
             }
         }
     }
