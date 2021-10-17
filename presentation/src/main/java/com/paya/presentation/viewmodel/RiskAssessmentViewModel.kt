@@ -20,16 +20,16 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RiskAssessmentViewModel @Inject constructor(
-    private val getRiskAssessmentQuestionsUseCase: UseCase<Unit, RiskAssessmentResponseRemoteModel>,
+    private val getRiskAssessmentQuestionsUseCase: UseCase<Unit, RiskAssessmentResponseRepoModel>,
     private val submitRiskAssessmentAnswersQuestionsUseCase: UseCase<RiskAssessmentRequestAnswerRepoBodyModel, RiskAssessmentSubmitResponseRepoModel>
 
 ) : BaseViewModel() {
 
-    val riskAssessmentPagesLiveData = MutableLiveData<Resource<RiskAssessmentResponseRemoteModel>>()
+    val riskAssessmentPagesLiveData = MutableLiveData<Resource<RiskAssessmentResponseRepoModel>>()
 
     var assessYourRiskQuestionsViewPagerCurrentPageLiveData = MutableLiveData<Int>()
 
-    var riskAssessmentResponseRemoteModel: RiskAssessmentResponseRemoteModel? = null
+    var RiskAssessmentResponseRepoModel: RiskAssessmentResponseRepoModel? = null
 
     var riskAssessmentRequestAnswerList: ArrayList<RiskAssessmentRequestAnswer> = arrayListOf()
 
@@ -39,14 +39,11 @@ class RiskAssessmentViewModel @Inject constructor(
             val response = callResource(this@RiskAssessmentViewModel,getRiskAssessmentQuestionsUseCase.action(Unit))
             when (response.status) {
                 Status.SUCCESS -> response.data?.let {
-
-
-                    riskAssessmentResponseRemoteModel = it
+                    RiskAssessmentResponseRepoModel = it
                     loge( " riskAssessmentPages.questionCount it " + it.count   )
                 }
-
                 else -> {
-                    loge( " riskAssessmentResponseRemoteModel is null " )
+                    loge( " RiskAssessmentResponseRepoModel is null " )
                 }
             }
             riskAssessmentPagesLiveData.postValue(response)
@@ -61,15 +58,15 @@ class RiskAssessmentViewModel @Inject constructor(
     }
 
     fun getRiskAssessmentQuestionsByPageNumber(pageNumber: Int): RiskAssessmentPages? {
-        return riskAssessmentResponseRemoteModel!!.pages[pageNumber - 1]
+        return RiskAssessmentResponseRepoModel!!.pages[pageNumber - 1]
         /*return when {
             pageNumber == 0 -> {
-                riskAssessmentResponseRemoteModel!!.pages.first()
+                RiskAssessmentResponseRepoModel!!.pages.first()
             }
-            pageNumber > riskAssessmentResponseRemoteModel!!.pageCount - 1 -> {
-                riskAssessmentResponseRemoteModel!!.pages.last()
+            pageNumber > RiskAssessmentResponseRepoModel!!.pageCount - 1 -> {
+                RiskAssessmentResponseRepoModel!!.pages.last()
             }
-            else -> riskAssessmentResponseRemoteModel!!.pages[pageNumber - 1]
+            else -> RiskAssessmentResponseRepoModel!!.pages[pageNumber - 1]
         }*/
     }
 

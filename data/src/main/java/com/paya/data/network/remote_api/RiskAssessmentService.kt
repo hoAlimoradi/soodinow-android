@@ -9,7 +9,7 @@ import retrofit2.http.POST
 
 interface RiskAssessmentService {
     @GET("q/1/questions")
-    suspend fun getRiskAssessmentQuestions(): ApiResponse<BaseModel<RiskAssessmentResponseRemoteModel>>
+    suspend fun getRiskAssessmentQuestions(@Header("Authorization") auth: String): ApiResponse<BaseModel<RiskAssessmentResponseRemoteModel>>
 
     @POST("q/1/submit")
     suspend fun submitRiskAssessmentQuestions(@Header("Authorization") auth: String,

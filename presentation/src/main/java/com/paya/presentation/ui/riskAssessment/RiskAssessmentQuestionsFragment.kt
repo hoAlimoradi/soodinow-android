@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.paya.domain.models.remote.RiskAssessmentResponseRemoteModel
+import com.paya.domain.models.remote.RiskAssessmentResponseRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.presentation.R
@@ -80,18 +81,17 @@ class RiskAssessmentQuestionsFragment : BaseFragment<RiskAssessmentViewModel>() 
 
     override fun onResume() {
         super.onResume()
-
         loge( "  بینمی " + viewModel.toString()   )
         riskAssessmentQuestionFragments.clear()
         viewModel.getRiskAssessmentQuestions()
     }
 
-    private fun onDataReady(resource: Resource<RiskAssessmentResponseRemoteModel>){
+    private fun onDataReady(resource: Resource<RiskAssessmentResponseRepoModel>){
 
         when (resource.status) {
-            Status.SUCCESS -> resource.data?.let { riskAssessmentResponseRemoteModel ->
+            Status.SUCCESS -> resource.data?.let { riskAssessmentResponseRepoModel ->
 
-                val count = riskAssessmentResponseRemoteModel.pageCount -1
+                val count = riskAssessmentResponseRepoModel.pageCount -1
                 for (i in 0..count) {
                     riskAssessmentQuestionFragments.add(RiskAssessmentQuestionFragment.newInstance(i))
                 }
@@ -100,7 +100,7 @@ class RiskAssessmentQuestionsFragment : BaseFragment<RiskAssessmentViewModel>() 
                 assessYourRiskQuestionsViewPager.adapter = viewPagerAdapter
                 //assessYourRiskQuestionsViewPager.offscreenPageLimit = 2
                 loge( " riskAssessmentQuestionFragments  size " + riskAssessmentQuestionFragments.size   )
-                loge( " riskAssessmentPages.questionCount " + riskAssessmentResponseRemoteModel.count   )
+                loge( " riskAssessmentPages.questionCount " + riskAssessmentResponseRepoModel.count   )
             }
             else -> return
         }

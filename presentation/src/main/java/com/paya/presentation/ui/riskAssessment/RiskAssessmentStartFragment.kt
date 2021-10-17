@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.paya.domain.models.remote.RiskAssessmentResponseRemoteModel
+import com.paya.domain.models.remote.RiskAssessmentResponseRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.presentation.R
@@ -53,17 +54,15 @@ class RiskAssessmentStartFragment : BaseFragment<RiskAssessmentViewModel>() {
 
     override fun onResume() {
         super.onResume()
-
         loge( "  بینمی " + viewModel.toString()   )
         //viewModel.getRiskAssessmentQuestions()
     }
 
-    private fun onDataReady(resource: Resource<RiskAssessmentResponseRemoteModel>){
+    private fun onDataReady(resource: Resource<RiskAssessmentResponseRepoModel>){
 
         when (resource.status) {
-            Status.SUCCESS -> resource.data?.let { riskAssessmentResponseRemoteModel ->
-
-                loge( " riskAssessmentPages.questionCount  onDataReady" + riskAssessmentResponseRemoteModel.count   )
+            Status.SUCCESS -> resource.data?.let { riskAssessmentResponseRepoModel ->
+                loge( " riskAssessmentPages.questionCount  onDataReady" + riskAssessmentResponseRepoModel.count   )
             }
             else -> return
         }

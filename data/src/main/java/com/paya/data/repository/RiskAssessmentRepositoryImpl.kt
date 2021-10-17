@@ -19,11 +19,17 @@ class RiskAssessmentRepositoryImpl @Inject constructor(
     private val context: Application,
     private val riskAssessmentService: RiskAssessmentService,
     private val riskAssessmentSubmitResponseRepoMapper: Mapper<RiskAssessmentSubmitResponseRemoteModel, RiskAssessmentSubmitResponseRepoModel>,
+    private val riskAssessmentResponseRepoMapper: Mapper<RiskAssessmentResponseRemoteModel, RiskAssessmentResponseRepoModel>,
     private val preferenceHelper: PreferenceHelper
 ): RiskAssessmentRepository {
-    override suspend fun getRiskAssessmentQuestions(): Resource<RiskAssessmentResponseRemoteModel> {
 
-        return getRiskAssessmentQuestionsMock()
+    override suspend fun getRiskAssessmentQuestions(): Resource<RiskAssessmentResponseRepoModel> {
+        return getResourceFromApiResponse(
+            riskAssessmentService.getRiskAssessmentQuestions(preferenceHelper.getAccessToken())
+        ) {
+            riskAssessmentResponseRepoMapper.map(it.data)
+        }
+        //return getRiskAssessmentQuestionsMock()
     }
 
     override suspend fun submitRiskAssessmentQuestions(answers: List<RiskAssessmentRequestAnswer>): Resource<RiskAssessmentSubmitResponseRepoModel> {

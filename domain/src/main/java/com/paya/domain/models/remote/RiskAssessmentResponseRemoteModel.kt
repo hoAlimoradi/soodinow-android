@@ -27,7 +27,6 @@ data class RiskAssessmentSubmitResponseRemoteModel (
     @SerializedName("investment_host_id") val investmentHostId : Int,
     @SerializedName("error_messages") val errorMessages : List<String>,
     @SerializedName("warning_messages") val warningMessages : List<String>
-
 )
 
 data class RiskAssessmentSubmitResponseRepoModel (
@@ -35,8 +34,14 @@ data class RiskAssessmentSubmitResponseRepoModel (
     val investmentHostId : Int,
     val errorMessages : List<String>,
     val warningMessages : List<String>
-
 )
+
+data class RiskAssessmentResponseRepoModel (
+    val pages : List<RiskAssessmentPages>,
+    val count : Int,
+    val pageCount : Int
+)
+
 
 
 

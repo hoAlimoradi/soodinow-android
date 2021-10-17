@@ -1,6 +1,7 @@
 package com.paya.data.di
 
 import com.paya.common.Mapper
+import com.paya.data.mapper.RiskAssessmentResponseRepoMapper
 import com.paya.data.mapper.RiskAssessmentSubmitResponseRepoMapper
 import com.paya.data.mapper.WalletBuyRemoteRepoMapper
 import com.paya.data.repository.RiskAssessmentRepositoryImpl
@@ -24,7 +25,7 @@ abstract class RiskAssessmentModule {
     abstract fun riskAssessmentRepository(dev: RiskAssessmentRepositoryImpl): RiskAssessmentRepository
 
     @Binds
-    abstract fun bindGetRiskAssessmentQuestionsUseCase(useCase: GetRiskAssessmentQuestionsUseCase): UseCase<Unit, RiskAssessmentResponseRemoteModel>
+    abstract fun bindGetRiskAssessmentQuestionsUseCase(useCase: GetRiskAssessmentQuestionsUseCase): UseCase<Unit, RiskAssessmentResponseRepoModel>
 
     @Binds
     abstract fun bindSubmitRiskAssessmentAnswersQuestionsUseCase(useCase: SubmitRiskAssessmentAnswersQuestionsUseCase): UseCase<RiskAssessmentRequestAnswerRepoBodyModel,
@@ -33,5 +34,9 @@ abstract class RiskAssessmentModule {
     @Binds
     abstract fun bindRiskAssessmentSubmitResponseRepoMapper(mapper: RiskAssessmentSubmitResponseRepoMapper): Mapper<RiskAssessmentSubmitResponseRemoteModel,
             RiskAssessmentSubmitResponseRepoModel>
+
+    @Binds
+    abstract fun bindRiskAssessmentResponseRepoMapper(mapper: RiskAssessmentResponseRepoMapper): Mapper<RiskAssessmentResponseRemoteModel,
+            RiskAssessmentResponseRepoModel>
 
 }
