@@ -1,8 +1,8 @@
 package com.paya.domain.repository
 
 import com.paya.domain.models.remote.RiskAssessmentRequestAnswer
-import com.paya.domain.models.remote.RiskAssessmentResponseRepoModel
-import com.paya.domain.models.remote.RiskAssessmentSubmitResponseRepoModel
+import com.paya.domain.models.repo.RiskAssessmentResponseRepoModel
+import com.paya.domain.models.repo.RiskAssessmentSubmitResponseRepoModel
 import com.paya.domain.tools.Resource
 
 interface RiskAssessmentRepository {

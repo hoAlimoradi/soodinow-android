@@ -3,31 +3,38 @@ package com.paya.presentation.ui.riskAssessment
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
-import com.paya.domain.models.remote.RiskAssessmentResponseRemoteModel
-import com.paya.domain.models.remote.RiskAssessmentResponseRepoModel
+import com.paya.domain.models.repo.RiskAssessmentResponseRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.presentation.R
 import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
+import com.paya.presentation.ui.riskAssessment.adapter.RiskAssessmentQuestionFragmentRecycleViewAdapter
 import com.paya.presentation.ui.riskAssessment.adapter.RiskAssessmentQuestionsFragmentViewPagerAdapter
 import com.paya.presentation.utils.loge
 import com.paya.presentation.utils.observe
 import com.paya.presentation.viewmodel.RiskAssessmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_question_risk_assessment.*
 import kotlinx.android.synthetic.main.fragment_questions_risk_assessment.*
+import kotlinx.android.synthetic.main.fragment_questions_risk_assessment.assessYourRiskPercentValue
+import kotlinx.android.synthetic.main.fragment_questions_risk_assessment.assessYourRiskStepperIndicator
+import kotlinx.android.synthetic.main.item_wallet.view.*
 
 
 @AndroidEntryPoint
 class RiskAssessmentQuestionsFragment : BaseFragment<RiskAssessmentViewModel>() {
 
-    private lateinit var viewPagerAdapter : RiskAssessmentQuestionsFragmentViewPagerAdapter
+    private var viewPagerAdapter : RiskAssessmentQuestionsFragmentViewPagerAdapter? = null
     private var riskAssessmentQuestionFragments = arrayListOf<RiskAssessmentQuestionFragment>()
-
+    private var assessYourRiskNextIsActive = false
     private val viewModel: RiskAssessmentViewModel by activityViewModels()
     var currentPage = 0
 
@@ -36,7 +43,10 @@ class RiskAssessmentQuestionsFragment : BaseFragment<RiskAssessmentViewModel>() 
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_questions_risk_assessment, container, false)
+        val view =  inflater.inflate(R.layout.fragment_questions_risk_assessment, container, false)
+
+        return view
+
     }
 
 
@@ -60,31 +70,54 @@ class RiskAssessmentQuestionsFragment : BaseFragment<RiskAssessmentViewModel>() 
         })
 
         observe(viewModel.riskAssessmentPagesLiveData, ::onDataReady)
+        assessYourRiskStepperIndicator.progress = currentPage * (riskAssessmentQuestionFragments.size /100)
+        assessYourRiskPercentValue.text = "% " + currentPage * (riskAssessmentQuestionFragments.size /100)
+
         assessYourRiskPrevious.setOnClickListener {
+
             if (currentPage == 0) {
                 findNavController().popBackStack()
             } else {
                 currentPage -= 1
             }
+            assessYourRiskStepperIndicator.progress = currentPage * (riskAssessmentQuestionFragments.size /100)
+            assessYourRiskPercentValue.text = "% " + currentPage * (riskAssessmentQuestionFragments.size /100)
         }
+
         assessYourRiskNext.setOnClickListener {
-            if (currentPage < riskAssessmentQuestionFragments.size -1) {
-                assessYourRiskQuestionsViewPager.currentItem++
-                currentPage = assessYourRiskQuestionsViewPager.currentItem
+
+            if (viewModel.checkWhetherAssessYourRiskNextIsActiveOrNot(currentPage)) {
+                if (currentPage < riskAssessmentQuestionFragments.size -1) {
+                    assessYourRiskQuestionsViewPager.currentItem++
+                    currentPage = assessYourRiskQuestionsViewPager.currentItem
+
+
+                } else {
+                    viewModel.submitRiskAssessmentRequestAnswer()
+                    getFindViewController()?.navigateUp()
+                    getFindViewController()?.navigate(R.id.riskAssessmentConfirm)
+                }
+
+                assessYourRiskStepperIndicator.progress = currentPage * (riskAssessmentQuestionFragments.size /100)
+                assessYourRiskPercentValue.text = "% " + currentPage * (riskAssessmentQuestionFragments.size /100)
             } else {
-                getFindViewController()?.navigateUp()
-                getFindViewController()?.navigate(R.id.riskAssessmentConfirm)
+                Toast.makeText(context, " لطفا به تمامی سوالات ضروری در این صفحه پاسخ دهید ", Toast.LENGTH_SHORT)
+                    .show()
             }
 
         }
+
+
     }
 
     override fun onResume() {
         super.onResume()
-        loge( "  بینمی " + viewModel.toString()   )
         riskAssessmentQuestionFragments.clear()
         viewModel.getRiskAssessmentQuestions()
+
+
     }
+
 
     private fun onDataReady(resource: Resource<RiskAssessmentResponseRepoModel>){
 
@@ -96,19 +129,46 @@ class RiskAssessmentQuestionsFragment : BaseFragment<RiskAssessmentViewModel>() 
                     riskAssessmentQuestionFragments.add(RiskAssessmentQuestionFragment.newInstance(i))
                 }
 
-                viewPagerAdapter = RiskAssessmentQuestionsFragmentViewPagerAdapter(requireContext(), childFragmentManager,  riskAssessmentQuestionFragments )
+                viewPagerAdapter = RiskAssessmentQuestionsFragmentViewPagerAdapter(childFragmentManager,
+                    riskAssessmentQuestionFragments )
+
                 assessYourRiskQuestionsViewPager.adapter = viewPagerAdapter
-                //assessYourRiskQuestionsViewPager.offscreenPageLimit = 2
-                loge( " riskAssessmentQuestionFragments  size " + riskAssessmentQuestionFragments.size   )
-                loge( " riskAssessmentPages.questionCount " + riskAssessmentResponseRepoModel.count   )
+                assessYourRiskQuestionsViewPager.offscreenPageLimit = count
+                assessYourRiskQuestionsViewPager.adapter?.let {
+                    if (it.count > 1) {
+                        assessYourRiskQuestionsViewPager.currentItem = 1
+                        assessYourRiskQuestionsViewPager.currentItem = 0
+                    }
+                }
+
             }
             else -> return
         }
     }
 
+    override fun onDestroyView() {
+        forceDestroyCurrentItemInViewPager()
+        super.onDestroyView()
+    }
+
+    // Call this method to call destroyItem() for current item in view pager.
+    private fun forceDestroyCurrentItemInViewPager() {
+        val position: Int = assessYourRiskQuestionsViewPager.getCurrentItem()
+        viewPagerAdapter?.let {
+            val item = it.getItem(position)
+            viewPagerAdapter?.destroyItem(assessYourRiskQuestionsViewPager, position, item)
+        }
+        riskAssessmentQuestionFragments.clear()
+        viewPagerAdapter = null
+        assessYourRiskQuestionsViewPager.adapter?.let {
+            if (it.count > 0) {
+            }
+        }
+
+
+    }
     override val baseViewModel: BaseViewModel
         get() = viewModel
-
 
 }
 

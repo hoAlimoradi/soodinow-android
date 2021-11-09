@@ -4,11 +4,13 @@ import com.paya.presentation.viewmodel.RiskAssessmentViewModel
 import android.os.Build
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.paya.domain.models.remote.RiskAssessmentResponseRemoteModel
+import com.paya.domain.models.repo.RiskAssessmentSubmitResponseRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.presentation.R
@@ -25,6 +27,8 @@ class RiskAssessmentConfirmFragment : BaseFragment<RiskAssessmentViewModel>() {
 
     private val viewModel: RiskAssessmentViewModel by activityViewModels()
 
+    private var assessYourRiskStartNowEnable = false
+    private var hostId = 0
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,19 +41,25 @@ class RiskAssessmentConfirmFragment : BaseFragment<RiskAssessmentViewModel>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         assessYourRiskStartNow.setOnClickListener {
-            getFindViewController()?.navigateUp()
-            var bundle = Bundle()
-            bundle.putInt(HOST_ID,9)
-            getFindViewController()?.navigate(
-                R.id.openSoodinowAutomaticInvestmentAccountFragment,
-                bundle
-            )
+            if (assessYourRiskStartNowEnable) {
+                getFindViewController()?.navigateUp()
+                var bundle = Bundle()
+                bundle.putInt(HOST_ID,9)
+                getFindViewController()?.navigate(
+                    R.id.openSoodinowAutomaticInvestmentAccountFragment,
+                    bundle
+                )
+            } else {
+                Toast.makeText(context, "محاسبه ریسک سرمایه گذاری دچار مشکل شده ", Toast.LENGTH_SHORT)
+                    .show()
+            }
+
         }
         assessYourRiskIWillTryAgain.setOnClickListener {
             findNavController().popBackStack()
         }
-       // observe(viewModel.riskAssessmentPagesLiveData, ::onDataReady)
-        finalAssessYourRiskProgressView.setProgress(0.5f)
+        observe(viewModel.riskAssessmentSubmitLiveData, ::onDataReady)
+
     }
 
 
@@ -60,16 +70,26 @@ class RiskAssessmentConfirmFragment : BaseFragment<RiskAssessmentViewModel>() {
        // viewModel.getRiskAssessmentQuestions()
     }
 
-    /*private fun onDataReady(resource: Resource<RiskAssessmentResponseRemoteModel>){
+    private fun onDataReady(resource: Resource<RiskAssessmentSubmitResponseRepoModel>){
 
         when (resource.status) {
             Status.SUCCESS -> resource.data?.let { riskAssessmentResponseRemoteModel ->
 
-                loge( " riskAssessmentPages.questionCount " + riskAssessmentResponseRemoteModel.count   )
+                // {"data":{"result_id":7,"risk_value":51.01,"investment_host_id":7,"error_messages":[],"warning_messages":[]},"error":{"message":"انجام شد","code":200,"extra":null}}
+                val risk = (riskAssessmentResponseRemoteModel.riskValue/100)
+                loge(" (riskAssessmentResponseRemoteModel.riskValue.toInt()/100)"  + (riskAssessmentResponseRemoteModel.riskValue.toInt()/100))
+                loge(" (riskAssessmentResponseRemoteModel.riskValue.toInt()/100)"  + (riskAssessmentResponseRemoteModel.riskValue/100))
+                finalAssessYourRiskProgressView.setProgress(risk)
+                assessYourRiskStartNowEnable = true
+                hostId = riskAssessmentResponseRemoteModel.investmentHostId
             }
-            else -> return
+            else -> {
+                finalAssessYourRiskProgressView.setProgress(0f)
+                assessYourRiskStartNowEnable = false
+                return
+            }
         }
-    }*/
+    }
 
     override val baseViewModel: BaseViewModel
         get() = viewModel

@@ -2,6 +2,7 @@ package com.paya.data.repository
 
 import android.app.Application
 import android.content.Context
+import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.paya.common.Mapper
@@ -9,7 +10,8 @@ import com.paya.data.network.remote_api.RiskAssessmentService
 import com.paya.data.sharedpreferences.PreferenceHelper
 import com.paya.data.utils.getResourceFromApiResponse
 import com.paya.domain.models.remote.*
-import com.paya.domain.models.repo.PreInvoiceRepoModel
+import com.paya.domain.models.repo.RiskAssessmentResponseRepoModel
+import com.paya.domain.models.repo.RiskAssessmentSubmitResponseRepoModel
 import com.paya.domain.repository.RiskAssessmentRepository
 import com.paya.domain.tools.Resource
 import java.io.IOException
@@ -27,6 +29,7 @@ class RiskAssessmentRepositoryImpl @Inject constructor(
         return getResourceFromApiResponse(
             riskAssessmentService.getRiskAssessmentQuestions(preferenceHelper.getAccessToken())
         ) {
+            Log.e(""," RiskAssessmentRepositoryImpl it.data " + it.data)
             riskAssessmentResponseRepoMapper.map(it.data)
         }
         //return getRiskAssessmentQuestionsMock()
@@ -35,21 +38,21 @@ class RiskAssessmentRepositoryImpl @Inject constructor(
     override suspend fun submitRiskAssessmentQuestions(answers: List<RiskAssessmentRequestAnswer>): Resource<RiskAssessmentSubmitResponseRepoModel> {
         return getResourceFromApiResponse(
             riskAssessmentService.submitRiskAssessmentQuestions(preferenceHelper.getAccessToken(),
-                answers)
+                RiskAssessmentRequestAnswerBodyModel(answers))
         ) {
             riskAssessmentSubmitResponseRepoMapper.map(it.data)
         }
     }
 
 
-    private fun getRiskAssessmentQuestionsMock(): Resource<RiskAssessmentResponseRemoteModel> {
+    private fun getRiskAssessmentQuestionsMock(): Resource<RiskAssessmentResponseRepoModel> {
         val jsonFileString = getJsonDataFromAsset(context, "risk_assessment_mock_response.json")
         //Log.e("data", "  $jsonFileString")
-
         val gson = Gson()
         val riskAssessmentPagesType = object : TypeToken<RiskAssessmentResponseRemoteModel>() {}.type
         val riskAssessmentPages: RiskAssessmentResponseRemoteModel = gson.fromJson(jsonFileString, riskAssessmentPagesType)
-        return Resource.success(riskAssessmentPages , 200)
+        return  Resource.success(riskAssessmentResponseRepoMapper.map(riskAssessmentPages) , 200)
+
     }
 
     private fun getJsonDataFromAsset(context: Context, fileName: String): String? {

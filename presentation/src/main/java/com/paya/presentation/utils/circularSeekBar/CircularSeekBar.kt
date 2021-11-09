@@ -149,6 +149,7 @@ class CircularSeekBar : View {
      * @param progress Progress from 0.0 to 1.0
      */
     fun setProgress(@FloatRange(from = 0.0, to = 1.0) progress: Float) {
+
         this.progress = when {
             progress in 0f..1f -> progress
             progress > 1f -> 1f

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,6 +9,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayoutParent"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_l"
@@ -31,11 +33,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.paya.presentation.utils.StepperIndicator
+        <ProgressBar
             android:id="@+id/assessYourRiskStepperIndicator"
+            style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:stpi_stepCount="5"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:max="100"
+            android:layoutDirection="rtl"
             android:layout_marginTop="@dimen/margin_l"
             android:layout_marginHorizontal="@dimen/margin_4_dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -46,13 +52,26 @@
             android:id="@+id/assessYourRiskPercentDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_m"
+            android:layout_margin="@dimen/margin_l"
             android:text="@string/assess_risk_percent_description"
             android:textColor="@color/emperor"
             android:textSize="@dimen/text_size_m"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/assessYourRiskStepperIndicator" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/assessYourRiskPercentValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="20 %"
+            android:layout_marginStart="@dimen/margin_s"
+            android:textColor="@color/emperor"
+            android:textSize="@dimen/text_size_m"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/assessYourRiskPercentDescription"
             app:layout_constraintTop_toBottomOf="@+id/assessYourRiskStepperIndicator" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

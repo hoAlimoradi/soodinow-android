@@ -52,8 +52,8 @@ android {
         minSdkVersion(21)
         targetSdkVersion(30)
         //targetSdkVersion(31)
-        versionCode = 5
-        versionName = "1.1.2"
+        versionCode = 6
+        versionName = "1.1.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders["appAuthRedirectScheme"] = "hadiidbouk-appAuthWebView"

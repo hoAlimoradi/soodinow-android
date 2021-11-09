@@ -7,10 +7,8 @@ import android.os.Bundle
 import android.view.*
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.paya.domain.models.remote.RiskAssessmentResponseRemoteModel
-import com.paya.domain.models.remote.RiskAssessmentResponseRepoModel
+import com.paya.domain.models.repo.RiskAssessmentResponseRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
 import com.paya.presentation.R
@@ -49,12 +47,11 @@ class RiskAssessmentStartFragment : BaseFragment<RiskAssessmentViewModel>() {
         observe(viewModel.riskAssessmentPagesLiveData, ::onDataReady)
 
 
-        assessYourRiskProgressView.setProgress(0.1f)
+        assessYourRiskProgressView.setProgress(0.0f)
     }
 
     override fun onResume() {
         super.onResume()
-        loge( "  بینمی " + viewModel.toString()   )
         //viewModel.getRiskAssessmentQuestions()
     }
 

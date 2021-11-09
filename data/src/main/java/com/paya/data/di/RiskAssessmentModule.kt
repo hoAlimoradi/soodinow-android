@@ -3,10 +3,10 @@ package com.paya.data.di
 import com.paya.common.Mapper
 import com.paya.data.mapper.RiskAssessmentResponseRepoMapper
 import com.paya.data.mapper.RiskAssessmentSubmitResponseRepoMapper
-import com.paya.data.mapper.WalletBuyRemoteRepoMapper
 import com.paya.data.repository.RiskAssessmentRepositoryImpl
 import com.paya.domain.models.remote.*
-import com.paya.domain.models.repo.WalletBuyRepoModel
+import com.paya.domain.models.repo.RiskAssessmentResponseRepoModel
+import com.paya.domain.models.repo.RiskAssessmentSubmitResponseRepoModel
 import com.paya.domain.repository.RiskAssessmentRepository
 import com.paya.domain.tools.UseCase
 import com.paya.domain.usecase.riskAssessment.GetRiskAssessmentQuestionsUseCase
@@ -15,7 +15,6 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
-import javax.inject.Inject
 
 @Module
 @InstallIn(ActivityComponent::class)
@@ -28,7 +27,7 @@ abstract class RiskAssessmentModule {
     abstract fun bindGetRiskAssessmentQuestionsUseCase(useCase: GetRiskAssessmentQuestionsUseCase): UseCase<Unit, RiskAssessmentResponseRepoModel>
 
     @Binds
-    abstract fun bindSubmitRiskAssessmentAnswersQuestionsUseCase(useCase: SubmitRiskAssessmentAnswersQuestionsUseCase): UseCase<RiskAssessmentRequestAnswerRepoBodyModel,
+    abstract fun bindSubmitRiskAssessmentAnswersQuestionsUseCase(useCase: SubmitRiskAssessmentAnswersQuestionsUseCase): UseCase<RiskAssessmentRequestAnswerBodyModel,
             RiskAssessmentSubmitResponseRepoModel>
 
     @Binds

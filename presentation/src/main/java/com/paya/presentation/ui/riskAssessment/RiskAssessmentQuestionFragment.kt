@@ -19,6 +19,9 @@ import com.paya.presentation.utils.loge
 import com.paya.presentation.utils.observe
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_question_risk_assessment.*
+import kotlinx.android.synthetic.main.fragment_question_risk_assessment.assessYourRiskPercentValue
+import kotlinx.android.synthetic.main.fragment_question_risk_assessment.assessYourRiskStepperIndicator
+import kotlinx.android.synthetic.main.fragment_questions_risk_assessment.*
 
 private const val ARG_PARAM_PAGE_NUMBER = "param_page_number"
 @AndroidEntryPoint
@@ -26,7 +29,6 @@ class RiskAssessmentQuestionFragment: BaseFragment<RiskAssessmentViewModel>() ,
     RiskAssessmentQuestionFragmentRecycleViewAdapter.QuestionCallback {
 
     private var riskAssessmentQuestionFragmentRecycleViewAdapter: RiskAssessmentQuestionFragmentRecycleViewAdapter? = null
-   // private val viewModel: RiskAssessmentViewModel by viewModels() viewModels({requireParentFragment()})
     private val viewModel: RiskAssessmentViewModel by activityViewModels()
     private var paramPageNumber: Int? = null
 
@@ -34,7 +36,6 @@ class RiskAssessmentQuestionFragment: BaseFragment<RiskAssessmentViewModel>() ,
         super.onCreate(savedInstanceState)
         arguments?.let {
             paramPageNumber = it.getInt(ARG_PARAM_PAGE_NUMBER, 0)
-            loge( "paramPageNumber " + paramPageNumber   )
         }
     }
 
@@ -49,19 +50,16 @@ class RiskAssessmentQuestionFragment: BaseFragment<RiskAssessmentViewModel>() ,
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.questionsCountPercentLiveData.observe(viewLifecycleOwner) {
+            assessYourRiskStepperIndicator.progress = it //(it + 1) * (100 /viewModel.pageCount)
+            assessYourRiskPercentValue.text = "% " + it // (it + 1) * (100 /viewModel.pageCount)
+        }
 
-        //observe(viewModel.riskAssessmentPagesLiveData, ::onDataReady)
-
-
-        viewModel.assessYourRiskQuestionsViewPagerCurrentPageLiveData.observe(viewLifecycleOwner, Observer { pageNumber ->
-            loge( " صفحه چاری " + pageNumber   )
-
-            //riskAssessmentResponseRemoteModel.pages[0].questions
-            /*loge( " riskAssessmentPages. pageNumber " + pageNumber   )
-            loge( " riskAssessmentPages.questionCount " + riskAssessmentQuestionRemotes.size   )*/
-
+        viewModel.assessYourRiskQuestionsViewPagerCurrentPageLiveData.observe(viewLifecycleOwner, Observer { it ->
+            loge( " صفحه چاری " + it   )
+            val pageNumber = it + 1
             val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-            //layoutManager.reverseLayout = true
+
             viewModel.getRiskAssessmentQuestionsByPageNumber(pageNumber)?.let {  riskAssessmentQuestionRemotes ->
                 riskAssessmentQuestionFragmentRecycleViewAdapter = RiskAssessmentQuestionFragmentRecycleViewAdapter(this@RiskAssessmentQuestionFragment, riskAssessmentQuestionRemotes.questions)
                 riskAssessmentQuestionFragmentRecycleViewAdapter?.let {
@@ -69,15 +67,20 @@ class RiskAssessmentQuestionFragment: BaseFragment<RiskAssessmentViewModel>() ,
                 }
                 riskAssessmentQuestionFragmentRecycleView.layoutManager = layoutManager
             }
-
-
         })
+
+        if (paramPageNumber == 0) {
+            riskAssessmentQuestionFragmentRecycleView.invalidate()
+        }
 
 
     }
 
     override fun onResume() {
         super.onResume()
+        if (paramPageNumber == 0) {
+            riskAssessmentQuestionFragmentRecycleView.invalidate()
+        }
 
     }
 
@@ -95,10 +98,11 @@ class RiskAssessmentQuestionFragment: BaseFragment<RiskAssessmentViewModel>() ,
             }
     }
 
-    override fun onQuestionClicked(
-        riskAssessmentRequestAnswer: RiskAssessmentRequestAnswer
-    ) {
-        viewModel.saveRiskAssessmentRequestAnswer(riskAssessmentRequestAnswer)
+    override fun onQuestionClicked( riskAssessmentRequestAnswer: RiskAssessmentRequestAnswer) {
+        paramPageNumber?.let {
+            viewModel.saveRiskAssessmentRequestAnswer(it, riskAssessmentRequestAnswer)
+        }
+
     }
 
 }
