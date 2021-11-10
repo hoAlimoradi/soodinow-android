@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 import com.paya.presentation.ui.riskAssessment.RiskAssessmentQuestionFragment
 
 class RiskAssessmentQuestionsFragmentViewPagerAdapter(fm: FragmentManager,
-                                                      var riskAssessmentQuestionFragments: List<RiskAssessmentQuestionFragment>)
+                                                      var riskAssessmentQuestionFragments: MutableList<RiskAssessmentQuestionFragment>)
     : FragmentPagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment {
@@ -19,6 +19,9 @@ class RiskAssessmentQuestionsFragmentViewPagerAdapter(fm: FragmentManager,
         return riskAssessmentQuestionFragments.size
     }
 
+    fun clear() {
+        riskAssessmentQuestionFragments.clear()
+    }
 
 }
 

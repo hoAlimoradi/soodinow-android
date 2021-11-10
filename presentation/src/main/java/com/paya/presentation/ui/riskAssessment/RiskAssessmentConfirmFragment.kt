@@ -76,8 +76,7 @@ class RiskAssessmentConfirmFragment : BaseFragment<RiskAssessmentViewModel>() {
             Status.SUCCESS -> resource.data?.let { riskAssessmentResponseRemoteModel ->
 
                 // {"data":{"result_id":7,"risk_value":51.01,"investment_host_id":7,"error_messages":[],"warning_messages":[]},"error":{"message":"انجام شد","code":200,"extra":null}}
-                val risk = (riskAssessmentResponseRemoteModel.riskValue/100)
-                loge(" (riskAssessmentResponseRemoteModel.riskValue.toInt()/100)"  + (riskAssessmentResponseRemoteModel.riskValue.toInt()/100))
+                val risk = (riskAssessmentResponseRemoteModel.riskValue/100).round(2)
                 loge(" (riskAssessmentResponseRemoteModel.riskValue.toInt()/100)"  + (riskAssessmentResponseRemoteModel.riskValue/100))
                 finalAssessYourRiskProgressView.setProgress(risk)
                 assessYourRiskStartNowEnable = true
@@ -90,6 +89,7 @@ class RiskAssessmentConfirmFragment : BaseFragment<RiskAssessmentViewModel>() {
             }
         }
     }
+    fun Float.round(decimals: Int = 2): Float = "%.${decimals}f".format(this).toFloat()
 
     override val baseViewModel: BaseViewModel
         get() = viewModel

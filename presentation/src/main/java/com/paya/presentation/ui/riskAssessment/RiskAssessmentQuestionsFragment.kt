@@ -16,7 +16,6 @@ import com.paya.domain.tools.Status
 import com.paya.presentation.R
 import com.paya.presentation.base.BaseFragment
 import com.paya.presentation.base.BaseViewModel
-import com.paya.presentation.ui.riskAssessment.adapter.RiskAssessmentQuestionFragmentRecycleViewAdapter
 import com.paya.presentation.ui.riskAssessment.adapter.RiskAssessmentQuestionsFragmentViewPagerAdapter
 import com.paya.presentation.utils.loge
 import com.paya.presentation.utils.observe
@@ -153,20 +152,17 @@ class RiskAssessmentQuestionsFragment : BaseFragment<RiskAssessmentViewModel>() 
 
     // Call this method to call destroyItem() for current item in view pager.
     private fun forceDestroyCurrentItemInViewPager() {
-        val position: Int = assessYourRiskQuestionsViewPager.getCurrentItem()
+        val position: Int = assessYourRiskQuestionsViewPager.currentItem
         viewPagerAdapter?.let {
             val item = it.getItem(position)
             viewPagerAdapter?.destroyItem(assessYourRiskQuestionsViewPager, position, item)
         }
         riskAssessmentQuestionFragments.clear()
+        (assessYourRiskQuestionsViewPager.adapter as RiskAssessmentQuestionsFragmentViewPagerAdapter).clear()
         viewPagerAdapter = null
-        assessYourRiskQuestionsViewPager.adapter?.let {
-            if (it.count > 0) {
-            }
-        }
-
 
     }
+
     override val baseViewModel: BaseViewModel
         get() = viewModel
 

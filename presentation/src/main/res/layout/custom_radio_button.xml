@@ -26,8 +26,8 @@
             android:id="@+id/imageView"
             android:layout_marginTop="@dimen/margin_m"
             android:src="@drawable/ic_baseline_panorama_fish_eye_24"
-            android:layout_width="48dp"
-            android:layout_height="48dp"/>
+            android:layout_width="68dp"
+            android:layout_height="68dp"/>
 
 
     </LinearLayout>

@@ -41,7 +41,7 @@ class CustomRadioButton : CardView, CustomRadioCheckable {
     var text: String = "Title"
     private var drawableIcon: Drawable? = null
     private var textSize: Float = 14f
-    private var iconSize: Float = 48f
+    private var iconSize: Float = 68f
     private var textColor: Int = Color.GRAY
     private var pressedTextColor: Int = Color.BLACK
     private var iconColor: Int = Color.GRAY
@@ -97,7 +97,7 @@ class CustomRadioButton : CardView, CustomRadioCheckable {
     private fun initRadioImageButton() {
         inflateView()
         bindView()
-        setCustomTouchListener()
+        //setCustomTouchListener()
     }
 
     private fun inflateView() {
@@ -130,6 +130,10 @@ class CustomRadioButton : CardView, CustomRadioCheckable {
         imageView.layoutParams.width = iconSize.toInt()
         imageView.setImageDrawable(drawableIcon)
 
+        imageView.setOnClickListener {
+            isChecked = true
+        }
+
     }
 
     private fun dpToPx(dp: Int): Int {
@@ -137,12 +141,12 @@ class CustomRadioButton : CardView, CustomRadioCheckable {
         return dp * (displayMetric.densityDpi / DisplayMetrics.DENSITY_DEFAULT)
     }
 
-    override fun setOnClickListener(l: OnClickListener?) {
+    /*override fun setOnClickListener(l: OnClickListener?) {
         mOnClickListener = l
-    }
+    }*/
 
     @SuppressLint("ClickableViewAccessibility")
-    private fun setCustomTouchListener() {
+   /* private fun setCustomTouchListener() {
         super.setOnTouchListener(TouchListener())
     }
 
@@ -151,10 +155,9 @@ class CustomRadioButton : CardView, CustomRadioCheckable {
     }
 
     private fun onTouchUp(motionEvent: MotionEvent) {
-        // Handle user defined click listeners
         mOnClickListener?.onClick(this)
     }
-
+*/
     fun setCheckedState() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             animateToSelected()
@@ -281,7 +284,7 @@ class CustomRadioButton : CardView, CustomRadioCheckable {
     }
 
 
-    private inner class TouchListener : View.OnTouchListener {
+    /*private inner class TouchListener : View.OnTouchListener {
 
         override fun onTouch(v: View, event: MotionEvent): Boolean {
             when (event.action) {
@@ -292,6 +295,6 @@ class CustomRadioButton : CardView, CustomRadioCheckable {
             return true
         }
 
-    }
+    }*/
 
 }
