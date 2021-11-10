@@ -158,7 +158,9 @@ class RiskAssessmentQuestionsFragment : BaseFragment<RiskAssessmentViewModel>() 
             viewPagerAdapter?.destroyItem(assessYourRiskQuestionsViewPager, position, item)
         }
         riskAssessmentQuestionFragments.clear()
+        viewPagerAdapter?.notifyDataSetChanged()
         (assessYourRiskQuestionsViewPager.adapter as RiskAssessmentQuestionsFragmentViewPagerAdapter).clear()
+        (assessYourRiskQuestionsViewPager.adapter as RiskAssessmentQuestionsFragmentViewPagerAdapter).notifyDataSetChanged()
         viewPagerAdapter = null
 
     }
