@@ -37,6 +37,7 @@ class RiskAssessmentStartFragment : BaseFragment<RiskAssessmentViewModel>() {
         super.onViewCreated(view, savedInstanceState)
 
         assessYourRiskStartNow.setOnClickListener {
+            viewModel.clearQuestions()
             getFindViewController()?.navigateUp()
             getFindViewController()?.navigate(R.id.riskAssessmentQuestions)
         }

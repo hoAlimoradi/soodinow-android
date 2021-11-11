@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.paya.domain.models.remote.RiskAssessmentResponseRemoteModel
 import com.paya.domain.models.repo.RiskAssessmentSubmitResponseRepoModel
@@ -43,7 +44,7 @@ class RiskAssessmentConfirmFragment : BaseFragment<RiskAssessmentViewModel>() {
         assessYourRiskStartNow.setOnClickListener {
             if (assessYourRiskStartNowEnable) {
                 getFindViewController()?.navigateUp()
-                var bundle = Bundle()
+                val bundle = Bundle()
                 bundle.putInt(HOST_ID,9)
                 getFindViewController()?.navigate(
                     R.id.openSoodinowAutomaticInvestmentAccountFragment,
@@ -53,11 +54,17 @@ class RiskAssessmentConfirmFragment : BaseFragment<RiskAssessmentViewModel>() {
                 Toast.makeText(context, "محاسبه ریسک سرمایه گذاری دچار مشکل شده ", Toast.LENGTH_SHORT)
                     .show()
             }
+        }
 
-        }
         assessYourRiskIWillTryAgain.setOnClickListener {
-            findNavController().popBackStack()
+            viewModel.clearQuestions()
+            viewModel.clearQuestionsMutableLiveData.observe(viewLifecycleOwner, Observer {
+                if (it) {
+                    findNavController().popBackStack()
+                }
+            })
         }
+
         observe(viewModel.riskAssessmentSubmitLiveData, ::onDataReady)
 
     }

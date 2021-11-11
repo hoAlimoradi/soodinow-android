@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
+import androidx.viewpager2.widget.ViewPager2
 import com.paya.domain.models.repo.RiskAssessmentResponseRepoModel
 import com.paya.domain.tools.Resource
 import com.paya.domain.tools.Status
@@ -36,7 +37,7 @@ class RiskAssessmentQuestionsFragment : BaseFragment<RiskAssessmentViewModel>() 
     private var assessYourRiskNextIsActive = false
     private val viewModel: RiskAssessmentViewModel by activityViewModels()
     var currentPage = 0
-
+    lateinit var onPageChangeCallback: ViewPager2.OnPageChangeCallback
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -52,6 +53,24 @@ class RiskAssessmentQuestionsFragment : BaseFragment<RiskAssessmentViewModel>() 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        assessYourRiskQuestionsViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                if ( position == 0 )  {
+                    // do something
+                }
+                else if (position == 1) {
+                    // do something
+                }
+                else {
+                    // do something
+                }
+
+                Log.i(""," log setAssessYourRiskQuestionsViewPagerCurrentPage " + position)
+                viewModel.setAssessYourRiskQuestionsViewPagerCurrentPage(position)
+                super.onPageSelected(position)
+            }
+        })
+/*
         assessYourRiskQuestionsViewPager.addOnPageChangeListener(object : OnPageChangeListener {
             override fun onPageScrolled(
                 position: Int,
@@ -66,7 +85,7 @@ class RiskAssessmentQuestionsFragment : BaseFragment<RiskAssessmentViewModel>() 
             }
 
             override fun onPageScrollStateChanged(state: Int) {}
-        })
+        })*/
 
         observe(viewModel.riskAssessmentPagesLiveData, ::onDataReady)
         assessYourRiskStepperIndicator.progress = currentPage * (riskAssessmentQuestionFragments.size /100)
@@ -127,18 +146,25 @@ class RiskAssessmentQuestionsFragment : BaseFragment<RiskAssessmentViewModel>() 
                 for (i in 0..count) {
                     riskAssessmentQuestionFragments.add(RiskAssessmentQuestionFragment.newInstance(i))
                 }
-
-                viewPagerAdapter = RiskAssessmentQuestionsFragmentViewPagerAdapter(childFragmentManager,
+                viewPagerAdapter = RiskAssessmentQuestionsFragmentViewPagerAdapter(this.requireActivity(),
                     riskAssessmentQuestionFragments )
+               /* viewPagerAdapter = RiskAssessmentQuestionsFragmentViewPagerAdapter(childFragmentManager,
+                    riskAssessmentQuestionFragments )*/
 
                 assessYourRiskQuestionsViewPager.adapter = viewPagerAdapter
                 assessYourRiskQuestionsViewPager.offscreenPageLimit = count
                 assessYourRiskQuestionsViewPager.adapter?.let {
-                    if (it.count > 1) {
+                    if (it.itemCount > 1) {
                         assessYourRiskQuestionsViewPager.currentItem = 1
                         assessYourRiskQuestionsViewPager.currentItem = 0
                     }
                 }
+                /*assessYourRiskQuestionsViewPager.adapter?.let {
+                    if (it.count > 1) {
+                        assessYourRiskQuestionsViewPager.currentItem = 1
+                        assessYourRiskQuestionsViewPager.currentItem = 0
+                    }
+                }*/
 
             }
             else -> return
@@ -153,16 +179,22 @@ class RiskAssessmentQuestionsFragment : BaseFragment<RiskAssessmentViewModel>() 
     // Call this method to call destroyItem() for current item in view pager.
     private fun forceDestroyCurrentItemInViewPager() {
         val position: Int = assessYourRiskQuestionsViewPager.currentItem
-        viewPagerAdapter?.let {
-            val item = it.getItem(position)
+        /*viewPagerAdapter?.let {
+            val item = it  getItem(position)
             viewPagerAdapter?.destroyItem(assessYourRiskQuestionsViewPager, position, item)
-        }
+            it.clear()
+        }*/
         riskAssessmentQuestionFragments.clear()
-        viewPagerAdapter?.notifyDataSetChanged()
         (assessYourRiskQuestionsViewPager.adapter as RiskAssessmentQuestionsFragmentViewPagerAdapter).clear()
         (assessYourRiskQuestionsViewPager.adapter as RiskAssessmentQuestionsFragmentViewPagerAdapter).notifyDataSetChanged()
+
+        viewPagerAdapter?.notifyDataSetChanged()
         viewPagerAdapter = null
 
+
+        /*assessYourRiskQuestionsViewPager.run{
+            this.unregisterOnPageChangeCallback(this.call)
+        }*/
     }
 
     override val baseViewModel: BaseViewModel

@@ -1,6 +1,7 @@
 package com.paya.presentation.viewmodel
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.paya.domain.models.remote.*
@@ -52,8 +53,11 @@ class RiskAssessmentViewModel @Inject constructor(
 
     var assessYourRiskNextStateListLiveData  = MutableLiveData<List<AssessYourRiskNextState>>()
 
+    var clearQuestionsMutableLiveData  = MutableLiveData<Boolean>()
+
     fun getRiskAssessmentQuestions() {
         viewModelScope.launch {
+            showLoading()
             val response = callResource(this@RiskAssessmentViewModel,getRiskAssessmentQuestionsUseCase.action(Unit))
             when (response.status) {
                 Status.SUCCESS -> response.data?.let {
@@ -73,7 +77,7 @@ class RiskAssessmentViewModel @Inject constructor(
                 }
             }
             riskAssessmentPagesLiveData.postValue(response)
-            //hideLoading()
+            hideLoading()
         }
     }
 
@@ -85,9 +89,9 @@ class RiskAssessmentViewModel @Inject constructor(
 
     fun updateQuestionsMap(riskAssessmentRequestAnswer: RiskAssessmentRequestAnswer) {
         if (riskAssessmentRequestAnswer.answers.isNotEmpty()) {
-            questionsMap.put(riskAssessmentRequestAnswer.question.id, true)
+            questionsMap[riskAssessmentRequestAnswer.question.id] = true
         } else {
-            questionsMap.put(riskAssessmentRequestAnswer.question.id, false)
+            questionsMap[riskAssessmentRequestAnswer.question.id] = false
         }
 
         var questionsCountHasAnswer = 0
@@ -156,6 +160,28 @@ class RiskAssessmentViewModel @Inject constructor(
         }
         return true
     }
+
+    fun clearQuestions()  {
+        viewModelScope.launch {
+            clearQuestionsMutableLiveData.value = false
+            if(!questionsMap.isNullOrEmpty()) {
+
+                with(questionsMap.iterator()) {
+                    forEach {
+                          remove()
+                    }
+                }
+            }
+
+
+            questionsCountPercentLiveData.value = 0
+            riskAssessmentRequestAnswerList.clear()
+            clearQuestionsMutableLiveData.value = true
+        }
+    }
+
+
+
 
 
 }
