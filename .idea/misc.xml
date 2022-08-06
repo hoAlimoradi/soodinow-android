@@ -6,21 +6,53 @@
         <entry key="presentation/src/main/res/drawable/bg_btn_japanese_laurel_green_corner5_size48.xml" value="0.5005" />
         <entry key="presentation/src/main/res/drawable/bg_btn_japanese_laurel_green_corner_just_bottom_left_5_size48.xml" value="0.5005" />
         <entry key="presentation/src/main/res/drawable/bg_btn_japanese_laurel_green_corner_just_left_5_size48.xml" value="0.5005" />
+        <entry key="presentation/src/main/res/drawable/bg_button_green_13c83f.xml" value="0.257" />
+        <entry key="presentation/src/main/res/drawable/bg_button_purple.xml" value="0.257" />
+        <entry key="presentation/src/main/res/drawable/bg_tab_layout_mini.xml" value="0.31" />
+        <entry key="presentation/src/main/res/drawable/bg_tab_selected_mini.xml" value="0.31" />
         <entry key="presentation/src/main/res/drawable/circle_white.xml" value="0.494" />
         <entry key="presentation/src/main/res/drawable/circle_white_with_gray_shadow.xml" value="0.494" />
+        <entry key="presentation/src/main/res/drawable/ic_back.xml" value="0.314" />
+        <entry key="presentation/src/main/res/drawable/ic_line_green.xml" value="0.31" />
+        <entry key="presentation/src/main/res/drawable/round_corner_layout.xml" value="0.329" />
+        <entry key="presentation/src/main/res/drawable/selector_tab_brokerage.xml" value="0.31" />
+        <entry key="presentation/src/main/res/layout/account_card.xml" value="0.29791666666666666" />
+        <entry key="presentation/src/main/res/layout/activity_main.xml" value="0.24394550958627648" />
+        <entry key="presentation/src/main/res/layout/dialog_error.xml" value="0.2363773965691221" />
         <entry key="presentation/src/main/res/layout/dialog_update_app.xml" value="0.2740036231884058" />
         <entry key="presentation/src/main/res/layout/fragment_about_us.xml" value="0.5140625" />
+        <entry key="presentation/src/main/res/layout/fragment_activate_login.xml" value="0.3223958333333333" />
+        <entry key="presentation/src/main/res/layout/fragment_confirm_risk_assessment.xml" value="0.39402173913043476" />
+        <entry key="presentation/src/main/res/layout/fragment_connect_low_risk_brokerage.xml" value="0.29791666666666666" />
+        <entry key="presentation/src/main/res/layout/fragment_hint.xml" value="0.3223958333333333" />
         <entry key="presentation/src/main/res/layout/fragment_home.xml" value="0.40443840579710144" />
+        <entry key="presentation/src/main/res/layout/fragment_login.xml" value="0.3223958333333333" />
         <entry key="presentation/src/main/res/layout/fragment_new_card_account.xml" value="0.2740036231884058" />
+        <entry key="presentation/src/main/res/layout/fragment_questions_risk_assessment.xml" value="0.29791666666666666" />
         <entry key="presentation/src/main/res/layout/fragment_settings.xml" value="0.278125" />
+        <entry key="presentation/src/main/res/layout/fragment_wallet_farabi.xml" value="0.16458333333333333" />
         <entry key="presentation/src/main/res/layout/fragment_why_soodinow.xml" value="0.5140625" />
+        <entry key="presentation/src/main/res/layout/input_phone_number.xml" value="0.365625" />
+        <entry key="presentation/src/main/res/layout/input_text.xml" value="0.365625" />
+        <entry key="presentation/src/main/res/layout/input_text_without_background.xml" value="0.365625" />
+        <entry key="presentation/src/main/res/layout/item_wallet.xml" value="0.29791666666666666" />
+        <entry key="presentation/src/main/res/layout/layout_add_inventory_modal_bottom_sheet.xml" value="0.29791666666666666" />
+        <entry key="presentation/src/main/res/layout/low_risk_card.xml" value="0.29791666666666666" />
         <entry key="presentation/src/main/res/layout/row_about_us.xml" value="0.5" />
+        <entry key="presentation/src/main/res/layout/row_efficiency.xml" value="0.29791666666666666" />
         <entry key="presentation/src/main/res/layout/row_market_currency.xml" value="0.24798183652875883" />
+        <entry key="presentation/src/main/res/layout/row_percent_efficiency.xml" value="0.39402173913043476" />
+        <entry key="presentation/src/main/res/layout/row_wallet_select_contrac_contecnt.xml" value="0.29791666666666666" />
+        <entry key="presentation/src/main/res/layout/row_wallet_select_contrac_first.xml" value="0.29791666666666666" />
         <entry key="presentation/src/main/res/layout/row_why_soodinow.xml" value="0.5" />
+        <entry key="presentation/src/main/res/layout/text_with_seperator.xml" value="0.29791666666666666" />
+        <entry key="presentation/src/main/res/layout/toolbar.xml" value="0.29791666666666666" />
+        <entry key="presentation/src/main/res/layout/toolbar_dialog.xml" value="0.29791666666666666" />
+        <entry key="presentation/src/main/res/layout/wallet_input_price.xml" value="0.29791666666666666" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

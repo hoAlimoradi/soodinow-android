@@ -32,10 +32,11 @@
         </compilerSettings>
         <compilerArguments>
           <option name="destination" value="$MODULE_DIR$/../../../common/build/tmp/kotlin-classes/debug" />
-          <option name="classpath" value="$MODULE_DIR$/../../../common/build/intermediates/compile_r_class_jar/debug/R.jar:/Users/arsalan/.gradle/caches/transforms-2/files-2.1/80774ae9fe144c430a3eca8a7237b362/jetified-kotlin-android-extensions-runtime-1.4.31.jar:/Users/arsalan/.gradle/caches/transforms-2/files-2.1/d2ad3d1fe58e3a56acad54677c7d7ff8/jetified-kotlin-stdlib-jdk7-1.3.72.jar:/Users/arsalan/.gradle/caches/transforms-2/files-2.1/829c53eaf252343799e117446082ecdc/jetified-core-ktx-1.5.0-alpha04-api.jar:/Users/arsalan/.gradle/caches/transforms-2/files-2.1/4c21bb13f63fe677ea6131d3492b9b38/jetified-kotlin-stdlib-1.4.31.jar:/Users/arsalan/.gradle/caches/transforms-2/files-2.1/d362ff9a7ee3caeec88ab2b077002829/jetified-kotlin-stdlib-common-1.4.31.jar:/Users/arsalan/.gradle/caches/transforms-2/files-2.1/f7dcd6f99c5edd8d115f907c30bd8b8d/jetified-annotations-13.0.jar:/Users/arsalan/.gradle/caches/transforms-2/files-2.1/6b65a31ee7a5b72a5f5697b9fda4ec71/core-1.5.0-alpha04-api.jar:/Users/arsalan/.gradle/caches/transforms-2/files-2.1/5610d9cd9f2890fb0a9d7cda1cce106e/lifecycle-runtime-2.0.0-api.jar:/Users/arsalan/.gradle/caches/transforms-2/files-2.1/a15721e53436c0ac482d2d275147fa42/versionedparcelable-1.1.0-api.jar:/Users/arsalan/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-common/2.0.0/e070ffae07452331bc5684734fce6831d531785c/lifecycle-common-2.0.0.jar:/Users/arsalan/.gradle/caches/modules-2/files-2.1/androidx.arch.core/core-common/2.0.0/bb21b9a11761451b51624ac428d1f1bb5deeac38/core-common-2.0.0.jar:/Users/arsalan/.gradle/caches/modules-2/files-2.1/androidx.collection/collection/1.0.0/42858b26cafdaa69b6149f45dfc2894007bc2c7a/collection-1.0.0.jar:/Users/arsalan/.gradle/caches/modules-2/files-2.1/androidx.annotation/annotation/1.2.0-alpha01/cf0f760ea00702c040b3f8c9ccbe615ae26356dc/annotation-1.2.0-alpha01.jar:/Users/arsalan/Library/Android/sdk/platforms/android-30/android.jar:/Users/arsalan/Library/Android/sdk/build-tools/30.0.1/core-lambda-stubs.jar" />
+          <option name="classpath" value="$USER_HOME$/.gradle/caches/transforms-2/files-2.1/80774ae9fe144c430a3eca8a7237b362/jetified-kotlin-android-extensions-runtime-1.4.31.jar:/home/ho/.gradle/caches/transforms-2/files-2.1/d2ad3d1fe58e3a56acad54677c7d7ff8/jetified-kotlin-stdlib-jdk7-1.3.72.jar:/home/ho/.gradle/caches/transforms-2/files-2.1/829c53eaf252343799e117446082ecdc/jetified-core-ktx-1.5.0-alpha04-api.jar:/home/ho/.gradle/caches/transforms-2/files-2.1/4c21bb13f63fe677ea6131d3492b9b38/jetified-kotlin-stdlib-1.4.31.jar:/home/ho/.gradle/caches/transforms-2/files-2.1/d362ff9a7ee3caeec88ab2b077002829/jetified-kotlin-stdlib-common-1.4.31.jar:/home/ho/.gradle/caches/transforms-2/files-2.1/f7dcd6f99c5edd8d115f907c30bd8b8d/jetified-annotations-13.0.jar:/home/ho/.gradle/caches/transforms-2/files-2.1/6b65a31ee7a5b72a5f5697b9fda4ec71/core-1.5.0-alpha04-api.jar:/home/ho/.gradle/caches/transforms-2/files-2.1/5610d9cd9f2890fb0a9d7cda1cce106e/lifecycle-runtime-2.0.0-api.jar:/home/ho/.gradle/caches/transforms-2/files-2.1/a15721e53436c0ac482d2d275147fa42/versionedparcelable-1.1.0-api.jar:/home/ho/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-common/2.0.0/e070ffae07452331bc5684734fce6831d531785c/lifecycle-common-2.0.0.jar:/home/ho/.gradle/caches/modules-2/files-2.1/androidx.arch.core/core-common/2.0.0/bb21b9a11761451b51624ac428d1f1bb5deeac38/core-common-2.0.0.jar:/home/ho/.gradle/caches/modules-2/files-2.1/androidx.collection/collection/1.0.0/42858b26cafdaa69b6149f45dfc2894007bc2c7a/collection-1.0.0.jar:/home/ho/.gradle/caches/modules-2/files-2.1/androidx.annotation/annotation/1.2.0-alpha01/cf0f760ea00702c040b3f8c9ccbe615ae26356dc/annotation-1.2.0-alpha01.jar:/home/ho/Android/Sdk/platforms/android-30/android.jar:/home/ho/Android/Sdk/build-tools/30.0.1/core-lambda-stubs.jar" />
           <option name="noStdlib" value="true" />
           <option name="noReflect" value="true" />
           <option name="moduleName" value="common_debug" />
+          <option name="jvmTarget" value="1.6" />
           <option name="languageVersion" value="1.4" />
           <option name="apiVersion" value="1.4" />
           <option name="pluginOptions">
@@ -70,16 +71,6 @@
     <output-test url="file://$MODULE_DIR$/../../../common/build/intermediates/javac/debugUnitTest/classes" />
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../../common">
-      <sourceFolder url="file://$MODULE_DIR$/../../../common/src/main/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../../common/build/generated/ap_generated_sources/debug/out" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/../../../common/build/generated/source/buildConfig/debug" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/../../../common/build/generated/source/kapt/debug" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/../../../common/build/generated/res/resValues/debug" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/../../../common/build/generated/source/kaptKotlin/debug" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/../../../common/build/generated/source/kaptKotlin/debugAndroidTest" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/../../../common/build/generated/source/kaptKotlin/debugAndroidTest" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/../../../common/build/generated/source/kaptKotlin/debugUnitTest" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/../../../common/build/generated/source/kaptKotlin/debugUnitTest" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/../../../common/.gradle" />
       <excludeFolder url="file://$MODULE_DIR$/../../../common/build" />
     </content>
@@ -88,28 +79,21 @@
     <orderEntry type="module-library">
       <library name="Gradle: kaptGeneratedClasses">
         <CLASSES>
-          <root url="file://$MODULE_DIR$/../../../common/build/tmp/kapt3/classes/debugAndroidTest" />
-          <root url="file://$MODULE_DIR$/../../../common/build/tmp/kapt3/classes/releaseUnitTest" />
           <root url="file://$MODULE_DIR$/../../../common/build/tmp/kapt3/classes/debug" />
-          <root url="file://$MODULE_DIR$/../../../common/build/tmp/kapt3/classes/release" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="TEST">
+      <library name="Gradle: kaptGeneratedTestClasses">
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../../../common/build/tmp/kapt3/classes/debugAndroidTest" />
           <root url="file://$MODULE_DIR$/../../../common/build/tmp/kapt3/classes/debugUnitTest" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-android-extensions-runtime:1.4.31" level="project" />
-    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72" level="project" />
-    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib:1.4.31" level="project" />
-    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-common:1.4.31" level="project" />
-    <orderEntry type="library" name="Gradle: org.jetbrains:annotations:13.0" level="project" />
-    <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-common:2.0.0" level="project" />
-    <orderEntry type="library" name="Gradle: androidx.arch.core:core-common:2.0.0" level="project" />
-    <orderEntry type="library" name="Gradle: androidx.collection:collection:1.0.0" level="project" />
-    <orderEntry type="library" name="Gradle: androidx.annotation:annotation:1.2.0-alpha01" level="project" />
-    <orderEntry type="library" name="Gradle: androidx.core:core-ktx:1.5.0-alpha04@aar" level="project" />
-    <orderEntry type="library" name="Gradle: androidx.core:core:1.5.0-alpha04@aar" level="project" />
-    <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-runtime:2.0.0@aar" level="project" />
-    <orderEntry type="library" name="Gradle: androidx.versionedparcelable:versionedparcelable:1.1.0@aar" level="project" />
   </component>
 </module>

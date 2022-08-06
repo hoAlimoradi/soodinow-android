@@ -4,11 +4,28 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Soodinow.iml" filepath="$PROJECT_DIR$/.idea/modules/Soodinow.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Soodinow.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Soodinow.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Soodinow.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Soodinow.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Soodinow.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Soodinow.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Soodinow.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Soodinow.app.unitTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Soodinow.buildSrc.iml" filepath="$PROJECT_DIR$/.idea/modules/Soodinow.buildSrc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Soodinow.buildSrc.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Soodinow.buildSrc.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Soodinow.buildSrc.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Soodinow.buildSrc.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/Soodinow.common.iml" filepath="$PROJECT_DIR$/.idea/modules/common/Soodinow.common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/Soodinow.common.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/common/Soodinow.common.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/Soodinow.common.main.iml" filepath="$PROJECT_DIR$/.idea/modules/common/Soodinow.common.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/Soodinow.common.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/common/Soodinow.common.unitTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/data/Soodinow.data.iml" filepath="$PROJECT_DIR$/.idea/modules/data/Soodinow.data.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/data/Soodinow.data.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/data/Soodinow.data.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/data/Soodinow.data.main.iml" filepath="$PROJECT_DIR$/.idea/modules/data/Soodinow.data.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/data/Soodinow.data.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/data/Soodinow.data.unitTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/domain/Soodinow.domain.iml" filepath="$PROJECT_DIR$/.idea/modules/domain/Soodinow.domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/domain/Soodinow.domain.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/domain/Soodinow.domain.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/domain/Soodinow.domain.main.iml" filepath="$PROJECT_DIR$/.idea/modules/domain/Soodinow.domain.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/domain/Soodinow.domain.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/domain/Soodinow.domain.unitTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/presentation/Soodinow.presentation.iml" filepath="$PROJECT_DIR$/.idea/modules/presentation/Soodinow.presentation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/presentation/Soodinow.presentation.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/presentation/Soodinow.presentation.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/presentation/Soodinow.presentation.main.iml" filepath="$PROJECT_DIR$/.idea/modules/presentation/Soodinow.presentation.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/presentation/Soodinow.presentation.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/presentation/Soodinow.presentation.unitTest.iml" />
     </modules>
   </component>
 </project>

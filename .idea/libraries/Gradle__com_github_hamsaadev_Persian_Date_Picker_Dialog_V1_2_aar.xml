@@ -1,15 +1,15 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.hamsaadev:Persian-Date-Picker-Dialog:V1.2@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/153e681ce1b8c13148dfa13cf7868e2a/jetified-Persian-Date-Picker-Dialog-V1.2/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/153e681ce1b8c13148dfa13cf7868e2a/jetified-Persian-Date-Picker-Dialog-V1.2/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/153e681ce1b8c13148dfa13cf7868e2a/jetified-Persian-Date-Picker-Dialog-V1.2/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c5ce4fe747046a7507ac6305180d4cba/jetified-Persian-Date-Picker-Dialog-V1.2/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c5ce4fe747046a7507ac6305180d4cba/jetified-Persian-Date-Picker-Dialog-V1.2/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c5ce4fe747046a7507ac6305180d4cba/jetified-Persian-Date-Picker-Dialog-V1.2/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7a993d5ca6d76029014398b52faf7103/jetified-Persian-Date-Picker-Dialog-V1.2/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7a993d5ca6d76029014398b52faf7103/jetified-Persian-Date-Picker-Dialog-V1.2/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7a993d5ca6d76029014398b52faf7103/jetified-Persian-Date-Picker-Dialog-V1.2/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d8a4af331c462e53541316397b7f0241/jetified-Persian-Date-Picker-Dialog-V1.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d8a4af331c462e53541316397b7f0241/jetified-Persian-Date-Picker-Dialog-V1.2/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d8a4af331c462e53541316397b7f0241/jetified-Persian-Date-Picker-Dialog-V1.2/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3cca5c3f005fc6d73e2af364761a9980/jetified-Persian-Date-Picker-Dialog-V1.2/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3cca5c3f005fc6d73e2af364761a9980/jetified-Persian-Date-Picker-Dialog-V1.2/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3cca5c3f005fc6d73e2af364761a9980/jetified-Persian-Date-Picker-Dialog-V1.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/da839105b634f6bcd90346f3148a7f77/jetified-Persian-Date-Picker-Dialog-V1.2/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/da839105b634f6bcd90346f3148a7f77/jetified-Persian-Date-Picker-Dialog-V1.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/da839105b634f6bcd90346f3148a7f77/jetified-Persian-Date-Picker-Dialog-V1.2/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
